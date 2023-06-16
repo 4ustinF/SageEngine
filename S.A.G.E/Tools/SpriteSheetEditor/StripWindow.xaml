@@ -1,0 +1,82 @@
+﻿<Window x:Class="SpriteSheetEditor.StripWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpriteSheetEditor"
+        mc:Ignorable="d"
+        Title="SpriteSheetStripper" Height="700" Width="800">
+    <Grid Background="#23272A">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Background="#23272A">
+                <MenuItem Header="_File" Height="25" Width="110" Background="#2C2F33" Foreground="#ffffff" BorderBrush="Black">
+                    <MenuItem Header="_New" Foreground="Black" Click="New_Click"/>
+                    <Separator />
+                    <MenuItem Header="_Exit" Foreground="Black" Click="Exit_Click"/>
+                </MenuItem>
+                <MenuItem Header="Background" Height="25" Width="110" Background="#2C2F33" Foreground="#ffffff" BorderBrush="Black">
+                    <MenuItem x:Name="miBGRemove" Header="_Remove Background" Foreground="Black" Click="Sample_Checked"/>
+                    <Separator />
+                    <MenuItem x:Name="miBGNone" Header="_Remove None" Foreground="Black" IsChecked="True" Click="SampleNone_Checked"/>
+                </MenuItem>
+                <MenuItem Header="Help" Height="25" Width="110" Background="#2C2F33" Foreground="#ffffff" BorderBrush="Black">
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <Label Content="Output Directory:"   Foreground="#ffffff" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top"/>
+        <Label Content="Filename: (__00.png)"     Foreground="#ffffff" HorizontalAlignment="Left" Margin="25,90,0,0" VerticalAlignment="Top"/>
+
+        <TextBox Name="tbOutputDir"     Background="#2C2F33" Foreground="#ffffff" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="160,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" Height="30" IsReadOnly="True"/>
+        <TextBox Name="tbOutputFile"    Background="#2C2F33" Foreground="#ffffff" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="160,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" Height="30" IsReadOnly="True"/>
+
+        <Button Content="Browse..." Background="#2C2F33" Foreground="#ffffff" HorizontalAlignment="Right" Margin="0,45,50,0" VerticalAlignment="Top" Width="90" Height="30" BorderThickness="3" Click="Browse_Click"/>
+
+        <Rectangle HorizontalAlignment="Left" Margin="30,140,0,0" Fill="#36393f" Stroke="Black" StrokeThickness="3" VerticalAlignment="Top" Width="400" Height="350"/>
+        <Image x:Name="SheetImage" RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform" HorizontalAlignment="Left" Margin="40,150,0,0" VerticalAlignment="Top" Width="380" Height="330"/>
+
+        <Label Content="Width:"     FontSize="18" Foreground="#ffffff" HorizontalAlignment="Right" Margin="0,155,235,0" VerticalAlignment="Top"/>
+        <Label Content="Height:"    FontSize="18" Foreground="#ffffff" HorizontalAlignment="Right" Margin="0,200,230,0" VerticalAlignment="Top"/>
+
+        <TextBox Name="tbWidth"     Background="#2C2F33" Foreground="#ffffff" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,155,65,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Height="30" TextChanged="tbWidth_TextChanged"/>
+        <TextBox Name="tbHeight"    Background="#2C2F33" Foreground="#ffffff" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,200,65,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Height="30" TextChanged="tbHeight_TextChanged"/>
+
+        <CheckBox x:Name="cbDimensionsLocked" Content="Lock Dimensions" Foreground="#ffffff" IsChecked="True" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="565,245,0,0" VerticalAlignment="Top" Click="DimensionsLocked_Checked"/>
+
+        <StackPanel Margin="472,295,22,0" Orientation="Horizontal" VerticalAlignment="Top">
+            <RadioButton Name="Rows"
+                  Click="cbRows_Checked"
+                  IsChecked="True"
+                  FontSize="18"
+                  Foreground="#ffffff"
+                  Height="35"
+                  Margin="10,0,0,0"
+                  VerticalAlignment="Top"
+                  VerticalContentAlignment="Center"
+                  Content="Rows / Columns" Width="175" />
+            <RadioButton Name="Pixels"
+                  Click="cbPixels_Checked"
+                  FontSize="18"
+                  Foreground="#ffffff"
+                  Height="35"
+                  Margin="10,0,0,0"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top"
+                  VerticalContentAlignment="Center"
+                  Content="Pixels" Width="100" />
+        </StackPanel>
+
+        <Button Content="Import"  Background="#2C2F33" Foreground="#ffffff" HorizontalAlignment="Left" Margin="490,400,0,0" VerticalAlignment="Top" Width="250" Height="35" BorderThickness="2" Click="Import_Click"/>
+        <Button Content="Strip"  Background="#2C2F33" Foreground="#ffffff" HorizontalAlignment="Left" Margin="490,450,0,0" VerticalAlignment="Top" Width="250" Height="35" BorderThickness="2" Click="Strip_Click"/>
+
+        <Rectangle Fill="#36393f" Stroke="Black" Margin="30,520,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="125" Width="190"/>
+        <Rectangle x:Name="rPixelPreview" Fill="Transparent" Stroke="Black" StrokeThickness="5" Margin="30,520,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="125" Width="190"/>
+
+        <Label Content="Sample X:"      FontSize="18" Foreground="#ffffff" HorizontalAlignment="Left" Margin="254,540,0,0" VerticalAlignment="Top"/>
+        <Label Content="Sample Y:"      FontSize="18" Foreground="#ffffff" HorizontalAlignment="Left" Margin="255,600,0,0" VerticalAlignment="Top"/>
+
+        <TextBox Name="tbSampleX"    Text="0" FontSize="18" Background="#2C2F33" Foreground="#ffffff" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="370,540,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="30" TextChanged="tbSampleX_TextChanged"/>
+        <TextBox Name="tbSampleY"    Text="0" FontSize="18" Background="#2C2F33" Foreground="#ffffff" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="370,600,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="30" TextChanged="tbSampleY_TextChanged"/>
+
+    </Grid>
+</Window>

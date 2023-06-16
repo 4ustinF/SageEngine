@@ -1,0 +1,17 @@
+{
+  "Capacity":  1000,
+  "Services": {
+    "CameraService": {
+
+    },
+    "RenderService": {
+      "SkyDomeTexture": "Neptune.jpg"
+    }
+  },
+  "GameObjects": [
+    {
+      "Name": "Player",
+      "TemplateFile": "../../Assets/Templates/VoxelPlayer.json"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+﻿  Precompiled.cpp
+  AnimatorComponent.cpp
+  App.cpp
+  BPhysicsComponent.cpp
+  BPhysicsService.cpp
+  CameraComponent.cpp
+  CameraService.cpp
+  CameraUtil.cpp
+  ColliderComponent.cpp
+  FPSCameraControllerComponent.cpp
+  FollowCameraControllerComponent.cpp
+  GameObject.cpp
+  GameObjectFactory.cpp
+  GameWorld.cpp
+  ModelComponent.cpp
+  ParticleComponent.cpp
+  ParticleService.cpp
+  PhysicsDebugDraw.cpp
+  PhysicsService.cpp
+  PostProcessingService.cpp
+  RenderService.cpp
+  Generating Code...
+  Compiling...
+  RigidBodyComponent.cpp
+  SAGE.cpp
+  SpawnerComponent.cpp
+  TerrainService.cpp
+  TransformComponent.cpp
+  UIService.cpp
+  Generating Code...
+  SAGE.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\SAGE.lib

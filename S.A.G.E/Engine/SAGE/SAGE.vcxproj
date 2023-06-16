@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Inc\AnimatorComponent.h" />
+    <ClInclude Include="Inc\App.h" />
+    <ClInclude Include="Inc\AppState.h" />
+    <ClInclude Include="Inc\BPhysicsComponent.h" />
+    <ClInclude Include="Inc\BPhysicsService.h" />
+    <ClInclude Include="Inc\CameraComponent.h" />
+    <ClInclude Include="Inc\CameraService.h" />
+    <ClInclude Include="Inc\CameraUtil.h" />
+    <ClInclude Include="Inc\ColliderComponent.h" />
+    <ClInclude Include="Inc\Common.h" />
+    <ClInclude Include="Inc\Component.h" />
+    <ClInclude Include="Inc\FollowCameraControllerComponent.h" />
+    <ClInclude Include="Inc\FPSCameraControllerComponent.h" />
+    <ClInclude Include="Inc\GameObject.h" />
+    <ClInclude Include="Inc\GameObjectFactory.h" />
+    <ClInclude Include="Inc\GameObjectHandle.h" />
+    <ClInclude Include="Inc\GameWorld.h" />
+    <ClInclude Include="Inc\ModelComponent.h" />
+    <ClInclude Include="Inc\ParticleComponent.h" />
+    <ClInclude Include="Inc\ParticleService.h" />
+    <ClInclude Include="Inc\PhysicsDebugDraw.h" />
+    <ClInclude Include="Inc\PhysicsService.h" />
+    <ClInclude Include="Inc\PostProcessingService.h" />
+    <ClInclude Include="Inc\RenderService.h" />
+    <ClInclude Include="Inc\RigidBodyComponent.h" />
+    <ClInclude Include="Inc\SAGE.h" />
+    <ClInclude Include="Inc\Service.h" />
+    <ClInclude Include="Inc\SpawnerComponent.h" />
+    <ClInclude Include="Inc\TerrainService.h" />
+    <ClInclude Include="Inc\TransformComponent.h" />
+    <ClInclude Include="Inc\TypeIds.h" />
+    <ClInclude Include="Inc\UIService.h" />
+    <ClInclude Include="Src\Precompiled.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\AnimatorComponent.cpp" />
+    <ClCompile Include="Src\App.cpp" />
+    <ClCompile Include="Src\BPhysicsComponent.cpp" />
+    <ClCompile Include="Src\BPhysicsService.cpp" />
+    <ClCompile Include="Src\CameraComponent.cpp" />
+    <ClCompile Include="Src\CameraService.cpp" />
+    <ClCompile Include="Src\CameraUtil.cpp" />
+    <ClCompile Include="Src\ColliderComponent.cpp" />
+    <ClCompile Include="Src\FollowCameraControllerComponent.cpp" />
+    <ClCompile Include="Src\FPSCameraControllerComponent.cpp" />
+    <ClCompile Include="Src\GameObject.cpp" />
+    <ClCompile Include="Src\GameObjectFactory.cpp" />
+    <ClCompile Include="Src\GameWorld.cpp" />
+    <ClCompile Include="Src\ModelComponent.cpp" />
+    <ClCompile Include="Src\ParticleComponent.cpp" />
+    <ClCompile Include="Src\ParticleService.cpp" />
+    <ClCompile Include="Src\PhysicsDebugDraw.cpp" />
+    <ClCompile Include="Src\PhysicsService.cpp" />
+    <ClCompile Include="Src\PostProcessingService.cpp" />
+    <ClCompile Include="Src\Precompiled.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Src\RenderService.cpp" />
+    <ClCompile Include="Src\RigidBodyComponent.cpp" />
+    <ClCompile Include="Src\SAGE.cpp" />
+    <ClCompile Include="Src\SpawnerComponent.cpp" />
+    <ClCompile Include="Src\TerrainService.cpp" />
+    <ClCompile Include="Src\TransformComponent.cpp" />
+    <ClCompile Include="Src\UIService.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\External\Bullet\Bullet.vcxproj">
+      <Project>{516192eb-788a-4fe7-b2b7-2ef9ac036b12}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Core\Core.vcxproj">
+      <Project>{8729acc6-dac0-4d68-9c96-3b9fe71611c9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Coroutine\Coroutine.vcxproj">
+      <Project>{90e08840-2b93-4c43-b366-f0ec8836a8f9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Graphics\Graphics.vcxproj">
+      <Project>{6d757bdd-5d81-4af5-b761-67c06ff33880}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Input\Input.vcxproj">
+      <Project>{3629f01a-6fed-42eb-b308-e9f7f1346eaf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Math\Math.vcxproj">
+      <Project>{6c840eb3-b863-407e-a551-366e0e1bb5bf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Physics\Physics.vcxproj">
+      <Project>{d337a0e9-1d98-469b-9297-b18e401c8e54}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{31cf8178-8c13-48e1-9807-4fa6b00243cd}</ProjectGuid>
+    <RootNamespace>SAGE</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\VSProps\EngineLib.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\VSProps\EngineLib.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\VSProps\EngineLib.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\VSProps\EngineLib.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

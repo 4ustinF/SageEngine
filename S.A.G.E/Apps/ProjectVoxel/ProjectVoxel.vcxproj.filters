@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUIService.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="CloudService.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldService.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ChunkMeshCreator.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraControllerComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControllerComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MobService.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimalComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUIService.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="CloudService.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkData.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkRenderer.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldService.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeIds.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkMeshCreator.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraControllerComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControllerComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RecipeOutcome.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="MobService.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimalComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Components">
+      <UniqueIdentifier>{f266f13a-a5fe-4119-8884-f413ae4eb466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{0dd0cadc-80d7-4b13-ad10-f9119c6c43aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services">
+      <UniqueIdentifier>{ce327bc6-139d-4404-9dc1-185cbdc79c15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{619aa998-8ab8-4a5e-8df9-5389ff28ac9d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FastNoiseLiteGUI-Win64.exe">
+      <Filter>Other</Filter>
+    </None>
+    <None Include="Crafting_Recipies.json">
+      <Filter>Other</Filter>
+    </None>
+  </ItemGroup>
+</Project>

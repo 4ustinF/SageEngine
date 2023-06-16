@@ -1,0 +1,13 @@
+{
+  "Components": {
+    "TransformComponent": {
+      "Position": [ 0, -0.1, 0 ]
+    },
+    "ColliderComponent": {
+      "Extend": [ 25.0, 0.1, 25.0 ]
+    },
+    "RigidBodyComponent": {
+      "Mass": 0.0
+    }
+  }
+}

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Inc">
+      <UniqueIdentifier>{42f90c6a-6050-41da-8c1d-05aa1a8b3bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{9f649d66-b2a7-4e1f-836e-9d102b5e9d72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Memory">
+      <UniqueIdentifier>{af06c95d-897e-4849-91fb-46e0c543738f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Platform">
+      <UniqueIdentifier>{3a37fe8a-5c4a-4369-8690-0faba891a822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Util">
+      <UniqueIdentifier>{b428a3af-f1c7-409a-9340-7aa6c72629c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Pch">
+      <UniqueIdentifier>{4eec2ccf-6355-4b35-ace0-df2250f2f0fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Util">
+      <UniqueIdentifier>{d53d67a8-5d22-4dc1-89bc-c7d631a02f50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Platform">
+      <UniqueIdentifier>{e0e4cc4b-e90f-4aef-b457-cc87de9a687e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Memory">
+      <UniqueIdentifier>{6cfc69fe-c471-45cc-84ae-801bc2db5c3b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Inc\Core.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Common.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DebugUtil.h">
+      <Filter>Inc\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\TimeUtil.h">
+      <Filter>Inc\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Window.h">
+      <Filter>Inc\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\WindowMessageHandler.h">
+      <Filter>Inc\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Precompiled.h">
+      <Filter>Src\Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\BlockAllocator.h">
+      <Filter>Inc\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\TypedAllocator.h">
+      <Filter>Inc\Memory</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Precompiled.cpp">
+      <Filter>Src\Pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\TimeUtil.cpp">
+      <Filter>Src\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Window.cpp">
+      <Filter>Src\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\WindowMessageHandler.cpp">
+      <Filter>Src\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\BlockAllocator.cpp">
+      <Filter>Src\Memory</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

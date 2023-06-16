@@ -1,0 +1,390 @@
+{
+  "CraftingRecipies": {
+    "Crafting Table": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Oak Plank", "Oak Plank", "", "Oak Plank", "Oak Plank", "", "", "", "" ],
+        [ "", "Oak Plank", "Oak Plank", "", "Oak Plank", "Oak Plank", "", "", "" ],
+        [ "", "", "", "Oak Plank", "Oak Plank", "", "Oak Plank", "Oak Plank", "" ],
+        [ "", "", "", "", "Oak Plank", "Oak Plank", "", "Oak Plank", "Oak Plank" ]
+      ]
+    },
+    "Furnace": {
+      "Amount": 1,
+      "Recipies": [
+        [ "CobbleStone", "CobbleStone", "CobbleStone", "CobbleStone", "", "CobbleStone", "CobbleStone", "CobbleStone", "CobbleStone" ]
+      ]
+    },
+    "Oak Plank": {
+      "Amount": 4,
+      "Recipies": [
+        [ "Oak Log", "", "", "", "", "", "", "", "" ],
+        [ "", "Oak Log", "", "", "", "", "", "", "" ],
+        [ "", "", "Oak Log", "", "", "", "", "", "" ],
+        [ "", "", "", "Oak Log", "", "", "", "", "" ],
+        [ "", "", "", "", "Oak Log", "", "", "", "" ],
+        [ "", "", "", "", "", "Oak Log", "", "", "" ],
+        [ "", "", "", "", "", "", "Oak Log", "", "" ],
+        [ "", "", "", "", "", "", "", "Oak Log", "" ],
+        [ "", "", "", "", "", "", "", "", "Oak Log" ]
+      ]
+    },
+    "Stick": {
+      "Amount": 4,
+      "Recipies": [
+        [ "Oak Plank", "", "", "Oak Plank", "", "", "", "", "" ],
+        [ "", "Oak Plank", "", "", "Oak Plank", "", "", "", "" ],
+        [ "", "", "Oak Plank", "", "", "Oak Plank", "", "", "" ],
+        [ "", "", "", "Oak Plank", "", "", "Oak Plank", "", "" ],
+        [ "", "", "", "", "Oak Plank", "", "", "Oak Plank", "" ],
+        [ "", "", "", "", "", "Oak Plank", "", "", "Oak Plank" ]
+      ]
+    },
+    "Sugar": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Sugar Cane", "", "", "", "", "", "", "", "" ],
+        [ "", "Sugar Cane", "", "", "", "", "", "", "" ],
+        [ "", "", "Sugar Cane", "", "", "", "", "", "" ],
+        [ "", "", "", "Sugar Cane", "", "", "", "", "" ],
+        [ "", "", "", "", "Sugar Cane", "", "", "", "" ],
+        [ "", "", "", "", "", "Sugar Cane", "", "", "" ],
+        [ "", "", "", "", "", "", "Sugar Cane", "", "" ],
+        [ "", "", "", "", "", "", "", "Sugar Cane", "" ],
+        [ "", "", "", "", "", "", "", "", "Sugar Cane" ]
+      ]
+    },
+    "Red Dye": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Poppy", "", "", "", "", "", "", "", "" ],
+        [ "", "Poppy", "", "", "", "", "", "", "" ],
+        [ "", "", "Poppy", "", "", "", "", "", "" ],
+        [ "", "", "", "Poppy", "", "", "", "", "" ],
+        [ "", "", "", "", "Poppy", "", "", "", "" ],
+        [ "", "", "", "", "", "Poppy", "", "", "" ],
+        [ "", "", "", "", "", "", "Poppy", "", "" ],
+        [ "", "", "", "", "", "", "", "Poppy", "" ],
+        [ "", "", "", "", "", "", "", "", "Poppy" ]
+      ]
+    },
+    "Yellow Dye": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Dandelion", "", "", "", "", "", "", "", "" ],
+        [ "", "Dandelion", "", "", "", "", "", "", "" ],
+        [ "", "", "Dandelion", "", "", "", "", "", "" ],
+        [ "", "", "", "Dandelion", "", "", "", "", "" ],
+        [ "", "", "", "", "Dandelion", "", "", "", "" ],
+        [ "", "", "", "", "", "Dandelion", "", "", "" ],
+        [ "", "", "", "", "", "", "Dandelion", "", "" ],
+        [ "", "", "", "", "", "", "", "Dandelion", "" ],
+        [ "", "", "", "", "", "", "", "", "Dandelion" ]
+      ]
+    },
+    "Green Dye": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Cactus", "", "", "", "", "", "", "", "" ],
+        [ "", "Cactus", "", "", "", "", "", "", "" ],
+        [ "", "", "Cactus", "", "", "", "", "", "" ],
+        [ "", "", "", "Cactus", "", "", "", "", "" ],
+        [ "", "", "", "", "Cactus", "", "", "", "" ],
+        [ "", "", "", "", "", "Cactus", "", "", "" ],
+        [ "", "", "", "", "", "", "Cactus", "", "" ],
+        [ "", "", "", "", "", "", "", "Cactus", "" ],
+        [ "", "", "", "", "", "", "", "", "Cactus" ]
+      ]
+    },
+    "Oak Slab": {
+      "Amount": 6,
+      "Recipies": [
+        [ "Oak Plank", "Oak Plank", "Oak Plank", "", "", "", "", "", "" ],
+        [ "", "", "", "Oak Plank", "Oak Plank", "Oak Plank", "", "", "" ],
+        [ "", "", "", "", "", "", "Oak Plank", "Oak Plank", "Oak Plank" ]
+      ]
+    },
+    "CobbleStone Slab": {
+      "Amount": 6,
+      "Recipies": [
+        [ "CobbleStone", "CobbleStone", "CobbleStone", "", "", "", "", "", "" ],
+        [ "", "", "", "CobbleStone", "CobbleStone", "CobbleStone", "", "", "" ],
+        [ "", "", "", "", "", "", "CobbleStone", "CobbleStone", "CobbleStone" ]
+      ]
+    },
+    "Stone Slab": {
+      "Amount": 6,
+      "Recipies": [
+        [ "Stone", "Stone", "Stone", "", "", "", "", "", "" ],
+        [ "", "", "", "Stone", "Stone", "Stone", "", "", "" ],
+        [ "", "", "", "", "", "", "Stone", "Stone", "Stone" ]
+      ]
+    },
+    "Wood Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "Oak Plank", "Stick", "", "Oak Plank", "Oak Plank", "" ],
+        [ "", "Stick", "", "", "Stick", "Oak Plank", "", "Oak Plank", "Oak Plank" ]
+      ]
+    },
+    "Wood Hoe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "Oak Plank", "Oak Plank", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "Oak Plank", "Oak Plank" ]
+      ]
+    },
+    "Wood Pick Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "Oak Plank", "Oak Plank", "Oak Plank" ]
+      ]
+    },
+    "Wood Shovel": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "Stick", "", "", "Oak Plank", "", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "Oak Plank", "" ],
+        [ "", "", "Stick", "", "", "Stick", "", "", "Oak Plank" ]
+      ]
+    },
+    "Wood Sword": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "Oak Plank", "", "", "Oak Plank", "", "" ],
+        [ "", "Stick", "", "", "Oak Plank", "", "", "Oak Plank", "" ],
+        [ "", "", "Stick", "", "", "Oak Plank", "", "", "Oak Plank" ]
+      ]
+    },
+    "Stone Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "CobbleStone", "Stick", "", "CobbleStone", "CobbleStone", "" ],
+        [ "", "Stick", "", "", "Stick", "CobbleStone", "", "CobbleStone", "CobbleStone" ]
+      ]
+    },
+    "Stone Hoe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "CobbleStone", "CobbleStone", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "CobbleStone", "CobbleStone" ]
+      ]
+    },
+    "Stone Pick Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "CobbleStone", "CobbleStone", "CobbleStone" ]
+      ]
+    },
+    "Stone Shovel": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "Stick", "", "", "CobbleStone", "", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "CobbleStone", "" ],
+        [ "", "", "Stick", "", "", "Stick", "", "", "CobbleStone" ]
+      ]
+    },
+    "Stone Sword": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "CobbleStone", "", "", "CobbleStone", "", "" ],
+        [ "", "Stick", "", "", "CobbleStone", "", "", "CobbleStone", "" ],
+        [ "", "", "Stick", "", "", "CobbleStone", "", "", "CobbleStone" ]
+      ]
+    },
+    "Iron Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "Iron Ingot", "Stick", "", "Iron Ingot", "Iron Ingot", "" ],
+        [ "", "Stick", "", "", "Stick", "Iron Ingot", "", "Iron Ingot", "Iron Ingot" ]
+      ]
+    },
+    "Iron Hoe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "Iron Ingot", "Iron Ingot", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "Iron Ingot", "Iron Ingot" ]
+      ]
+    },
+    "Iron Pick Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "Iron Ingot", "Iron Ingot", "Iron Ingot" ]
+      ]
+    },
+    "Iron Shovel": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "Stick", "", "", "Iron Ingot", "", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "Iron Ingot", "" ],
+        [ "", "", "Stick", "", "", "Stick", "", "", "Iron Ingot" ]
+      ]
+    },
+    "Iron Sword": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "Iron Ingot", "", "", "Iron Ingot", "", "" ],
+        [ "", "Stick", "", "", "Iron Ingot", "", "", "Iron Ingot", "" ],
+        [ "", "", "Stick", "", "", "Iron Ingot", "", "", "Iron Ingot" ]
+      ]
+    },
+    "Gold Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "Gold Ingot", "Stick", "", "Gold Ingot", "Gold Ingot", "" ],
+        [ "", "Stick", "", "", "Stick", "Gold Ingot", "", "Gold Ingot", "Gold Ingot" ]
+      ]
+    },
+    "Gold Hoe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "Gold Ingot", "Gold Ingot", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "Gold Ingot", "Gold Ingot" ]
+      ]
+    },
+    "Gold Pick Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "Gold Ingot", "Gold Ingot", "Gold Ingot" ]
+      ]
+    },
+    "Gold Shovel": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "Stick", "", "", "Gold Ingot", "", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "Gold Ingot", "" ],
+        [ "", "", "Stick", "", "", "Stick", "", "", "Gold Ingot" ]
+      ]
+    },
+    "Gold Sword": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "Gold Ingot", "", "", "Gold Ingot", "", "" ],
+        [ "", "Stick", "", "", "Gold Ingot", "", "", "Gold Ingot", "" ],
+        [ "", "", "Stick", "", "", "Gold Ingot", "", "", "Gold Ingot" ]
+      ]
+    },
+    "Diamond Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "Diamond", "Stick", "", "Diamond", "Diamond", "" ],
+        [ "", "Stick", "", "", "Stick", "Diamond", "", "Diamond", "Diamond" ]
+      ]
+    },
+    "Diamond Hoe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "Diamond", "Diamond", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "Diamond", "Diamond" ]
+      ]
+    },
+    "Diamond Pick Axe": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "Stick", "", "", "Stick", "", "Diamond", "Diamond", "Diamond" ]
+      ]
+    },
+    "Diamond Shovel": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "Stick", "", "", "Diamond", "", "" ],
+        [ "", "Stick", "", "", "Stick", "", "", "Diamond", "" ],
+        [ "", "", "Stick", "", "", "Stick", "", "", "Diamond" ]
+      ]
+    },
+    "Diamond Sword": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Stick", "", "", "Diamond", "", "", "Diamond", "", "" ],
+        [ "", "Stick", "", "", "Diamond", "", "", "Diamond", "" ],
+        [ "", "", "Stick", "", "", "Diamond", "", "", "Diamond" ]
+      ]
+    },
+    "Iron Boots": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Iron Ingot", "", "Iron Ingot", "Iron Ingot", "", "Iron Ingot", "", "", "" ],
+        [ "", "", "", "Iron Ingot", "", "Iron Ingot", "Iron Ingot", "", "Iron Ingot" ]
+      ]
+    },
+    "Iron ChestPlate": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Iron Ingot", "Iron Ingot", "Iron Ingot", "Iron Ingot", "Iron Ingot", "Iron Ingot", "Iron Ingot", "", "Iron Ingot" ]
+      ]
+    },
+    "Iron Helmet": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "", "", "Iron Ingot", "", "Iron Ingot", "Iron Ingot", "Iron Ingot", "Iron Ingot" ],
+        [ "Iron Ingot", "", "Iron Ingot", "Iron Ingot", "Iron Ingot", "Iron Ingot", "", "", "" ]
+      ]
+    },
+    "Iron Leggings": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Iron Ingot", "", "Iron Ingot", "Iron Ingot", "", "Iron Ingot", "Iron Ingot", "Iron Ingot", "Iron Ingot" ]
+      ]
+    },
+    "Gold Boots": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Gold Ingot", "", "Gold Ingot", "Gold Ingot", "", "Gold Ingot", "", "", "" ],
+        [ "", "", "", "Gold Ingot", "", "Gold Ingot", "Gold Ingot", "", "Gold Ingot" ]
+      ]
+    },
+    "Gold ChestPlate": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Gold Ingot", "Gold Ingot", "Gold Ingot", "Gold Ingot", "Gold Ingot", "Gold Ingot", "Gold Ingot", "", "Gold Ingot" ]
+      ]
+    },
+    "Gold Helmet": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "", "", "Gold Ingot", "", "Gold Ingot", "Gold Ingot", "Gold Ingot", "Gold Ingot" ],
+        [ "Gold Ingot", "", "Gold Ingot", "Gold Ingot", "Gold Ingot", "Gold Ingot", "", "", "" ]
+      ]
+    },
+    "Gold Leggings": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Gold Ingot", "", "Gold Ingot", "Gold Ingot", "", "Gold Ingot", "Gold Ingot", "Gold Ingot", "Gold Ingot" ]
+      ]
+    },
+    "Diamond Boots": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Diamond", "", "Diamond", "Diamond", "", "Diamond", "", "", "" ],
+        [ "", "", "", "Diamond", "", "Diamond", "Diamond", "", "Diamond" ]
+      ]
+    },
+    "Diamond ChestPlate": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Diamond", "Diamond", "Diamond", "Diamond", "Diamond", "Diamond", "Diamond", "", "Diamond" ]
+      ]
+    },
+    "Diamond Helmet": {
+      "Amount": 1,
+      "Recipies": [
+        [ "", "", "", "Diamond", "", "Diamond", "Diamond", "Diamond", "Diamond" ],
+        [ "Diamond", "", "Diamond", "Diamond", "Diamond", "Diamond", "", "", "" ]
+      ]
+    },
+    "Diamond Leggings": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Diamond", "", "Diamond", "Diamond", "", "Diamond", "Diamond", "Diamond", "Diamond" ]
+      ]
+    },
+    "Bread": {
+      "Amount": 1,
+      "Recipies": [
+        [ "Wheat", "Wheat", "Wheat", "", "", "", "", "", "" ],
+        [ "", "", "", "Wheat", "Wheat", "Wheat", "", "", "" ],
+        [ "", "", "", "", "", "", "Wheat", "Wheat", "Wheat" ]
+      ]
+    }
+  }
+}

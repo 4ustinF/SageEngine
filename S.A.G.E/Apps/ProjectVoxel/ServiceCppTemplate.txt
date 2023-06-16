@@ -1,0 +1,29 @@
+#include "Precompiled.h"
+#include "Service.h"
+
+using namespace SAGE;
+
+void UIService::Initialize()
+{
+	SetServiceName("Set Service Name Here");
+}
+
+void UIService::Terminate()
+{
+	
+}
+
+void UIService::Update(float deltaTime)
+{
+	
+}
+
+void UIService::Render()
+{
+	
+}
+
+void UIService::DebugUI()
+{
+	
+}

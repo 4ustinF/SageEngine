@@ -1,0 +1,67 @@
+﻿  GameState.cpp
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(30,26): error C2061: syntax error: identifier 'TypedConstantBuffer'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(31,25): error C2061: syntax error: identifier 'TypedConstantBuffer'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(32,22): error C2061: syntax error: identifier 'TypedConstantBuffer'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(33,25): error C2061: syntax error: identifier 'TypedConstantBuffer'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,18): error C3646: 'mTransformBuffer': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,34): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,17): error C3646: 'mMaterialBuffer': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,14): error C3646: 'mLightBuffer': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,17): error C3646: 'mSettingsBuffer': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,19): error C3646: 'mDirectionalLight': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(13,2): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(14,2): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(15,2): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(16,2): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(34,2): error C2065: 'mSettingsBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(35,2): error C2065: 'mTransformBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(36,2): error C2065: 'mMaterialBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(37,2): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(38,2): error C2065: 'mTransformBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(59,2): error C2065: 'mTransformBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(61,2): error C2065: 'mLightBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(62,2): error C2065: 'mLightBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(64,2): error C2065: 'mMaterialBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(65,2): error C2065: 'mSettingsBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(66,2): error C2065: 'mSettingsBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(81,2): error C2065: 'mTransformBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(83,2): error C2065: 'mLightBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(83,23): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(85,2): error C2065: 'mSettingsBuffer': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(112,46): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(112,6): error C2665: 'ImGui::DragFloat3': none of the 2 overloads could convert all the argument types
+D:\AzureDevOps\S.A.G.E\External\ImGui\Inc\imgui.h(538,29): message : could be 'bool ImGui::DragFloat3(const char *,float [],float,float,float,const char *,ImGuiSliderFlags)'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(112,14): message : 'bool ImGui::DragFloat3(const char *,float [],float,float,float,const char *,ImGuiSliderFlags)': cannot convert argument 2 from 'float' to 'float []'
+D:\AzureDevOps\S.A.G.E\External\ImGui\Inc\imgui.h(538,29): message : see declaration of 'ImGui::DragFloat3'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(112,6): message : while trying to match the argument list '(const char [17], float, float, float)'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(113,4): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(113,50): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(116,40): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(116,67): error C2660: 'ImGui::ColorEdit4': function does not take 1 arguments
+D:\AzureDevOps\S.A.G.E\External\ImGui\Inc\imgui.h(592,29): message : see declaration of 'ImGui::ColorEdit4'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(117,40): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(117,67): error C2660: 'ImGui::ColorEdit4': function does not take 1 arguments
+D:\AzureDevOps\S.A.G.E\External\ImGui\Inc\imgui.h(592,29): message : see declaration of 'ImGui::ColorEdit4'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(118,41): error C2065: 'mDirectionalLight': undeclared identifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(118,69): error C2660: 'ImGui::ColorEdit4': function does not take 1 arguments
+D:\AzureDevOps\S.A.G.E\External\ImGui\Inc\imgui.h(592,29): message : see declaration of 'ImGui::ColorEdit4'
+  WinMain.cpp
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(30,26): error C2061: syntax error: identifier 'TypedConstantBuffer'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(31,25): error C2061: syntax error: identifier 'TypedConstantBuffer'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(32,22): error C2061: syntax error: identifier 'TypedConstantBuffer'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(33,25): error C2061: syntax error: identifier 'TypedConstantBuffer'
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,18): error C3646: 'mTransformBuffer': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,34): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,17): error C3646: 'mMaterialBuffer': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,14): error C3646: 'mLightBuffer': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,17): error C3646: 'mSettingsBuffer': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,19): error C3646: 'mDirectionalLight': unknown override specifier
+D:\AzureDevOps\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  Generating Code...

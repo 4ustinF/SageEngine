@@ -1,0 +1,4 @@
+﻿  GameState.cpp
+D:\AzureDevOps\S.A.G.E\VGP334\19_HelloParticles\GameState.cpp(57,119): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+     Creating library D:\AzureDevOps\S.A.G.E\x64\Debug\19_HelloParticles.lib and object D:\AzureDevOps\S.A.G.E\x64\Debug\19_HelloParticles.exp
+  19_HelloParticles.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\19_HelloParticles.exe

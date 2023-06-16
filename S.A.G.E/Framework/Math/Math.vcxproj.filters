@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Inc">
+      <UniqueIdentifier>{5037b219-2b9f-4448-ac7b-dd4fe766e00d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{dcc73091-0d1a-4749-949b-95099a394800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Shapes">
+      <UniqueIdentifier>{27a4d734-11fa-40c9-933e-1c43417dca84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Utility">
+      <UniqueIdentifier>{5407a992-bec7-46c8-9ab2-8e38d0c6eee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\LinearAlgebra">
+      <UniqueIdentifier>{93900373-d827-418b-9729-7adb76b6ad90}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Inc\SAGEmath.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Common.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Precompiled.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\AABB.h">
+      <Filter>Inc\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Cylinder.h">
+      <Filter>Inc\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Pyramid.h">
+      <Filter>Inc\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Sphere.h">
+      <Filter>Inc\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Plane.h">
+      <Filter>Inc\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Random.h">
+      <Filter>Inc\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Constant.h">
+      <Filter>Inc\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Matrix4.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Quaternion.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Vector2.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Vector3.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Vector4.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\OBB.h">
+      <Filter>Inc\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Ray.h">
+      <Filter>Inc\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Vector2Int.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Vector3Int.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Rect.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Matrix3.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\RectInt.h">
+      <Filter>Inc\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Noise.h">
+      <Filter>Inc\Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Precompiled.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SAGEmath.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Random.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

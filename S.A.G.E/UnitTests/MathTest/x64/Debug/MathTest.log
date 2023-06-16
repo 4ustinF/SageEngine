@@ -1,0 +1,7 @@
+﻿  pch.cpp
+  Matrix4Test.cpp
+  QuaternionTest.cpp
+  Vector3Test.cpp
+  Generating Code...
+     Creating library D:\AzureDevOps\S.A.G.E\x64\Debug\MathTest.lib and object D:\AzureDevOps\S.A.G.E\x64\Debug\MathTest.exp
+  MathTest.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\MathTest.dll

@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Inc">
+      <UniqueIdentifier>{ed6470f9-20d7-431f-b2b4-197977c7c047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{6b9a9f74-2330-49dc-83c6-bad271b7d081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\App">
+      <UniqueIdentifier>{f8ed9c30-0352-44ec-81b5-b01b8a785a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\App">
+      <UniqueIdentifier>{52366284-811e-41b3-94d8-364ec16b9f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Pch">
+      <UniqueIdentifier>{0dafed45-e1f7-4ca6-85df-11f9dea53303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\World">
+      <UniqueIdentifier>{174564d8-04f2-4e8b-8851-524d5bfc6d53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\World">
+      <UniqueIdentifier>{b3b58816-fc18-4a84-bdab-348f03775bd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Components">
+      <UniqueIdentifier>{66c668bd-35a5-4c31-9aa3-9806741e934c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Components">
+      <UniqueIdentifier>{11c350e4-483a-4398-87ae-f251fc9485f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Services">
+      <UniqueIdentifier>{dd6f2fd1-5009-4a87-a046-befe8332922a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Services">
+      <UniqueIdentifier>{c5270408-cd41-410a-a73b-789c073f9ae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Physics">
+      <UniqueIdentifier>{038abce5-e28c-4928-833e-71dbf374f51c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Physics">
+      <UniqueIdentifier>{18bad1c4-8593-4b45-bc1b-2cb4b44b0d64}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Inc\SAGE.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Common.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\AppState.h">
+      <Filter>Inc\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\App.h">
+      <Filter>Inc\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Precompiled.h">
+      <Filter>Src\Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CameraUtil.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Component.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GameObject.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\TypeIds.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GameObjectHandle.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GameWorld.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Service.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GameObjectFactory.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\TransformComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ColliderComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\RenderService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ModelComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CameraComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CameraService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\FPSCameraControllerComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\TerrainService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\AnimatorComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\FollowCameraControllerComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SpawnerComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\PhysicsService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ParticleService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ParticleComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\UIService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\PostProcessingService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\RigidBodyComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\BPhysicsComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\BPhysicsService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\PhysicsDebugDraw.h">
+      <Filter>Inc\Physics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\App.cpp">
+      <Filter>Src\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Precompiled.cpp">
+      <Filter>Src\Pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SAGE.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\CameraUtil.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameObject.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameWorld.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameObjectFactory.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\TransformComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ColliderComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RenderService.cpp">
+      <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ModelComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\CameraComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\CameraService.cpp">
+      <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\FPSCameraControllerComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\TerrainService.cpp">
+      <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\AnimatorComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\FollowCameraControllerComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SpawnerComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PhysicsService.cpp">
+      <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ParticleService.cpp">
+      <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ParticleComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\UIService.cpp">
+      <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PostProcessingService.cpp">
+      <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RigidBodyComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\BPhysicsComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\BPhysicsService.cpp">
+      <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PhysicsDebugDraw.cpp">
+      <Filter>Src\Physics</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

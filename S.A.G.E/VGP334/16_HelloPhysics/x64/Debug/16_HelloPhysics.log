@@ -1,0 +1,14 @@
+﻿  GameState.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\memory(3393,56): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+D:\AzureDevOps\S.A.G.E\Framework\Physics\Inc\PhysicsWorld.h(49): message : see reference to function template instantiation 'std::unique_ptr<SAGE::Physics::Particle,std::default_delete<SAGE::Physics::Particle>> std::make_unique<SAGE::Physics::Particle,_Ty,float,0>(_Ty &&,float &&)' being compiled
+          with
+          [
+              _Ty=double
+          ]
+D:\AzureDevOps\S.A.G.E\VGP334\16_HelloPhysics\GameState.cpp(85,48): message : see reference to function template instantiation 'SAGE::Physics::Particle *SAGE::Physics::PhysicsWorld::AddParticle<double,float>(double &&,float &&)' being compiled
+     Creating library D:\AzureDevOps\S.A.G.E\x64\Debug\16_HelloPhysics.lib and object D:\AzureDevOps\S.A.G.E\x64\Debug\16_HelloPhysics.exp
+  16_HelloPhysics.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\16_HelloPhysics.exe

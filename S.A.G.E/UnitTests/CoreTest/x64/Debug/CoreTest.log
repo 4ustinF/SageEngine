@@ -1,0 +1,6 @@
+﻿  pch.cpp
+  BlockAllocatorTest.cpp
+  TypedAllocatorTest.cpp
+  Generating Code...
+     Creating library D:\AzureDevOps\S.A.G.E\x64\Debug\CoreTest.lib and object D:\AzureDevOps\S.A.G.E\x64\Debug\CoreTest.exp
+  CoreTest.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\CoreTest.dll

@@ -1,0 +1,6 @@
+﻿  GameState.cpp
+D:\AzureDevOps\S.A.G.E\VGP242\05_HelloCube\GameState.h(17,31): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  WinMain.cpp
+D:\AzureDevOps\S.A.G.E\VGP242\05_HelloCube\GameState.h(17,31): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  Generating Code...
+  05_HelloCube.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\05_HelloCube.exe

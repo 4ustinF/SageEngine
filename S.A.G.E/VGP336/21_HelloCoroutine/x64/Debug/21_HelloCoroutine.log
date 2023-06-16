@@ -1,0 +1,12 @@
+﻿  GameState.cpp
+D:\AzureDevOps\S.A.G.E\Framework\Math\Inc\SAGEMath.h(44,49): warning C4244: 'return': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+D:\AzureDevOps\S.A.G.E\Engine\SAGE\Inc\ParticleComponent.h(36): message : see reference to function template instantiation 'T SAGE::Math::Lerp<int>(T,T,float)' being compiled
+          with
+          [
+              T=int
+          ]
+  21_HelloCoroutine.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\21_HelloCoroutine.exe

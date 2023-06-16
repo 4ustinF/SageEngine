@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Inc">
+      <UniqueIdentifier>{a7a105b5-7a9a-41fa-8f51-697f7572ec19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{a22bb044-3826-41ba-9dfe-af7383853f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\FSM">
+      <UniqueIdentifier>{e3a73513-0863-4e89-9118-080ce4a67de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Pathing">
+      <UniqueIdentifier>{a8c69097-0ddd-4d47-82d9-7fa074c6dd19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Sterring">
+      <UniqueIdentifier>{15f8249c-2eb5-4984-aa48-1293ad233983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\World">
+      <UniqueIdentifier>{21a235e5-9bb4-4622-836e-0c859b7d6e32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Pathing">
+      <UniqueIdentifier>{973f5c81-d697-4164-8614-422e56043c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Steering">
+      <UniqueIdentifier>{e7d22a7a-c982-445c-b072-fe78bd8a476d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\World">
+      <UniqueIdentifier>{ee4daeac-57ff-4360-acd7-9d6647dd49e4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Inc\AI.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\common.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Precompiled.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\State.h">
+      <Filter>Inc\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\StateMachine.h">
+      <Filter>Inc\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\aStar.h">
+      <Filter>Inc\Pathing</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\BFS.h">
+      <Filter>Inc\Pathing</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DFS.h">
+      <Filter>Inc\Pathing</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Dijkstra.h">
+      <Filter>Inc\Pathing</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GridBasedGraph.h">
+      <Filter>Inc\Pathing</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Agent.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\AIWorld.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Entity.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\AlignmentBehavior.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ArriveBehavior.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CohesionBehavior.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\FleeBehavior.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\PursuitBehavior.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SeekBehavior.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SeperationBehavior.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SteeringBehavior.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SteeringModule.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\WanderBehavoir.h">
+      <Filter>Inc\Sterring</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Precompiled.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\aStar.cpp">
+      <Filter>Src\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\BFS.cpp">
+      <Filter>Src\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\DFS.cpp">
+      <Filter>Src\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Dijkstra.cpp">
+      <Filter>Src\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GridBasedGraph.cpp">
+      <Filter>Src\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Agent.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\AIWorld.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Entity.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\AlignmentBehavior.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ArriveBehavior.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\CohesionBehavior.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\FleeBehavior.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PursuitBehavior.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SeekBehavior.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SeperationBehavior.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SteeringModule.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\WanderBehavoir.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

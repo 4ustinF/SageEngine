@@ -1,0 +1,43 @@
+{
+  "Capacity":  1000,
+  "Services": {
+    "CameraService": {
+
+    },
+    "RenderService": {
+      "SkyDomeTexture": "Neptune.jpg"
+    },
+    "TerrainService": {
+      "HeightMap": "../../Assets/Heightmaps/Heightmap.raw",
+      "MaxHeight": 5,
+      "Textures": [
+        "grass.jpg",
+        "dirt.jpg"
+      ]
+    }
+  },
+  "GameObjects": [
+    {
+      "Name": "Player",
+      "TemplateFile": "../../Assets/Templates/player.json",
+      "Components": {
+        "TransformComponent": {
+          "Position": [ 10, 0, 10 ]
+        }
+      }
+    },
+    {
+      "Name": "FpsCamera",
+      "TemplateFile": "../../Assets/Templates/fps_camera.json"
+    },
+    {
+      "Name": "SpawnerA",
+      "TemplateFile": "../../Assets/Templates/spawner.json",
+      "Components": {
+        "TransformComponent": {
+          "Position": [ 50, 0, 50 ]
+        }
+      }
+     }
+  ]
+}

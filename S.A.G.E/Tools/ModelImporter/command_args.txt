@@ -1,0 +1,29 @@
+-scale 0.01 ../../Assets/Models/Duck/duck.fbx ../../Assets/Models/Duck/duck.model
+-scale 0.01 ../../Assets/Models/Eve/eve.fbx ../../Assets/Models/Eve/eve.model
+-scale 0.01 ../../Assets/Models/MasterChief/Master_Chief.fbx ../../Assets/Models/MasterChief/Master_Chief.model
+-scale 0.01 ../../Assets/Models/Cortana/new_cortana_halo4_og.fbx ../../Assets/Models/Cortana/new_cortana_halo4_og.model
+-scale 0.01 ../../Assets/Models/Maria_J_J_Ong/maria.fbx ../../Assets/Models/Maria_J_J_Ong/maria.model
+-scale 0.01 ../../Assets/Models/Paladin/paladin.fbx ../../Assets/Models/Paladin/paladin.model
+-scale 0.01 ../../Assets/Models/Steve/Steve.fbx ../../Assets/Models/Steve/Steve.model
+-scale 1.00 ../../Assets/Models/Max/Max.dae ../../Assets/Models/Max/Max.model
+-scale 1.00 ../../Assets/Models/Max/PlayerModel.fbx ../../Assets/Models/Max/PlayerModel.model
+-scale 1.00 ../../Assets/Models/Mutant/mutant.fbx ../../Assets/Models/Mutant/mutant.model
+
+
+-scale 0.01 -animOnly ../../Assets/Models/Maria_J_J_Ong/maria_walk.fbx ../../Assets/Models/Maria_J_J_Ong/maria_walk.model
+-scale 0.01 -animOnly ../../Assets/Models/Maria_J_J_Ong/maria_attack.fbx ../../Assets/Models/Maria_J_J_Ong/maria_attack.model
+-scale 0.01 -animOnly ../../Assets/Models/Maria_J_J_Ong/maria_block.fbx ../../Assets/Models/Maria_J_J_Ong/maria_block.model
+-scale 0.01 -animOnly ../../Assets/Models/Maria_J_J_Ong/maria_retreat.fbx ../../Assets/Models/Maria_J_J_Ong/maria_retreat.model
+-scale 0.01 -animOnly ../../Assets/Models/Maria_J_J_Ong/maria_strafe_left.fbx ../../Assets/Models/Maria_J_J_Ong/maria_strafe_left.model
+-scale 0.01 -animOnly ../../Assets/Models/Maria_J_J_Ong/maria_strafe_right.fbx ../../Assets/Models/Maria_J_J_Ong/maria_strafe_right.model
+
+-scale 0.01 -animOnly ../../Assets/Models/Paladin/paladin_walk.fbx ../../Assets/Models/Paladin/paladin_walk.model
+-scale 1.00 -animOnly ../../Assets/Models/Max/PlayerModelWalk.fbx ../../Assets/Models/Max/PlayerModel_Walk.model
+
+-scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_walking.fbx ../../Assets/Models/Mutant/mutant_walking.model
+-scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_run.fbx ../../Assets/Models/Mutant/mutant_run.model
+-scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_dying.fbx ../../Assets/Models/Mutant/mutant_dying.model
+-scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_jumping.fbx ../../Assets/Models/Mutant/mutant_jumping.model
+-scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_swipe.fbx ../../Assets/Models/Mutant/mutant_swipe.model
+-scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_punch.fbx ../../Assets/Models/Mutant/mutant_punch.model
+-scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_muscle_flex.fbx ../../Assets/Models/Mutant/mutant_muscle_flex.model

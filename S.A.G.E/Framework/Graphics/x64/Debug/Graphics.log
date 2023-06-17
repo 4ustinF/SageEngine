@@ -1,2 +1,243 @@
-﻿  CrossHatchEffect.cpp
-  Graphics.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\Graphics.lib
+﻿  Precompiled.cpp
+  Animation.cpp
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(54,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(63): message : see reference to function template instantiation 'T `anonymous-namespace'::GetValue<SAGE::Math::Vector3>(const std::vector<SAGE::Graphics::KeyFrame<T>,std::allocator<SAGE::Graphics::KeyFrame<T>>> &,float)' being compiled
+          with
+          [
+              T=SAGE::Math::Vector3
+          ]
+  AnimationBuilder.cpp
+  AnimationIO.cpp
+  AnimationUtil.cpp
+  Animator.cpp
+  AudioSystem.cpp
+  BlendState.cpp
+  Camera.cpp
+  ConstantBuffer.cpp
+  CrossHatchEffect.cpp
+  DebugUI.cpp
+  Font.cpp
+  GaussianBlurEffect.cpp
+  GraphicsSystem.cpp
+  HologramEffect.cpp
+  MeshBuffer.cpp
+  MeshBuilder.cpp
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,50): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=std::seed_seq::result_type
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,56): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=std::seed_seq::result_type
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,56): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=std::seed_seq::result_type
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,50): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=std::seed_seq::result_type
+          ]
+  MeshUtil.cpp
+  ModelIO.cpp
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 1 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 2 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 3 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 4 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 5 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 6 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 7 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 8 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 9 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 10 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 11 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 12 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 13 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 14 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 15 has type 'const float *'
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 16 has type 'const float *'
+  ModelManager.cpp
+  Generating Code...
+  Compiling...
+  ParticleEffect.cpp
+  PixelShader.cpp
+  ReflectionEffect.cpp
+  RenderObject.cpp
+  RenderTarget.cpp
+  Sampler.cpp
+  ShadowEffect.cpp
+  SimpleDraw.cpp
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(381,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(417,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(418,44): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(419,29): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(421,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(422,29): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(423,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(426,30): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(427,45): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(428,49): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(430,49): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(431,30): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(432,49): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(444,38): warning C4244: 'argument': conversion from 'unsigned __int64' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(445,38): warning C4244: 'argument': conversion from 'unsigned __int64' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(446,38): warning C4244: 'argument': conversion from 'unsigned __int64' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(448,38): warning C4244: 'argument': conversion from 'unsigned __int64' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(449,22): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(450,24): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(455,40): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(455,66): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(455,92): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(665,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(666,44): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(667,29): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(669,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(670,29): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(671,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(677,40): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(677,66): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(677,92): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+  SoundEffectManager.cpp
+  SpriteRenderer.cpp
+  StandardEffect.cpp
+  Terrain.cpp
+  TerrainEffect.cpp
+  Texture.cpp
+  PostProccessingEffect.cpp
+  TextureManager.cpp
+  TexturingEffect.cpp
+  ToonEffect .cpp
+  UIButton.cpp
+  VertexShader.cpp
+  Generating Code...
+  Compiling...
+  VoxelCloudsEffect.cpp
+  VoxelTerrainEffect.cpp
+  VoxelWaterEffect.cpp
+  Generating Code...
+  Graphics.vcxproj -> C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\x64\Debug\Graphics.lib

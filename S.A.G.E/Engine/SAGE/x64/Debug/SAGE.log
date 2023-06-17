@@ -7,8 +7,8 @@
   CameraService.cpp
   CameraUtil.cpp
   ColliderComponent.cpp
-  FPSCameraControllerComponent.cpp
   FollowCameraControllerComponent.cpp
+  FPSCameraControllerComponent.cpp
   GameObject.cpp
   GameObjectFactory.cpp
   GameWorld.cpp
@@ -28,4 +28,4 @@
   TransformComponent.cpp
   UIService.cpp
   Generating Code...
-  SAGE.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\SAGE.lib
+  SAGE.vcxproj -> C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

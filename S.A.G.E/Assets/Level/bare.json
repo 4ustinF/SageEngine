@@ -1,0 +1,17 @@
+{
+  "Capacity":  1000,
+  "Services": {
+    "CameraService": {
+
+    },
+    "RenderService": {
+      "SkyDomeTexture": "Neptune.jpg"
+    }
+  },
+  "GameObjects": [
+    {
+      "Name": "FpsCamera",
+      "TemplateFile": "../../Assets/Templates/fps_camera.json"
+    }
+  ]
+}

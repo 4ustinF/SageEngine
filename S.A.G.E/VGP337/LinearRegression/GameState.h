@@ -13,6 +13,22 @@ public:
 
 private:
 	SAGE::GameWorld mGameWorld;
-
 	AppLog mAppLog;
+
+	void TrainModel();
+
+	SAGE::ML::Dataset mDataset;
+	SAGE::ML::LinearRegression mLinReg;
+	std::vector<float> mError;
+	int mSampleCount = 1000;
+	float b0Value = 0.0f;
+	float b1Value = 1.0f;
+	float mMinX = 0.0f;
+	float mMaxX = 100.0f;
+	float mNoise = 10.0f;
+	int mEpoch = 10000;
+	float mLearningRate = 0.00055f; 
+	bool mFindLowestError = false;
+	float mLowestError = 1.0f;
+
 };

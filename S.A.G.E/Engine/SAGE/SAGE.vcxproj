@@ -106,6 +106,9 @@
     <ProjectReference Include="..\..\Framework\Math\Math.vcxproj">
       <Project>{6c840eb3-b863-407e-a551-366e0e1bb5bf}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\Framework\ML\ML.vcxproj">
+      <Project>{c72aa0ce-f191-4934-8cc4-3045effd9946}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Physics\Physics.vcxproj">
       <Project>{d337a0e9-1d98-469b-9297-b18e401c8e54}</Project>
     </ProjectReference>

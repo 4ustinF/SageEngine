@@ -30,3 +30,10 @@ float LinearRegression::Predict(float X) const
 {
 	return b0 + (b1 * X);
 }
+
+void LinearRegression::Reset(float B0, float B1, float lR)
+{
+	b0 = B0;
+	b1 = B1;
+	learningRate = lR;
+}

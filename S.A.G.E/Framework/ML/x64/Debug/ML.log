@@ -1,6 +1,2 @@
-﻿  Datasets.cpp
-  LinearRegression.cpp
-  Generating Code...
-D:\GitHub\SageEngine\S.A.G.E\Framework\ML\Src\LinearRegression.cpp(8,8): error C2653: 'LinearRegression': is not a class or namespace name
-  (compiling source file '/Src/LinearRegression.cpp')
-  
+﻿  LinearRegression.cpp
+  ML.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ML.lib

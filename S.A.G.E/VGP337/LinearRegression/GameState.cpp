@@ -33,6 +33,12 @@ void GameState::Terminate()
 void GameState::Update(float deltaTime)
 {
 	mGameWorld.Update(deltaTime);
+
+	const auto& inputSystem = InputSystem::Get();
+	if (inputSystem->IsKeyPressed(KeyCode::SPACE))
+	{
+		mAppLog.AddLog("Bam!\n");
+	}
 }
 
 void GameState::Render()
@@ -43,4 +49,6 @@ void GameState::Render()
 void GameState::DebugUI()
 {
 	mGameWorld.DebugUI();
+
+	mAppLog.Draw("Console");
 }

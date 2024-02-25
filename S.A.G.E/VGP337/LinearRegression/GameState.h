@@ -1,4 +1,5 @@
 #include <SAGE/Inc/SAGE.h>
+#include <ImGui/Inc/AppLog.h>
 
 class GameState : public SAGE::AppState
 {
@@ -12,4 +13,6 @@ public:
 
 private:
 	SAGE::GameWorld mGameWorld;
+
+	AppLog mAppLog;
 };

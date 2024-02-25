@@ -147,10 +147,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\AppLog.h" />
     <ClInclude Include="Inc\imconfig.h" />
     <ClInclude Include="Inc\imgui.h" />
     <ClInclude Include="Inc\imgui_impl_dx11.h" />
     <ClInclude Include="Inc\imgui_impl_win32.h" />
+    <ClInclude Include="Inc\ImPlot.h" />
     <ClInclude Include="Src\imgui_internal.h" />
     <ClInclude Include="Src\imstb_rectpack.h" />
     <ClInclude Include="Src\imstb_textedit.h" />
@@ -164,6 +166,7 @@
     <ClCompile Include="Src\imgui_impl_win32.cpp" />
     <ClCompile Include="Src\imgui_tables.cpp" />
     <ClCompile Include="Src\imgui_widgets.cpp" />
+    <ClCompile Include="Src\ImPlot.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

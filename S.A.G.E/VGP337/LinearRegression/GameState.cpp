@@ -58,18 +58,18 @@ void GameState::DebugUI()
 		TrainModel();
 	}
 
-	ImGui::SliderFloat("Learning Rate", &mLearningRate, 0.000001f, 0.001f, "%.7f");
+	ImGui::DragFloat("Learning Rate", &mLearningRate, 0.01f, 0.000001f, 0.001f, "%.7f");
 	ImGui::SliderInt("Epochs", &mEpoch, 100, 10000);
 
 	ImGui::SliderInt("Sample Count", &mSampleCount, 10, 1000);
-	ImGui::SliderFloat("B0Value", &b0Value, 0.0f, 10.0f, "%.2f");
-	ImGui::SliderFloat("B1Value", &b1Value, 0.0f, 10.0f, "%.2f");
-	ImGui::SliderFloat("Min X", &mMinX, 0.0f, 100.0f, "%.2f");
-	ImGui::SliderFloat("Max X", &mMaxX, 0.0f, 100.0f, "%.2f");
-	ImGui::SliderFloat("Noise", &mNoise, 0.0f, 100.0f, "%.2f");
+	ImGui::DragFloat("B0Value", &b0Value, 0.01f, -10.0f, 10.0f, "%.2f");
+	ImGui::DragFloat("B1Value", &b1Value, 0.01f, -10.0f, 10.0f, "%.2f");
+	ImGui::DragFloat("Min X", &mMinX, 0.01f, 0.0f, 100.0f, "%.2f");
+	ImGui::DragFloat("Max X", &mMaxX, 0.01f, 0.0f, 100.0f, "%.2f");
+	ImGui::DragFloat("Noise", &mNoise, 0.01f, 0.0f, 100.0f, "%.2f");
 
 	ImGui::Checkbox("Find Lowest Error", &mFindLowestError);
-	ImGui::SliderFloat("Lowest Error", &mLowestError, 0.0f, 0.001f, "%.7f");
+	ImGui::DragFloat("Lowest Error", &mLowestError, 0.01f, 0.0f, 0.001f, "%.7f");
 
 	if (ImPlot::BeginPlot("Linear regression", "x", "y"))
 	{

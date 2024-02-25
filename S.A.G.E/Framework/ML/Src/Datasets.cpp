@@ -22,7 +22,6 @@ Dataset Datasets::MakeLinear(size_t samples, float b0, float b1, float minX, flo
 	return dataset;
 }
 
-// 2:57 - 2:58
 Dataset Datasets::MakeLogistic(size_t samples, float b0, float b1, float b2, float minX, float maxX, float noise)
 {
 	Dataset dataset;

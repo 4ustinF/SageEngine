@@ -39,6 +39,9 @@
     <ClInclude Include="Inc\LinearRegression.h">
       <Filter>Inc\LinearModel</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\LogisticRegression.h">
+      <Filter>Inc\LinearModel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -48,6 +51,9 @@
       <Filter>Src\Datasets</Filter>
     </ClCompile>
     <ClCompile Include="Src\LinearRegression.cpp">
+      <Filter>Src\LinearModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\LogisticRegression.cpp">
       <Filter>Src\LinearModel</Filter>
     </ClCompile>
   </ItemGroup>

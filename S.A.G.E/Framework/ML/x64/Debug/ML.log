@@ -1,2 +1,6 @@
-﻿  LogisticRegression.cpp
+﻿  Precompiled.cpp
+  Datasets.cpp
+  LinearRegression.cpp
+  LogisticRegression.cpp
+  Generating Code...
   ML.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ML.lib

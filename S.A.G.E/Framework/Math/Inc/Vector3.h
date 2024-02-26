@@ -30,7 +30,7 @@ namespace SAGE::Math
 
 		Vector3& operator+=(const Vector3& v) { x += v.x, y += v.y, z += v.z; return *this; }
 		Vector3& operator-=(const Vector3& v) { x -= v.x; y -= v.y; z -= v.z; return *this; }
-		bool operator==(const Vector3& v) { return x == v.x && y == v.y && z == v.z;}
+		bool operator==(const Vector3& v) const { return x == v.x && y == v.y && z == v.z;}
 		Vector3& operator*=(float f) { x *= f; y *= f; z *= f; return *this; }
 		Vector3& operator/=(float f) { x /= f; y /= f; z /= f; return *this; }
 	};

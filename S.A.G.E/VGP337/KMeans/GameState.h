@@ -23,4 +23,5 @@ private:
 
 	SAGE::Graphics::Texture mUnitTexture;
 	std::vector<Unit> mUnits;
+	bool mShowKMeans = false;
 };

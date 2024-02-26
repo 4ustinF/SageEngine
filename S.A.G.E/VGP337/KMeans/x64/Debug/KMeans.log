@@ -1,4 +1,8 @@
 ﻿  GameState.cpp
-  WinMain.cpp
-  Generating Code...
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267:         with
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267:         [
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267:             _Ty=int
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267:         ]
+     Creating library D:\GitHub\SageEngine\S.A.G.E\x64\Debug\KMeans.lib and object D:\GitHub\SageEngine\S.A.G.E\x64\Debug\KMeans.exp
   KMeans.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\KMeans.exe

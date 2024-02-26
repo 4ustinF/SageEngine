@@ -27,21 +27,69 @@ namespace
 	struct ClusterResult
 	{
 		std::vector<Vector2> centroids;
-		std::vector<int> assignment;
+		std::vector<int> assignments;
+
+		std::vector<std::vector<Vector2>> centroidHistory;
 	};
 
-	ClusterResult KMeansCluster(const std::vector<Vector2>& data, int K)
+	ClusterResult KMeansCluster(const std::vector<Vector2>& data, int K, size_t maxIteration)
 	{
-		std::vector<Vector2> centroids;
-		centroids.resize(K);
-		for (auto& centroid : centroids)
+		ClusterResult result;
+
+		// Generate random starting positions
+		result.centroids.resize(K);
+		for (auto& centroid : result.centroids)
 		{
 			centroid.x = Random::UniformFloat(0.0f, 800.0f);
 			centroid.y = Random::UniformFloat(0.0f, 600.0f);
 		}
 
-		return {};
+		for (size_t iteration = 0; iteration < maxIteration; ++iteration)
+		{
+			std::vector<Vector2> newCentroids;
+			std::vector<size_t> clusterEntryCount;
+			newCentroids.resize(K);
+			clusterEntryCount.resize(K);
+
+			// Assign cluster membership
+			result.assignments.clear();
+			result.assignments.reserve(data.size());
+			for (const auto& sample : data)
+			{
+				size_t closestClusterIndex = 0;
+				float closestDistanceSqr = DistanceSqr(sample, result.centroids[0]);
+				for (size_t i = 1; i < result.centroids.size(); ++i)
+				{
+					const float distanceSqr = DistanceSqr(sample, result.centroids[i]);
+					if (distanceSqr < closestDistanceSqr)
+					{
+						closestClusterIndex = i;
+						closestDistanceSqr = distanceSqr;
+					}
+				}
+				result.assignments.push_back(closestClusterIndex);
+				newCentroids[closestClusterIndex] += sample;
+				clusterEntryCount[closestClusterIndex]++;
+			}
+
+			// Compute new centroid
+			for (size_t i = 0; i < newCentroids.size(); ++i) {
+				newCentroids[i] /= static_cast<float>(clusterEntryCount[i]);
+			}
+
+			// Check if we are done
+			if (newCentroids == result.centroids) {
+				break;
+			}
+
+			// Update centroid positions and repeat
+			result.centroids = std::move(newCentroids);
+		}
+
+		return result;
 	}
+
+	ClusterResult kMeansResult;
 }
 
 void GameState::Initialize()
@@ -54,14 +102,12 @@ void GameState::Initialize()
 	mGameWorld.LoadLevel("../../Assets/Level/bare.json");
 
 	mUnitTexture.Initialize(L"../../Assets/Sprites/X/scv_01.png");
-
 	for (size_t i = 0; i < 20; ++i)
 	{
 		const float pX = Random::UniformFloat(0.0f, 800.0f);
 		const float pY = Random::UniformFloat(0.0f, 600.0f);
 		const float vX = Random::UniformFloat(-100.0f, 100.0f);
 		const float vY = Random::UniformFloat(-100.0f, 100.0f);
-
 		mUnits.emplace_back(Unit{ {pX, pY}, {vX, vY} });
 	}
 }
@@ -77,31 +123,45 @@ void GameState::Update(float deltaTime)
 	//mGameWorld.Update(deltaTime);
 
 	const auto& inputSystem = InputSystem::Get();
-	if (inputSystem->IsKeyDown(KeyCode::SPACE))
+
+	if (!mShowKMeans)
 	{
-		// Run kMeans
-		// Show centroids/assignment
-	}
-	else
-	{
-		for (auto& unit : mUnits)
+		if (inputSystem->IsKeyDown(KeyCode::SPACE))
 		{
-			unit.position += unit.velocity * deltaTime;
-			if (unit.position.x < 0.0f) {
-				unit.position.x += 800.0f;
+			mShowKMeans = true;
+
+			std::vector<Vector2> data;
+			data.reserve(mUnits.size());
+			for (auto& unit : mUnits)
+			{
+				data.push_back({ unit.position.x, unit.position.y });
 			}
-			if (unit.position.x > 800.0f) {
-				unit.position.x -= 800.0f;
-			}
-			if (unit.position.y < 0.0f) {
-				unit.position.y += 600.0f;
-			}
-			if (unit.position.y > 600.0f) {
-				unit.position.y -= 600.0f;
+			kMeansResult = KMeansCluster(data, 3, 10);
+		}
+		else
+		{
+			for (auto& unit : mUnits)
+			{
+				unit.position += unit.velocity * deltaTime;
+				if (unit.position.x < 0.0f) {
+					unit.position.x += 800.0f;
+				}
+				if (unit.position.x > 800.0f) {
+					unit.position.x -= 800.0f;
+				}
+				if (unit.position.y < 0.0f) {
+					unit.position.y += 600.0f;
+				}
+				if (unit.position.y > 600.0f) {
+					unit.position.y -= 600.0f;
+				}
 			}
 		}
 	}
-
+	else if (!inputSystem->IsKeyDown(KeyCode::SPACE))
+	{
+		mShowKMeans = false;
+	}
 }
 
 void GameState::Render()
@@ -123,9 +183,29 @@ void GameState::DebugUI()
 		ImGui::Image(mUnitTexture.GetRawData(), unitSize);
 	}
 
-	ImVec2 winPos = ImGui::GetWindowPos();
+	const ImVec2 winPos = ImGui::GetWindowPos();
 	ImDrawList* drawList = ImGui::GetForegroundDrawList();
-	drawList->AddCircle(winPos + mUnits[0].position, 50.0f, 0xff0000ff);
+
+	if (mShowKMeans)
+	{
+		const ImU32 clusterColors[] = { 0xffff8800, 0xff66ff44, 0xffff22ff };
+
+		// Circles
+		for (size_t i = 0; i < kMeansResult.centroids.size(); ++i)
+		{
+			const ImVec2 center{kMeansResult.centroids[i].x, kMeansResult.centroids[i].y };
+			drawList->AddCircle(winPos + center, 10.0f, clusterColors[i]);
+		}
+
+		// Lines
+		for (size_t i = 0; i < kMeansResult.assignments.size(); ++i)
+		{
+			const size_t clusterIndex = kMeansResult.assignments[i];
+			const Vector2 centroid = kMeansResult.centroids[clusterIndex];
+			const ImVec2 center{ centroid.x, centroid.y };
+			drawList->AddLine(winPos + center, winPos + mUnits[i].position, clusterColors[clusterIndex]);
+		}
+	}
 
 	ImGui::End();
 }

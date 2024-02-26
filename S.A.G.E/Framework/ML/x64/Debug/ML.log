@@ -1,5 +1,6 @@
 ﻿  Precompiled.cpp
   Datasets.cpp
+  KMeans.cpp
   LinearRegression.cpp
   LogisticRegression.cpp
   Generating Code...

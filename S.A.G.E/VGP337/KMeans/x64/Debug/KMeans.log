@@ -10,5 +10,6 @@ D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(72,34): warning C4267: 
 D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(72,34): warning C4267:         [
 D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(72,34): warning C4267:             _Ty=int
 D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(72,34): warning C4267:         ]
-     Creating library D:\GitHub\SageEngine\S.A.G.E\x64\Debug\KMeans.lib and object D:\GitHub\SageEngine\S.A.G.E\x64\Debug\KMeans.exp
+  WinMain.cpp
+  Generating Code...
   KMeans.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\KMeans.exe

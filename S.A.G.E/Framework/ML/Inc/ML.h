@@ -8,3 +8,6 @@
 // Linear Model Headers
 #include "LinearRegression.h"
 #include "LogisticRegression.h"
+
+// Cluster Model Headers
+#include "KMeans.h"

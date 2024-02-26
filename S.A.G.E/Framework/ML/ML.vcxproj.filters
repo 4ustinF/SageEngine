@@ -22,6 +22,12 @@
     <Filter Include="Src\LinearModel">
       <UniqueIdentifier>{eec4548a-47b1-48db-bc01-47cfd5b1c796}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\Cluster">
+      <UniqueIdentifier>{e1e2a134-b2d3-4775-8fd3-d21e8d8eaa8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Cluster">
+      <UniqueIdentifier>{86a4d514-7735-4a0e-8bab-cde500590266}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\ML.h">
@@ -42,6 +48,9 @@
     <ClInclude Include="Inc\LogisticRegression.h">
       <Filter>Inc\LinearModel</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\KMeans.h">
+      <Filter>Inc\Cluster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -55,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="Src\LogisticRegression.cpp">
       <Filter>Src\LinearModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\KMeans.cpp">
+      <Filter>Src\Cluster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

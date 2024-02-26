@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\Datasets.h" />
+    <ClInclude Include="Inc\KMeans.h" />
     <ClInclude Include="Inc\LinearRegression.h" />
     <ClInclude Include="Inc\LogisticRegression.h" />
     <ClInclude Include="Inc\ML.h" />
@@ -144,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Datasets.cpp" />
+    <ClCompile Include="Src\KMeans.cpp" />
     <ClCompile Include="Src\LinearRegression.cpp" />
     <ClCompile Include="Src\LogisticRegression.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">

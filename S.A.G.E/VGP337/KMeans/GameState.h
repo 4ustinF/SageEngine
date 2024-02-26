@@ -18,6 +18,7 @@ private:
 	struct Unit
 	{
 		ImVec2 position;
+		ImVec2 velocity;
 	};
 
 	SAGE::Graphics::Texture mUnitTexture;

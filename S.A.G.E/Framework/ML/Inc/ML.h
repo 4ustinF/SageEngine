@@ -7,3 +7,4 @@
 
 // Linear Model Headers
 #include "LinearRegression.h"
+#include "LogisticRegression.h"

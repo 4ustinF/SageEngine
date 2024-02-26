@@ -24,7 +24,13 @@ namespace
 
 namespace 
 {
-	void KMeansCluster(const std::vector<Vector2>& data, int K)
+	struct ClusterResult
+	{
+		std::vector<Vector2> centroids;
+		std::vector<int> assignment;
+	};
+
+	ClusterResult KMeansCluster(const std::vector<Vector2>& data, int K)
 	{
 		std::vector<Vector2> centroids;
 		centroids.resize(K);
@@ -33,6 +39,8 @@ namespace
 			centroid.x = Random::UniformFloat(0.0f, 800.0f);
 			centroid.y = Random::UniformFloat(0.0f, 600.0f);
 		}
+
+		return {};
 	}
 }
 
@@ -69,27 +77,31 @@ void GameState::Update(float deltaTime)
 	//mGameWorld.Update(deltaTime);
 
 	const auto& inputSystem = InputSystem::Get();
-	if (inputSystem->IsKeyPressed(KeyCode::SPACE))
+	if (inputSystem->IsKeyDown(KeyCode::SPACE))
 	{
-		mAppLog.clear();
+		// Run kMeans
+		// Show centroids/assignment
+	}
+	else
+	{
+		for (auto& unit : mUnits)
+		{
+			unit.position += unit.velocity * deltaTime;
+			if (unit.position.x < 0.0f) {
+				unit.position.x += 800.0f;
+			}
+			if (unit.position.x > 800.0f) {
+				unit.position.x -= 800.0f;
+			}
+			if (unit.position.y < 0.0f) {
+				unit.position.y += 600.0f;
+			}
+			if (unit.position.y > 600.0f) {
+				unit.position.y -= 600.0f;
+			}
+		}
 	}
 
-	for (auto& unit : mUnits)
-	{
-		unit.position += unit.velocity * deltaTime;
-		if (unit.position.x < 0.0f) {
-			unit.position.x += 800.0f;
-		}
-		if (unit.position.x > 800.0f) {
-			unit.position.x -= 800.0f;
-		}
-		if (unit.position.y < 0.0f) {
-			unit.position.y += 600.0f;
-		}
-		if (unit.position.y > 600.0f) {
-			unit.position.y -= 600.0f;
-		}
-	}
 }
 
 void GameState::Render()

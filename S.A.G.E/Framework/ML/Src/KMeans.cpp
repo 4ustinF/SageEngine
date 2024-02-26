@@ -12,5 +12,6 @@ float KMeans::Fit(const Dataset& dataset)
 
 size_t KMeans::Predict(float x0, float x1) const
 {
+	// TODO: Return the index of what centroid is the closest
 	return 0;
 }

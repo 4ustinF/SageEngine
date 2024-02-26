@@ -22,31 +22,33 @@ namespace
 	}
 }
 
-namespace 
+namespace
 {
 	struct ClusterResult
 	{
-		std::vector<Vector2> centroids;
+		std::vector<Vector3> centroids;
 		std::vector<int> assignments;
 
-		std::vector<std::vector<Vector2>> centroidHistory;
+		std::vector<std::vector<Vector3>> centroidHistory;
 	};
 
-	ClusterResult KMeansCluster(const std::vector<Vector2>& data, int K, size_t maxIteration)
+	ClusterResult KMeansCluster(const std::vector<Vector3>& data, int K, size_t maxIteration)
 	{
+		ASSERT(K <= data.size(), "Not Enough data for %zu clusters", K);
+
 		ClusterResult result;
 
-		// Generate random starting positions
+		// Use existing data points as starting cluster centroids
 		result.centroids.resize(K);
-		for (auto& centroid : result.centroids)
+		result.centroidHistory.resize(K);
+		for (size_t i = 0; i < K; ++i)
 		{
-			centroid.x = Random::UniformFloat(0.0f, 800.0f);
-			centroid.y = Random::UniformFloat(0.0f, 600.0f);
+			result.centroids[i] = data[i];
 		}
 
 		for (size_t iteration = 0; iteration < maxIteration; ++iteration)
 		{
-			std::vector<Vector2> newCentroids;
+			std::vector<Vector3> newCentroids;
 			std::vector<size_t> clusterEntryCount;
 			newCentroids.resize(K);
 			clusterEntryCount.resize(K);
@@ -77,6 +79,12 @@ namespace
 				newCentroids[i] /= static_cast<float>(clusterEntryCount[i]);
 			}
 
+			// Get history
+			for (size_t i = 0; i < result.centroids.size(); ++i)
+			{
+				result.centroidHistory[i].push_back(result.centroids[i]);
+			}
+
 			// Check if we are done
 			if (newCentroids == result.centroids) {
 				break;
@@ -102,7 +110,7 @@ void GameState::Initialize()
 	mGameWorld.LoadLevel("../../Assets/Level/bare.json");
 
 	mUnitTexture.Initialize(L"../../Assets/Sprites/X/scv_01.png");
-	for (size_t i = 0; i < 20; ++i)
+	for (size_t i = 0; i < 30; ++i)
 	{
 		const float pX = Random::UniformFloat(0.0f, 800.0f);
 		const float pY = Random::UniformFloat(0.0f, 600.0f);
@@ -130,11 +138,11 @@ void GameState::Update(float deltaTime)
 		{
 			mShowKMeans = true;
 
-			std::vector<Vector2> data;
+			std::vector<Vector3> data;
 			data.reserve(mUnits.size());
 			for (auto& unit : mUnits)
 			{
-				data.push_back({ unit.position.x, unit.position.y });
+				data.push_back({ unit.position.x, unit.position.y, 0.0f });
 			}
 			kMeansResult = KMeansCluster(data, 3, 10);
 		}
@@ -193,7 +201,7 @@ void GameState::DebugUI()
 		// Circles
 		for (size_t i = 0; i < kMeansResult.centroids.size(); ++i)
 		{
-			const ImVec2 center{kMeansResult.centroids[i].x, kMeansResult.centroids[i].y };
+			const ImVec2 center{ kMeansResult.centroids[i].x, kMeansResult.centroids[i].y };
 			drawList->AddCircle(winPos + center, 10.0f, clusterColors[i]);
 		}
 
@@ -201,9 +209,25 @@ void GameState::DebugUI()
 		for (size_t i = 0; i < kMeansResult.assignments.size(); ++i)
 		{
 			const size_t clusterIndex = kMeansResult.assignments[i];
-			const Vector2 centroid = kMeansResult.centroids[clusterIndex];
+			const Vector3 centroid = kMeansResult.centroids[clusterIndex];
 			const ImVec2 center{ centroid.x, centroid.y };
 			drawList->AddLine(winPos + center, winPos + mUnits[i].position, clusterColors[clusterIndex]);
+		}
+
+		for (size_t i = 0; i < kMeansResult.centroidHistory.size(); ++i)
+		{
+			for (size_t j = 0; j < kMeansResult.centroidHistory[i].size(); ++j)
+			{
+				const float radius = Lerp(3.0f, 7.5f, static_cast<float>(j) / static_cast<float>(kMeansResult.centroidHistory[i].size()));
+				const auto& history = kMeansResult.centroidHistory[i][j];
+				drawList->AddCircleFilled(winPos + ImVec2{ history.x, history.y }, radius, clusterColors[i]);
+
+				if (j > 0)
+				{
+					const auto& lastHistory = kMeansResult.centroidHistory[i][j - 1];
+					drawList->AddLine(winPos + ImVec2{ history.x, history.y }, winPos + ImVec2{ lastHistory.x, lastHistory.y }, 0xffffffff);
+				}
+			}
 		}
 	}
 

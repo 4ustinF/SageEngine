@@ -1,8 +1,14 @@
 ﻿  GameState.cpp
-D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267:         with
-D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267:         [
-D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267:             _Ty=int
-D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(70,34): warning C4267:         ]
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(37,3): warning C4477: 'snprintf' : format string '%zu' requires an argument of type 'unsigned __int64', but variadic argument 4 has type 'int'
+  D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(37,3):
+  consider using '%u' in the format string
+  D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(37,3):
+  consider using '%I32u' in the format string
+  
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(72,34): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(72,34): warning C4267:         with
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(72,34): warning C4267:         [
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(72,34): warning C4267:             _Ty=int
+D:\GitHub\SageEngine\S.A.G.E\VGP337\KMeans\GameState.cpp(72,34): warning C4267:         ]
      Creating library D:\GitHub\SageEngine\S.A.G.E\x64\Debug\KMeans.lib and object D:\GitHub\SageEngine\S.A.G.E\x64\Debug\KMeans.exp
   KMeans.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\KMeans.exe

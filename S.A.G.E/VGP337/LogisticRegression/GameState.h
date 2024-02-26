@@ -31,5 +31,6 @@ private:
 	float mLearningRate = 0.00055f; 
 	bool mFindLowestError = false;
 	float mLowestError = 1.0f;
+	float e = 2.71828f;
 
 };

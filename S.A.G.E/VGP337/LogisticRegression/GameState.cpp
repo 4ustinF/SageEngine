@@ -48,6 +48,10 @@ void GameState::Render()
 	mGameWorld.Render();
 }
 
+float x1[] = { 2.7810836f, 1.46f, 3.39f, 1.38f, 3.01f };
+float x2[] = { 2.550537003f, 2.36f, 4.40029f, 1.85f, 3.01f };
+float y[] = { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 };
+
 void GameState::DebugUI()
 {
 	mGameWorld.DebugUI();

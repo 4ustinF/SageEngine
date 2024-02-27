@@ -1,7 +1,2 @@
-﻿  Precompiled.cpp
-  Datasets.cpp
-  KMeans.cpp
-  LinearRegression.cpp
-  LogisticRegression.cpp
-  Generating Code...
+﻿  NeuralNetwork.cpp
   ML.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ML.lib

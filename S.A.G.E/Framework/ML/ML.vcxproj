@@ -141,6 +141,7 @@
     <ClInclude Include="Inc\LinearRegression.h" />
     <ClInclude Include="Inc\LogisticRegression.h" />
     <ClInclude Include="Inc\ML.h" />
+    <ClInclude Include="Inc\NeuralNetwork.h" />
     <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
     <ClCompile Include="Src\KMeans.cpp" />
     <ClCompile Include="Src\LinearRegression.cpp" />
     <ClCompile Include="Src\LogisticRegression.cpp" />
+    <ClCompile Include="Src\NeuralNetwork.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

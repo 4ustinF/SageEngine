@@ -28,6 +28,12 @@
     <Filter Include="Src\Cluster">
       <UniqueIdentifier>{86a4d514-7735-4a0e-8bab-cde500590266}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\ANN">
+      <UniqueIdentifier>{296369ae-777b-4632-8f11-29cf16adf3e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ANN">
+      <UniqueIdentifier>{02475691-b9b2-4d37-8dbe-329872193eff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\ML.h">
@@ -51,6 +57,9 @@
     <ClInclude Include="Inc\KMeans.h">
       <Filter>Inc\Cluster</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\NeuralNetwork.h">
+      <Filter>Inc\ANN</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -67,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="Src\KMeans.cpp">
       <Filter>Src\Cluster</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\NeuralNetwork.cpp">
+      <Filter>Src\ANN</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

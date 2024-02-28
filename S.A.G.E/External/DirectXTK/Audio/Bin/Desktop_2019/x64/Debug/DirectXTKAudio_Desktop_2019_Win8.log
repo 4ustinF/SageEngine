@@ -1,1227 +1,1227 @@
 ﻿  AudioEngine.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Foundation.h(890,47): warning C5256: 'ABI::Windows::Foundation::Collections::CollectionChange': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Foundation.h(899,39): warning C5256: 'ABI::Windows::Foundation::PropertyType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4175,47): warning C5256: 'ABI::Windows::Graphics::DirectX::DirectXAlphaMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4185,48): warning C5256: 'ABI::Windows::Graphics::DirectX::DirectXColorSpace': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4195,49): warning C5256: 'ABI::Windows::Graphics::DirectX::DirectXPixelFormat': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4326,66): warning C5256: 'ABI::Windows::UI::Composition::AnimationControllerProgressBehavior': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4336,53): warning C5256: 'ABI::Windows::UI::Composition::AnimationDelayBehavior': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4346,49): warning C5256: 'ABI::Windows::UI::Composition::AnimationDirection': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4356,57): warning C5256: 'ABI::Windows::UI::Composition::AnimationIterationBehavior': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4366,58): warning C5256: 'ABI::Windows::UI::Composition::AnimationPropertyAccessMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4376,52): warning C5256: 'ABI::Windows::UI::Composition::AnimationStopBehavior': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4386,60): warning C5256: 'ABI::Windows::UI::Composition::CompositionBackfaceVisibility': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4396,52): warning C5256: 'ABI::Windows::UI::Composition::CompositionBatchTypes': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4406,65): warning C5256: 'ABI::Windows::UI::Composition::CompositionBitmapInterpolationMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4416,52): warning C5256: 'ABI::Windows::UI::Composition::CompositionBorderMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4426,52): warning C5256: 'ABI::Windows::UI::Composition::CompositionColorSpace': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4436,55): warning C5256: 'ABI::Windows::UI::Composition::CompositionCompositeMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4446,64): warning C5256: 'ABI::Windows::UI::Composition::CompositionDropShadowSourcePolicy': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4456,60): warning C5256: 'ABI::Windows::UI::Composition::CompositionEasingFunctionMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4466,65): warning C5256: 'ABI::Windows::UI::Composition::CompositionEffectFactoryLoadStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4476,56): warning C5256: 'ABI::Windows::UI::Composition::CompositionGetValueStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4486,60): warning C5256: 'ABI::Windows::UI::Composition::CompositionGradientExtendMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4496,53): warning C5256: 'ABI::Windows::UI::Composition::CompositionMappingMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4506,49): warning C5256: 'ABI::Windows::UI::Composition::CompositionStretch': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4516,51): warning C5256: 'ABI::Windows::UI::Composition::CompositionStrokeCap': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Composition.h(4526,56): warning C5256: 'ABI::Windows::UI::Composition::CompositionStrokeLineJoin': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Haptics.h(209,52): warning C5256: 'ABI::Windows::Devices::Haptics::VibrationAccessStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Input.h(968,48): warning C5256: 'ABI::Windows::Devices::Input::PointerDeviceType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Geolocation.h(614,54): warning C5256: 'ABI::Windows::Devices::Geolocation::GeolocationAccessStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Geolocation.h(1383,54): warning C5256: 'ABI::Windows::Devices::Geolocation::AltitudeReferenceSystem': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Geolocation.h(1393,43): warning C5256: 'ABI::Windows::Devices::Geolocation::GeoshapeType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Geolocation.h(1403,47): warning C5256: 'ABI::Windows::Devices::Geolocation::PositionAccuracy': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Geolocation.h(1413,45): warning C5256: 'ABI::Windows::Devices::Geolocation::PositionSource': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Geolocation.h(1423,45): warning C5256: 'ABI::Windows::Devices::Geolocation::PositionStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Geolocation.h(1433,51): warning C5256: 'ABI::Windows::Devices::Geolocation::VisitMonitoringScope': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Geolocation.h(1443,47): warning C5256: 'ABI::Windows::Devices::Geolocation::VisitStateChange': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.FileProperties.h(1060,47): warning C5256: 'ABI::Windows::Storage::FileProperties::PhotoOrientation': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.FileProperties.h(1070,44): warning C5256: 'ABI::Windows::Storage::FileProperties::ThumbnailType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.FileProperties.h(1080,47): warning C5256: 'ABI::Windows::Storage::FileProperties::VideoOrientation': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1610,48): warning C5256: 'ABI::Windows::Storage::Provider::CachedFileOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1620,47): warning C5256: 'ABI::Windows::Storage::Provider::CachedFileTarget': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1630,47): warning C5256: 'ABI::Windows::Storage::Provider::FileUpdateStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1640,49): warning C5256: 'ABI::Windows::Storage::Provider::ReadActivationMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1650,60): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderHardlinkPolicy': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1660,61): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderHydrationPolicy': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1670,69): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderHydrationPolicyModifier': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1680,58): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderInSyncPolicy': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1690,67): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderKnownFolderSyncStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1700,62): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderPopulationPolicy': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1710,60): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderProtectionMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1720,51): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1730,60): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderUICommandState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1740,61): warning C5256: 'ABI::Windows::Storage::Provider::StorageProviderUriSourceStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1750,39): warning C5256: 'ABI::Windows::Storage::Provider::UIStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Provider.h(1760,50): warning C5256: 'ABI::Windows::Storage::Provider::WriteActivationMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Globalization.h(735,36): warning C5256: 'ABI::Windows::Globalization::DayOfWeek': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Globalization.h(743,50): warning C5256: 'ABI::Windows::Globalization::LanguageLayoutDirection': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(374,40): warning C5256: 'ABI::Windows::UI::Text::CaretType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(384,42): warning C5256: 'ABI::Windows::UI::Text::FindOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(394,42): warning C5256: 'ABI::Windows::UI::Text::FontStretch': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(404,40): warning C5256: 'ABI::Windows::UI::Text::FontStyle': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(414,43): warning C5256: 'ABI::Windows::UI::Text::FormatEffect': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(424,59): warning C5256: 'ABI::Windows::UI::Text::HorizontalCharacterAlignment': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(434,41): warning C5256: 'ABI::Windows::UI::Text::LetterCase': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(444,46): warning C5256: 'ABI::Windows::UI::Text::LineSpacingRule': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(454,39): warning C5256: 'ABI::Windows::UI::Text::LinkType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(464,46): warning C5256: 'ABI::Windows::UI::Text::MarkerAlignment': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(474,42): warning C5256: 'ABI::Windows::UI::Text::MarkerStyle': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(484,41): warning C5256: 'ABI::Windows::UI::Text::MarkerType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(494,49): warning C5256: 'ABI::Windows::UI::Text::ParagraphAlignment': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(504,45): warning C5256: 'ABI::Windows::UI::Text::ParagraphStyle': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(514,43): warning C5256: 'ABI::Windows::UI::Text::PointOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(524,43): warning C5256: 'ABI::Windows::UI::Text::RangeGravity': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(534,47): warning C5256: 'ABI::Windows::UI::Text::RichEditMathMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(544,47): warning C5256: 'ABI::Windows::UI::Text::SelectionOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(554,44): warning C5256: 'ABI::Windows::UI::Text::SelectionType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(564,43): warning C5256: 'ABI::Windows::UI::Text::TabAlignment': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(574,40): warning C5256: 'ABI::Windows::UI::Text::TabLeader': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(584,45): warning C5256: 'ABI::Windows::UI::Text::TextGetOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(594,44): warning C5256: 'ABI::Windows::UI::Text::TextRangeUnit': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(604,41): warning C5256: 'ABI::Windows::UI::Text::TextScript': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(614,45): warning C5256: 'ABI::Windows::UI::Text::TextSetOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(624,44): warning C5256: 'ABI::Windows::UI::Text::UnderlineType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.h(634,57): warning C5256: 'ABI::Windows::UI::Text::VerticalCharacterAlignment': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Popups.h(387,51): warning C5256: 'ABI::Windows::UI::Popups::MessageDialogOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Popups.h(397,40): warning C5256: 'ABI::Windows::UI::Popups::Placement': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.WindowManagement.h(1437,52): warning C5256: 'ABI::Windows::UI::WindowManagement::AppWindowClosedReason': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.WindowManagement.h(1447,50): warning C5256: 'ABI::Windows::UI::WindowManagement::AppWindowFrameStyle': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.WindowManagement.h(1457,56): warning C5256: 'ABI::Windows::UI::WindowManagement::AppWindowPresentationKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.WindowManagement.h(1467,58): warning C5256: 'ABI::Windows::UI::WindowManagement::AppWindowTitleBarVisibility': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.WindowManagement.h(1477,55): warning C5256: 'ABI::Windows::UI::WindowManagement::WindowingEnvironmentKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1552,40): warning C5256: 'ABI::Windows::UI::Popups::Placement': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1608,56): warning C5256: 'ABI::Windows::UI::ViewManagement::ApplicationViewBoundsMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1618,50): warning C5256: 'ABI::Windows::UI::ViewManagement::ApplicationViewMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1628,57): warning C5256: 'ABI::Windows::UI::ViewManagement::ApplicationViewOrientation': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1638,51): warning C5256: 'ABI::Windows::UI::ViewManagement::ApplicationViewState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1648,62): warning C5256: 'ABI::Windows::UI::ViewManagement::ApplicationViewSwitchingOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1658,59): warning C5256: 'ABI::Windows::UI::ViewManagement::ApplicationViewWindowingMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1668,58): warning C5256: 'ABI::Windows::UI::ViewManagement::FullScreenSystemOverlayMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1678,45): warning C5256: 'ABI::Windows::UI::ViewManagement::HandPreference': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1688,42): warning C5256: 'ABI::Windows::UI::ViewManagement::UIColorType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1698,44): warning C5256: 'ABI::Windows::UI::ViewManagement::UIElementType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1708,50): warning C5256: 'ABI::Windows::UI::ViewManagement::UserInteractionMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.ViewManagement.h(1718,49): warning C5256: 'ABI::Windows::UI::ViewManagement::ViewSizePreference': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.Core.h(546,44): warning C5256: 'ABI::Windows::UI::Text::UnderlineType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.Core.h(583,44): warning C5256: 'ABI::Windows::UI::ViewManagement::UIElementType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.Core.h(1090,63): warning C5256: 'ABI::Windows::UI::Text::Core::CoreTextFormatUpdatingReason': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.Core.h(1102,63): warning C5256: 'ABI::Windows::UI::Text::Core::CoreTextFormatUpdatingResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.Core.h(1114,65): warning C5256: 'ABI::Windows::UI::Text::Core::CoreTextInputPaneDisplayPolicy': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.Core.h(1126,53): warning C5256: 'ABI::Windows::UI::Text::Core::CoreTextInputScope': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.Core.h(1138,66): warning C5256: 'ABI::Windows::UI::Text::Core::CoreTextSelectionUpdatingResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Text.Core.h(1150,61): warning C5256: 'ABI::Windows::UI::Text::Core::CoreTextTextUpdatingResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Data.Text.h(1120,53): warning C5256: 'ABI::Windows::UI::Text::Core::CoreTextInputScope': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Data.Text.h(1131,59): warning C5256: 'ABI::Windows::Data::Text::AlternateNormalizationFormat': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Data.Text.h(1141,52): warning C5256: 'ABI::Windows::Data::Text::TextPredictionOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Data.Text.h(1151,53): warning C5256: 'ABI::Windows::Data::Text::UnicodeGeneralCategory': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Data.Text.h(1161,49): warning C5256: 'ABI::Windows::Data::Text::UnicodeNumericType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Search.h(1298,43): warning C5256: 'ABI::Windows::Storage::Search::IndexedState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Search.h(1879,54): warning C5256: 'ABI::Windows::Storage::FileProperties::PropertyPrefetchOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Search.h(1889,44): warning C5256: 'ABI::Windows::Storage::FileProperties::ThumbnailMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Search.h(1899,47): warning C5256: 'ABI::Windows::Storage::FileProperties::ThumbnailOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Search.h(1945,46): warning C5256: 'ABI::Windows::Storage::Search::CommonFileQuery': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Search.h(1955,48): warning C5256: 'ABI::Windows::Storage::Search::CommonFolderQuery': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Search.h(1965,46): warning C5256: 'ABI::Windows::Storage::Search::DateStackOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Search.h(1975,42): warning C5256: 'ABI::Windows::Storage::Search::FolderDepth': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Search.h(1985,44): warning C5256: 'ABI::Windows::Storage::Search::IndexerOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(2103,51): warning C5256: 'ABI::Windows::Storage::KnownFoldersAccessStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(2166,47): warning C5256: 'ABI::Windows::Storage::Provider::FileUpdateStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3051,47): warning C5256: 'ABI::Windows::Foundation::Collections::CollectionChange': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3171,44): warning C5256: 'ABI::Windows::Storage::FileProperties::ThumbnailMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3181,47): warning C5256: 'ABI::Windows::Storage::FileProperties::ThumbnailOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3251,46): warning C5256: 'ABI::Windows::Storage::Streams::UnicodeEncoding': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3281,59): warning C5256: 'ABI::Windows::Storage::ApplicationDataCreateDisposition': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3289,50): warning C5256: 'ABI::Windows::Storage::ApplicationDataLocality': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3297,50): warning C5256: 'ABI::Windows::Storage::CreationCollisionOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3305,41): warning C5256: 'ABI::Windows::Storage::FileAccessMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3313,41): warning C5256: 'ABI::Windows::Storage::FileAttributes': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3321,40): warning C5256: 'ABI::Windows::Storage::KnownFolderId': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3329,41): warning C5256: 'ABI::Windows::Storage::KnownLibraryId': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3337,46): warning C5256: 'ABI::Windows::Storage::NameCollisionOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3345,46): warning C5256: 'ABI::Windows::Storage::StorageDeleteOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3353,43): warning C5256: 'ABI::Windows::Storage::StorageItemTypes': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3361,51): warning C5256: 'ABI::Windows::Storage::StorageLibraryChangeType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3369,45): warning C5256: 'ABI::Windows::Storage::StorageOpenOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.h(3377,50): warning C5256: 'ABI::Windows::Storage::StreamedFileFailureMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Streams.h(1063,41): warning C5256: 'ABI::Windows::Storage::FileAccessMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Streams.h(1084,45): warning C5256: 'ABI::Windows::Storage::StorageOpenOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Streams.h(1114,40): warning C5256: 'ABI::Windows::Storage::Streams::ByteOrder': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Streams.h(1124,50): warning C5256: 'ABI::Windows::Storage::Streams::FileOpenDisposition': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Streams.h(1134,49): warning C5256: 'ABI::Windows::Storage::Streams::InputStreamOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Storage.Streams.h(1144,46): warning C5256: 'ABI::Windows::Storage::Streams::UnicodeEncoding': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(1280,65): warning C5256: 'ABI::Windows::UI::Input::RadialControllerSystemMenuItemKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(2553,48): warning C5256: 'ABI::Windows::Devices::Input::PointerDeviceType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(2680,48): warning C5256: 'ABI::Windows::UI::Input::CrossSlidingState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(2690,44): warning C5256: 'ABI::Windows::UI::Input::DraggingState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(2700,46): warning C5256: 'ABI::Windows::UI::Input::EdgeGestureKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(2710,46): warning C5256: 'ABI::Windows::UI::Input::GestureSettings': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(2720,43): warning C5256: 'ABI::Windows::UI::Input::HoldingState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(2730,51): warning C5256: 'ABI::Windows::UI::Input::InputActivationState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(2740,48): warning C5256: 'ABI::Windows::UI::Input::PointerUpdateKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Input.h(2750,60): warning C5256: 'ABI::Windows::UI::Input::RadialControllerMenuKnownIcon': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2208,37): warning C5256: 'ABI::Windows::System::VirtualKey': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2216,46): warning C5256: 'ABI::Windows::System::VirtualKeyModifiers': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2301,58): warning C5256: 'ABI::Windows::UI::Core::AppViewBackButtonVisibility': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2311,58): warning C5256: 'ABI::Windows::UI::Core::CoreAcceleratorKeyEventType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2321,45): warning C5256: 'ABI::Windows::UI::Core::CoreCursorType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2331,53): warning C5256: 'ABI::Windows::UI::Core::CoreDispatcherPriority': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2341,58): warning C5256: 'ABI::Windows::UI::Core::CoreIndependentInputFilters': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2351,51): warning C5256: 'ABI::Windows::UI::Core::CoreInputDeviceTypes': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2361,54): warning C5256: 'ABI::Windows::UI::Core::CoreProcessEventsOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2371,51): warning C5256: 'ABI::Windows::UI::Core::CoreVirtualKeyStates': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2381,55): warning C5256: 'ABI::Windows::UI::Core::CoreWindowActivationMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2391,56): warning C5256: 'ABI::Windows::UI::Core::CoreWindowActivationState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.UI.Core.h(2401,54): warning C5256: 'ABI::Windows::UI::Core::CoreWindowFlowDirection': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Core.h(565,54): warning C5256: 'ABI::Windows::ApplicationModel::Core::AppRestartFailureReason': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(1415,43): warning C5256: 'ABI::Windows::ApplicationModel::StartupTaskState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2802,48): warning C5256: 'ABI::Windows::System::ProcessorArchitecture': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2831,52): warning C5256: 'ABI::Windows::ApplicationModel::AddResourcePackageOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2839,46): warning C5256: 'ABI::Windows::ApplicationModel::AppExecutionContext': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2847,51): warning C5256: 'ABI::Windows::ApplicationModel::AppInstallerPolicySource': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2855,48): warning C5256: 'ABI::Windows::ApplicationModel::FullTrustLaunchResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2863,53): warning C5256: 'ABI::Windows::ApplicationModel::LimitedAccessFeatureStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2871,51): warning C5256: 'ABI::Windows::ApplicationModel::PackageContentGroupState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2879,46): warning C5256: 'ABI::Windows::ApplicationModel::PackageRelationship': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2887,47): warning C5256: 'ABI::Windows::ApplicationModel::PackageSignatureKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.h(2895,52): warning C5256: 'ABI::Windows::ApplicationModel::PackageUpdateAvailability': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Data.Json.h(510,46): warning C5256: 'ABI::Windows::Data::Json::JsonErrorStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Data.Json.h(520,44): warning C5256: 'ABI::Windows::Data::Json::JsonValueType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.Diagnostics.h(450,52): warning C5256: 'ABI::Windows::System::Diagnostics::DiagnosticActionState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.Diagnostics.h(832,48): warning C5256: 'ABI::Windows::System::ProcessorArchitecture': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.AppService.h(394,57): warning C5256: 'ABI::Windows::ApplicationModel::AppService::AppServiceConnectionStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.AppService.h(522,55): warning C5256: 'ABI::Windows::ApplicationModel::AppService::AppServiceResponseStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.AppService.h(978,53): warning C5256: 'ABI::Windows::ApplicationModel::AppService::AppServiceClosedStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.AppService.h(988,64): warning C5256: 'ABI::Windows::ApplicationModel::AppService::StatelessAppServiceResponseStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(1489,60): warning C5256: 'ABI::Windows::Networking::Connectivity::ConnectionProfileDeleteStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2496,41): warning C5256: 'ABI::Windows::Networking::DomainNameType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2504,46): warning C5256: 'ABI::Windows::Networking::HostNameSortOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2543,60): warning C5256: 'ABI::Windows::Networking::Connectivity::CellularApnAuthenticationType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2553,51): warning C5256: 'ABI::Windows::Networking::Connectivity::DataUsageGranularity': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2563,55): warning C5256: 'ABI::Windows::Networking::Connectivity::DomainAuthenticationKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2573,54): warning C5256: 'ABI::Windows::Networking::Connectivity::DomainConnectivityLevel': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2583,56): warning C5256: 'ABI::Windows::Networking::Connectivity::NetworkAuthenticationType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2593,55): warning C5256: 'ABI::Windows::Networking::Connectivity::NetworkConnectivityLevel': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2603,46): warning C5256: 'ABI::Windows::Networking::Connectivity::NetworkCostType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2613,52): warning C5256: 'ABI::Windows::Networking::Connectivity::NetworkEncryptionType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2623,43): warning C5256: 'ABI::Windows::Networking::Connectivity::NetworkTypes': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2633,44): warning C5256: 'ABI::Windows::Networking::Connectivity::RoamingStates': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2643,40): warning C5256: 'ABI::Windows::Networking::Connectivity::TriStates': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2653,44): warning C5256: 'ABI::Windows::Networking::Connectivity::WwanDataClass': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2663,48): warning C5256: 'ABI::Windows::Networking::Connectivity::WwanNetworkIPKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.Connectivity.h(2673,59): warning C5256: 'ABI::Windows::Networking::Connectivity::WwanNetworkRegistrationState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Networking.h(224,39): warning C5256: 'ABI::Windows::Networking::HostNameType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Certificates.h(1166,60): warning C5256: 'ABI::Windows::Security::Cryptography::Certificates::SignatureValidationResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Certificates.h(1698,57): warning C5256: 'ABI::Windows::Security::Cryptography::Certificates::CertificateChainPolicy': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Certificates.h(1710,56): warning C5256: 'ABI::Windows::Security::Cryptography::Certificates::ChainValidationResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Certificates.h(1722,50): warning C5256: 'ABI::Windows::Security::Cryptography::Certificates::EnrollKeyUsages': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Certificates.h(1734,47): warning C5256: 'ABI::Windows::Security::Cryptography::Certificates::ExportOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Certificates.h(1746,49): warning C5256: 'ABI::Windows::Security::Cryptography::Certificates::InstallOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Certificates.h(1758,53): warning C5256: 'ABI::Windows::Security::Cryptography::Certificates::KeyProtectionLevel': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Core.h(871,58): warning C5256: 'ABI::Windows::Security::Cryptography::Core::Capi1KdfTargetAlgorithm': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Core.h(883,55): warning C5256: 'ABI::Windows::Security::Cryptography::Core::CryptographicPadding': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Core.h(895,66): warning C5256: 'ABI::Windows::Security::Cryptography::Core::CryptographicPrivateKeyBlobType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Cryptography.Core.h(907,65): warning C5256: 'ABI::Windows::Security::Cryptography::Core::CryptographicPublicKeyBlobType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Credentials.h(1068,47): warning C5256: 'ABI::Windows::Foundation::Collections::CollectionChange': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Credentials.h(1128,65): warning C5256: 'ABI::Windows::Security::Cryptography::Core::CryptographicPublicKeyBlobType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Credentials.h(1175,61): warning C5256: 'ABI::Windows::Security::Credentials::KeyCredentialAttestationStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Credentials.h(1185,58): warning C5256: 'ABI::Windows::Security::Credentials::KeyCredentialCreationOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Credentials.h(1195,50): warning C5256: 'ABI::Windows::Security::Credentials::KeyCredentialStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Credentials.h(1205,52): warning C5256: 'ABI::Windows::Security::Credentials::WebAccountPictureSize': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.Credentials.h(1215,46): warning C5256: 'ABI::Windows::Security::Credentials::WebAccountState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(1261,55): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemAccessStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2737,60): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemAuthorizationKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2747,56): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemDiscoveryType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2757,51): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemPlatform': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2767,64): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemSessionCreationStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2777,68): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemSessionDisconnectedReason': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2787,60): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemSessionJoinStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2797,75): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemSessionMessageChannelReliability': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2807,74): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemSessionParticipantWatcherStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2817,63): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemSessionWatcherStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2827,49): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2837,53): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemStatusType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.RemoteSystems.h(2847,55): warning C5256: 'ABI::Windows::System::RemoteSystems::RemoteSystemWatcherError': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(2196,51): warning C5256: 'ABI::Windows::System::AutoUpdateTimeZoneStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(2258,49): warning C5256: 'ABI::Windows::System::DiagnosticAccessStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(2320,51): warning C5256: 'ABI::Windows::System::LaunchQuerySupportStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(2444,42): warning C5256: 'ABI::Windows::System::LaunchUriStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(2568,48): warning C5256: 'ABI::Windows::System::RemoteLaunchUriStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(2684,47): warning C5256: 'ABI::Windows::System::UserAgeConsentResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(3066,48): warning C5256: 'ABI::Windows::System::UserWatcherUpdateKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4192,40): warning C5256: 'ABI::Windows::UI::Popups::Placement': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4202,49): warning C5256: 'ABI::Windows::UI::ViewManagement::ViewSizePreference': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4211,57): warning C5256: 'ABI::Windows::System::AppDiagnosticInfoWatcherStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4219,46): warning C5256: 'ABI::Windows::System::AppMemoryUsageLevel': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4227,59): warning C5256: 'ABI::Windows::System::AppResourceGroupEnergyQuotaState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4235,57): warning C5256: 'ABI::Windows::System::AppResourceGroupExecutionState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4243,60): warning C5256: 'ABI::Windows::System::AppResourceGroupInfoWatcherStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4251,50): warning C5256: 'ABI::Windows::System::DispatcherQueuePriority': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4259,49): warning C5256: 'ABI::Windows::System::LaunchQuerySupportType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4267,37): warning C5256: 'ABI::Windows::System::PowerState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4275,39): warning C5256: 'ABI::Windows::System::ShutdownKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4283,46): warning C5256: 'ABI::Windows::System::UserAgeConsentGroup': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4291,51): warning C5256: 'ABI::Windows::System::UserAuthenticationStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4299,42): warning C5256: 'ABI::Windows::System::UserPictureSize': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4307,35): warning C5256: 'ABI::Windows::System::UserType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.System.h(4315,44): warning C5256: 'ABI::Windows::System::UserWatcherStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2060,40): warning C5256: 'ABI::Windows::UI::Popups::Placement': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2070,52): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentBusyStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2080,68): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentCalendarOtherAppReadAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2090,69): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentCalendarOtherAppWriteAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2100,60): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentCalendarSyncStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2110,54): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentConflictType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2120,52): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentDaysOfWeek': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2130,53): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentDetailsKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2140,61): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentParticipantResponse': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2150,57): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentParticipantRole': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2160,56): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentRecurrenceUnit': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2170,53): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentSensitivity': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2180,57): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentStoreAccessType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2190,57): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentStoreChangeType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2200,57): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentSummaryCardView': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2210,53): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::AppointmentWeekOfMonth': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2220,62): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::FindAppointmentCalendarsOptions': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Appointments.h(2230,45): warning C5256: 'ABI::Windows::ApplicationModel::Appointments::RecurrenceType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(3378,47): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactFieldType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5129,40): warning C5256: 'ABI::Windows::UI::Popups::Placement': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5139,49): warning C5256: 'ABI::Windows::UI::ViewManagement::ViewSizePreference': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5149,49): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactAddressKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5159,58): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactAnnotationOperations': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5169,63): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactAnnotationStoreAccessType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5179,49): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactBatchStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5189,52): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactCardHeaderKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5199,49): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactCardTabKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5209,48): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactChangeType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5219,46): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactDateKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5229,47): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactEmailKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5239,51): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactFieldCategory': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5249,60): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactListOtherAppReadAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5259,61): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactListOtherAppWriteAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5269,52): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactListSyncStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5279,53): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactMatchReasonKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5289,47): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactNameOrder': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5299,47): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactPhoneKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5309,56): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactQueryDesiredFields': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5319,55): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactQuerySearchFields': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5329,54): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactQuerySearchScope': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5339,50): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactRelationship': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5349,51): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactSelectionMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5359,53): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactStoreAccessType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.h(5369,51): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::PinnedContactSurface': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(1201,55): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallOperationStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(1585,69): warning C5256: 'ABI::Windows::ApplicationModel::Calls::VoipPhoneCallResourceReservationStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(1649,49): warning C5256: 'ABI::Windows::Devices::Enumeration::DeviceAccessStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2752,38): warning C5256: 'ABI::Windows::ApplicationModel::Calls::DtmfKey': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2762,52): warning C5256: 'ABI::Windows::ApplicationModel::Calls::DtmfToneAudioPlayback': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2772,56): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2782,51): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallAudioDevice': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2792,49): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallDirection': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2802,57): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2812,70): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2822,69): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2832,66): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2842,59): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2852,62): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2862,45): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallMedia': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2872,46): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneCallStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2882,74): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneLineNetworkOperatorDisplayTextLocation': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2892,55): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneLineOperationStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2902,49): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneLineTransport': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2912,53): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneLineWatcherStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2922,48): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneNetworkState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2932,44): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneSimState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2942,49): warning C5256: 'ABI::Windows::ApplicationModel::Calls::PhoneVoicemailType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2952,64): warning C5256: 'ABI::Windows::ApplicationModel::Calls::TransportDeviceAudioRoutingStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2962,49): warning C5256: 'ABI::Windows::ApplicationModel::Calls::VoipPhoneCallMedia': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2972,56): warning C5256: 'ABI::Windows::ApplicationModel::Calls::VoipPhoneCallRejectReason': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Calls.h(2982,49): warning C5256: 'ABI::Windows::ApplicationModel::Calls::VoipPhoneCallState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.Provider.h(221,47): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactFieldType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.Provider.h(442,51): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::ContactSelectionMode': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Contacts.Provider.h(453,51): warning C5256: 'ABI::Windows::ApplicationModel::Contacts::Provider::AddContactResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.EnterpriseData.h(808,51): warning C5256: 'ABI::Windows::Security::EnterpriseData::FileProtectionStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.EnterpriseData.h(1064,63): warning C5256: 'ABI::Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.EnterpriseData.h(1468,50): warning C5256: 'ABI::Windows::Storage::CreationCollisionOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.EnterpriseData.h(1502,46): warning C5256: 'ABI::Windows::Storage::NameCollisionOption': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.EnterpriseData.h(1579,51): warning C5256: 'ABI::Windows::Security::EnterpriseData::DataProtectionStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.EnterpriseData.h(1589,47): warning C5256: 'ABI::Windows::Security::EnterpriseData::EnforcementLevel': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.EnterpriseData.h(1599,58): warning C5256: 'ABI::Windows::Security::EnterpriseData::ProtectedImportExportStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.EnterpriseData.h(1609,58): warning C5256: 'ABI::Windows::Security::EnterpriseData::ProtectionPolicyAuditAction': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Security.EnterpriseData.h(1619,68): warning C5256: 'ABI::Windows::Security::EnterpriseData::ProtectionPolicyRequestAccessBehavior': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.DataTransfer.h(1451,63): warning C5256: 'ABI::Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.DataTransfer.h(2494,64): warning C5256: 'ABI::Windows::ApplicationModel::DataTransfer::ClipboardHistoryItemsResultStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.DataTransfer.h(2504,51): warning C5256: 'ABI::Windows::ApplicationModel::DataTransfer::DataPackageOperation': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.DataTransfer.h(2514,60): warning C5256: 'ABI::Windows::ApplicationModel::DataTransfer::SetHistoryItemAsContentStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.DataTransfer.h(2524,43): warning C5256: 'ABI::Windows::ApplicationModel::DataTransfer::ShareUITheme': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(1465,61): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxDeleteFolderStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(1529,60): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxEmptyFolderStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(1785,63): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailCertificateValidationStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3270,67): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxSmimeEncryptionAlgorithm': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3307,64): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxSmimeSigningAlgorithm': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3577,59): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailAttachmentDownloadState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3587,47): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailBatchStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3597,45): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailFlagState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3607,46): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailImportance': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3617,53): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxActionKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3627,85): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxAllowedSmimeEncryptionAlgorithmNegotiation': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3637,71): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxAutoReplyMessageResponseKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3647,53): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxChangeType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3657,61): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxCreateFolderStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3667,61): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxOtherAppReadAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3677,62): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxOtherAppWriteAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3687,53): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMailboxSyncStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3697,55): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMeetingResponseType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3707,51): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMessageBodyKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3717,56): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMessageDownloadState': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3727,55): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMessageResponseKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3737,52): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailMessageSmimeKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3747,45): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailQueryKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3757,53): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailQuerySearchFields': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3767,52): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailQuerySearchScope': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3777,54): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailQuerySortDirection': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3787,53): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailQuerySortProperty': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3797,61): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailRecipientResolutionStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3807,53): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailSpecialFolderKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Email.h(3817,51): warning C5256: 'ABI::Windows::ApplicationModel::Email::EmailStoreAccessType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(901,53): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskDaysOfWeek': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(938,54): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskWeekOfMonth': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1094,54): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskDetailsKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1104,47): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1114,65): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskListOtherAppReadAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1124,66): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskListOtherAppWriteAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1134,57): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskListSyncStatus': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1144,51): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskPriority': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1154,52): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskQueryKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1164,60): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskQuerySortProperty': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1174,57): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskRecurrenceUnit': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1184,59): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskRegenerationUnit': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1194,54): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskSensitivity': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataTasks.h(1204,58): warning C5256: 'ABI::Windows::ApplicationModel::UserDataTasks::UserDataTaskStoreAccessType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataAccounts.h(1791,58): warning C5256: 'ABI::Windows::ApplicationModel::UserDataAccounts::UserDataAccountContentKinds': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataAccounts.h(1801,64): warning C5256: 'ABI::Windows::ApplicationModel::UserDataAccounts::UserDataAccountOtherAppReadAccess': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataAccounts.h(1811,61): warning C5256: 'ABI::Windows::ApplicationModel::UserDataAccounts::UserDataAccountStoreAccessType': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataAccounts.Provider.h(298,58): warning C5256: 'ABI::Windows::ApplicationModel::UserDataAccounts::UserDataAccountContentKinds': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'External/DirectXTK/Audio/AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataAccounts.Provider.h(309,71): warning C5256: 'ABI::Windows::ApplicationModel::UserDataAccounts::Provider::UserDataAccountProviderOperationKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'External/DirectXTK/Audio/AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.UserDataAccounts.Provider.h(321,76): warning C5256: 'ABI::Windows::ApplicationModel::UserDataAccounts::Provider::UserDataAccountProviderPartnerAccountKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'External/DirectXTK/Audio/AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Wallet.h(1339,53): warning C5256: 'ABI::Windows::ApplicationModel::Wallet::WalletBarcodeSymbology': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'External/DirectXTK/Audio/AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Wallet.h(1349,55): warning C5256: 'ABI::Windows::ApplicationModel::Wallet::WalletDetailViewPosition': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'External/DirectXTK/Audio/AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Wallet.h(1359,45): warning C5256: 'ABI::Windows::ApplicationModel::Wallet::WalletItemKind': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'External/DirectXTK/Audio/AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.ApplicationModel.Wallet.h(1369,56): warning C5256: 'ABI::Windows::ApplicationModel::Wallet::WalletSummaryViewPosition': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
-  (compiling source file 'External/DirectXTK/Audio/AudioEngine.cpp')
+  (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')
   
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt\Windows.Devices.Printers.Extensions.h(447,56): warning C5256: 'ABI::Windows::Devices::Printers::Extensions::Print3DWorkflowDetail': a non-defining declaration of an enumeration with a fixed underlying type is only permitted as a standalone declaration
   (compiling source file '../../External/DirectXTK/Audio/AudioEngine.cpp')

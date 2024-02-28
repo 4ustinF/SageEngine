@@ -766,10 +766,10 @@
   EffectFactory.cpp
   EnvironmentMapEffect.cpp
   GamePad.cpp
+  GeometricPrimitive.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\DirectXTK\Src\GamePad.cpp(22,21): warning C5264: '`anonymous-namespace'::c_XboxOneThumbDeadZone': 'const' variable is not used
   (compiling source file '/Src/GamePad.cpp')
   
-  GeometricPrimitive.cpp
   Geometry.cpp
   GraphicsMemory.cpp
   Generating Code...

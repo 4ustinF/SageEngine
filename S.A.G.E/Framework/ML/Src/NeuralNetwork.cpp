@@ -79,10 +79,12 @@ NeuralNetwork::NeuralNetwork(const std::vector<size_t>& topology)
 		const size_t numNeurons = topology[layer];
 
 		// For each layer, we want 1 extra neuron as the bias neuron (hence <= instead of <)
-		for (size_t neuron = 0; neuron < numNeurons; ++neuron) {
+		for (size_t neuron = 0; neuron <= numNeurons; ++neuron) {
 			mLayers[layer].emplace_back(numOutputs, neuron);
 		}
 	}
+
+	mLayers.back().back().SetOutputValue(1.0f);
 }
 
 void NeuralNetwork::FeedForward(const std::vector<float>& inputValues)
@@ -103,7 +105,6 @@ void NeuralNetwork::FeedForward(const std::vector<float>& inputValues)
 			nextLayer[neuron].FeedForward(currentLayer);
 		}
 	}
-
 }
 
 void NeuralNetwork::BackPropagate(const std::vector<float>& targetValues)

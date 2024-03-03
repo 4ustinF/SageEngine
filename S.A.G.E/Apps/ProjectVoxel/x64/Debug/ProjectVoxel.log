@@ -1,2 +1,199 @@
-﻿     Creating library D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.lib and object D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exp
+﻿  LINK : D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exe not found or not built by the last incremental link; performing full link
+AnimalComponent.obj : warning LNK4099: PDB '' was not found with 'AnimalComponent.obj' or at ''; linking object as if no debug info
+CameraControllerComponent.obj : warning LNK4099: PDB '' was not found with 'CameraControllerComponent.obj' or at ''; linking object as if no debug info
+ChunkMeshCreator.obj : warning LNK4099: PDB '' was not found with 'ChunkMeshCreator.obj' or at ''; linking object as if no debug info
+CloudService.obj : warning LNK4099: PDB '' was not found with 'CloudService.obj' or at ''; linking object as if no debug info
+GameState.obj : warning LNK4099: PDB '' was not found with 'GameState.obj' or at ''; linking object as if no debug info
+MobService.obj : warning LNK4099: PDB '' was not found with 'MobService.obj' or at ''; linking object as if no debug info
+PlayerControllerComponent.obj : warning LNK4099: PDB '' was not found with 'PlayerControllerComponent.obj' or at ''; linking object as if no debug info
+PlayerUIService.obj : warning LNK4099: PDB '' was not found with 'PlayerUIService.obj' or at ''; linking object as if no debug info
+WinMain.obj : warning LNK4099: PDB '' was not found with 'WinMain.obj' or at ''; linking object as if no debug info
+WorldService.obj : warning LNK4099: PDB '' was not found with 'WorldService.obj' or at ''; linking object as if no debug info
+Bullet.lib(btCollisionObject.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btRigidBody.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btAlignedAllocator.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btTriangleMesh.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btBvhTriangleMeshShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btStridingMeshInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btTriangleIndexVertexArray.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btCollisionShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btTriangleMeshShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btQuantizedBvh.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btOptimizedBvh.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btTriangleCallback.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConcaveShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Core.lib(BlockAllocator.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Core.lib(TimeUtil.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Core.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Coroutine.lib(CoroutineSystem.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+ImGui.lib(imgui_widgets.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+ImGui.lib(imgui.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+ImGui.lib(imgui_draw.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+ImGui.lib(imgui_tables.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Math.lib(SAGEmath.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Math.lib(Random.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Math.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(SimpleDraw.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(MeshBuffer.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Camera.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(TextureManager.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(RenderObject.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(VoxelCloudsEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(MeshBuilder.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(ConstantBuffer.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Sampler.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Texture.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(RenderTarget.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(BlendState.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(ShadowEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(StandardEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(SoundEffectManager.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Font.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(SpriteRenderer.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(VoxelTerrainEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(VoxelWaterEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(PixelShader.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(VertexShader.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(GraphicsSystem.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(AnimationUtil.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(AudioSystem.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Input.lib(InputSystem.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Input.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(ParticleComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(RigidBodyComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(GameWorld.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(CameraUtil.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(CameraService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(BPhysicsService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(ParticleService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(RenderService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(GameObjectFactory.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(TransformComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(App.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(GameObject.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(SAGE.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(ColliderComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(TerrainService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(BPhysicsComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(PhysicsDebugDraw.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(AnimatorComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(CameraComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(FollowCameraControllerComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(FPSCameraControllerComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(ModelComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(SpawnerComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btCollisionDispatcher.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btDefaultCollisionConfiguration.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btDbvtBroadphase.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btDiscreteDynamicsWorld.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btSequentialImpulseConstraintSolver.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConvexShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConvexInternalShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btBoxShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btSphereShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btCapsuleShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btStaticPlaneShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btDispatcher.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btPersistentManifold.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btManifoldResult.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btQuickprof.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConvexConvexAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btEmptyCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConvexConcaveCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btCompoundCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btCompoundCompoundCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConvexPlaneCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btBoxBoxCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btSphereSphereCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btSphereTriangleCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btGjkEpaPenetrationDepthSolver.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btMinkowskiPenetrationDepthSolver.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btDbvt.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btOverlappingPairCache.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btCollisionWorld.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btSimulationIslandManager.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btTypedConstraint.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConeTwistConstraint.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btGeneric6DofConstraint.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btVector3.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btPolyhedralConvexShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btActivatingCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btGjkPairDetector.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btPolyhedralContactClipping.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConvexPolyhedron.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConvexCast.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btGjkConvexCast.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btCollisionAlgorithm.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btSubSimplexConvexCast.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btSdfCollisionShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btHashedSimplePairCache.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btBoxBoxDetector.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(SphereTriangleDetector.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btVoronoiSimplexSolver.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btGjkEpa2.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btHeightfieldTerrainShape.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btRaycastCallback.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btContinuousConvexCollision.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btUnionFind.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btConvexHullComputer.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btGeometryUtil.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Bullet.lib(btMiniSDF.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Core.lib(WindowMessageHandler.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Core.lib(Window.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+DirectXTKAudioWin8.lib(AudioEngine.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(AudioEngine.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(SoundEffect.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(SoundEffect.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(SoundEffectInstance.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(SoundEffectInstance.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(SoundCommon.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(SoundCommon.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(WAVFileReader.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(WAVFileReader.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(WaveBank.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(WaveBank.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(SoundStreamInstance.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(SoundStreamInstance.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(WaveBankReader.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(WaveBankReader.obj)' or at ''; linking object as if no debug info
+DirectXTK.lib(WICTextureLoader.obj) : warning LNK4099: PDB '' was not found with 'DirectXTK.lib(WICTextureLoader.obj)' or at ''; linking object as if no debug info
+DirectXTK.lib(CommonStates.obj) : warning LNK4099: PDB '' was not found with 'DirectXTK.lib(CommonStates.obj)' or at ''; linking object as if no debug info
+DirectXTK.lib(SpriteBatch.obj) : warning LNK4099: PDB '' was not found with 'DirectXTK.lib(SpriteBatch.obj)' or at ''; linking object as if no debug info
+DirectXTK.lib(GamePad.obj) : warning LNK4099: PDB '' was not found with 'DirectXTK.lib(GamePad.obj)' or at ''; linking object as if no debug info
+DirectXTK.lib(pch.obj) : warning LNK4099: PDB '' was not found with 'DirectXTK.lib(pch.obj)' or at ''; linking object as if no debug info
+DirectXTK.lib(BufferHelpers.obj) : warning LNK4099: PDB '' was not found with 'DirectXTK.lib(BufferHelpers.obj)' or at ''; linking object as if no debug info
+DirectXTK.lib(VertexTypes.obj) : warning LNK4099: PDB '' was not found with 'DirectXTK.lib(VertexTypes.obj)' or at ''; linking object as if no debug info
+FW1FontWrapper.lib(FW1FontWrapper.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1Factory.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(FW1Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1FactoryInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1FontWrapper.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphVertexDrawer.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphRenderStates.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+     Creating library D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.lib and object D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exp
+FW1FontWrapper.lib(CFW1TextRenderer.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1TextGeometry.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphProvider.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1DWriteRenderTarget.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphAtlas.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphSheet.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1ColorRGBA.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1FontWrapperInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphVertexDrawerInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphRenderStatesInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1TextRendererInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1TextGeometryInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphProviderInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1DWriteRenderTargetInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphAtlasInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphSheetInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1ColorRGBAInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1StateSaver.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(ParticleEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(TerrainEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(TexturingEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(ModelManager.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Animator.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(DebugUI.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Terrain.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(ModelIO.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Animation.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(MeshUtil.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(AnimationIO.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+ImGui.lib(imgui_impl_dx11.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+ImGui.lib(imgui_impl_win32.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
   ProjectVoxel.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exe

@@ -1,0 +1,3 @@
+Tiles: 2
+../Sprites/PacMan/MapTiles/OuterWall/tile_01.png 0
+../Sprites/PacMan/MapTiles/OuterWall/tile_02.png 1

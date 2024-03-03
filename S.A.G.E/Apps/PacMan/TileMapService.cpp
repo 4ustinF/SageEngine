@@ -7,7 +7,6 @@ using namespace SAGE::Input;
 
 namespace
 {
-	//const float tileSize = 24.0f;
 	//std::unique_ptr<TileMap> tileMapInstance;
 
 	inline int ToIndex(int x, int y, int columns) {
@@ -33,7 +32,6 @@ void TileMapService::Terminate()
 
 void TileMapService::Update(float deltaTime)
 {
-
 }
 
 void TileMapService::Render()

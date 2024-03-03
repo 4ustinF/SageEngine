@@ -1,14 +1,60 @@
 ﻿  GameState.cpp
-  TileMapService.cpp
-  Generating Code...
-Bullet.lib(btDiscreteDynamicsWorld.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Core.lib(BlockAllocator.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Core.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Core.lib(Window.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Coroutine.lib(CoroutineSystem.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
 DirectXTKAudioWin8.lib(AudioEngine.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(AudioEngine.obj)' or at ''; linking object as if no debug info
-ImGui.lib(imgui.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
-ImGui.lib(imgui_draw.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
-ImGui.lib(imgui_tables.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
-ImGui.lib(imgui_widgets.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+DirectXTKAudioWin8.lib(SoundEffect.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(SoundEffect.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(SoundStreamInstance.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(SoundStreamInstance.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(WaveBank.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(WaveBank.obj)' or at ''; linking object as if no debug info
+DirectXTKAudioWin8.lib(WaveBankReader.obj) : warning LNK4099: PDB '' was not found with 'DirectXTKAudioWin8.lib(WaveBankReader.obj)' or at ''; linking object as if no debug info
+DirectXTK.lib(CommonStates.obj) : warning LNK4099: PDB '' was not found with 'DirectXTK.lib(CommonStates.obj)' or at ''; linking object as if no debug info
+DirectXTK.lib(SpriteBatch.obj) : warning LNK4099: PDB '' was not found with 'DirectXTK.lib(SpriteBatch.obj)' or at ''; linking object as if no debug info
+FW1FontWrapper.lib(CFW1DWriteRenderTarget.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1Factory.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1FontWrapper.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1FontWrapperInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphProvider.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphProviderInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphRenderStates.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphSheet.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1GlyphVertexDrawer.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1TextGeometry.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+FW1FontWrapper.lib(CFW1TextGeometryInterface.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Math.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Math.lib(SAGEmath.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(AnimationIO.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(AnimationUtil.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Animator.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Font.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(MeshBuilder.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(MeshUtil.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(ModelIO.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(ModelManager.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(ParticleEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(RenderObject.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(ShadowEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(SimpleDraw.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(SoundEffectManager.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
 Graphics.lib(StandardEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(Terrain.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(TerrainEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(TextureManager.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(TexturingEffect.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Graphics.lib(VertexShader.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Input.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(AnimatorComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(App.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
 SAGE.lib(BPhysicsService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(CameraService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
 SAGE.lib(GameObjectFactory.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(GameWorld.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(ModelComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(ParticleComponent.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(ParticleService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(Precompiled.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(RenderService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+SAGE.lib(SAGE.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
 SAGE.lib(TerrainService.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
   PacMan.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\PacMan.exe

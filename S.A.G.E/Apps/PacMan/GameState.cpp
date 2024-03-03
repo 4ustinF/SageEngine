@@ -19,12 +19,12 @@ namespace
 void GameState::Initialize()
 {
 	mGameWorld.AddService<CameraService>();
-	mGameWorld.AddService<RenderService>();
+	//mGameWorld.AddService<RenderService>();
 	TileMapService* tileMapService = mGameWorld.AddService<TileMapService>();
 	mGameWorld.Initialize(1000);
 
 	GameObjectFactory::SetMakeOverride(OnMake);
-	mGameWorld.LoadLevel("../../Assets/Level/bare.json");
+	//mGameWorld.LoadLevel("../../Assets/Level/bare.json");
 
 	tileMapService->LoadTiles("tiles.txt");
 	tileMapService->LoadMap("map.txt");

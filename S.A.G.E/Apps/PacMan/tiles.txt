@@ -1,3 +1,11 @@
-Tiles: 2
-../Sprites/PacMan/MapTiles/OuterWall/tile_01.png 0
-../Sprites/PacMan/MapTiles/OuterWall/tile_02.png 1
+Tiles: 10
+../Sprites/PacMan/MapTiles/tile_00.png 0
+../Sprites/PacMan/MapTiles/tile_01.png 0
+../Sprites/PacMan/MapTiles/tile_02.png 0
+../Sprites/PacMan/MapTiles/tile_03.png 1
+../Sprites/PacMan/MapTiles/tile_04.png 1
+../Sprites/PacMan/MapTiles/tile_05.png 1
+../Sprites/PacMan/MapTiles/tile_06.png 1
+../Sprites/PacMan/MapTiles/tile_07.png 1
+../Sprites/PacMan/MapTiles/tile_08.png 1
+../Sprites/PacMan/MapTiles/tile_09.png 1

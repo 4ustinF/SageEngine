@@ -17,6 +17,10 @@ namespace
 void TileMapService::Initialize()
 {
 	SetServiceName("TileMap Service");
+
+	mInputSystem = InputSystem::Get();
+	mPaintFlipMode = static_cast<int>(Pivot::TopLeft);
+	mPaintPivotMode = static_cast<int>(Flip::None);
 }
 
 void TileMapService::Terminate()
@@ -28,30 +32,54 @@ void TileMapService::Terminate()
 	mRows = 0;
 
 	mMap.clear();
+	mInputSystem = nullptr;
 }
 
 void TileMapService::Update(float deltaTime)
 {
+	if (mIsInPaintMode)
+	{
+		if (mInputSystem->IsMouseDown(MouseButton::LBUTTON))
+		{
+			PaintTile(mPaintIndex);
+		}		
+		else if (mInputSystem->IsMouseDown(MouseButton::RBUTTON))
+		{
+			PaintTile(0);
+		}
+	}
 }
 
 void TileMapService::Render()
 {
-	//Map
 	for (int y = 0; y < mRows; ++y) {
 		for (int x = 0; x < mColumns; ++x) {
 			const int mapIndex = ToIndex(x, y, mColumns);
-			const int tileIndex = mMap[mapIndex];
-			const TextureId textureId = mTiles.at(tileIndex);
-			const Vector2 worldPosition = { x * mTileSize, y * mTileSize };
+			const Tile& tile = mMap[mapIndex];
+			const TextureId textureId = mTiles.at(tile.tileIndex);
+			const Vector2 worldPosition = tile.localPosition + mWorldOffset;
 
-			SpriteRenderer::Get()->Draw(textureId, worldPosition, 0.0f, Pivot::TopLeft, Flip::None);
+			SpriteRenderer::Get()->Draw(textureId, worldPosition, tile.tileRotation, tile.pivot, tile.flip);
 		}
 	}
 }
 
 void TileMapService::DebugUI()
 {
+	ImGui::Checkbox("Enable Paint Mode", &mIsInPaintMode);
+	if (mIsInPaintMode)
+	{
+		// TODO: Display the tile we are painting with
+		ImGui::SliderInt("Tile Index", &mPaintIndex, 0, static_cast<int>(mTiles.size()) - 1);
+		ImGui::SliderAngle("Tile Rotation", &mPaintRotation);
+		ImGui::SliderInt("Tile Flip", &mPaintFlipMode, 0, static_cast<int>(Input::Flip::Count) - 1);
+		ImGui::SliderInt("Tile Flip", &mPaintFlipMode, 0, static_cast<int>(Input::Pivot::Count) - 1);
 
+		if (ImGui::Button("Export Map"))
+		{
+			ExportMap();
+		}
+	}
 }
 
 
@@ -81,26 +109,28 @@ void TileMapService::LoadTiles(const std::filesystem::path& fileName)
 	fclose(file);
 }
 
-void TileMapService::LoadMap(const char* fileName)
+void TileMapService::LoadMap(const std::filesystem::path& path)
 {
 	if (mMap.size() > 0) {
 		mMap.clear();
 	}
 
+	mMapFilePath = path;
 	FILE* file = nullptr;
-	std::filesystem::path path = fileName;
 	fopen_s(&file, path.u8string().c_str(), "r");
 
 	fscanf_s(file, "Columns: %d\n", &mColumns);
 	fscanf_s(file, "Rows: %d\n", &mRows);
 
-	mMap = std::vector<int>(mColumns * mRows);
+	mMap = std::vector<Tile>(mColumns * mRows);
 
 	for (int y = 0; y < mRows; ++y) {
 		for (int x = 0; x < mColumns; ++x) {
 			const int index = ToIndex(x, y, mColumns);
 			int insert = fgetc(file) - '0';
-			mMap[index] = insert;
+
+			mMap[index].tileIndex = insert;
+			mMap[index].localPosition = { x * mTileSize, y * mTileSize };
 		}
 
 		fgetc(file);
@@ -111,7 +141,7 @@ void TileMapService::LoadMap(const char* fileName)
 
 bool TileMapService::IsBlocked(int x, int y) const
 {
-	const int tile = mMap[ToIndex(x, y, mColumns)];
+	const int tile = mMap[ToIndex(x, y, mColumns)].tileIndex;
 	const bool blocked = mBlocked[tile];
 	return blocked;
 }
@@ -132,4 +162,39 @@ SAGE::Math::Rect TileMapService::GetBound() const
 		mColumns * mTileSize,	//right
 		mRows * mTileSize		//Bottom
 	};
+}
+
+void TileMapService::PaintTile(int tileIndex)
+{
+	if (tileIndex >= mTiles.size())
+	{
+		return;
+	}
+
+	const int tilePosX = static_cast<int>(mInputSystem->GetMouseScreenX() / mTileSize); // TODO: Take offset into consideration
+	const int tilePosY = static_cast<int>(mInputSystem->GetMouseScreenY() / mTileSize); // TODO: Take offset into consideration
+	Tile& tile = mMap[ToIndex(tilePosX, tilePosY, mColumns)];
+	tile.tileIndex = tileIndex;
+	tile.tileRotation = mPaintRotation;
+	tile.flip = static_cast<Flip>(mPaintFlipMode);
+	tile.pivot = static_cast<Pivot>(mPaintPivotMode);
+}
+
+void TileMapService::ExportMap()
+{
+	FILE* file = nullptr;
+	fopen_s(&file, mMapFilePath.u8string().c_str(), "w");
+
+	fprintf(file, "Columns: %d\n", mColumns);
+	fprintf(file, "Rows: %d\n", mRows);
+
+	for (int y = 0; y < mRows; ++y) {
+		for (int x = 0; x < mColumns; ++x) {
+			const int index = ToIndex(x, y, mColumns);
+			fprintf(file, "%d", mMap[index].tileIndex);
+		}
+		fprintf(file, "\n");
+	}
+
+	fclose(file);
 }

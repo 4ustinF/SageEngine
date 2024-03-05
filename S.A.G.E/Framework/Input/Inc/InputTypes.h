@@ -12,7 +12,8 @@ namespace SAGE::Input
 		Right,
 		BottomLeft,
 		Bottom,
-		BottomRight
+		BottomRight,
+		Count
 	};
 
 	enum class Flip
@@ -20,7 +21,8 @@ namespace SAGE::Input
 		None,
 		Horizontal,
 		Vertical,
-		Both
+		Both,
+		Count
 	};
 
 	enum class KeyCode : uint32_t

@@ -23,7 +23,9 @@ public:
 	void DebugUI() override;
 
 	void LoadTiles(const std::filesystem::path& fileName);
-	void LoadMap(const std::filesystem::path& fileName);
+	void LoadTileMap(const std::filesystem::path& fileName);
+	void LoadFlipMap(const std::filesystem::path& fileName);
+	void LoadPivotMap(const std::filesystem::path& fileName);
 
 	bool IsBlocked(int x, int y) const;
 	SAGE::Math::Rect GetBound() const;
@@ -32,10 +34,17 @@ private:
 	SAGE::Math::Vector2 GetPixelPosition(int x, int y) const;
 	void PaintTile(int tileIndex);
 	void ExportMap();
+	void ExportFlipMap();
+	void ExportPivotMap();
+
+	void AdjustTilePivot(Tile& tile, int pivotIndex);
+	int PivotToIndex(SAGE::Input::Pivot pivot) const;
 
 	// References
 	SAGE::Input::InputSystem* mInputSystem;
 	std::filesystem::path mMapFilePath;
+	std::filesystem::path mFlipMapFilePath;
+	std::filesystem::path mPivotMapFilePath;
 
 	std::vector<Tile> mMap;
 	std::vector<bool> mBlocked;
@@ -48,7 +57,6 @@ private:
 
 	bool mIsInPaintMode = false;
 	int mPaintIndex = 0;
-	float mPaintRotation = 0.0f;
 	int mPaintFlipMode = 0;
 	int mPaintPivotMode = 0;
 };

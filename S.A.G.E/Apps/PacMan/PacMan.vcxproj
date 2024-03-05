@@ -150,7 +150,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="flipmap.txt" />
     <Text Include="map.txt" />
+    <Text Include="pivotmap.txt" />
     <Text Include="tiles.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

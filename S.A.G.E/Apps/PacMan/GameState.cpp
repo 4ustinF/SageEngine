@@ -27,7 +27,9 @@ void GameState::Initialize()
 	//mGameWorld.LoadLevel("../../Assets/Level/bare.json");
 
 	tileMapService->LoadTiles("tiles.txt");
-	tileMapService->LoadMap("map.txt");
+	tileMapService->LoadTileMap("map.txt");
+	tileMapService->LoadFlipMap("flipmap.txt");
+	tileMapService->LoadPivotMap("pivotmap.txt");
 }
 
 void GameState::Terminate()

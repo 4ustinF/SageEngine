@@ -18,9 +18,22 @@
     <Filter Include="Services">
       <UniqueIdentifier>{dcc2414e-0855-4439-9131-d637bdf6a4a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{55f836a1-db1c-4539-a47e-46ba5dc6eed4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="map.txt" />
-    <Text Include="tiles.txt" />
+    <Text Include="tiles.txt">
+      <Filter>Map</Filter>
+    </Text>
+    <Text Include="map.txt">
+      <Filter>Map</Filter>
+    </Text>
+    <Text Include="flipmap.txt">
+      <Filter>Map</Filter>
+    </Text>
+    <Text Include="pivotmap.txt">
+      <Filter>Map</Filter>
+    </Text>
   </ItemGroup>
 </Project>

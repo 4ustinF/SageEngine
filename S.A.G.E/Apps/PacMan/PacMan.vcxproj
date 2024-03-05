@@ -136,11 +136,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="PlayerAnimatorComponent.cpp" />
+    <ClCompile Include="PlayerControllerComponent.cpp" />
     <ClCompile Include="TileMapService.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="PlayerAnimatorComponent.h" />
+    <ClInclude Include="PlayerControllerComponent.h" />
     <ClInclude Include="TileMapService.h" />
     <ClInclude Include="TypeIds.h" />
   </ItemGroup>

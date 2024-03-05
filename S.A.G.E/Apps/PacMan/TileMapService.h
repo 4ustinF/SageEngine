@@ -27,6 +27,9 @@ public:
 	void LoadFlipMap(const std::filesystem::path& fileName);
 	void LoadPivotMap(const std::filesystem::path& fileName);
 
+	void SetTileSize(float tileSize) { mTileSize = tileSize; };
+	float GetTileSize() const { return mTileSize; };
+
 	bool IsBlocked(int x, int y) const;
 	SAGE::Math::Rect GetBound() const;
 
@@ -52,9 +55,10 @@ private:
 	int mColumns = 0;
 	int mRows = 0;
 
-	const float mTileSize = 24.0f;
+	float mTileSize = 24.0f;
 	float mWorldOffset = 0.0f;
 
+	// Painting
 	bool mIsInPaintMode = false;
 	int mPaintIndex = 0;
 	int mPaintFlipMode = 0;

@@ -1,5 +1,7 @@
 #include <SAGE/Inc/SAGE.h>
 
+class PlayerAnimatorComponent;
+
 class GameState : public SAGE::AppState
 {
 public:
@@ -12,5 +14,5 @@ public:
 
 private:
 	SAGE::GameWorld mGameWorld;
-
+	PlayerAnimatorComponent* mPlayerAnimatorComponent = nullptr;
 };

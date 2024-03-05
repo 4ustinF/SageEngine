@@ -1,0 +1,17 @@
+{
+  "Capacity": 1000,
+  "Services": {
+    "CameraService": {
+
+    },
+    "TileMapService": {
+
+    }
+  },
+  "GameObjects": [
+    {
+      "Name": "PacMan",
+      "TemplateFile": "../../Assets/Templates/pacman.json"
+    }
+  ]
+}

@@ -1,6 +1,9 @@
 #include "GameState.h"
 #include "TileMapService.h"
 
+#include "PlayerControllerComponent.h"
+#include "PlayerAnimatorComponent.h"
+
 using namespace SAGE;
 using namespace SAGE::Graphics;
 using namespace SAGE::Math;
@@ -12,6 +15,16 @@ namespace
 	// Check for custom components
 	bool OnMake(const char* componentName, const rapidjson::Value& value, GameObject& gameObject)
 	{
+		if (strcmp(componentName, "PlayerControllerComponent") == 0)
+		{
+			auto playerControllerComponent = gameObject.AddComponent<PlayerControllerComponent>();
+			return true;
+		}
+		else if (strcmp(componentName, "PlayerAnimatorComponent") == 0)
+		{
+			auto playerAnimatorComponent = gameObject.AddComponent<PlayerAnimatorComponent>();
+			return true;
+		}
 		return false;
 	}
 }
@@ -19,37 +32,35 @@ namespace
 void GameState::Initialize()
 {
 	mGameWorld.AddService<CameraService>();
-	//mGameWorld.AddService<RenderService>();
 	TileMapService* tileMapService = mGameWorld.AddService<TileMapService>();
 	mGameWorld.Initialize(1000);
 
 	GameObjectFactory::SetMakeOverride(OnMake);
-	//mGameWorld.LoadLevel("../../Assets/Level/bare.json");
+	mGameWorld.LoadLevel("../../Assets/Level/pacman_level.json");
 
 	tileMapService->LoadTiles("tiles.txt");
 	tileMapService->LoadTileMap("map.txt");
 	tileMapService->LoadFlipMap("flipmap.txt");
 	tileMapService->LoadPivotMap("pivotmap.txt");
+
+	mPlayerAnimatorComponent = mGameWorld.FindGameObject("PacMan")->GetComponent<PlayerAnimatorComponent>();
 }
 
 void GameState::Terminate()
 {
 	mGameWorld.Terminate();
+	mPlayerAnimatorComponent = nullptr;
 }
 
 void GameState::Update(float deltaTime)
 {
 	mGameWorld.Update(deltaTime);
-
-	const auto& inputSystem = InputSystem::Get();
-	if (inputSystem->IsKeyPressed(KeyCode::SPACE))
-	{
-	}
 }
 
 void GameState::Render()
 {
 	mGameWorld.Render();
+	mPlayerAnimatorComponent->Render();
 }
 
 void GameState::DebugUI()

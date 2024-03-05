@@ -7,8 +7,6 @@ using namespace SAGE::Input;
 
 namespace
 {
-	//std::unique_ptr<TileMap> tileMapInstance;
-
 	inline int ToIndex(int x, int y, int columns) {
 		return x + (y * columns);
 	}
@@ -103,7 +101,7 @@ void TileMapService::LoadTiles(const std::filesystem::path& fileName)
 		fscanf_s(file, "%d\n", &isBlocked);
 
 		mTiles.push_back(tm->LoadTexture(buffer));
-		isBlocked ? mBlocked.push_back(true) : mBlocked.push_back(false);
+		isBlocked ? mBlocked.push_back(false) : mBlocked.push_back(true);
 	}
 
 	fclose(file);

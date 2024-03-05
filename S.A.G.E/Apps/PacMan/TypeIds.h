@@ -4,7 +4,8 @@
 
 enum class ComponentId
 {
-	//Animal = static_cast<uint32_t>(SAGE::ComponentId::Count),
+	PlayerController = static_cast<uint32_t>(SAGE::ComponentId::Count),
+	PlayerAnimator,
 };
 
 enum class ServiceId

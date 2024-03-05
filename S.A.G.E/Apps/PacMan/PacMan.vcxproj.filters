@@ -1,17 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="TileMapService.cpp">
       <Filter>Services</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControllerComponent.cpp">
+      <Filter>Components\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAnimatorComponent.cpp">
+      <Filter>Components\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameState.h" />
     <ClInclude Include="TypeIds.h" />
     <ClInclude Include="TileMapService.h">
       <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControllerComponent.h">
+      <Filter>Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h" />
+    <ClInclude Include="PlayerAnimatorComponent.h">
+      <Filter>Components\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -20,6 +39,15 @@
     </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{55f836a1-db1c-4539-a47e-46ba5dc6eed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{ea99f088-49a8-427d-a7a8-813852c212e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{783d2e14-f3c4-4537-9ab1-df2308334897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Player">
+      <UniqueIdentifier>{8429bf04-bd59-4ad2-a384-aa368ce6945e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

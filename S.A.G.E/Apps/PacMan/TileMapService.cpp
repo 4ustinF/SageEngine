@@ -331,11 +331,11 @@ void TileMapService::AdjustTilePivot(Tile& tile, int pivotIndex)
 		tile.pivot = Pivot::TopLeft;
 		break;
 	case 1:
-		tile.tileRotation = -90.0f * Constants::DegToRad;
+		tile.tileRotation = -Constants::HalfPi;
 		tile.pivot = Pivot::TopRight;
 		break;
 	case 2:
-		tile.tileRotation = 90.0f * Constants::DegToRad;
+		tile.tileRotation = Constants::HalfPi;
 		tile.pivot = Pivot::BottomLeft;
 		break;
 	}

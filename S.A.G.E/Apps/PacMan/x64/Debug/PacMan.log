@@ -1,5 +1,2 @@
-﻿  GameState.cpp
-  TileMapService.cpp
-  Generating Code...
-     Creating library D:\GitHub\SageEngine\S.A.G.E\x64\Debug\PacMan.lib and object D:\GitHub\SageEngine\S.A.G.E\x64\Debug\PacMan.exp
+﻿  TileMapService.cpp
   PacMan.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\PacMan.exe

@@ -19,6 +19,12 @@ public:
 	void Render();
 
 private:
+	float mTimer = 0.0f;
+	float mTimePerFrame = 0.125f;
+	int mSpriteIndex = 0;
+	int mSpriteMaxIndex = 3;
+
 	PlayerControllerComponent* mPlayerController = nullptr;
-	SAGE::Graphics::TextureId mTextureID = 0;
+	std::vector<SAGE::Graphics::TextureId> mEatTextureIds;
+	SAGE::Graphics::TextureId mDisplayTextureID = 0;
 };

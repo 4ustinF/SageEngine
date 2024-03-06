@@ -5,6 +5,7 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Input;
 using namespace SAGE::Graphics;
+using namespace SAGE::Coroutine;
 
 MEMORY_POOL_DEFINE(PlayerAnimatorComponent, 1000);
 
@@ -13,28 +14,64 @@ void PlayerAnimatorComponent::Initialize()
 	mPlayerController = GetOwner().GetComponent<PlayerControllerComponent>();
 
 	auto tm = TextureManager::Get();
-	mTextureID = tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_02.png");
+	mEatTextureIds.reserve(3);
+	mEatTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_00.png"));
+	mEatTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_01.png"));
+	mEatTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_02.png"));
+
+	mDisplayTextureID = mEatTextureIds[1];
+	mTimer = mTimePerFrame;
 }
 
 void PlayerAnimatorComponent::Terminate()
 {
+	mDisplayTextureID = 0;
+	for (TextureId& id : mEatTextureIds) {
+		id = 0;
+	}
+	mEatTextureIds.clear();
+
 	mPlayerController = nullptr;
-	mTextureID = 0;
 }
 
 void PlayerAnimatorComponent::Update(float deltaTime)
 {
+	mTimer -= deltaTime;
+	if (mTimer <= 0.0f)
+	{
+		if (mSpriteIndex == mSpriteMaxIndex)
+		{
+			mSpriteIndex = 0;
+		}
+		mDisplayTextureID = mEatTextureIds[mSpriteIndex++];
+		mTimer += mTimePerFrame;
+	}
 }
 
 void PlayerAnimatorComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Player Animator Component##PlayerAnimatorComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
+		ImGui::InputFloat("Time Per Frame", &mTimePerFrame);
 	}
 }
 
 void PlayerAnimatorComponent::Render()
 {
 	const Vector2 pos = mPlayerController->GetPlayerPosition();
-	SpriteRenderer::Get()->Draw(mTextureID, pos, 0.0, Pivot::Center, Flip::None);
+	switch (mPlayerController->GetPlayerDirection())
+	{
+	case Direction::Up:
+		SpriteRenderer::Get()->Draw(mDisplayTextureID, pos, -Constants::HalfPi, Pivot::Center, Flip::None);
+		break;
+	case Direction::Right:
+		SpriteRenderer::Get()->Draw(mDisplayTextureID, pos, 0.0, Pivot::Center, Flip::None);
+		break;
+	case Direction::Down:
+		SpriteRenderer::Get()->Draw(mDisplayTextureID, pos, Constants::HalfPi, Pivot::Center, Flip::None);
+		break;
+	case Direction::Left:
+		SpriteRenderer::Get()->Draw(mDisplayTextureID, pos, 0.0, Pivot::Center, Flip::Horizontal);
+		break;
+	}
 }

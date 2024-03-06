@@ -39,26 +39,26 @@ void PlayerControllerComponent::Update(float deltaTime)
 	}
 
 	const float limit = 684.0f; // rows * TileSize
-	if (mPosition.x < -mHalfTileSize) {
+	if (mPosition.x <= -mHalfTileSize) {
 		mPosition.x = limit;
 	}
 	else if (mPosition.x >= limit) {
 		mPosition.x = -mHalfTileSize;
 	}
 
-	if (mInputSystem->IsKeyDown(KeyCode::UP) || mInputSystem->IsKeyDown(KeyCode::W)) {
+	if (mInputSystem->IsKeyPressed(KeyCode::UP) || mInputSystem->IsKeyPressed(KeyCode::W)) {
 		mDirection = Direction::Up;
 		SetDirection();
 	}
-	else if (mInputSystem->IsKeyDown(KeyCode::DOWN) || mInputSystem->IsKeyDown(KeyCode::S)) {
+	else if (mInputSystem->IsKeyPressed(KeyCode::DOWN) || mInputSystem->IsKeyPressed(KeyCode::S)) {
 		mDirection = Direction::Down;
 		SetDirection();
 	}
-	else if (mInputSystem->IsKeyDown(KeyCode::RIGHT) || mInputSystem->IsKeyDown(KeyCode::D)) {
+	else if (mInputSystem->IsKeyPressed(KeyCode::RIGHT) || mInputSystem->IsKeyPressed(KeyCode::D)) {
 		mDirection = Direction::Right;
 		SetDirection();
 	}
-	else if (mInputSystem->IsKeyDown(KeyCode::LEFT) || mInputSystem->IsKeyDown(KeyCode::A)) {
+	else if (mInputSystem->IsKeyPressed(KeyCode::LEFT) || mInputSystem->IsKeyPressed(KeyCode::A)) {
 		mDirection = Direction::Left;
 		SetDirection();
 	}
@@ -125,8 +125,8 @@ void PlayerControllerComponent::SetDirection()
 			int tileY = mTileCords.y - y;
 			if (mTileMapService->IsBlocked(mTileCords.x, tileY++))
 			{
-				mTargetPosition.y = tileY * mTileSize + mHalfTileSize + tileOffset.y; // - -24
-				//mPosition.x = mTileCords.x * mTileSize - mHalfTileSize; // Fix offset
+				mTargetPosition.y = tileY * mTileSize + mHalfTileSize + tileOffset.y;
+				mPosition.x = (mTileCords.x - 1) * mTileSize - mHalfTileSize; // Fix offset
 				break;
 			}
 		}
@@ -138,7 +138,7 @@ void PlayerControllerComponent::SetDirection()
 			if (mTileMapService->IsBlocked(tileX, mTileCords.y))
 			{
 				mTargetPosition.x = tileX * mTileSize - mHalfTileSize + tileOffset.x;
-				//mPosition.y = mTileCords.y * mTileSize - mHalfTileSize; // Fix offset
+				mPosition.y = mTileCords.y * mTileSize - mHalfTileSize; // Fix offset
 				break;
 			}
 		}
@@ -150,7 +150,7 @@ void PlayerControllerComponent::SetDirection()
 			if (mTileMapService->IsBlocked(mTileCords.x, tileY))
 			{
 				mTargetPosition.y = tileY * mTileSize - mHalfTileSize + tileOffset.y;
-				//mPosition.x = mTileCords.x * mTileSize - mHalfTileSize; // Fix offset
+				mPosition.x = (mTileCords.x - 1) * mTileSize - mHalfTileSize; // Fix offset
 				break;
 			}
 		}
@@ -162,7 +162,7 @@ void PlayerControllerComponent::SetDirection()
 			if (mTileMapService->IsBlocked(tileX++, mTileCords.y))
 			{
 				mTargetPosition.x = tileX * mTileSize + mHalfTileSize + tileOffset.x;
-				//mPosition.y = mTileCords.y * mTileSize - mHalfTileSize; // Fix offset
+				mPosition.y = mTileCords.y * mTileSize - mHalfTileSize; // Fix offset
 				break;
 			}
 		}

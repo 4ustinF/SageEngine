@@ -38,26 +38,27 @@ void PlayerControllerComponent::Update(float deltaTime)
 		tile.tileIndex = 0;
 	}
 
+	const float limit = 684.0f; // rows * TileSize
 	if (mPosition.x < -mHalfTileSize) {
-		mPosition.x = 700;
+		mPosition.x = limit;
 	}
-	else if (mPosition.x > 700.0f) {
+	else if (mPosition.x >= limit) {
 		mPosition.x = -mHalfTileSize;
 	}
 
-	if (mInputSystem->IsKeyDown(KeyCode::UP)) {
+	if (mInputSystem->IsKeyDown(KeyCode::UP) || mInputSystem->IsKeyDown(KeyCode::W)) {
 		mDirection = Direction::Up;
 		SetDirection();
 	}
-	else if (mInputSystem->IsKeyDown(KeyCode::DOWN)) {
+	else if (mInputSystem->IsKeyDown(KeyCode::DOWN) || mInputSystem->IsKeyDown(KeyCode::S)) {
 		mDirection = Direction::Down;
 		SetDirection();
 	}
-	else if (mInputSystem->IsKeyDown(KeyCode::RIGHT)) {
+	else if (mInputSystem->IsKeyDown(KeyCode::RIGHT) || mInputSystem->IsKeyDown(KeyCode::D)) {
 		mDirection = Direction::Right;
 		SetDirection();
 	}
-	else if (mInputSystem->IsKeyDown(KeyCode::LEFT)) {
+	else if (mInputSystem->IsKeyDown(KeyCode::LEFT) || mInputSystem->IsKeyDown(KeyCode::A)) {
 		mDirection = Direction::Left;
 		SetDirection();
 	}
@@ -121,10 +122,11 @@ void PlayerControllerComponent::SetDirection()
 	case Direction::Up:
 		for (int y = 1; y < mTileMapService->GetRows(); ++y)
 		{
-			const int tileY = mTileCords.y - y;
-			if (mTileMapService->IsBlocked(mTileCords.x, tileY))
+			int tileY = mTileCords.y - y;
+			if (mTileMapService->IsBlocked(mTileCords.x, tileY++))
 			{
-				mTargetPosition.y = tileY * mTileSize - mHalfTileSize - tileOffset.y;
+				mTargetPosition.y = tileY * mTileSize + mHalfTileSize + tileOffset.y; // - -24
+				//mPosition.x = mTileCords.x * mTileSize - mHalfTileSize; // Fix offset
 				break;
 			}
 		}
@@ -136,6 +138,7 @@ void PlayerControllerComponent::SetDirection()
 			if (mTileMapService->IsBlocked(tileX, mTileCords.y))
 			{
 				mTargetPosition.x = tileX * mTileSize - mHalfTileSize + tileOffset.x;
+				//mPosition.y = mTileCords.y * mTileSize - mHalfTileSize; // Fix offset
 				break;
 			}
 		}
@@ -147,6 +150,7 @@ void PlayerControllerComponent::SetDirection()
 			if (mTileMapService->IsBlocked(mTileCords.x, tileY))
 			{
 				mTargetPosition.y = tileY * mTileSize - mHalfTileSize + tileOffset.y;
+				//mPosition.x = mTileCords.x * mTileSize - mHalfTileSize; // Fix offset
 				break;
 			}
 		}
@@ -154,10 +158,11 @@ void PlayerControllerComponent::SetDirection()
 	case Direction::Left:
 		for (int x = 1; x < mTileMapService->GetColumns(); ++x)
 		{
-			const int tileX = mTileCords.x - x;
-			if (mTileMapService->IsBlocked(tileX, mTileCords.y))
+			int tileX = mTileCords.x - x;
+			if (mTileMapService->IsBlocked(tileX++, mTileCords.y))
 			{
-				mTargetPosition.x = tileX * mTileSize - mHalfTileSize - tileOffset.x;
+				mTargetPosition.x = tileX * mTileSize + mHalfTileSize + tileOffset.x;
+				//mPosition.y = mTileCords.y * mTileSize - mHalfTileSize; // Fix offset
 				break;
 			}
 		}

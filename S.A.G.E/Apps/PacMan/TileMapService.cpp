@@ -11,7 +11,7 @@ void TileMapService::Initialize()
 
 	mInputSystem = InputSystem::Get();
 	mPaintFlipMode = static_cast<int>(Pivot::TopLeft);
-	mWorldOffset = { -mTileSize, -mTileSize };
+	mWorldOffset = { -2.0f * mTileSize, -mTileSize };
 }
 
 void TileMapService::Terminate()

@@ -1,2 +1,5 @@
-﻿  PlayerControllerComponent.cpp
+﻿  GameState.cpp
+  PlayerControllerComponent.cpp
+  TileMapService.cpp
+  Generating Code...
   PacMan.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\PacMan.exe

@@ -23,12 +23,16 @@ public:
 	Direction GetPlayerDirection() const { return mDirection; }
 
 private:
+	void SetDirection();
+
 	// References
 	TileMapService* mTileMapService = nullptr;
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 
 	SAGE::Math::Vector2 mStartingPosition = SAGE::Math::Vector2::Zero;
 	SAGE::Math::Vector2 mPosition = SAGE::Math::Vector2::Zero;
+	SAGE::Math::Vector2 mTargetPosition = SAGE::Math::Vector2::Zero;
+	SAGE::Math::Vector2Int mTileCords = SAGE::Math::Vector2Int::Zero;
 	Direction mDirection = Direction::Right;
 	float mSpeed = 150.0f;
 

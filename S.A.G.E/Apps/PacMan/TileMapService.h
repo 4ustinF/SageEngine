@@ -27,8 +27,18 @@ public:
 	void LoadFlipMap(const std::filesystem::path& fileName);
 	void LoadPivotMap(const std::filesystem::path& fileName);
 
+	// TODO: Move to functions to do safety checks
+	int ToIndex(int x, int y, int columns) const { return x + (y * columns); }
+	Tile& GetTile(SAGE::Math::Vector2Int pos) { return mMap[ToIndex(pos.x, pos.y, mColumns)]; }
+	Tile& GetTile(int x, int y) { return mMap[ToIndex(x, y, mColumns)]; }
+	void SetTile(int x, int y, const Tile& tile) { mMap[ToIndex(x, y, mColumns)] = tile; }
+	void SetTile(SAGE::Math::Vector2Int pos, const Tile& tile) { mMap[ToIndex(pos.x, pos.y, mColumns)] = tile; }
+
+	SAGE::Math::Vector2 GetWorldOffset() const { return mWorldOffset; }
 	void SetTileSize(float tileSize) { mTileSize = tileSize; };
 	float GetTileSize() const { return mTileSize; };
+	int GetColumns() const { return mColumns; }
+	int GetRows() const { return mRows; }
 
 	bool IsBlocked(int x, int y) const;
 	SAGE::Math::Rect GetBound() const;
@@ -56,7 +66,7 @@ private:
 	int mRows = 0;
 
 	float mTileSize = 24.0f;
-	float mWorldOffset = 0.0f;
+	SAGE::Math::Vector2 mWorldOffset = SAGE::Math::Vector2::Zero;
 
 	// Painting
 	bool mIsInPaintMode = false;

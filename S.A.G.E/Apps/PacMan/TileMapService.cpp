@@ -5,19 +5,13 @@ using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 using namespace SAGE::Input;
 
-namespace
-{
-	inline int ToIndex(int x, int y, int columns) {
-		return x + (y * columns);
-	}
-}
-
 void TileMapService::Initialize()
 {
 	SetServiceName("TileMap Service");
 
 	mInputSystem = InputSystem::Get();
 	mPaintFlipMode = static_cast<int>(Pivot::TopLeft);
+	mWorldOffset = { -mTileSize, -mTileSize };
 }
 
 void TileMapService::Terminate()
@@ -63,7 +57,9 @@ void TileMapService::Render()
 
 void TileMapService::DebugUI()
 {
-	ImGui::Checkbox("Enable Paint Mode##PaintMode", &mIsInPaintMode);
+	ImGui::DragFloat2("World OffSet##TileMapService", &mWorldOffset.x, 0.1f);
+
+	ImGui::Checkbox("Enable Paint Mode##TileMapService", &mIsInPaintMode);
 	if (mIsInPaintMode)
 	{
 		// TODO: Display the tile we are painting with
@@ -101,7 +97,7 @@ void TileMapService::LoadTiles(const std::filesystem::path& fileName)
 		fscanf_s(file, "%d\n", &isBlocked);
 
 		mTiles.push_back(tm->LoadTexture(buffer));
-		isBlocked ? mBlocked.push_back(false) : mBlocked.push_back(true);
+		isBlocked ? mBlocked.push_back(true) : mBlocked.push_back(false);
 	}
 
 	fclose(file);
@@ -221,6 +217,7 @@ SAGE::Math::Vector2 TileMapService::GetPixelPosition(int x, int y) const
 
 SAGE::Math::Rect TileMapService::GetBound() const
 {
+	// TODO: Take offset into consideration
 	return {
 		0.0f,					//Left
 		0.0f,					//Top
@@ -236,8 +233,8 @@ void TileMapService::PaintTile(int tileIndex)
 		return;
 	}
 
-	const int tilePosX = static_cast<int>(mInputSystem->GetMouseScreenX() / mTileSize); // TODO: Take offset into consideration
-	const int tilePosY = static_cast<int>(mInputSystem->GetMouseScreenY() / mTileSize); // TODO: Take offset into consideration
+	const int tilePosX = static_cast<int>((mInputSystem->GetMouseScreenX() - mWorldOffset.x) / mTileSize);
+	const int tilePosY = static_cast<int>((mInputSystem->GetMouseScreenY() - mWorldOffset.y) / mTileSize);
 	Tile& tile = mMap[ToIndex(tilePosX, tilePosY, mColumns)];
 	tile.tileIndex = tileIndex;
 	tile.flip = static_cast<Flip>(mPaintFlipMode);

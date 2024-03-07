@@ -25,6 +25,11 @@ public:
 private:
 	void SetDirection();
 
+	void NewMovement(float deltaTime);
+	bool CanTurn();
+	bool IsOppositeDirection();
+	float mTurnThreshold = 3.0f; // 4.0f
+
 	// References
 	TileMapService* mTileMapService = nullptr;
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
@@ -36,6 +41,10 @@ private:
 	Direction mDirection = Direction::Right;
 	float mSpeed = 150.0f;
 
+	Direction mPreMoveDirection = Direction::None;
+
+	// Map Data
 	float mTileSize = 0.0f;
 	float mHalfTileSize = 0.0f;
+	SAGE::Math::Vector2 mWorldOffset = SAGE::Math::Vector2::Zero;
 };

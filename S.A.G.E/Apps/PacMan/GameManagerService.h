@@ -4,6 +4,7 @@
 #include "Enums.h"
 
 class TileMapService;
+class PlayerControllerComponent;
 
 class GameManagerService final : public SAGE::Service
 {
@@ -16,15 +17,18 @@ public:
 	void Render() override;
 	void DebugUI() override;
 
+	void SetPlayerControllerReference(PlayerControllerComponent* playerController) { mPlayerController = playerController; }
+
+	void RestartGame();
 	void AtePellet(PelletType pelletType);
 
 private:
 	void SetupLevel(int level);
 	void RestartLevel();
-	void RestartGame();
 
 	// References
 	TileMapService* mTileMapService = nullptr;
+	PlayerControllerComponent* mPlayerController = nullptr;
 
 	// Game
 	int mLevel = 1;

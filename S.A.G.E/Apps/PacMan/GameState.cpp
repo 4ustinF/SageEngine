@@ -34,7 +34,7 @@ namespace
 void GameState::Initialize()
 {
 	mGameWorld.AddService<CameraService>();
-	mGameWorld.AddService<GameManagerService>();
+	GameManagerService* gameManagerService = mGameWorld.AddService<GameManagerService>();
 	TileMapService* tileMapService = mGameWorld.AddService<TileMapService>();
 	mGameWorld.Initialize(1000);
 
@@ -42,9 +42,7 @@ void GameState::Initialize()
 	mGameWorld.LoadLevel("../../Assets/Level/pacman_level.json");
 
 	tileMapService->LoadTiles("tiles.txt");
-	tileMapService->LoadTileMap("map.txt");
-	tileMapService->LoadFlipMap("flipmap.txt");
-	tileMapService->LoadPivotMap("pivotmap.txt");
+	gameManagerService->RestartGame();
 
 	mPlayerAnimatorComponent = mGameWorld.FindGameObject("PacMan")->GetComponent<PlayerAnimatorComponent>();
 }

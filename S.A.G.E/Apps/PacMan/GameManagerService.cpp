@@ -1,6 +1,8 @@
 #include "GameManagerService.h"
 #include "TileMapService.h"
 
+#include "PlayerControllerComponent.h"
+
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
@@ -15,6 +17,7 @@ void GameManagerService::Initialize()
 
 void GameManagerService::Terminate()
 {
+	mPlayerController = nullptr;
 	mTileMapService = nullptr;
 }
 
@@ -35,6 +38,20 @@ void GameManagerService::DebugUI()
 }
 
 
+void GameManagerService::RestartGame()
+{
+	// Restart Map
+	// Restart Ghost
+	// Restart Player
+
+	mLevel = 1;
+	mPlayerPoints = 0;
+	mPlayerLives = mPlayerStartingLives;
+	mRemainingPelletCount = mMaxPelletCount;
+
+	SetupLevel(mLevel);
+}
+
 void GameManagerService::AtePellet(PelletType pelletType)
 {
 	mPlayerPoints += static_cast<int>(pelletType);
@@ -52,7 +69,11 @@ void GameManagerService::SetupLevel(int level)
 	// Adjust stats according to each level
 	mRemainingPelletCount = mMaxPelletCount;
 
-	mTileMapService->ReloadMap();
+	mTileMapService->LoadTileMap("map.txt");
+	mTileMapService->LoadFlipMap("flipmap.txt");
+	mTileMapService->LoadPivotMap("pivotmap.txt");
+
+	mPlayerController->Respawn();
 }
 
 void GameManagerService::RestartLevel()
@@ -60,20 +81,4 @@ void GameManagerService::RestartLevel()
 	// Set ghost back to box
 	// Set player to start position
 	mRemainingPelletCount = mMaxPelletCount;
-
-	mTileMapService->ReloadMap();
-}
-
-void GameManagerService::RestartGame()
-{
-	// Restart Map
-	// Restart Ghost
-	// Restart Player
-
-	mLevel = 1;
-	mPlayerPoints = 0;
-	mPlayerLives = mPlayerStartingLives;
-	mRemainingPelletCount = mMaxPelletCount;
-
-	SetupLevel(mLevel);
 }

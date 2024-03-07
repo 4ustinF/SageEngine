@@ -20,7 +20,7 @@ void PlayerControllerComponent::Initialize()
 	mStartingPosition = { 13.5f * mTileSize + mHalfTileSize, 23.0f * mTileSize + mHalfTileSize };
 	mWorldOffset = mTileMapService->GetWorldOffset();
 
-	Respawn();
+	mGameManagerService->SetPlayerControllerReference(this);
 }
 
 void PlayerControllerComponent::Terminate()
@@ -54,6 +54,7 @@ void PlayerControllerComponent::DebugUI()
 void PlayerControllerComponent::Respawn()
 {
 	TeleportPlayer(mStartingPosition, Direction::Right);
+	mTargetPosition = Vector2::Zero;
 }
 
 void PlayerControllerComponent::UpdateTileCords()

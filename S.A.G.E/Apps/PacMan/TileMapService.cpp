@@ -199,6 +199,12 @@ void TileMapService::LoadPivotMap(const std::filesystem::path& path)
 	fclose(file);
 }
 
+void TileMapService::ReloadMap()
+{
+	LoadTileMap(mMapFilePath);
+	LoadFlipMap(mFlipMapFilePath);
+	LoadPivotMap(mPivotMapFilePath);
+}
 
 bool TileMapService::IsBlocked(int x, int y) const
 {

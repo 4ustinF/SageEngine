@@ -272,7 +272,7 @@ void GameWorld::DestroyGameObject(GameObjectHandle handle)
 	if (!IsValid(handle)) { return; }
 
 	auto& slot = mGameObjectSlots[handle.mIndex];
-	slot.generation++; // This invalidates all exisiting handles to the slot
+	slot.generation++; // This invalidates all existing handles to the slot
 	mToBeDestroyed.push_back(handle.mIndex);
 }
 
@@ -295,7 +295,7 @@ void GameWorld::ProcessDestroyList()
 		GameObject* gameObject = slot.gameObject.get();
 		ASSERT(!IsValid(gameObject->GetHandle()), "GameWorld - Game object is still valid.");
 
-		// Remove from uppdate list
+		// Remove from update list
 		mUpdateList.erase(std::remove(mUpdateList.begin(), mUpdateList.end(), gameObject)); // Erase-Remove Idiom
 
 		// Terminate gameOnject

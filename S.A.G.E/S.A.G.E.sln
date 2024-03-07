@@ -114,6 +114,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		Assets\Templates\follow_camera.json = Assets\Templates\follow_camera.json
 		Assets\Templates\fps_camera.json = Assets\Templates\fps_camera.json
 		Assets\Templates\mutant.json = Assets\Templates\mutant.json
+		Assets\Templates\pacman.json = Assets\Templates\pacman.json
 		Assets\Templates\player.json = Assets\Templates\player.json
 		Assets\Templates\spawner.json = Assets\Templates\spawner.json
 		Assets\Templates\test.json = Assets\Templates\test.json
@@ -136,6 +137,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DingySpirits", "Apps\DingyS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level", "Level", "{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}"
 	ProjectSection(SolutionItems) = preProject
+		Assets\Level\pacman_level.json = Assets\Level\pacman_level.json
 		Assets\Level\test_level.json = Assets\Level\test_level.json
 		Assets\Level\voxel_level.json = Assets\Level\voxel_level.json
 	EndProjectSection

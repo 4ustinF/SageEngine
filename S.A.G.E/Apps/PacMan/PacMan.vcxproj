@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameManagerService.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="PlayerAnimatorComponent.cpp" />
     <ClCompile Include="PlayerControllerComponent.cpp" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="GameManagerService.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="PlayerAnimatorComponent.h" />
     <ClInclude Include="PlayerControllerComponent.h" />

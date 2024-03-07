@@ -16,6 +16,9 @@
     <ClCompile Include="PlayerAnimatorComponent.cpp">
       <Filter>Components\Player</Filter>
     </ClCompile>
+    <ClCompile Include="GameManagerService.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TypeIds.h" />
@@ -31,6 +34,9 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="PlayerAnimatorComponent.h">
       <Filter>Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManagerService.h">
+      <Filter>Services</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

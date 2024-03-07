@@ -10,5 +10,6 @@ enum class ComponentId
 
 enum class ServiceId
 {
-	TileMap = static_cast<uint32_t>(SAGE::ServiceId::Count),
+	GameManagerService = static_cast<uint32_t>(SAGE::ServiceId::Count),
+	TileMap,
 };

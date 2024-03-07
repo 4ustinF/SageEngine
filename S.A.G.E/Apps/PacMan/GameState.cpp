@@ -1,8 +1,10 @@
 #include "GameState.h"
+
+#include "GameManagerService.h"
 #include "TileMapService.h"
 
-#include "PlayerControllerComponent.h"
 #include "PlayerAnimatorComponent.h"
+#include "PlayerControllerComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Graphics;
@@ -32,6 +34,7 @@ namespace
 void GameState::Initialize()
 {
 	mGameWorld.AddService<CameraService>();
+	mGameWorld.AddService<GameManagerService>();
 	TileMapService* tileMapService = mGameWorld.AddService<TileMapService>();
 	mGameWorld.Initialize(1000);
 

@@ -27,6 +27,8 @@ public:
 	void LoadFlipMap(const std::filesystem::path& fileName);
 	void LoadPivotMap(const std::filesystem::path& fileName);
 
+	void ReloadMap();
+
 	// TODO: Move to functions to do safety checks
 	int ToIndex(int x, int y, int columns) const { return x + (y * columns); }
 	Tile& GetTile(SAGE::Math::Vector2Int pos) { return mMap[ToIndex(pos.x, pos.y, mColumns)]; }

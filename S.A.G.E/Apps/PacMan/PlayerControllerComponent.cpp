@@ -1,5 +1,6 @@
 #include "PlayerControllerComponent.h"
 #include "TileMapService.h"
+#include "GameManagerService.h"
 
 using namespace SAGE;
 using namespace SAGE::Input;
@@ -10,8 +11,10 @@ MEMORY_POOL_DEFINE(PlayerControllerComponent, 1000);
 void PlayerControllerComponent::Initialize()
 {
 	mInputSystem = InputSystem::Get();
+	auto& world = GetOwner().GetWorld();
+	mTileMapService = world.GetService<TileMapService>();
+	mGameManagerService = world.GetService<GameManagerService>();
 
-	mTileMapService = GetOwner().GetWorld().GetService<TileMapService>();
 	mTileSize = mTileMapService->GetTileSize();
 	mHalfTileSize = mTileSize * 0.5f;
 	mStartingPosition = { 13.5f * mTileSize + mHalfTileSize, 23.0f * mTileSize + mHalfTileSize };
@@ -22,6 +25,7 @@ void PlayerControllerComponent::Initialize()
 
 void PlayerControllerComponent::Terminate()
 {
+	mGameManagerService = nullptr;
 	mTileMapService = nullptr;
 	mInputSystem = nullptr;
 }
@@ -46,6 +50,7 @@ void PlayerControllerComponent::DebugUI()
 	}
 }
 
+
 void PlayerControllerComponent::Respawn()
 {
 	TeleportPlayer(mStartingPosition, Direction::Right);
@@ -60,8 +65,12 @@ void PlayerControllerComponent::UpdateTileCords()
 void PlayerControllerComponent::Eating()
 {
 	Tile& tile = mTileMapService->GetTile(mTileCords);
-	if (tile.tileIndex == 1 || tile.tileIndex == 2)
-	{
+	if (tile.tileIndex == 1) {
+		mGameManagerService->AtePellet(PelletType::Small);
+		tile.tileIndex = 0;
+	}
+	else if (tile.tileIndex == 2) {
+		mGameManagerService->AtePellet(PelletType::Big);
 		tile.tileIndex = 0;
 	}
 }

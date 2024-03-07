@@ -4,6 +4,7 @@
 #include "Enums.h"
 
 class TileMapService;
+class GameManagerService;
 
 class PlayerControllerComponent final : public SAGE::Component
 {
@@ -35,6 +36,7 @@ private:
 
 	// References
 	TileMapService* mTileMapService = nullptr;
+	GameManagerService* mGameManagerService = nullptr;
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 
 	SAGE::Math::Vector2 mStartingPosition = SAGE::Math::Vector2::Zero;

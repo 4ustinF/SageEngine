@@ -28,27 +28,11 @@ void PlayerControllerComponent::Terminate()
 
 void PlayerControllerComponent::Update(float deltaTime)
 {
-	// Update tile cords
-	mTileCords.x = static_cast<int>((mPosition.x - mWorldOffset.x) / mTileSize);
-	mTileCords.y = static_cast<int>((mPosition.y - mWorldOffset.y) / mTileSize);
+	UpdateTileCords();
 
-	// Eat pellet
-	Tile& tile = mTileMapService->GetTile(mTileCords);
-	if (tile.tileIndex == 1 || tile.tileIndex == 2)
-	{
-		tile.tileIndex = 0;
-	}
+	Eating();
 
-	// Teleport Tunnel - TODO: Fix bug going through ghost box
-	const float limit = 684.0f; // rows * TileSize
-	if (mPosition.x <= -mHalfTileSize) {
-		mPosition.x = limit;
-	}
-	else if (mPosition.x >= limit) {
-		mPosition.x = -mHalfTileSize;
-	}
-
-	NewMovement(deltaTime);
+	Movement(deltaTime);
 }
 
 void PlayerControllerComponent::DebugUI()
@@ -64,8 +48,22 @@ void PlayerControllerComponent::DebugUI()
 
 void PlayerControllerComponent::Respawn()
 {
-	mPosition = mStartingPosition;
-	mDirection = Direction::Right;
+	TeleportPlayer(mStartingPosition, Direction::Right);
+}
+
+void PlayerControllerComponent::UpdateTileCords()
+{
+	mTileCords.x = static_cast<int>((mPosition.x - mWorldOffset.x) / mTileSize);
+	mTileCords.y = static_cast<int>((mPosition.y - mWorldOffset.y) / mTileSize);
+}
+
+void PlayerControllerComponent::Eating()
+{
+	Tile& tile = mTileMapService->GetTile(mTileCords);
+	if (tile.tileIndex == 1 || tile.tileIndex == 2)
+	{
+		tile.tileIndex = 0;
+	}
 }
 
 void PlayerControllerComponent::SetDirection()
@@ -123,8 +121,24 @@ void PlayerControllerComponent::SetDirection()
 	}
 }
 
-void PlayerControllerComponent::NewMovement(float deltaTime)
+void PlayerControllerComponent::TeleportPlayer(const Vector2 newPos, const Direction dir)
 {
+	mPosition = newPos;
+	mDirection = dir;
+	UpdateTileCords();
+	SetDirection();
+}
+
+void PlayerControllerComponent::Movement(float deltaTime)
+{
+	// Teleport Tunnel
+	if (mPosition.x <= -mHalfTileSize) {
+		TeleportPlayer({ mTunnelLimit, mPosition.y}, mDirection);
+	}
+	else if (mPosition.x >= mTunnelLimit) {
+		TeleportPlayer({ -mHalfTileSize, mPosition.y }, mDirection);
+	}
+
 	// Player input
 	if (mInputSystem->IsKeyPressed(KeyCode::UP) || mInputSystem->IsKeyPressed(KeyCode::W)) {
 		mPreMoveDirection = Direction::Up;
@@ -192,7 +206,7 @@ void PlayerControllerComponent::NewMovement(float deltaTime)
 	}
 }
 
-bool PlayerControllerComponent::CanTurn()
+bool PlayerControllerComponent::CanTurn() const
 {
 	// Check if tile in that direction isBlocking or not
 	switch (mPreMoveDirection)
@@ -243,7 +257,7 @@ bool PlayerControllerComponent::CanTurn()
 	return false;
 }
 
-bool PlayerControllerComponent::IsOppositeDirection()
+bool PlayerControllerComponent::IsOppositeDirection() const
 {
 	switch (mDirection)
 	{

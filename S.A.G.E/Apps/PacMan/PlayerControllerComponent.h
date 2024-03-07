@@ -23,11 +23,14 @@ public:
 	Direction GetPlayerDirection() const { return mDirection; }
 
 private:
+	void UpdateTileCords();
+	void Eating();
 	void SetDirection();
+	void TeleportPlayer(const SAGE::Math::Vector2 newPos, const Direction dir);
 
-	void NewMovement(float deltaTime);
-	bool CanTurn();
-	bool IsOppositeDirection();
+	void Movement(float deltaTime);
+	bool CanTurn() const;
+	bool IsOppositeDirection() const;
 	float mTurnThreshold = 3.0f; // 4.0f
 
 	// References
@@ -40,6 +43,7 @@ private:
 	SAGE::Math::Vector2Int mTileCords = SAGE::Math::Vector2Int::Zero;
 	Direction mDirection = Direction::Right;
 	float mSpeed = 150.0f;
+	const float mTunnelLimit = 684.0f; // rows * TileSize
 
 	Direction mPreMoveDirection = Direction::None;
 

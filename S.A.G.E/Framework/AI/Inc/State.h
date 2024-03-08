@@ -1,6 +1,6 @@
 #pragma once
 
-namespace AI
+namespace SAGE::AI
 {
 	template<class AgentType>
 	class State

@@ -6,7 +6,7 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
-using namespace AI;
+using namespace SAGE::AI;
 
 Vector2 FleeBehavior::Calculate(Agent& agent)
 {
@@ -25,10 +25,10 @@ Vector2 FleeBehavior::Calculate(Agent& agent)
 	const auto seekForce = desiredVelocity - agent.velocity;
 
 	if (IsDebug()) {
-		SAGE::DrawScreenLine(agent.position, agent.position + desiredVelocity, Colors::Yellow);
-		SAGE::DrawScreenLine(agent.position, agent.position + agent.velocity, Colors::Green);
-
-		SAGE::DrawScreenCircle(agent.position, panicDistance, Color(Colors::Blue));
+		//SAGE::DrawScreenLine(agent.position, agent.position + desiredVelocity, Colors::Yellow);
+		//SAGE::DrawScreenLine(agent.position, agent.position + agent.velocity, Colors::Green);
+		//
+		//SAGE::DrawScreenCircle(agent.position, panicDistance, Color(Colors::Blue));
 	}
 
 	isFleeing = true;

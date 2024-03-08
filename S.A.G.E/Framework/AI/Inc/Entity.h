@@ -1,6 +1,6 @@
 #pragma once
 
-namespace AI
+namespace SAGE::AI
 {
 	class AIWorld;
 	class Entity;

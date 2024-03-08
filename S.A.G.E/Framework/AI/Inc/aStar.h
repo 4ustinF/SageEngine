@@ -2,7 +2,7 @@
 
 #include "GridBasedGraph.h"
 
-namespace AI
+namespace SAGE::AI
 {
 	using NodeList = std::list<GridBasedGraph::Node*>;
 	using GetCost = std::function<float(const GridBasedGraph::Node*, const GridBasedGraph::Node*)>;

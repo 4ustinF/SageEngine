@@ -1,7 +1,7 @@
 #include "Precompiled.h"
 #include "BFS.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 
 bool BFS::Run(GridBasedGraph& graph, int startX, int startY, int endX, int endY)
 {

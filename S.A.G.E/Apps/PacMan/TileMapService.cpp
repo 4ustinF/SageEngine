@@ -4,6 +4,7 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 using namespace SAGE::Input;
+using namespace SAGE::AI;
 
 void TileMapService::Initialize()
 {
@@ -223,6 +224,40 @@ SAGE::Math::Rect TileMapService::GetBound() const
 		mColumns * mTileSize,	//right
 		mRows * mTileSize		//Bottom
 	};
+}
+
+std::vector<SAGE::Math::Vector2> TileMapService::FindPath()
+{
+	//std::vector<SAGE::Math::Vector2> path;
+
+	//auto getCostWrapper = [&](auto nodeA, auto nodeB)
+	//	{
+	//		return GetCost(nodeA, nodeB);
+	//	};
+
+	//auto getHeuristicWrapper = [&](auto nodeA, auto nodeB)
+	//	{
+	//		return GetHeuristic(nodeA, nodeB);
+	//	};
+
+	//aStar star;
+	//if (star.Run(mGraph, startPosX, startPosY, endPosX, endPosY, getCostWrapper, getHeuristicWrapper))
+	//{
+	//	const auto& closedList = star.GetClosedList();
+	//	auto node = closedList.back();
+	//	while (node != nullptr)
+	//	{
+	//		path.push_back(GetPixelPosition(node->columns, node->row));
+	//		node = node->parent;
+	//	}
+	//	std::reverse(path.begin(), path.end());
+
+	//	// Cache the closed list for visualization
+	//	mClosedList = closedList;
+	//}
+
+	//return path;
+	return {};
 }
 
 void TileMapService::PaintTile(int tileIndex)

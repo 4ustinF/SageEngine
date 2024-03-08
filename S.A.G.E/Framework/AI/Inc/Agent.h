@@ -2,7 +2,7 @@
 
 #include "Entity.h"
 
-namespace AI
+namespace SAGE::AI
 {
 	class Agent;
 

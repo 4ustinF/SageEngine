@@ -8,6 +8,7 @@
 #include <Math/Inc/SAGEmath.h>
 #include <Physics/Inc/Physics.h>
 #include "ML/Inc/ML.h"
+#include "AI/Inc/AI.h"
 
 // External Headers
 #include <rapidjson/document.h>

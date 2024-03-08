@@ -1,7 +1,7 @@
 #include "Precompiled.h"
 #include "aStar.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 
 bool aStar::Run(GridBasedGraph& graph, int startX, int startY, int endX, int endY, GetCost getCost, GetHeuristics getHeur)
 {

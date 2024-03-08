@@ -91,6 +91,9 @@
     <ProjectReference Include="..\..\External\Bullet\Bullet.vcxproj">
       <Project>{516192eb-788a-4fe7-b2b7-2ef9ac036b12}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\Framework\AI\AI.vcxproj">
+      <Project>{3a6cd03a-98e2-4114-902f-9ccd934bea6a}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Core\Core.vcxproj">
       <Project>{8729acc6-dac0-4d68-9c96-3b9fe71611c9}</Project>
     </ProjectReference>

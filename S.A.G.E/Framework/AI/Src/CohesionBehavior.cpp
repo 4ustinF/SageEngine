@@ -3,7 +3,7 @@
 
 #include "Agent.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
@@ -20,7 +20,7 @@ Vector2 CohesionBehavior::Calculate(Agent& agent)
 		cohesion += n->position;
 	}
 
-	cohesion /= agent.mNeighbors.size();
+	cohesion /= static_cast<float>(agent.mNeighbors.size());
 
 	const auto agentToDest = cohesion - agent.position;
 	const float distToDest = Magnitude(agentToDest);
@@ -32,9 +32,9 @@ Vector2 CohesionBehavior::Calculate(Agent& agent)
 
 	if (IsDebug())
 	{
-		SAGE::DrawScreenDiamond(cohesion, 5.0f, Colors::IndianRed);
-		SAGE::DrawScreenLine(agent.position, agent.position + desiredVelocity, Colors::Yellow);
-		SAGE::DrawScreenLine(agent.position, agent.position + agent.velocity, Colors::Green);
+		//SAGE::DrawScreenDiamond(cohesion, 5.0f, Colors::IndianRed);
+		//SAGE::DrawScreenLine(agent.position, agent.position + desiredVelocity, Colors::Yellow);
+		//SAGE::DrawScreenLine(agent.position, agent.position + agent.velocity, Colors::Green);
 	}
 
 	return cohesionSeekForce;

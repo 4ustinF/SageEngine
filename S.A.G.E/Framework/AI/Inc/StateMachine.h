@@ -2,7 +2,7 @@
 
 #include "State.h"
 
-namespace AI
+namespace SAGE::AI
 {
 	template<class AgentType>
 	class StateMachine

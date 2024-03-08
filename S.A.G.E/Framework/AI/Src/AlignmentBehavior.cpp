@@ -3,7 +3,7 @@
 
 #include "Agent.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 using namespace SAGE;
 using namespace SAGE::Math;
 
@@ -19,7 +19,7 @@ Vector2 AlignmentBehavior::Calculate(Agent& agent)
 		Alignment += n->heading;
 	}
 
-	Alignment /= agent.mNeighbors.size() + 1;
+	Alignment /= static_cast<float>(agent.mNeighbors.size() + 1);
 	Alignment -= agent.heading;
 
 	Alignment *= agent.maxSpeed;

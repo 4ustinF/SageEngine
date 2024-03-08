@@ -3,7 +3,7 @@
 
 #include "Agent.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
@@ -33,8 +33,8 @@ Vector2 ArriveBehavior::Calculate(Agent& agent)
 
 	if (IsDebug())
 	{
-		SAGE::DrawScreenLine(agent.position, agent.position + desiredVelocity, Colors::Yellow);
-		SAGE::DrawScreenLine(agent.position, agent.position + agent.velocity, Colors::Green);
+		//SAGE::DrawScreenLine(agent.position, agent.position + desiredVelocity, Colors::Yellow);
+		//SAGE::DrawScreenLine(agent.position, agent.position + agent.velocity, Colors::Green);
 
 		//Agent Velocity
 		std::string str = std::to_string(agent.velocity.x).c_str();

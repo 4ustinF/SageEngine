@@ -2,7 +2,7 @@
 
 #include "SteeringBehavior.h"
 
-namespace AI
+namespace SAGE::AI
 {
 	class SeperationBehavior : public SteeringBehavior
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include "SteeringBehavior.h"
 
-namespace AI
+namespace SAGE::AI
 {
 	class FleeBehavior : public SteeringBehavior
 	{

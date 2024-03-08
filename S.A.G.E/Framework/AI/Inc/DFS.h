@@ -2,7 +2,7 @@
 
 #include "GridBasedGraph.h"
 
-namespace AI
+namespace SAGE::AI
 {
 	using NodeList = std::list<GridBasedGraph::Node*>;
 

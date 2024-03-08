@@ -43,6 +43,9 @@ public:
 	bool IsBlocked(int x, int y) const;
 	SAGE::Math::Rect GetBound() const;
 
+	// AI
+	std::vector<SAGE::Math::Vector2> FindPath();
+
 private:
 	SAGE::Math::Vector2 GetPixelPosition(int x, int y) const;
 	void PaintTile(int tileIndex);

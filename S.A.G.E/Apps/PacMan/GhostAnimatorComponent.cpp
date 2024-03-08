@@ -12,6 +12,7 @@ void GhostAnimatorComponent::Initialize()
 {
 	mGhostController = GetOwner().GetComponent<GhostControllerComponent>();
 
+	// TODO: Set textures through json
 	auto tm = TextureManager::Get();
 	mMoveUpTextureIds.reserve(2);
 	mMoveUpTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Blinky/sprite_up_00.png"));

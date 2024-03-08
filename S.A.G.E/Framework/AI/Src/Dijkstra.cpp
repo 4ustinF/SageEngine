@@ -1,7 +1,7 @@
 #include "Precompiled.h"
 #include "Dijkstra.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 
 bool Dijkstra::Run(GridBasedGraph& graph, int startX, int startY, int endX, int endY, GetCost getCost)
 {

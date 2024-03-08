@@ -1,7 +1,7 @@
 #include "Precompiled.h"
 #include "GridBasedGraph.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 
 void GridBasedGraph::Initialize(int columns, int rows)
 {

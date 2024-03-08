@@ -6,7 +6,7 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
-using namespace AI;
+using namespace SAGE::AI;
 
 Vector2 PursuitBehavior::Calculate(Agent& agent)
 {
@@ -41,9 +41,9 @@ Vector2 PursuitBehavior::Calculate(Agent& agent)
 
 	if (IsDebug())
 	{
-		SAGE::DrawScreenLine(agent.position, agent.position + desiredVelocity, Colors::Yellow);
-		SAGE::DrawScreenLine(agent.position, agent.position + agent.velocity, Colors::Green);
-		SAGE::DrawScreenCircle(agent.position, chaseDistance, Color(Colors::Red));
+		//SAGE::DrawScreenLine(agent.position, agent.position + desiredVelocity, Colors::Yellow);
+		//SAGE::DrawScreenLine(agent.position, agent.position + agent.velocity, Colors::Green);
+		//SAGE::DrawScreenCircle(agent.position, chaseDistance, Color(Colors::Red));
 	}
 
 	return seekForce;

@@ -3,7 +3,7 @@
 
 #include "Agent.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
@@ -34,10 +34,10 @@ Vector2 WanderBehavior::Calculate(Agent& agent)
 	if (IsDebug())
 	{
 		const auto wanderCenter = TransformCoord({ 0.0f, mWanderDistance }, worldTransform);
-		SAGE::DrawScreenCircle(wanderCenter, mWanderRadius, Colors::Green);
-
-		SAGE::DrawScreenDiamond(worldWanderTarget, 3.0f, Colors::Red);
-		SAGE::DrawScreenLine(agent.position, worldWanderTarget, Colors::Yellow);
+		//SAGE::DrawScreenCircle(wanderCenter, mWanderRadius, Colors::Green);
+		//
+		//SAGE::DrawScreenDiamond(worldWanderTarget, 3.0f, Colors::Red);
+		//SAGE::DrawScreenLine(agent.position, worldWanderTarget, Colors::Yellow);
 	}
 
 	return seekForce;

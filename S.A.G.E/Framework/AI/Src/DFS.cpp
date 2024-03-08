@@ -1,7 +1,7 @@
 #include "Precompiled.h"
 #include "DFS.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 
 bool DFS::Run(GridBasedGraph& graph, int startX, int startY, int endX, int endY)
 {

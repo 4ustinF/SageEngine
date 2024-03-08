@@ -3,7 +3,7 @@
 
 #include "Agent.h"
 
-using namespace AI;
+using namespace SAGE::AI;
 using namespace SAGE;
 using namespace SAGE::Math;
 

@@ -21,6 +21,7 @@ public:
 	void Respawn();
 
 	SAGE::Math::Vector2 GetPlayerPosition() const { return mPosition; }
+	SAGE::Math::Vector2Int GetPlayerCords() const { return mTileCords; }
 	Direction GetPlayerDirection() const { return mDirection; }
 
 private:

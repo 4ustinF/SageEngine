@@ -3,6 +3,7 @@
 
 #include "PlayerControllerComponent.h"
 #include "PlayerAnimatorComponent.h"
+#include "GhostControllerComponent.h"
 #include "GhostAnimatorComponent.h"
 
 using namespace SAGE;
@@ -19,6 +20,9 @@ void GameManagerService::Initialize()
 	// Init audio
 	mSoundEffectManager = SoundEffectManager::Get();
 	//mMunchID = mSoundEffectManager->Load("munch.wav"); // Need a better soundFX
+
+	auto tm = TextureManager::Get();
+	mPathFindingTextureID = tm->LoadTexture("../Sprites/PacMan/pathfinding.png");
 }
 
 void GameManagerService::Terminate()
@@ -32,6 +36,7 @@ void GameManagerService::Terminate()
 	mCachedBigPelletCords.clear();
 
 	// Ghost
+	mBlinkyController = nullptr;
 	mBlinkyAnimator = nullptr;
 
 	// Player
@@ -40,6 +45,7 @@ void GameManagerService::Terminate()
 
 	// Other
 	mTileMapService = nullptr;
+	mPathFindingTextureID = 0;
 }
 
 void GameManagerService::Update(float deltaTime)
@@ -50,6 +56,16 @@ void GameManagerService::Render()
 {
 	mPlayerAnimator->Render();
 	mBlinkyAnimator->Render();
+
+	// TODO: This is for debugging purposes
+	const Vector2Int mStartPos = mBlinkyController->GetGhostTileCords();
+	const Vector2Int mEndPos = mPlayerController->GetPlayerCords();
+	auto path = std::move(mTileMapService->FindPath(mStartPos.x, mStartPos.y, mEndPos.x, mEndPos.y));
+	auto offset = mTileMapService->GetWorldOffset();
+	for (const auto& pos : path)
+	{
+		SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
+	}
 }
 
 void GameManagerService::DebugUI()
@@ -76,7 +92,9 @@ void GameManagerService::SetupGame()
 	mPlayerAnimator = playerObject->GetComponent<PlayerAnimatorComponent>();
 
 	// Ghost
-	mBlinkyAnimator = world.FindGameObject("Blinky")->GetComponent<GhostAnimatorComponent>();
+	GameObject* blinkyObject = world.FindGameObject("Blinky");
+	mBlinkyController = blinkyObject->GetComponent<GhostControllerComponent>();
+	mBlinkyAnimator = blinkyObject->GetComponent<GhostAnimatorComponent>();
 
 	mLevel = 1;
 	mPlayerPoints = 0;
@@ -161,6 +179,7 @@ void GameManagerService::SetupLevel()
 	// Adjust stats according to each level
 
 	mPlayerController->Respawn();
+	mBlinkyController->Respawn();
 
 	if (mLevel > 1) { // Don't need to populate the pellets on the first level as that is preset for us there.
 		RepopulatePellets();

@@ -43,8 +43,8 @@ public:
 	bool IsBlocked(int x, int y) const;
 	SAGE::Math::Rect GetBound() const;
 
-	// AI
-	std::vector<SAGE::Math::Vector2> FindPath();
+	// Path finding
+	std::vector<SAGE::Math::Vector2> FindPath(int startPosX, int startPosY, int endPosX, int endPosY);
 
 private:
 	SAGE::Math::Vector2 GetPixelPosition(int x, int y) const;
@@ -57,7 +57,8 @@ private:
 	int PivotToIndex(SAGE::Input::Pivot pivot) const;
 
 	// References
-	SAGE::Input::InputSystem* mInputSystem;
+	SAGE::Input::InputSystem* mInputSystem = nullptr;
+	SAGE::Graphics::SpriteRenderer* mSpriteRenderer = nullptr;
 	std::filesystem::path mMapFilePath;
 	std::filesystem::path mFlipMapFilePath;
 	std::filesystem::path mPivotMapFilePath;
@@ -76,4 +77,11 @@ private:
 	int mPaintIndex = 0;
 	int mPaintFlipMode = 0;
 	int mPaintPivotMode = 0;
+
+	// Path finding
+	float GetCost(const SAGE::AI::GridBasedGraph::Node* nodeA, const SAGE::AI::GridBasedGraph::Node* nodeB) const;
+	float GetHeuristic(const SAGE::AI::GridBasedGraph::Node* nodeA, const SAGE::AI::GridBasedGraph::Node* nodeB) const;
+	SAGE::AI::GridBasedGraph mGridBasedGraph;
+	SAGE::AI::NodeList mClosedList;
+
 };

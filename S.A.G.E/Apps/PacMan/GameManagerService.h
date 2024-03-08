@@ -6,6 +6,7 @@
 class TileMapService;
 class PlayerControllerComponent;
 class PlayerAnimatorComponent;
+class GhostControllerComponent;
 class GhostAnimatorComponent;
 
 class GameManagerService final : public SAGE::Service
@@ -45,6 +46,7 @@ private:
 	int mPlayerPoints = 0;
 
 	// Ghost
+	GhostControllerComponent* mBlinkyController = nullptr;
 	GhostAnimatorComponent* mBlinkyAnimator = nullptr;
 
 	// Pellets
@@ -56,4 +58,7 @@ private:
 	// Audio
 	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
 	SAGE::Graphics::SoundId mMunchID;
+
+	// Debug path finding
+	SAGE::Graphics::TextureId mPathFindingTextureID = 0;
 };

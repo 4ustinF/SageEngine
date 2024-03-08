@@ -19,8 +19,8 @@ bool aStar::Run(GridBasedGraph& graph, int startX, int startY, int endX, int end
 
 	bool found = false;
 
-	//Open list - list of nodes you need to considor in the steps ahead
-	//Closed list - list of nodes you already visited and dont need to consider again
+	//Open list - list of nodes you need to consider in the steps ahead
+	//Closed list - list of nodes you already visited and don't need to consider again
 	//Parent - for each node, keep track of which node it was expanded from
 
 	while (!found && !mOpenList.empty())
@@ -37,7 +37,7 @@ bool aStar::Run(GridBasedGraph& graph, int startX, int startY, int endX, int end
 		else {
 			for (auto neighbor : node->neighbors)
 			{
-				//if expanded node isnt closed list and isnt null
+				//if expanded node isn't closed list and isn't null
 				if (neighbor == nullptr || neighbor->closed) {
 					continue;
 				}
@@ -51,9 +51,9 @@ bool aStar::Run(GridBasedGraph& graph, int startX, int startY, int endX, int end
 				}
 				else //neighbor is open - see if this g value is better if so then change its parent and g value
 				{
-					//Compare whos g value is lower
+					//Compare whose g value is lower
 					float neighborsGVal = node->g + getCost(node, neighbor);
-					if (neighborsGVal < neighbor->g) //Edge relaxtion
+					if (neighborsGVal < neighbor->g) //Edge relaxation
 					{
 						neighbor->g = neighborsGVal;
 						neighbor->parent = node;

@@ -42,7 +42,7 @@ void PlayerControllerComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Player Controller Component##PlayerControllerComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		ImGui::DragFloat("Speed", &mSpeed, 1.0f, 0.0f, 500.0f);
+		ImGui::DragFloat("Speed##PlayerControllerComponent", &mSpeed, 1.0f, 0.0f, 500.0f);
 		ImGui::DragFloat2("Position##PlayerControllerComponent", &mPosition.x, 0.1f);
 		ImGui::DragFloat2("Target Position##PlayerControllerComponent", &mTargetPosition.x, 0.1f);
 		ImGui::DragInt2("Tile Coordinate##PlayerControllerComponent", &mTileCords.x, 0.1f);

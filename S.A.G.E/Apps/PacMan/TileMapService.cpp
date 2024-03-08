@@ -11,12 +11,16 @@ void TileMapService::Initialize()
 	SetServiceName("TileMap Service");
 
 	mInputSystem = InputSystem::Get();
+	mSpriteRenderer = SpriteRenderer::Get();
 	mPaintFlipMode = static_cast<int>(Pivot::TopLeft);
 	mWorldOffset = { -2.0f * mTileSize, -mTileSize };
 }
 
 void TileMapService::Terminate()
 {
+
+	mClosedList.clear();
+
 	mTiles.clear();
 	mBlocked.clear();
 
@@ -24,6 +28,7 @@ void TileMapService::Terminate()
 	mRows = 0;
 
 	mMap.clear();
+	mSpriteRenderer = nullptr;
 	mInputSystem = nullptr;
 }
 
@@ -34,7 +39,7 @@ void TileMapService::Update(float deltaTime)
 		if (mInputSystem->IsMouseDown(MouseButton::LBUTTON))
 		{
 			PaintTile(mPaintIndex);
-		}		
+		}
 		else if (mInputSystem->IsMouseDown(MouseButton::RBUTTON))
 		{
 			PaintTile(0);
@@ -51,9 +56,50 @@ void TileMapService::Render()
 			const TextureId textureId = mTiles.at(tile.tileIndex);
 			const Vector2 worldPosition = tile.localPosition + mWorldOffset;
 
-			SpriteRenderer::Get()->Draw(textureId, worldPosition, tile.tileRotation, tile.pivot, tile.flip);
+			mSpriteRenderer->Draw(textureId, worldPosition, tile.tileRotation, tile.pivot, tile.flip);
 		}
 	}
+
+	////Unblocked tiles
+	//for (int r = 0; r < mRows; ++r) {
+	//	for (int c = 0; c < mColumns; ++c) {
+	//		const auto node = mGraph.GetNode(c, r);
+	//		for (const auto neighbor : node->neighbors) {
+	//			if (neighbor == nullptr) {
+	//				continue;
+	//			}
+
+	//			const auto a = GetPixelPosition(node->columns, node->row);
+	//			const auto b = GetPixelPosition(neighbor->columns, neighbor->row);
+	//			X::DrawScreenLine(a, b, X::Colors::IndianRed);
+	//		}
+	//	}
+	//}
+
+	////Draw start and end spots
+	//X::DrawScreenCircle(GetPixelPosition(startPosX, startPosY), tileSize * 0.25f, X::Colors::Cyan);
+	//X::DrawScreenCircle(GetPixelPosition(endPosX, endPosY), tileSize * 0.25f, X::Colors::Cyan);
+
+	//if (mClosedList.size() > 0)
+	//{
+	//	for (auto& node : mClosedList)
+	//	{
+	//		if (node->parent != nullptr)
+	//		{
+	//			const auto a = GetPixelPosition(node->columns, node->row);
+	//			const auto b = GetPixelPosition(node->parent->columns, node->parent->row);
+	//			X::DrawScreenLine(a, b, X::Colors::Cyan);
+	//		}
+	//	}
+
+	//	//Iterate through the path list drawing to its parent
+	//	auto node = mClosedList.back();
+	//	while (node != nullptr)
+	//	{
+	//		X::DrawScreenCircle(GetPixelPosition(node->columns, node->row), tileSize * 0.25f, X::Colors::Cyan);
+	//		node = node->parent;
+	//	}
+	//}
 }
 
 void TileMapService::DebugUI()
@@ -132,6 +178,39 @@ void TileMapService::LoadTileMap(const std::filesystem::path& path)
 	}
 
 	fclose(file);
+
+	// --------------------------------------------------
+
+	mGridBasedGraph.Initialize(mColumns, mRows);
+
+	for (int r = 0; r < mRows; ++r)
+	{
+		for (int c = 0; c < mColumns; ++c)
+		{
+			if (IsBlocked(c, r)) {
+				continue;
+			}
+
+			auto GetNeighbor = [&](int c, int r) -> AI::GridBasedGraph::Node*
+				{
+					const auto node = mGridBasedGraph.GetNode(c, r);
+					if (node == nullptr) {
+						return nullptr;
+					}
+
+					if (IsBlocked(c, r)) {
+						return nullptr;
+					}
+					return node;
+				};
+
+			GridBasedGraph::Node* node = mGridBasedGraph.GetNode(c, r);
+			node->neighbors[GridBasedGraph::North] = GetNeighbor(c, r - 1);
+			node->neighbors[GridBasedGraph::South] = GetNeighbor(c, r + 1);
+			node->neighbors[GridBasedGraph::East] = GetNeighbor(c + 1, r);
+			node->neighbors[GridBasedGraph::West] = GetNeighbor(c - 1, r);
+		}
+	}
 }
 
 void TileMapService::LoadFlipMap(const std::filesystem::path& path)
@@ -211,7 +290,7 @@ SAGE::Math::Vector2 TileMapService::GetPixelPosition(int x, int y) const
 {
 	return{
 		(x + 0.5f) * mTileSize,
-		(y + 0.5f)* mTileSize,
+		(y + 0.5f) * mTileSize,
 	};
 }
 
@@ -226,38 +305,62 @@ SAGE::Math::Rect TileMapService::GetBound() const
 	};
 }
 
-std::vector<SAGE::Math::Vector2> TileMapService::FindPath()
+std::vector<SAGE::Math::Vector2> TileMapService::FindPath(int startPosX, int startPosY, int endPosX, int endPosY)
 {
-	//std::vector<SAGE::Math::Vector2> path;
+	std::vector<SAGE::Math::Vector2> path;
 
-	//auto getCostWrapper = [&](auto nodeA, auto nodeB)
-	//	{
-	//		return GetCost(nodeA, nodeB);
-	//	};
+	auto getCostWrapper = [&](auto nodeA, auto nodeB)
+		{
+			return GetCost(nodeA, nodeB);
+		};
 
-	//auto getHeuristicWrapper = [&](auto nodeA, auto nodeB)
-	//	{
-	//		return GetHeuristic(nodeA, nodeB);
-	//	};
+	auto getHeuristicWrapper = [&](auto nodeA, auto nodeB)
+		{
+			return GetHeuristic(nodeA, nodeB);
+		};
 
-	//aStar star;
-	//if (star.Run(mGraph, startPosX, startPosY, endPosX, endPosY, getCostWrapper, getHeuristicWrapper))
-	//{
-	//	const auto& closedList = star.GetClosedList();
-	//	auto node = closedList.back();
-	//	while (node != nullptr)
-	//	{
-	//		path.push_back(GetPixelPosition(node->columns, node->row));
-	//		node = node->parent;
-	//	}
-	//	std::reverse(path.begin(), path.end());
+	aStar star;
+	if (star.Run(mGridBasedGraph, startPosX, startPosY, endPosX, endPosY, getCostWrapper, getHeuristicWrapper))
+	{
+		const auto& closedList = star.GetClosedList();
+		auto node = closedList.back();
+		while (node != nullptr)
+		{
+			path.push_back(GetPixelPosition(node->columns, node->row));
+			node = node->parent;
+		}
+		std::reverse(path.begin(), path.end());
 
-	//	// Cache the closed list for visualization
-	//	mClosedList = closedList;
+		// Cache the closed list for visualization
+		mClosedList = closedList;
+	}
+
+	return path;
+}
+
+float TileMapService::GetCost(const GridBasedGraph::Node* nodeA, const GridBasedGraph::Node* nodeB) const
+{
+	const int fromTileIndex = ToIndex(nodeA->columns, nodeA->row, mColumns);
+	const int toTileIndex = ToIndex(nodeB->columns, nodeB->row, mColumns);
+
+	const int tileType = mMap[toTileIndex].tileIndex;
+	const float multiplier = ((nodeA->columns != nodeB->columns) && (nodeA->row != nodeB->row)) ? 1.414f : 1.0f;
+
+	multiplier * 1.01f; //Multiplier a tie breaker to eliminate symmetry
+
+	//// Makes it harder to go through that tile example
+	//if (tileType == 1) {
+	//	return 5.0f * multiplier;
 	//}
 
-	//return path;
-	return {};
+	return 1.0f * multiplier;
+}
+
+float TileMapService::GetHeuristic(const GridBasedGraph::Node* nodeA, const GridBasedGraph::Node* nodeB) const
+{
+	//sqrt(A^2 + b^2) = c
+	return sqrt((nodeA->columns - nodeB->columns) * (nodeA->columns - nodeB->columns) +
+		(nodeA->row - nodeB->row) * (nodeA->row - nodeB->row));
 }
 
 void TileMapService::PaintTile(int tileIndex)

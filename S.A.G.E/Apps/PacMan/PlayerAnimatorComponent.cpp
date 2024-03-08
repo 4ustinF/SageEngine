@@ -5,7 +5,6 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Input;
 using namespace SAGE::Graphics;
-using namespace SAGE::Coroutine;
 
 MEMORY_POOL_DEFINE(PlayerAnimatorComponent, 1000);
 

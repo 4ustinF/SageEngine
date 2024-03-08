@@ -15,7 +15,7 @@
     },
     {
       "Name": "Blinky",
-      "TemplateFile": "../../Assets/Templates/pacman_ghost.json"
+      "TemplateFile": "../../Assets/Templates/blinky.json"
     }
   ]
 }

@@ -137,6 +137,8 @@
   <ItemGroup>
     <ClCompile Include="GameManagerService.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GhostAnimatorComponent.cpp" />
+    <ClCompile Include="GhostControllerComponent.cpp" />
     <ClCompile Include="PlayerAnimatorComponent.cpp" />
     <ClCompile Include="PlayerControllerComponent.cpp" />
     <ClCompile Include="TileMapService.cpp" />
@@ -146,6 +148,8 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GameManagerService.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="GhostAnimatorComponent.h" />
+    <ClInclude Include="GhostControllerComponent.h" />
     <ClInclude Include="PlayerAnimatorComponent.h" />
     <ClInclude Include="PlayerControllerComponent.h" />
     <ClInclude Include="TileMapService.h" />

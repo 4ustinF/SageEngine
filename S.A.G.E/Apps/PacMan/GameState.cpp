@@ -5,6 +5,8 @@
 
 #include "PlayerAnimatorComponent.h"
 #include "PlayerControllerComponent.h"
+#include "GhostControllerComponent.h"
+#include "GhostAnimatorComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Graphics;
@@ -25,6 +27,16 @@ namespace
 		else if (strcmp(componentName, "PlayerAnimatorComponent") == 0)
 		{
 			auto playerAnimatorComponent = gameObject.AddComponent<PlayerAnimatorComponent>();
+			return true;
+		}
+		else if (strcmp(componentName, "GhostControllerComponent") == 0)
+		{
+			auto ghostControllerComponent = gameObject.AddComponent<GhostControllerComponent>();
+			return true;
+		}
+		else if (strcmp(componentName, "GhostAnimatorComponent") == 0)
+		{
+			auto ghostAnimatorComponent = gameObject.AddComponent<GhostAnimatorComponent>();
 			return true;
 		}
 		return false;

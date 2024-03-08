@@ -6,6 +6,7 @@
 class TileMapService;
 class PlayerControllerComponent;
 class PlayerAnimatorComponent;
+class GhostAnimatorComponent;
 
 class GameManagerService final : public SAGE::Service
 {
@@ -42,6 +43,9 @@ private:
 	const int mPlayerStartingLives = 3;
 	int mPlayerLives = 3;
 	int mPlayerPoints = 0;
+
+	// Ghost
+	GhostAnimatorComponent* mBlinkyAnimator = nullptr;
 
 	// Pellets
 	const int mMaxPelletCount = 244;

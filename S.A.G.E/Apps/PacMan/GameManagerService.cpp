@@ -3,6 +3,7 @@
 
 #include "PlayerControllerComponent.h"
 #include "PlayerAnimatorComponent.h"
+#include "GhostAnimatorComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -22,14 +23,22 @@ void GameManagerService::Initialize()
 
 void GameManagerService::Terminate()
 {
+	// Audio
 	mMunchID = 0;
 	mSoundEffectManager = nullptr;
 
+	// Pellets
 	mCachedSmallPelletCords.clear();
 	mCachedBigPelletCords.clear();
 
+	// Ghost
+	mBlinkyAnimator = nullptr;
+
+	// Player
 	mPlayerAnimator = nullptr;
 	mPlayerController = nullptr;
+
+	// Other
 	mTileMapService = nullptr;
 }
 
@@ -40,6 +49,7 @@ void GameManagerService::Update(float deltaTime)
 void GameManagerService::Render()
 {
 	mPlayerAnimator->Render();
+	mBlinkyAnimator->Render();
 }
 
 void GameManagerService::DebugUI()
@@ -59,9 +69,14 @@ void GameManagerService::SetupGame()
 	mTileMapService->LoadFlipMap("flipmap.txt");
 	mTileMapService->LoadPivotMap("pivotmap.txt");
 
-	GameObject* playerObject = GetWorld().FindGameObject("PacMan");
+	//Player
+	auto& world = GetWorld();
+	GameObject* playerObject = world.FindGameObject("PacMan");
 	mPlayerController = playerObject->GetComponent<PlayerControllerComponent>();
 	mPlayerAnimator = playerObject->GetComponent<PlayerAnimatorComponent>();
+
+	// Ghost
+	mBlinkyAnimator = world.FindGameObject("Blinky")->GetComponent<GhostAnimatorComponent>();
 
 	mLevel = 1;
 	mPlayerPoints = 0;

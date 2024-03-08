@@ -19,6 +19,12 @@
     <ClCompile Include="GameManagerService.cpp">
       <Filter>Services</Filter>
     </ClCompile>
+    <ClCompile Include="GhostAnimatorComponent.cpp">
+      <Filter>Components\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="GhostControllerComponent.cpp">
+      <Filter>Components\Ghost</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TypeIds.h" />
@@ -37,6 +43,12 @@
     </ClInclude>
     <ClInclude Include="GameManagerService.h">
       <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostAnimatorComponent.h">
+      <Filter>Components\Ghost</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostControllerComponent.h">
+      <Filter>Components\Ghost</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -110,12 +110,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{1996BA5E-CA20-4255-93A8-C97D9E5110E4}"
 	ProjectSection(SolutionItems) = preProject
 		Assets\Templates\cube.json = Assets\Templates\cube.json
+		Assets\Templates\blinky.json = Assets\Templates\blinky.json
 		Assets\Templates\cube2.json = Assets\Templates\cube2.json
 		Assets\Templates\follow_camera.json = Assets\Templates\follow_camera.json
 		Assets\Templates\fps_camera.json = Assets\Templates\fps_camera.json
 		Assets\Templates\mutant.json = Assets\Templates\mutant.json
 		Assets\Templates\pacman.json = Assets\Templates\pacman.json
-		Assets\Templates\pacman_ghost.json = Assets\Templates\pacman_ghost.json
 		Assets\Templates\player.json = Assets\Templates\player.json
 		Assets\Templates\spawner.json = Assets\Templates\spawner.json
 		Assets\Templates\test.json = Assets\Templates\test.json

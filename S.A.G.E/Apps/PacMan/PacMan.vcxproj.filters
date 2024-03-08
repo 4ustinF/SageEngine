@@ -55,6 +55,9 @@
     <Filter Include="Components\Player">
       <UniqueIdentifier>{8429bf04-bd59-4ad2-a384-aa368ce6945e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Ghost">
+      <UniqueIdentifier>{38d4b101-657c-4291-9d1f-3fa05f5e066e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="tiles.txt">

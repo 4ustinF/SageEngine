@@ -2,6 +2,7 @@
 #include "TileMapService.h"
 
 #include "PlayerControllerComponent.h"
+#include "PlayerAnimatorComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -13,13 +14,21 @@ void GameManagerService::Initialize()
 	SetServiceName("Game Manager Service");
 
 	mTileMapService = GetWorld().GetService<TileMapService>();
+
+	// Init audio
+	mSoundEffectManager = SoundEffectManager::Get();
+	//mMunchID = mSoundEffectManager->Load("munch.wav"); // Need a better soundFX
 }
 
 void GameManagerService::Terminate()
 {
+	mMunchID = 0;
+	mSoundEffectManager = nullptr;
+
 	mCachedSmallPelletCords.clear();
 	mCachedBigPelletCords.clear();
 
+	mPlayerAnimator = nullptr;
 	mPlayerController = nullptr;
 	mTileMapService = nullptr;
 }
@@ -30,6 +39,7 @@ void GameManagerService::Update(float deltaTime)
 
 void GameManagerService::Render()
 {
+	mPlayerAnimator->Render();
 }
 
 void GameManagerService::DebugUI()
@@ -49,6 +59,10 @@ void GameManagerService::SetupGame()
 	mTileMapService->LoadFlipMap("flipmap.txt");
 	mTileMapService->LoadPivotMap("pivotmap.txt");
 
+	GameObject* playerObject = GetWorld().FindGameObject("PacMan");
+	mPlayerController = playerObject->GetComponent<PlayerControllerComponent>();
+	mPlayerAnimator = playerObject->GetComponent<PlayerAnimatorComponent>();
+
 	mLevel = 1;
 	mPlayerPoints = 0;
 	mPlayerLives = mPlayerStartingLives;
@@ -64,6 +78,8 @@ void GameManagerService::StartGame()
 
 void GameManagerService::AtePellet(PelletType pelletType)
 {
+	//mSoundEffectManager->Play(mMunchID, false, 0.5f, Random::UniformFloat(-0.1f, 0.15f), Random::UniformFloat(-0.1f, 0.1f));
+
 	mPlayerPoints += static_cast<int>(pelletType);
 	if (--mRemainingPelletCount <= 0)
 	{

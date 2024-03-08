@@ -5,6 +5,7 @@
 
 class TileMapService;
 class PlayerControllerComponent;
+class PlayerAnimatorComponent;
 
 class GameManagerService final : public SAGE::Service
 {
@@ -16,8 +17,6 @@ public:
 	void Update(float deltaTime) override;
 	void Render() override;
 	void DebugUI() override;
-
-	void SetPlayerControllerReference(PlayerControllerComponent* playerController) { mPlayerController = playerController; }
 
 	void SetupGame();
 	void StartGame();
@@ -34,6 +33,7 @@ private:
 	// References
 	TileMapService* mTileMapService = nullptr;
 	PlayerControllerComponent* mPlayerController = nullptr;
+	PlayerAnimatorComponent* mPlayerAnimator = nullptr;
 
 	// Game
 	int mLevel = 1;
@@ -48,4 +48,8 @@ private:
 	int mRemainingPelletCount = 244;
 	std::vector<SAGE::Math::Vector2Int> mCachedSmallPelletCords;
 	std::vector<SAGE::Math::Vector2Int> mCachedBigPelletCords;
+
+	// Audio
+	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
+	SAGE::Graphics::SoundId mMunchID;
 };

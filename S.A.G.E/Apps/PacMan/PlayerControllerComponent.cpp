@@ -5,6 +5,7 @@
 using namespace SAGE;
 using namespace SAGE::Input;
 using namespace SAGE::Math;
+using namespace SAGE::Graphics;
 
 MEMORY_POOL_DEFINE(PlayerControllerComponent, 1000);
 
@@ -19,8 +20,6 @@ void PlayerControllerComponent::Initialize()
 	mHalfTileSize = mTileSize * 0.5f;
 	mStartingPosition = { 13.5f * mTileSize + mHalfTileSize, 23.0f * mTileSize + mHalfTileSize };
 	mWorldOffset = mTileMapService->GetWorldOffset();
-
-	mGameManagerService->SetPlayerControllerReference(this);
 }
 
 void PlayerControllerComponent::Terminate()
@@ -65,13 +64,13 @@ void PlayerControllerComponent::UpdateTileCords()
 
 void PlayerControllerComponent::Eating()
 {
-	Tile& tile = mTileMapService->GetTile(mTileCords);
-	if (tile.tileIndex == 1) {
-		tile.tileIndex = 0;
+	int& tileIndex = mTileMapService->GetTile(mTileCords).tileIndex;
+	if (tileIndex == 1) {
+		tileIndex = 0;
 		mGameManagerService->AtePellet(PelletType::Small);
 	}
-	else if (tile.tileIndex == 2) {
-		tile.tileIndex = 0;
+	else if (tileIndex == 2) {
+		tileIndex = 0;
 		mGameManagerService->AtePellet(PelletType::Big);
 	}
 }

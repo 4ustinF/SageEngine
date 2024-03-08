@@ -10,7 +10,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int)
 	appConfig.winHeight = 744;
 	appConfig.debugDrawLimit = 3000;
 	appConfig.textureRoot = "../../Assets/Images";
-	appConfig.audioRoot = "../../Assets/Audio";
+	appConfig.audioRoot = "../../Assets/Audio/PacMan";
 
 	auto& app = MainApp();
 	app.AddState<GameState>("GameState");

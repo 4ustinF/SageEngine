@@ -34,15 +34,12 @@ namespace
 void GameState::Initialize()
 {
 	mGameWorld.AddService<CameraService>();
-	GameManagerService* gameManagerService = mGameWorld.AddService<GameManagerService>();
 	mGameWorld.AddService<TileMapService>();
+	GameManagerService* gameManagerService = mGameWorld.AddService<GameManagerService>();
 	mGameWorld.Initialize(1000);
 
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/pacman_level.json");
-
-	// TODO: Have a sprite service or something to animate for us. This way all the ghost and anything can pass its handle to it and it will do the rendering.
-	mPlayerAnimatorComponent = mGameWorld.FindGameObject("PacMan")->GetComponent<PlayerAnimatorComponent>();
 
 	gameManagerService->SetupGame();
 	gameManagerService->StartGame();
@@ -51,7 +48,6 @@ void GameState::Initialize()
 void GameState::Terminate()
 {
 	mGameWorld.Terminate();
-	mPlayerAnimatorComponent = nullptr;
 }
 
 void GameState::Update(float deltaTime)
@@ -62,7 +58,6 @@ void GameState::Update(float deltaTime)
 void GameState::Render()
 {
 	mGameWorld.Render();
-	mPlayerAnimatorComponent->Render();
 }
 
 void GameState::DebugUI()

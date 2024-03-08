@@ -2,19 +2,20 @@
   "Capacity": 1000,
   "Services": {
     "CameraService": {
-
     },
     "TileMapService": {
-
     },
     "GameManagerService": {
-
     }
   },
   "GameObjects": [
     {
       "Name": "PacMan",
       "TemplateFile": "../../Assets/Templates/pacman.json"
+    },
+    {
+      "Name": "Blinky",
+      "TemplateFile": "../../Assets/Templates/pacman_ghost.json"
     }
   ]
 }

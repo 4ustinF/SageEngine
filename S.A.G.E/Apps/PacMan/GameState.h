@@ -14,5 +14,4 @@ public:
 
 private:
 	SAGE::GameWorld mGameWorld;
-	PlayerAnimatorComponent* mPlayerAnimatorComponent = nullptr;
 };

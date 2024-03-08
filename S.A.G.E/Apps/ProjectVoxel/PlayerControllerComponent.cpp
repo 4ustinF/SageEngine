@@ -1007,10 +1007,11 @@ void PlayerControllerComponent::PlayBlockPlacingSound(const BlockTypes blockType
 
 void PlayerControllerComponent::InitializeSoundIds()
 {
-	mCrunchID = SoundEffectManager::Get()->Load("Crunch.wav");
-	mGlassBreakID = SoundEffectManager::Get()->Load("glass_breaking.wav");
-	mLeafBreakID = SoundEffectManager::Get()->Load("LeafCrunch.wav");
-	mHoeID = SoundEffectManager::Get()->Load("hoe.wav");
+	auto soundEffectManager = SoundEffectManager::Get();
+	mCrunchID = soundEffectManager->Load("Crunch.wav");
+	mGlassBreakID = soundEffectManager->Load("glass_breaking.wav");
+	mLeafBreakID = soundEffectManager->Load("LeafCrunch.wav");
+	mHoeID = soundEffectManager->Load("hoe.wav");
 }
 
 Color PlayerControllerComponent::GetBlockColor(const BlockTypes blockType)

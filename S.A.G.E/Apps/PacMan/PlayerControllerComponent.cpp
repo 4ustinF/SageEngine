@@ -67,12 +67,12 @@ void PlayerControllerComponent::Eating()
 {
 	Tile& tile = mTileMapService->GetTile(mTileCords);
 	if (tile.tileIndex == 1) {
-		mGameManagerService->AtePellet(PelletType::Small);
 		tile.tileIndex = 0;
+		mGameManagerService->AtePellet(PelletType::Small);
 	}
 	else if (tile.tileIndex == 2) {
-		mGameManagerService->AtePellet(PelletType::Big);
 		tile.tileIndex = 0;
+		mGameManagerService->AtePellet(PelletType::Big);
 	}
 }
 

@@ -19,11 +19,16 @@ public:
 
 	void SetPlayerControllerReference(PlayerControllerComponent* playerController) { mPlayerController = playerController; }
 
-	void RestartGame();
+	void SetupGame();
+	void StartGame();
 	void AtePellet(PelletType pelletType);
 
 private:
-	void SetupLevel(int level);
+	void CachePelletLocations();
+	void RepopulatePellets();
+
+	void RestartGame();
+	void SetupLevel();
 	void RestartLevel();
 
 	// References
@@ -41,4 +46,6 @@ private:
 	// Pellets
 	const int mMaxPelletCount = 244;
 	int mRemainingPelletCount = 244;
+	std::vector<SAGE::Math::Vector2Int> mCachedSmallPelletCords;
+	std::vector<SAGE::Math::Vector2Int> mCachedBigPelletCords;
 };

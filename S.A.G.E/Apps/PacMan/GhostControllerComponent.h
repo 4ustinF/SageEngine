@@ -23,6 +23,8 @@ public:
 	Direction GetGhostDirection() const { return mDirection; }
 	SAGE::Math::Vector2Int GetGhostTileCords() const { return mTileCords; }
 
+	SAGE::Math::Vector2 mPosition = SAGE::Math::Vector2::Zero;
+
 private:
 	void TeleportGhost(const SAGE::Math::Vector2 newPos, const Direction dir);
 	void UpdateTileCords();
@@ -30,7 +32,6 @@ private:
 	// References
 	TileMapService* mTileMapService = nullptr;
 
-	SAGE::Math::Vector2 mPosition = SAGE::Math::Vector2::Zero;
 	SAGE::Math::Vector2Int mTileCords = SAGE::Math::Vector2Int::Zero;
 	Direction mDirection = Direction::Right;
 	float mSpeed = 150.0f;

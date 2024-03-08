@@ -10,6 +10,7 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 using namespace SAGE::Input;
+using namespace SAGE::Coroutine;
 
 void GameManagerService::Initialize()
 {
@@ -62,6 +63,12 @@ void GameManagerService::Render()
 	const Vector2Int mEndPos = mPlayerController->GetPlayerCords();
 	auto path = std::move(mTileMapService->FindPath(mStartPos.x, mStartPos.y, mEndPos.x, mEndPos.y));
 	auto offset = mTileMapService->GetWorldOffset();
+
+	if (path.size() >= 2)
+	{
+		mBlinkyController->mPosition = Lerp(mBlinkyController->mPosition, path[1] + offset, 0.1f);
+	}
+
 	for (const auto& pos : path)
 	{
 		SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
@@ -116,8 +123,7 @@ void GameManagerService::AtePellet(PelletType pelletType)
 	mPlayerPoints += static_cast<int>(pelletType);
 	if (--mRemainingPelletCount <= 0)
 	{
-		++mLevel;
-		SetupLevel();
+		CoroutineSystem::Get()->StartCoroutine(GoToNextLevel());
 	}
 }
 
@@ -192,4 +198,15 @@ void GameManagerService::RestartLevel()
 	// Set player to start position
 
 	mPlayerController->Respawn();
+}
+
+Enumerator GameManagerService::GoToNextLevel()
+{
+	return [=](CoroPush& yield_return)
+		{
+			// Prevent ghost from killing player here?
+			yield_return(new WaitForSeconds(0.15f));
+			++mLevel;
+			SetupLevel();
+		};
 }

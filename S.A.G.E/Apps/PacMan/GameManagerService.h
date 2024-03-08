@@ -61,4 +61,7 @@ private:
 
 	// Debug path finding
 	SAGE::Graphics::TextureId mPathFindingTextureID = 0;
+
+	// Coroutines
+	SAGE::Coroutine::Enumerator GoToNextLevel();
 };

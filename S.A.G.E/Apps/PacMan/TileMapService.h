@@ -46,6 +46,8 @@ public:
 	// Path finding
 	std::vector<SAGE::Math::Vector2> FindPath(int startPosX, int startPosY, int endPosX, int endPosY);
 
+	SAGE::AI::GridBasedGraph mGridBasedGraph;
+
 private:
 	SAGE::Math::Vector2 GetPixelPosition(int x, int y) const;
 	void PaintTile(int tileIndex);
@@ -81,7 +83,6 @@ private:
 	// Path finding
 	float GetCost(const SAGE::AI::GridBasedGraph::Node* nodeA, const SAGE::AI::GridBasedGraph::Node* nodeB) const;
 	float GetHeuristic(const SAGE::AI::GridBasedGraph::Node* nodeA, const SAGE::AI::GridBasedGraph::Node* nodeB) const;
-	SAGE::AI::GridBasedGraph mGridBasedGraph;
 	SAGE::AI::NodeList mClosedList;
 
 };

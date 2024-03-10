@@ -24,6 +24,8 @@ void GameManagerService::Initialize()
 
 	auto tm = TextureManager::Get();
 	mPathFindingTextureID = tm->LoadTexture("../Sprites/PacMan/pathfinding.png");
+
+	SetIntersectionPoints();
 }
 
 void GameManagerService::Terminate()
@@ -45,6 +47,8 @@ void GameManagerService::Terminate()
 	mPlayerController = nullptr;
 
 	// Other
+	mIntersections.clear();
+	mIntersectionsPositions.clear();
 	mTileMapService = nullptr;
 	mPathFindingTextureID = 0;
 }
@@ -58,21 +62,26 @@ void GameManagerService::Render()
 	mPlayerAnimator->Render();
 	mBlinkyAnimator->Render();
 
-	// TODO: This is for debugging purposes
-	const Vector2Int mStartPos = mBlinkyController->GetGhostTileCords();
-	const Vector2Int mEndPos = mPlayerController->GetPlayerCords();
-	auto path = std::move(mTileMapService->FindPath(mStartPos.x, mStartPos.y, mEndPos.x, mEndPos.y));
-	auto offset = mTileMapService->GetWorldOffset();
+	//// TODO: This is for debugging purposes
+	//const Vector2Int mStartPos = mBlinkyController->GetTileCords();
+	//const Vector2Int mEndPos = mPlayerController->GetPlayerCords();
+	//auto path = std::move(mTileMapService->FindPath(mStartPos.x, mStartPos.y, mEndPos.x, mEndPos.y));
+	Vector2 offset = mTileMapService->GetWorldOffset();
 
-	if (path.size() >= 2)
-	{
-		mBlinkyController->mPosition = Lerp(mBlinkyController->mPosition, path[1] + offset, 0.1f);
-	}
+	//if (path.size() >= 2)
+	//{
+	//	//mBlinkyController->mPosition = Lerp(mBlinkyController->mPosition, path[1] + offset, 0.1f);
+	//}
 
-	for (const auto& pos : path)
+	for (const auto& pos : mBlinkyController->mTargetNodePositions)
 	{
 		SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
 	}
+
+	//for (const auto& pos : mIntersectionsPositions)
+	//{
+	//	SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
+	//}
 }
 
 void GameManagerService::DebugUI()
@@ -125,6 +134,18 @@ void GameManagerService::AtePellet(PelletType pelletType)
 	{
 		CoroutineSystem::Get()->StartCoroutine(GoToNextLevel());
 	}
+}
+
+bool GameManagerService::IsIntersectionPoint(Vector2Int pointToCheck) const
+{
+	for (const Vector2Int& intersection : mIntersections)
+	{
+		if (pointToCheck == intersection)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void GameManagerService::CachePelletLocations()
@@ -198,6 +219,53 @@ void GameManagerService::RestartLevel()
 	// Set player to start position
 
 	mPlayerController->Respawn();
+}
+
+void GameManagerService::SetIntersectionPoints()
+{
+	mIntersections.reserve(34);
+
+	mIntersections.push_back(Vector2Int(8, 2));
+	mIntersections.push_back(Vector2Int(23, 2));
+	mIntersections.push_back(Vector2Int(3, 6));
+	mIntersections.push_back(Vector2Int(8, 6));
+	mIntersections.push_back(Vector2Int(11, 6));
+	mIntersections.push_back(Vector2Int(14, 6));
+	mIntersections.push_back(Vector2Int(17, 6));
+	mIntersections.push_back(Vector2Int(20, 6));
+	mIntersections.push_back(Vector2Int(23, 6));
+	mIntersections.push_back(Vector2Int(28, 6));
+	mIntersections.push_back(Vector2Int(8, 9));
+	mIntersections.push_back(Vector2Int(23, 9));
+	mIntersections.push_back(Vector2Int(14, 12));
+	mIntersections.push_back(Vector2Int(17, 12));
+	mIntersections.push_back(Vector2Int(8, 15));
+	mIntersections.push_back(Vector2Int(11, 15));
+	mIntersections.push_back(Vector2Int(20, 15));
+	mIntersections.push_back(Vector2Int(23, 15));
+	mIntersections.push_back(Vector2Int(11, 18));
+	mIntersections.push_back(Vector2Int(20, 18));
+	mIntersections.push_back(Vector2Int(8, 21));
+	mIntersections.push_back(Vector2Int(11, 21));
+	mIntersections.push_back(Vector2Int(20, 21));
+	mIntersections.push_back(Vector2Int(23, 21));
+	mIntersections.push_back(Vector2Int(8, 24));
+	mIntersections.push_back(Vector2Int(11, 24));
+	mIntersections.push_back(Vector2Int(14, 24));
+	mIntersections.push_back(Vector2Int(17, 24));
+	mIntersections.push_back(Vector2Int(20, 24));
+	mIntersections.push_back(Vector2Int(23, 24));
+	mIntersections.push_back(Vector2Int(5, 27));
+	mIntersections.push_back(Vector2Int(26, 27));
+	mIntersections.push_back(Vector2Int(14, 30));
+	mIntersections.push_back(Vector2Int(17, 30));
+
+	mIntersectionsPositions.reserve(mIntersections.size());
+	for (const auto& cord : mIntersections)
+	{
+		// TODO: Tile size and half tile size should be cached
+		mIntersectionsPositions.push_back({cord.x * 24.0f + 12.0f, cord.y * 24.0f + 12.0f});
+	}
 }
 
 Enumerator GameManagerService::GoToNextLevel()

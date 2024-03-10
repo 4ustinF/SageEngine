@@ -40,6 +40,8 @@ namespace SAGE::AI
 		int GetColumns() const { return mColumns; }
 		int GetRows() const { return mRows; }
 
+		void BlockTile(int x, int y);
+
 	private:
 		int GetIndex(int x, int y) const;
 

@@ -65,13 +65,13 @@ void GhostAnimatorComponent::DebugUI()
 
 void GhostAnimatorComponent::Render()
 {
-	const Flip flip = mGhostController->GetGhostDirection() == Direction::Right ? Flip::Horizontal : Flip::None;
-	SpriteRenderer::Get()->Draw(mDisplayTextureID, mGhostController->GetGhostPosition(), 0.0, Pivot::Center, flip);
+	const Flip flip = mGhostController->GetDirection() == Direction::Right ? Flip::Horizontal : Flip::None;
+	SpriteRenderer::Get()->Draw(mDisplayTextureID, mGhostController->GetPosition(), 0.0, Pivot::Center, flip);
 }
 
 std::vector<TextureId>& GhostAnimatorComponent::GetTextureIDLookup()
 {
-	switch (mGhostController->GetGhostDirection())
+	switch (mGhostController->GetDirection())
 	{
 	case Direction::Up:
 		return mMoveUpTextureIds;

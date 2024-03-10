@@ -1,2 +1,6 @@
-﻿  aStar.cpp
+﻿  BFS.cpp
+  DFS.cpp
+  Dijkstra.cpp
+  GridBasedGraph.cpp
+  aStar.cpp
   AI.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\AI.lib

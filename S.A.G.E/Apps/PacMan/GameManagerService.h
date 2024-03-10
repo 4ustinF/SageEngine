@@ -24,6 +24,8 @@ public:
 	void StartGame();
 	void AtePellet(PelletType pelletType);
 
+	bool IsIntersectionPoint(SAGE::Math::Vector2Int pointToCheck) const;
+
 private:
 	void CachePelletLocations();
 	void RepopulatePellets();
@@ -31,6 +33,8 @@ private:
 	void RestartGame();
 	void SetupLevel();
 	void RestartLevel();
+
+	void SetIntersectionPoints();
 
 	// References
 	TileMapService* mTileMapService = nullptr;
@@ -54,6 +58,10 @@ private:
 	int mRemainingPelletCount = 244;
 	std::vector<SAGE::Math::Vector2Int> mCachedSmallPelletCords;
 	std::vector<SAGE::Math::Vector2Int> mCachedBigPelletCords;
+
+	// Map
+	std::vector<SAGE::Math::Vector2Int> mIntersections; // TODO: Don't use a vector. This uses linear look up times. Cord, pos
+	std::vector<SAGE::Math::Vector2> mIntersectionsPositions;
 
 	// Audio
 	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;

@@ -20,7 +20,7 @@ public:
 
 private:
 	float mTimer = 0.0f;
-	float mTimePerFrame = 0.125f;
+	float mTimePerFrame = 0.15f;
 	int mSpriteIndex = 0;
 	int mSpriteMaxIndex = 2;
 

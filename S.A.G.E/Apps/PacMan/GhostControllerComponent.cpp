@@ -38,6 +38,14 @@ void GhostControllerComponent::Update(float deltaTime)
 {
 	UpdateTileCords();
 
+	// Teleport Tunnel
+	if (mPosition.x <= -mHalfTileSize) {
+		TeleportGhost({ mTunnelLimit, mPosition.y }, mDirection);
+	}
+	else if (mPosition.x >= mTunnelLimit) {
+		TeleportGhost({ -mHalfTileSize, mPosition.y }, mDirection);
+	}
+
 	// Moves the ghost
 	switch (mDirection)
 	{
@@ -104,8 +112,8 @@ void GhostControllerComponent::DebugUI()
 
 void GhostControllerComponent::Respawn()
 {
-	const Vector2 newPos = { 3.0f * mTileSize + mHalfTileSize + mWorldOffset.x, 2.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
-	TeleportGhost(newPos, Direction::Right);
+	const Vector2 newPos = { 15.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 12.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
+	TeleportGhost(newPos, Direction::Left);
 	CalculateNewTargetPosition();
 }
 
@@ -113,7 +121,7 @@ void GhostControllerComponent::TeleportGhost(const Vector2 newPos, const Directi
 {
 	mPosition = newPos;
 	mDirection = dir;
-	UpdateTileCords();
+	CalculateNewTargetPosition();
 }
 
 void GhostControllerComponent::UpdateTileCords()
@@ -341,26 +349,3 @@ void GhostControllerComponent::CalculateNewTargetPosition()
 		}
 	}
 }
-
-void GhostControllerComponent::CalculateTargetNodePositions()
-{
-	// TODO: This is for debugging purposes
-	const Vector2Int mEndPos = mPlayerController->GetPlayerCords();
-	mTargetNodePositions = std::move(mTileMapService->FindPath(mTileCords.x, mTileCords.y, mEndPos.x, mEndPos.y));
-
-	for (int i = 0; i < mTargetNodePositions.size(); ++i)
-	{
-		const Vector2& nodePos = mTargetNodePositions[i];
-		const Vector2Int cords {
-			static_cast<int>((nodePos.x - mWorldOffset.x) / mTileSize),
-			static_cast<int>((nodePos.y - mWorldOffset.y) / mTileSize)
-		};
-
-		if (mGameManagerService->IsIntersectionPoint(cords))
-		{
-			mTargetNodePositions.erase(mTargetNodePositions.begin(), mTargetNodePositions.end());
-		}
-	}
-	mTargetIndex = 0;
-}
-

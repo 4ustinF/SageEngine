@@ -73,10 +73,10 @@ void GameManagerService::Render()
 	//	//mBlinkyController->mPosition = Lerp(mBlinkyController->mPosition, path[1] + offset, 0.1f);
 	//}
 
-	for (const auto& pos : mBlinkyController->mTargetNodePositions)
-	{
-		SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
-	}
+	//for (const auto& pos : mBlinkyController->mTargetNodePositions)
+	//{
+	//	SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
+	//}
 
 	//for (const auto& pos : mIntersectionsPositions)
 	//{

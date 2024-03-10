@@ -31,7 +31,6 @@ private:
 	void UpdateTileCords();
 
 	void CalculateNewTargetPosition();
-	void CalculateTargetNodePositions();
 
 	// References
 	TileMapService* mTileMapService = nullptr;
@@ -52,5 +51,6 @@ private:
 	float mTileSize = 0.0f;
 	float mHalfTileSize = 0.0f;
 	SAGE::Math::Vector2 mWorldOffset = SAGE::Math::Vector2::Zero;
+	const float mTunnelLimit = 684.0f; // rows * TileSize
 
 };

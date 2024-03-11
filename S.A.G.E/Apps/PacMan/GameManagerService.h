@@ -53,6 +53,9 @@ private:
 	void SetLevelData();
 	void SetIntersectionPoints();
 
+	void AteGhost();
+	void CheckIfGhostAtePlayer();
+
 	// References
 	TileMapService* mTileMapService = nullptr;
 	PlayerControllerComponent* mPlayerController = nullptr;

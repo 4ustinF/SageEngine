@@ -24,6 +24,8 @@ public:
 	SAGE::Math::Vector2Int GetPlayerCords() const { return mTileCords; }
 	Direction GetPlayerDirection() const { return mDirection; }
 
+	bool GetIsPlayerInvincible() const { return mIsInvincible; }
+
 private:
 	void UpdateTileCords();
 	void Eating();
@@ -49,6 +51,7 @@ private:
 	const float mTunnelLimit = 684.0f; // rows * TileSize
 
 	Direction mPreMoveDirection = Direction::None;
+	bool mIsInvincible = false;
 
 	// Map Data
 	float mTileSize = 0.0f;

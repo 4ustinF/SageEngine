@@ -76,6 +76,8 @@ void GameManagerService::Update(float deltaTime)
 			SetGhostChaseScatterMode();
 		}
 	}
+
+	CheckIfGhostAtePlayer();
 }
 
 void GameManagerService::Render()
@@ -156,6 +158,8 @@ void GameManagerService::AtePellet(PelletType pelletType)
 		mCoroutineSystem->StartCoroutine(GoToNextLevel());
 	}
 }
+
+
 
 bool GameManagerService::IsIntersectionPoint(Vector2Int pointToCheck) const
 {
@@ -243,10 +247,15 @@ void GameManagerService::SetupLevel()
 
 void GameManagerService::RestartLevel()
 {
-	// Set ghost back to box
-	// Set player to start position
-
 	mPlayerController->Respawn();
+	mBlinkyController->Respawn();
+
+	// Scatter Chase Routine
+	mScatterChaseIndex = 0;
+	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
+	mTickScatterChaseTimer = true;
+	mIsChasing = false;
+	SetGhostChaseScatterMode();
 }
 
 void GameManagerService::SetLevelData()
@@ -319,6 +328,28 @@ void GameManagerService::SetIntersectionPoints()
 	{
 		// TODO: Tile size and half tile size should be cached
 		mIntersectionsPositions.push_back({cord.x * 24.0f + 12.0f, cord.y * 24.0f + 12.0f});
+	}
+}
+
+void GameManagerService::AteGhost()
+{
+}
+
+void GameManagerService::CheckIfGhostAtePlayer()
+{
+	if (mPlayerController->GetIsPlayerInvincible())
+	{
+		return;
+	}
+
+	if (mBlinkyController->GetTileCords() == mPlayerController->GetPlayerCords())
+	{
+		if (--mPlayerLives > 0) {
+			RestartLevel();
+			return;
+		}
+
+		RestartGame();
 	}
 }
 

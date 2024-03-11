@@ -62,6 +62,10 @@ private:
 	// Game
 	int mLevel = 1;
 	std::vector<Level> mLevels;
+	const std::array<float, 7> mScatterChaseTimes = { 7.0f, 20.0f , 7.0f , 20.0f , 5.0f , 20.0f , 5.0f };
+	int mScatterChaseIndex = 0;
+	bool mTickScatterChaseTimer = true;
+	float mScatterChaseTimer = 0.0f;
 
 	// Player
 	const int mPlayerStartingLives = 3;
@@ -70,6 +74,7 @@ private:
 	bool mIsInFrenzy = false;
 
 	// Ghost
+	void SetGhostChaseScatterMode();
 	GhostControllerComponent* mBlinkyController = nullptr;
 	GhostAnimatorComponent* mBlinkyAnimator = nullptr;
 	bool mIsChasing = false;
@@ -93,5 +98,4 @@ private:
 
 	// Coroutines
 	SAGE::Coroutine::Enumerator GoToNextLevel();
-	SAGE::Coroutine::Enumerator ScatterChaseWave();
 };

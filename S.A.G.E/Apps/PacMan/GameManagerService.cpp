@@ -59,6 +59,23 @@ void GameManagerService::Terminate()
 
 void GameManagerService::Update(float deltaTime)
 {
+	if (mTickScatterChaseTimer)
+	{
+		mScatterChaseTimer -= deltaTime;
+
+		if (mScatterChaseTimer <= 0.0f)
+		{
+			if (++mScatterChaseIndex < static_cast<int>(mScatterChaseTimes.size())) {
+				mScatterChaseTimer += mScatterChaseTimes[mScatterChaseIndex];
+				mIsChasing = !mIsChasing;
+			}
+			else {
+				mTickScatterChaseTimer = false;
+				mIsChasing = true; // Chase Indefinitely
+			}
+			SetGhostChaseScatterMode();
+		}
+	}
 }
 
 void GameManagerService::Render()
@@ -216,7 +233,12 @@ void GameManagerService::SetupLevel()
 		RepopulatePellets();
 	}
 
-	mCoroutineSystem->StartCoroutine(ScatterChaseWave());
+	// Scatter Chase Routine
+	mScatterChaseIndex = 0;
+	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
+	mTickScatterChaseTimer = true;
+	mIsChasing = false;
+	SetGhostChaseScatterMode();
 }
 
 void GameManagerService::RestartLevel()
@@ -225,7 +247,6 @@ void GameManagerService::RestartLevel()
 	// Set player to start position
 
 	mPlayerController->Respawn();
-	mCoroutineSystem->StartCoroutine(ScatterChaseWave());
 }
 
 void GameManagerService::SetLevelData()
@@ -301,6 +322,12 @@ void GameManagerService::SetIntersectionPoints()
 	}
 }
 
+void GameManagerService::SetGhostChaseScatterMode()
+{
+	mBlinkyController->mIsChasing = mIsChasing;
+}
+
+
 Enumerator GameManagerService::GoToNextLevel()
 {
 	return [=](CoroPush& yield_return)
@@ -309,37 +336,5 @@ Enumerator GameManagerService::GoToNextLevel()
 			yield_return(new WaitForSeconds(0.15f));
 			++mLevel;
 			SetupLevel();
-		};
-}
-
-Enumerator GameManagerService::ScatterChaseWave()
-{
-	return [=](CoroPush& yield_return)
-		{
-			// TODO: Pause these timers when in frenzy mode
-
-			mIsChasing = false;
-			mBlinkyController->mIsChasing = mIsChasing;
-			yield_return(new WaitForSeconds(7.0f)); // Scatter for 7 seconds
-			mIsChasing = true;
-			mBlinkyController->mIsChasing = mIsChasing;
-			yield_return(new WaitForSeconds(20.0f)); // Chase for 20 seconds
-			mIsChasing = false;
-			mBlinkyController->mIsChasing = mIsChasing;
-			yield_return(new WaitForSeconds(7.0f)); // Scatter for 7 seconds
-			mIsChasing = true;
-			mBlinkyController->mIsChasing = mIsChasing;
-			yield_return(new WaitForSeconds(20.0f)); // Chase for 20 seconds
-			mIsChasing = false;
-			mBlinkyController->mIsChasing = mIsChasing;
-			yield_return(new WaitForSeconds(5.0f)); // Scatter for 5 seconds
-			mIsChasing = true;
-			mBlinkyController->mIsChasing = mIsChasing;
-			yield_return(new WaitForSeconds(20.0f)); // Chase for 20 seconds
-			mIsChasing = false;
-			mBlinkyController->mIsChasing = mIsChasing;
-			yield_return(new WaitForSeconds(5.0f)); // Scatter for 5 seconds
-			mIsChasing = true; // Indefinite Chase
-			mBlinkyController->mIsChasing = mIsChasing;
 		};
 }

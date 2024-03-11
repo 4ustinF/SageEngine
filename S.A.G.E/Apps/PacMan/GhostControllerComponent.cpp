@@ -24,6 +24,8 @@ void GhostControllerComponent::Initialize()
 	// Player
 	GameObject* playerObject = world.FindGameObject("PacMan");
 	mPlayerController = playerObject->GetComponent<PlayerControllerComponent>();
+
+	SetHomeCords();
 }
 
 void GhostControllerComponent::Terminate()
@@ -106,6 +108,9 @@ void GhostControllerComponent::DebugUI()
 			}
 		}
 		ImGui::DragFloat2("Target Position##GhostControllerComponent", &mTargetPosition.x, 0.1f);
+
+		ImGui::Checkbox("Is Chasing", &mIsChasing);
+		ImGui::DragInt2("Home Cords##GhostControllerComponent", &mHomeCords.x, 0.1f);
 	}
 }
 
@@ -115,6 +120,25 @@ void GhostControllerComponent::Respawn()
 	const Vector2 newPos = { 15.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 12.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
 	TeleportGhost(newPos, Direction::Left);
 	CalculateNewTargetPosition();
+}
+
+void GhostControllerComponent::SetHomeCords()
+{
+	switch (mGhostType)
+	{
+	case GhostType::Blinky:
+		mHomeCords = Vector2Int(28, 2);
+		break;
+	case GhostType::Pinky:
+		mHomeCords = Vector2Int(3, 2);
+		break;
+	case GhostType::Inky:
+		mHomeCords = Vector2Int(28, 30);
+		break;
+	case GhostType::Clyde:
+		mHomeCords = Vector2Int(3, 30);
+		break;
+	}
 }
 
 void GhostControllerComponent::TeleportGhost(const Vector2 newPos, const Direction dir)
@@ -135,6 +159,16 @@ void GhostControllerComponent::UpdateTileCords()
 	}
 }
 
+Vector2Int GhostControllerComponent::GetTargetCords()
+{
+	if (mIsChasing)
+	{
+		return mPlayerController->GetPlayerCords();
+	}
+
+	return mHomeCords;
+}
+
 void GhostControllerComponent::CalculateNewTargetPosition()
 {
 	// When you reach pass the target point
@@ -143,7 +177,7 @@ void GhostControllerComponent::CalculateNewTargetPosition()
 	// Check if its an intersection
 	if (mGameManagerService->IsIntersectionPoint(mTileCords)) // True: Path find - Set target position to first tile in path finding list
 	{
-		const Vector2Int mEndPos = mPlayerController->GetPlayerCords();
+		const Vector2Int mEndPos = GetTargetCords();
 
 		// Get graph node we are on
 		// Cache all neighbors

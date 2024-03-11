@@ -26,10 +26,15 @@ public:
 	SAGE::Math::Vector2Int GetTileCords() const { return mTileCords; }
 	std::vector<SAGE::Math::Vector2> mTargetNodePositions;
 
+	bool mIsChasing = false;
+
 private:
+	void SetHomeCords();
+
 	void TeleportGhost(const SAGE::Math::Vector2 newPos, const Direction dir);
 	void UpdateTileCords();
 
+	SAGE::Math::Vector2Int GetTargetCords();
 	void CalculateNewTargetPosition();
 
 	// References
@@ -41,8 +46,10 @@ private:
 	SAGE::Math::Vector2 mTargetPosition = SAGE::Math::Vector2::Zero;
 	SAGE::Math::Vector2Int mTileCords = SAGE::Math::Vector2Int::Zero;
 	SAGE::Math::Vector2Int mOldTileCords = SAGE::Math::Vector2Int::Zero;
+	SAGE::Math::Vector2Int mHomeCords = SAGE::Math::Vector2Int::Zero;
 	Direction mDirection = Direction::Right;
 	float mSpeed = 140.0f;
+	GhostType mGhostType = GhostType::Blinky;
 
 	// Target
 	int mTargetIndex = 0;

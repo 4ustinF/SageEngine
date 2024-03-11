@@ -9,6 +9,22 @@ class PlayerAnimatorComponent;
 class GhostControllerComponent;
 class GhostAnimatorComponent;
 
+struct Level
+{
+	BonusSymbol BonusSymbol = BonusSymbol::Cherries;
+	float PacManSpeed = 0.0f;
+	float GhostSpeed = 0.0f;
+	float GhostTunnelSpeed = 0.0f;
+	int Elroy1DotsLeft = 0;
+	float Elroy1Speed = 0.0f;
+	int Elroy2DotsLeft = 0;
+	float Elroy2Speed = 0.0f;
+	float FrightPacManSpeed = 0.0f;
+	float FrightGhostSpeed = 0.0f;
+	float FrightTime = 0.0f;
+	int NumberOfFlashes = 0;
+};
+
 class GameManagerService final : public SAGE::Service
 {
 public:
@@ -34,24 +50,29 @@ private:
 	void SetupLevel();
 	void RestartLevel();
 
+	void SetLevelData();
 	void SetIntersectionPoints();
 
 	// References
 	TileMapService* mTileMapService = nullptr;
 	PlayerControllerComponent* mPlayerController = nullptr;
 	PlayerAnimatorComponent* mPlayerAnimator = nullptr;
+	SAGE::Coroutine::CoroutineSystem* mCoroutineSystem = nullptr;
 
 	// Game
 	int mLevel = 1;
+	std::vector<Level> mLevels;
 
 	// Player
 	const int mPlayerStartingLives = 3;
 	int mPlayerLives = 3;
 	int mPlayerPoints = 0;
+	bool mIsInFrenzy = false;
 
 	// Ghost
 	GhostControllerComponent* mBlinkyController = nullptr;
 	GhostAnimatorComponent* mBlinkyAnimator = nullptr;
+	bool mIsChasing = false;
 
 	// Pellets
 	const int mMaxPelletCount = 244;
@@ -72,4 +93,5 @@ private:
 
 	// Coroutines
 	SAGE::Coroutine::Enumerator GoToNextLevel();
+	SAGE::Coroutine::Enumerator ScatterChaseWave();
 };

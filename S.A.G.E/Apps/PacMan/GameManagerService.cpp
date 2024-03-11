@@ -17,6 +17,7 @@ void GameManagerService::Initialize()
 	SetServiceName("Game Manager Service");
 
 	mTileMapService = GetWorld().GetService<TileMapService>();
+	mCoroutineSystem = CoroutineSystem::Get();
 
 	// Init audio
 	mSoundEffectManager = SoundEffectManager::Get();
@@ -25,6 +26,7 @@ void GameManagerService::Initialize()
 	auto tm = TextureManager::Get();
 	mPathFindingTextureID = tm->LoadTexture("../Sprites/PacMan/pathfinding.png");
 
+	SetLevelData();
 	SetIntersectionPoints();
 }
 
@@ -47,10 +49,12 @@ void GameManagerService::Terminate()
 	mPlayerController = nullptr;
 
 	// Other
+	mLevels.clear();
 	mIntersections.clear();
 	mIntersectionsPositions.clear();
 	mTileMapService = nullptr;
 	mPathFindingTextureID = 0;
+	mCoroutineSystem = nullptr;
 }
 
 void GameManagerService::Update(float deltaTime)
@@ -73,10 +77,10 @@ void GameManagerService::Render()
 	//	//mBlinkyController->mPosition = Lerp(mBlinkyController->mPosition, path[1] + offset, 0.1f);
 	//}
 
-	//for (const auto& pos : mBlinkyController->mTargetNodePositions)
-	//{
-	//	SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
-	//}
+	for (const auto& pos : mBlinkyController->mTargetNodePositions)
+	{
+		SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
+	}
 
 	//for (const auto& pos : mIntersectionsPositions)
 	//{
@@ -132,7 +136,7 @@ void GameManagerService::AtePellet(PelletType pelletType)
 	mPlayerPoints += static_cast<int>(pelletType);
 	if (--mRemainingPelletCount <= 0)
 	{
-		CoroutineSystem::Get()->StartCoroutine(GoToNextLevel());
+		mCoroutineSystem->StartCoroutine(GoToNextLevel());
 	}
 }
 
@@ -211,6 +215,8 @@ void GameManagerService::SetupLevel()
 	if (mLevel > 1) { // Don't need to populate the pellets on the first level as that is preset for us there.
 		RepopulatePellets();
 	}
+
+	mCoroutineSystem->StartCoroutine(ScatterChaseWave());
 }
 
 void GameManagerService::RestartLevel()
@@ -219,6 +225,33 @@ void GameManagerService::RestartLevel()
 	// Set player to start position
 
 	mPlayerController->Respawn();
+	mCoroutineSystem->StartCoroutine(ScatterChaseWave());
+}
+
+void GameManagerService::SetLevelData()
+{
+	mLevels.reserve(21);
+	mLevels.push_back({ BonusSymbol::Cherries,	0.8f, 0.75f, 0.40f,  20, 0.8f, 10, 0.85f, 0.90f, 0.50f, 6.f, 5 });
+	mLevels.push_back({ BonusSymbol::Strawberry,0.9f, 0.85f, 0.45f,  30, 0.9f, 15, 0.95f, 0.95f, 0.55f, 5.f, 5 });
+	mLevels.push_back({ BonusSymbol::Peach,		0.9f, 0.85f, 0.45f,  40, 0.9f, 20, 0.95f, 0.95f, 0.55f, 4.f, 5 });
+	mLevels.push_back({ BonusSymbol::Peach,		0.9f, 0.85f, 0.45f,  40, 0.9f, 20, 0.95f, 0.95f, 0.55f, 3.f, 5 });
+	mLevels.push_back({ BonusSymbol::Apple,		1.0f, 0.95f, 0.50f,  40, 1.0f, 20, 1.05f, 1.00f, 0.60f, 2.f, 5 });
+	mLevels.push_back({ BonusSymbol::Apple,		1.0f, 0.95f, 0.50f,  50, 1.0f, 25, 1.05f, 1.00f, 0.60f, 5.f, 5 });
+	mLevels.push_back({ BonusSymbol::Grapes,	1.0f, 0.95f, 0.50f,  50, 1.0f, 25, 1.05f, 1.00f, 0.60f, 2.f, 5 });
+	mLevels.push_back({ BonusSymbol::Grapes,	1.0f, 0.95f, 0.50f,  50, 1.0f, 25, 1.05f, 1.00f, 0.60f, 2.f, 5 });
+	mLevels.push_back({ BonusSymbol::Galaxian,	1.0f, 0.95f, 0.50f,  60, 1.0f, 30, 1.05f, 1.00f, 0.60f, 1.f, 3 });
+	mLevels.push_back({ BonusSymbol::Galaxian,	1.0f, 0.95f, 0.50f,  60, 1.0f, 30, 1.05f, 1.00f, 0.60f, 5.f, 5 });
+	mLevels.push_back({ BonusSymbol::Bell,		1.0f, 0.95f, 0.50f,  60, 1.0f, 30, 1.05f, 1.00f, 0.60f, 2.f, 5 });
+	mLevels.push_back({ BonusSymbol::Bell,		1.0f, 0.95f, 0.50f,  80, 1.0f, 40, 1.05f, 1.00f, 0.60f, 1.f, 3 });
+	mLevels.push_back({ BonusSymbol::Key,		1.0f, 0.95f, 0.50f,  80, 1.0f, 40, 1.05f, 1.00f, 0.60f, 1.f, 3 });
+	mLevels.push_back({ BonusSymbol::Key,		1.0f, 0.95f, 0.50f,  80, 1.0f, 40, 1.05f, 1.00f, 0.60f, 3.f, 5 });
+	mLevels.push_back({ BonusSymbol::Key,		1.0f, 0.95f, 0.50f, 100, 1.0f, 50, 1.05f, 1.00f, 0.60f, 1.f, 3 });
+	mLevels.push_back({ BonusSymbol::Key,		1.0f, 0.95f, 0.50f, 100, 1.0f, 50, 1.05f, 1.00f, 0.60f, 1.f, 3 });
+	mLevels.push_back({ BonusSymbol::Key,		1.0f, 0.95f, 0.50f, 100, 1.0f, 50, 1.05f, 1.00f, 0.60f, 1.f, 3 });
+	mLevels.push_back({ BonusSymbol::Key,		1.0f, 0.95f, 0.50f, 100, 1.0f, 50, 1.05f, 1.00f, 0.60f, 1.f, 3 });
+	mLevels.push_back({ BonusSymbol::Key,		1.0f, 0.95f, 0.50f, 120, 1.0f, 60, 1.05f, 1.00f, 0.60f, 1.f, 3 });
+	mLevels.push_back({ BonusSymbol::Key,		1.0f, 0.95f, 0.50f, 120, 1.0f, 60, 1.05f, 1.00f, 0.60f, 1.f, 3 });
+	mLevels.push_back({ BonusSymbol::Key,		0.9f, 0.95f, 0.50f, 120, 1.0f, 60, 1.05f, 1.00f, 0.60f, 1.f, 3 });
 }
 
 void GameManagerService::SetIntersectionPoints()
@@ -276,5 +309,37 @@ Enumerator GameManagerService::GoToNextLevel()
 			yield_return(new WaitForSeconds(0.15f));
 			++mLevel;
 			SetupLevel();
+		};
+}
+
+Enumerator GameManagerService::ScatterChaseWave()
+{
+	return [=](CoroPush& yield_return)
+		{
+			// TODO: Pause these timers when in frenzy mode
+
+			mIsChasing = false;
+			mBlinkyController->mIsChasing = mIsChasing;
+			yield_return(new WaitForSeconds(7.0f)); // Scatter for 7 seconds
+			mIsChasing = true;
+			mBlinkyController->mIsChasing = mIsChasing;
+			yield_return(new WaitForSeconds(20.0f)); // Chase for 20 seconds
+			mIsChasing = false;
+			mBlinkyController->mIsChasing = mIsChasing;
+			yield_return(new WaitForSeconds(7.0f)); // Scatter for 7 seconds
+			mIsChasing = true;
+			mBlinkyController->mIsChasing = mIsChasing;
+			yield_return(new WaitForSeconds(20.0f)); // Chase for 20 seconds
+			mIsChasing = false;
+			mBlinkyController->mIsChasing = mIsChasing;
+			yield_return(new WaitForSeconds(5.0f)); // Scatter for 5 seconds
+			mIsChasing = true;
+			mBlinkyController->mIsChasing = mIsChasing;
+			yield_return(new WaitForSeconds(20.0f)); // Chase for 20 seconds
+			mIsChasing = false;
+			mBlinkyController->mIsChasing = mIsChasing;
+			yield_return(new WaitForSeconds(5.0f)); // Scatter for 5 seconds
+			mIsChasing = true; // Indefinite Chase
+			mBlinkyController->mIsChasing = mIsChasing;
 		};
 }

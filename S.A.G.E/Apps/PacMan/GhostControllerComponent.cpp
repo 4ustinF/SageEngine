@@ -6,6 +6,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Math::Random;
 using namespace SAGE::Graphics;
 using namespace SAGE::AI;
 
@@ -161,9 +162,14 @@ void GhostControllerComponent::UpdateTileCords()
 
 Vector2Int GhostControllerComponent::GetTargetCords()
 {
-	if (mIsChasing)
+	switch (mGhostMode)
 	{
+	case GhostMode::Chase:
 		return mPlayerController->GetPlayerCords();
+	case GhostMode::Scatter:
+		return mHomeCords;
+	case GhostMode::Frightened:
+		return mGameManagerService->GetRandomPelletCord(); // TODO: Get Random location could be better using all moveable tiles.
 	}
 
 	return mHomeCords;
@@ -175,211 +181,225 @@ void GhostControllerComponent::CalculateNewTargetPosition()
 	UpdateTileCords();
 
 	// Check if its an intersection
-	if (mGameManagerService->IsIntersectionPoint(mTileCords)) // True: Path find - Set target position to first tile in path finding list
+	if (mGameManagerService->IsIntersectionPoint(mTileCords)) {
+		CalculateTargetPositionAtIntersection();
+	}
+	else {
+		CalculateTargetPositionContinuedDirection();
+	}
+}
+
+void GhostControllerComponent::CalculateTargetPositionAtIntersection()
+{
+	const Vector2Int mEndPos = GetTargetCords();
+
+	if (abs(mTileCords.x - mEndPos.x) <= 1 && abs(mTileCords.y - mEndPos.y) <= 1)
 	{
-		const Vector2Int mEndPos = GetTargetCords();
+		CalculateTargetPositionContinuedDirection();
+		return;
+	}
 
-		// Get graph node we are on
-		// Cache all neighbors
-		// all neighbors null us
-		// we null neighbors
-		// restore
-		// Get neighbor from the direction we are coming from
-		
-		// Block tile
-		GridBasedGraph& graph = mTileMapService->mGridBasedGraph;
-		Vector2Int blockTileCords = Vector2Int::Zero;
-		switch (mDirection)
-		{
-		case Direction::Up:
-			blockTileCords = { mTileCords.x, mTileCords.y + 1 };
-			break;
-		case Direction::Right:
-			blockTileCords = { mTileCords.x - 1, mTileCords.y };
-			break;
-		case Direction::Down:
-			blockTileCords = { mTileCords.x, mTileCords.y - 1 };
-			break;
-		case Direction::Left:
-			blockTileCords = { mTileCords.x + 1, mTileCords.y };
-			break;
+	// Get graph node we are on
+	// Cache all neighbors
+	// all neighbors null us
+	// we null neighbors
+	// restore
+	// Get neighbor from the direction we are coming from
+
+	// Block tile
+	GridBasedGraph& graph = mTileMapService->mGridBasedGraph;
+	Vector2Int blockTileCords = Vector2Int::Zero;
+	switch (mDirection)
+	{
+	case Direction::Up:
+		blockTileCords = { mTileCords.x, mTileCords.y + 1 };
+		break;
+	case Direction::Right:
+		blockTileCords = { mTileCords.x - 1, mTileCords.y };
+		break;
+	case Direction::Down:
+		blockTileCords = { mTileCords.x, mTileCords.y - 1 };
+		break;
+	case Direction::Left:
+		blockTileCords = { mTileCords.x + 1, mTileCords.y };
+		break;
+	}
+	graph.BlockTile(blockTileCords.x, blockTileCords.y);
+
+	mTargetNodePositions = std::move(mTileMapService->FindPath(mTileCords.x, mTileCords.y, mEndPos.x, mEndPos.y));
+
+	if (mTargetNodePositions.size() >= 2)
+	{
+		const Vector2& newPos = mTargetNodePositions[1] + mWorldOffset;
+
+		if (newPos.x > mTargetPosition.x) {
+			mDirection = Direction::Right;
 		}
-		graph.BlockTile(blockTileCords.x, blockTileCords.y);
+		else if (newPos.x < mTargetPosition.x) {
+			mDirection = Direction::Left;
+		}
+		else if (newPos.y > mTargetPosition.y) {
+			mDirection = Direction::Down;
+		}
+		else if (newPos.y < mTargetPosition.y) {
+			mDirection = Direction::Up;
+		}
 
-		mTargetNodePositions = std::move(mTileMapService->FindPath(mTileCords.x, mTileCords.y, mEndPos.x, mEndPos.y));
+		mTargetPosition = newPos;
+	}
 
-		if (mTargetNodePositions.size() >= 2)
+	// Unblock tile
+	GridBasedGraph::Node* nodeToUnblock = graph.GetNode(blockTileCords.x, blockTileCords.y);
+
+	if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y - 1)) { // North
+		GridBasedGraph::Node* northNode = graph.GetNode(blockTileCords.x, blockTileCords.y - 1);
+		northNode->neighbors[GridBasedGraph::South] = nodeToUnblock;
+		nodeToUnblock->neighbors[GridBasedGraph::North] = northNode;
+	}
+	if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y)) { // Right
+		GridBasedGraph::Node* eastNode = graph.GetNode(blockTileCords.x + 1, blockTileCords.y);
+		eastNode->neighbors[GridBasedGraph::West] = nodeToUnblock;
+		nodeToUnblock->neighbors[GridBasedGraph::East] = eastNode;
+	}
+	if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y + 1)) {
+		GridBasedGraph::Node* southNode = graph.GetNode(blockTileCords.x, blockTileCords.y + 1);
+		southNode->neighbors[GridBasedGraph::North] = nodeToUnblock;
+		nodeToUnblock->neighbors[GridBasedGraph::South] = southNode;
+	}
+	if (!mTileMapService->IsBlocked(mTileCords.x - 1, mTileCords.y)) {
+		GridBasedGraph::Node* westNode = graph.GetNode(blockTileCords.x - 1, blockTileCords.y);
+		westNode->neighbors[GridBasedGraph::East] = nodeToUnblock;
+		nodeToUnblock->neighbors[GridBasedGraph::West] = westNode;
+	}
+}
+
+void GhostControllerComponent::CalculateTargetPositionContinuedDirection()
+{
+	switch (mDirection)
+	{
+	case Direction::Up:
+		if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y - 1))
 		{
-			const Vector2& newPos = mTargetNodePositions[1] + mWorldOffset;
-
-			if (newPos.x > mTargetPosition.x) {
-				mDirection = Direction::Right;
-			}
-			else if (newPos.x < mTargetPosition.x) {
-				mDirection = Direction::Left;
-			}
-			else if (newPos.y > mTargetPosition.y) {
-				mDirection = Direction::Down;
-			}
-			else if (newPos.y < mTargetPosition.y) {
-				mDirection = Direction::Up;
-			}
+			const Vector2 newPos{
+				mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
+				(mTileCords.y - 1) * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
 
 			mTargetPosition = newPos;
 		}
-
-		// Unblock tile
-		GridBasedGraph::Node* nodeToUnblock = graph.GetNode(blockTileCords.x, blockTileCords.y);
-		
-		if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y - 1)) { // North
-			GridBasedGraph::Node* northNode = graph.GetNode(blockTileCords.x, blockTileCords.y - 1);
-			northNode->neighbors[GridBasedGraph::South] = nodeToUnblock;
-			nodeToUnblock->neighbors[GridBasedGraph::North] = northNode;
-		}
-		if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y)) { // Right
-			GridBasedGraph::Node* eastNode = graph.GetNode(blockTileCords.x + 1, blockTileCords.y);
-			eastNode->neighbors[GridBasedGraph::West] = nodeToUnblock;
-			nodeToUnblock->neighbors[GridBasedGraph::East] = eastNode;
-		}
-		if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y + 1)) {
-			GridBasedGraph::Node* southNode = graph.GetNode(blockTileCords.x, blockTileCords.y + 1);
-			southNode->neighbors[GridBasedGraph::North] = nodeToUnblock;
-			nodeToUnblock->neighbors[GridBasedGraph::South] = southNode;
-		}
-		if (!mTileMapService->IsBlocked(mTileCords.x - 1, mTileCords.y)) {
-			GridBasedGraph::Node* westNode = graph.GetNode(blockTileCords.x - 1, blockTileCords.y);
-			westNode->neighbors[GridBasedGraph::East] = nodeToUnblock;
-			nodeToUnblock->neighbors[GridBasedGraph::West] = westNode;
-		}
-	}
-	else // False: Try to keep going in the same direction - Can't go in the same direction. Check all other directions thats not behind you
-	{
-		switch (mDirection)
+		else if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y))
 		{
-		case Direction::Up:
-			if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y - 1))
-			{
-				const Vector2 newPos{
-					mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
-					(mTileCords.y - 1) * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
+			const Vector2 newPos{
+				(mTileCords.x + 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
+				mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
 
-				mTargetPosition = newPos;
-			}
-			else if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y))
-			{
-				const Vector2 newPos{
-					(mTileCords.x + 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
-					mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-				mDirection = Direction::Right;
-			}
-			else if (!mTileMapService->IsBlocked(mTileCords.x - 1, mTileCords.y))
-			{
-				const Vector2 newPos{
-					(mTileCords.x - 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
-					mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-				mDirection = Direction::Left;
-			}
-			break;
-		case Direction::Right:
-			if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y))
-			{
-				const Vector2 newPos {
-					(mTileCords.x + 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
-					mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-	
-				mTargetPosition = newPos;
-			}
-			else if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y + 1))
-			{
-				const Vector2 newPos{
-					mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
-					(mTileCords.y + 1) * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-				mDirection = Direction::Down;
-			}
-			else if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y - 1))
-			{
-				const Vector2 newPos{
-					mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
-					(mTileCords.y - 1) * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-				mDirection = Direction::Up;
-			}
-			break;
-		case Direction::Down:
-			if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y + 1))
-			{
-				const Vector2 newPos{
-					mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
-					(mTileCords.y + 1) * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-			}
-			else if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y))
-			{
-				const Vector2 newPos{
-					(mTileCords.x + 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
-					mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-				mDirection = Direction::Right;
-			}
-			else if (!mTileMapService->IsBlocked(mTileCords.x - 1, mTileCords.y))
-			{
-				const Vector2 newPos{
-					(mTileCords.x - 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
-					mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-				mDirection = Direction::Left;
-			}
-			break;
-		case Direction::Left:
-			if (!mTileMapService->IsBlocked(mTileCords.x - 1, mTileCords.y))
-			{
-				const Vector2 newPos{
-					(mTileCords.x - 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
-					mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-			}
-			else if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y + 1))
-			{
-				const Vector2 newPos{
-					mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
-					(mTileCords.y + 1) * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-				mDirection = Direction::Down;
-			}
-			else if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y - 1))
-			{
-				const Vector2 newPos{
-					mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
-					(mTileCords.y - 1) * mTileSize + mWorldOffset.y + mHalfTileSize
-				};
-
-				mTargetPosition = newPos;
-				mDirection = Direction::Up;
-			}
-			break;
+			mTargetPosition = newPos;
+			mDirection = Direction::Right;
 		}
+		else if (!mTileMapService->IsBlocked(mTileCords.x - 1, mTileCords.y))
+		{
+			const Vector2 newPos{
+				(mTileCords.x - 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
+				mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+			mDirection = Direction::Left;
+		}
+		break;
+	case Direction::Right:
+		if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y))
+		{
+			const Vector2 newPos{
+				(mTileCords.x + 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
+				mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+		}
+		else if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y + 1))
+		{
+			const Vector2 newPos{
+				mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
+				(mTileCords.y + 1) * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+			mDirection = Direction::Down;
+		}
+		else if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y - 1))
+		{
+			const Vector2 newPos{
+				mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
+				(mTileCords.y - 1) * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+			mDirection = Direction::Up;
+		}
+		break;
+	case Direction::Down:
+		if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y + 1))
+		{
+			const Vector2 newPos{
+				mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
+				(mTileCords.y + 1) * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+		}
+		else if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y))
+		{
+			const Vector2 newPos{
+				(mTileCords.x + 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
+				mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+			mDirection = Direction::Right;
+		}
+		else if (!mTileMapService->IsBlocked(mTileCords.x - 1, mTileCords.y))
+		{
+			const Vector2 newPos{
+				(mTileCords.x - 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
+				mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+			mDirection = Direction::Left;
+		}
+		break;
+	case Direction::Left:
+		if (!mTileMapService->IsBlocked(mTileCords.x - 1, mTileCords.y))
+		{
+			const Vector2 newPos{
+				(mTileCords.x - 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
+				mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+		}
+		else if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y + 1))
+		{
+			const Vector2 newPos{
+				mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
+				(mTileCords.y + 1) * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+			mDirection = Direction::Down;
+		}
+		else if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y - 1))
+		{
+			const Vector2 newPos{
+				mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
+				(mTileCords.y - 1) * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+			mDirection = Direction::Up;
+		}
+		break;
 	}
 }

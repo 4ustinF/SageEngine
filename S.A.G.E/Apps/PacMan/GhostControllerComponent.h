@@ -26,6 +26,8 @@ public:
 	SAGE::Math::Vector2Int GetTileCords() const { return mTileCords; }
 	std::vector<SAGE::Math::Vector2> mTargetNodePositions;
 
+	void SetGhostMode(GhostMode mode) { mGhostMode = mode; }
+
 	bool mIsChasing = false;
 
 private:
@@ -36,6 +38,8 @@ private:
 
 	SAGE::Math::Vector2Int GetTargetCords();
 	void CalculateNewTargetPosition();
+	void CalculateTargetPositionAtIntersection();
+	void CalculateTargetPositionContinuedDirection();
 
 	// References
 	TileMapService* mTileMapService = nullptr;
@@ -50,6 +54,7 @@ private:
 	Direction mDirection = Direction::Right;
 	float mSpeed = 140.0f;
 	GhostType mGhostType = GhostType::Blinky;
+	GhostMode mGhostMode = GhostMode::Scatter;
 
 	// Target
 	int mTargetIndex = 0;

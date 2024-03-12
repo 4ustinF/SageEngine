@@ -67,11 +67,11 @@ void GameManagerService::Update(float deltaTime)
 		{
 			if (++mScatterChaseIndex < static_cast<int>(mScatterChaseTimes.size())) {
 				mScatterChaseTimer += mScatterChaseTimes[mScatterChaseIndex];
-				mIsChasing = !mIsChasing;
+				mGhostMode = mGhostMode == GhostMode::Scatter ? GhostMode::Chase : GhostMode::Scatter;
 			}
 			else {
 				mTickScatterChaseTimer = false;
-				mIsChasing = true; // Chase Indefinitely
+				mGhostMode = GhostMode::Chase; // Chase Indefinitely
 			}
 			SetGhostChaseScatterMode();
 		}
@@ -86,20 +86,12 @@ void GameManagerService::Render()
 	mBlinkyAnimator->Render();
 
 	//// TODO: This is for debugging purposes
-	//const Vector2Int mStartPos = mBlinkyController->GetTileCords();
-	//const Vector2Int mEndPos = mPlayerController->GetPlayerCords();
-	//auto path = std::move(mTileMapService->FindPath(mStartPos.x, mStartPos.y, mEndPos.x, mEndPos.y));
 	Vector2 offset = mTileMapService->GetWorldOffset();
 
-	//if (path.size() >= 2)
+	//for (const auto& pos : mBlinkyController->mTargetNodePositions)
 	//{
-	//	//mBlinkyController->mPosition = Lerp(mBlinkyController->mPosition, path[1] + offset, 0.1f);
+	//	SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
 	//}
-
-	for (const auto& pos : mBlinkyController->mTargetNodePositions)
-	{
-		SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
-	}
 
 	//for (const auto& pos : mIntersectionsPositions)
 	//{
@@ -153,6 +145,12 @@ void GameManagerService::AtePellet(PelletType pelletType)
 	//mSoundEffectManager->Play(mMunchID, false, 0.5f, Random::UniformFloat(-0.1f, 0.15f), Random::UniformFloat(-0.1f, 0.1f));
 
 	mPlayerPoints += static_cast<int>(pelletType);
+
+	if (pelletType == PelletType::Big)
+	{
+		// Go into attack mode
+	}
+
 	if (--mRemainingPelletCount <= 0)
 	{
 		mCoroutineSystem->StartCoroutine(GoToNextLevel());
@@ -241,7 +239,7 @@ void GameManagerService::SetupLevel()
 	mScatterChaseIndex = 0;
 	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
 	mTickScatterChaseTimer = true;
-	mIsChasing = false;
+	mGhostMode = GhostMode::Scatter;
 	SetGhostChaseScatterMode();
 }
 
@@ -254,7 +252,7 @@ void GameManagerService::RestartLevel()
 	mScatterChaseIndex = 0;
 	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
 	mTickScatterChaseTimer = true;
-	mIsChasing = false;
+	mGhostMode = GhostMode::Scatter;
 	SetGhostChaseScatterMode();
 }
 
@@ -355,7 +353,7 @@ void GameManagerService::CheckIfGhostAtePlayer()
 
 void GameManagerService::SetGhostChaseScatterMode()
 {
-	mBlinkyController->mIsChasing = mIsChasing;
+	mBlinkyController->SetGhostMode(mGhostMode);
 }
 
 

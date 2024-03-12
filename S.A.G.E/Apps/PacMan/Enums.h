@@ -17,6 +17,13 @@ enum class GhostType
 	Clyde
 };
 
+enum class GhostMode
+{
+	Chase,
+	Scatter,
+	Frightened,
+};
+
 enum class PelletType
 {
 	Small = 10, // Represents 10 points

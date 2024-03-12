@@ -41,6 +41,7 @@ public:
 	void AtePellet(PelletType pelletType);
 
 	bool IsIntersectionPoint(SAGE::Math::Vector2Int pointToCheck) const;
+	SAGE::Math::Vector2Int GetRandomPelletCord() const { return mCachedSmallPelletCords[SAGE::Math::Random::UniformInt(0, static_cast<int>(mCachedSmallPelletCords.size()) - 1)]; }
 
 private:
 	void CachePelletLocations();
@@ -80,7 +81,7 @@ private:
 	void SetGhostChaseScatterMode();
 	GhostControllerComponent* mBlinkyController = nullptr;
 	GhostAnimatorComponent* mBlinkyAnimator = nullptr;
-	bool mIsChasing = false;
+	GhostMode mGhostMode = GhostMode::Scatter;
 
 	// Pellets
 	const int mMaxPelletCount = 244;

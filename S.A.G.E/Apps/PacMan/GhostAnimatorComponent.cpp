@@ -24,6 +24,12 @@ void GhostAnimatorComponent::Initialize()
 	mMoveLeftTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Blinky/sprite_left_00.png"));
 	mMoveLeftTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Blinky/sprite_left_01.png"));
 
+	mFrightenedTextureIds.reserve(4);
+	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_00.png"));
+	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_01.png"));
+	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_02.png"));
+	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_03.png"));
+
 	mDisplayTextureID = mMoveLeftTextureIds[0];
 	mTimer = mTimePerFrame;
 }
@@ -37,6 +43,9 @@ void GhostAnimatorComponent::Terminate()
 	mMoveDownTextureIds.clear();
 	for (TextureId& id : mMoveLeftTextureIds) { id = 0; }
 	mMoveLeftTextureIds.clear();
+
+	for (TextureId& id : mFrightenedTextureIds) { id = 0; }
+	mFrightenedTextureIds.clear();
 
 	mGhostController = nullptr;
 }
@@ -71,6 +80,11 @@ void GhostAnimatorComponent::Render()
 
 std::vector<TextureId>& GhostAnimatorComponent::GetTextureIDLookup()
 {
+	if (mGhostController->GetGhostMode() == GhostMode::Frightened)
+	{
+		return mFrightenedTextureIds;
+	}
+
 	switch (mGhostController->GetDirection())
 	{
 	case Direction::Up:

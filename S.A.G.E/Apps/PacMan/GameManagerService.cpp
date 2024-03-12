@@ -67,17 +67,30 @@ void GameManagerService::Update(float deltaTime)
 		{
 			if (++mScatterChaseIndex < static_cast<int>(mScatterChaseTimes.size())) {
 				mScatterChaseTimer += mScatterChaseTimes[mScatterChaseIndex];
-				mGhostMode = mGhostMode == GhostMode::Scatter ? GhostMode::Chase : GhostMode::Scatter;
+				SetGhostChaseScatterMode(mGhostMode == GhostMode::Scatter ? GhostMode::Chase : GhostMode::Scatter);
 			}
 			else {
 				mTickScatterChaseTimer = false;
-				mGhostMode = GhostMode::Chase; // Chase Indefinitely
+				SetGhostChaseScatterMode(GhostMode::Chase); // Chase Indefinitely
 			}
-			SetGhostChaseScatterMode();
 		}
 	}
 
-	CheckIfGhostAtePlayer();
+	if (mIsInFrenzy)
+	{
+		CheckIfPlayerAteGhost();
+		mFrightTimer -= deltaTime;
+		if (mFrightTimer <= 0.0f)
+		{
+			mIsInFrenzy = false;
+			mGhostAteInFrenzy = 0;
+			SetGhostChaseScatterMode(mPrevGhostMode);
+		}
+	}
+	else
+	{
+		CheckIfGhostAtePlayer();
+	}
 }
 
 void GameManagerService::Render()
@@ -146,17 +159,18 @@ void GameManagerService::AtePellet(PelletType pelletType)
 
 	mPlayerPoints += static_cast<int>(pelletType);
 
-	if (pelletType == PelletType::Big)
-	{
-		// Go into attack mode
+	if (pelletType == PelletType::Big) {
+		mIsInFrenzy = true;
+		const Level& levelData = mLevels[Min(mLevel, static_cast<int>(mLevels.size()) - 1)];
+		mFrightTimer = levelData.FrightTime;
+		mPrevGhostMode = mGhostMode;
+		SetGhostChaseScatterMode(GhostMode::Frightened);
 	}
 
-	if (--mRemainingPelletCount <= 0)
-	{
+	if (--mRemainingPelletCount <= 0) {
 		mCoroutineSystem->StartCoroutine(GoToNextLevel());
 	}
 }
-
 
 
 bool GameManagerService::IsIntersectionPoint(Vector2Int pointToCheck) const
@@ -239,8 +253,9 @@ void GameManagerService::SetupLevel()
 	mScatterChaseIndex = 0;
 	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
 	mTickScatterChaseTimer = true;
-	mGhostMode = GhostMode::Scatter;
-	SetGhostChaseScatterMode();
+	SetGhostChaseScatterMode(GhostMode::Scatter);
+
+	mIsInFrenzy = false;
 }
 
 void GameManagerService::RestartLevel()
@@ -252,8 +267,9 @@ void GameManagerService::RestartLevel()
 	mScatterChaseIndex = 0;
 	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
 	mTickScatterChaseTimer = true;
-	mGhostMode = GhostMode::Scatter;
-	SetGhostChaseScatterMode();
+	SetGhostChaseScatterMode(GhostMode::Scatter);
+
+	mIsInFrenzy = false;
 }
 
 void GameManagerService::SetLevelData()
@@ -351,8 +367,18 @@ void GameManagerService::CheckIfGhostAtePlayer()
 	}
 }
 
-void GameManagerService::SetGhostChaseScatterMode()
+void GameManagerService::CheckIfPlayerAteGhost()
 {
+	if (mPlayerController->GetPlayerCords() == mBlinkyController->GetTileCords())
+	{
+		mPlayerPoints += mPointsPerGhostAte * static_cast<int>(std::pow(2, mGhostAteInFrenzy++));
+		mBlinkyController->Respawn();
+	}
+}
+
+void GameManagerService::SetGhostChaseScatterMode(GhostMode mode)
+{
+	mGhostMode = mode;
 	mBlinkyController->SetGhostMode(mGhostMode);
 }
 

@@ -123,6 +123,16 @@ void GhostControllerComponent::Respawn()
 	CalculateNewTargetPosition();
 }
 
+void GhostControllerComponent::SetGhostMode(GhostMode mode)
+{ 
+	if (mGhostMode == GhostMode::Chase || mGhostMode == GhostMode::Scatter)
+	{
+		ReverseDirection();
+	}
+
+	mGhostMode = mode;
+}
+
 void GhostControllerComponent::SetHomeCords()
 {
 	switch (mGhostType)
@@ -400,6 +410,61 @@ void GhostControllerComponent::CalculateTargetPositionContinuedDirection()
 			mTargetPosition = newPos;
 			mDirection = Direction::Up;
 		}
+		break;
+	}
+}
+
+void GhostControllerComponent::ReverseDirection()
+{
+	switch (mDirection)
+	{
+	case Direction::Up:
+	{
+		const int yTile = static_cast<int>((mPosition.y - mWorldOffset.y + mHalfTileSize) / mTileSize);
+		const Vector2 newPos{
+			mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
+			yTile * mTileSize + mWorldOffset.y + mHalfTileSize
+		};
+
+		mTargetPosition = newPos;
+		mDirection = Direction::Down;
+	}
+		break;
+	case Direction::Right:
+	{
+		const int xTile = static_cast<int>((mPosition.x - mWorldOffset.x - mHalfTileSize) / mTileSize);
+		const Vector2 newPos{
+			xTile * mTileSize + mWorldOffset.x + mHalfTileSize,
+			mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
+		};
+
+		mTargetPosition = newPos;
+		mDirection = Direction::Left;
+	}
+		break;
+	case Direction::Down:
+	{
+		const int yTile = static_cast<int>((mPosition.y - mWorldOffset.y - mHalfTileSize) / mTileSize);
+		const Vector2 newPos{
+			mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
+			yTile * mTileSize + mWorldOffset.y + mHalfTileSize
+		};
+
+		mTargetPosition = newPos;
+		mDirection = Direction::Up;
+	}
+		break;
+	case Direction::Left:
+	{
+		const int xTile = static_cast<int>((mPosition.x - mWorldOffset.x + mHalfTileSize) / mTileSize);
+		const Vector2 newPos{
+			xTile * mTileSize + mWorldOffset.x + mHalfTileSize,
+			mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
+		};
+
+		mTargetPosition = newPos;
+		mDirection = Direction::Right;
+	}
 		break;
 	}
 }

@@ -30,5 +30,6 @@ private:
 	std::vector<SAGE::Graphics::TextureId> mMoveUpTextureIds;
 	std::vector<SAGE::Graphics::TextureId> mMoveDownTextureIds;
 	std::vector<SAGE::Graphics::TextureId> mMoveLeftTextureIds;
+	std::vector<SAGE::Graphics::TextureId> mFrightenedTextureIds;
 	SAGE::Graphics::TextureId mDisplayTextureID = 0;
 };

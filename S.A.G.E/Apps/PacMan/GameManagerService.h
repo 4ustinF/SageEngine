@@ -56,6 +56,7 @@ private:
 
 	void AteGhost();
 	void CheckIfGhostAtePlayer();
+	void CheckIfPlayerAteGhost();
 
 	// References
 	TileMapService* mTileMapService = nullptr;
@@ -70,18 +71,22 @@ private:
 	int mScatterChaseIndex = 0;
 	bool mTickScatterChaseTimer = true;
 	float mScatterChaseTimer = 0.0f;
+	float mFrightTimer = 0.0f;
 
 	// Player
 	const int mPlayerStartingLives = 3;
 	int mPlayerLives = 3;
 	int mPlayerPoints = 0;
 	bool mIsInFrenzy = false;
+	int mGhostAteInFrenzy = 0;
+	const int mPointsPerGhostAte = 200;
 
 	// Ghost
-	void SetGhostChaseScatterMode();
+	void SetGhostChaseScatterMode(GhostMode mode);
 	GhostControllerComponent* mBlinkyController = nullptr;
 	GhostAnimatorComponent* mBlinkyAnimator = nullptr;
 	GhostMode mGhostMode = GhostMode::Scatter;
+	GhostMode mPrevGhostMode = GhostMode::Scatter;
 
 	// Pellets
 	const int mMaxPelletCount = 244;

@@ -1,5 +1,8 @@
 ﻿  Precompiled.cpp
   Animation.cpp
+  AnimationBuilder.cpp
+  AnimationIO.cpp
+  AnimationUtil.cpp
 D:\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(54,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   (compiling source file '/Src/Animation.cpp')
   D:\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(54,41):
@@ -11,9 +14,6 @@ D:\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(54,41): warnin
               T=SAGE::Math::Vector3
           ]
   
-  AnimationBuilder.cpp
-  AnimationIO.cpp
-  AnimationUtil.cpp
   Animator.cpp
   AudioSystem.cpp
   BlendState.cpp

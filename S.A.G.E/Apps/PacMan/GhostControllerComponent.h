@@ -41,6 +41,7 @@ private:
 	void CalculateNewTargetPosition();
 	void CalculateTargetPositionAtIntersection();
 	void CalculateTargetPositionContinuedDirection();
+	void CalculateRandomDirection();
 	void ReverseDirection();
 
 	// References

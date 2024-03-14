@@ -59,23 +59,6 @@ void GameManagerService::Terminate()
 
 void GameManagerService::Update(float deltaTime)
 {
-	if (mTickScatterChaseTimer)
-	{
-		mScatterChaseTimer -= deltaTime;
-
-		if (mScatterChaseTimer <= 0.0f)
-		{
-			if (++mScatterChaseIndex < static_cast<int>(mScatterChaseTimes.size())) {
-				mScatterChaseTimer += mScatterChaseTimes[mScatterChaseIndex];
-				SetGhostChaseScatterMode(mGhostMode == GhostMode::Scatter ? GhostMode::Chase : GhostMode::Scatter);
-			}
-			else {
-				mTickScatterChaseTimer = false;
-				SetGhostChaseScatterMode(GhostMode::Chase); // Chase Indefinitely
-			}
-		}
-	}
-
 	if (mIsInFrenzy)
 	{
 		CheckIfPlayerAteGhost();
@@ -89,6 +72,23 @@ void GameManagerService::Update(float deltaTime)
 	}
 	else
 	{
+		if (mTickScatterChaseTimer)
+		{
+			mScatterChaseTimer -= deltaTime;
+
+			if (mScatterChaseTimer <= 0.0f)
+			{
+				if (++mScatterChaseIndex < static_cast<int>(mScatterChaseTimes.size())) {
+					mScatterChaseTimer += mScatterChaseTimes[mScatterChaseIndex];
+					SetGhostChaseScatterMode(mGhostMode == GhostMode::Scatter ? GhostMode::Chase : GhostMode::Scatter);
+				}
+				else {
+					mTickScatterChaseTimer = false;
+					SetGhostChaseScatterMode(GhostMode::Chase); // Chase Indefinitely
+				}
+			}
+		}
+
 		CheckIfGhostAtePlayer();
 	}
 }
@@ -161,8 +161,7 @@ void GameManagerService::AtePellet(PelletType pelletType)
 
 	if (pelletType == PelletType::Big) {
 		mIsInFrenzy = true;
-		const Level& levelData = mLevels[Min(mLevel, static_cast<int>(mLevels.size()) - 1)];
-		mFrightTimer = levelData.FrightTime;
+		mFrightTimer = mCurrentLevelData.FrightTime;
 		mPrevGhostMode = mGhostMode;
 		SetGhostChaseScatterMode(GhostMode::Frightened);
 	}
@@ -241,6 +240,8 @@ void GameManagerService::SetupLevel()
 	// Restart Ghost
 	// Restart Player
 	// Adjust stats according to each level
+
+	mCurrentLevelData = mLevels[Min(mLevel, static_cast<int>(mLevels.size()) - 1) - 1];
 
 	mPlayerController->Respawn();
 	mBlinkyController->Respawn();

@@ -1,6 +1,19 @@
-﻿  BFS.cpp
+﻿  Agent.cpp
+  AIWorld.cpp
+  AlignmentBehavior.cpp
+  ArriveBehavior.cpp
+  aStar.cpp
+  BFS.cpp
+  CohesionBehavior.cpp
   DFS.cpp
   Dijkstra.cpp
+  Entity.cpp
+  FleeBehavior.cpp
   GridBasedGraph.cpp
-  aStar.cpp
+  Precompiled.cpp
+  PursuitBehavior.cpp
+  SeekBehavior.cpp
+  SeperationBehavior.cpp
+  SteeringModule.cpp
+  WanderBehavoir.cpp
   AI.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\AI.lib

@@ -6,7 +6,8 @@ enum class Direction
 	Up, 
 	Right,
 	Down,
-	Left
+	Left,
+	Size
 };
 
 enum class GhostType
@@ -22,6 +23,7 @@ enum class GhostMode
 	Chase,
 	Scatter,
 	Frightened,
+	Eaten,
 };
 
 enum class PelletType
@@ -41,3 +43,39 @@ enum class BonusSymbol
 	Bell = 3000,
 	Key = 5000
 };
+
+namespace
+{
+	SAGE::Math::Vector2Int DirectionToVector2Int(Direction direction)
+	{
+		switch (direction)
+		{
+		case Direction::Up:
+			return { 0, -1 };
+		case Direction::Right:
+			return { +1, 0 };
+		case Direction::Down:
+			return { 0, +1 };
+		case Direction::Left:
+			return { -1, 0 };
+		}
+		return SAGE::Math::Vector2Int::Zero;
+	}
+
+	Direction GetOppositeDirection(Direction direction)
+	{
+		switch (direction)
+		{
+		case Direction::Up:
+			return Direction::Down;
+		case Direction::Right:
+			return Direction::Left;
+		case Direction::Down:
+			return Direction::Up;
+		case Direction::Left:
+			return Direction::Right;
+		}
+
+		return Direction::None;
+	}
+}

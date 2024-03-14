@@ -40,6 +40,7 @@ public:
 	int GetColumns() const { return mColumns; }
 	int GetRows() const { return mRows; }
 
+	bool IsBlocked(SAGE::Math::Vector2Int cords) const;
 	bool IsBlocked(int x, int y) const;
 	SAGE::Math::Rect GetBound() const;
 

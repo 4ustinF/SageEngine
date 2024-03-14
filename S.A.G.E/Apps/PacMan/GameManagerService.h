@@ -67,6 +67,7 @@ private:
 	// Game
 	int mLevel = 1;
 	std::vector<Level> mLevels;
+	Level mCurrentLevelData;
 	const std::array<float, 7> mScatterChaseTimes = { 7.0f, 20.0f , 7.0f , 20.0f , 5.0f , 20.0f , 5.0f };
 	int mScatterChaseIndex = 0;
 	bool mTickScatterChaseTimer = true;

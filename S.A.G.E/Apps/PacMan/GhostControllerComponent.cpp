@@ -118,6 +118,7 @@ void GhostControllerComponent::DebugUI()
 
 void GhostControllerComponent::Respawn()
 {
+	mGhostMode = GhostMode::Scatter;
 	const Vector2 newPos = { 15.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 12.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
 	TeleportGhost(newPos, Direction::Left);
 	CalculateNewTargetPosition();
@@ -178,8 +179,6 @@ Vector2Int GhostControllerComponent::GetTargetCords()
 		return mPlayerController->GetPlayerCords();
 	case GhostMode::Scatter:
 		return mHomeCords;
-	case GhostMode::Frightened:
-		return mGameManagerService->GetRandomPelletCord(); // TODO: Get Random location could be better using all moveable tiles.
 	}
 
 	return mHomeCords;
@@ -192,7 +191,13 @@ void GhostControllerComponent::CalculateNewTargetPosition()
 
 	// Check if its an intersection
 	if (mGameManagerService->IsIntersectionPoint(mTileCords)) {
-		CalculateTargetPositionAtIntersection();
+
+		if (mGhostMode == GhostMode::Frightened) {
+			CalculateRandomDirection();
+		}
+		else {
+			CalculateTargetPositionAtIntersection();
+		}
 	}
 	else {
 		CalculateTargetPositionContinuedDirection();
@@ -201,8 +206,9 @@ void GhostControllerComponent::CalculateNewTargetPosition()
 
 void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 {
-	const Vector2Int mEndPos = GetTargetCords();
+	const Vector2Int mEndPos = mGhostMode == GhostMode::Chase ? mPlayerController->GetPlayerCords() : mHomeCords;
 
+	// In case we path find to something to close. Usually the player so continuing in the same direction is the preferred direction. 
 	if (abs(mTileCords.x - mEndPos.x) <= 1 && abs(mTileCords.y - mEndPos.y) <= 1)
 	{
 		CalculateTargetPositionContinuedDirection();
@@ -414,57 +420,25 @@ void GhostControllerComponent::CalculateTargetPositionContinuedDirection()
 	}
 }
 
+void GhostControllerComponent::CalculateRandomDirection()
+{
+	const int dirSize = static_cast<int>(Direction::Size) - 1; // -1 because uniform int is inclusive
+	while (true)
+	{
+		const Direction oppDir = GetOppositeDirection(mDirection);
+		const Direction randNewDir = static_cast<Direction>(Random::UniformInt(0, dirSize));
+		if (randNewDir != oppDir && !mTileMapService->IsBlocked(mTileCords + DirectionToVector2Int(randNewDir)))
+		{
+			mDirection = randNewDir;
+			break;
+		}
+	}
+
+	CalculateTargetPositionContinuedDirection();
+}
+
 void GhostControllerComponent::ReverseDirection()
 {
-	switch (mDirection)
-	{
-	case Direction::Up:
-	{
-		const int yTile = static_cast<int>((mPosition.y - mWorldOffset.y + mHalfTileSize) / mTileSize);
-		const Vector2 newPos{
-			mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
-			yTile * mTileSize + mWorldOffset.y + mHalfTileSize
-		};
-
-		mTargetPosition = newPos;
-		mDirection = Direction::Down;
-	}
-		break;
-	case Direction::Right:
-	{
-		const int xTile = static_cast<int>((mPosition.x - mWorldOffset.x - mHalfTileSize) / mTileSize);
-		const Vector2 newPos{
-			xTile * mTileSize + mWorldOffset.x + mHalfTileSize,
-			mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
-		};
-
-		mTargetPosition = newPos;
-		mDirection = Direction::Left;
-	}
-		break;
-	case Direction::Down:
-	{
-		const int yTile = static_cast<int>((mPosition.y - mWorldOffset.y - mHalfTileSize) / mTileSize);
-		const Vector2 newPos{
-			mTileCords.x * mTileSize + mWorldOffset.x + mHalfTileSize,
-			yTile * mTileSize + mWorldOffset.y + mHalfTileSize
-		};
-
-		mTargetPosition = newPos;
-		mDirection = Direction::Up;
-	}
-		break;
-	case Direction::Left:
-	{
-		const int xTile = static_cast<int>((mPosition.x - mWorldOffset.x + mHalfTileSize) / mTileSize);
-		const Vector2 newPos{
-			xTile * mTileSize + mWorldOffset.x + mHalfTileSize,
-			mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
-		};
-
-		mTargetPosition = newPos;
-		mDirection = Direction::Right;
-	}
-		break;
-	}
+	mDirection = GetOppositeDirection(mDirection);
+	CalculateTargetPositionContinuedDirection();
 }

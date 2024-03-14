@@ -279,6 +279,11 @@ void TileMapService::LoadPivotMap(const std::filesystem::path& path)
 	fclose(file);
 }
 
+bool TileMapService::IsBlocked(SAGE::Math::Vector2Int cords) const
+{
+	return IsBlocked(cords.x, cords.y);
+}
+
 bool TileMapService::IsBlocked(int x, int y) const
 {
 	const int tile = mMap[ToIndex(x, y, mColumns)].tileIndex;

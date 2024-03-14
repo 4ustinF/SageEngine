@@ -12,6 +12,8 @@ void GhostAnimatorComponent::Initialize()
 {
 	mGhostController = GetOwner().GetComponent<GhostControllerComponent>();
 
+	spriteRenderer = SpriteRenderer::Get();
+
 	// TODO: Set textures through json
 	auto tm = TextureManager::Get();
 	mMoveUpTextureIds.reserve(2);
@@ -30,12 +32,19 @@ void GhostAnimatorComponent::Initialize()
 	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_02.png"));
 	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_03.png"));
 
+	mEatenTextureIds[0] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_up.png");
+	mEatenTextureIds[1] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_right.png");
+	mEatenTextureIds[2] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_down.png");
+	mEatenTextureIds[3] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_left.png");
+
 	mDisplayTextureID = mMoveLeftTextureIds[0];
 	mTimer = mTimePerFrame;
 }
 
 void GhostAnimatorComponent::Terminate()
 {
+	spriteRenderer = nullptr;
+
 	mDisplayTextureID = 0;
 	for (TextureId& id : mMoveUpTextureIds) { id = 0; }
 	mMoveUpTextureIds.clear();
@@ -52,6 +61,12 @@ void GhostAnimatorComponent::Terminate()
 
 void GhostAnimatorComponent::Update(float deltaTime)
 {
+	if (mGhostController->GetGhostMode() == GhostMode::Eaten)
+	{
+		mDisplayTextureID = mEatenTextureIds[static_cast<int>(mGhostController->GetDirection())];
+		return;
+	}
+
 	mTimer -= deltaTime;
 	if (mTimer <= 0.0f)
 	{
@@ -74,8 +89,18 @@ void GhostAnimatorComponent::DebugUI()
 
 void GhostAnimatorComponent::Render()
 {
+	mGhostController->GetGhostMode() == GhostMode::Eaten ? RenderEaten() : RenderMovement();
+}
+
+void GhostAnimatorComponent::RenderMovement()
+{
 	const Flip flip = mGhostController->GetDirection() == Direction::Right ? Flip::Horizontal : Flip::None;
-	SpriteRenderer::Get()->Draw(mDisplayTextureID, mGhostController->GetPosition(), 0.0, Pivot::Center, flip);
+	spriteRenderer->Draw(mDisplayTextureID, mGhostController->GetPosition(), 0.0, Pivot::Center, flip);
+}
+
+void GhostAnimatorComponent::RenderEaten()
+{
+	spriteRenderer->Draw(mDisplayTextureID, mGhostController->GetPosition(), 0.0, Pivot::Center, Flip::None);
 }
 
 std::vector<TextureId>& GhostAnimatorComponent::GetTextureIDLookup()

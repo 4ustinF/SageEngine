@@ -65,9 +65,14 @@ void GameManagerService::Update(float deltaTime)
 		mFrightTimer -= deltaTime;
 		if (mFrightTimer <= 0.0f)
 		{
+			mPlayerController->SetPlayerSpeed(mCurrentLevelData.PacManSpeed);
 			mIsInFrenzy = false;
 			mGhostAteInFrenzy = 0;
-			SetGhostChaseScatterMode(mPrevGhostMode);
+
+			if (mBlinkyController->GetGhostMode() == GhostMode::Frightened) // TODO: Only set ghost back if they were not eaten. If they were eaten they will sort themselves out.
+			{
+				SetGhostChaseScatterMode(mPrevGhostMode);
+			}
 		}
 	}
 	else
@@ -160,6 +165,7 @@ void GameManagerService::AtePellet(PelletType pelletType)
 	mPlayerPoints += static_cast<int>(pelletType);
 
 	if (pelletType == PelletType::Big) {
+		mPlayerController->SetPlayerSpeed(mCurrentLevelData.FrightPacManSpeed);
 		mIsInFrenzy = true;
 		mFrightTimer = mCurrentLevelData.FrightTime;
 		mPrevGhostMode = mGhostMode;
@@ -244,6 +250,7 @@ void GameManagerService::SetupLevel()
 	mCurrentLevelData = mLevels[Min(mLevel, static_cast<int>(mLevels.size()) - 1) - 1];
 
 	mPlayerController->Respawn();
+	mPlayerController->SetPlayerSpeed(mCurrentLevelData.PacManSpeed);
 	mBlinkyController->Respawn();
 
 	if (mLevel > 1) { // Don't need to populate the pellets on the first level as that is preset for us there.
@@ -352,7 +359,7 @@ void GameManagerService::AteGhost()
 
 void GameManagerService::CheckIfGhostAtePlayer()
 {
-	if (mPlayerController->GetIsPlayerInvincible())
+	if (mBlinkyController->GetGhostMode() == GhostMode::Eaten || mPlayerController->GetIsPlayerInvincible())
 	{
 		return;
 	}
@@ -370,10 +377,16 @@ void GameManagerService::CheckIfGhostAtePlayer()
 
 void GameManagerService::CheckIfPlayerAteGhost()
 {
+	if (mBlinkyController->GetGhostMode() == GhostMode::Eaten)
+	{
+		return;
+	}
+
 	if (mPlayerController->GetPlayerCords() == mBlinkyController->GetTileCords())
 	{
 		mPlayerPoints += mPointsPerGhostAte * static_cast<int>(std::pow(2, mGhostAteInFrenzy++));
-		mBlinkyController->Respawn();
+		//mBlinkyController->Respawn();
+		mBlinkyController->IsAten();
 	}
 }
 

@@ -29,10 +29,12 @@ public:
 	GhostMode GetGhostMode() const { return mGhostMode; }
 	void SetGhostMode(GhostMode mode);
 
+	void IsAten();
+
 	bool mIsChasing = false;
 
 private:
-	void SetHomeCords();
+	void SetCornerCords();
 
 	void TeleportGhost(const SAGE::Math::Vector2 newPos, const Direction dir);
 	void UpdateTileCords();
@@ -53,7 +55,9 @@ private:
 	SAGE::Math::Vector2 mTargetPosition = SAGE::Math::Vector2::Zero;
 	SAGE::Math::Vector2Int mTileCords = SAGE::Math::Vector2Int::Zero;
 	SAGE::Math::Vector2Int mOldTileCords = SAGE::Math::Vector2Int::Zero;
-	SAGE::Math::Vector2Int mHomeCords = SAGE::Math::Vector2Int::Zero;
+	SAGE::Math::Vector2Int mCornerCords = SAGE::Math::Vector2Int::Zero;
+	const SAGE::Math::Vector2Int mHomeCords = SAGE::Math::Vector2Int(15, 12);
+	const SAGE::Math::Vector2 mHomePos = SAGE::Math::Vector2(336.0f, 227.0f);
 	Direction mDirection = Direction::Right;
 	float mSpeed = 140.0f;
 	GhostType mGhostType = GhostType::Blinky;

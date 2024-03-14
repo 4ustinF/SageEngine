@@ -20,6 +20,7 @@ public:
 
 	void Respawn();
 
+	void SetPlayerSpeed(float multiplier) { mSpeed = mBaseSpeed * multiplier; }
 	SAGE::Math::Vector2 GetPlayerPosition() const { return mPosition; }
 	SAGE::Math::Vector2Int GetPlayerCords() const { return mTileCords; }
 	Direction GetPlayerDirection() const { return mDirection; }
@@ -47,7 +48,8 @@ private:
 	SAGE::Math::Vector2 mTargetPosition = SAGE::Math::Vector2::Zero;
 	SAGE::Math::Vector2Int mTileCords = SAGE::Math::Vector2Int::Zero;
 	Direction mDirection = Direction::Right;
-	float mSpeed = 150.0f;
+	float mSpeed = 190.0f;
+	const float mBaseSpeed = 190.0f;
 	const float mTunnelLimit = 684.0f; // rows * TileSize
 
 	Direction mPreMoveDirection = Direction::None;

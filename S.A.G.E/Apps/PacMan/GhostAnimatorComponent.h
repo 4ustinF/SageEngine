@@ -19,6 +19,12 @@ public:
 	void Render();
 
 private:
+	void RenderMovement();
+	void RenderEaten();
+
+	// References
+	SAGE::Graphics::SpriteRenderer* spriteRenderer = nullptr;
+
 	float mTimer = 0.0f;
 	float mTimePerFrame = 0.15f;
 	int mSpriteIndex = 0;
@@ -31,5 +37,6 @@ private:
 	std::vector<SAGE::Graphics::TextureId> mMoveDownTextureIds;
 	std::vector<SAGE::Graphics::TextureId> mMoveLeftTextureIds;
 	std::vector<SAGE::Graphics::TextureId> mFrightenedTextureIds;
+	std::array<SAGE::Graphics::TextureId, 4> mEatenTextureIds;
 	SAGE::Graphics::TextureId mDisplayTextureID = 0;
 };

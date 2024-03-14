@@ -26,7 +26,7 @@ void GhostControllerComponent::Initialize()
 	GameObject* playerObject = world.FindGameObject("PacMan");
 	mPlayerController = playerObject->GetComponent<PlayerControllerComponent>();
 
-	SetHomeCords();
+	SetCornerCords();
 }
 
 void GhostControllerComponent::Terminate()
@@ -90,6 +90,14 @@ void GhostControllerComponent::Update(float deltaTime)
 		}
 		break;
 	}
+
+	if (mGhostMode == GhostMode::Eaten) // Back at house
+	{
+		if (mTileCords == mHomeCords) // TODO: Find a better way to respawn at home
+		{
+			Respawn();
+		}
+	}
 }
 
 void GhostControllerComponent::DebugUI()
@@ -111,7 +119,7 @@ void GhostControllerComponent::DebugUI()
 		ImGui::DragFloat2("Target Position##GhostControllerComponent", &mTargetPosition.x, 0.1f);
 
 		ImGui::Checkbox("Is Chasing", &mIsChasing);
-		ImGui::DragInt2("Home Cords##GhostControllerComponent", &mHomeCords.x, 0.1f);
+		ImGui::DragInt2("Home Cords##GhostControllerComponent", &mCornerCords.x, 0.1f);
 	}
 }
 
@@ -126,29 +134,39 @@ void GhostControllerComponent::Respawn()
 
 void GhostControllerComponent::SetGhostMode(GhostMode mode)
 { 
-	if (mGhostMode == GhostMode::Chase || mGhostMode == GhostMode::Scatter)
+	switch (mGhostMode)
 	{
+	case GhostMode::Chase:
+	case GhostMode::Scatter:
 		ReverseDirection();
+		break;
+	case GhostMode::Eaten:
+		return; // Needs to go home first before changing ghost mode
 	}
 
 	mGhostMode = mode;
 }
 
-void GhostControllerComponent::SetHomeCords()
+void GhostControllerComponent::IsAten()
+{
+	SetGhostMode(GhostMode::Eaten);
+}
+
+void GhostControllerComponent::SetCornerCords()
 {
 	switch (mGhostType)
 	{
 	case GhostType::Blinky:
-		mHomeCords = Vector2Int(28, 2);
+		mCornerCords = Vector2Int(28, 2);
 		break;
 	case GhostType::Pinky:
-		mHomeCords = Vector2Int(3, 2);
+		mCornerCords = Vector2Int(3, 2);
 		break;
 	case GhostType::Inky:
-		mHomeCords = Vector2Int(28, 30);
+		mCornerCords = Vector2Int(28, 30);
 		break;
 	case GhostType::Clyde:
-		mHomeCords = Vector2Int(3, 30);
+		mCornerCords = Vector2Int(3, 30);
 		break;
 	}
 }
@@ -178,10 +196,12 @@ Vector2Int GhostControllerComponent::GetTargetCords()
 	case GhostMode::Chase:
 		return mPlayerController->GetPlayerCords();
 	case GhostMode::Scatter:
+		return mCornerCords;
+	case GhostMode::Eaten:
 		return mHomeCords;
 	}
 
-	return mHomeCords;
+	return mCornerCords;
 }
 
 void GhostControllerComponent::CalculateNewTargetPosition()
@@ -206,7 +226,7 @@ void GhostControllerComponent::CalculateNewTargetPosition()
 
 void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 {
-	const Vector2Int mEndPos = mGhostMode == GhostMode::Chase ? mPlayerController->GetPlayerCords() : mHomeCords;
+	const Vector2Int mEndPos = GetTargetCords();
 
 	// In case we path find to something to close. Usually the player so continuing in the same direction is the preferred direction. 
 	if (abs(mTileCords.x - mEndPos.x) <= 1 && abs(mTileCords.y - mEndPos.y) <= 1)

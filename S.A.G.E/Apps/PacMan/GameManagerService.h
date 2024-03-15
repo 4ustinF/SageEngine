@@ -11,18 +11,18 @@ class GhostAnimatorComponent;
 
 struct Level
 {
-	BonusSymbol BonusSymbol = BonusSymbol::Cherries;
-	float PacManSpeed = 0.0f;
-	float GhostSpeed = 0.0f;
-	float GhostTunnelSpeed = 0.0f;
-	int Elroy1DotsLeft = 0;
-	float Elroy1Speed = 0.0f;
-	int Elroy2DotsLeft = 0;
-	float Elroy2Speed = 0.0f;
-	float FrightPacManSpeed = 0.0f;
-	float FrightGhostSpeed = 0.0f;
-	float FrightTime = 0.0f;
-	int NumberOfFlashes = 0;
+	BonusSymbol BonusSymbol;
+	float PacManSpeed;
+	float GhostSpeed;
+	float GhostTunnelSpeed;		// (Ghosts slow down when traveling through the Warps on the sides)
+	int Elroy1DotsLef;			// (When there are this many Dots left, Blinkies/Red Ghosts increase in speed)
+	float Elroy1Speed;
+	int Elroy2DotsLeft;			// (When there are this many Dots left, Blinkies/Red Ghosts increase in speed again)
+	float Elroy2Speed;
+	float FrightPacManSpeed;	// (after Pac-Man grabs a Power-Pellet)
+	float FrightGhostSpeed;		// (the speed of blue vulnerable Ghosts)
+	float FrightTime;			// (the time Ghosts spend in the blue vulnerable state)
+	int NumberOfFlashes;		// (the visual indication that Fright Time for Ghosts is about to expire)
 };
 
 class GameManagerService final : public SAGE::Service
@@ -113,6 +113,9 @@ private:
 	std::string mHighScoreString = "0";
 	float mHighScoreStringXOffset = 330.0f; // mHalfScreenWidthX - half size("0")
 	const float mHalfScreenWidthX = 336.0f;
+
+	// Bonus Symbols
+
 
 	// Map
 	std::vector<SAGE::Math::Vector2Int> mIntersections; // TODO: Don't use a vector. This uses linear look up times. Cord, pos

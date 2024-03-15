@@ -11,10 +11,6 @@
       "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\PlayerControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GhostControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GhostControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -30,21 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PlayerControllerComponent.h",
-              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerControllerComponent.h",
-              "RelativeDocumentMoniker": "Apps\\PacMan\\PlayerControllerComponent.h",
-              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerControllerComponent.h",
-              "RelativeToolTip": "Apps\\PacMan\\PlayerControllerComponent.h",
-              "ViewState": "AQIAACQAAAAAAAAAAAAAADUAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-15T20:27:18.222Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -53,7 +36,7 @@
               "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.cpp",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp",
               "RelativeToolTip": "Apps\\PacMan\\GameManagerService.cpp",
-              "ViewState": "AQIAAFcBAAAAAAAAAAAAAGYBAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAJEAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-15T05:35:51.111Z",
               "EditorCaption": ""
@@ -66,14 +49,14 @@
               "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.h",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h",
               "RelativeToolTip": "Apps\\PacMan\\GameManagerService.h",
-              "ViewState": "AQIAAGMAAAAAAAAAAAAAAHYAAAAZAAAA",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAAAHoAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-03-08T06:53:40.436Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "GhostControllerComponent.cpp",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GhostControllerComponent.cpp",
               "RelativeDocumentMoniker": "Apps\\PacMan\\GhostControllerComponent.cpp",
@@ -86,7 +69,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "GhostControllerComponent.h",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GhostControllerComponent.h",
               "RelativeDocumentMoniker": "Apps\\PacMan\\GhostControllerComponent.h",

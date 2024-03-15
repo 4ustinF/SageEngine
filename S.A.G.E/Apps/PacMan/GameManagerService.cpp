@@ -42,6 +42,15 @@ void GameManagerService::Initialize()
 	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Bell, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_bell.png")));
 	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Key, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_key.png")));
 
+	mBonusSymbolsEatenPointsTextureIDsMap.insert(std::make_pair(BonusSymbol::Cherries, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/Points/sprite_100.png")));
+	mBonusSymbolsEatenPointsTextureIDsMap.insert(std::make_pair(BonusSymbol::Strawberry, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/Points/sprite_300.png")));
+	mBonusSymbolsEatenPointsTextureIDsMap.insert(std::make_pair(BonusSymbol::Peach, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/Points/sprite_500.png")));
+	mBonusSymbolsEatenPointsTextureIDsMap.insert(std::make_pair(BonusSymbol::Apple, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/Points/sprite_700.png")));
+	mBonusSymbolsEatenPointsTextureIDsMap.insert(std::make_pair(BonusSymbol::Grapes, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/Points/sprite_1000.png")));
+	mBonusSymbolsEatenPointsTextureIDsMap.insert(std::make_pair(BonusSymbol::Galaxian, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/Points/sprite_2000.png")));
+	mBonusSymbolsEatenPointsTextureIDsMap.insert(std::make_pair(BonusSymbol::Bell, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/Points/sprite_3000.png")));
+	mBonusSymbolsEatenPointsTextureIDsMap.insert(std::make_pair(BonusSymbol::Key, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/Points/sprite_5000.png")));
+
 	mSpriteRenderer = SpriteRenderer::Get();
 	mFont = Font::Get();
 
@@ -85,6 +94,7 @@ void GameManagerService::Terminate()
 	mIntersectionsPositions.clear();
 	mTileMapService = nullptr;
 	mCoroutineSystem = nullptr;
+	mBonusSymbolsEatenPointsTextureIDsMap.clear();
 }
 
 void GameManagerService::Update(float deltaTime)
@@ -127,9 +137,14 @@ void GameManagerService::Update(float deltaTime)
 		CheckIfGhostAtePlayer();
 	}
 
-	// Timer to display points
+	// Timer to display ghost eaten points
 	if (mDisplayEatenPointsTimer > 0.0f) {
 		mDisplayEatenPointsTimer -= deltaTime;
+	}
+
+	// Timer to display symbol eaten points
+	if (mDisplayBonusSymbolsEatenPointsTimer > 0.0f) {
+		mDisplayBonusSymbolsEatenPointsTimer -= deltaTime;
 	}
 
 	if (mIsBonusSymbolActive)
@@ -177,6 +192,11 @@ void GameManagerService::Render()
 	// Points upon ghost eaten
 	if (mDisplayEatenPointsTimer > 0.0f) {
 		mSpriteRenderer->Draw(mEatenPointsTextureIDs[mTextureIDIndex], mGhostEatenPosition);
+	}
+
+	// Points upon bonus symbol eaten
+	if (mDisplayBonusSymbolsEatenPointsTimer > 0.0f) {
+		mSpriteRenderer->Draw(mBonusSymbolsEatenPointsTextureIDsMap[mCurrentLevelData.BonusSymbol], mBonusSymbolPosition);
 	}
 
 	//// TODO: This is for debugging purposes
@@ -470,7 +490,7 @@ void GameManagerService::CheckIfPlayerAteGhost()
 	if (mPlayerController->GetPlayerCords() == mBlinkyController->GetTileCords())
 	{
 		PlayAudioOneShot(mGhostEatenSoundID);
-		mDisplayEatenPointsTimer = mDisplayEatenPointsMaxTimer;
+		mDisplayEatenPointsTimer = mPointsMaxTime;
 		mGhostEatenPosition = mBlinkyController->GetPosition();
 		mTextureIDIndex = mGhostAteInFrenzy;
 
@@ -483,9 +503,10 @@ void GameManagerService::CheckIfPlayerAteBonusSymbol()
 {
 	if (IsRectOverlap(mPlayerController->GetRect(), mBonusSymbolRect))
 	{
+		mDisplayBonusSymbolsEatenPointsTimer = mPointsMaxTime;
+		mIsBonusSymbolActive = false;
 		PlayAudioOneShot(mBonusSymbolSoundID);
 		AddPlayerPoints(static_cast<int>(mCurrentLevelData.BonusSymbol));
-		mIsBonusSymbolActive = false;
 	}
 }
 

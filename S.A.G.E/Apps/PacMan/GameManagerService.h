@@ -98,7 +98,6 @@ private:
 	std::array<SAGE::Graphics::TextureId, 4> mEatenPointsTextureIDs;
 	int mTextureIDIndex = 0;
 	float mDisplayEatenPointsTimer = 0.0f;
-	const float mDisplayEatenPointsMaxTimer = 1.0f;
 	SAGE::Math::Vector2 mGhostEatenPosition = SAGE::Math::Vector2::Zero;
 
 	// Pellets
@@ -117,8 +116,9 @@ private:
 	float mHighScoreStringXOffset = 330.0f; // mHalfScreenWidthX - half size("0")
 	const float mHalfScreenWidthX = 336.0f;
 	const float mScreenWidth = 672.0f; // We could set this with a get screen width call
+	const float mPointsMaxTime = 1.0f;
 
-	// Bonus Symbols
+	// Bonus Symbols - TODO: Maybe move to its own service
 	bool mIsBonusSymbolActive = false;
 	const SAGE::Math::Vector2 mBonusSymbolPosition = SAGE::Math::Vector2(338.0f, 492.0f); // TODO: Find bonus symbol position
 	const SAGE::Math::Rect mBonusSymbolRect = { mBonusSymbolPosition.x - 2.0f, mBonusSymbolPosition.y - 2.0f, mBonusSymbolPosition.x + 2.0f, mBonusSymbolPosition.y + 2.0f };
@@ -128,6 +128,9 @@ private:
 	float mBonusSymbolTimer = 0.0f;
 	std::map<BonusSymbol, SAGE::Graphics::TextureId> mBonusSymbolTextureIDs;
 	SAGE::Graphics::TextureId mBonusSymbolTextureID = 0;
+
+	std::map<BonusSymbol, SAGE::Graphics::TextureId> mBonusSymbolsEatenPointsTextureIDsMap;
+	float mDisplayBonusSymbolsEatenPointsTimer = 0.0f;
 
 	// Map
 	std::vector<SAGE::Math::Vector2Int> mIntersections; // TODO: Don't use a vector. This uses linear look up times. Cord, pos

@@ -23,6 +23,7 @@ void GameManagerService::Initialize()
 	mSoundEffectManager = SoundEffectManager::Get();
 	mGhostEatenSoundID = mSoundEffectManager->Load("eat_ghost.wav");
 	mBonusSymbolSoundID = mSoundEffectManager->Load("eat_bonus.wav");
+	mExtraLifeSoundID = mSoundEffectManager->Load("extra_life.wav");
 	//mMunchID = mSoundEffectManager->Load("munch.wav"); // Need a better soundFX
 
 	auto tm = TextureManager::Get();
@@ -64,6 +65,7 @@ void GameManagerService::Terminate()
 	mMunchID = 0;
 	mGhostEatenSoundID = 0;
 	mBonusSymbolSoundID = 0;
+	mExtraLifeSoundID = 0;
 	mSoundEffectManager = nullptr;
 
 	// UI
@@ -520,7 +522,11 @@ void GameManagerService::AddPlayerPoints(int pointsToAdd)
 	if (mPlayerPointsTillNextBonusLife >= mPlayerPointsNeededForBonusLife)
 	{
 		mPlayerPointsTillNextBonusLife -= mPlayerPointsNeededForBonusLife;
-		mPlayerLives = Min(++mPlayerLives, mMaxPlayerLives);
+		if (mPlayerLives < mMaxPlayerLives)
+		{
+			++mPlayerLives;
+			PlayAudioOneShot(mExtraLifeSoundID);
+		}
 	}
 
 	if (mPlayerPoints > mMaxPlayerPoints)
@@ -549,7 +555,7 @@ void GameManagerService::SetGhostChaseScatterMode(GhostMode mode)
 
 void GameManagerService::PlayAudioOneShot(const SAGE::Graphics::SoundId soundID)
 {
-	mSoundEffectManager->Play(soundID, false, mAudioVolume, Random::UniformFloat(-0.1f, 0.15f), Random::UniformFloat(-0.1f, 0.1f));
+	mSoundEffectManager->Play(soundID, false, mAudioVolume, Random::UniformFloat(-0.1f, 0.15f));
 }
 
 

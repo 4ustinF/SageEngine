@@ -146,6 +146,7 @@ private:
 	SAGE::Graphics::SoundId mMunchID = 0;
 	SAGE::Graphics::SoundId mGhostEatenSoundID = 0;
 	SAGE::Graphics::SoundId mBonusSymbolSoundID = 0;
+	SAGE::Graphics::SoundId mExtraLifeSoundID = 0;
 
 	// Debug path finding
 	SAGE::Graphics::TextureId mPathFindingTextureID = 0;

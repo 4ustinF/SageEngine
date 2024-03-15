@@ -108,16 +108,20 @@ private:
 	std::vector<SAGE::Math::Vector2Int> mCachedBigPelletCords;
 
 	// UI
+	std::vector<SAGE::Graphics::TextureId> mBonusSymbolTextureIds;
+	const float mBonusSymbolTextureIdsXSpacing = 46.0f;
+	float mBonusSymbolTextureIdsXStartOffset = 0.0f;
 	SAGE::Graphics::TextureId mPacmanLifeTextureID = 0;
 	std::string mPlayerPointsString = "0";
 	std::string mHighScoreString = "0";
 	float mHighScoreStringXOffset = 330.0f; // mHalfScreenWidthX - half size("0")
 	const float mHalfScreenWidthX = 336.0f;
+	const float mScreenWidth = 672.0f; // We could set this with a get screen width call
 
 	// Bonus Symbols
 	bool mIsBonusSymbolActive = false;
 	const SAGE::Math::Vector2 mBonusSymbolPosition = SAGE::Math::Vector2(338.0f, 492.0f); // TODO: Find bonus symbol position
-	const SAGE::Math::Rect mBonusSymbolRect = { mBonusSymbolPosition.x - 10.0f, mBonusSymbolPosition.y - 10.0f, mBonusSymbolPosition.x + 10.0f, mBonusSymbolPosition.y + 10.0f };
+	const SAGE::Math::Rect mBonusSymbolRect = { mBonusSymbolPosition.x - 2.0f, mBonusSymbolPosition.y - 2.0f, mBonusSymbolPosition.x + 2.0f, mBonusSymbolPosition.y + 2.0f };
 	const int mBonusSymbol1RemainingPellets = 174; // 244 - 70
 	const int mBonusSymbol2RemainingPellets = 74; // 244 -170
 	const float mBonusSymbolMaxTime = 10.0f;

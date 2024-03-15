@@ -7,7 +7,7 @@ using namespace SAGE::Input;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
-MEMORY_POOL_DEFINE(PlayerControllerComponent, 1000);
+MEMORY_POOL_DEFINE(PlayerControllerComponent, 300);
 
 void PlayerControllerComponent::Initialize()
 {

@@ -10,7 +10,7 @@ using namespace SAGE::Math::Random;
 using namespace SAGE::Graphics;
 using namespace SAGE::AI;
 
-MEMORY_POOL_DEFINE(GhostControllerComponent, 1000);
+MEMORY_POOL_DEFINE(GhostControllerComponent, 500);
 
 void GhostControllerComponent::Initialize()
 {

@@ -168,6 +168,12 @@ void GameManagerService::Render()
 		mSpriteRenderer->Draw(mPacmanLifeTextureID, {50.0f + (i * 46.0f), 841.0f}, 0.0, Pivot::Center, Flip::Horizontal);
 	}
 
+	// Previous and current level bonus symbols
+	for (int i = 0; i < mBonusSymbolTextureIds.size(); ++i)
+	{
+		mSpriteRenderer->Draw(mBonusSymbolTextureIds[i], { mBonusSymbolTextureIdsXStartOffset + (i * mBonusSymbolTextureIdsXSpacing), 841.0f});
+	}
+
 	// Points upon ghost eaten
 	if (mDisplayEatenPointsTimer > 0.0f) {
 		mSpriteRenderer->Draw(mEatenPointsTextureIDs[mTextureIDIndex], mGhostEatenPosition);
@@ -306,14 +312,12 @@ void GameManagerService::RepopulatePellets()
 
 void GameManagerService::RestartGame()
 {
-	// Restart Map
-	// Restart Ghost
-	// Restart Player
-
 	mLevel = 1;
 	AddPlayerPoints(-mPlayerPoints);
 	mPlayerLives = mPlayerStartingLives;
 	mRemainingPelletCount = mMaxPelletCount;
+
+	mBonusSymbolTextureIds.clear();
 
 	RepopulatePellets();
 	SetupLevel();
@@ -321,11 +325,6 @@ void GameManagerService::RestartGame()
 
 void GameManagerService::SetupLevel()
 {
-	// Restart Map
-	// Restart Ghost
-	// Restart Player
-	// Adjust stats according to each level
-
 	mCurrentLevelData = mLevels[Min(mLevel, static_cast<int>(mLevels.size()) - 1) - 1];
 
 	mPlayerController->Respawn();
@@ -341,7 +340,14 @@ void GameManagerService::SetupLevel()
 	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
 	mTickScatterChaseTimer = true;
 
+	mIsBonusSymbolActive = false;
 	mBonusSymbolTextureID = mBonusSymbolTextureIDs.at(mCurrentLevelData.BonusSymbol);
+
+	mBonusSymbolTextureIds.push_back(mBonusSymbolTextureID);
+	if (mBonusSymbolTextureIds.size() > 7) {
+		mBonusSymbolTextureIds.erase(mBonusSymbolTextureIds.begin());
+	}
+	mBonusSymbolTextureIdsXStartOffset = mScreenWidth - (mBonusSymbolTextureIds.size() * mBonusSymbolTextureIdsXSpacing);
 
 	mIsInFrenzy = false;
 }

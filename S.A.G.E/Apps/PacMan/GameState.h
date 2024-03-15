@@ -14,4 +14,6 @@ public:
 
 private:
 	SAGE::GameWorld mGameWorld;
+	SAGE::Input::InputSystem* mInputSystem = nullptr;
+	bool mIsPaused = false;
 };

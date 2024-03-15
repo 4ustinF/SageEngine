@@ -143,7 +143,7 @@ void GameManagerService::Render()
 	}
 
 	//// TODO: This is for debugging purposes
-	//Vector2 offset = mTileMapService->GetWorldOffset();
+	//const Vector2 offset = mTileMapService->GetWorldOffset();
 
 	//for (const auto& pos : mBlinkyController->mTargetNodePositions)
 	//{
@@ -301,7 +301,6 @@ void GameManagerService::SetupLevel()
 	mScatterChaseIndex = 0;
 	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
 	mTickScatterChaseTimer = true;
-	SetGhostChaseScatterMode(GhostMode::Scatter);
 
 	mIsInFrenzy = false;
 }
@@ -315,7 +314,6 @@ void GameManagerService::RestartLevel()
 	mScatterChaseIndex = 0;
 	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
 	mTickScatterChaseTimer = true;
-	SetGhostChaseScatterMode(GhostMode::Scatter);
 
 	mIsInFrenzy = false;
 }
@@ -350,45 +348,45 @@ void GameManagerService::SetIntersectionPoints()
 {
 	mIntersections.reserve(34);
 
-	mIntersections.push_back(Vector2Int(8, 2));
-	mIntersections.push_back(Vector2Int(23, 2));
-	mIntersections.push_back(Vector2Int(3, 6));
-	mIntersections.push_back(Vector2Int(8, 6));
-	mIntersections.push_back(Vector2Int(11, 6));
-	mIntersections.push_back(Vector2Int(14, 6));
-	mIntersections.push_back(Vector2Int(17, 6));
-	mIntersections.push_back(Vector2Int(20, 6));
-	mIntersections.push_back(Vector2Int(23, 6));
-	mIntersections.push_back(Vector2Int(28, 6));
-	mIntersections.push_back(Vector2Int(8, 9));
-	mIntersections.push_back(Vector2Int(23, 9));
-	mIntersections.push_back(Vector2Int(14, 12));
-	mIntersections.push_back(Vector2Int(17, 12));
-	mIntersections.push_back(Vector2Int(8, 15));
-	mIntersections.push_back(Vector2Int(11, 15));
-	mIntersections.push_back(Vector2Int(20, 15));
-	mIntersections.push_back(Vector2Int(23, 15));
-	mIntersections.push_back(Vector2Int(11, 18));
-	mIntersections.push_back(Vector2Int(20, 18));
-	mIntersections.push_back(Vector2Int(8, 21));
-	mIntersections.push_back(Vector2Int(11, 21));
-	mIntersections.push_back(Vector2Int(20, 21));
-	mIntersections.push_back(Vector2Int(23, 21));
-	mIntersections.push_back(Vector2Int(8, 24));
-	mIntersections.push_back(Vector2Int(11, 24));
-	mIntersections.push_back(Vector2Int(14, 24));
-	mIntersections.push_back(Vector2Int(17, 24));
-	mIntersections.push_back(Vector2Int(20, 24));
-	mIntersections.push_back(Vector2Int(23, 24));
-	mIntersections.push_back(Vector2Int(5, 27));
-	mIntersections.push_back(Vector2Int(26, 27));
-	mIntersections.push_back(Vector2Int(14, 30));
-	mIntersections.push_back(Vector2Int(17, 30));
+	mIntersections.push_back(Vector2Int(8, 1));
+	mIntersections.push_back(Vector2Int(23, 1));
+	mIntersections.push_back(Vector2Int(3, 5));
+	mIntersections.push_back(Vector2Int(8, 5));
+	mIntersections.push_back(Vector2Int(11, 5));
+	mIntersections.push_back(Vector2Int(14, 5));
+	mIntersections.push_back(Vector2Int(17, 5));
+	mIntersections.push_back(Vector2Int(20, 5));
+	mIntersections.push_back(Vector2Int(23, 5));
+	mIntersections.push_back(Vector2Int(28, 5));
+	mIntersections.push_back(Vector2Int(8, 8));
+	mIntersections.push_back(Vector2Int(23, 8));
+	mIntersections.push_back(Vector2Int(14, 11));
+	mIntersections.push_back(Vector2Int(17, 11));
+	mIntersections.push_back(Vector2Int(8, 14));
+	mIntersections.push_back(Vector2Int(11, 14));
+	mIntersections.push_back(Vector2Int(20, 14));
+	mIntersections.push_back(Vector2Int(23, 14));
+	mIntersections.push_back(Vector2Int(11, 17));
+	mIntersections.push_back(Vector2Int(20, 17));
+	mIntersections.push_back(Vector2Int(8, 20));
+	mIntersections.push_back(Vector2Int(11, 20));
+	mIntersections.push_back(Vector2Int(20, 20));
+	mIntersections.push_back(Vector2Int(23, 20));
+	mIntersections.push_back(Vector2Int(8, 23));
+	mIntersections.push_back(Vector2Int(11, 23));
+	mIntersections.push_back(Vector2Int(14, 23));
+	mIntersections.push_back(Vector2Int(17, 23));
+	mIntersections.push_back(Vector2Int(20, 23));
+	mIntersections.push_back(Vector2Int(23, 23));
+	mIntersections.push_back(Vector2Int(5, 26));
+	mIntersections.push_back(Vector2Int(26, 26));
+	mIntersections.push_back(Vector2Int(14, 29));
+	mIntersections.push_back(Vector2Int(17, 29));
 
 	mIntersectionsPositions.reserve(mIntersections.size());
 	for (const auto& cord : mIntersections)
 	{
-		// TODO: Tile size and half tile size should be cached
+		// TODO: Tile size and half tile size should be cached. Also take offset into consideration.
 		mIntersectionsPositions.push_back({cord.x * 24.0f + 12.0f, cord.y * 24.0f + 12.0f});
 	}
 }

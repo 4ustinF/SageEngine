@@ -118,8 +118,9 @@ void GhostControllerComponent::DebugUI()
 		}
 		ImGui::DragFloat2("Target Position##GhostControllerComponent", &mTargetPosition.x, 0.1f);
 
-		ImGui::Checkbox("Is Chasing", &mIsChasing);
 		ImGui::DragInt2("Home Cords##GhostControllerComponent", &mCornerCords.x, 0.1f);
+		//int temp = static_cast<int>(mGhostMode);
+		//ImGui::DragInt("Ghost Mode", &temp, 0.5f);
 	}
 }
 
@@ -127,9 +128,8 @@ void GhostControllerComponent::DebugUI()
 void GhostControllerComponent::Respawn()
 {
 	mGhostMode = GhostMode::Scatter;
-	const Vector2 newPos = { 15.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 12.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
+	const Vector2 newPos = { 15.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 11.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
 	TeleportGhost(newPos, Direction::Left);
-	CalculateNewTargetPosition();
 }
 
 void GhostControllerComponent::SetGhostMode(GhostMode mode)
@@ -206,7 +206,6 @@ Vector2Int GhostControllerComponent::GetTargetCords()
 
 void GhostControllerComponent::CalculateNewTargetPosition()
 {
-	// When you reach pass the target point
 	UpdateTileCords();
 
 	// Check if its an intersection

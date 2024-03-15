@@ -55,6 +55,8 @@ void GameState::Initialize()
 
 	gameManagerService->SetupGame();
 	gameManagerService->StartGame();
+
+	mInputSystem = InputSystem::Get();
 }
 
 void GameState::Terminate()
@@ -64,7 +66,13 @@ void GameState::Terminate()
 
 void GameState::Update(float deltaTime)
 {
-	mGameWorld.Update(deltaTime);
+	if (mInputSystem->IsKeyPressed(KeyCode::SPACE)) {
+		mIsPaused = !mIsPaused;
+	}
+
+	if (!mIsPaused) {
+		mGameWorld.Update(deltaTime);
+	}
 }
 
 void GameState::Render()

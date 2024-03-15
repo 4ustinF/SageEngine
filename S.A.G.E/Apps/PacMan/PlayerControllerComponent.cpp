@@ -18,7 +18,7 @@ void PlayerControllerComponent::Initialize()
 
 	mTileSize = mTileMapService->GetTileSize();
 	mHalfTileSize = mTileSize * 0.5f;
-	mStartingPosition = { 13.5f * mTileSize + mHalfTileSize, 23.0f * mTileSize + mHalfTileSize };
+	mStartingPosition = { 13.5f * mTileSize + mHalfTileSize, 26.0f * mTileSize + mHalfTileSize }; // 31
 	mWorldOffset = mTileMapService->GetWorldOffset();
 }
 
@@ -99,7 +99,7 @@ void PlayerControllerComponent::SetDirection()
 			if (mTileMapService->IsBlocked(tileX, mTileCords.y))
 			{
 				mTargetPosition.x = tileX * mTileSize - mHalfTileSize + mWorldOffset.x;
-				mPosition.y = mTileCords.y * mTileSize - mHalfTileSize; // Fix offset
+				mPosition.y = (mTileCords.y + 1) * mTileSize - mHalfTileSize + mWorldOffset.y; 
 				break;
 			}
 		}
@@ -123,7 +123,7 @@ void PlayerControllerComponent::SetDirection()
 			if (mTileMapService->IsBlocked(tileX++, mTileCords.y))
 			{
 				mTargetPosition.x = tileX * mTileSize + mHalfTileSize + mWorldOffset.x;
-				mPosition.y = mTileCords.y * mTileSize - mHalfTileSize; // Fix offset
+				mPosition.y = (mTileCords.y + 1) * mTileSize - mHalfTileSize + mWorldOffset.y;
 				break;
 			}
 		}

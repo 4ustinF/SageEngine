@@ -12,6 +12,8 @@ void PlayerAnimatorComponent::Initialize()
 {
 	mPlayerController = GetOwner().GetComponent<PlayerControllerComponent>();
 
+	spriteRenderer = SpriteRenderer::Get();
+
 	auto tm = TextureManager::Get();
 	mEatTextureIds.reserve(3);
 	mEatTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_00.png"));
@@ -24,6 +26,8 @@ void PlayerAnimatorComponent::Initialize()
 
 void PlayerAnimatorComponent::Terminate()
 {
+	spriteRenderer = nullptr;
+
 	mDisplayTextureID = 0;
 	for (TextureId& id : mEatTextureIds) {
 		id = 0;
@@ -61,16 +65,16 @@ void PlayerAnimatorComponent::Render()
 	switch (mPlayerController->GetPlayerDirection())
 	{
 	case Direction::Up:
-		SpriteRenderer::Get()->Draw(mDisplayTextureID, pos, -Constants::HalfPi, Pivot::Center, Flip::None);
+		spriteRenderer->Draw(mDisplayTextureID, pos, -Constants::HalfPi, Pivot::Center, Flip::None);
 		break;
 	case Direction::Right:
-		SpriteRenderer::Get()->Draw(mDisplayTextureID, pos, 0.0, Pivot::Center, Flip::None);
+		spriteRenderer->Draw(mDisplayTextureID, pos, 0.0, Pivot::Center, Flip::None);
 		break;
 	case Direction::Down:
-		SpriteRenderer::Get()->Draw(mDisplayTextureID, pos, Constants::HalfPi, Pivot::Center, Flip::None);
+		spriteRenderer->Draw(mDisplayTextureID, pos, Constants::HalfPi, Pivot::Center, Flip::None);
 		break;
 	case Direction::Left:
-		SpriteRenderer::Get()->Draw(mDisplayTextureID, pos, 0.0, Pivot::Center, Flip::Horizontal);
+		spriteRenderer->Draw(mDisplayTextureID, pos, 0.0, Pivot::Center, Flip::Horizontal);
 		break;
 	}
 }

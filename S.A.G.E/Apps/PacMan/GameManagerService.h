@@ -63,6 +63,7 @@ private:
 	PlayerControllerComponent* mPlayerController = nullptr;
 	PlayerAnimatorComponent* mPlayerAnimator = nullptr;
 	SAGE::Coroutine::CoroutineSystem* mCoroutineSystem = nullptr;
+	SAGE::Graphics::SpriteRenderer* spriteRenderer = nullptr;
 
 	// Game
 	int mLevel = 1;
@@ -88,6 +89,14 @@ private:
 	GhostAnimatorComponent* mBlinkyAnimator = nullptr;
 	GhostMode mGhostMode = GhostMode::Scatter;
 	GhostMode mPrevGhostMode = GhostMode::Scatter;
+
+	// Ghost Eaten
+	std::array<SAGE::Graphics::TextureId, 4> mEatenPointsTextureIDs;
+	int mTextureIDIndex = 0;
+	float mDisplayEatenPointsTimer = 0.0f;
+	const float mDisplayEatenPointsMaxTimer = 1.0f;
+	SAGE::Math::Vector2 mGhostEatenPosition = SAGE::Math::Vector2::Zero;
+	SAGE::Graphics::SoundId mGhostEatenSoundID = 0;
 
 	// Pellets
 	const int mMaxPelletCount = 244;

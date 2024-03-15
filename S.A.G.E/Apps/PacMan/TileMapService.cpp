@@ -349,9 +349,9 @@ float TileMapService::GetCost(const GridBasedGraph::Node* nodeA, const GridBased
 	const int toTileIndex = ToIndex(nodeB->columns, nodeB->row, mColumns);
 
 	const int tileType = mMap[toTileIndex].tileIndex;
-	const float multiplier = ((nodeA->columns != nodeB->columns) && (nodeA->row != nodeB->row)) ? 1.414f : 1.0f;
+	float multiplier = ((nodeA->columns != nodeB->columns) && (nodeA->row != nodeB->row)) ? 1.414f : 1.0f;
 
-	multiplier * 1.01f; //Multiplier a tie breaker to eliminate symmetry
+	multiplier *= 1.01f; //Multiplier a tie breaker to eliminate symmetry
 
 	//// Makes it harder to go through that tile example
 	//if (tileType == 1) {

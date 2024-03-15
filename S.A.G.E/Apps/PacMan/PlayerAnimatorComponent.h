@@ -24,6 +24,7 @@ private:
 	int mSpriteIndex = 0;
 	int mSpriteMaxIndex = 3;
 
+	SAGE::Graphics::SpriteRenderer* spriteRenderer = nullptr;
 	PlayerControllerComponent* mPlayerController = nullptr;
 	std::vector<SAGE::Graphics::TextureId> mEatTextureIds;
 	SAGE::Graphics::TextureId mDisplayTextureID = 0;

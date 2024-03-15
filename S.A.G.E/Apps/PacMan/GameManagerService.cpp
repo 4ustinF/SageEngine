@@ -21,10 +21,17 @@ void GameManagerService::Initialize()
 
 	// Init audio
 	mSoundEffectManager = SoundEffectManager::Get();
+	mGhostEatenSoundID = mSoundEffectManager->Load("eat_ghost.wav");
 	//mMunchID = mSoundEffectManager->Load("munch.wav"); // Need a better soundFX
 
 	auto tm = TextureManager::Get();
 	mPathFindingTextureID = tm->LoadTexture("../Sprites/PacMan/pathfinding.png");
+	mEatenPointsTextureIDs[0] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_200.png");
+	mEatenPointsTextureIDs[1] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_400.png");
+	mEatenPointsTextureIDs[2] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_800.png");
+	mEatenPointsTextureIDs[3] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_1600.png");
+
+	spriteRenderer = SpriteRenderer::Get();
 
 	SetLevelData();
 	SetIntersectionPoints();
@@ -34,6 +41,7 @@ void GameManagerService::Terminate()
 {
 	// Audio
 	mMunchID = 0;
+	mGhostEatenSoundID = 0;
 	mSoundEffectManager = nullptr;
 
 	// Pellets
@@ -55,6 +63,7 @@ void GameManagerService::Terminate()
 	mTileMapService = nullptr;
 	mPathFindingTextureID = 0;
 	mCoroutineSystem = nullptr;
+	spriteRenderer = nullptr;
 }
 
 void GameManagerService::Update(float deltaTime)
@@ -96,6 +105,11 @@ void GameManagerService::Update(float deltaTime)
 
 		CheckIfGhostAtePlayer();
 	}
+
+	// Timer to display points
+	if (mDisplayEatenPointsTimer > 0.0f) {
+		mDisplayEatenPointsTimer -= deltaTime;
+	}
 }
 
 void GameManagerService::Render()
@@ -103,8 +117,13 @@ void GameManagerService::Render()
 	mPlayerAnimator->Render();
 	mBlinkyAnimator->Render();
 
+	if (mDisplayEatenPointsTimer > 0.0f)
+	{
+		spriteRenderer->Draw(mEatenPointsTextureIDs[mTextureIDIndex], mGhostEatenPosition, 0.0, Pivot::Center, Flip::None);
+	}
+
 	//// TODO: This is for debugging purposes
-	Vector2 offset = mTileMapService->GetWorldOffset();
+	//Vector2 offset = mTileMapService->GetWorldOffset();
 
 	//for (const auto& pos : mBlinkyController->mTargetNodePositions)
 	//{
@@ -384,8 +403,12 @@ void GameManagerService::CheckIfPlayerAteGhost()
 
 	if (mPlayerController->GetPlayerCords() == mBlinkyController->GetTileCords())
 	{
+		mSoundEffectManager->Play(mGhostEatenSoundID, false, 0.5f, Random::UniformFloat(-0.1f, 0.15f), Random::UniformFloat(-0.1f, 0.1f));
+		mDisplayEatenPointsTimer = mDisplayEatenPointsMaxTimer;
+		mGhostEatenPosition = mBlinkyController->GetPosition();
+		mTextureIDIndex = mGhostAteInFrenzy;
+
 		mPlayerPoints += mPointsPerGhostAte * static_cast<int>(std::pow(2, mGhostAteInFrenzy++));
-		//mBlinkyController->Respawn();
 		mBlinkyController->IsAten();
 	}
 }

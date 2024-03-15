@@ -81,6 +81,7 @@ private:
 	const int mPlayerStartingLives = 3;
 	int mPlayerLives = 3;
 	int mPlayerPoints = 0;
+	int mMaxPlayerPoints = 0;
 	bool mIsInFrenzy = false;
 	int mGhostAteInFrenzy = 0;
 	const int mPointsPerGhostAte = 200;
@@ -107,7 +108,11 @@ private:
 	std::vector<SAGE::Math::Vector2Int> mCachedBigPelletCords;
 
 	// UI
+	SAGE::Graphics::TextureId mPacmanLifeTextureID = 0;
 	std::string mPlayerPointsString = "0";
+	std::string mHighScoreString = "0";
+	float mHighScoreStringXOffset = 330.0f; // mHalfScreenWidthX - half size("0")
+	const float mHalfScreenWidthX = 336.0f;
 
 	// Map
 	std::vector<SAGE::Math::Vector2Int> mIntersections; // TODO: Don't use a vector. This uses linear look up times. Cord, pos

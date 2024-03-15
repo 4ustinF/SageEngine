@@ -11,6 +11,10 @@
       "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GhostControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GhostControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -26,8 +30,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WinMain.cpp",
+              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\WinMain.cpp",
+              "RelativeDocumentMoniker": "Apps\\PacMan\\WinMain.cpp",
+              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\WinMain.cpp",
+              "RelativeToolTip": "Apps\\PacMan\\WinMain.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-15T16:15:00.649Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -36,7 +53,7 @@
               "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.cpp",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp",
               "RelativeToolTip": "Apps\\PacMan\\GameManagerService.cpp",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAAAHkAAABBAAAA",
+              "ViewState": "AQIAALMBAAAAAAAAAAAAAMYBAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-15T05:35:51.111Z",
               "EditorCaption": ""
@@ -49,14 +66,14 @@
               "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.h",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h",
               "RelativeToolTip": "Apps\\PacMan\\GameManagerService.h",
-              "ViewState": "AQIAADcAAAAAAAAAAAAIwEkAAAAcAAAA",
+              "ViewState": "AQIAAGEAAAAAAAAAAAAIwHIAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-03-08T06:53:40.436Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "GhostControllerComponent.cpp",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GhostControllerComponent.cpp",
               "RelativeDocumentMoniker": "Apps\\PacMan\\GhostControllerComponent.cpp",
@@ -64,12 +81,11 @@
               "RelativeToolTip": "Apps\\PacMan\\GhostControllerComponent.cpp",
               "ViewState": "AQIAAAkAAAAAAAAAAAAQwFwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-08T06:32:32.139Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-08T06:32:32.139Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "GhostControllerComponent.h",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GhostControllerComponent.h",
               "RelativeDocumentMoniker": "Apps\\PacMan\\GhostControllerComponent.h",
@@ -77,8 +93,7 @@
               "RelativeToolTip": "Apps\\PacMan\\GhostControllerComponent.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-08T06:32:31.636Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-08T06:32:31.636Z"
             }
           ]
         }

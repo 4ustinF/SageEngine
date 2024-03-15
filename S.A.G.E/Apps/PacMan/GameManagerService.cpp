@@ -30,6 +30,7 @@ void GameManagerService::Initialize()
 	mEatenPointsTextureIDs[1] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_400.png");
 	mEatenPointsTextureIDs[2] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_800.png");
 	mEatenPointsTextureIDs[3] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_1600.png");
+	mPacmanLifeTextureID = tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_01.png");
 
 	mSpriteRenderer = SpriteRenderer::Get();
 	mFont = Font::Get();
@@ -44,6 +45,12 @@ void GameManagerService::Terminate()
 	mMunchID = 0;
 	mGhostEatenSoundID = 0;
 	mSoundEffectManager = nullptr;
+
+	// UI
+	mFont = nullptr;
+	mSpriteRenderer = nullptr;
+	mPacmanLifeTextureID = 0;
+	mPathFindingTextureID = 0;
 
 	// Pellets
 	mCachedSmallPelletCords.clear();
@@ -62,10 +69,7 @@ void GameManagerService::Terminate()
 	mIntersections.clear();
 	mIntersectionsPositions.clear();
 	mTileMapService = nullptr;
-	mPathFindingTextureID = 0;
 	mCoroutineSystem = nullptr;
-	mSpriteRenderer = nullptr;
-	mFont = nullptr;
 }
 
 void GameManagerService::Update(float deltaTime)
@@ -119,11 +123,22 @@ void GameManagerService::Render()
 	mPlayerAnimator->Render();
 	mBlinkyAnimator->Render();
 
+	// Current Score
 	mFont->Draw("Current Score", 12.0f, 9.0f, 25.0f, Colors::White);
 	mFont->Draw(mPlayerPointsString.c_str(), 12.0f, 34.0f, 25.0f, Colors::White);
 
-	if (mDisplayEatenPointsTimer > 0.0f)
-	{
+	// HighScore
+	//float width = mFont->GetStringWidth(L"High Score", 25.0f); //672, 336, 136
+	mFont->Draw("High Score", 268.0f, 9.0f, 25.0f, Colors::White); //268 = 336 - (136 / 2) = half screen width - half text size
+	mFont->Draw(mHighScoreString.c_str(), mHighScoreStringXOffset, 34.0f, 25.0f, Colors::White);
+
+	// Player Lives
+	for (int i = 0; i < mPlayerLives; ++i) {
+		mSpriteRenderer->Draw(mPacmanLifeTextureID, {50.0f + (i * 46.0f), 841.0f}, 0.0, Pivot::Center, Flip::Horizontal);
+	}
+
+	// Points upon ghost eaten
+	if (mDisplayEatenPointsTimer > 0.0f) {
 		mSpriteRenderer->Draw(mEatenPointsTextureIDs[mTextureIDIndex], mGhostEatenPosition, 0.0, Pivot::Center, Flip::None);
 	}
 
@@ -146,6 +161,7 @@ void GameManagerService::DebugUI()
 	ImGui::DragInt("Level##GameManagerService", &mLevel, 0.5f);
 	ImGui::DragInt("Lives##GameManagerService", &mPlayerLives, 0.5f);
 	ImGui::DragInt("Points##GameManagerService", &mPlayerPoints, 0.5f);
+	ImGui::DragInt("High Score##GameManagerService", &mMaxPlayerPoints, 0.5f);
 	ImGui::DragInt("Remaining Pellet Count##GameManagerService", &mRemainingPelletCount, 0.5f);
 }
 
@@ -422,6 +438,23 @@ void GameManagerService::AddPlayerPoints(int pointsToAdd)
 {
 	mPlayerPoints += pointsToAdd;
 	mPlayerPointsString = std::to_string(mPlayerPoints);
+
+	if (mPlayerPoints > mMaxPlayerPoints)
+	{
+		mMaxPlayerPoints = mPlayerPoints;
+		mHighScoreString = mPlayerPointsString;
+
+		// Convert const char* -> const wchar_t*
+		const char* highScore = mHighScoreString.c_str();
+		const size_t len = std::strlen(highScore) + 1; // +1 for null terminator
+		wchar_t* wstr = new wchar_t[len];
+		std::mbstowcs(wstr, highScore, len);
+
+		mHighScoreStringXOffset = 336.0f - (mFont->GetStringWidth(wstr, 25.0f) * 0.5f);
+
+		// Free memory
+		delete[] wstr;
+	}
 }
 
 void GameManagerService::SetGhostChaseScatterMode(GhostMode mode)

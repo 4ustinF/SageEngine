@@ -31,7 +31,8 @@ void GameManagerService::Initialize()
 	mEatenPointsTextureIDs[2] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_800.png");
 	mEatenPointsTextureIDs[3] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_1600.png");
 
-	spriteRenderer = SpriteRenderer::Get();
+	mSpriteRenderer = SpriteRenderer::Get();
+	mFont = Font::Get();
 
 	SetLevelData();
 	SetIntersectionPoints();
@@ -63,7 +64,8 @@ void GameManagerService::Terminate()
 	mTileMapService = nullptr;
 	mPathFindingTextureID = 0;
 	mCoroutineSystem = nullptr;
-	spriteRenderer = nullptr;
+	mSpriteRenderer = nullptr;
+	mFont = nullptr;
 }
 
 void GameManagerService::Update(float deltaTime)
@@ -117,9 +119,12 @@ void GameManagerService::Render()
 	mPlayerAnimator->Render();
 	mBlinkyAnimator->Render();
 
+	mFont->Draw("Current Score", 12.0f, 9.0f, 25.0f, Colors::White);
+	mFont->Draw(mPlayerPointsString.c_str(), 12.0f, 34.0f, 25.0f, Colors::White);
+
 	if (mDisplayEatenPointsTimer > 0.0f)
 	{
-		spriteRenderer->Draw(mEatenPointsTextureIDs[mTextureIDIndex], mGhostEatenPosition, 0.0, Pivot::Center, Flip::None);
+		mSpriteRenderer->Draw(mEatenPointsTextureIDs[mTextureIDIndex], mGhostEatenPosition, 0.0, Pivot::Center, Flip::None);
 	}
 
 	//// TODO: This is for debugging purposes
@@ -165,7 +170,7 @@ void GameManagerService::SetupGame()
 	mBlinkyAnimator = blinkyObject->GetComponent<GhostAnimatorComponent>();
 
 	mLevel = 1;
-	mPlayerPoints = 0;
+	AddPlayerPoints(-mPlayerPoints);
 	mPlayerLives = mPlayerStartingLives;
 	mRemainingPelletCount = mMaxPelletCount;
 
@@ -181,7 +186,7 @@ void GameManagerService::AtePellet(PelletType pelletType)
 {
 	//mSoundEffectManager->Play(mMunchID, false, 0.5f, Random::UniformFloat(-0.1f, 0.15f), Random::UniformFloat(-0.1f, 0.1f));
 
-	mPlayerPoints += static_cast<int>(pelletType);
+	AddPlayerPoints(static_cast<int>(pelletType));
 
 	if (pelletType == PelletType::Big) {
 		mPlayerController->SetPlayerSpeed(mCurrentLevelData.FrightPacManSpeed);
@@ -251,7 +256,7 @@ void GameManagerService::RestartGame()
 	// Restart Player
 
 	mLevel = 1;
-	mPlayerPoints = 0;
+	AddPlayerPoints(-mPlayerPoints);
 	mPlayerLives = mPlayerStartingLives;
 	mRemainingPelletCount = mMaxPelletCount;
 
@@ -408,9 +413,15 @@ void GameManagerService::CheckIfPlayerAteGhost()
 		mGhostEatenPosition = mBlinkyController->GetPosition();
 		mTextureIDIndex = mGhostAteInFrenzy;
 
-		mPlayerPoints += mPointsPerGhostAte * static_cast<int>(std::pow(2, mGhostAteInFrenzy++));
+		AddPlayerPoints(mPointsPerGhostAte * static_cast<int>(std::pow(2, mGhostAteInFrenzy++)));
 		mBlinkyController->IsAten();
 	}
+}
+
+void GameManagerService::AddPlayerPoints(int pointsToAdd)
+{
+	mPlayerPoints += pointsToAdd;
+	mPlayerPointsString = std::to_string(mPlayerPoints);
 }
 
 void GameManagerService::SetGhostChaseScatterMode(GhostMode mode)

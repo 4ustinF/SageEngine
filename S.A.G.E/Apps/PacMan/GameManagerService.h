@@ -63,7 +63,8 @@ private:
 	PlayerControllerComponent* mPlayerController = nullptr;
 	PlayerAnimatorComponent* mPlayerAnimator = nullptr;
 	SAGE::Coroutine::CoroutineSystem* mCoroutineSystem = nullptr;
-	SAGE::Graphics::SpriteRenderer* spriteRenderer = nullptr;
+	SAGE::Graphics::SpriteRenderer* mSpriteRenderer = nullptr;
+	SAGE::Graphics::Font* mFont = nullptr;
 
 	// Game
 	int mLevel = 1;
@@ -76,6 +77,7 @@ private:
 	float mFrightTimer = 0.0f;
 
 	// Player
+	void AddPlayerPoints(int pointsToAdd);
 	const int mPlayerStartingLives = 3;
 	int mPlayerLives = 3;
 	int mPlayerPoints = 0;
@@ -103,6 +105,9 @@ private:
 	int mRemainingPelletCount = 244;
 	std::vector<SAGE::Math::Vector2Int> mCachedSmallPelletCords;
 	std::vector<SAGE::Math::Vector2Int> mCachedBigPelletCords;
+
+	// UI
+	std::string mPlayerPointsString = "0";
 
 	// Map
 	std::vector<SAGE::Math::Vector2Int> mIntersections; // TODO: Don't use a vector. This uses linear look up times. Cord, pos

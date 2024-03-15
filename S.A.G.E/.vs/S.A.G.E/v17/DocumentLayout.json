@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\GitHub\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -21,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GhostControllerComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GhostControllerComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,32 +30,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GameState.cpp",
-              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.cpp",
-              "RelativeDocumentMoniker": "Apps\\PacMan\\GameState.cpp",
-              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.cpp",
-              "RelativeToolTip": "Apps\\PacMan\\GameState.cpp",
-              "ViewState": "AQIAADQAAAAAAAAAAAAAAEcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-15T17:21:48.37Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GameState.h",
-              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.h",
-              "RelativeDocumentMoniker": "Apps\\PacMan\\GameState.h",
-              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.h",
-              "RelativeToolTip": "Apps\\PacMan\\GameState.h",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAPAAAA",
+              "Title": "Enums.h",
+              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\Enums.h",
+              "RelativeDocumentMoniker": "Apps\\PacMan\\Enums.h",
+              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\Enums.h",
+              "RelativeToolTip": "Apps\\PacMan\\Enums.h",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAACQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-15T17:21:47.868Z",
+              "WhenOpened": "2024-03-15T18:16:49.869Z",
               "EditorCaption": ""
             },
             {
@@ -70,20 +53,20 @@
               "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.cpp",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp",
               "RelativeToolTip": "Apps\\PacMan\\GameManagerService.cpp",
-              "ViewState": "AQIAAIQAAAAAAAAAAAAIwI8AAAAAAAAA",
+              "ViewState": "AQIAAGkAAAAAAAAAAAAAAIUAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-15T05:35:51.111Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "GameManagerService.h",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h",
               "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.h",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h",
               "RelativeToolTip": "Apps\\PacMan\\GameManagerService.h",
-              "ViewState": "AQIAAE0AAAAAAAAAAAAAwFkAAAAeAAAA",
+              "ViewState": "AQIAAGkAAAAAAAAAAAAAAHgAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-03-08T06:53:40.436Z",
               "EditorCaption": ""

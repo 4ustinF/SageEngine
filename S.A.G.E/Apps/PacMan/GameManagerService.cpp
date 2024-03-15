@@ -32,6 +32,15 @@ void GameManagerService::Initialize()
 	mEatenPointsTextureIDs[3] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/Points/sprite_1600.png");
 	mPacmanLifeTextureID = tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_01.png");
 
+	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Cherries, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_cherry.png")));
+	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Strawberry, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_strawberry.png")));
+	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Peach, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_peach.png")));
+	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Apple, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_apple.png")));
+	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Grapes, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_grapes.png")));
+	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Galaxian, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_galaxian.png")));
+	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Bell, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_bell.png")));
+	mBonusSymbolTextureIDs.insert(std::make_pair(BonusSymbol::Key, tm->LoadTexture("../Sprites/PacMan/BonusSymbols/sprite_key.png")));
+
 	mSpriteRenderer = SpriteRenderer::Get();
 	mFont = Font::Get();
 
@@ -55,6 +64,10 @@ void GameManagerService::Terminate()
 	// Pellets
 	mCachedSmallPelletCords.clear();
 	mCachedBigPelletCords.clear();
+
+	// Bonus Symbols
+	mBonusSymbolTextureID = 0;
+	mBonusSymbolTextureIDs.clear();
 
 	// Ghost
 	mBlinkyController = nullptr;
@@ -116,10 +129,26 @@ void GameManagerService::Update(float deltaTime)
 	if (mDisplayEatenPointsTimer > 0.0f) {
 		mDisplayEatenPointsTimer -= deltaTime;
 	}
+
+	if (mIsBonusSymbolActive)
+	{
+		mBonusSymbolTimer -= deltaTime;
+		if (mBonusSymbolTimer <= 0.0f) { // Deactivate bonus symbol if it hasn't picked up in time 
+			mIsBonusSymbolActive = false;
+		}
+		else {
+			// Check for collision
+		}
+	}
 }
 
 void GameManagerService::Render()
 {
+	if (mIsBonusSymbolActive)
+	{
+		mSpriteRenderer->Draw(mBonusSymbolTextureID, mBonusSymbolPosition);
+	}
+
 	mPlayerAnimator->Render();
 	mBlinkyAnimator->Render();
 
@@ -139,7 +168,7 @@ void GameManagerService::Render()
 
 	// Points upon ghost eaten
 	if (mDisplayEatenPointsTimer > 0.0f) {
-		mSpriteRenderer->Draw(mEatenPointsTextureIDs[mTextureIDIndex], mGhostEatenPosition, 0.0, Pivot::Center, Flip::None);
+		mSpriteRenderer->Draw(mEatenPointsTextureIDs[mTextureIDIndex], mGhostEatenPosition);
 	}
 
 	//// TODO: This is for debugging purposes
@@ -147,12 +176,12 @@ void GameManagerService::Render()
 
 	//for (const auto& pos : mBlinkyController->mTargetNodePositions)
 	//{
-	//	SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
+	//	SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset);
 	//}
 
 	//for (const auto& pos : mIntersectionsPositions)
 	//{
-	//	SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset, 0.0, Pivot::Center, Flip::None);
+	//	SpriteRenderer::Get()->Draw(mPathFindingTextureID, pos + offset);
 	//}
 }
 
@@ -212,7 +241,15 @@ void GameManagerService::AtePellet(PelletType pelletType)
 		SetGhostChaseScatterMode(GhostMode::Frightened);
 	}
 
-	if (--mRemainingPelletCount <= 0) {
+	--mRemainingPelletCount;
+
+	if (mRemainingPelletCount == mBonusSymbol1RemainingPellets || mRemainingPelletCount == mBonusSymbol2RemainingPellets)
+	{
+		mIsBonusSymbolActive = true;
+		mBonusSymbolTimer = mBonusSymbolMaxTime;
+	}
+
+	if (mRemainingPelletCount <= 0) {
 		mCoroutineSystem->StartCoroutine(GoToNextLevel());
 	}
 }
@@ -301,6 +338,8 @@ void GameManagerService::SetupLevel()
 	mScatterChaseIndex = 0;
 	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
 	mTickScatterChaseTimer = true;
+
+	mBonusSymbolTextureID = mBonusSymbolTextureIDs.at(mCurrentLevelData.BonusSymbol);
 
 	mIsInFrenzy = false;
 }

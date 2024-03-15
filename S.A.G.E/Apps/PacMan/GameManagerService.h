@@ -115,7 +115,14 @@ private:
 	const float mHalfScreenWidthX = 336.0f;
 
 	// Bonus Symbols
-
+	bool mIsBonusSymbolActive = false;
+	const SAGE::Math::Vector2 mBonusSymbolPosition = SAGE::Math::Vector2(338.0f, 492.0f); // TODO: Find bonus symbol position
+	const int mBonusSymbol1RemainingPellets = 174; // 244 - 70
+	const int mBonusSymbol2RemainingPellets = 74; // 244 -170
+	const float mBonusSymbolMaxTime = 10.0f;
+	float mBonusSymbolTimer = 0.0f;
+	std::map<BonusSymbol, SAGE::Graphics::TextureId> mBonusSymbolTextureIDs;
+	SAGE::Graphics::TextureId mBonusSymbolTextureID = 0;
 
 	// Map
 	std::vector<SAGE::Math::Vector2Int> mIntersections; // TODO: Don't use a vector. This uses linear look up times. Cord, pos

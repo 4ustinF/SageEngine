@@ -81,11 +81,14 @@ private:
 	void AddPlayerPoints(int pointsToAdd);
 	const int mPlayerStartingLives = 3;
 	int mPlayerLives = 3;
+	const int mMaxPlayerLives = 5;
 	int mPlayerPoints = 0;
 	int mMaxPlayerPoints = 0;
 	bool mIsInFrenzy = false;
 	int mGhostAteInFrenzy = 0;
 	const int mPointsPerGhostAte = 200;
+	int mPlayerPointsTillNextBonusLife = 0;
+	const int mPlayerPointsNeededForBonusLife = 10000;
 
 	// Ghost
 	void SetGhostChaseScatterMode(GhostMode mode);

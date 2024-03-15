@@ -336,6 +336,7 @@ void GameManagerService::RestartGame()
 	AddPlayerPoints(-mPlayerPoints);
 	mPlayerLives = mPlayerStartingLives;
 	mRemainingPelletCount = mMaxPelletCount;
+	mPlayerPointsTillNextBonusLife = 0;
 
 	mBonusSymbolTextureIds.clear();
 
@@ -514,6 +515,13 @@ void GameManagerService::AddPlayerPoints(int pointsToAdd)
 {
 	mPlayerPoints += pointsToAdd;
 	mPlayerPointsString = std::to_string(mPlayerPoints);
+
+	mPlayerPointsTillNextBonusLife += pointsToAdd;
+	if (mPlayerPointsTillNextBonusLife >= mPlayerPointsNeededForBonusLife)
+	{
+		mPlayerPointsTillNextBonusLife -= mPlayerPointsNeededForBonusLife;
+		mPlayerLives = Min(++mPlayerLives, mMaxPlayerLives);
+	}
 
 	if (mPlayerPoints > mMaxPlayerPoints)
 	{

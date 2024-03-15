@@ -263,6 +263,21 @@ namespace SAGE::Math
 	#pragma region ---Rect---
 
 	inline bool IsEmpty(const Rect& rect) { return rect.right <= rect.left || rect.bottom <= rect.top; }
+	inline bool IsRectOverlap(const Rect& r1, const Rect& r2) 
+	{
+		// Check if one rect is on left side of the other
+		if (r1.right <= r2.left || r2.right <= r1.left) {
+			return false;
+		}
+
+		// Check if one rect is above the other
+		if (r1.bottom <= r2.top || r2.bottom <= r1.top) {
+			return false;
+		}
+
+		// If none of the sides of one rectangle are outside the other, they are overlapping
+		return true;
+	}
 
 #pragma endregion
 

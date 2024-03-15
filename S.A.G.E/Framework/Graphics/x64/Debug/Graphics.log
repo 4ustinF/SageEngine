@@ -1,8 +1,6 @@
 ﻿  Precompiled.cpp
   Animation.cpp
   AnimationBuilder.cpp
-  AnimationIO.cpp
-  AnimationUtil.cpp
 D:\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(54,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   (compiling source file '/Src/Animation.cpp')
   D:\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(54,41):
@@ -14,6 +12,8 @@ D:\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(54,41): warnin
               T=SAGE::Math::Vector3
           ]
   
+  AnimationIO.cpp
+  AnimationUtil.cpp
   Animator.cpp
   AudioSystem.cpp
   BlendState.cpp
@@ -110,6 +110,7 @@ D:\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning 
   Compiling...
   ParticleEffect.cpp
   PixelShader.cpp
+  PostProccessingEffect.cpp
   ReflectionEffect.cpp
   RenderObject.cpp
   RenderTarget.cpp
@@ -335,7 +336,6 @@ D:\GitHub\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(677,92): warn
   Terrain.cpp
   TerrainEffect.cpp
   Texture.cpp
-  PostProccessingEffect.cpp
   TextureManager.cpp
   TexturingEffect.cpp
   ToonEffect .cpp

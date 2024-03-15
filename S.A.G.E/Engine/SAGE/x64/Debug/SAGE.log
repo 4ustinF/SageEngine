@@ -7,8 +7,8 @@
   CameraService.cpp
   CameraUtil.cpp
   ColliderComponent.cpp
-  FollowCameraControllerComponent.cpp
   FPSCameraControllerComponent.cpp
+  FollowCameraControllerComponent.cpp
   GameObject.cpp
   GameObjectFactory.cpp
   GameWorld.cpp

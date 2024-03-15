@@ -22,6 +22,7 @@ void GameManagerService::Initialize()
 	// Init audio
 	mSoundEffectManager = SoundEffectManager::Get();
 	mGhostEatenSoundID = mSoundEffectManager->Load("eat_ghost.wav");
+	mBonusSymbolSoundID = mSoundEffectManager->Load("eat_bonus.wav");
 	//mMunchID = mSoundEffectManager->Load("munch.wav"); // Need a better soundFX
 
 	auto tm = TextureManager::Get();
@@ -53,6 +54,7 @@ void GameManagerService::Terminate()
 	// Audio
 	mMunchID = 0;
 	mGhostEatenSoundID = 0;
+	mBonusSymbolSoundID = 0;
 	mSoundEffectManager = nullptr;
 
 	// UI
@@ -137,7 +139,7 @@ void GameManagerService::Update(float deltaTime)
 			mIsBonusSymbolActive = false;
 		}
 		else {
-			// Check for collision
+			CheckIfPlayerAteBonusSymbol();
 		}
 	}
 }
@@ -229,7 +231,7 @@ void GameManagerService::StartGame()
 
 void GameManagerService::AtePellet(PelletType pelletType)
 {
-	//mSoundEffectManager->Play(mMunchID, false, 0.5f, Random::UniformFloat(-0.1f, 0.15f), Random::UniformFloat(-0.1f, 0.1f));
+	//PlayAudioOneShot(mMunchID);
 
 	AddPlayerPoints(static_cast<int>(pelletType));
 
@@ -461,13 +463,23 @@ void GameManagerService::CheckIfPlayerAteGhost()
 
 	if (mPlayerController->GetPlayerCords() == mBlinkyController->GetTileCords())
 	{
-		mSoundEffectManager->Play(mGhostEatenSoundID, false, 0.5f, Random::UniformFloat(-0.1f, 0.15f), Random::UniformFloat(-0.1f, 0.1f));
+		PlayAudioOneShot(mGhostEatenSoundID);
 		mDisplayEatenPointsTimer = mDisplayEatenPointsMaxTimer;
 		mGhostEatenPosition = mBlinkyController->GetPosition();
 		mTextureIDIndex = mGhostAteInFrenzy;
 
 		AddPlayerPoints(mPointsPerGhostAte * static_cast<int>(std::pow(2, mGhostAteInFrenzy++)));
 		mBlinkyController->IsAten();
+	}
+}
+
+void GameManagerService::CheckIfPlayerAteBonusSymbol()
+{
+	if (IsRectOverlap(mPlayerController->GetRect(), mBonusSymbolRect))
+	{
+		PlayAudioOneShot(mBonusSymbolSoundID);
+		AddPlayerPoints(static_cast<int>(mCurrentLevelData.BonusSymbol));
+		mIsBonusSymbolActive = false;
 	}
 }
 
@@ -498,6 +510,11 @@ void GameManagerService::SetGhostChaseScatterMode(GhostMode mode)
 {
 	mGhostMode = mode;
 	mBlinkyController->SetGhostMode(mGhostMode);
+}
+
+void GameManagerService::PlayAudioOneShot(const SAGE::Graphics::SoundId soundID)
+{
+	mSoundEffectManager->Play(soundID, false, mAudioVolume, Random::UniformFloat(-0.1f, 0.15f), Random::UniformFloat(-0.1f, 0.1f));
 }
 
 

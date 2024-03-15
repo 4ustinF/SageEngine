@@ -22,6 +22,7 @@ public:
 	void Respawn();
 
 	SAGE::Math::Vector2 GetPosition() const { return mPosition; }
+	//SAGE::Math::Rect GetRect() const { return {mPos} }
 	Direction GetDirection() const { return mDirection; }
 	SAGE::Math::Vector2Int GetTileCords() const { return mTileCords; }
 	std::vector<SAGE::Math::Vector2> mTargetNodePositions;

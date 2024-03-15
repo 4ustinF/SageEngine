@@ -57,6 +57,7 @@ private:
 	void AteGhost();
 	void CheckIfGhostAtePlayer();
 	void CheckIfPlayerAteGhost();
+	void CheckIfPlayerAteBonusSymbol();
 
 	// References
 	TileMapService* mTileMapService = nullptr;
@@ -99,7 +100,6 @@ private:
 	float mDisplayEatenPointsTimer = 0.0f;
 	const float mDisplayEatenPointsMaxTimer = 1.0f;
 	SAGE::Math::Vector2 mGhostEatenPosition = SAGE::Math::Vector2::Zero;
-	SAGE::Graphics::SoundId mGhostEatenSoundID = 0;
 
 	// Pellets
 	const int mMaxPelletCount = 244;
@@ -117,6 +117,7 @@ private:
 	// Bonus Symbols
 	bool mIsBonusSymbolActive = false;
 	const SAGE::Math::Vector2 mBonusSymbolPosition = SAGE::Math::Vector2(338.0f, 492.0f); // TODO: Find bonus symbol position
+	const SAGE::Math::Rect mBonusSymbolRect = { mBonusSymbolPosition.x - 10.0f, mBonusSymbolPosition.y - 10.0f, mBonusSymbolPosition.x + 10.0f, mBonusSymbolPosition.y + 10.0f };
 	const int mBonusSymbol1RemainingPellets = 174; // 244 - 70
 	const int mBonusSymbol2RemainingPellets = 74; // 244 -170
 	const float mBonusSymbolMaxTime = 10.0f;
@@ -129,8 +130,12 @@ private:
 	std::vector<SAGE::Math::Vector2> mIntersectionsPositions;
 
 	// Audio
+	void PlayAudioOneShot(const SAGE::Graphics::SoundId soundID);
+	const float mAudioVolume = 0.5f;
 	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
-	SAGE::Graphics::SoundId mMunchID;
+	SAGE::Graphics::SoundId mMunchID = 0;
+	SAGE::Graphics::SoundId mGhostEatenSoundID = 0;
+	SAGE::Graphics::SoundId mBonusSymbolSoundID = 0;
 
 	// Debug path finding
 	SAGE::Graphics::TextureId mPathFindingTextureID = 0;

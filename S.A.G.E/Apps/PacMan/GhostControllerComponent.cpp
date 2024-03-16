@@ -227,9 +227,18 @@ void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 {
 	const Vector2Int mEndPos = GetTargetCords();
 
-	// In case we path find to something to close. Usually the player so continuing in the same direction is the preferred direction. 
-	if (abs(mTileCords.x - mEndPos.x) <= 1 && abs(mTileCords.y - mEndPos.y) <= 1)
-	{
+	// Check if the target is within one tile away. 
+	// Old ghost path finding method. Good for up close as it gives us the same result without more complexity.
+	const int dx = mEndPos.x - mTileCords.x;
+	const int dy = mEndPos.y - mTileCords.y;
+	if (std::abs(dx) + std::abs(dy) <= 1) {
+		if (std::abs(dx) > std::abs(dy)) {
+			mDirection = dx > 0 ? Direction::Right : Direction::Left;
+		}
+		else {
+			mDirection = dy > 0 ? Direction::Down : Direction::Up;
+		}
+	
 		CalculateTargetPositionContinuedDirection();
 		return;
 	}
@@ -263,29 +272,8 @@ void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 
 	mTargetNodePositions = std::move(mTileMapService->FindPath(mTileCords.x, mTileCords.y, mEndPos.x, mEndPos.y));
 
-	if (mTargetNodePositions.size() >= 2)
-	{
-		const Vector2& newPos = mTargetNodePositions[1] + mWorldOffset;
-
-		if (newPos.x > mTargetPosition.x) {
-			mDirection = Direction::Right;
-		}
-		else if (newPos.x < mTargetPosition.x) {
-			mDirection = Direction::Left;
-		}
-		else if (newPos.y > mTargetPosition.y) {
-			mDirection = Direction::Down;
-		}
-		else if (newPos.y < mTargetPosition.y) {
-			mDirection = Direction::Up;
-		}
-
-		mTargetPosition = newPos;
-	}
-
 	// Unblock tile
 	GridBasedGraph::Node* nodeToUnblock = graph.GetNode(blockTileCords.x, blockTileCords.y);
-
 	if (!mTileMapService->IsBlocked(mTileCords.x, mTileCords.y - 1)) { // North
 		GridBasedGraph::Node* northNode = graph.GetNode(blockTileCords.x, blockTileCords.y - 1);
 		northNode->neighbors[GridBasedGraph::South] = nodeToUnblock;
@@ -306,6 +294,24 @@ void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 		westNode->neighbors[GridBasedGraph::East] = nodeToUnblock;
 		nodeToUnblock->neighbors[GridBasedGraph::West] = westNode;
 	}
+
+	// Get new target position
+	const Vector2& newPos = mTargetNodePositions[1] + mWorldOffset;
+
+	if (newPos.x > mTargetPosition.x) {
+		mDirection = Direction::Right;
+	}
+	else if (newPos.x < mTargetPosition.x) {
+		mDirection = Direction::Left;
+	}
+	else if (newPos.y > mTargetPosition.y) {
+		mDirection = Direction::Down;
+	}
+	else if (newPos.y < mTargetPosition.y) {
+		mDirection = Direction::Up;
+	}
+
+	mTargetPosition = newPos;
 }
 
 void GhostControllerComponent::CalculateTargetPositionContinuedDirection()

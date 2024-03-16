@@ -93,6 +93,11 @@ void GhostControllerComponent::Update(float deltaTime)
 
 	if (mGhostMode == GhostMode::Eaten) // Back at house
 	{
+		// Path find to mHomeCords
+		// We will then run into home enter rect
+			// mDirection = down
+			// mTargetPosition = 3 tiles down
+
 		if (mTileCords == mHomeCords) // TODO: Find a better way to respawn at home
 		{
 			Respawn();
@@ -296,22 +301,25 @@ void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 	}
 
 	// Get new target position
-	const Vector2& newPos = mTargetNodePositions[1] + mWorldOffset;
+	if (!mTargetNodePositions.empty())
+	{
+		const Vector2& newPos = mTargetNodePositions[1] + mWorldOffset;
 
-	if (newPos.x > mTargetPosition.x) {
-		mDirection = Direction::Right;
-	}
-	else if (newPos.x < mTargetPosition.x) {
-		mDirection = Direction::Left;
-	}
-	else if (newPos.y > mTargetPosition.y) {
-		mDirection = Direction::Down;
-	}
-	else if (newPos.y < mTargetPosition.y) {
-		mDirection = Direction::Up;
-	}
+		if (newPos.x > mTargetPosition.x) {
+			mDirection = Direction::Right;
+		}
+		else if (newPos.x < mTargetPosition.x) {
+			mDirection = Direction::Left;
+		}
+		else if (newPos.y > mTargetPosition.y) {
+			mDirection = Direction::Down;
+		}
+		else if (newPos.y < mTargetPosition.y) {
+			mDirection = Direction::Up;
+		}
 
-	mTargetPosition = newPos;
+		mTargetPosition = newPos;
+	}
 }
 
 void GhostControllerComponent::CalculateTargetPositionContinuedDirection()

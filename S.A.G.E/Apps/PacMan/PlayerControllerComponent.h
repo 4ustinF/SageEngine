@@ -24,7 +24,7 @@ public:
 	SAGE::Math::Vector2 GetPlayerPosition() const { return mPosition; }
 	SAGE::Math::Vector2Int GetPlayerCords() const { return mTileCords; }
 	Direction GetPlayerDirection() const { return mDirection; }
-	SAGE::Math::Rect GetRect() const { return { mPosition.x - mHalfPacmanSpriteSize, mPosition.y - mHalfPacmanSpriteSize, mPosition.x + mHalfPacmanSpriteSize, mPosition.y + mHalfPacmanSpriteSize }; } // TODO: Set this value on move cause we might call this a lot. Especially for ghost collision.
+	SAGE::Math::Rect GetRect() const { return { mPosition, mHalfSpriteSize }; }
 
 	bool GetIsPlayerInvincible() const { return mIsInvincible; }
 
@@ -56,8 +56,8 @@ private:
 	Direction mPreMoveDirection = Direction::None;
 	bool mIsInvincible = false;
 
-	const float mPacmanSpriteSize = 39.0f;
-	const float mHalfPacmanSpriteSize = 19.5f;
+	const float mSpriteSize = 39.0f;
+	const float mHalfSpriteSize = 19.5f; // TODO: Use a diff float for rects
 
 	// Map Data
 	float mTileSize = 0.0f;

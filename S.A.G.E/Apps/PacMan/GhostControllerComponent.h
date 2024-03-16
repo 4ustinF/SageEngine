@@ -22,7 +22,7 @@ public:
 	void Respawn();
 
 	SAGE::Math::Vector2 GetPosition() const { return mPosition; }
-	//SAGE::Math::Rect GetRect() const { return {mPos} }
+	SAGE::Math::Rect GetRect() const { return { mPosition, mHalfSpriteSize }; }
 	Direction GetDirection() const { return mDirection; }
 	SAGE::Math::Vector2Int GetTileCords() const { return mTileCords; }
 	std::vector<SAGE::Math::Vector2> mTargetNodePositions;
@@ -63,7 +63,12 @@ private:
 	GhostMode mGhostMode = GhostMode::Frightened;
 
 	// Target
-	int mTargetIndex = 0;
+	int mTargetIndex = 0; // TODO: Rename
+
+	// Sprite data
+	const float mHalfSpriteSize = 21.0f;
+
+	// Ghost home
 
 	// Map Data
 	float mTileSize = 0.0f;

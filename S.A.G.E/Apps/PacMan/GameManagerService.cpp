@@ -334,11 +334,11 @@ void GameManagerService::RepopulatePellets()
 
 void GameManagerService::RestartGame()
 {
-	mLevel = 1;
 	AddPlayerPoints(-mPlayerPoints);
+	mLevel = 1;
+	mPlayerPointsTillNextBonusLife = 0;
 	mPlayerLives = mPlayerStartingLives;
 	mRemainingPelletCount = mMaxPelletCount;
-	mPlayerPointsTillNextBonusLife = 0;
 
 	mBonusSymbolTextureIds.clear();
 
@@ -373,6 +373,7 @@ void GameManagerService::SetupLevel()
 	mBonusSymbolTextureIdsXStartOffset = mScreenWidth - (mBonusSymbolTextureIds.size() * mBonusSymbolTextureIdsXSpacing);
 
 	mIsInFrenzy = false;
+	mGhostAteInFrenzy = 0;
 }
 
 void GameManagerService::RestartLevel()
@@ -386,6 +387,7 @@ void GameManagerService::RestartLevel()
 	mTickScatterChaseTimer = true;
 
 	mIsInFrenzy = false;
+	mGhostAteInFrenzy = 0;
 }
 
 void GameManagerService::SetLevelData()

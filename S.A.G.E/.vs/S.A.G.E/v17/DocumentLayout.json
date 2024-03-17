@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "D:\\GitHub\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|Level{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|Level{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|solutionrelative:Assets\\Level\\pacman_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameManagerService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|Level{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|Level{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|solutionrelative:Assets\\Level\\pacman_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -42,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -72,39 +72,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "GameManagerService.cpp",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp",
               "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.cpp",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp",
               "RelativeToolTip": "Apps\\PacMan\\GameManagerService.cpp",
-              "ViewState": "AQIAAOIBAAAAAAAAAAAAAO0BAAABAAAA",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAEwPgAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-17T04:55:33.236Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "GameManagerService.h",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h",
               "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.h",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h",
               "RelativeToolTip": "Apps\\PacMan\\GameManagerService.h",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAADoAAAAkAAAA",
+              "ViewState": "AQIAAG4AAAAAAAAAAAAAAHMAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-03-17T04:55:32.724Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "pacman_level.json",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level.json",
               "RelativeDocumentMoniker": "Assets\\Level\\pacman_level.json",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level.json",
               "RelativeToolTip": "Assets\\Level\\pacman_level.json",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABwAAAAWAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABIAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-03-17T04:51:49.195Z",
               "EditorCaption": ""

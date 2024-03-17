@@ -75,6 +75,10 @@ private:
 	bool mTickScatterChaseTimer = true;
 	float mScatterChaseTimer = 0.0f;
 	float mFrightTimer = 0.0f;
+	void AddIteration();
+	int mNumOfIterations = 0;
+	std::string mNumOfIterationsStr = "0";
+	float mIterationXPos = 0.0f;
 
 	// Player
 	void AddPlayerPoints(int pointsToAdd);
@@ -109,6 +113,7 @@ private:
 
 	// UI
 	std::vector<SAGE::Graphics::TextureId> mBonusSymbolTextureIds;
+	const float mFontSize = 25.0f;
 	const float mBonusSymbolTextureIdsXSpacing = 46.0f;
 	float mBonusSymbolTextureIdsXStartOffset = 0.0f;
 	SAGE::Graphics::TextureId mPacmanLifeTextureID = 0;
@@ -148,6 +153,9 @@ private:
 
 	// Debug path finding
 	SAGE::Graphics::TextureId mPathFindingTextureID = 0;
+
+	// Helper
+	float StringToTextWidth(std::string text) const;
 
 	// Coroutines
 	SAGE::Coroutine::Enumerator GoToNextLevel();

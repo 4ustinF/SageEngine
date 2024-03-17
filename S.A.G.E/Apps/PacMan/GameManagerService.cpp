@@ -189,13 +189,17 @@ void GameManagerService::Render()
 	}
 
 	// Current Score
-	mFont->Draw("Current Score", 12.0f, 9.0f, 25.0f, Colors::White);
-	mFont->Draw(mPlayerPointsString.c_str(), 12.0f, 34.0f, 25.0f, Colors::White);
+	mFont->Draw("Current Score", 12.0f, 9.0f, mFontSize, Colors::White);
+	mFont->Draw(mPlayerPointsString.c_str(), 12.0f, 34.0f, mFontSize, Colors::White);
 
 	// HighScore
-	//float width = mFont->GetStringWidth(L"High Score", 25.0f); //672, 336, 136
-	mFont->Draw("High Score", 268.0f, 9.0f, 25.0f, Colors::White); //268 = 336 - (136 / 2) = half screen width - half text size
-	mFont->Draw(mHighScoreString.c_str(), mHighScoreStringXOffset, 34.0f, 25.0f, Colors::White);
+	//float width = mFont->GetStringWidth(L"High Score", mFontSize); //672, 336, 136
+	mFont->Draw("High Score", 268.0f, 9.0f, mFontSize, Colors::White); //268 = 336 - (136 / 2) = half screen width - half text size
+	mFont->Draw(mHighScoreString.c_str(), mHighScoreStringXOffset, 34.0f, mFontSize, Colors::White);
+
+	// Iterations 
+	mFont->Draw("Iterations", 526.0f, 9.0f, mFontSize, Colors::White); // Screen width - text width - 12 offset
+	mFont->Draw(mNumOfIterationsStr.c_str(), mIterationXPos, 34.0f, mFontSize, Colors::White);
 
 	// Player Lives
 	for (int i = 0; i < mPlayerLives; ++i) {
@@ -270,6 +274,7 @@ void GameManagerService::SetupGame()
 	AddPlayerPoints(-mPlayerPoints);
 	mPlayerLives = mPlayerStartingLives;
 	mRemainingPelletCount = mMaxPelletCount;
+	AddIteration();
 
 	CachePelletLocations();
 }
@@ -361,6 +366,7 @@ void GameManagerService::RestartGame()
 {
 	AddPlayerPoints(-mPlayerPoints);
 	mLevel = 1;
+	AddIteration();
 	mPlayerPointsTillNextBonusLife = 0;
 	mPlayerLives = mPlayerStartingLives;
 	mRemainingPelletCount = mMaxPelletCount;
@@ -423,7 +429,7 @@ void GameManagerService::RestartLevel()
 void GameManagerService::SetLevelData()
 {
 	mLevels.reserve(21);
-	mLevels.push_back({ BonusSymbol::Cherries,	0.8f, 0.75f, 0.40f,  20, 0.8f, 10, 0.85f, 0.90f, 0.50f, 6000.f, 5 });
+	mLevels.push_back({ BonusSymbol::Cherries,	0.8f, 0.75f, 0.40f,  20, 0.8f, 10, 0.85f, 0.90f, 0.50f, 6.f, 5 });
 	mLevels.push_back({ BonusSymbol::Strawberry,0.9f, 0.85f, 0.45f,  30, 0.9f, 15, 0.95f, 0.95f, 0.55f, 5.f, 5 });
 	mLevels.push_back({ BonusSymbol::Peach,		0.9f, 0.85f, 0.45f,  40, 0.9f, 20, 0.95f, 0.95f, 0.55f, 4.f, 5 });
 	mLevels.push_back({ BonusSymbol::Peach,		0.9f, 0.85f, 0.45f,  40, 0.9f, 20, 0.95f, 0.95f, 0.55f, 3.f, 5 });
@@ -541,6 +547,12 @@ void GameManagerService::CheckIfPlayerAteBonusSymbol()
 	}
 }
 
+void GameManagerService::AddIteration()
+{
+	mNumOfIterationsStr = std::to_string(++mNumOfIterations);
+	mIterationXPos = 672.0f - 12.0f - StringToTextWidth(mNumOfIterationsStr); // screen width - padding - text width
+}
+
 void GameManagerService::AddPlayerPoints(int pointsToAdd)
 {
 	mPlayerPoints += pointsToAdd;
@@ -562,16 +574,7 @@ void GameManagerService::AddPlayerPoints(int pointsToAdd)
 		mMaxPlayerPoints = mPlayerPoints;
 		mHighScoreString = mPlayerPointsString;
 
-		// Convert const char* -> const wchar_t*
-		const char* highScore = mHighScoreString.c_str();
-		const size_t len = std::strlen(highScore) + 1; // +1 for null terminator
-		wchar_t* wstr = new wchar_t[len];
-		std::mbstowcs(wstr, highScore, len);
-
-		mHighScoreStringXOffset = 336.0f - (mFont->GetStringWidth(wstr, 25.0f) * 0.5f);
-
-		// Free memory
-		delete[] wstr;
+		mHighScoreStringXOffset = 336.0f - (StringToTextWidth(mHighScoreString) * 0.5f);
 	}
 }
 
@@ -580,6 +583,21 @@ void GameManagerService::PlayAudioOneShot(const SAGE::Graphics::SoundId soundID)
 	mSoundEffectManager->Play(soundID, false, mAudioVolume, Random::UniformFloat(-0.1f, 0.15f));
 }
 
+float GameManagerService::StringToTextWidth(std::string text) const
+{
+	// Convert const char* -> const wchar_t*
+	const char* c = text.c_str();
+	const size_t len = std::strlen(c) + 1; // +1 for null terminator
+	wchar_t* wstr = new wchar_t[len];
+	std::mbstowcs(wstr, c, len);
+
+	const float textWidth = mFont->GetStringWidth(wstr, mFontSize);
+
+	// Free memory
+	delete[] wstr;
+
+	return textWidth;
+}
 
 Enumerator GameManagerService::GoToNextLevel()
 {

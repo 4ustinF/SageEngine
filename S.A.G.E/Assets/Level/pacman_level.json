@@ -16,18 +16,6 @@
     {
       "Name": "Blinky",
       "TemplateFile": "../../Assets/Templates/blinky.json"
-    },
-    {
-      "Name": "Pinky",
-      "TemplateFile": "../../Assets/Templates/pinky.json"
-    },
-    {
-      "Name": "Inky",
-      "TemplateFile": "../../Assets/Templates/inky.json"
-    },
-    {
-      "Name": "Clyde",
-      "TemplateFile": "../../Assets/Templates/clyde.json"
     }
   ]
 }

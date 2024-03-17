@@ -83,8 +83,10 @@ void GameManagerService::Terminate()
 	mBonusSymbolTextureIDs.clear();
 
 	// Ghost
-	mBlinkyController = nullptr;
-	mBlinkyAnimator = nullptr;
+	for (auto& p : mGhostControllers) { p = nullptr; }
+	mGhostControllers.clear();
+	for (auto& p : mGhostAnimators) { p = nullptr; }
+	mGhostAnimators.clear();
 
 	// Player
 	mPlayerAnimator = nullptr;
@@ -103,7 +105,10 @@ void GameManagerService::Update(float deltaTime)
 {
 	if (mIsInFrenzy)
 	{
-		CheckIfPlayerAteGhost();
+		for (const auto& ghost : mGhostControllers) {
+			CheckIfPlayerAteGhost(ghost);
+		}
+
 		mFrightTimer -= deltaTime;
 		if (mFrightTimer <= 0.0f)
 		{
@@ -111,9 +116,11 @@ void GameManagerService::Update(float deltaTime)
 			mIsInFrenzy = false;
 			mGhostAteInFrenzy = 0;
 
-			if (mBlinkyController->GetGhostMode() == GhostMode::Frightened) // TODO: Only set ghost back if they were not eaten. If they were eaten they will sort themselves out.
-			{
-				SetGhostChaseScatterMode(mPrevGhostMode);
+			mGhostMode = mPrevGhostMode;
+			for (const auto& ghost : mGhostControllers) {
+				if (ghost->GetGhostMode() == GhostMode::Frightened) { // TODO: Only set ghost back if they were not eaten. If they were eaten they will sort themselves out.
+					ghost->SetGhostMode(mGhostMode);
+				}
 			}
 		}
 	}
@@ -127,16 +134,23 @@ void GameManagerService::Update(float deltaTime)
 			{
 				if (++mScatterChaseIndex < static_cast<int>(mScatterChaseTimes.size())) {
 					mScatterChaseTimer += mScatterChaseTimes[mScatterChaseIndex];
-					SetGhostChaseScatterMode(mGhostMode == GhostMode::Scatter ? GhostMode::Chase : GhostMode::Scatter);
+					const GhostMode newMode = mGhostMode == GhostMode::Scatter ? GhostMode::Chase : GhostMode::Scatter;
+					for (const auto& ghost : mGhostControllers) { // TODO: set these properly
+						ghost->SetGhostMode(newMode);
+					}
 				}
 				else {
 					mTickScatterChaseTimer = false;
-					SetGhostChaseScatterMode(GhostMode::Chase); // Chase Indefinitely
+					for (const auto& ghost : mGhostControllers) { // Chase Indefinitely
+						ghost->SetGhostMode(GhostMode::Chase);
+					}
 				}
 			}
 		}
+	}
 
-		CheckIfGhostAtePlayer();
+	for (const auto& ghost : mGhostControllers) {
+		CheckIfGhostAtePlayer(ghost);
 	}
 
 	// Timer to display ghost eaten points
@@ -169,7 +183,10 @@ void GameManagerService::Render()
 	}
 
 	mPlayerAnimator->Render();
-	mBlinkyAnimator->Render();
+	for (const auto& ghost : mGhostAnimators)
+	{
+		ghost->Render();
+	}
 
 	// Current Score
 	mFont->Draw("Current Score", 12.0f, 9.0f, 25.0f, Colors::White);
@@ -240,9 +257,14 @@ void GameManagerService::SetupGame()
 	mPlayerAnimator = playerObject->GetComponent<PlayerAnimatorComponent>();
 
 	// Ghost
-	GameObject* blinkyObject = world.FindGameObject("Blinky");
-	mBlinkyController = blinkyObject->GetComponent<GhostControllerComponent>();
-	mBlinkyAnimator = blinkyObject->GetComponent<GhostAnimatorComponent>();
+	for (int i = 0; i < static_cast<int>(GhostType::Size); ++i)
+	{
+		if (GameObject* ghostGameObject = world.FindGameObject(GhostTypeToString(static_cast<GhostType>(i))))
+		{
+			mGhostControllers.push_back(ghostGameObject->GetComponent<GhostControllerComponent>());
+			mGhostAnimators.push_back(ghostGameObject->GetComponent<GhostAnimatorComponent>());
+		}
+	}
 
 	mLevel = 1;
 	AddPlayerPoints(-mPlayerPoints);
@@ -268,7 +290,10 @@ void GameManagerService::AtePellet(PelletType pelletType)
 		mIsInFrenzy = true;
 		mFrightTimer = mCurrentLevelData.FrightTime;
 		mPrevGhostMode = mGhostMode;
-		SetGhostChaseScatterMode(GhostMode::Frightened);
+
+		for (const auto& ghost : mGhostControllers) {
+			ghost->SetGhostMode(GhostMode::Frightened);
+		}
 	}
 
 	--mRemainingPelletCount;
@@ -352,7 +377,9 @@ void GameManagerService::SetupLevel()
 
 	mPlayerController->Respawn();
 	mPlayerController->SetPlayerSpeed(mCurrentLevelData.PacManSpeed);
-	mBlinkyController->Respawn();
+	for (const auto& ghost : mGhostControllers) {
+		ghost->Respawn();
+	}
 
 	if (mLevel > 1) { // Don't need to populate the pellets on the first level as that is preset for us there.
 		RepopulatePellets();
@@ -379,13 +406,16 @@ void GameManagerService::SetupLevel()
 void GameManagerService::RestartLevel()
 {
 	mPlayerController->Respawn();
-	mBlinkyController->Respawn();
+	for (const auto& ghost : mGhostControllers) {
+		ghost->Respawn();
+	}
 
 	// Scatter Chase Routine
 	mScatterChaseIndex = 0;
 	mScatterChaseTimer = mScatterChaseTimes[mScatterChaseIndex];
 	mTickScatterChaseTimer = true;
 
+	mPlayerController->SetPlayerSpeed(mCurrentLevelData.PacManSpeed);
 	mIsInFrenzy = false;
 	mGhostAteInFrenzy = 0;
 }
@@ -393,7 +423,7 @@ void GameManagerService::RestartLevel()
 void GameManagerService::SetLevelData()
 {
 	mLevels.reserve(21);
-	mLevels.push_back({ BonusSymbol::Cherries,	0.8f, 0.75f, 0.40f,  20, 0.8f, 10, 0.85f, 0.90f, 0.50f, 6.f, 5 });
+	mLevels.push_back({ BonusSymbol::Cherries,	0.8f, 0.75f, 0.40f,  20, 0.8f, 10, 0.85f, 0.90f, 0.50f, 6000.f, 5 });
 	mLevels.push_back({ BonusSymbol::Strawberry,0.9f, 0.85f, 0.45f,  30, 0.9f, 15, 0.95f, 0.95f, 0.55f, 5.f, 5 });
 	mLevels.push_back({ BonusSymbol::Peach,		0.9f, 0.85f, 0.45f,  40, 0.9f, 20, 0.95f, 0.95f, 0.55f, 4.f, 5 });
 	mLevels.push_back({ BonusSymbol::Peach,		0.9f, 0.85f, 0.45f,  40, 0.9f, 20, 0.95f, 0.95f, 0.55f, 3.f, 5 });
@@ -463,18 +493,14 @@ void GameManagerService::SetIntersectionPoints()
 	}
 }
 
-void GameManagerService::AteGhost()
+void GameManagerService::CheckIfGhostAtePlayer(const GhostControllerComponent* ghost)
 {
-}
-
-void GameManagerService::CheckIfGhostAtePlayer()
-{
-	if (mBlinkyController->GetGhostMode() == GhostMode::Eaten || mPlayerController->GetIsPlayerInvincible())
+	if (ghost->GetGhostMode() == GhostMode::Eaten || mPlayerController->GetIsPlayerInvincible())
 	{
 		return;
 	}
 
-	if (mBlinkyController->GetTileCords() == mPlayerController->GetPlayerCords())
+	if (ghost->GetTileCords() == mPlayerController->GetPlayerCords())
 	{
 		if (--mPlayerLives > 0) {
 			RestartLevel();
@@ -485,22 +511,22 @@ void GameManagerService::CheckIfGhostAtePlayer()
 	}
 }
 
-void GameManagerService::CheckIfPlayerAteGhost()
+void GameManagerService::CheckIfPlayerAteGhost(GhostControllerComponent* ghost)
 {
-	if (mBlinkyController->GetGhostMode() == GhostMode::Eaten)
+	if (ghost->GetGhostMode() != GhostMode::Frightened)
 	{
 		return;
 	}
 
-	if (mPlayerController->GetPlayerCords() == mBlinkyController->GetTileCords())
+	if (mPlayerController->GetPlayerCords() == ghost->GetTileCords())
 	{
 		PlayAudioOneShot(mGhostEatenSoundID);
 		mDisplayEatenPointsTimer = mPointsMaxTime;
-		mGhostEatenPosition = mBlinkyController->GetPosition();
+		mGhostEatenPosition = ghost->GetPosition();
 		mTextureIDIndex = mGhostAteInFrenzy;
 
 		AddPlayerPoints(mPointsPerGhostAte * static_cast<int>(std::pow(2, mGhostAteInFrenzy++)));
-		mBlinkyController->IsAten();
+		ghost->IsAten();
 	}
 }
 
@@ -547,12 +573,6 @@ void GameManagerService::AddPlayerPoints(int pointsToAdd)
 		// Free memory
 		delete[] wstr;
 	}
-}
-
-void GameManagerService::SetGhostChaseScatterMode(GhostMode mode)
-{
-	mGhostMode = mode;
-	mBlinkyController->SetGhostMode(mGhostMode);
 }
 
 void GameManagerService::PlayAudioOneShot(const SAGE::Graphics::SoundId soundID)

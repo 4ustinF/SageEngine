@@ -32,6 +32,11 @@ namespace
 		else if (strcmp(componentName, "GhostControllerComponent") == 0)
 		{
 			auto ghostControllerComponent = gameObject.AddComponent<GhostControllerComponent>();
+			if (value.HasMember("GhostType"))
+			{
+				const int ghostType = value["GhostType"].GetInt();
+				ghostControllerComponent->SetGhostType(static_cast<GhostType>(ghostType));
+			}
 			return true;
 		}
 		else if (strcmp(componentName, "GhostAnimatorComponent") == 0)

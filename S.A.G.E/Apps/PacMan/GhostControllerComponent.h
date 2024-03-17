@@ -22,7 +22,8 @@ public:
 	void Respawn();
 
 	SAGE::Math::Vector2 GetPosition() const { return mPosition; }
-	SAGE::Math::Rect GetRect() const { return { mPosition, mHalfSpriteSize }; }
+	SAGE::Math::Rect GetColliderRect() const { return { mPosition, mHalfSpriteSize }; }
+	SAGE::Math::Rect GetSmallColliderRect() const { return { mPosition, 2.0f }; }
 	Direction GetDirection() const { return mDirection; }
 	SAGE::Math::Vector2Int GetTileCords() const { return mTileCords; }
 	std::vector<SAGE::Math::Vector2> mTargetNodePositions;
@@ -30,6 +31,7 @@ public:
 	GhostMode GetGhostMode() const { return mGhostMode; }
 	void SetGhostMode(GhostMode mode);
 
+	void SetGhostType(GhostType type);
 	void IsAten();
 
 private:
@@ -38,7 +40,8 @@ private:
 	void TeleportGhost(const SAGE::Math::Vector2 newPos, const Direction dir);
 	void UpdateTileCords();
 
-	SAGE::Math::Vector2Int GetTargetCords();
+	SAGE::Math::Vector2Int GetTargetCords() const;
+	SAGE::Math::Vector2Int GetChaseTargetCords() const;
 	void CalculateNewTargetPosition();
 	void CalculateTargetPositionAtIntersection();
 	void CalculateTargetPositionContinuedDirection();
@@ -61,14 +64,14 @@ private:
 	float mSpeed = 140.0f;
 	GhostType mGhostType = GhostType::Blinky;
 	GhostMode mGhostMode = GhostMode::Frightened;
-
-	// Target
-	int mTargetIndex = 0; // TODO: Rename
+	GhostHomeState mEatenState = GhostHomeState::None;
 
 	// Sprite data
 	const float mHalfSpriteSize = 21.0f;
 
 	// Ghost home
+	const SAGE::Math::Rect mHomeEntranceRect = SAGE::Math::Rect(SAGE::Math::Vector2(336.0f, 348.0f), 2.0f); // TODO: Take map offset into account
+	const SAGE::Math::Rect mHomeMidRect = SAGE::Math::Rect(SAGE::Math::Vector2(336.0f, 420.0f), 2.0f); // TODO: Take map offset into account
 
 	// Map Data
 	float mTileSize = 0.0f;

@@ -1,0 +1,17 @@
+{
+  "Components": {
+    "GhostControllerComponent": {
+      "GhostType": 2
+    },
+    "GhostAnimatorComponent": {
+      "MovementSprites": [
+        "../Sprites/PacMan/Ghost/Inky/sprite_up_00.png",
+        "../Sprites/PacMan/Ghost/Inky/sprite_up_01.png",
+        "../Sprites/PacMan/Ghost/Inky/sprite_down_00.png",
+        "../Sprites/PacMan/Ghost/Inky/sprite_down_01.png",
+        "../Sprites/PacMan/Ghost/Inky/sprite_left_00.png",
+        "../Sprites/PacMan/Ghost/Inky/sprite_left_01.png"
+      ]
+    }
+  }
+}

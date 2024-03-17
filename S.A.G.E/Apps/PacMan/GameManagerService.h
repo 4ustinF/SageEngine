@@ -54,9 +54,8 @@ private:
 	void SetLevelData();
 	void SetIntersectionPoints();
 
-	void AteGhost();
-	void CheckIfGhostAtePlayer();
-	void CheckIfPlayerAteGhost();
+	void CheckIfGhostAtePlayer(const GhostControllerComponent* ghost);
+	void CheckIfPlayerAteGhost(GhostControllerComponent* ghost);
 	void CheckIfPlayerAteBonusSymbol();
 
 	// References
@@ -91,9 +90,8 @@ private:
 	const int mPlayerPointsNeededForBonusLife = 10000;
 
 	// Ghost
-	void SetGhostChaseScatterMode(GhostMode mode);
-	GhostControllerComponent* mBlinkyController = nullptr;
-	GhostAnimatorComponent* mBlinkyAnimator = nullptr;
+	std::vector<GhostControllerComponent*> mGhostControllers; // TODO: Should be a map that contains both?
+	std::vector<GhostAnimatorComponent*> mGhostAnimators;
 	GhostMode mGhostMode = GhostMode::Scatter;
 	GhostMode mPrevGhostMode = GhostMode::Scatter;
 

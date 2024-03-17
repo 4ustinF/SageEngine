@@ -1,0 +1,17 @@
+{
+  "Components": {
+    "GhostControllerComponent": {
+      "GhostType": 3
+    },
+    "GhostAnimatorComponent": {
+      "MovementSprites": [
+        "../Sprites/PacMan/Ghost/Clyde/sprite_up_00.png",
+        "../Sprites/PacMan/Ghost/Clyde/sprite_up_01.png",
+        "../Sprites/PacMan/Ghost/Clyde/sprite_down_00.png",
+        "../Sprites/PacMan/Ghost/Clyde/sprite_down_01.png",
+        "../Sprites/PacMan/Ghost/Clyde/sprite_left_00.png",
+        "../Sprites/PacMan/Ghost/Clyde/sprite_left_01.png"
+      ]
+    }
+  }
+}

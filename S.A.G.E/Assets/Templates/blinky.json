@@ -1,6 +1,7 @@
 {
   "Components": {
     "GhostControllerComponent": {
+      "GhostType": 0
     },
     "GhostAnimatorComponent": {
       "MovementSprites": [

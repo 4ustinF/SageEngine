@@ -4,8 +4,5 @@
   GhostControllerComponent.cpp
   PlayerAnimatorComponent.cpp
   PlayerControllerComponent.cpp
-  TileMapService.cpp
-D:\GitHub\SageEngine\S.A.G.E\Apps\PacMan\TileMapService.cpp(367,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  WinMain.cpp
   Generating Code...
   PacMan.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\PacMan.exe

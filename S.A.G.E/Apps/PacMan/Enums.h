@@ -15,7 +15,8 @@ enum class GhostType
 	Blinky,
 	Pinky,
 	Inky,
-	Clyde
+	Clyde,
+	Size
 };
 
 enum class GhostMode
@@ -24,6 +25,15 @@ enum class GhostMode
 	Scatter,
 	Frightened,
 	Eaten,
+};
+
+enum class GhostHomeState
+{
+	None = -1,
+	GoingToHomeEntrance,
+	GoingIntoHome,
+	Idle,
+	LeavingHome,
 };
 
 enum class PelletType
@@ -77,5 +87,21 @@ namespace
 		}
 
 		return Direction::None;
+	}
+
+	std::string GhostTypeToString(GhostType type)
+	{
+		switch (type)
+		{
+		case GhostType::Blinky:
+			return "Blinky";
+		case GhostType::Pinky:
+			return "Pinky";
+		case GhostType::Inky:
+			return "Inky";
+		case GhostType::Clyde:
+			return "Clyde";
+		}
+		return "";
 	}
 }

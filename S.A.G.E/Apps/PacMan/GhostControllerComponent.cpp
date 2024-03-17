@@ -25,8 +25,6 @@ void GhostControllerComponent::Initialize()
 	// Player
 	GameObject* playerObject = world.FindGameObject("PacMan");
 	mPlayerController = playerObject->GetComponent<PlayerControllerComponent>();
-
-	SetCornerCords();
 }
 
 void GhostControllerComponent::Terminate()
@@ -93,15 +91,42 @@ void GhostControllerComponent::Update(float deltaTime)
 
 	if (mGhostMode == GhostMode::Eaten) // Back at house
 	{
-		// Path find to mHomeCords
-		// We will then run into home enter rect
-			// mDirection = down
-			// mTargetPosition = 3 tiles down
-
-		if (mTileCords == mHomeCords) // TODO: Find a better way to respawn at home
+		switch (mEatenState)
 		{
-			Respawn();
+		case GhostHomeState::GoingToHomeEntrance:
+			if (IsRectOverlap(GetSmallColliderRect(), mHomeEntranceRect)) // Made it to home entrance
+			{
+				mPosition.x = 336.0f;
+				mTargetPosition = { 336.0f, 420.f };
+				mDirection = Direction::Down;
+				mEatenState = GhostHomeState::GoingIntoHome;
+			}
+			break;
+		case GhostHomeState::GoingIntoHome:
+			if (IsRectOverlap(GetSmallColliderRect(), mHomeMidRect)) // Made it inside the home
+			{
+				mPosition.y = 420.0f;
+				mTargetPosition = { 336.0f, 348.f };
+				mDirection = Direction::Up;
+				mEatenState = GhostHomeState::LeavingHome;
+
+				mGhostMode = GhostMode::Scatter;
+			}
+			break;
+		case GhostHomeState::LeavingHome:
+			if (IsRectOverlap(GetSmallColliderRect(), mHomeEntranceRect)) // Made it out to the home entrance
+			{
+				mPosition.y = 348.0f;
+				mEatenState = GhostHomeState::None;
+				Respawn();
+			}
+			break;
 		}
+
+		//if (mTileCords == mHomeCords) // TODO: Find a better way to respawn at home
+		//{
+		//	Respawn();
+		//}
 	}
 }
 
@@ -139,6 +164,10 @@ void GhostControllerComponent::Respawn()
 
 void GhostControllerComponent::SetGhostMode(GhostMode mode)
 { 
+	if (mGhostMode == mode) {
+		return;
+	}
+
 	switch (mGhostMode)
 	{
 	case GhostMode::Chase:
@@ -152,8 +181,19 @@ void GhostControllerComponent::SetGhostMode(GhostMode mode)
 	mGhostMode = mode;
 }
 
+void GhostControllerComponent::SetGhostType(GhostType type)
+{
+	mGhostType = type;
+	SetCornerCords();
+
+	// TODO: set up ghost accordingly
+	// Home cords
+	// How to target? I don't think thats done here
+}
+
 void GhostControllerComponent::IsAten()
 {
+	mEatenState = GhostHomeState::GoingToHomeEntrance;
 	SetGhostMode(GhostMode::Eaten);
 }
 
@@ -162,16 +202,16 @@ void GhostControllerComponent::SetCornerCords()
 	switch (mGhostType)
 	{
 	case GhostType::Blinky:
-		mCornerCords = Vector2Int(28, 2);
+		mCornerCords = Vector2Int(28, 1);
 		break;
 	case GhostType::Pinky:
-		mCornerCords = Vector2Int(3, 2);
+		mCornerCords = Vector2Int(3, 1);
 		break;
 	case GhostType::Inky:
-		mCornerCords = Vector2Int(28, 30);
+		mCornerCords = Vector2Int(28, 29);
 		break;
 	case GhostType::Clyde:
-		mCornerCords = Vector2Int(3, 30);
+		mCornerCords = Vector2Int(3, 29);
 		break;
 	}
 }
@@ -194,12 +234,12 @@ void GhostControllerComponent::UpdateTileCords()
 	}
 }
 
-Vector2Int GhostControllerComponent::GetTargetCords()
+Vector2Int GhostControllerComponent::GetTargetCords() const
 {
 	switch (mGhostMode)
 	{
 	case GhostMode::Chase:
-		return mPlayerController->GetPlayerCords();
+		return GetChaseTargetCords();
 	case GhostMode::Scatter:
 		return mCornerCords;
 	case GhostMode::Eaten:
@@ -208,6 +248,44 @@ Vector2Int GhostControllerComponent::GetTargetCords()
 
 	return mCornerCords;
 }
+
+Vector2Int GhostControllerComponent::GetChaseTargetCords() const
+{
+	switch (mGhostType)
+	{
+	case GhostType::Blinky: // pacmans position
+		return mPlayerController->GetPlayerCords();
+	case GhostType::Pinky: // 4 tiles in front of pacman. Or less if not valid. Can return pacmans position.
+	{
+		const Vector2Int dir = DirectionToVector2Int(mPlayerController->GetPlayerDirection());
+		const Vector2Int playerCords = mPlayerController->GetPlayerCords();
+		for (int i = 4; i >= 0; --i)
+		{
+			const Vector2Int targetCords = playerCords + (dir * i);
+			if (!mTileMapService->IsBlocked(targetCords))
+			{
+				return targetCords;
+			}
+		}
+		break;
+	}
+	case GhostType::Inky:
+		// TODO:
+		// Need pacman and Blinky to go off of.
+		break;
+	case GhostType::Clyde: // Pacmans position until too close. Then back to the corner. 
+		const Vector2Int playerCords = mPlayerController->GetPlayerCords();
+		const int dx = playerCords.x - mTileCords.x;
+		const int dy = playerCords.y - mTileCords.y;
+		if (std::abs(dx) + std::abs(dy) <= 8) {
+			return mCornerCords;
+		}
+		return playerCords;
+	}
+
+	return mPlayerController->GetPlayerCords();
+}
+
 
 void GhostControllerComponent::CalculateNewTargetPosition()
 {
@@ -234,6 +312,7 @@ void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 
 	// Check if the target is within one tile away. 
 	// Old ghost path finding method. Good for up close as it gives us the same result without more complexity.
+	// We should use this if we don't find something below
 	const int dx = mEndPos.x - mTileCords.x;
 	const int dy = mEndPos.y - mTileCords.y;
 	if (std::abs(dx) + std::abs(dy) <= 1) {
@@ -243,7 +322,7 @@ void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 		else {
 			mDirection = dy > 0 ? Direction::Down : Direction::Up;
 		}
-	
+
 		CalculateTargetPositionContinuedDirection();
 		return;
 	}
@@ -303,6 +382,7 @@ void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 	// Get new target position
 	if (!mTargetNodePositions.empty())
 	{
+		mPosition = mPosition;
 		const Vector2& newPos = mTargetNodePositions[1] + mWorldOffset;
 
 		if (newPos.x > mTargetPosition.x) {

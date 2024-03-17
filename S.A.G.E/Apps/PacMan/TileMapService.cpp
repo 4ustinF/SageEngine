@@ -286,7 +286,12 @@ bool TileMapService::IsBlocked(SAGE::Math::Vector2Int cords) const
 
 bool TileMapService::IsBlocked(int x, int y) const
 {
-	const int tile = mMap[ToIndex(x, y, mColumns)].tileIndex;
+	const int mapIndex = ToIndex(x, y, mColumns);
+	if (mapIndex >= mMap.size()) {
+		return true; // Map tile doesn't exist pretend it is blocked.
+	}
+
+	const int tile = mMap[mapIndex].tileIndex;
 	const bool blocked = mBlocked[tile];
 	return blocked;
 }

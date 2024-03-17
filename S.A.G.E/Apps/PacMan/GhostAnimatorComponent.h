@@ -18,25 +18,28 @@ public:
 
 	void Render();
 
+	void InitGhostSprites(const std::array<std::filesystem::path, 6>& spriteFilePaths);
+
 private:
 	void RenderMovement();
 	void RenderEaten();
 
 	// References
-	SAGE::Graphics::SpriteRenderer* spriteRenderer = nullptr;
+	SAGE::Graphics::SpriteRenderer* mSpriteRenderer = nullptr;
+	SAGE::Graphics::TextureManager* mTextureManager = nullptr;
+	GhostControllerComponent* mGhostController = nullptr;
 
 	float mTimer = 0.0f;
 	float mTimePerFrame = 0.15f;
 	int mSpriteIndex = 0;
 	int mSpriteMaxIndex = 2;
 
-	std::vector<SAGE::Graphics::TextureId>& GetTextureIDLookup();
 
-	GhostControllerComponent* mGhostController = nullptr;
-	std::vector<SAGE::Graphics::TextureId> mMoveUpTextureIds;
-	std::vector<SAGE::Graphics::TextureId> mMoveDownTextureIds;
-	std::vector<SAGE::Graphics::TextureId> mMoveLeftTextureIds;
-	std::vector<SAGE::Graphics::TextureId> mFrightenedTextureIds;
+	SAGE::Graphics::TextureId GetNewDisplayTexture() const;
+	std::array<SAGE::Graphics::TextureId, 2> mMoveUpTextureIds;
+	std::array<SAGE::Graphics::TextureId, 2> mMoveDownTextureIds;
+	std::array<SAGE::Graphics::TextureId, 2> mMoveLeftTextureIds;
+	std::array<SAGE::Graphics::TextureId, 4> mFrightenedTextureIds;
 	std::array<SAGE::Graphics::TextureId, 4> mEatenTextureIds;
 	SAGE::Graphics::TextureId mDisplayTextureID = 0;
 };

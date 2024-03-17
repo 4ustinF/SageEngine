@@ -3,6 +3,14 @@
     "GhostControllerComponent": {
     },
     "GhostAnimatorComponent": {
+      "MovementSprites": [
+        "../Sprites/PacMan/Ghost/Blinky/sprite_up_00.png",
+        "../Sprites/PacMan/Ghost/Blinky/sprite_up_01.png",
+        "../Sprites/PacMan/Ghost/Blinky/sprite_down_00.png",
+        "../Sprites/PacMan/Ghost/Blinky/sprite_down_01.png",
+        "../Sprites/PacMan/Ghost/Blinky/sprite_left_00.png",
+        "../Sprites/PacMan/Ghost/Blinky/sprite_left_01.png"
+      ]
     }
   }
 }

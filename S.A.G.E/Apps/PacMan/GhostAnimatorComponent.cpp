@@ -12,49 +12,27 @@ void GhostAnimatorComponent::Initialize()
 {
 	mGhostController = GetOwner().GetComponent<GhostControllerComponent>();
 
-	spriteRenderer = SpriteRenderer::Get();
+	mSpriteRenderer = SpriteRenderer::Get();
 
-	// TODO: Set textures through json
-	auto tm = TextureManager::Get();
-	mMoveUpTextureIds.reserve(2);
-	mMoveUpTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Blinky/sprite_up_00.png"));
-	mMoveUpTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Blinky/sprite_up_01.png"));
-	mMoveDownTextureIds.reserve(2);
-	mMoveDownTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Blinky/sprite_down_00.png"));
-	mMoveDownTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Blinky/sprite_down_01.png"));
-	mMoveLeftTextureIds.reserve(2);
-	mMoveLeftTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Blinky/sprite_left_00.png"));
-	mMoveLeftTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Blinky/sprite_left_01.png"));
+	mFrightenedTextureIds[0] = mTextureManager->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_00.png");
+	mFrightenedTextureIds[1] = mTextureManager->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_01.png");
+	mFrightenedTextureIds[2] = mTextureManager->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_02.png");
+	mFrightenedTextureIds[3] = mTextureManager->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_03.png");
 
-	mFrightenedTextureIds.reserve(4);
-	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_00.png"));
-	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_01.png"));
-	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_02.png"));
-	mFrightenedTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/Ghost/Frighten/sprite_03.png"));
+	mEatenTextureIds[0] = mTextureManager->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_up.png");
+	mEatenTextureIds[1] = mTextureManager->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_right.png");
+	mEatenTextureIds[2] = mTextureManager->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_down.png");
+	mEatenTextureIds[3] = mTextureManager->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_left.png");
 
-	mEatenTextureIds[0] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_up.png");
-	mEatenTextureIds[1] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_right.png");
-	mEatenTextureIds[2] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_down.png");
-	mEatenTextureIds[3] = tm->LoadTexture("../Sprites/PacMan/Ghost/Eaten/sprite_left.png");
-
-	mDisplayTextureID = mMoveLeftTextureIds[0];
 	mTimer = mTimePerFrame;
 }
 
 void GhostAnimatorComponent::Terminate()
 {
-	spriteRenderer = nullptr;
+	mTextureManager = nullptr;
+	mSpriteRenderer = nullptr;
 
 	mDisplayTextureID = 0;
-	for (TextureId& id : mMoveUpTextureIds) { id = 0; }
-	mMoveUpTextureIds.clear();
-	for (TextureId& id : mMoveDownTextureIds) { id = 0; }
-	mMoveDownTextureIds.clear();
-	for (TextureId& id : mMoveLeftTextureIds) { id = 0; }
-	mMoveLeftTextureIds.clear();
-
-	for (TextureId& id : mFrightenedTextureIds) { id = 0; }
-	mFrightenedTextureIds.clear();
 
 	mGhostController = nullptr;
 }
@@ -70,11 +48,12 @@ void GhostAnimatorComponent::Update(float deltaTime)
 	mTimer -= deltaTime;
 	if (mTimer <= 0.0f)
 	{
-		if (mSpriteIndex == mSpriteMaxIndex)
-		{
+		if (mSpriteIndex == mSpriteMaxIndex) {
 			mSpriteIndex = 0;
 		}
-		mDisplayTextureID = GetTextureIDLookup()[mSpriteIndex++];
+
+		mDisplayTextureID = GetNewDisplayTexture();
+		++mSpriteIndex;
 		mTimer += mTimePerFrame;
 	}
 }
@@ -84,6 +63,7 @@ void GhostAnimatorComponent::DebugUI()
 	if (ImGui::CollapsingHeader("Ghost Animator Component##GhostAnimatorComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		ImGui::InputFloat("Time Per Frame", &mTimePerFrame);
+		ImGui::DragInt("Sprite Index", &mSpriteIndex);
 	}
 }
 
@@ -92,34 +72,49 @@ void GhostAnimatorComponent::Render()
 	mGhostController->GetGhostMode() == GhostMode::Eaten ? RenderEaten() : RenderMovement();
 }
 
+void GhostAnimatorComponent::InitGhostSprites(const std::array<std::filesystem::path, 6>& spriteFilePaths)
+{
+	mTextureManager = TextureManager::Get();
+
+	// TODO: Don't separate these and we can for loop this.
+	mMoveUpTextureIds[0] = mTextureManager->LoadTexture(spriteFilePaths[0]);
+	mMoveUpTextureIds[1] = mTextureManager->LoadTexture(spriteFilePaths[1]);
+	mMoveDownTextureIds[1] = mTextureManager->LoadTexture(spriteFilePaths[3]);
+	mMoveDownTextureIds[0] = mTextureManager->LoadTexture(spriteFilePaths[2]);
+	mMoveLeftTextureIds[0] = mTextureManager->LoadTexture(spriteFilePaths[4]);
+	mMoveLeftTextureIds[1] = mTextureManager->LoadTexture(spriteFilePaths[5]);
+
+	mDisplayTextureID = mMoveLeftTextureIds[0];
+}
+
 void GhostAnimatorComponent::RenderMovement()
 {
 	const Flip flip = mGhostController->GetDirection() == Direction::Right ? Flip::Horizontal : Flip::None;
-	spriteRenderer->Draw(mDisplayTextureID, mGhostController->GetPosition(), 0.0, Pivot::Center, flip);
+	mSpriteRenderer->Draw(mDisplayTextureID, mGhostController->GetPosition(), 0.0, Pivot::Center, flip);
 }
 
 void GhostAnimatorComponent::RenderEaten()
 {
-	spriteRenderer->Draw(mDisplayTextureID, mGhostController->GetPosition(), 0.0, Pivot::Center, Flip::None);
+	mSpriteRenderer->Draw(mDisplayTextureID, mGhostController->GetPosition(), 0.0, Pivot::Center, Flip::None);
 }
 
-std::vector<TextureId>& GhostAnimatorComponent::GetTextureIDLookup()
+TextureId GhostAnimatorComponent::GetNewDisplayTexture() const
 {
 	if (mGhostController->GetGhostMode() == GhostMode::Frightened)
 	{
-		return mFrightenedTextureIds;
+		return mFrightenedTextureIds[mSpriteIndex];
 	}
 
 	switch (mGhostController->GetDirection())
 	{
 	case Direction::Up:
-		return mMoveUpTextureIds;
+		return mMoveUpTextureIds[mSpriteIndex];
 	case Direction::Down:
-		return mMoveDownTextureIds;
+		return mMoveDownTextureIds[mSpriteIndex];
 	case Direction::Right:
 	case Direction::Left:
-		return mMoveLeftTextureIds;
+		return mMoveLeftTextureIds[mSpriteIndex];
 	}
 
-	return mMoveUpTextureIds;
+	return mMoveUpTextureIds[mSpriteIndex];
 }

@@ -37,6 +37,14 @@ namespace
 		else if (strcmp(componentName, "GhostAnimatorComponent") == 0)
 		{
 			auto ghostAnimatorComponent = gameObject.AddComponent<GhostAnimatorComponent>();
+			if (value.HasMember("MovementSprites")) {
+				const auto movementSprites = value["MovementSprites"].GetArray();
+				std::array<std::filesystem::path, 6> spriteFilePaths;
+				for (int i = 0; i < 6; ++i) {
+					spriteFilePaths[i] = movementSprites[i].GetString();
+				}
+				ghostAnimatorComponent->InitGhostSprites(spriteFilePaths);
+			}
 			return true;
 		}
 		return false;

@@ -1,132 +1,132 @@
 ﻿  btBulletCollisionAll.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.cpp(373,21): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletCollisionAll.cpp')
+  (compiling source file 'btBulletCollisionAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.cpp(374,21): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletCollisionAll.cpp')
+  (compiling source file 'btBulletCollisionAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.cpp(412,9): warning C4244: 'return': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletCollisionAll.cpp')
+  (compiling source file 'btBulletCollisionAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btGjkConvexCast.cpp(25,1): warning C4005: 'MAX_ITERATIONS': macro redefinition
-  (compiling source file '../Bullet/btBulletCollisionAll.cpp')
+  (compiling source file 'btBulletCollisionAll.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btContinuousConvexCollision.cpp(46,1):
   see previous definition of 'MAX_ITERATIONS'
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\CollisionShapes\btHeightfieldTerrainShape.cpp(843,42): warning C4244: 'argument': conversion from 'const int' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletCollisionAll.cpp')
+  (compiling source file 'btBulletCollisionAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\CollisionShapes\btHeightfieldTerrainShape.cpp(843,71): warning C4244: 'argument': conversion from 'const int' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletCollisionAll.cpp')
+  (compiling source file 'btBulletCollisionAll.cpp')
   
   btBulletDynamicsAll.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\ConstraintSolver\btBatchedConstraints.cpp(169,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file 'btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\ConstraintSolver\btBatchedConstraints.cpp(661,46): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file 'btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\ConstraintSolver\btHingeConstraint.cpp(304,14): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file 'btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBody.cpp(1971,38): warning C4244: '=': conversion from 'int' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBody.cpp(2014,19): warning C4244: 'initializing': conversion from 'btScalar' to 'int', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyDynamicsWorld.cpp(724,90): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyDynamicsWorld.cpp(733,93): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyDynamicsWorld.cpp(742,93): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(88,40): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(88,27): warning C4244: 'initializing': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(107,40): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(107,27): warning C4244: 'initializing': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(163,41): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(163,28): warning C4244: 'initializing': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(174,41): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(174,28): warning C4244: 'initializing': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(213,41): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(213,28): warning C4244: 'initializing': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(224,41): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp(224,28): warning C4244: 'initializing': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodyJointLimitConstraint.cpp(118,22): warning C4244: 'initializing': conversion from 'int' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointMotor.cpp(31,17): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointMotor.cpp(31,12): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointMotor.cpp(31,7): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointMotor.cpp(146,26): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointMotor.cpp(160,19): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointMotor.cpp(166,29): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointMotor.cpp(166,7): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointLimit.cpp(36,17): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointLimit.cpp(36,12): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointLimit.cpp(36,7): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointLimit.cpp(208,26): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointLimit.cpp(222,19): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointLimit.cpp(242,29): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointLimit.cpp(242,8): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBodySphericalJointLimit.cpp(268,29): warning C4305: 'argument': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
   btLinearMathAll.cpp
   b3DynamicBvh.cpp
@@ -155,13 +155,13 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMulti
   b3ContactCache.cpp
   b3ConvexHullContact.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\Bullet3Collision\NarrowPhaseCollision\shared\b3NewContactReduction.h(138,39): warning C4244: '=': conversion from 'float' to 'unsigned short', possible loss of data
-  (compiling source file '../Bullet/Bullet3OpenCL/NarrowphaseCollision/b3ConvexHullContact.cpp')
+  (compiling source file '../../External/Bullet/Bullet3OpenCL/NarrowphaseCollision/b3ConvexHullContact.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\Bullet3Collision\NarrowPhaseCollision\shared\b3NewContactReduction.h(139,36): warning C4244: '=': conversion from 'float' to 'unsigned short', possible loss of data
-  (compiling source file '../Bullet/Bullet3OpenCL/NarrowphaseCollision/b3ConvexHullContact.cpp')
+  (compiling source file '../../External/Bullet/Bullet3OpenCL/NarrowphaseCollision/b3ConvexHullContact.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\Bullet3Collision\NarrowPhaseCollision\shared\b3NewContactReduction.h(166,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file '../Bullet/Bullet3OpenCL/NarrowphaseCollision/b3ConvexHullContact.cpp')
+  (compiling source file '../../External/Bullet/Bullet3OpenCL/NarrowphaseCollision/b3ConvexHullContact.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\Bullet3OpenCL\NarrowphaseCollision\b3ConvexHullContact.cpp(1315,15): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\Bullet3OpenCL\NarrowphaseCollision\b3ConvexHullContact.cpp(1379,24): warning C4305: 'argument': truncation from 'double' to 'float'
@@ -410,7 +410,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMulti
   btWheelInfo.cpp
   MultiBodyTreeImpl.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\details\IDLinearMathInterface.hpp(51,72): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletInverseDynamics/details/MultiBodyTreeImpl.cpp')
+  (compiling source file '../../External/Bullet/BulletInverseDynamics/details/MultiBodyTreeImpl.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\details\MultiBodyTreeImpl.cpp(23,24): warning C4305: '=': truncation from 'double' to 'idScalar'
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\details\MultiBodyTreeImpl.cpp(939,30): warning C4244: 'argument': conversion from 'const double' to 'const idScalar', possible loss of data
@@ -418,11 +418,11 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\details\Multi
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\details\MultiBodyTreeImpl.cpp(979,30): warning C4244: 'argument': conversion from 'const double' to 'const idScalar', possible loss of data
   MultiBodyTreeInitCache.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\details\IDLinearMathInterface.hpp(51,72): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletInverseDynamics/details/MultiBodyTreeInitCache.cpp')
+  (compiling source file '../../External/Bullet/BulletInverseDynamics/details/MultiBodyTreeInitCache.cpp')
   
   IDMath.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\details\IDLinearMathInterface.hpp(51,72): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletInverseDynamics/IDMath.cpp')
+  (compiling source file '../../External/Bullet/BulletInverseDynamics/IDMath.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\IDMath.cpp(262,31): warning C4244: 'initializing': conversion from 'double' to 'idScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\IDMath.cpp(262,25): warning C4244: 'initializing': conversion from 'double' to 'const idScalar', possible loss of data
@@ -430,12 +430,12 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\IDMath.cpp(45
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\IDMath.cpp(498,9): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
   MultiBodyTree.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\details\IDLinearMathInterface.hpp(51,72): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletInverseDynamics/MultiBodyTree.cpp')
+  (compiling source file '../../External/Bullet/BulletInverseDynamics/MultiBodyTree.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletInverseDynamics\MultiBodyTree.cpp(277,27): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
   btDefaultSoftBodySolver.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDefaultSoftBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDefaultSoftBodySolver.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -447,141 +447,141 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btDeformableBackwardEulerObjective.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(30,105): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(33,214): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableGravityForce.h(70,19): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(84,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(238,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(239,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(240,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(248,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(250,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(254,16): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(284,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(286,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(289,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(290,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(291,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(293,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(294,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(298,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(299,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(536,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(614,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(615,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(616,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(617,30): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(629,52): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,77): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,99): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(451,34): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\LinearMath\btImplicitQRSVD.h(492,22): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableNeoHookeanForce.h(32,20): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(117,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(128,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,128): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,111): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,94): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableBackwardEulerObjective.cpp(57,43): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableBackwardEulerObjective.cpp(208,28): warning C4244: '+=': conversion from 'double' to 'btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBackwardEulerObjective.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -593,136 +593,136 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btDeformableBodySolver.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(30,105): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(33,214): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableGravityForce.h(70,19): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(84,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(238,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(239,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(240,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(248,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(250,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(254,16): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(284,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(286,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(289,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(290,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(291,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(293,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(294,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(298,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(299,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(536,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(614,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(615,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(616,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(617,30): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(629,52): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,77): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,99): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(451,34): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\LinearMath\btImplicitQRSVD.h(492,22): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableNeoHookeanForce.h(32,20): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(117,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(128,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,128): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,111): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,94): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableBodySolver.cpp(23,140): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableBodySolver.cpp(73,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
@@ -730,7 +730,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableBodySolv
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableBodySolver.cpp(133,44): warning C4244: '+=': conversion from 'double' to 'btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableBodySolver.cpp(171,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btConjugateResidual.h(33,21): warning C4305: 'argument': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btConjugateResidual.h(33,21):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableBodySolver.h(44,58):
@@ -741,7 +741,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btConjugateResidual.
   		see the first reference to 'btConjugateResidual<btDeformableBackwardEulerObjective>::btConjugateResidual' in 'btDeformableBodySolver::btDeformableBodySolver'
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableBodySolver.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -754,7 +754,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   btDeformableContactConstraint.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableContactConstraint.cpp(504,23): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactConstraint.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactConstraint.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -766,143 +766,143 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btDeformableContactProjection.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(30,105): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(33,214): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableGravityForce.h(70,19): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(84,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(238,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(239,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(240,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(248,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(250,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(254,16): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(284,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(286,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(289,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(290,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(291,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(293,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(294,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(298,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(299,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(536,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(614,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(615,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(616,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(617,30): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(629,52): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,77): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,99): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(451,34): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\LinearMath\btImplicitQRSVD.h(492,22): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableNeoHookeanForce.h(32,20): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(117,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(128,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,128): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,111): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,94): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableContactProjection.cpp(574,42): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableContactProjection.cpp(587,43): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableContactProjection.cpp(599,42): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableContactProjection.cpp(607,43): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableContactProjection.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -916,139 +916,139 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   Compiling...
   btDeformableMultiBodyConstraintSolver.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(30,105): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(33,214): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableGravityForce.h(70,19): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(84,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(238,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(239,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(240,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(248,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(250,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(254,16): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(284,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(286,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(289,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(290,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(291,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(293,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(294,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(298,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(299,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(536,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(614,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(615,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(616,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(617,30): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(629,52): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,77): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,99): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(451,34): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\LinearMath\btImplicitQRSVD.h(492,22): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableNeoHookeanForce.h(32,20): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(117,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(128,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,128): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,111): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,94): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1060,141 +1060,141 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btDeformableMultiBodyDynamicsWorld.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(30,105): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(33,214): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableGravityForce.h(70,19): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(84,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(238,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(239,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(240,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(248,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(250,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(254,16): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(284,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(286,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(289,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(290,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(291,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(293,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(294,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(298,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(299,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(536,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(614,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(615,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(616,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(617,30): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(629,52): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,77): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,99): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(451,34): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\LinearMath\btImplicitQRSVD.h(492,22): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableNeoHookeanForce.h(32,20): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(117,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(128,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,128): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,111): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,94): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMultiBodyDynamicsWorld.cpp(54,38): warning C4305: 'argument': truncation from 'double' to 'btScalar'
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMultiBodyDynamicsWorld.cpp(61,31): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1206,82 +1206,82 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btSoftBody.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(84,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(238,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(239,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(240,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(248,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(250,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(254,16): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(284,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(286,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(289,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(290,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(291,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(293,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(294,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(298,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(299,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(536,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(614,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(615,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(616,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(617,30): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(629,52): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\LinearMath\btImplicitQRSVD.h(492,22): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.cpp(225,24): warning C4305: '=': truncation from 'double' to 'btScalar'
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.cpp(1039,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
@@ -1296,7 +1296,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.cpp(4432,
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.cpp(4452,49): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.cpp(4476,38): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBody.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1308,7 +1308,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btSoftBodyConcaveCollisionAlgorithm.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyConcaveCollisionAlgorithm.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyConcaveCollisionAlgorithm.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1320,86 +1320,86 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btSoftBodyHelpers.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(84,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(238,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(239,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(240,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(248,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(250,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(254,16): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(284,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(286,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(289,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(290,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(291,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(293,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(294,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(298,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(299,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(536,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(614,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(615,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(616,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(617,30): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(629,52): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyHelpers.cpp(581,29): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyHelpers.cpp(582,29): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyHelpers.cpp(1594,20): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyHelpers.cpp(1597,26): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftBodyHelpers.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1412,7 +1412,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   btSoftBodyRigidBodyCollisionConfiguration.cpp
   btSoftMultiBodyDynamicsWorld.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftMultiBodyDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftMultiBodyDynamicsWorld.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1424,7 +1424,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btSoftRigidCollisionAlgorithm.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftRigidCollisionAlgorithm.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftRigidCollisionAlgorithm.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1436,7 +1436,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btSoftRigidDynamicsWorld.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftRigidDynamicsWorld.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftRigidDynamicsWorld.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1448,7 +1448,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btSoftSoftCollisionAlgorithm.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/btSoftSoftCollisionAlgorithm.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/btSoftSoftCollisionAlgorithm.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1460,85 +1460,85 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btReducedDeformableBody.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(84,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(238,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(239,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(240,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(248,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(250,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(254,16): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(284,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(286,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(289,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(290,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(291,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(293,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(294,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(298,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(299,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(536,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(614,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(615,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(616,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(617,30): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(629,52): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\BulletReducedDeformableBody\btReducedDeformableBody.cpp(68,35): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\BulletReducedDeformableBody\btReducedDeformableBody.cpp(75,30): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\BulletReducedDeformableBody\btReducedDeformableBody.cpp(507,24): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1552,7 +1552,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\BulletReducedDeformableBody\btReducedDeformableBodyHelpers.cpp(191,20): warning C4018: '<': signed/unsigned mismatch
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\BulletReducedDeformableBody\btReducedDeformableBodyHelpers.cpp(193,21): warning C4018: '<': signed/unsigned mismatch
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodyHelpers.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodyHelpers.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1564,139 +1564,139 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btReducedDeformableBodySolver.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(130,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,96): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,73): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLagrangianForce.h(240,50): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(30,105): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableMassSpringForce.h(33,214): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableGravityForce.h(70,19): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(84,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(238,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(239,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(240,95): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(248,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(250,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(254,16): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(284,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(286,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(289,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(290,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(291,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(293,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(294,14): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(298,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(299,27): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(533,29): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(536,15): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(614,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(615,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(616,38): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(617,30): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBodyInternals.h(629,52): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,77): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(30,99): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableLinearElasticityForce.h(451,34): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\LinearMath\btImplicitQRSVD.h(492,22): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btDeformableNeoHookeanForce.h(32,20): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(117,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(128,36): warning C4244: '=': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,128): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,111): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btPreconditioner.h(142,94): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):
@@ -1708,7 +1708,7 @@ D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17
   
   btReducedDeformableContactConstraint.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17): warning C4244: 'initializing': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file '../Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableContactConstraint.cpp')
+  (compiling source file '../../External/Bullet/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableContactConstraint.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1269,17):
   the template instantiation context (the oldest one first) is
   	D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletSoftBody\btSoftBody.h(1303,4):

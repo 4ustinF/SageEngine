@@ -27,7 +27,6 @@ d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\uibutton.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\tooneffect .obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\texturingeffect.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\texturemanager.obj
-d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\postproccessingeffect.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\texture.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\terraineffect.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\terrain.obj
@@ -40,6 +39,7 @@ d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\sampler.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\rendertarget.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\renderobject.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\reflectioneffect.obj
+d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\postproccessingeffect.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\pixelshader.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\particleeffect.obj
 d:\github\sageengine\s.a.g.e\framework\graphics\x64\debug\voxelwatereffect.obj

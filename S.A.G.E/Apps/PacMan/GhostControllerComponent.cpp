@@ -18,9 +18,9 @@ void GhostControllerComponent::Initialize()
 	mTileMapService = world.GetService<TileMapService>();
 	mGameManagerService = world.GetService<GameManagerService>();
 
+	mWorldOffset = mTileMapService->GetWorldOffset();
 	mTileSize = mTileMapService->GetTileSize();
 	mHalfTileSize = mTileSize * 0.5f;
-	mWorldOffset = mTileMapService->GetWorldOffset();
 
 	// Player
 	GameObject* playerObject = world.FindGameObject("PacMan");
@@ -29,6 +29,7 @@ void GhostControllerComponent::Initialize()
 
 void GhostControllerComponent::Terminate()
 {
+	mHomeRects.clear();
 	mTargetNodePositions.clear();
 	mPlayerController = nullptr;
 	mTileMapService = nullptr;
@@ -155,11 +156,68 @@ void GhostControllerComponent::DebugUI()
 }
 
 
+void GhostControllerComponent::SetHomePos()
+{
+	// TODO: Don't manually set these. Use offset.
+	const Rect homeEntranceRect = Rect(Vector2(336.0f, 348.0f), 2.0f);
+	const Rect homeMidRect = Rect(Vector2(336.0f, 348.0f), 2.0f);
+
+	const float xOffset = mHalfTileSize + mWorldOffset.x;
+	const float yOffset = mHalfTileSize + mWorldOffset.y;
+	const Vector2 homeEntrancePos = { 15.5f * mTileSize + xOffset, 11.0f * mTileSize + yOffset };
+	const Vector2 homeMidPos = { 15.5f * mTileSize + xOffset, 14.0f * mTileSize + yOffset };
+
+	switch (mGhostType)
+	{
+	case GhostType::Blinky:
+		mStartPos = homeEntrancePos;
+		mHomeRects.reserve(2);
+		mHomeRects.push_back(homeEntranceRect);
+		mHomeRects.push_back(homeMidRect);
+		break;
+	case GhostType::Pinky:
+		mStartPos = homeMidPos;
+		mHomeRects.reserve(2);
+		mHomeRects.push_back(homeEntranceRect); 
+		mHomeRects.push_back(homeMidRect);
+		break;
+	case GhostType::Inky:
+		//mStartPos = { 13.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 14.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
+		mStartPos = homeMidPos - Vector2(mTileSize * 2.0f, 0.0f);
+		mHomeRects.reserve(3);
+		mHomeRects.push_back(homeEntranceRect);
+		mHomeRects.push_back(homeMidRect);
+		mHomeRects.push_back(Rect(mStartPos, 2.0f)); // Home Left Rect
+		break;
+	case GhostType::Clyde:
+		//mStartPos = { 17.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 14.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
+		mStartPos = homeMidPos + Vector2(mTileSize * 2.0f, 0.0f);
+		mHomeRects.reserve(3);
+		mHomeRects.push_back(homeEntranceRect);
+		mHomeRects.push_back(homeMidRect);
+		mHomeRects.push_back(Rect(mStartPos, 2.0f)); // Home Right Rect
+		break;
+	}
+}
+
 void GhostControllerComponent::Respawn()
 {
 	mGhostMode = GhostMode::Scatter;
-	const Vector2 newPos = { 15.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 11.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
-	TeleportGhost(newPos, Direction::Left);
+	TeleportGhost(mStartPos, Direction::Left);
+	LeaveHome();
+}
+
+void GhostControllerComponent::LeaveHome()
+{
+	switch (mGhostType)
+	{
+	case GhostType::Pinky:
+		break;
+	case GhostType::Inky:
+		break;
+	case GhostType::Clyde:
+		break;
+	}
 }
 
 void GhostControllerComponent::SetGhostMode(GhostMode mode)
@@ -185,10 +243,6 @@ void GhostControllerComponent::SetGhostType(GhostType type)
 {
 	mGhostType = type;
 	SetCornerCords();
-
-	// TODO: set up ghost accordingly
-	// Home cords
-	// How to target? I don't think thats done here
 }
 
 void GhostControllerComponent::IsAten()
@@ -400,6 +454,9 @@ void GhostControllerComponent::CalculateTargetPositionAtIntersection()
 
 		mTargetPosition = newPos;
 	}
+	else {
+		CalculateRandomDirection(); // Fallback if we don't have a valid tile to go to.
+	}
 }
 
 void GhostControllerComponent::CalculateTargetPositionContinuedDirection()
@@ -416,16 +473,6 @@ void GhostControllerComponent::CalculateTargetPositionContinuedDirection()
 
 			mTargetPosition = newPos;
 		}
-		else if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y))
-		{
-			const Vector2 newPos{
-				(mTileCords.x + 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
-				mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
-			};
-
-			mTargetPosition = newPos;
-			mDirection = Direction::Right;
-		}
 		else if (!mTileMapService->IsBlocked(mTileCords.x - 1, mTileCords.y))
 		{
 			const Vector2 newPos{
@@ -435,6 +482,16 @@ void GhostControllerComponent::CalculateTargetPositionContinuedDirection()
 
 			mTargetPosition = newPos;
 			mDirection = Direction::Left;
+		}
+		else if (!mTileMapService->IsBlocked(mTileCords.x + 1, mTileCords.y))
+		{
+			const Vector2 newPos{
+				(mTileCords.x + 1) * mTileSize + mWorldOffset.x + mHalfTileSize,
+				mTileCords.y * mTileSize + mWorldOffset.y + mHalfTileSize
+			};
+
+			mTargetPosition = newPos;
+			mDirection = Direction::Right;
 		}
 		break;
 	case Direction::Right:
@@ -536,9 +593,9 @@ void GhostControllerComponent::CalculateTargetPositionContinuedDirection()
 void GhostControllerComponent::CalculateRandomDirection()
 {
 	const int dirSize = static_cast<int>(Direction::Size) - 1; // -1 because uniform int is inclusive
+	const Direction oppDir = GetOppositeDirection(mDirection);
 	while (true)
 	{
-		const Direction oppDir = GetOppositeDirection(mDirection);
 		const Direction randNewDir = static_cast<Direction>(Random::UniformInt(0, dirSize));
 		if (randNewDir != oppDir && !mTileMapService->IsBlocked(mTileCords + DirectionToVector2Int(randNewDir)))
 		{

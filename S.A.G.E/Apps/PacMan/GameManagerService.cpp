@@ -265,7 +265,10 @@ void GameManagerService::SetupGame()
 	{
 		if (GameObject* ghostGameObject = world.FindGameObject(GhostTypeToString(static_cast<GhostType>(i))))
 		{
-			mGhostControllers.push_back(ghostGameObject->GetComponent<GhostControllerComponent>());
+			GhostControllerComponent* controller = ghostGameObject->GetComponent<GhostControllerComponent>();
+			controller->SetHomePos();
+			mGhostControllers.push_back(controller);
+
 			mGhostAnimators.push_back(ghostGameObject->GetComponent<GhostAnimatorComponent>());
 		}
 	}

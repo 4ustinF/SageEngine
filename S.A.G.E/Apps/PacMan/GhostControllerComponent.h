@@ -19,7 +19,9 @@ public:
 	void Update(float deltaTime) override;
 	void DebugUI() override;
 
+	void SetHomePos();
 	void Respawn();
+	void LeaveHome();
 
 	SAGE::Math::Vector2 GetPosition() const { return mPosition; }
 	SAGE::Math::Rect GetColliderRect() const { return { mPosition, mHalfSpriteSize }; }
@@ -36,6 +38,7 @@ public:
 
 private:
 	void SetCornerCords();
+	void SetGhostCounter();
 
 	void TeleportGhost(const SAGE::Math::Vector2 newPos, const Direction dir);
 	void UpdateTileCords();
@@ -60,8 +63,9 @@ private:
 	SAGE::Math::Vector2Int mCornerCords = SAGE::Math::Vector2Int::Zero;
 	const SAGE::Math::Vector2Int mHomeCords = SAGE::Math::Vector2Int(15, 11);
 	const SAGE::Math::Vector2 mHomePos = SAGE::Math::Vector2(336.0f, 227.0f);
+	SAGE::Math::Vector2 mStartPos = SAGE::Math::Vector2(336.0f, 227.0f);
 	Direction mDirection = Direction::Right;
-	float mSpeed = 140.0f;
+	float mSpeed = 0.0f;
 	GhostType mGhostType = GhostType::Blinky;
 	GhostMode mGhostMode = GhostMode::Frightened;
 	GhostHomeState mEatenState = GhostHomeState::None;
@@ -72,6 +76,9 @@ private:
 	// Ghost home
 	const SAGE::Math::Rect mHomeEntranceRect = SAGE::Math::Rect(SAGE::Math::Vector2(336.0f, 348.0f), 2.0f); // TODO: Take map offset into account
 	const SAGE::Math::Rect mHomeMidRect = SAGE::Math::Rect(SAGE::Math::Vector2(336.0f, 420.0f), 2.0f); // TODO: Take map offset into account
+	std::vector<SAGE::Math::Rect> mHomeRects;
+	int mPelletCounter = 0;
+	int mPelletCountToLeaveHome = 30;
 
 	// Map Data
 	float mTileSize = 0.0f;

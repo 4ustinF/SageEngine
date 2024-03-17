@@ -14,8 +14,8 @@
       "TemplateFile": "../../Assets/Templates/pacman.json"
     },
     {
-      "Name": "Blinky",
-      "TemplateFile": "../../Assets/Templates/blinky.json"
+      "Name": "Pinky",
+      "TemplateFile": "../../Assets/Templates/pinky.json"
     }
   ]
 }

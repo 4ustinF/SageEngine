@@ -382,11 +382,15 @@ void TileMapService::PaintTile(int tileIndex)
 
 	const int tilePosX = static_cast<int>((mInputSystem->GetMouseScreenX() - mWorldOffset.x) / mTileSize);
 	const int tilePosY = static_cast<int>((mInputSystem->GetMouseScreenY() - mWorldOffset.y) / mTileSize);
-	Tile& tile = mMap[ToIndex(tilePosX, tilePosY, mColumns)];
-	tile.tileIndex = tileIndex;
-	tile.flip = static_cast<Flip>(mPaintFlipMode);
+	const int mapIndex = ToIndex(tilePosX, tilePosY, mColumns);
+	if (mapIndex < mMap.size())
+	{
+		Tile& tile = mMap[mapIndex];
+		tile.tileIndex = tileIndex;
+		tile.flip = static_cast<Flip>(mPaintFlipMode);
 
-	AdjustTilePivot(tile, mPaintPivotMode);
+		AdjustTilePivot(tile, mPaintPivotMode);
+	}
 }
 
 void TileMapService::ExportMap()

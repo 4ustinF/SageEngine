@@ -25,6 +25,7 @@ enum class GhostMode
 	Scatter,
 	Frightened,
 	Eaten,
+	Home,
 };
 
 enum class GhostHomeState

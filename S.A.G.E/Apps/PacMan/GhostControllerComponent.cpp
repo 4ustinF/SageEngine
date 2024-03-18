@@ -29,7 +29,6 @@ void GhostControllerComponent::Initialize()
 
 void GhostControllerComponent::Terminate()
 {
-	mHomeRects.clear();
 	mTargetNodePositions.clear();
 	mPlayerController = nullptr;
 	mTileMapService = nullptr;
@@ -90,44 +89,44 @@ void GhostControllerComponent::Update(float deltaTime)
 		break;
 	}
 
-	if (mGhostMode == GhostMode::Eaten) // Back at house
+	switch (mGhostMode)
 	{
-		switch (mEatenState)
+	case GhostMode::Eaten:
+		switch (mHomeState)
 		{
 		case GhostHomeState::GoingToHomeEntrance:
 			if (IsRectOverlap(GetSmallColliderRect(), mHomeEntranceRect)) // Made it to home entrance
 			{
-				mPosition.x = 336.0f;
-				mTargetPosition = { 336.0f, 420.f };
+				mPosition = mHomeEntrancePos;
+				mTargetPosition = mHomeMidPos;
 				mDirection = Direction::Down;
-				mEatenState = GhostHomeState::GoingIntoHome;
+				mHomeState = GhostHomeState::GoingIntoHome;
 			}
 			break;
 		case GhostHomeState::GoingIntoHome:
 			if (IsRectOverlap(GetSmallColliderRect(), mHomeMidRect)) // Made it inside the home
 			{
-				mPosition.y = 420.0f;
-				mTargetPosition = { 336.0f, 348.f };
-				mDirection = Direction::Up;
-				mEatenState = GhostHomeState::LeavingHome;
-
-				mGhostMode = GhostMode::Scatter;
-			}
-			break;
-		case GhostHomeState::LeavingHome:
-			if (IsRectOverlap(GetSmallColliderRect(), mHomeEntranceRect)) // Made it out to the home entrance
-			{
-				mPosition.y = 348.0f;
-				mEatenState = GhostHomeState::None;
-				Respawn();
+				mGhostMode = GhostMode::Home;
+				if (mGhostType == GhostType::Blinky) { // Leave home immediately if you are blinky.
+					mHomeState = GhostHomeState::LeavingHome;
+				}
 			}
 			break;
 		}
-
-		//if (mTileCords == mHomeCords) // TODO: Find a better way to respawn at home
-		//{
-		//	Respawn();
-		//}
+		break;
+	case GhostMode::Home:
+		if (mHomeState == GhostHomeState::LeavingHome)
+		{
+			if (IsRectOverlap(GetSmallColliderRect(), mLeaveHomeMidRect))
+			{
+				mPosition.x = mHomeMidPos.x;
+				mTargetPosition = mHomeEntrancePos;
+				mDirection = Direction::Up;
+				mHomeState = GhostHomeState::None;
+				mGhostMode = GhostMode::Scatter;
+			}
+		}
+		break;
 	}
 }
 
@@ -152,57 +151,45 @@ void GhostControllerComponent::DebugUI()
 		ImGui::DragInt2("Home Cords##GhostControllerComponent", &mCornerCords.x, 0.1f);
 		//int temp = static_cast<int>(mGhostMode);
 		//ImGui::DragInt("Ghost Mode", &temp, 0.5f);
+
+		if (ImGui::Button("Leave Home"))
+		{
+			mHomeState = GhostHomeState::LeavingHome;
+		}
 	}
 }
 
 
 void GhostControllerComponent::SetHomePos()
 {
-	// TODO: Don't manually set these. Use offset.
-	const Rect homeEntranceRect = Rect(Vector2(336.0f, 348.0f), 2.0f);
-	const Rect homeMidRect = Rect(Vector2(336.0f, 348.0f), 2.0f);
+	const Vector2 homeEntrancePos = { 15.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 11.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
+	const Vector2 homeMidPos = homeEntrancePos + Vector2(0.0f, 3.0f * mTileSize);
 
-	const float xOffset = mHalfTileSize + mWorldOffset.x;
-	const float yOffset = mHalfTileSize + mWorldOffset.y;
-	const Vector2 homeEntrancePos = { 15.5f * mTileSize + xOffset, 11.0f * mTileSize + yOffset };
-	const Vector2 homeMidPos = { 15.5f * mTileSize + xOffset, 14.0f * mTileSize + yOffset };
+	const Rect homeEntranceRect = Rect(homeEntrancePos, 2.0f);
+	const Rect homeMidRect = Rect(homeMidPos, 2.0f);
 
 	switch (mGhostType)
 	{
 	case GhostType::Blinky:
 		mStartPos = homeEntrancePos;
-		mHomeRects.reserve(2);
-		mHomeRects.push_back(homeEntranceRect);
-		mHomeRects.push_back(homeMidRect);
 		break;
 	case GhostType::Pinky:
 		mStartPos = homeMidPos;
-		mHomeRects.reserve(2);
-		mHomeRects.push_back(homeEntranceRect); 
-		mHomeRects.push_back(homeMidRect);
 		break;
 	case GhostType::Inky:
 		//mStartPos = { 13.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 14.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
 		mStartPos = homeMidPos - Vector2(mTileSize * 2.0f, 0.0f);
-		mHomeRects.reserve(3);
-		mHomeRects.push_back(homeEntranceRect);
-		mHomeRects.push_back(homeMidRect);
-		mHomeRects.push_back(Rect(mStartPos, 2.0f)); // Home Left Rect
 		break;
 	case GhostType::Clyde:
 		//mStartPos = { 17.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 14.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
 		mStartPos = homeMidPos + Vector2(mTileSize * 2.0f, 0.0f);
-		mHomeRects.reserve(3);
-		mHomeRects.push_back(homeEntranceRect);
-		mHomeRects.push_back(homeMidRect);
-		mHomeRects.push_back(Rect(mStartPos, 2.0f)); // Home Right Rect
 		break;
 	}
 }
 
 void GhostControllerComponent::Respawn()
 {
-	mGhostMode = GhostMode::Scatter;
+	mGhostMode = mGhostType == GhostType::Blinky ? GhostMode::Scatter : GhostMode::Home;
 	TeleportGhost(mStartPos, Direction::Left);
 	LeaveHome();
 }
@@ -233,6 +220,7 @@ void GhostControllerComponent::SetGhostMode(GhostMode mode)
 		ReverseDirection();
 		break;
 	case GhostMode::Eaten:
+	case GhostMode::Home:
 		return; // Needs to go home first before changing ghost mode
 	}
 
@@ -247,7 +235,7 @@ void GhostControllerComponent::SetGhostType(GhostType type)
 
 void GhostControllerComponent::IsAten()
 {
-	mEatenState = GhostHomeState::GoingToHomeEntrance;
+	mHomeState = GhostHomeState::GoingToHomeEntrance;
 	SetGhostMode(GhostMode::Eaten);
 }
 
@@ -339,7 +327,6 @@ Vector2Int GhostControllerComponent::GetChaseTargetCords() const
 
 	return mPlayerController->GetPlayerCords();
 }
-
 
 void GhostControllerComponent::CalculateNewTargetPosition()
 {

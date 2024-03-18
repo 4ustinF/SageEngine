@@ -65,18 +65,20 @@ private:
 	const SAGE::Math::Vector2 mHomePos = SAGE::Math::Vector2(336.0f, 227.0f);
 	SAGE::Math::Vector2 mStartPos = SAGE::Math::Vector2(336.0f, 227.0f);
 	Direction mDirection = Direction::Right;
-	float mSpeed = 0.0f;
+	float mSpeed = 140.0f;
 	GhostType mGhostType = GhostType::Blinky;
-	GhostMode mGhostMode = GhostMode::Frightened;
-	GhostHomeState mEatenState = GhostHomeState::None;
+	GhostMode mGhostMode = GhostMode::Home;
 
 	// Sprite data
 	const float mHalfSpriteSize = 21.0f;
 
 	// Ghost home
-	const SAGE::Math::Rect mHomeEntranceRect = SAGE::Math::Rect(SAGE::Math::Vector2(336.0f, 348.0f), 2.0f); // TODO: Take map offset into account
-	const SAGE::Math::Rect mHomeMidRect = SAGE::Math::Rect(SAGE::Math::Vector2(336.0f, 420.0f), 2.0f); // TODO: Take map offset into account
-	std::vector<SAGE::Math::Rect> mHomeRects;
+	const SAGE::Math::Vector2 mHomeEntrancePos = SAGE::Math::Vector2(336.0f, 348.0f);		// { 15.5f * mTileSize + mHalfTileSize + mWorldOffset.x, 11.0f * mTileSize + mHalfTileSize + mWorldOffset.y };
+	const SAGE::Math::Vector2 mHomeMidPos = SAGE::Math::Vector2(336.0f, 420.0f);			// homeEntrancePos + Vector2(0.0f, 3.0f * mTileSize);
+	const SAGE::Math::Rect mHomeEntranceRect = SAGE::Math::Rect(mHomeEntrancePos, 2.0f);	// TODO: Take map offset into account
+	const SAGE::Math::Rect mHomeMidRect = SAGE::Math::Rect(mHomeMidPos, 2.0f);				// TODO: Take map offset into account
+	const SAGE::Math::Rect mLeaveHomeMidRect = SAGE::Math::Rect(mHomeMidPos, 2.0f, 24.0f);
+	GhostHomeState mHomeState = GhostHomeState::None;
 	int mPelletCounter = 0;
 	int mPelletCountToLeaveHome = 30;
 

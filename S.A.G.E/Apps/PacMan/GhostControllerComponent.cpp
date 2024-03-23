@@ -107,9 +107,7 @@ void GhostControllerComponent::Update(float deltaTime)
 			if (IsRectOverlap(GetSmallColliderRect(), mHomeMidRect)) // Made it inside the home
 			{
 				mGhostMode = GhostMode::Home;
-				if (mGhostType == GhostType::Blinky) { // Leave home immediately if you are blinky.
-					mHomeState = GhostHomeState::LeavingHome;
-				}
+				mHomeState = GhostHomeState::LeavingHome;
 			}
 			break;
 		}
@@ -191,20 +189,6 @@ void GhostControllerComponent::Respawn()
 {
 	mGhostMode = mGhostType == GhostType::Blinky ? GhostMode::Scatter : GhostMode::Home;
 	TeleportGhost(mStartPos, Direction::Left);
-	LeaveHome();
-}
-
-void GhostControllerComponent::LeaveHome()
-{
-	switch (mGhostType)
-	{
-	case GhostType::Pinky:
-		break;
-	case GhostType::Inky:
-		break;
-	case GhostType::Clyde:
-		break;
-	}
 }
 
 void GhostControllerComponent::SetGhostMode(GhostMode mode)

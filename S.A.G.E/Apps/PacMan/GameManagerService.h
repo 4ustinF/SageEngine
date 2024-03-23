@@ -2,6 +2,7 @@
 
 #include "TypeIds.h"
 #include "Enums.h"
+#include <queue>
 
 class TileMapService;
 class PlayerControllerComponent;
@@ -94,6 +95,9 @@ private:
 	const int mPlayerPointsNeededForBonusLife = 10000;
 
 	// Ghost
+	void ReleaseGhost();
+	std::array<int, 4> mPelletsToFreeGhost = {214, 184, 243, 194}; // 30, 60, 0, 50
+	int mReleaseGhostIndex = 0;
 	std::vector<GhostControllerComponent*> mGhostControllers; // TODO: Should be a map that contains both?
 	std::vector<GhostAnimatorComponent*> mGhostAnimators;
 	GhostMode mGhostMode = GhostMode::Scatter;

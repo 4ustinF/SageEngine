@@ -306,6 +306,24 @@ void GameManagerService::AtePellet(PelletType pelletType)
 
 	--mRemainingPelletCount;
 
+	// TODO: Figure a better way to release ghost
+	if (mLevel == 1 && mRemainingPelletCount == 214)
+	{
+		mGhostControllers[2]->SetHomeState(GhostHomeState::LeavingHome);
+	}
+	else if (mLevel == 1 && mRemainingPelletCount == 184)
+	{
+		mGhostControllers[3]->SetHomeState(GhostHomeState::LeavingHome);
+	}
+	else if (mLevel == 2 && mRemainingPelletCount == 243)
+	{
+		mGhostControllers[2]->SetHomeState(GhostHomeState::LeavingHome);
+	}
+	else if (mLevel == 2 && mRemainingPelletCount == 194)
+	{
+		mGhostControllers[3]->SetHomeState(GhostHomeState::LeavingHome);
+	}
+
 	if (mRemainingPelletCount == mBonusSymbol1RemainingPellets || mRemainingPelletCount == mBonusSymbol2RemainingPellets)
 	{
 		mIsBonusSymbolActive = true;
@@ -375,6 +393,7 @@ void GameManagerService::RestartGame()
 	mRemainingPelletCount = mMaxPelletCount;
 
 	mBonusSymbolTextureIds.clear();
+	mReleaseGhostIndex = 0;
 
 	RepopulatePellets();
 	SetupLevel();
@@ -388,7 +407,13 @@ void GameManagerService::SetupLevel()
 	mPlayerController->SetPlayerSpeed(mCurrentLevelData.PacManSpeed);
 	for (const auto& ghost : mGhostControllers) {
 		ghost->Respawn();
+		if (mLevel >= 3) { // If level is >= 3 let all ghost out immediately 
+			ghost->SetHomeState(GhostHomeState::LeavingHome);
+		}
 	}
+
+	mGhostControllers[1]->SetHomeState(GhostHomeState::LeavingHome); // Let Pinky out immediately 
+
 
 	if (mLevel > 1) { // Don't need to populate the pellets on the first level as that is preset for us there.
 		RepopulatePellets();
@@ -579,6 +604,13 @@ void GameManagerService::AddPlayerPoints(int pointsToAdd)
 
 		mHighScoreStringXOffset = 336.0f - (StringToTextWidth(mHighScoreString) * 0.5f);
 	}
+}
+
+void GameManagerService::ReleaseGhost()
+{
+	//mGhostToLeaveHome.front()->SetHomeState(GhostHomeState::LeavingHome);
+	//mGhostToLeaveHome.pop();
+	++mReleaseGhostIndex;
 }
 
 void GameManagerService::PlayAudioOneShot(const SAGE::Graphics::SoundId soundID)

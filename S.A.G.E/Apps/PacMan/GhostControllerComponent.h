@@ -21,7 +21,6 @@ public:
 
 	void SetHomePos();
 	void Respawn();
-	void LeaveHome();
 
 	SAGE::Math::Vector2 GetPosition() const { return mPosition; }
 	SAGE::Math::Rect GetColliderRect() const { return { mPosition, mHalfSpriteSize }; }
@@ -34,11 +33,11 @@ public:
 	void SetGhostMode(GhostMode mode);
 
 	void SetGhostType(GhostType type);
+	void SetHomeState(GhostHomeState homestate) { mHomeState = homestate; };
 	void IsAten();
 
 private:
 	void SetCornerCords();
-	void SetGhostCounter();
 
 	void TeleportGhost(const SAGE::Math::Vector2 newPos, const Direction dir);
 	void UpdateTileCords();

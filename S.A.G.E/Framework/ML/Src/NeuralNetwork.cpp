@@ -6,23 +6,40 @@ using namespace SAGE::Math::Random;
 
 namespace
 {
-	float Activation(float x)
+	// Works better for XOR
+	float Tanh(float x)
 	{
 		return tanh(x);
 	}
 
-	float ActivationDerivative(float x)
+	float TanhDerivative(float x)
 	{
 		return 1.0f - (x * x);
 	}
+
+	// Works better for digits
+	float Sigmoid(float x)
+	{
+		return 1 / (1 + exp(-x));
+	}
+
+	float SigmoidDerivative(float x)
+	{
+		const float out = Sigmoid(x);
+		return out * (1 - out);
+	}
 }
 
-Neuron::Neuron(size_t numOutputs, size_t myIndex)
+Neuron::Neuron(size_t numOutputs, size_t myIndex, bool isBias)
 	: mMyIndex(myIndex)
 {
-	for (size_t i = 0; i < numOutputs; ++i)
-	{
-		mOutputeWeights.push_back({ UniformFloat() });
+	if (isBias) {
+		mOutputeWeights.resize(numOutputs, {1.0f});
+	}
+	else {
+		for (size_t i = 0; i < numOutputs; ++i) {
+			mOutputeWeights.push_back({ UniformFloat() });
+		}
 	}
 }
 
@@ -34,13 +51,13 @@ void Neuron::FeedForward(const Layer& previousLayer)
 		sum += n.GetOutputValue() * n.mOutputeWeights[mMyIndex].weight;
 	}
 
-	mOutputValue = Activation(sum);
+	mOutputValue = Tanh(sum);
 }
 
 void Neuron::CalculateOutputGradients(float targetValue)
 {
 	const float error = targetValue - mOutputValue;
-	mGradient = error * ActivationDerivative(mOutputValue);
+	mGradient = error * TanhDerivative(mOutputValue);
 }
 
 void Neuron::CalculateHiddenGradients(const Layer& nextLayer)
@@ -49,7 +66,7 @@ void Neuron::CalculateHiddenGradients(const Layer& nextLayer)
 	for (size_t neuron = 0; neuron + 1 < nextLayer.size(); ++neuron) {
 		sumDOW += mOutputeWeights[neuron].weight * nextLayer[neuron].mGradient;
 	}
-	mGradient = sumDOW * ActivationDerivative(mOutputValue);
+	mGradient = sumDOW * TanhDerivative(mOutputValue);
 }
 
 void Neuron::UpdateInputWeights(Layer& previousLayer)
@@ -65,7 +82,7 @@ void Neuron::UpdateInputWeights(Layer& previousLayer)
 
 // ====================================================================================================
 
-NeuralNetwork::NeuralNetwork(const std::vector<size_t>& topology)
+NeuralNetwork::NeuralNetwork(const std::vector<size_t>& topology, ActivationFunction activationFunction)
 {
 	const size_t numLayers = topology.size();
 	ASSERT(numLayers >= 2, "NeuralNetwork -- Invalid topology. Must have at least 2 layers.");
@@ -80,7 +97,7 @@ NeuralNetwork::NeuralNetwork(const std::vector<size_t>& topology)
 
 		// For each layer, we want 1 extra neuron as the bias neuron (hence <= instead of <)
 		for (size_t neuron = 0; neuron <= numNeurons; ++neuron) {
-			mLayers[layer].emplace_back(numOutputs, neuron);
+			mLayers[layer].emplace_back(numOutputs, neuron, neuron == numNeurons);
 		}
 	}
 

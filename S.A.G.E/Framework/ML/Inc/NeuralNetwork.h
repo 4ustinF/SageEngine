@@ -13,7 +13,7 @@ namespace SAGE::ML
 	class Neuron
 	{
 	public:
-		Neuron(size_t numOutputs, size_t myIndex);
+		Neuron(size_t numOutputs, size_t myIndex, bool isBias);
 
 		void SetOutputValue(float value) { mOutputValue = value; }
 		float GetOutputValue() const { return mOutputValue; }
@@ -33,7 +33,13 @@ namespace SAGE::ML
 	class NeuralNetwork
 	{
 	public:
-		NeuralNetwork(const std::vector<size_t>& topology);
+		enum ActivationFunction
+		{
+			TanH,
+			Sigmoid,
+		};
+
+		NeuralNetwork(const std::vector<size_t>& topology, ActivationFunction activationFunction = ActivationFunction::TanH);
 
 		void FeedForward(const std::vector<float>& inputValues);
 		void BackPropagate(const std::vector<float>& targetValues);

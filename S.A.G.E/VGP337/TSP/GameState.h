@@ -20,11 +20,13 @@ private:
 	SAGE::ML::GeneticAlgorithm mGeneticAlgorithm;
 	bool mInitialized = false;
 
-	int mPopulationSize = 100;
+	int mPopulationSize = 10;
 	float mCrossoverRate = 0.45f;
 	float mMutationRate = 0.1f;
+	int mChromoLength = 10;
 
 	SAGE::Graphics::TextureId mCityTextureID = 0;
+	float mCityRadius = 100.0f;
 	float mHalfScreenWidth = 0.0f;
 	float mHalfScreenHeight = 0.0f;
 };

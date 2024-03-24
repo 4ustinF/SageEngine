@@ -58,7 +58,7 @@ void GameState::Update(float deltaTime)
 			// Print the next best genome.
 			std::string bestStr;
 			for (const auto& gene : mGeneticAlgorithm.GetBestGenome().chromosome) {
-				bestStr += static_cast<char>(gene + 32);
+				bestStr += std::to_string(gene) + ' ';
 			}
 			mAppLog.AddLog("Generation %d: %s\n", mGeneticAlgorithm.Getgeneration(), bestStr.c_str());
 		}
@@ -67,10 +67,9 @@ void GameState::Update(float deltaTime)
 
 void GameState::Render()
 {
-	const float radius = 100.0f;
 	for (int i = 0; i < 100; ++i)
 	{
-		mSpriteRenderer->Draw(mCityTextureID, Random::OnUnitCircle() * radius + Vector2(mHalfScreenWidth, mHalfScreenHeight), 0.0, Pivot::Center, Flip::None);
+		mSpriteRenderer->Draw(mCityTextureID, Random::OnUnitCircle() * mCityRadius + Vector2(mHalfScreenWidth, mHalfScreenHeight), 0.0, Pivot::Center, Flip::None);
 	}
 }
 
@@ -98,9 +97,18 @@ void GameState::DebugUI()
 				population.resize(mPopulationSize);
 				for (auto& genome : population)
 				{
-					genome.chromosome.reserve(kChromoLength);
-					for (int i = 0; i < kChromoLength; ++i) {
-						genome.chromosome.push_back(Random::UniformInt(0, kValidGeneValue));
+					std::vector<int> mValues(mChromoLength);
+					std::iota(mValues.begin(), mValues.end(), +1);
+
+					genome.chromosome.reserve(mChromoLength);
+					for (int i = 0; i < mChromoLength; ++i) {
+						const int size = static_cast<int>(mValues.size()) - 1;
+						const int index = Random::UniformInt(0, size);
+
+						genome.chromosome.push_back(mValues[index] - 1);
+
+						std::swap(mValues[index], mValues[size]);
+						mValues.pop_back();
 					}
 				}
 			};
@@ -110,17 +118,18 @@ void GameState::DebugUI()
 				float fitness = 0.0f;
 
 				// One point per matching character
-				for (size_t i = 0; i < kTarget.size(); ++i) {
-					if (kTarget[i] == genome.chromosome[i] + 32) { // 32 is our ASCII offset
-						fitness += 1.0f;
-					}
-				}
+				//for (size_t i = 0; i < kTarget.size(); ++i) {
+				//	if (kTarget[i] == genome.chromosome[i] + 32) { // 32 is our ASCII offset
+				//		fitness += 1.0f;
+				//	}
+				//}
 				return fitness;
 			};
 
 		auto mate = [this](const auto& parent1, const auto& parent2)
 			{
 				GeneticAlgorithm::Genome offSpring;
+				return offSpring;
 				offSpring.chromosome.reserve(parent1.chromosome.size());
 
 				for (size_t i = 0; i < parent1.chromosome.size(); ++i)

@@ -7,24 +7,19 @@
       "RelativeMoniker": "D:0:0:{CA5C14E6-0C4A-4300-BA80-37C8BC3AFB61}|VGP337\\TSP\\TSP.vcxproj|solutionrelative:VGP337\\TSP\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CA5C14E6-0C4A-4300-BA80-37C8BC3AFB61}|VGP337\\TSP\\TSP.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\VGP337\\TSP\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CA5C14E6-0C4A-4300-BA80-37C8BC3AFB61}|VGP337\\TSP\\TSP.vcxproj|solutionrelative:VGP337\\TSP\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{CA5C14E6-0C4A-4300-BA80-37C8BC3AFB61}|VGP337\\TSP\\TSP.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.39.33519\\INCLUDE\\VECTOR||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C72AA0CE-F191-4934-8CC4-3045EFFD9946}|Framework\\ML\\ML.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Framework\\ML\\Src\\GeneticAlgorithm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C72AA0CE-F191-4934-8CC4-3045EFFD9946}|Framework\\ML\\ML.vcxproj|solutionrelative:Framework\\ML\\Src\\GeneticAlgorithm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7B33728-0C03-485E-B5C9-50F307486470}|VGP337\\GA\\GA.vcxproj|D:\\GITHUB\\SAGEENGINE\\S.A.G.E\\FRAMEWORK\\ML\\INC\\GENETICALGORITHM.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F7B33728-0C03-485E-B5C9-50F307486470}|VGP337\\GA\\GA.vcxproj|solutionrelative:FRAMEWORK\\ML\\INC\\GENETICALGORITHM.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{CA5C14E6-0C4A-4300-BA80-37C8BC3AFB61}|VGP337\\TSP\\TSP.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\VGP337\\TSP\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CA5C14E6-0C4A-4300-BA80-37C8BC3AFB61}|VGP337\\TSP\\TSP.vcxproj|solutionrelative:VGP337\\TSP\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|Level{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|Level{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|solutionrelative:Assets\\Level\\pacman_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1996BA5E-CA20-4255-93A8-C97D9E5110E4}|Templates{1996BA5E-CA20-4255-93A8-C97D9E5110E4}|D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Templates\\blinky.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{1996BA5E-CA20-4255-93A8-C97D9E5110E4}|Templates{1996BA5E-CA20-4255-93A8-C97D9E5110E4}|solutionrelative:Assets\\Templates\\blinky.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{C72AA0CE-F191-4934-8CC4-3045EFFD9946}|Framework\\ML\\ML.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\FRAMEWORK\\ML\\INC\\GENETICALGORITHM.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C72AA0CE-F191-4934-8CC4-3045EFFD9946}|Framework\\ML\\ML.vcxproj|solutionrelative:FRAMEWORK\\ML\\INC\\GENETICALGORITHM.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,8 +29,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "vector",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
+              "ViewState": "AQIAAGEHAAAAAAAAAAAiwG4HAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-24T20:39:26.822Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -44,14 +50,14 @@
               "RelativeDocumentMoniker": "Framework\\ML\\Src\\GeneticAlgorithm.cpp",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Framework\\ML\\Src\\GeneticAlgorithm.cpp",
               "RelativeToolTip": "Framework\\ML\\Src\\GeneticAlgorithm.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-23T23:27:32.099Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "GeneticAlgorithm.h",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Framework\\ML\\Inc\\GeneticAlgorithm.h",
               "RelativeDocumentMoniker": "Framework\\ML\\Inc\\GeneticAlgorithm.h",
@@ -70,68 +76,22 @@
               "RelativeDocumentMoniker": "VGP337\\TSP\\GameState.cpp",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\VGP337\\TSP\\GameState.cpp",
               "RelativeToolTip": "VGP337\\TSP\\GameState.cpp",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAB4AAAAsAAAA",
+              "ViewState": "AQIAAC8AAAAAAAAAAAD4vz0AAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-24T04:29:15.104Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "GameState.h",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\VGP337\\TSP\\GameState.h",
               "RelativeDocumentMoniker": "VGP337\\TSP\\GameState.h",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\VGP337\\TSP\\GameState.h",
               "RelativeToolTip": "VGP337\\TSP\\GameState.h",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABwAAAAgAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABkAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-03-24T04:29:14.619Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "6ca5fad4-6b53-4318-8b7e-5616b27ebae3",
-        "Display": 1,
-        "X": 376,
-        "Y": 240,
-        "Width": 1533,
-        "Height": 670,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "blinky.json",
-              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Templates\\blinky.json",
-              "RelativeDocumentMoniker": "Assets\\Templates\\blinky.json",
-              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Templates\\blinky.json",
-              "RelativeToolTip": "Assets\\Templates\\blinky.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-03-17T00:31:04.068Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "pacman_level.json",
-              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level.json",
-              "RelativeDocumentMoniker": "Assets\\Level\\pacman_level.json",
-              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level.json",
-              "RelativeToolTip": "Assets\\Level\\pacman_level.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-03-17T04:51:49.195Z",
               "EditorCaption": ""
             }
           ]

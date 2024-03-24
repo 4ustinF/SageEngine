@@ -39,14 +39,6 @@ void GameState::Terminate()
 
 void GameState::Update(float deltaTime)
 {
-	//mGameWorld.Update(deltaTime);
-
-	const auto& inputSystem = InputSystem::Get();
-	if (inputSystem->IsKeyPressed(KeyCode::SPACE))
-	{
-		mAppLog.clear();
-	}
-
 	if (mInitialized)
 	{
 		const auto& best = mGeneticAlgorithm.GetBestGenome();
@@ -66,12 +58,16 @@ void GameState::Update(float deltaTime)
 
 void GameState::Render()
 {
-	//mGameWorld.Render();
 }
 
 void GameState::DebugUI()
 {
-	//mGameWorld.DebugUI();
+	if (ImGui::CollapsingHeader("Genetic Algorithm Settings"))
+	{
+		ImGui::DragInt("Population Count", &mPopulationSize, 1.0f, 5, 500);
+		ImGui::DragFloat("Crossover Rate", &mCrossoverRate, 0.025f, 0.1f, 0.9f);
+		ImGui::DragFloat("Mutation Rate", &mMutationRate, 0.025f, 0.025, 0.9f);
+	}
 
 	if (ImGui::Button("Run!"))
 	{

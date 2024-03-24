@@ -1,4 +1,4 @@
 ﻿  GameState.cpp
-  WinMain.cpp
-  Generating Code...
+D:\GitHub\SageEngine\S.A.G.E\VGP337\GA\GameState.cpp(79,61): warning C4305: 'argument': truncation from 'double' to 'float'
+     Creating library D:\GitHub\SageEngine\S.A.G.E\x64\Debug\GA.lib and object D:\GitHub\SageEngine\S.A.G.E\x64\Debug\GA.exp
   GA.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\GA.exe

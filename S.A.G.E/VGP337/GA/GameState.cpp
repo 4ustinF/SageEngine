@@ -1,8 +1,5 @@
 #include "GameState.h"
 
-#include "ImGui/Inc/ImPlot.h"
-#include "ImGui/Src/imgui_internal.h"
-
 using namespace SAGE;
 using namespace SAGE::Graphics;
 using namespace SAGE::Math;
@@ -11,7 +8,7 @@ using namespace SAGE::ML;
 
 namespace
 {
-	const std::string kTarget = "Genetic Algorithm is coooooool!";
+	const std::string kTarget = "SAGE Engine, Best Engine!";
 	const int kValidGeneValue = 94; // 126 - 32; // From character '~' to ' ' in ASCII table
 }
 
@@ -32,8 +29,6 @@ void GameState::Initialize()
 
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/bare.json");
-
-
 }
 
 void GameState::Terminate()
@@ -94,7 +89,29 @@ void GameState::DebugUI()
 				return fitness;
 			};
 
-		mGeneticAlgorithm.Initialize(100, static_cast<int>(kTarget.size()), kValidGeneValue, 0.45f, 0.1f, computeFitness);
+		auto mate = [this](const auto& parent1, const auto& parent2)
+			{
+				GeneticAlgorithm::Genome offSpring;
+				offSpring.chromosome.reserve(parent1.chromosome.size());
+
+				for (size_t i = 0; i < parent1.chromosome.size(); ++i)
+				{
+					if (Random::UniformFloat() < mMutationRate) {
+						offSpring.chromosome.push_back(Random::UniformInt(0, kValidGeneValue));
+					}
+					else if (Random::UniformFloat() < mCrossoverRate) {
+						offSpring.chromosome.push_back(parent1.chromosome[i]);
+					}
+					else {
+						offSpring.chromosome.push_back(parent2.chromosome[i]);
+					}
+				}
+
+				return offSpring;
+			};
+
+		mGeneticAlgorithm.Initialize(100, static_cast<int>(kTarget.size()), kValidGeneValue, mCrossoverRate, mMutationRate, 
+			computeFitness, mate);
 		mInitialized = true;
 	}
 

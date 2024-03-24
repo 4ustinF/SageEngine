@@ -4,9 +4,11 @@
 using namespace SAGE::Math;
 using namespace SAGE::ML;
 
-void GeneticAlgorithm::Initialize(int populationSize, int chromolength, int maxGeneValue, float crossoverRate, float mutationRate, ComputeFitnessFunc computeFitness)
+void GeneticAlgorithm::Initialize(int populationSize, int chromolength, int maxGeneValue, float crossoverRate, float mutationRate, 
+	ComputeFitnessFunc computeFitness, MateFunc mate)
 {
 	mComputeFitnessFunc = std::move(computeFitness);
+	mMateFunc = std::move(mate);
 
 	// Reset
 	mGeneration = 0;
@@ -48,7 +50,7 @@ void GeneticAlgorithm::Advance()
 	{
 		const auto& parent1 = mPopulation[Random::UniformInt(0, cutOff)];
 		const auto& parent2 = mPopulation[Random::UniformInt(0, cutOff)];
-		newpopulation.push_back(Mate(parent1, parent2));
+		newpopulation.push_back(mMateFunc(parent1, parent2));
 	}
 
 	mPopulation = std::move(newpopulation);

@@ -14,8 +14,10 @@ namespace SAGE::ML
 
 		using ComputeFitnessFunc = std::function<float(const Genome&)>;
 		//using SelectionFunc = std::function<int(std::vector<Genome>)>;
+		using MateFunc = std::function<Genome(const Genome& parent1, const Genome& parent2)>;
 
-		void Initialize(int populationSize, int chromolength, int maxGeneValue, float crossoverRate, float mutationRate, ComputeFitnessFunc computeFitness);
+		void Initialize(int populationSize, int chromolength, int maxGeneValue, float crossoverRate, float mutationRate, 
+			ComputeFitnessFunc computeFitness, MateFunc mate);
 		void Advance();
 
 		const Genome& GetBestGenome() const { return mPopulation.front(); };
@@ -26,6 +28,7 @@ namespace SAGE::ML
 		Genome Mate(const Genome& parent1, const Genome& parent2);
 
 		ComputeFitnessFunc mComputeFitnessFunc;
+		MateFunc mMateFunc;
 
 		std::vector<Genome> mPopulation;
 		int mGeneration = 0;

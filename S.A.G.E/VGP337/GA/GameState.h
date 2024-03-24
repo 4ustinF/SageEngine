@@ -18,6 +18,7 @@ private:
 	SAGE::ML::GeneticAlgorithm mGeneticAlgorithm;
 	bool mInitialized = false;
 
+	int mPopulationSize = 100;
 	float mCrossoverRate = 0.45f;
 	float mMutationRate = 0.1f;
 };

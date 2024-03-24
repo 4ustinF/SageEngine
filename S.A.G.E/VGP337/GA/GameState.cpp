@@ -10,6 +10,7 @@ namespace
 {
 	const std::string kTarget = "SAGE Engine, Best Engine!";
 	const int kValidGeneValue = 94; // 126 - 32; // From character '~' to ' ' in ASCII table
+	const int kChromoLength = static_cast<int>(kTarget.size());
 }
 
 namespace
@@ -76,11 +77,24 @@ void GameState::DebugUI()
 	{
 		mAppLog.AddLog("Initializing new population...\n");
 
+		auto generate = [this]()
+			{
+				auto& population = mGeneticAlgorithm.GetPopulation();
+				population.resize(mPopulationSize);
+				for (auto& genome : population)
+				{
+					genome.chromosome.reserve(kChromoLength);
+					for (int i = 0; i < kChromoLength; ++i) {
+						genome.chromosome.push_back(Random::UniformInt(0, kValidGeneValue));
+					}
+				}
+			};
+
 		auto computeFitness = [](auto& genome)
 			{
 				float fitness = 0.0f;
 
-				// one point per matching character
+				// One point per matching character
 				for (size_t i = 0; i < kTarget.size(); ++i) {
 					if (kTarget[i] == genome.chromosome[i] + 32) { // 32 is our ASCII offset
 						fitness += 1.0f;
@@ -110,8 +124,7 @@ void GameState::DebugUI()
 				return offSpring;
 			};
 
-		mGeneticAlgorithm.Initialize(100, static_cast<int>(kTarget.size()), kValidGeneValue, mCrossoverRate, mMutationRate, 
-			computeFitness, mate);
+		mGeneticAlgorithm.Initialize(generate, computeFitness, mate);
 		mInitialized = true;
 	}
 

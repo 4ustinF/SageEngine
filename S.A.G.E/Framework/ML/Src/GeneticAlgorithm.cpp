@@ -4,28 +4,17 @@
 using namespace SAGE::Math;
 using namespace SAGE::ML;
 
-void GeneticAlgorithm::Initialize(int populationSize, int chromolength, int maxGeneValue, float crossoverRate, float mutationRate, 
-	ComputeFitnessFunc computeFitness, MateFunc mate)
+void GeneticAlgorithm::Initialize(GeneratePopulationFunc generatePopulation, ComputeFitnessFunc computeFitness, MateFunc mate)
 {
 	mComputeFitnessFunc = std::move(computeFitness);
 	mMateFunc = std::move(mate);
 
 	// Reset
 	mGeneration = 0;
-	mMaxGeneValue = maxGeneValue;
-	mCrossoverRate = crossoverRate;
-	mMutationRate = mutationRate;
 
 	// Create initial population
 	mPopulation.clear();
-	mPopulation.resize(populationSize);
-	for (auto& genome : mPopulation)
-	{
-		genome.chromosome.reserve(chromolength);
-		for (int i = 0; i < chromolength; ++i) {
-			genome.chromosome.push_back(Random::UniformInt(0, maxGeneValue));
-		}
-	}
+	generatePopulation();
 	EvaluatePopulation();
 }
 
@@ -68,28 +57,3 @@ void GeneticAlgorithm::EvaluatePopulation()
 			return a.fitness > b.fitness;
 		});
 }
-
-GeneticAlgorithm::Genome GeneticAlgorithm::Mate(const Genome& parent1, const Genome& parent2)
-{
-	Genome offSpring;
-	offSpring.chromosome.reserve(parent1.chromosome.size());
-
-	for (size_t i = 0; i < parent1.chromosome.size(); ++i)
-	{
-		if (Random::UniformFloat() < mMutationRate) {
-			offSpring.chromosome.push_back(Random::UniformInt(0, mMaxGeneValue));
-		}
-		else if (Random::UniformFloat() < mCrossoverRate) {
-			offSpring.chromosome.push_back(parent1.chromosome[i]);
-		}
-		else {
-			offSpring.chromosome.push_back(parent2.chromosome[i]);
-		}
-	}
-
-	return offSpring;
-}
-
-
-// TODO:
-// Allow crossover/mutate to be std::functions and use GA for pathfinding 

@@ -30,11 +30,20 @@ void GameState::Initialize()
 
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/bare.json");
+
+	mSpriteRenderer = SpriteRenderer::Get();
+	mCityTextureID = TextureManager::Get()->LoadTexture("../Sprites/X/bullet2.png");
+
+	auto gs = GraphicsSystem::Get();
+	mHalfScreenWidth = gs->GetBackBufferWidth() * 0.5f;
+	mHalfScreenHeight = gs->GetBackBufferHeight() * 0.5f;
 }
 
 void GameState::Terminate()
 {
 	mGameWorld.Terminate();
+	mSpriteRenderer = nullptr;
+	mCityTextureID = 0;
 }
 
 void GameState::Update(float deltaTime)
@@ -58,6 +67,11 @@ void GameState::Update(float deltaTime)
 
 void GameState::Render()
 {
+	const float radius = 100.0f;
+	for (int i = 0; i < 100; ++i)
+	{
+		mSpriteRenderer->Draw(mCityTextureID, Random::OnUnitCircle() * radius + Vector2(mHalfScreenWidth, mHalfScreenHeight), 0.0, Pivot::Center, Flip::None);
+	}
 }
 
 void GameState::DebugUI()
@@ -68,6 +82,11 @@ void GameState::DebugUI()
 		ImGui::DragFloat("Crossover Rate", &mCrossoverRate, 0.025f, 0.1f, 0.9f);
 		ImGui::DragFloat("Mutation Rate", &mMutationRate, 0.025f, 0.025f, 0.9f);
 	}
+
+	//if (ImGui::Button("Run!"))
+	//{
+	//	
+	//}
 
 	if (ImGui::Button("Run!"))
 	{

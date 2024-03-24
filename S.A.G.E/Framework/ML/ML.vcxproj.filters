@@ -34,6 +34,12 @@
     <Filter Include="Src\ANN">
       <UniqueIdentifier>{02475691-b9b2-4d37-8dbe-329872193eff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\GA">
+      <UniqueIdentifier>{ad11b223-b9d6-4d12-a39a-6ed679dae5cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\GA">
+      <UniqueIdentifier>{9dec81a6-8b7b-4ade-a724-5a9d31a9b18a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\ML.h">
@@ -60,6 +66,9 @@
     <ClInclude Include="Inc\NeuralNetwork.h">
       <Filter>Inc\ANN</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\GeneticAlgorithm.h">
+      <Filter>Inc\GA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -79,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="Src\NeuralNetwork.cpp">
       <Filter>Src\ANN</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GeneticAlgorithm.cpp">
+      <Filter>Src\GA</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

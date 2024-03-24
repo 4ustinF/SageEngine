@@ -11,6 +11,9 @@
 // Datasets Headers
 #include "Datasets.h"
 
+// GA headers
+#include "GeneticAlgorithm.h"
+
 // Linear Model Headers
 #include "LinearRegression.h"
 #include "LogisticRegression.h"

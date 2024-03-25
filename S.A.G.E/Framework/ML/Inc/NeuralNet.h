@@ -18,7 +18,7 @@ namespace SAGE::ML::NEAT
 	class NeuralNet
 	{
 	public:
-		void Initialize(const Genome& genome, const NeuralNetworkConfig& netConfig);
+		void Initialize(const Genome& genome, const NeuralNetConfig& netConfig);
 
 		std::vector<float> Evaluate(const std::vector<float>& input);
 

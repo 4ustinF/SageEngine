@@ -1,6 +1,8 @@
 #include "Precompiled.h"
 #include "Population.h"
 
+#include <queue>
+
 using namespace SAGE::ML::NEAT;
 using namespace SAGE::Math;
 
@@ -437,7 +439,7 @@ void Population::RemoveWeakSpecies()
 	const size_t sum = TotalAverageFitness();
 
 	auto backup = species;
-	backup.remove_if([this](auto& s) {
+	backup.remove_if([this, sum](auto& s) {
 		return 1.0 > std::floor(1.0 * s.average_fitness / sum * speciatingConfig.population);
 		});
 

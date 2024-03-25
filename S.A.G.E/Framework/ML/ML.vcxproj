@@ -136,13 +136,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Common.h" />
+    <ClInclude Include="Inc\Config.h" />
     <ClInclude Include="Inc\Datasets.h" />
     <ClInclude Include="Inc\GeneticAlgorithm.h" />
+    <ClInclude Include="Inc\Genome.h" />
+    <ClInclude Include="Inc\InnovationContainer.h" />
     <ClInclude Include="Inc\KMeans.h" />
     <ClInclude Include="Inc\LinearRegression.h" />
     <ClInclude Include="Inc\LogisticRegression.h" />
     <ClInclude Include="Inc\ML.h" />
+    <ClInclude Include="Inc\NeuralNet.h" />
     <ClInclude Include="Inc\NeuralNetwork.h" />
+    <ClInclude Include="Inc\Population.h" />
+    <ClInclude Include="Inc\Species.h" />
     <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +158,7 @@
     <ClCompile Include="Src\LinearRegression.cpp" />
     <ClCompile Include="Src\LogisticRegression.cpp" />
     <ClCompile Include="Src\NeuralNetwork.cpp" />
+    <ClCompile Include="Src\Population.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

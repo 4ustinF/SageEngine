@@ -14,6 +14,11 @@ int Random::UniformInt(int min, int max)
 	return std::uniform_int_distribution<>{min, max}(myRandomEngine);
 }
 
+size_t Random::UniformSizet(int min, int max)
+{
+	return static_cast<size_t>(UniformInt(min, max));
+}
+
 float Random::UniformFloat(float min, float max)
 {
 	return std::uniform_real_distribution<float>{min, max}(myRandomEngine);

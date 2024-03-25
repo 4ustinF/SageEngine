@@ -47,7 +47,7 @@ namespace SAGE::ML::NEAT
 		Genome BreedChild(const Species& s);
 		void RemoveStaleSpecies();
 		void RemoveWeakSpecies();
-		void AddToSpecies(const genome& child);
+		void AddToSpecies(const Genome& child);
 
 	private:
 		InnovationContainer mInnovation;

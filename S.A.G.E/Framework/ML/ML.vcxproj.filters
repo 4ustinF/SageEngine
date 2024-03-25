@@ -40,6 +40,12 @@
     <Filter Include="Src\GA">
       <UniqueIdentifier>{9dec81a6-8b7b-4ade-a724-5a9d31a9b18a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\NEAT">
+      <UniqueIdentifier>{39d8cb52-4250-44da-9ce6-ddf6459474d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\NEAT">
+      <UniqueIdentifier>{2dd3b7da-9958-4818-8791-2f7d979114f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\ML.h">
@@ -69,6 +75,24 @@
     <ClInclude Include="Inc\GeneticAlgorithm.h">
       <Filter>Inc\GA</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\Config.h">
+      <Filter>Inc\NEAT</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Genome.h">
+      <Filter>Inc\NEAT</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\InnovationContainer.h">
+      <Filter>Inc\NEAT</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\NeuralNet.h">
+      <Filter>Inc\NEAT</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Population.h">
+      <Filter>Inc\NEAT</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Species.h">
+      <Filter>Inc\NEAT</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -91,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="Src\GeneticAlgorithm.cpp">
       <Filter>Src\GA</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Population.cpp">
+      <Filter>Src\NEAT</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

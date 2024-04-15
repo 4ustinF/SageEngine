@@ -25,10 +25,20 @@ void GameState::Initialize()
 	mGameWorld.LoadLevel("../../Assets/Level/bare.json");
 
 	mInputSystem = InputSystem::Get();
+	mSpriteRenderer = SpriteRenderer::Get();
+
+
+	auto tm = TextureManager::Get();
+	mBackgroundTextureID = tm->LoadTexture("../Sprites/FlappyBird/background.png");
+	mBaseTextureID = tm->LoadTexture("../Sprites/FlappyBird/base.png");
 }
 
 void GameState::Terminate()
 {
+	mBackgroundTextureID = 0;
+	mBaseTextureID = 0;
+
+	mSpriteRenderer = nullptr;
 	mGameWorld.Terminate();
 }
 
@@ -46,6 +56,9 @@ void GameState::Update(float deltaTime)
 void GameState::Render()
 {
 	mGameWorld.Render();
+
+	mSpriteRenderer->Draw(mBackgroundTextureID, Vector2::Zero, 0.0f, Pivot::TopLeft);
+	mSpriteRenderer->Draw(mBaseTextureID, Vector2(0.0f, 853.0f), 0.0f, Pivot::BottomLeft);
 }
 
 void GameState::DebugUI()

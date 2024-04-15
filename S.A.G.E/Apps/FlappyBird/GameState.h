@@ -16,4 +16,8 @@ private:
 	SAGE::GameWorld mGameWorld;
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 	bool mIsPaused = false;
+
+	SAGE::Graphics::SpriteRenderer* mSpriteRenderer = nullptr;
+	SAGE::Graphics::TextureId mBackgroundTextureID = 0;
+	SAGE::Graphics::TextureId mBaseTextureID = 0;
 };

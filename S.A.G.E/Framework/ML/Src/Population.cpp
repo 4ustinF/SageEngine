@@ -377,17 +377,18 @@ size_t Population::TotalAverageFitness() const
 
 void Population::CullSpecies(bool cut_to_one)
 {
-	for (auto& s : species)
-	{
-		std::sort(s.genomes.begin(), s.genomes.end(), [](auto a, auto b) { return a->fitness > b->fitness; });
+	return; // TODO:
+	//for (auto& s : species)
+	//{
+	//	std::sort(s.genomes.begin(), s.genomes.end(), [](auto a, auto b) { return a->fitness > b->fitness; });
 
-		const size_t numToKeep = cut_to_one ? 1 :
-			static_cast<size_t>(std::ceil(s.genomes.size() / 2.0));
+	//	const size_t numToKeep = cut_to_one ? 1 :
+	//		static_cast<size_t>(std::ceil(s.genomes.size() / 2.0));
 
-		while (s.genomes.size() > numToKeep) {
-			s.genomes.pop_back();
-		}
-	}
+	//	while (s.genomes.size() > numToKeep) {
+	//		s.genomes.pop_back();
+	//	}
+	//}
 }
 
 Genome Population::BreedChild(const Species& s)

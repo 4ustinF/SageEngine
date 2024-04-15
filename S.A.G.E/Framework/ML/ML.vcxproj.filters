@@ -119,5 +119,11 @@
     <ClCompile Include="Src\Population.cpp">
       <Filter>Src\NEAT</Filter>
     </ClCompile>
+    <ClCompile Include="Src\NeuralNet.cpp">
+      <Filter>Src\NEAT</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\InnovationContainer.cpp">
+      <Filter>Src\NEAT</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

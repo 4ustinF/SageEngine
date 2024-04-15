@@ -24,15 +24,6 @@ namespace SAGE::ML::NEAT
 		size_t stale_species = 15;
 	};
 
-	struct SpeciatingConfig
-	{
-		size_t population = 300;
-		float delta_disjoint = 2.0f;
-		float delta_weights = 0.4f;
-		float delta_threshold = 1.3f;
-		size_t stale_species = 15;
-	};
-
 	struct NeuralNetConfig
 	{
 		size_t input_size;

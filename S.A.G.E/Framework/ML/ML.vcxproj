@@ -154,9 +154,11 @@
   <ItemGroup>
     <ClCompile Include="Src\Datasets.cpp" />
     <ClCompile Include="Src\GeneticAlgorithm.cpp" />
+    <ClCompile Include="Src\InnovationContainer.cpp" />
     <ClCompile Include="Src\KMeans.cpp" />
     <ClCompile Include="Src\LinearRegression.cpp" />
     <ClCompile Include="Src\LogisticRegression.cpp" />
+    <ClCompile Include="Src\NeuralNet.cpp" />
     <ClCompile Include="Src\NeuralNetwork.cpp" />
     <ClCompile Include="Src\Population.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">

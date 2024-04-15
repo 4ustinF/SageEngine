@@ -1,3 +1,5 @@
 ﻿  GameState.cpp
+  WinMain.cpp
+  Generating Code...
      Creating library D:\GitHub\SageEngine\S.A.G.E\x64\Debug\TSP.lib and object D:\GitHub\SageEngine\S.A.G.E\x64\Debug\TSP.exp
   TSP.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\TSP.exe

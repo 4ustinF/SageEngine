@@ -1,2 +1,12 @@
-﻿  GeneticAlgorithm.cpp
+﻿  Precompiled.cpp
+  Datasets.cpp
+  GeneticAlgorithm.cpp
+  InnovationContainer.cpp
+  KMeans.cpp
+  LinearRegression.cpp
+  LogisticRegression.cpp
+  NeuralNet.cpp
+  NeuralNetwork.cpp
+  Population.cpp
+  Generating Code...
   ML.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ML.lib

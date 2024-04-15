@@ -1,33 +1,33 @@
 ﻿  btBulletCollisionAll.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.cpp(373,21): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file 'btBulletCollisionAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletCollisionAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.cpp(374,21): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file 'btBulletCollisionAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletCollisionAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.cpp(412,9): warning C4244: 'return': conversion from 'double' to 'btScalar', possible loss of data
-  (compiling source file 'btBulletCollisionAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletCollisionAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btGjkConvexCast.cpp(25,1): warning C4005: 'MAX_ITERATIONS': macro redefinition
-  (compiling source file 'btBulletCollisionAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletCollisionAll.cpp')
   D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\NarrowPhaseCollision\btContinuousConvexCollision.cpp(46,1):
   see previous definition of 'MAX_ITERATIONS'
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\CollisionShapes\btHeightfieldTerrainShape.cpp(843,42): warning C4244: 'argument': conversion from 'const int' to 'const btScalar', possible loss of data
-  (compiling source file 'btBulletCollisionAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletCollisionAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletCollision\CollisionShapes\btHeightfieldTerrainShape.cpp(843,71): warning C4244: 'argument': conversion from 'const int' to 'const btScalar', possible loss of data
-  (compiling source file 'btBulletCollisionAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletCollisionAll.cpp')
   
   btBulletDynamicsAll.cpp
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\ConstraintSolver\btBatchedConstraints.cpp(169,49): warning C4244: 'argument': conversion from 'double' to 'const btScalar', possible loss of data
-  (compiling source file 'btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\ConstraintSolver\btBatchedConstraints.cpp(661,46): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-  (compiling source file 'btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\ConstraintSolver\btHingeConstraint.cpp(304,14): warning C4305: 'initializing': truncation from 'double' to 'btScalar'
-  (compiling source file 'btBulletDynamicsAll.cpp')
+  (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')
   
 D:\GitHub\SageEngine\S.A.G.E\External\Bullet\BulletDynamics\Featherstone\btMultiBody.cpp(1971,38): warning C4244: '=': conversion from 'int' to 'btScalar', possible loss of data
   (compiling source file '../../External/Bullet/btBulletDynamicsAll.cpp')

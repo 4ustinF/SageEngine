@@ -10,7 +10,7 @@ namespace SAGE::ML::NEAT
 		void Reset();
 
 		size_t AddGene(const Gene& gene);
-		size_t Number() const { }
+		size_t Number() const { return mInnovationNumber; }
 
 	private:
 		friend class Population;

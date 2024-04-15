@@ -1,6 +1,8 @@
 #pragma once
 #include "Config.h"
 
+// https://github.com/hav4ik/tinyai
+
 namespace SAGE::ML::NEAT
 {
 	struct Genome;

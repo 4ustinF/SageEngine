@@ -136,10 +136,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="PipeComponent.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="PipeComponent.h" />
+    <ClInclude Include="TypeIds.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Engine\SAGE\SAGE.vcxproj">

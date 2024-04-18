@@ -18,10 +18,18 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="PipeComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h" />
+    <ClInclude Include="TypeIds.h" />
+    <ClInclude Include="PipeComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

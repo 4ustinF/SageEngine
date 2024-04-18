@@ -1,0 +1,21 @@
+{
+  "Capacity": 1000,
+  "Services": {
+    "CameraService": {
+    }
+  },
+  "GameObjects": [
+    {
+      "Name": "Pipe 1",
+      "TemplateFile": "../../Assets/Templates/pipe.json"
+    },
+    {
+      "Name": "Pipe 2",
+      "TemplateFile": "../../Assets/Templates/pipe.json"
+    },
+    {
+      "Name": "Pipe 3",
+      "TemplateFile": "../../Assets/Templates/pipe.json"
+    }
+  ]
+}

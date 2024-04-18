@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\GitHub\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BCDC76D6-8D58-4D03-A105-99EF53A22799}|Apps\\FlappyBird\\FlappyBird.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\PipeComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BCDC76D6-8D58-4D03-A105-99EF53A22799}|Apps\\FlappyBird\\FlappyBird.vcxproj|solutionrelative:Apps\\FlappyBird\\PipeComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCDC76D6-8D58-4D03-A105-99EF53A22799}|Apps\\FlappyBird\\FlappyBird.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\PipeComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BCDC76D6-8D58-4D03-A105-99EF53A22799}|Apps\\FlappyBird\\FlappyBird.vcxproj|solutionrelative:Apps\\FlappyBird\\PipeComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BCDC76D6-8D58-4D03-A105-99EF53A22799}|Apps\\FlappyBird\\FlappyBird.vcxproj|D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{BCDC76D6-8D58-4D03-A105-99EF53A22799}|Apps\\FlappyBird\\FlappyBird.vcxproj|solutionrelative:Apps\\FlappyBird\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -22,46 +30,70 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WinMain.cpp",
+              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\WinMain.cpp",
+              "RelativeDocumentMoniker": "Apps\\FlappyBird\\WinMain.cpp",
+              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\WinMain.cpp",
+              "RelativeToolTip": "Apps\\FlappyBird\\WinMain.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-16T05:42:23.9Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PipeComponent.cpp",
+              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\PipeComponent.cpp",
+              "RelativeDocumentMoniker": "Apps\\FlappyBird\\PipeComponent.cpp",
+              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\PipeComponent.cpp",
+              "RelativeToolTip": "Apps\\FlappyBird\\PipeComponent.cpp",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAACsAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-16T04:38:42.138Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PipeComponent.h",
+              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\PipeComponent.h",
+              "RelativeDocumentMoniker": "Apps\\FlappyBird\\PipeComponent.h",
+              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\PipeComponent.h",
+              "RelativeToolTip": "Apps\\FlappyBird\\PipeComponent.h",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAmwB0AAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-04-16T04:38:36.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "GameState.cpp",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\GameState.cpp",
               "RelativeDocumentMoniker": "Apps\\FlappyBird\\GameState.cpp",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\GameState.cpp",
               "RelativeToolTip": "Apps\\FlappyBird\\GameState.cpp",
-              "ViewState": "AQIAACgAAAAAAAAAAAAAADMAAAAfAAAA",
+              "ViewState": "AQIAABkAAAAAAAAAAAAqwCgAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-04-15T20:20:52.466Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "GameState.h",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\GameState.h",
               "RelativeDocumentMoniker": "Apps\\FlappyBird\\GameState.h",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\GameState.h",
               "RelativeToolTip": "Apps\\FlappyBird\\GameState.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAApAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAB4AAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-15T20:20:47.807Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "WinMain.cpp",
-              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\WinMain.cpp",
-              "RelativeDocumentMoniker": "Apps\\FlappyBird\\WinMain.cpp",
-              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Apps\\FlappyBird\\WinMain.cpp",
-              "RelativeToolTip": "Apps\\FlappyBird\\WinMain.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-15T20:19:51.537Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-15T20:20:47.807Z"
             }
           ]
         }

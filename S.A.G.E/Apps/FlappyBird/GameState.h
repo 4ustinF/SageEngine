@@ -1,5 +1,6 @@
 #include <SAGE/Inc/SAGE.h>
 
+class BirdControllerComponent;
 class PipeComponent;
 
 class GameState : public SAGE::AppState
@@ -26,6 +27,7 @@ private:
 	float mBase2XPos = 480.0f;
 	float mMoveSpeed = 100.0f;
 
+	BirdControllerComponent* mFlappyBird = nullptr;
 	PipeComponent* mPipe1 = nullptr;
 	PipeComponent* mPipe2 = nullptr;
 	PipeComponent* mPipe3 = nullptr;

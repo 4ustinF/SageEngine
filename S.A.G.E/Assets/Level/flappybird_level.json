@@ -6,6 +6,10 @@
   },
   "GameObjects": [
     {
+      "Name": "Flappy Bird",
+      "TemplateFile": "../../Assets/Templates/flappybird.json"
+    },
+    {
       "Name": "Pipe 1",
       "TemplateFile": "../../Assets/Templates/pipe.json"
     },

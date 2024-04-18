@@ -21,6 +21,9 @@
     <ClCompile Include="PipeComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="BirdControllerComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -29,6 +32,9 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="TypeIds.h" />
     <ClInclude Include="PipeComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BirdControllerComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

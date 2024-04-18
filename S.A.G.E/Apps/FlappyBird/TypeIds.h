@@ -4,7 +4,8 @@
 
 enum class ComponentId
 {
-	PipeComponent = static_cast<uint32_t>(SAGE::ComponentId::Count),
+	BirdControllerComponent = static_cast<uint32_t>(SAGE::ComponentId::Count),
+	PipeComponent,
 };
 
 enum class ServiceId

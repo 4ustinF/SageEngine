@@ -1,5 +1,6 @@
 #include "GameState.h"
 
+#include "BirdControllerComponent.h"
 #include "PipeComponent.h"
 
 using namespace SAGE;
@@ -13,7 +14,12 @@ namespace
 	// Check for custom components
 	bool OnMake(const char* componentName, const rapidjson::Value& value, GameObject& gameObject)
 	{
-		if (strcmp(componentName, "PipeComponent") == 0)
+		if (strcmp(componentName, "BirdControllerComponent") == 0)
+		{
+			auto birdControllerComponent = gameObject.AddComponent<BirdControllerComponent>();
+			return true;
+		}
+		else if (strcmp(componentName, "PipeComponent") == 0)
 		{
 			auto pipeComponent = gameObject.AddComponent<PipeComponent>();
 			return true;
@@ -30,6 +36,8 @@ void GameState::Initialize()
 
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/flappybird_level.json");
+
+	mFlappyBird = mGameWorld.FindGameObject("Flappy Bird")->GetComponent<BirdControllerComponent>();
 
 	mPipe1 = mGameWorld.FindGameObject("Pipe 1")->GetComponent<PipeComponent>();
 	mPipe1->SetXPos(480.0f);
@@ -58,13 +66,14 @@ void GameState::Terminate()
 	mPipe3 = nullptr;
 	mPipe2 = nullptr;
 	mPipe1 = nullptr;
+	mFlappyBird = nullptr;
 	mSpriteRenderer = nullptr;
 	mGameWorld.Terminate();
 }
 
 void GameState::Update(float deltaTime)
 {
-	if (mInputSystem->IsKeyPressed(KeyCode::SPACE)) {
+	if (mInputSystem->IsKeyPressed(KeyCode::P)) {
 		mIsPaused = !mIsPaused;
 	}
 
@@ -103,6 +112,8 @@ void GameState::Render()
 	
 	mSpriteRenderer->Draw(mBaseTextureID, Vector2(mBase1XPos, 853.0f), 0.0f, Pivot::BottomLeft);
 	mSpriteRenderer->Draw(mBaseTextureID, Vector2(mBase2XPos, 853.0f), 0.0f, Pivot::BottomLeft);
+
+	mFlappyBird->Render();
 }
 
 void GameState::DebugUI()

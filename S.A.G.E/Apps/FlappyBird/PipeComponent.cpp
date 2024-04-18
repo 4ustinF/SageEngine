@@ -1,9 +1,7 @@
 #include "PipeComponent.h"
 
 using namespace SAGE;
-using namespace SAGE::Input;
 using namespace SAGE::Math;
-using namespace SAGE::Graphics;
 
 MEMORY_POOL_DEFINE(PipeComponent, 300);
 

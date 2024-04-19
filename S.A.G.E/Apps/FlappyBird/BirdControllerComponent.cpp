@@ -43,7 +43,7 @@ void BirdControllerComponent::Update(float deltaTime)
 
 void BirdControllerComponent::Render()
 {
-	mSpriteRenderer->Draw(mBirdTextureIDs[mAnimIndex], Vector2(240.0f, mPosition), 0.0f, Pivot::Center, Flip::None);
+	mSpriteRenderer->Draw(mBirdTextureIDs[mAnimIndex], Vector2(240.0f, mPosition), mRotation, Pivot::Center, Flip::None);
 }
 
 void BirdControllerComponent::DebugUI()
@@ -87,6 +87,12 @@ void BirdControllerComponent::ApplyGravity(float deltaTime)
 
 void BirdControllerComponent::MoveBird(float deltaTime)
 {
+	// Position
 	mPosition += mVelocity * deltaTime;
 	mPosition = Math::Clamp(mPosition, 24.0f, 717.0f);
+
+	// Rotation
+	const float rotationAmount = Lerp(0.0f, 1.0f, (mVelocity - mMinVelocityCap) / (abs(mMinVelocityCap) + mMaxVelocityCap));
+	const float targetRotation = Constants::DegToRad * Lerp(-60.0f, 90.0f, rotationAmount);
+	mRotation = Lerp(mRotation, targetRotation, 0.1f);
 }

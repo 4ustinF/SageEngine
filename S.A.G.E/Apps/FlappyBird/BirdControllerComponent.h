@@ -40,4 +40,5 @@ private:
 	float mMaxVelocityCap = 475.0f; // Going Down
 	float mGravity = 1250.0f;
 	float mFlapAmount = 500.0f;
+	float mRotation = 0.0f;
 };

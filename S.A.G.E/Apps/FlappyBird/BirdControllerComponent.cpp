@@ -18,6 +18,7 @@ void BirdControllerComponent::Initialize()
 	mBirdTextureIDs[2] = tm->LoadTexture("../Sprites/FlappyBird/bird3.png");
 
 	mAnimTimer = mAnimTimePerFrame;
+	mPosition = mStartPosition;
 }
 
 void BirdControllerComponent::Terminate()
@@ -43,31 +44,64 @@ void BirdControllerComponent::Update(float deltaTime)
 
 void BirdControllerComponent::Render()
 {
-	mSpriteRenderer->Draw(mBirdTextureIDs[mAnimIndex], Vector2(240.0f, mPosition), mRotation, Pivot::Center, Flip::None);
+	mSpriteRenderer->Draw(mBirdTextureIDs[mAnimIndex], mPosition, mRotation, Pivot::Center, Flip::None);
 }
 
 void BirdControllerComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Bird Controller Component##BirdControllerComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		ImGui::DragFloat("Y Position##BirdControllerComponent", &mPosition, 1.0f, -1000.0f, 1000.0f);
+		ImGui::DragFloat2("Position##BirdControllerComponent", &mPosition.x, 1.0f, -1000.0f, 1000.0f);
 		ImGui::DragFloat("Velocity##BirdControllerComponent", &mVelocity, 1.0f, -1000.0f, 1000.0f);
 		ImGui::DragFloat("Min Velocity Cap##BirdControllerComponent", &mMinVelocityCap, 1.0f, -1000.0f, 0.0f);
 		ImGui::DragFloat("Max Velocity Cap##BirdControllerComponent", &mMaxVelocityCap, 1.0f, 0.0f, 1000.0f);
 		ImGui::DragFloat("Gravity##BirdControllerComponent", &mGravity, 1.0f, -1000.0f, 1000.0f);
 		ImGui::DragFloat("Flap Amount##BirdControllerComponent", &mFlapAmount, 1.0f, 0.0f, 1000.0f);
-		ImGui::DragFloat("mAnimTimePerFrame##BirdControllerComponent", &mAnimTimePerFrame, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Anim Time Per Frame##BirdControllerComponent", &mAnimTimePerFrame, 0.01f, 0.0f, 1.0f);
+		if (ImGui::Checkbox("Is Dead##BirdControllerComponent", &mIsDead))
+		{
+			if (mIsDead) {
+				KillBird();
+			}
+		}
 	}
+}
+
+std::vector<Vector2> BirdControllerComponent::GetBirdVerts()
+{
+	std::vector<Vector2> birdVerts;
+	birdVerts.reserve(4);
+
+	birdVerts.push_back(Vector2(mPosition.x - mHalfWidth, mPosition.y - mHalfHeight)); // Top Left
+	birdVerts.push_back(Vector2(mPosition.x + mHalfWidth, mPosition.y - mHalfHeight)); // Top Right
+	birdVerts.push_back(Vector2(mPosition.x - mHalfWidth, mPosition.y + mHalfHeight)); // Bottom Left
+	birdVerts.push_back(Vector2(mPosition.x + mHalfWidth, mPosition.y + mHalfHeight)); // Bottom Right
+
+	return birdVerts;
+}
+
+void BirdControllerComponent::KillBird()
+{
+	mIsDead = true;
+	mAnimIndex = 0;
 }
 
 void BirdControllerComponent::Flap()
 {
+	if (mIsDead) {
+		return;
+	}
+
 	mVelocity -= mFlapAmount;
 	mVelocity = Math::Clamp(mVelocity, mMinVelocityCap, mMaxVelocityCap);
 }
 
 void BirdControllerComponent::UpdateBirdAnimation(float deltaTime)
 {
+	if (mIsDead) {
+		return;
+	}
+
 	mAnimTimer -= deltaTime;
 	if (mAnimTimer <= 0.0f)
 	{
@@ -87,9 +121,14 @@ void BirdControllerComponent::ApplyGravity(float deltaTime)
 
 void BirdControllerComponent::MoveBird(float deltaTime)
 {
+	if (mIsDead) { // Have the bird get cleared with the level
+		mPosition.x -= 100.0f * deltaTime; // TODO: Map/Pipe speed
+		mPosition.x = Math::Clamp(mPosition.x, -200.0f, 1000.0f); // TODO:: rework
+	}
+
 	// Position
-	mPosition += mVelocity * deltaTime;
-	mPosition = Math::Clamp(mPosition, 24.0f, 717.0f);
+	mPosition.y += mVelocity * deltaTime;
+	mPosition.y = Math::Clamp(mPosition.y, 24.0f, 717.0f);
 
 	// Rotation
 	const float rotationAmount = Lerp(0.0f, 1.0f, (mVelocity - mMinVelocityCap) / (abs(mMinVelocityCap) + mMaxVelocityCap));

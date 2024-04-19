@@ -15,11 +15,12 @@ public:
 	void DebugUI() override;
 
 	// TODO: Rework
-	SAGE::Math::Vector2 GetTopPipePos() { return { mPipeXPos, mPipeYPos.x }; }
-	SAGE::Math::Vector2 GetBottomPipePos() { return { mPipeXPos,mPipeYPos.y }; }
+	SAGE::Math::Vector2 GetTopPipePos() { return { mPipeXPos, mPipeYPos.x }; }		// Bottom Left
+	SAGE::Math::Vector2 GetBottomPipePos() { return { mPipeXPos, mPipeYPos.y }; }	// Top Left
 
 	void SetXPos(float xPos) { mPipeXPos = xPos; }
 	void SetPipeSpeed(float speed) { mPipeSpeed = speed; }
+	bool CheckForBirdCollision(std::vector<SAGE::Math::Vector2> birdVerts);
 
 private:
 	void Reset();
@@ -30,4 +31,5 @@ private:
 	float mPipeXPos = 0.0f;
 
 	const float mPipeWidth = 92.0f;
+	const float mPipeHeight = 566.0f;
 };

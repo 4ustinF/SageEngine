@@ -15,6 +15,8 @@ public:
 	void Render();
 	void DebugUI() override;
 
+	std::vector<SAGE::Math::Vector2> GetBirdVerts();
+	void KillBird();
 
 private:
 
@@ -34,11 +36,17 @@ private:
 	float mAnimTimer = 0.0f;
 	float mAnimTimePerFrame = 0.15f;
 
-	float mPosition = 426.5f;
+	const SAGE::Math::Vector2 mStartPosition = SAGE::Math::Vector2(240.0f, 426.5f);
+	SAGE::Math::Vector2 mPosition = SAGE::Math::Vector2::Zero;
 	float mVelocity = 0.0f;
 	float mMinVelocityCap = -375.0f; // Going Up
 	float mMaxVelocityCap = 475.0f; // Going Down
 	float mGravity = 1250.0f;
 	float mFlapAmount = 500.0f;
 	float mRotation = 0.0f;
+	bool mIsDead = false;
+
+	// Sprite Info
+	const float mHalfWidth = 34.0f;
+	const float mHalfHeight = 24.0f;
 };

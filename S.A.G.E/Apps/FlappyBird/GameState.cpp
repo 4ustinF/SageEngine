@@ -85,15 +85,21 @@ void GameState::Update(float deltaTime)
 
 	const float moveAmount = mMoveSpeed * deltaTime;
 	mBase1XPos -= moveAmount;
-	if (mBase1XPos <= -480.0f)
-	{
+	if (mBase1XPos <= -480.0f) {
 		mBase1XPos += 960.0f;
 	}
 
 	mBase2XPos -= moveAmount;
-	if (mBase2XPos <= -480.0f)
-	{
+	if (mBase2XPos <= -480.0f) {
 		mBase2XPos += 960.0f;
+	}
+
+	auto birdVerts = mFlappyBird->GetBirdVerts();
+	if (mPipe1->CheckForBirdCollision(birdVerts) ||
+		mPipe2->CheckForBirdCollision(birdVerts) ||
+		mPipe3->CheckForBirdCollision(birdVerts))
+	{
+		mFlappyBird->KillBird();
 	}
 }
 
@@ -103,6 +109,8 @@ void GameState::Render()
 
 	mSpriteRenderer->Draw(mBackgroundTextureID, Vector2::Zero, 0.0f, Pivot::TopLeft);
 
+	//mSpriteRenderer->Draw(mPipeTextureID, mPipe1->GetTopPipePos(), 0.0f, Pivot::Center, Flip::Vertical); // Top Pipe
+	//mSpriteRenderer->Draw(mPipeTextureID, mPipe1->GetBottomPipePos(), 0.0f, Pivot::Center); // Bottom Pipe
 	mSpriteRenderer->Draw(mPipeTextureID, mPipe1->GetTopPipePos(), 0.0f, Pivot::BottomLeft, Flip::Vertical); // Top Pipe
 	mSpriteRenderer->Draw(mPipeTextureID, mPipe1->GetBottomPipePos(), 0.0f, Pivot::TopLeft); // Bottom Pipe
 	mSpriteRenderer->Draw(mPipeTextureID, mPipe2->GetTopPipePos(), 0.0f, Pivot::BottomLeft, Flip::Vertical); // Top Pipe

@@ -35,6 +35,27 @@ void PipeComponent::DebugUI()
 	}
 }
 
+bool PipeComponent::CheckForBirdCollision(std::vector<SAGE::Math::Vector2> birdVerts)
+{
+	for (const Vector2& vert : birdVerts)
+	{
+		// Check top pipe
+		if (vert.x >= mPipeXPos && vert.x <= mPipeXPos + mPipeWidth 
+			&& vert.y <= mPipeYPos.x)
+		{
+			return true;
+		}
+
+		// Check bottom pipe
+		if (vert.x >= mPipeXPos && vert.x <= mPipeXPos + mPipeWidth &&
+			vert.y >= mPipeYPos.y && vert.y <= mPipeYPos.y + mPipeHeight)
+		{
+			return true;
+		}
+	}
+
+	return false;;
+}
 
 void PipeComponent::Reset()
 {

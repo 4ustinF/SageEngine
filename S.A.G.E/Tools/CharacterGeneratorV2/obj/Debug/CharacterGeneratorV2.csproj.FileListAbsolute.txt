@@ -1,0 +1,15 @@
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\bin\Debug\CharacterGeneratorV2.exe.config
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\bin\Debug\CharacterGeneratorV2.exe
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\bin\Debug\CharacterGeneratorV2.pdb
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\CharacterGeneratorV2.csproj.AssemblyReference.cache
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\MainWindow.g.cs
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\App.g.cs
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\CharacterGeneratorV2_MarkupCompile.cache
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\CharacterGeneratorV2_MarkupCompile.lref
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\MainWindow.baml
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\CharacterGeneratorV2.g.resources
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\CharacterGeneratorV2.Properties.Resources.resources
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\CharacterGeneratorV2.csproj.GenerateResource.cache
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\CharacterGeneratorV2.csproj.CoreCompileInputs.cache
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\CharacterGeneratorV2.exe
+D:\GitHub\SageEngine\S.A.G.E\Tools\CharacterGeneratorV2\obj\Debug\CharacterGeneratorV2.pdb

@@ -195,6 +195,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FlappyBird", "Apps\FlappyBi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nonogram", "Apps\Nonogram\Nonogram.vcxproj", "{52FE7EB2-894D-4386-923A-651EDF905777}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharacterGeneratorV2", "Tools\CharacterGeneratorV2\CharacterGeneratorV2.csproj", "{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -887,6 +889,18 @@ Global
 		{52FE7EB2-894D-4386-923A-651EDF905777}.Release|x64.Build.0 = Release|x64
 		{52FE7EB2-894D-4386-923A-651EDF905777}.Release|x86.ActiveCfg = Release|Win32
 		{52FE7EB2-894D-4386-923A-651EDF905777}.Release|x86.Build.0 = Release|Win32
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Debug|x64.Build.0 = Debug|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Release|x64.ActiveCfg = Release|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Release|x64.Build.0 = Release|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -952,6 +966,7 @@ Global
 		{CA5C14E6-0C4A-4300-BA80-37C8BC3AFB61} = {76A84F5C-2783-4246-BB78-7670811F1461}
 		{BCDC76D6-8D58-4D03-A105-99EF53A22799} = {FC821FF4-AD08-44EE-B20C-6E1E001C600E}
 		{52FE7EB2-894D-4386-923A-651EDF905777} = {FC821FF4-AD08-44EE-B20C-6E1E001C600E}
+		{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800} = {6AADFEB4-B4C6-4DA1-A5DD-CDAE4B4134EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2072C838-18C9-4A2C-92CB-CFCB229E399D}

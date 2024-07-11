@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "D:\\GitHub\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|d:\\github\\sageengine\\s.a.g.e\\tools\\charactergeneratorv2\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|solutionrelative:tools\\charactergeneratorv2\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|D:\\GitHub\\SageEngine\\S.A.G.E\\tools\\charactergeneratorv2\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|solutionrelative:tools\\charactergeneratorv2\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|d:\\github\\sageengine\\s.a.g.e\\tools\\charactergeneratorv2\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|solutionrelative:tools\\charactergeneratorv2\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|d:\\github\\sageengine\\s.a.g.e\\tools\\charactergeneratorv2\\spritemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|solutionrelative:tools\\charactergeneratorv2\\spritemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BE4CC60-2D5D-4F68-AF7E-61ADBD5A1B9B}|Tools\\CharacterGenerator\\CharacterGenerator.csproj|d:\\github\\sageengine\\s.a.g.e\\tools\\charactergenerator\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BE4CC60-2D5D-4F68-AF7E-61ADBD5A1B9B}|Tools\\CharacterGenerator\\CharacterGenerator.csproj|solutionrelative:tools\\charactergenerator\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|d:\\github\\sageengine\\s.a.g.e\\tools\\charactergeneratorv2\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{DE0CB6B1-DC73-4E48-9278-CA4BAAD51800}|Tools\\CharacterGeneratorV2\\CharacterGeneratorV2.csproj|solutionrelative:tools\\charactergeneratorv2\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,11 +26,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Tools\\CharacterGenerator\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Tools\\CharacterGenerator\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Tools\\CharacterGenerator\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Tools\\CharacterGenerator\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T03:17:52.551Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Tools\\CharacterGeneratorV2\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Tools\\CharacterGeneratorV2\\MainWindow.xaml",
@@ -34,15 +55,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Tools\\CharacterGeneratorV2\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Tools\\CharacterGeneratorV2\\MainWindow.xaml.cs",
               "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Tools\\CharacterGeneratorV2\\MainWindow.xaml.cs",
               "RelativeToolTip": "Tools\\CharacterGeneratorV2\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABkAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-10T06:38:38.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SpriteManager.cs",
+              "DocumentMoniker": "D:\\GitHub\\SageEngine\\S.A.G.E\\Tools\\CharacterGeneratorV2\\SpriteManager.cs",
+              "RelativeDocumentMoniker": "Tools\\CharacterGeneratorV2\\SpriteManager.cs",
+              "ToolTip": "D:\\GitHub\\SageEngine\\S.A.G.E\\Tools\\CharacterGeneratorV2\\SpriteManager.cs",
+              "RelativeToolTip": "Tools\\CharacterGeneratorV2\\SpriteManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T03:16:52.83Z",
               "EditorCaption": ""
             }
           ]

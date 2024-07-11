@@ -20,9 +20,20 @@ namespace CharacterGeneratorV2
     /// </summary>
     public partial class MainWindow : Window
     {
+        private SpriteManager _spriteManager = new SpriteManager();
+
         public MainWindow()
         {
             InitializeComponent();
+            this.ResizeMode = ResizeMode.NoResize;
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            _spriteManager.Initialize();
+
         }
     }
 }

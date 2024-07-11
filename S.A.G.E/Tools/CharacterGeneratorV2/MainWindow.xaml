@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CharacterGeneratorV2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Character Generator" Height="650" Width="650">
+    <Grid Background="#23272A">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="General" Command="{Binding ShowGeneralCommand}"/>
+            <MenuItem Header="Graphics" Command="{Binding ShowGraphicsCommand}"/>
+            <MenuItem Header="Audio" Command="{Binding ShowAudioCommand}"/>
+        </Menu>
         
+        <ContentControl Grid.Row="1" Content="{Binding CurrentView}"/>
+
+
     </Grid>
 </Window>

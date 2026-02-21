@@ -1,0 +1,14 @@
+{
+  "Components": {
+    "PlayerControllerComponent": {
+    },
+    "PlayerAnimatorComponent": {
+      "MovementSprites": [
+        "../Sprites/PacMan/PacMan/Eat/sprite_eat_00.png",
+        "../Sprites/PacMan/PacMan/Eat/sprite_eat_01.png",
+        "../Sprites/PacMan/PacMan/Eat/sprite_eat_02.png"
+      ],
+      "TimePerFrame": 0.125
+    }
+  }
+}

@@ -11,19 +11,19 @@
   "GameObjects": [
     {
       "Name": "PacMan",
-      "TemplateFile": "../../Assets/Templates/pacman.json"
+      "TemplateFile": "../../Assets/Templates/PacmanTemplates/pacman.json"
     },
     {
       "Name": "Blinky",
-      "TemplateFile": "../../Assets/Templates/blinky.json"
+      "TemplateFile": "../../Assets/Templates/PacmanTemplates/blinky.json"
     },
     {
       "Name": "Pinky",
-      "TemplateFile": "../../Assets/Templates/pinky.json"
+      "TemplateFile": "../../Assets/Templates/PacmanTemplates/pinky.json"
     },
     {
       "Name": "Inky",
-      "TemplateFile": "../../Assets/Templates/inky.json"
+      "TemplateFile": "../../Assets/Templates/PacmanTemplates/inky.json"
     },
     {
       "Name": "Clyde",

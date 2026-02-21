@@ -18,6 +18,9 @@ public:
 
 	void Render();
 
+	void InitPacmanSprites(const std::vector<std::filesystem::path>& spriteFilePaths);
+	void SetTimePerFrame(float time) { mTimePerFrame = time; }
+
 private:
 	float mTimer = 0.0f;
 	float mTimePerFrame = 0.125f;

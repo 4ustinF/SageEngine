@@ -27,6 +27,21 @@ namespace
 		else if (strcmp(componentName, "PlayerAnimatorComponent") == 0)
 		{
 			auto playerAnimatorComponent = gameObject.AddComponent<PlayerAnimatorComponent>();
+			if (value.HasMember("MovementSprites")) {
+				const rapidjson::GenericArray movementSprites = value["MovementSprites"].GetArray();
+				std::vector<std::filesystem::path> spriteFilePaths;
+
+				spriteFilePaths.reserve(movementSprites.Size());
+				for (const rapidjson::Value& movementSpirte : movementSprites)
+				{
+					spriteFilePaths.push_back(movementSpirte.GetString());
+				}
+
+				playerAnimatorComponent->InitPacmanSprites(spriteFilePaths);
+			}
+			if (value.HasMember("TimePerFrame")) {
+				playerAnimatorComponent->SetTimePerFrame(value["TimePerFrame"].GetFloat());
+			}
 			return true;
 		}
 		else if (strcmp(componentName, "GhostControllerComponent") == 0)

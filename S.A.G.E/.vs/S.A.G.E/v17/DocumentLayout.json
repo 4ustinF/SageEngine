@@ -3,28 +3,20 @@
   "WorkspaceRootPath": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerControllerComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\PlayerControllerComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerAnimatorComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\PlayerAnimatorComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\PlayerControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level_ghostless.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Level\\pacman_level_ghostless.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerAnimatorComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\PlayerAnimatorComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameManagerService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameManagerService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level_ghostless.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Level\\pacman_level_ghostless.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,79 +31,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PlayerControllerComponent.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerControllerComponent.cpp",
-              "RelativeDocumentMoniker": "Apps\\PacMan\\PlayerControllerComponent.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerControllerComponent.cpp",
-              "RelativeToolTip": "Apps\\PacMan\\PlayerControllerComponent.cpp",
-              "ViewState": "AgIAADUAAAAAAAAAAAAAAEQAAAAWAAAAAAAAAA==",
+              "Title": "PlayerAnimatorComponent.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerAnimatorComponent.cpp",
+              "RelativeDocumentMoniker": "Apps\\PacMan\\PlayerAnimatorComponent.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerAnimatorComponent.cpp",
+              "RelativeToolTip": "Apps\\PacMan\\PlayerAnimatorComponent.cpp",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADMAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-21T20:20:30.282Z",
+              "WhenOpened": "2026-02-21T20:46:32.354Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PlayerControllerComponent.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerControllerComponent.h",
-              "RelativeDocumentMoniker": "Apps\\PacMan\\PlayerControllerComponent.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerControllerComponent.h",
-              "RelativeToolTip": "Apps\\PacMan\\PlayerControllerComponent.h",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAAwDcAAAAcAAAAAAAAAA==",
+              "Title": "PlayerAnimatorComponent.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerAnimatorComponent.h",
+              "RelativeDocumentMoniker": "Apps\\PacMan\\PlayerAnimatorComponent.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\PlayerAnimatorComponent.h",
+              "RelativeToolTip": "Apps\\PacMan\\PlayerAnimatorComponent.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBoAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-21T20:20:29.445Z",
+              "WhenOpened": "2026-02-21T20:46:31.718Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "pacman_level_ghostless.json",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level_ghostless.json",
-              "RelativeDocumentMoniker": "Assets\\Level\\pacman_level_ghostless.json",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level_ghostless.json",
-              "RelativeToolTip": "Assets\\Level\\pacman_level_ghostless.json",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-21T20:14:09.394Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "GameState.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.cpp",
               "RelativeDocumentMoniker": "Apps\\PacMan\\GameState.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.cpp",
               "RelativeToolTip": "Apps\\PacMan\\GameState.cpp",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAEIAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-21T20:14:50.277Z",
+              "WhenOpened": "2026-02-21T20:41:52.968Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GameManagerService.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp",
-              "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.cpp",
-              "RelativeToolTip": "Apps\\PacMan\\GameManagerService.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGcAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-21T20:07:10.944Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GameManagerService.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h",
-              "RelativeDocumentMoniker": "Apps\\PacMan\\GameManagerService.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameManagerService.h",
-              "RelativeToolTip": "Apps\\PacMan\\GameManagerService.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-21T20:07:22.453Z",
+              "DocumentIndex": 3,
+              "Title": "pacman_level_ghostless.json",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level_ghostless.json",
+              "RelativeDocumentMoniker": "Assets\\Level\\pacman_level_ghostless.json",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\pacman_level_ghostless.json",
+              "RelativeToolTip": "Assets\\Level\\pacman_level_ghostless.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-21T20:14:09.394Z",
               "EditorCaption": ""
             }
           ]

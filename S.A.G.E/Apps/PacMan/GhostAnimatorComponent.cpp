@@ -79,8 +79,8 @@ void GhostAnimatorComponent::InitGhostSprites(const std::array<std::filesystem::
 	// TODO: Don't separate these and we can for loop this.
 	mMoveUpTextureIds[0] = mTextureManager->LoadTexture(spriteFilePaths[0]);
 	mMoveUpTextureIds[1] = mTextureManager->LoadTexture(spriteFilePaths[1]);
-	mMoveDownTextureIds[1] = mTextureManager->LoadTexture(spriteFilePaths[3]);
 	mMoveDownTextureIds[0] = mTextureManager->LoadTexture(spriteFilePaths[2]);
+	mMoveDownTextureIds[1] = mTextureManager->LoadTexture(spriteFilePaths[3]);
 	mMoveLeftTextureIds[0] = mTextureManager->LoadTexture(spriteFilePaths[4]);
 	mMoveLeftTextureIds[1] = mTextureManager->LoadTexture(spriteFilePaths[5]);
 

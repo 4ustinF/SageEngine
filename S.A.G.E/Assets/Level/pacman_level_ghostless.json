@@ -11,7 +11,7 @@
   "GameObjects": [
     {
       "Name": "PacMan",
-      "TemplateFile": "../../Assets/Templates/pacman.json"
+      "TemplateFile": "../../Assets/Templates/PacmanTemplates/pacman.json"
     }
   ]
 }

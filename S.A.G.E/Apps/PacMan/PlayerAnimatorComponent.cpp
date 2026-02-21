@@ -13,13 +13,6 @@ void PlayerAnimatorComponent::Initialize()
 	mPlayerController = GetOwner().GetComponent<PlayerControllerComponent>();
 	spriteRenderer = SpriteRenderer::Get();
 
-	TextureManager* textureManager = TextureManager::Get();
-	mEatTextureIds.reserve(3);
-	mEatTextureIds.push_back(textureManager->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_00.png"));
-	mEatTextureIds.push_back(textureManager->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_01.png"));
-	mEatTextureIds.push_back(textureManager->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_02.png"));
-
-	mDisplayTextureID = mEatTextureIds[1];
 	mTimer = mTimePerFrame;
 }
 
@@ -55,6 +48,10 @@ void PlayerAnimatorComponent::DebugUI()
 	if (ImGui::CollapsingHeader("Player Animator Component##PlayerAnimatorComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		ImGui::InputFloat("Time Per Frame", &mTimePerFrame);
+		if (ImGui::InputInt("Sprite Index", &mSpriteIndex))
+		{
+			mSpriteIndex = Clamp(mSpriteIndex, 0, mSpriteMaxIndex);
+		}
 	}
 }
 
@@ -76,4 +73,23 @@ void PlayerAnimatorComponent::Render()
 		spriteRenderer->Draw(mDisplayTextureID, pos, 0.0, Pivot::Center, Flip::Horizontal);
 		break;
 	}
+}
+
+void PlayerAnimatorComponent::InitPacmanSprites(const std::vector<std::filesystem::path>& spriteFilePaths)
+{
+	if (spriteFilePaths.empty())
+	{
+		return;
+	}
+
+	TextureManager* textureManager = TextureManager::Get();
+
+	mEatTextureIds.reserve(spriteFilePaths.size());
+	for (std::filesystem::path spriteFilePath : spriteFilePaths)
+	{
+		mEatTextureIds.push_back(textureManager->LoadTexture(spriteFilePath));
+	}
+
+	mSpriteMaxIndex = static_cast<int>(mEatTextureIds.size());
+	mDisplayTextureID = mEatTextureIds[0];
 }

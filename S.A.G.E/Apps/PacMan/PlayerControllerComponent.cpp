@@ -65,7 +65,7 @@ void PlayerControllerComponent::UpdateTileCords()
 
 void PlayerControllerComponent::Eating()
 {
-	int tileIndex = mTileMapService->GetTile(mTileCords).tileIndex;
+	int& tileIndex = mTileMapService->GetTile(mTileCords).tileIndex;
 	if (tileIndex == 1) {
 		tileIndex = 0;
 		mGameManagerService->AtePellet(PelletType::Small);

@@ -11,14 +11,13 @@ MEMORY_POOL_DEFINE(PlayerAnimatorComponent, 200);
 void PlayerAnimatorComponent::Initialize()
 {
 	mPlayerController = GetOwner().GetComponent<PlayerControllerComponent>();
-
 	spriteRenderer = SpriteRenderer::Get();
 
-	auto tm = TextureManager::Get();
+	TextureManager* textureManager = TextureManager::Get();
 	mEatTextureIds.reserve(3);
-	mEatTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_00.png"));
-	mEatTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_01.png"));
-	mEatTextureIds.push_back(tm->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_02.png"));
+	mEatTextureIds.push_back(textureManager->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_00.png"));
+	mEatTextureIds.push_back(textureManager->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_01.png"));
+	mEatTextureIds.push_back(textureManager->LoadTexture("../Sprites/PacMan/PacMan/Eat/sprite_eat_02.png"));
 
 	mDisplayTextureID = mEatTextureIds[1];
 	mTimer = mTimePerFrame;

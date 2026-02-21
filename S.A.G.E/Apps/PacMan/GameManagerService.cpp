@@ -309,19 +309,31 @@ void GameManagerService::AtePellet(PelletType pelletType)
 	// TODO: Figure a better way to release ghost
 	if (mLevel == 1 && mRemainingPelletCount == 214)
 	{
-		mGhostControllers[2]->SetHomeState(GhostHomeState::LeavingHome);
+		if (mGhostControllers.size() >= 3) // TODO: Lets not manually reference ghost like this.
+		{
+			mGhostControllers[2]->SetHomeState(GhostHomeState::LeavingHome);
+		}
 	}
 	else if (mLevel == 1 && mRemainingPelletCount == 184)
 	{
-		mGhostControllers[3]->SetHomeState(GhostHomeState::LeavingHome);
+		if (mGhostControllers.size() >= 4) // TODO: Lets not manually reference ghost like this.
+		{
+			mGhostControllers[3]->SetHomeState(GhostHomeState::LeavingHome);
+		}
 	}
 	else if (mLevel == 2 && mRemainingPelletCount == 243)
 	{
-		mGhostControllers[2]->SetHomeState(GhostHomeState::LeavingHome);
+		if (mGhostControllers.size() >= 3) // TODO: Lets not manually reference ghost like this.
+		{
+			mGhostControllers[2]->SetHomeState(GhostHomeState::LeavingHome);
+		}
 	}
 	else if (mLevel == 2 && mRemainingPelletCount == 194)
 	{
-		mGhostControllers[3]->SetHomeState(GhostHomeState::LeavingHome);
+		if (mGhostControllers.size() >= 4) // TODO: Lets not manually reference ghost like this.
+		{
+			mGhostControllers[3]->SetHomeState(GhostHomeState::LeavingHome);
+		}
 	}
 
 	if (mRemainingPelletCount == mBonusSymbol1RemainingPellets || mRemainingPelletCount == mBonusSymbol2RemainingPellets)
@@ -412,8 +424,10 @@ void GameManagerService::SetupLevel()
 		}
 	}
 
-	mGhostControllers[1]->SetHomeState(GhostHomeState::LeavingHome); // Let Pinky out immediately 
-
+	if (mGhostControllers.size() > 0) // TODO: Lets not manually reference ghost like this.
+	{
+		mGhostControllers[1]->SetHomeState(GhostHomeState::LeavingHome); // Let Pinky out immediately 
+	}
 
 	if (mLevel > 1) { // Don't need to populate the pellets on the first level as that is preset for us there.
 		RepopulatePellets();

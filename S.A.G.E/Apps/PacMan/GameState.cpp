@@ -64,7 +64,8 @@ void GameState::Initialize()
 	mGameWorld.Initialize(1000);
 
 	GameObjectFactory::SetMakeOverride(OnMake);
-	mGameWorld.LoadLevel("../../Assets/Level/pacman_level.json");
+	//mGameWorld.LoadLevel("../../Assets/Level/pacman_level.json");
+	mGameWorld.LoadLevel("../../Assets/Level/pacman_level_ghostless.json");
 
 	gameManagerService->SetupGame();
 	gameManagerService->StartGame();

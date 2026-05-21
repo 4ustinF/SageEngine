@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA708D12-1737-4831-A188-78B707487D84}|Apps\\PacMan\\PacMan.vcxproj|solutionrelative:Apps\\PacMan\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,20 +34,46 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "GameState.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.cpp",
+              "RelativeDocumentMoniker": "Apps\\PacMan\\GameState.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.cpp",
+              "RelativeToolTip": "Apps\\PacMan\\GameState.cpp",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAEsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-21T21:46:27.317Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GameState.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.h",
+              "RelativeDocumentMoniker": "Apps\\PacMan\\GameState.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\PacMan\\GameState.h",
+              "RelativeToolTip": "Apps\\PacMan\\GameState.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-21T21:46:26.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "GameState.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
               "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\GameState.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
               "RelativeToolTip": "Apps\\MyPhysicsDemo\\GameState.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAApwBQAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-05-21T21:42:21.826Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "GameState.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.h",
               "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\GameState.h",
@@ -52,7 +86,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "WinMain.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\WinMain.cpp",
               "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\WinMain.cpp",

@@ -18,14 +18,10 @@ namespace
 void GameState::Initialize()
 {
 	mGameWorld.AddService<CameraService>();
-	mGameWorld.AddService<RenderService>()->SetSampleFilter(Sampler::Filter::Point);
-
 	mGameWorld.Initialize(100);
 
 	GameObjectFactory::SetMakeOverride(OnMake);
 	//mGameWorld.LoadLevel("../../Assets/Level/your_level.json");
-
-	mGameWorld.GetService<RenderService>()->GetDirectionalLight().ambient = { 0.4f, 0.4f, 0.4f, 1.0f };
 }
 
 void GameState::Terminate()
@@ -41,8 +37,6 @@ void GameState::Update(float deltaTime)
 void GameState::Render()
 {
 	mGameWorld.Render();
-
-	SimpleDraw::Render(mGameWorld.GetService<CameraService>()->GetCamera());
 }
 
 void GameState::DebugUI()

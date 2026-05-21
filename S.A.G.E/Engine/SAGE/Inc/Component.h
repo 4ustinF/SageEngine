@@ -28,10 +28,17 @@ namespace SAGE
 		virtual void OnEnable() {}
 		virtual void OnDisable() {}
 
+		void EnqueueUpdate() { mQueueUpdate = true; }
+		void ClearQueueUpdate() { mQueueUpdate = false; }
+		bool CanQueueUpdate() const { return mQueueUpdate; }
+		virtual void OnQueueUpdate(float deltaTime) {}
+
 		GameObject& GetOwner() { return *mOwner; }
 		const GameObject& GetOwner() const { return *mOwner; }
 	private:
 		friend class GameObject;
 		GameObject* mOwner = nullptr;
+
+		bool mQueueUpdate = false;
 	};
 }

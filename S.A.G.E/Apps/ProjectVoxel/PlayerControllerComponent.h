@@ -16,6 +16,7 @@ public:
 	void Initialize() override;
 	void Terminate() override;
 	void Update(float deltaTime) override;
+	void OnQueueUpdate(float deltaTime) override;
 	void DebugUI() override;
 	void OnEnable() override;
 
@@ -121,6 +122,15 @@ private:
 	SAGE::Math::Vector3 mClosestPoint;
 	SAGE::Math::Vector3 mClosestNormal;
 	SAGE::Graphics::TextureId mDestroyStagesTextureIDs[10];
+
+	// Screen Shake
+	bool mIsScreenShaking = false;
+	std::chrono::time_point<std::chrono::system_clock> mScreenShakeStartTime;
+	float mScreenShakeElapsedTime = 0.0f;
+	float mScreenShakeDuration = 0.05f;
+	float mScreenShakeMagnitude = 0.075f;
+	void StartScreenShake();
+	void UpdateScreenShake(float deltaTime);
 
 	bool InstantBreakCheck(SAGE::Math::Vector3 closestPoint, SAGE::Math::Vector3 closestNormal);
 

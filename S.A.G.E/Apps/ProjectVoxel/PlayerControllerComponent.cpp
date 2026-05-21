@@ -141,6 +141,14 @@ void PlayerControllerComponent::Update(float deltaTime)
 	//}
 }
 
+void PlayerControllerComponent::OnQueueUpdate(float deltaTime)
+{
+	if (mIsScreenShaking)
+	{
+		UpdateScreenShake(deltaTime);
+	}
+}
+
 void PlayerControllerComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Player Controller Component##PlayerControllerComponent", ImGuiTreeNodeFlags_CollapsingHeader))
@@ -180,7 +188,8 @@ void PlayerControllerComponent::TakeDamage(int dmg)
 	mHealth = Clamp(mHealth, 0, 20);
 
 	mPlayerUIService->UpdatePlayerHp(static_cast<float>(mHealth) * 0.05f);
-	CoroutineSystem::Get()->StartCoroutine(ScreenShake(0.05f, 0.075f));
+	//CoroutineSystem::Get()->StartCoroutine(ScreenShake(0.05f, 0.075f));
+	StartScreenShake();
 
 	if (mHealth <= 0)
 	{
@@ -1148,6 +1157,41 @@ Enumerator PlayerControllerComponent::MineInstantBlock()
 		mMinedBlock = true;
 		mIsMining = false;
 	};
+}
+
+void PlayerControllerComponent::StartScreenShake()
+{
+	//if (mIsScreenShaking)
+	//{
+	//	// TODO: Maybe stack effects instead of just restarting it?
+	//}
+	mScreenShakeStartTime = std::chrono::system_clock::now();
+	mScreenShakeElapsedTime = 0.0f;
+	mIsScreenShaking = true;
+	EnqueueUpdate();
+}
+
+void PlayerControllerComponent::UpdateScreenShake(float deltaTime)
+{
+	if (mScreenShakeElapsedTime < mScreenShakeDuration)
+	{
+		const auto end = std::chrono::system_clock::now();
+		const std::chrono::duration<float> elapsedTime = end - mScreenShakeStartTime;
+		mScreenShakeElapsedTime = elapsedTime.count();
+
+		float x = Random::UniformFloat() * mScreenShakeMagnitude;
+		float y = Random::UniformFloat() * mScreenShakeMagnitude;
+
+		//auto cam = mCameraService->GetCamera();
+		Vector3 newPos = mCameraService->GetCamera().GetPosition() + Vector3(x, y, 0.0f);
+		mCameraService->GetCamera().SetPosition(newPos);
+
+		EnqueueUpdate();
+		return;
+	}
+
+	mScreenShakeElapsedTime = 0.0f;
+	mIsScreenShaking = false;
 }
 
 bool PlayerControllerComponent::InstantBreakCheck(Vector3 closestPoint, Vector3 closestNormal)

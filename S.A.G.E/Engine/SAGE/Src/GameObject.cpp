@@ -30,8 +30,15 @@ void GameObject::Update(float deltaTime)
 		return;
 	}
 
-	for (auto& component : mComponents) {
+	for (auto& component : mComponents) 
+	{
 		component->Update(deltaTime);
+
+		if (component->CanQueueUpdate())
+		{
+			component->ClearQueueUpdate();
+			component->OnQueueUpdate(deltaTime);
+		}
 	}
 }
 

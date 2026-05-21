@@ -1,4 +1,10 @@
 ﻿  GameState.cpp
-D:\AzureDevOps\S.A.G.E\VGP334\19_HelloParticles\GameState.cpp(57,119): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-     Creating library D:\AzureDevOps\S.A.G.E\x64\Debug\19_HelloParticles.lib and object D:\AzureDevOps\S.A.G.E\x64\Debug\19_HelloParticles.exp
-  19_HelloParticles.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\19_HelloParticles.exe
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP334\19_HelloParticles\GameState.cpp(57,93): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  ParticleSystem.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP334\19_HelloParticles\ParticleSystem.cpp(97,10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP334\19_HelloParticles\ParticleSystem.cpp(156,37): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP334\19_HelloParticles\ParticleSystem.cpp(156,17): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  WinMain.cpp
+  Generating Code...
+     Creating library D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\19_HelloParticles.lib and object D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\19_HelloParticles.exp
+  19_HelloParticles.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\19_HelloParticles.exe

@@ -1,4 +1,4 @@
-#include "Precompiled.h"
+﻿#include "Precompiled.h"
 #include "FPSCameraControllerComponent.h"
 
 #include "CameraComponent.h"
@@ -39,7 +39,7 @@ void FPSCameraControllerComponent::DebugUI()
 		Math::Vector3 position = camera.GetPosition();
 		if (ImGui::DragFloat3("Position##FPSCameraControllerComponent", &position.x, 0.1f))
 		{
-			camera.SetPosition(position);	
+			camera.SetPosition(position);
 		}
 
 		Math::Vector3 direction = camera.GetDirection();

@@ -1,4 +1,4 @@
-#include "Precompiled.h"
+﻿#include "Precompiled.h"
 #include "FPSCameraControllerComponent.h"
 
 #include "CameraComponent.h"
@@ -35,18 +35,8 @@ void FPSCameraControllerComponent::DebugUI()
 	if (ImGui::CollapsingHeader("FPS Camera Component##FPSCameraControllerComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		SAGE::Graphics::Camera& camera = mCameraComponent->GetCamera();
-
-		Math::Vector3 position = camera.GetPosition();
-		if (ImGui::DragFloat3("Position##FPSCameraControllerComponent", &position.x, 0.1f))
-		{
-			camera.SetPosition(position);	
-		}
-
-		Math::Vector3 direction = camera.GetDirection();
-		if (ImGui::DragFloat3("Direction##FPSCameraControllerComponent", &direction.x, 0.1f))
-		{
-			camera.SetDirection(direction);
-		}
+		ImGui::DragFloat3("Position##FPSCameraControllerComponent", &camera.GetPosition().x, 0.1f);
+		ImGui::DragFloat3("Direction##FPSCameraControllerComponent", &camera.GetDirection().x, 0.1f);
 
 		ImGui::InputFloat("Normal Speed##FPSCameraControllerComponent", &normSpeed, 0.1f, 0.05f);
 		ImGui::InputFloat("Fast Speed##FPSCameraControllerComponent", &fastSpeed, 0.1f, 0.05f);

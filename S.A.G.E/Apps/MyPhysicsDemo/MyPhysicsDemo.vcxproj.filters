@@ -4,6 +4,12 @@
     <Filter Include="Game">
       <UniqueIdentifier>{8ffe54b7-671b-4709-8e97-78dfed91b1ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{cc4598d7-0dbe-47fc-ad6d-64a051cdf919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{d8555196-cc27-4b78-9f94-af203205ed18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp">
@@ -16,6 +22,9 @@
   <ItemGroup>
     <ClInclude Include="GameState.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeIds.h">
+      <Filter>Other</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

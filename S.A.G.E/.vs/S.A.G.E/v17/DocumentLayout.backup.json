@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\FPSCameraControllerComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\FPSCameraControllerComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\TransformComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\TransformComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\FPSCameraControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\FPSCameraControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObjectFactory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\GameObjectFactory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\TypeIds.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\TypeIds.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,24 +38,89 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TransformComponent.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\TransformComponent.cpp",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\TransformComponent.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\TransformComponent.cpp",
+              "RelativeToolTip": "Engine\\SAGE\\Src\\TransformComponent.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-21T22:32:03.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GameObjectFactory.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObjectFactory.cpp",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameObjectFactory.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObjectFactory.cpp",
+              "RelativeToolTip": "Engine\\SAGE\\Src\\GameObjectFactory.cpp",
+              "ViewState": "AgIAAMEAAAAAAAAAAAAuwNQAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-21T22:13:54.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FPSCameraControllerComponent.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\FPSCameraControllerComponent.cpp",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\FPSCameraControllerComponent.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\FPSCameraControllerComponent.cpp",
+              "RelativeToolTip": "Engine\\SAGE\\Src\\FPSCameraControllerComponent.cpp",
+              "ViewState": "AgIAABwAAAAAAAAAAAAnwCcAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-21T22:11:15.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FPSCameraControllerComponent.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\FPSCameraControllerComponent.h",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\FPSCameraControllerComponent.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\FPSCameraControllerComponent.h",
+              "RelativeToolTip": "Engine\\SAGE\\Inc\\FPSCameraControllerComponent.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-21T22:11:02.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TypeIds.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\TypeIds.h",
+              "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\TypeIds.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\TypeIds.h",
+              "RelativeToolTip": "Apps\\MyPhysicsDemo\\TypeIds.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-21T22:08:23.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "GameState.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
               "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\GameState.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
               "RelativeToolTip": "Apps\\MyPhysicsDemo\\GameState.cpp",
-              "ViewState": "AgIAABIAAAAAAAAAAAApwCoAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-05-21T21:42:21.826Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "GameState.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.h",
               "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\GameState.h",
@@ -48,19 +129,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-05-21T21:42:20.428Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "WinMain.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\WinMain.cpp",
-              "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\WinMain.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\WinMain.cpp",
-              "RelativeToolTip": "Apps\\MyPhysicsDemo\\WinMain.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-05-21T21:37:55.126Z",
               "EditorCaption": ""
             }
           ]

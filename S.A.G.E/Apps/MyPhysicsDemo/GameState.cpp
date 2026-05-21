@@ -1,5 +1,6 @@
 #include "GameState.h"
 
+
 using namespace SAGE;
 using namespace SAGE::Physics;
 using namespace SAGE::Graphics;
@@ -18,10 +19,11 @@ namespace
 void GameState::Initialize()
 {
 	mGameWorld.AddService<CameraService>();
-	mGameWorld.Initialize(100);
+	mGameWorld.AddService<RenderService>()->SetSampleFilter(Sampler::Filter::Point);
+	mGameWorld.Initialize(1000);
 
 	GameObjectFactory::SetMakeOverride(OnMake);
-	//mGameWorld.LoadLevel("../../Assets/Level/your_level.json");
+	mGameWorld.LoadLevel("../../Assets/Level/my_physics_demo_level.json");
 }
 
 void GameState::Terminate()
@@ -37,6 +39,8 @@ void GameState::Update(float deltaTime)
 void GameState::Render()
 {
 	mGameWorld.Render();
+
+	SimpleDraw::Render(mGameWorld.GetService<CameraService>()->GetCamera());
 }
 
 void GameState::DebugUI()

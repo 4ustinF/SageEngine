@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{424DD30D-5745-4F02-B54E-D9CE188E5E3E}|Apps\\ProjectVoxel\\ProjectVoxel.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\ProjectVoxel\\PlayerControllerComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{424DD30D-5745-4F02-B54E-D9CE188E5E3E}|Apps\\ProjectVoxel\\ProjectVoxel.vcxproj|solutionrelative:Apps\\ProjectVoxel\\PlayerControllerComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{424DD30D-5745-4F02-B54E-D9CE188E5E3E}|Apps\\ProjectVoxel\\ProjectVoxel.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\ProjectVoxel\\PlayerControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{424DD30D-5745-4F02-B54E-D9CE188E5E3E}|Apps\\ProjectVoxel\\ProjectVoxel.vcxproj|solutionrelative:Apps\\ProjectVoxel\\PlayerControllerComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{424DD30D-5745-4F02-B54E-D9CE188E5E3E}|Apps\\ProjectVoxel\\ProjectVoxel.vcxproj|D:\\GITHUBFILES\\SAGEENGINE\\S.A.G.E\\ENGINE\\SAGE\\INC\\COMPONENT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{424DD30D-5745-4F02-B54E-D9CE188E5E3E}|Apps\\ProjectVoxel\\ProjectVoxel.vcxproj|solutionrelative:ENGINE\\SAGE\\INC\\COMPONENT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GameObject.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObject.cpp",
-              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameObject.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObject.cpp",
-              "RelativeToolTip": "Engine\\SAGE\\Src\\GameObject.cpp",
-              "ViewState": "AgIAABUAAAAAAAAAAAAnwCYAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-05-21T16:43:03.909Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Component.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\Component.h",
-              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\Component.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\Component.h",
-              "RelativeToolTip": "Engine\\SAGE\\Inc\\Component.h",
-              "ViewState": "AgIAAA8AAAAAAAAAAAASwB4AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-05-21T16:42:03.781Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PlayerControllerComponent.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\ProjectVoxel\\PlayerControllerComponent.cpp",
-              "RelativeDocumentMoniker": "Apps\\ProjectVoxel\\PlayerControllerComponent.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\ProjectVoxel\\PlayerControllerComponent.cpp",
-              "RelativeToolTip": "Apps\\ProjectVoxel\\PlayerControllerComponent.cpp",
-              "ViewState": "AgIAAFgEAAAAAAAAAADgv5IEAAARAAAAAAAAAA==",
+              "Title": "GameState.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
+              "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\GameState.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
+              "RelativeToolTip": "Apps\\MyPhysicsDemo\\GameState.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-05-21T15:44:40.517Z",
+              "WhenOpened": "2026-05-21T21:42:21.826Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PlayerControllerComponent.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\ProjectVoxel\\PlayerControllerComponent.h",
-              "RelativeDocumentMoniker": "Apps\\ProjectVoxel\\PlayerControllerComponent.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\ProjectVoxel\\PlayerControllerComponent.h",
-              "RelativeToolTip": "Apps\\ProjectVoxel\\PlayerControllerComponent.h",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAAAIIAAAAmAAAAAAAAAA==",
+              "Title": "GameState.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.h",
+              "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\GameState.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.h",
+              "RelativeToolTip": "Apps\\MyPhysicsDemo\\GameState.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-05-21T15:44:39.739Z",
+              "WhenOpened": "2026-05-21T21:42:20.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WinMain.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\WinMain.cpp",
+              "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\WinMain.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\WinMain.cpp",
+              "RelativeToolTip": "Apps\\MyPhysicsDemo\\WinMain.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-21T21:37:55.126Z",
               "EditorCaption": ""
             }
           ]

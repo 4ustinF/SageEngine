@@ -1,1 +1,3 @@
-﻿  Input.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Input.lib
+﻿  Precompiled.cpp
+  InputSystem.cpp
+  Input.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Input.lib

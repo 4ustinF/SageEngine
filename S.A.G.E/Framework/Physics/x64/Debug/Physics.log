@@ -1,1 +1,4 @@
-﻿  Physics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Physics.lib
+﻿  Constraints.cpp
+  PhysicsWorld.cpp
+  Precompiled.cpp
+  Physics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Physics.lib

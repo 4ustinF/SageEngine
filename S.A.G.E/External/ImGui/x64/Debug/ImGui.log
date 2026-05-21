@@ -1,1 +1,10 @@
-﻿  ImGui.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ImGui.lib
+﻿  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  ImPlot.cpp
+  Generating Code...
+  ImGui.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ImGui.lib

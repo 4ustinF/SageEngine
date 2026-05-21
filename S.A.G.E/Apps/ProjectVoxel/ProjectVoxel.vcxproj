@@ -125,7 +125,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\GitHub\SageEngine\S.A.G.E\External\boost\stage\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\GitHubFiles\SageEngine\S.A.G.E\External\boost\stage\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

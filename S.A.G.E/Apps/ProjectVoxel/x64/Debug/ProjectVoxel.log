@@ -1,13 +1,7 @@
 ﻿  AnimalComponent.cpp
-  CameraControllerComponent.cpp
-  ChunkMeshCreator.cpp
-  CloudService.cpp
   GameState.cpp
-  MobService.cpp
   PlayerControllerComponent.cpp
   PlayerUIService.cpp
-  WinMain.cpp
-  WorldService.cpp
   Generating Code...
-     Creating library D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.lib and object D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exp
-  ProjectVoxel.vcxproj -> D:\GitHub\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exe
+     Creating library D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.lib and object D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exp
+  ProjectVoxel.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exe

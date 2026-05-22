@@ -20,6 +20,8 @@ void RBPhysicsWorld::Update(float deltaTime)
 	{
 		mTimer -= mSettings.timeStep;
 	}
+
+	Simulate(deltaTime);
 }
 
 void RBPhysicsWorld::DebugDraw() const
@@ -38,3 +40,21 @@ void RBPhysicsWorld::DebugUI()
 	ImGui::End();
 }
 
+void RBPhysicsWorld::AddObject(const RBPhysicsObject& object)
+{
+	mObjects.push_back(object);
+}
+
+void RBPhysicsWorld::Simulate(float deltaTime)
+{
+	// TODO: Remove
+	//for (int objectIndex = 0; objectIndex < mObjects.size(); ++objectIndex)
+	//{
+	//	mObjects[objectIndex].Integrate(deltaTime);
+	//}
+
+	for (RBPhysicsObject& object : mObjects)
+	{
+		object.Integrate(deltaTime);
+	}
+}

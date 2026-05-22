@@ -25,9 +25,12 @@ namespace SAGE::RBPhysics
 		void ShowDebugLines(bool showDebug) { mShowDebugLines = showDebug; }
 		bool IsPaused() { return mPause; }
 
+		void AddObject(const RBPhysicsObject& object);
+
 	private:
-		void AccumulateForces();
-		void Intergrate();
+		void Simulate(float deltaTime);
+
+		std::vector<RBPhysicsObject> mObjects;
 
 		Settings mSettings;
 		float mTimer = 0.0f;

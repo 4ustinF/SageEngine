@@ -158,6 +158,7 @@
     <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\RBPhysicsObject.cpp" />
     <ClCompile Include="Src\RBPhysicsWorld.cpp" />
     <ClCompile Include="Src\Precompiled.cpp" />
   </ItemGroup>

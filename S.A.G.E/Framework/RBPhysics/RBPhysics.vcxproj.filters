@@ -32,5 +32,8 @@
     <ClCompile Include="Src\RBPhysicsWorld.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="Src\RBPhysicsObject.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

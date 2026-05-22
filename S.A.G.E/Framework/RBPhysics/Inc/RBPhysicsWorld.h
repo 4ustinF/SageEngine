@@ -16,16 +16,27 @@ namespace SAGE::RBPhysics
 		};
 
 		void Initialize(Settings settings = {});
+		void Clear();
 
 		void Update(float deltaTime);
 		void DebugDraw() const;
 		void DebugUI();
 
-		void Pause(bool isPaused) { mPause = isPaused; }
 		void ShowDebugLines(bool showDebug) { mShowDebugLines = showDebug; }
-		bool IsPaused() { return mPause; }
 
 		void AddObject(const RBPhysicsObject& object);
+
+		// TODO: These are temp please remove.
+		const RBPhysicsObject& GetObject(int index) const
+		{
+			return mObjects[index];
+		}
+
+		// TODO: These are temp please remove.
+		int GetObjectsCount() const
+		{
+			return mObjects.size();
+		}
 
 	private:
 		void Simulate(float deltaTime);
@@ -33,8 +44,6 @@ namespace SAGE::RBPhysics
 		std::vector<RBPhysicsObject> mObjects;
 
 		Settings mSettings;
-		float mTimer = 0.0f;
-		bool mPause = false;
 		bool mShowDebugLines = true;
 		bool mFillDebugShapes = false;
 	};

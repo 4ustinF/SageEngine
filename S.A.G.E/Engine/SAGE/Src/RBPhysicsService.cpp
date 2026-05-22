@@ -13,11 +13,14 @@ void RBPhysicsService::Initialize()
 {
 	SetServiceName("RBPhysics Service");
 	mPhysicsWorld.Initialize();
+
+	mPhysicsObject.SetVelocity(Vector3(1.0f, 1.0f, 0.0f));
+	mPhysicsWorld.AddObject(mPhysicsObject);
 }
 
 void RBPhysicsService::Terminate()
 {
-
+	mPhysicsWorld.Clear();
 }
 
 void RBPhysicsService::Update(float deltaTime)

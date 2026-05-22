@@ -7,6 +7,7 @@
 #include <Input/Inc/Input.h>
 #include <Math/Inc/SAGEmath.h>
 #include <Physics/Inc/Physics.h>
+#include <RBPhysics/Inc/RBPhysics.h>
 #include "ML/Inc/ML.h"
 #include "AI/Inc/AI.h"
 

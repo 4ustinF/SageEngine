@@ -14,6 +14,7 @@ namespace SAGE::RBPhysics
 			float drag = 0.0f;
 			int iterations = 1;
 		};
+		RBPhysicsWorld() = default;
 
 		void Initialize(Settings settings = {});
 		void Clear();
@@ -27,7 +28,7 @@ namespace SAGE::RBPhysics
 		void AddObject(const RBPhysicsObject& object);
 
 		// TODO: These are temp please remove.
-		const RBPhysicsObject& GetObject(int index) const
+		const RBPhysicsObject& GetPhysicsObject(int index) const
 		{
 			return mObjects[index];
 		}

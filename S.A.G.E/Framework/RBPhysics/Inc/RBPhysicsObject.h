@@ -8,38 +8,39 @@ namespace SAGE::RBPhysics
 	class RBPhysicsObject
 	{
 	public:
-		RBPhysicsObject() = default;
-		RBPhysicsObject(Math::Vector3 position, Math::Vector3 velocity, float radius) :
-			mPosition(position),
+		RBPhysicsObject(Collider* collider, const Math::Vector3& velocity) :
+			mPosition(collider->GetCenter()),
+			mOldPosition(collider->GetCenter()),
 			mVelocity(velocity),
-			mRadius(radius),
-			mBoundingSphere(position, radius)
+			mCollider(collider)
 		{
 		}
+		RBPhysicsObject(const RBPhysicsObject& other);
+		void operator=(RBPhysicsObject other);
+		virtual ~RBPhysicsObject();
 
 		void Integrate(float deltaTime);
 
 		const Math::Vector3& GetPosition() const { return mPosition; }
 		const Math::Vector3& GetVelocity() const { return mVelocity; }
 
-		void SetPosition(const Math::Vector3& position) { mPosition = position; }
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
-		void SetRadius(float radius) { mRadius = radius; }
 
-		const Collider& GetCollider() // TODO: 
+		const Collider& GetCollider() // TODO: This is temp.
 		{
-			mBoundingSphere = BoundingSphere(mPosition, mRadius);
-			return mBoundingSphere;
+			Math::Vector3 translation = mPosition - mOldPosition;
+			mOldPosition = mPosition;
+			mCollider->Transform(translation);
+
+			return *mCollider;
 		}
 
 	private:
 		Math::Vector3 mPosition = Math::Vector3::Zero;
+		Math::Vector3 mOldPosition = Math::Vector3::Zero;
 		Math::Vector3 mVelocity = Math::Vector3::Zero;
 
-		// TODO: Remove later
-		float mRadius = 0.0f;
+		Collider* mCollider;
 
-		// TODO: This is temp.
-		BoundingSphere mBoundingSphere;
 	};
 }

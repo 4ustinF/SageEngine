@@ -74,6 +74,7 @@ namespace SAGE::Math
 	inline float Distance(const Vector3& a, const Vector3& b)		{ return sqrt(DistanceSqr(a, b)); }
 	inline Vector3 Normalize(const Vector3& v)						{ return v / Magnitude(v); }
 	inline Vector3 Cross(const Vector3& a, const Vector3& b)		{ return Vector3((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x)); }
+	inline Vector3 Reflect(const Vector3& a, const Vector3& b)		{ return a - (b * (2.0f * Dot(a, b))); }
 #pragma endregion
 
 	//Matrix3

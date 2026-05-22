@@ -8,16 +8,17 @@ namespace SAGE::RBPhysics
 	{
 	public:
 		IntersectData() = default;
-		IntersectData(bool doesIntersect, float distance)
-			: mDoesIntersect(doesIntersect), mDistance(distance)
+		IntersectData(bool doesIntersect, const Math::Vector3& direction)
+			: mDoesIntersect(doesIntersect), mDirection(direction)
 		{
 		}
 
 		bool GetDoesIntersect() const { return mDoesIntersect; }
-		float GetDistance() const { return mDistance; }
+		float GetDistance() const { return Math::Magnitude(mDirection); }
+		const Math::Vector3& GetDirection() const { return mDirection; }
 
 	private:
 		bool mDoesIntersect = false;
-		float mDistance = 0.0f;
+		Math::Vector3 mDirection = Math::Vector3::Zero;
 	};
 }

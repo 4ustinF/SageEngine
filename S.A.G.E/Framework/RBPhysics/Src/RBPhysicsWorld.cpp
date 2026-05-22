@@ -28,13 +28,16 @@ void RBPhysicsWorld::DebugDraw()
 {
 	//if (!mShowDebugLines) { return; }
 
+	bool isRed = true;
 	if (mFillDebugShapes)
 	{
 		for (RBPhysicsObject& object : mObjects)
 		{
 			auto BP = (BoundingSphere&)object.GetCollider();
 			const float radius = BP.GetRadius();
-			SimpleDraw::AddFilledSphere(object.GetPosition(), 16, 16, radius, Colors::Red);
+			const Color color = isRed ? Colors::Red : Colors::Blue;
+			isRed = !isRed;
+			SimpleDraw::AddFilledSphere(object.GetPosition(), 16, 16, radius, color);
 		}
 	}
 	else
@@ -43,7 +46,9 @@ void RBPhysicsWorld::DebugDraw()
 		{
 			auto BP = (BoundingSphere&)object.GetCollider();
 			const float radius = BP.GetRadius();
-			SimpleDraw::AddSphere(object.GetPosition(), 16, 16, radius, Colors::Red);
+			const Color color = isRed ? Colors::Red : Colors::Blue;
+			isRed = !isRed;
+			SimpleDraw::AddSphere(object.GetPosition(), 16, 16, radius, color);
 		}
 	}
 }
@@ -83,8 +88,12 @@ void RBPhysicsWorld::HandleCollisions()
 
 			if (intersectData.GetDoesIntersect())
 			{
-				primaryObject.SetVelocity(-primaryObject.GetVelocity());
-				secondaryObject.SetVelocity(-secondaryObject.GetVelocity());
+				const Vector3 direction = Normalize(intersectData.GetDirection());
+				const Vector3 primVel = primaryObject.GetVelocity();
+				const Vector3 otherDirection = Reflect(direction, Normalize(primVel));
+
+				primaryObject.SetVelocity(Reflect(primVel, otherDirection));
+				secondaryObject.SetVelocity(Reflect(secondaryObject.GetVelocity(), direction));
 			}
 		}
 	}

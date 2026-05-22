@@ -16,5 +16,5 @@ IntersectData Collider::Intersect(const Collider& other) const
 		return self->IntersectBoundingSphere((BoundingSphere&)other); // TODO: Better cast?
 	}
 
-	return IntersectData(false, 0); // TODO: Should never reach this add error logs if we do.
+	return IntersectData(false, Vector3::Zero); // TODO: Should never reach this add error logs if we do.
 }

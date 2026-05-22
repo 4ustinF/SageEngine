@@ -152,10 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Common.h" />
+    <ClInclude Include="Inc\RBPhysicsWorld.h" />
     <ClInclude Include="Inc\RBPhysics.h" />
+    <ClInclude Include="Inc\RBPhysicsObject.h" />
     <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\RBPhysicsWorld.cpp" />
     <ClCompile Include="Src\Precompiled.cpp" />
   </ItemGroup>
   <ItemGroup>

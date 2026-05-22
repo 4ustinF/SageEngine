@@ -1,12 +1,31 @@
 ﻿  GameState.cpp
-D:\AzureDevOps\S.A.G.E\Framework\Math\Inc\SAGEMath.h(43,49): warning C4244: 'return': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-D:\AzureDevOps\S.A.G.E\Engine\SAGE\Inc\ParticleComponent.h(36): message : see reference to function template instantiation 'T SAGE::Math::Lerp<int>(T,T,float)' being compiled
-          with
-          [
-              T=int
-          ]
-  20_HelloWaveFunctionCollapse.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\20_HelloWaveFunctionCollapse.exe
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../VGP336/20_HelloWaveFunctionCollapse/GameState.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../VGP336/20_HelloWaveFunctionCollapse/GameState.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../VGP336/20_HelloWaveFunctionCollapse/GameState.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../VGP336/20_HelloWaveFunctionCollapse/GameState.cpp')
+  
+  WinMain.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../VGP336/20_HelloWaveFunctionCollapse/WinMain.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../VGP336/20_HelloWaveFunctionCollapse/WinMain.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../VGP336/20_HelloWaveFunctionCollapse/WinMain.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../VGP336/20_HelloWaveFunctionCollapse/WinMain.cpp')
+  
+  Generating Code...

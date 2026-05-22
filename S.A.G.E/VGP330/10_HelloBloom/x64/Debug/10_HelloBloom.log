@@ -1,5 +1,32 @@
 ﻿  GameState.cpp
-D:\AzureDevOps\S.A.G.E\VGP330\10_HelloBloom\GameState.cpp(31,41): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file 'GameState.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file 'GameState.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file 'GameState.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'GameState.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\10_HelloBloom\GameState.cpp(31,41): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   WinMain.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../VGP330/10_HelloBloom/WinMain.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../VGP330/10_HelloBloom/WinMain.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../VGP330/10_HelloBloom/WinMain.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../VGP330/10_HelloBloom/WinMain.cpp')
+  
   Generating Code...
-  10_HelloBloom.vcxproj -> D:\AzureDevOps\S.A.G.E\x64\Debug\10_HelloBloom.exe

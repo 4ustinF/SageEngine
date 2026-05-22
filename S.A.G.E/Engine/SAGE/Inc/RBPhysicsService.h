@@ -14,13 +14,9 @@ namespace SAGE
 		void Update(float deltaTime) override;
 		void DebugUI() override;
 
-		void SetGravity(float gravity);
-		void SetMaxSubSteps(int steps) { mMaxSubSteps = steps; }
-
 	private:
 
+		SAGE::RBPhysics::RBPhysicsWorld mPhysicsWorld;
 		bool mRenderDebugUI = false;
-		float mGravity = -9.81f;
-		int mMaxSubSteps = 1;
 	};
 }

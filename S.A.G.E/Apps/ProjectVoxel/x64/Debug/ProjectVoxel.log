@@ -1,7 +1,151 @@
 ﻿  AnimalComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/AnimalComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/AnimalComponent.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/AnimalComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/AnimalComponent.cpp')
+  
+  CameraControllerComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/CameraControllerComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/CameraControllerComponent.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/CameraControllerComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/CameraControllerComponent.cpp')
+  
+  ChunkMeshCreator.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/ChunkMeshCreator.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/ChunkMeshCreator.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/ChunkMeshCreator.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/ChunkMeshCreator.cpp')
+  
+  CloudService.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/CloudService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/CloudService.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/CloudService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/CloudService.cpp')
+  
   GameState.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/GameState.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/GameState.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/GameState.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/GameState.cpp')
+  
+  MobService.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/MobService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/MobService.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/MobService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/MobService.cpp')
+  
   PlayerControllerComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/PlayerControllerComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/PlayerControllerComponent.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/PlayerControllerComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/PlayerControllerComponent.cpp')
+  
   PlayerUIService.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/PlayerUIService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/PlayerUIService.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/PlayerUIService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/PlayerUIService.cpp')
+  
+  WinMain.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/WinMain.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/WinMain.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/WinMain.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/WinMain.cpp')
+  
+  WorldService.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/ProjectVoxel/WorldService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/ProjectVoxel/WorldService.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/ProjectVoxel/WorldService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/ProjectVoxel/WorldService.cpp')
+  
   Generating Code...
-     Creating library D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.lib and object D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exp
-  ProjectVoxel.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exe

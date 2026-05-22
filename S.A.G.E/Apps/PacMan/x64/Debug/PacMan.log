@@ -1,3 +1,122 @@
 ﻿  GameManagerService.cpp
-     Creating library D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\PacMan.lib and object D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\PacMan.exp
-  PacMan.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\PacMan.exe
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/PacMan/GameManagerService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/PacMan/GameManagerService.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/PacMan/GameManagerService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/PacMan/GameManagerService.cpp')
+  
+  GameState.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../PacMan/GameState.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../PacMan/GameState.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../PacMan/GameState.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../PacMan/GameState.cpp')
+  
+  GhostAnimatorComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/PacMan/GhostAnimatorComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/PacMan/GhostAnimatorComponent.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/PacMan/GhostAnimatorComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/PacMan/GhostAnimatorComponent.cpp')
+  
+  GhostControllerComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/PacMan/GhostControllerComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/PacMan/GhostControllerComponent.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/PacMan/GhostControllerComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/PacMan/GhostControllerComponent.cpp')
+  
+  PlayerAnimatorComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/PacMan/PlayerAnimatorComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/PacMan/PlayerAnimatorComponent.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/PacMan/PlayerAnimatorComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/PacMan/PlayerAnimatorComponent.cpp')
+  
+  PlayerControllerComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/PacMan/PlayerControllerComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/PacMan/PlayerControllerComponent.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/PacMan/PlayerControllerComponent.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/PacMan/PlayerControllerComponent.cpp')
+  
+  TileMapService.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/PacMan/TileMapService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/PacMan/TileMapService.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/PacMan/TileMapService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/PacMan/TileMapService.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Apps\PacMan\TileMapService.cpp(372,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  WinMain.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
+  (compiling source file '../../Apps/PacMan/WinMain.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
+  (compiling source file '../../Apps/PacMan/WinMain.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
+      see declaration of 'SAGE'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
+  (compiling source file '../../Apps/PacMan/WinMain.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file '../../Apps/PacMan/WinMain.cpp')
+  
+  Generating Code...

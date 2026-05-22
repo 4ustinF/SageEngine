@@ -26,7 +26,7 @@ namespace SAGE::RBPhysics
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
 		void SetRadius(float radius) { mRadius = radius; }
 
-		Collider GetBoundingSphere() // TODO: 
+		const Collider& GetCollider() // TODO: 
 		{
 			mBoundingSphere = BoundingSphere(mPosition, mRadius);
 			return mBoundingSphere;

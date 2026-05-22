@@ -20,8 +20,8 @@ namespace SAGE
 		// For now lets create a physics object here and just do a debug draw of its location.
 		// TODO: Remove
 		// TODO: When this is in the comp it should be a ptr
-		SAGE::RBPhysics::RBPhysicsObject mPhysicsObject1;
-		SAGE::RBPhysics::RBPhysicsObject mPhysicsObject2;
+		SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject1;
+		SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject2;
 
 	private:
 

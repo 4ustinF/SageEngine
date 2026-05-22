@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Inc\\RBPhysicsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{516192EB-788A-4FE7-B2B7-2EF9AC036B12}|External\\Bullet\\Bullet.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\External\\Bullet\\BulletCollision\\CollisionShapes\\btCollisionShape.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{516192EB-788A-4FE7-B2B7-2EF9AC036B12}|External\\Bullet\\Bullet.vcxproj|solutionrelative:External\\Bullet\\BulletCollision\\CollisionShapes\\btCollisionShape.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Inc\\RBPhysicsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\BoundingSphere.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Inc\\BoundingSphere.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysics.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Inc\\RBPhysics.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RBPhysicsService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\RBPhysicsService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysics.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Inc\\RBPhysics.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RBPhysicsService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -38,24 +38,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "btCollisionShape.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\External\\Bullet\\BulletCollision\\CollisionShapes\\btCollisionShape.cpp",
-              "RelativeDocumentMoniker": "External\\Bullet\\BulletCollision\\CollisionShapes\\btCollisionShape.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\External\\Bullet\\BulletCollision\\CollisionShapes\\btCollisionShape.cpp",
-              "RelativeToolTip": "External\\Bullet\\BulletCollision\\CollisionShapes\\btCollisionShape.cpp",
-              "ViewState": "AgIAACcAAAAAAAAAAAAEwDMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-05-22T07:25:03.939Z",
+              "Title": "BoundingSphere.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\BoundingSphere.h",
+              "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\BoundingSphere.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\BoundingSphere.h",
+              "RelativeToolTip": "Framework\\RBPhysics\\Inc\\BoundingSphere.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-22T07:30:37.096Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "RBPhysics.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysics.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\RBPhysics.h",
@@ -68,52 +68,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "RBPhysicsObject.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
               "RelativeToolTip": "Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
-              "ViewState": "AgIAABYAAAAAAAAAAAAEwB8AAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAiwBwAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-05-22T02:39:31.771Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "RBPhysicsWorld.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
               "RelativeToolTip": "Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAEwE8AAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAADgv1IAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-05-22T02:54:44.745Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "RBPhysicsWorld.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h",
               "RelativeToolTip": "Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAUwCMAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAADwvyMAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-05-22T02:28:36.002Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "RBPhysicsService.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RBPhysicsService.cpp",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\RBPhysicsService.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RBPhysicsService.cpp",
               "RelativeToolTip": "Engine\\SAGE\\Src\\RBPhysicsService.cpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAADgvxgAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-05-22T01:45:18.48Z",
               "EditorCaption": ""
@@ -126,7 +126,7 @@
               "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\RBPhysicsService.h",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RBPhysicsService.h",
               "RelativeToolTip": "Engine\\SAGE\\Inc\\RBPhysicsService.h",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAjwB0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-05-22T01:44:55.115Z",
               "EditorCaption": ""

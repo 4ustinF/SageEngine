@@ -16,17 +16,13 @@ void RBPhysicsService::Initialize()
 	mPhysicsWorld.Initialize();
 
 	// Set up object first
-	mPhysicsObject1.SetPosition(Vector3(-5.0f, 0.0f, 0.0f));
-	mPhysicsObject1.SetVelocity(Vector3(1.0f, 0.0f, 0.0f));
-	mPhysicsObject1.SetRadius(1.0f);
+	mPhysicsObject1 = new RBPhysicsObject(Vector3(-5.0f, 0.0f, 0.0f), Vector3(1.0f, 0.0f, 0.0f), 1.0f);
 
 	// Set up second object
-	mPhysicsObject2.SetPosition(Vector3(5.0f, 0.0f, 0.0f));
-	mPhysicsObject2.SetVelocity(Vector3(-1.0f, 0.0f, 0.0f));
-	mPhysicsObject2.SetRadius(2.0f);
+	mPhysicsObject2 = new RBPhysicsObject(Vector3(5.0f, 0.0f, 0.0f), Vector3(-1.0f, 0.0f, 0.0f), 2.0f);
 
-	mPhysicsWorld.AddObject(mPhysicsObject1);
-	mPhysicsWorld.AddObject(mPhysicsObject2);
+	mPhysicsWorld.AddObject(*mPhysicsObject1);
+	mPhysicsWorld.AddObject(*mPhysicsObject2);
 }
 
 void RBPhysicsService::Terminate()

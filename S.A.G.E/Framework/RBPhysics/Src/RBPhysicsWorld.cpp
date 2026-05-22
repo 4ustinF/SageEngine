@@ -32,7 +32,8 @@ void RBPhysicsWorld::DebugDraw()
 	{
 		for (RBPhysicsObject& object : mObjects)
 		{
-			const float radius = 1.0f;
+			auto BP = (BoundingSphere&)object.GetCollider();
+			const float radius = BP.GetRadius();
 			SimpleDraw::AddFilledSphere(object.GetPosition(), 16, 16, radius, Colors::Red);
 		}
 	}
@@ -40,7 +41,8 @@ void RBPhysicsWorld::DebugDraw()
 	{
 		for (RBPhysicsObject& object : mObjects)
 		{
-			const float radius = 1.0f;
+			auto BP = (BoundingSphere&)object.GetCollider();
+			const float radius = BP.GetRadius();
 			SimpleDraw::AddSphere(object.GetPosition(), 16, 16, radius, Colors::Red);
 		}
 	}
@@ -77,7 +79,7 @@ void RBPhysicsWorld::HandleCollisions()
 		for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
 		{
 			RBPhysicsObject& secondaryObject = mObjects[secondaryIndex];
-			IntersectData intersectData = primaryObject.GetBoundingSphere().Intersect(secondaryObject.GetBoundingSphere());
+			IntersectData intersectData = primaryObject.GetCollider().Intersect(secondaryObject.GetCollider());
 
 			if (intersectData.GetDoesIntersect())
 			{

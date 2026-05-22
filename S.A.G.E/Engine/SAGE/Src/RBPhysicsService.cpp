@@ -16,13 +16,13 @@ void RBPhysicsService::Initialize()
 	mPhysicsWorld.Initialize();
 
 	// Set up object first
-	mPhysicsObject1.SetPosition(Vector3(0.0f, 0.0f, 0.0f));
-	mPhysicsObject1.SetVelocity(Vector3(0.0f, 0.0f, 1.0f));
+	mPhysicsObject1.SetPosition(Vector3(-5.0f, 0.0f, 0.0f));
+	mPhysicsObject1.SetVelocity(Vector3(1.0f, 0.0f, 0.0f));
 	mPhysicsObject1.SetRadius(1.0f);
 
 	// Set up second object
-	mPhysicsObject2.SetPosition(Vector3(0.0f, 0.0f, 10.0f));
-	mPhysicsObject2.SetVelocity(Vector3(0.0f, 0.0f, -1.0f));
+	mPhysicsObject2.SetPosition(Vector3(5.0f, 0.0f, 0.0f));
+	mPhysicsObject2.SetVelocity(Vector3(-1.0f, 0.0f, 0.0f));
 	mPhysicsObject2.SetRadius(2.0f);
 
 	mPhysicsWorld.AddObject(mPhysicsObject1);
@@ -37,11 +37,12 @@ void RBPhysicsService::Terminate()
 void RBPhysicsService::Update(float deltaTime)
 {
 	mPhysicsWorld.Update(deltaTime);
+	mPhysicsWorld.DebugDraw(); // TODO: Move out.
 }
 
 void RBPhysicsService::DebugUI()
 {
 	ImGui::Checkbox("Render Physics##RBPhysics", &mRenderDebugUI);
-	mPhysicsWorld.DebugDraw();
+	//mPhysicsWorld.DebugDraw();
 	mPhysicsWorld.DebugUI();
 }

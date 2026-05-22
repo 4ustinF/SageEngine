@@ -35,11 +35,12 @@ namespace SAGE::RBPhysics
 		// TODO: These are temp please remove.
 		int GetObjectsCount() const
 		{
-			return mObjects.size();
+			return static_cast<int>(mObjects.size());
 		}
 
 	private:
 		void Simulate(float deltaTime);
+		void HandleCollisions();
 
 		std::vector<RBPhysicsObject> mObjects;
 

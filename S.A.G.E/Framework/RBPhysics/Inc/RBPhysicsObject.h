@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common.h"
+#include "BoundingSphere.h" // TODO: Move out.
 
 namespace SAGE::RBPhysics
 {
@@ -22,13 +23,9 @@ namespace SAGE::RBPhysics
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
 		void SetRadius(float radius) { mRadius = radius; }
 
-		Math::Sphere GetBoundingSphere() // TODO: 
+		BoundingSphere GetBoundingSphere() // TODO: 
 		{
-			Math::Sphere sphere;
-			sphere.center = mPosition;
-			sphere.radius = mRadius;
-
-			return sphere;
+			return BoundingSphere(mPosition, mRadius);
 		}
 
 	private:

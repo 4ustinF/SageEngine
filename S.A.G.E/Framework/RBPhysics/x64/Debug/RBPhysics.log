@@ -1,6 +1,2 @@
-﻿  RBPhysicsObject.cpp
-  RBPhysicsWorld.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsWorld.h(38,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'Src/RBPhysicsWorld.cpp')
-  
+﻿  RBPhysicsWorld.cpp
   RBPhysics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\RBPhysics.lib

@@ -1,6 +1,8 @@
 #include "Precompiled.h"
 #include "RBPhysicsWorld.h"
 
+#include "IntersectData.h"
+
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
@@ -19,16 +21,28 @@ void RBPhysicsWorld::Clear()
 void RBPhysicsWorld::Update(float deltaTime)
 {
 	Simulate(deltaTime);
+	HandleCollisions();
 }
 
 void RBPhysicsWorld::DebugDraw()
 {
 	//if (!mShowDebugLines) { return; }
 
-	for (RBPhysicsObject& object : mObjects)
+	if (mFillDebugShapes)
 	{
-		float Radius = object.GetBoundingSphere().radius;
-		SimpleDraw::AddSphere(object.GetPosition(), 16, 16, Radius, Colors::Red);
+		for (RBPhysicsObject& object : mObjects)
+		{
+			const float Radius = object.GetBoundingSphere().GetRadius();
+			SimpleDraw::AddFilledSphere(object.GetPosition(), 16, 16, Radius, Colors::Red);
+		}
+	}
+	else
+	{
+		for (RBPhysicsObject& object : mObjects)
+		{
+			const float Radius = object.GetBoundingSphere().GetRadius();
+			SimpleDraw::AddSphere(object.GetPosition(), 16, 16, Radius, Colors::Red);
+		}
 	}
 }
 
@@ -48,14 +62,28 @@ void RBPhysicsWorld::AddObject(const RBPhysicsObject& object)
 
 void RBPhysicsWorld::Simulate(float deltaTime)
 {
-	// TODO: Remove
-	//for (int objectIndex = 0; objectIndex < mObjects.size(); ++objectIndex)
-	//{
-	//	mObjects[objectIndex].Integrate(deltaTime);
-	//}
-
 	for (RBPhysicsObject& object : mObjects)
 	{
 		object.Integrate(deltaTime);
+	}
+}
+
+void RBPhysicsWorld::HandleCollisions()
+{
+	const int objectsCount = GetObjectsCount();
+	for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
+	{
+		RBPhysicsObject& primaryObject = mObjects[primaryIndex];
+		for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
+		{
+			RBPhysicsObject& secondaryObject = mObjects[secondaryIndex];
+			IntersectData intersectData = primaryObject.GetBoundingSphere().IntersectBoundingSphere(secondaryObject.GetBoundingSphere());
+
+			if (intersectData.GetDoesIntersect())
+			{
+				primaryObject.SetVelocity(-primaryObject.GetVelocity());
+				secondaryObject.SetVelocity(-secondaryObject.GetVelocity());
+			}
+		}
 	}
 }

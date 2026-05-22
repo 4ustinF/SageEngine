@@ -21,13 +21,14 @@ void RBPhysicsWorld::Update(float deltaTime)
 	Simulate(deltaTime);
 }
 
-void RBPhysicsWorld::DebugDraw() const
+void RBPhysicsWorld::DebugDraw()
 {
 	//if (!mShowDebugLines) { return; }
 
-	for (const RBPhysicsObject& object : mObjects)
+	for (RBPhysicsObject& object : mObjects)
 	{
-		SimpleDraw::AddSphere(object.GetPosition(), 16, 16, 1.0f, Colors::Red);
+		float Radius = object.GetBoundingSphere().radius;
+		SimpleDraw::AddSphere(object.GetPosition(), 16, 16, Radius, Colors::Red);
 	}
 }
 

@@ -12,10 +12,21 @@ using namespace SAGE::RBPhysics;
 void RBPhysicsService::Initialize()
 {
 	SetServiceName("RBPhysics Service");
+	
 	mPhysicsWorld.Initialize();
 
-	mPhysicsObject.SetVelocity(Vector3(1.0f, 1.0f, 0.0f));
-	mPhysicsWorld.AddObject(mPhysicsObject);
+	// Set up object first
+	mPhysicsObject1.SetPosition(Vector3(0.0f, 0.0f, 0.0f));
+	mPhysicsObject1.SetVelocity(Vector3(0.0f, 0.0f, 1.0f));
+	mPhysicsObject1.SetRadius(1.0f);
+
+	// Set up second object
+	mPhysicsObject2.SetPosition(Vector3(0.0f, 0.0f, 10.0f));
+	mPhysicsObject2.SetVelocity(Vector3(0.0f, 0.0f, -1.0f));
+	mPhysicsObject2.SetRadius(2.0f);
+
+	mPhysicsWorld.AddObject(mPhysicsObject1);
+	mPhysicsWorld.AddObject(mPhysicsObject2);
 }
 
 void RBPhysicsService::Terminate()

@@ -19,7 +19,7 @@ namespace SAGE::RBPhysics
 		void Clear();
 
 		void Update(float deltaTime);
-		void DebugDraw() const;
+		void DebugDraw();
 		void DebugUI();
 
 		void ShowDebugLines(bool showDebug) { mShowDebugLines = showDebug; }

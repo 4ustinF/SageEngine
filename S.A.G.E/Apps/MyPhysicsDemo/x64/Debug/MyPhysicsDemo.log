@@ -7,4 +7,5 @@ D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsWorld.h(38,24
   (compiling source file 'WinMain.cpp')
   
   Generating Code...
+     Creating library D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\MyPhysicsDemo.lib and object D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\MyPhysicsDemo.exp
   MyPhysicsDemo.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\MyPhysicsDemo.exe

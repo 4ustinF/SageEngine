@@ -1,4 +1,24 @@
 ﻿  GameState.cpp
-  WinMain.cpp
-  Generating Code...
-  MyPhysicsDemo.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\MyPhysicsDemo.exe
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(3465,35): error C2280: 'SAGE::RBPhysicsService::RBPhysicsService(void)': attempting to reference a deleted function
+  (compiling source file 'GameState.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(30,2):
+      compiler has generated 'SAGE::RBPhysicsService::RBPhysicsService' here
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(30,2):
+      'SAGE::RBPhysicsService::RBPhysicsService(void)': function was implicitly deleted because a data member invokes a deleted or inaccessible function 'SAGE::RBPhysics::RBPhysicsObject::RBPhysicsObject(void)'
+      D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(11,3):
+      'SAGE::RBPhysics::RBPhysicsObject::RBPhysicsObject(void)': function was implicitly deleted because a data member invokes a deleted or inaccessible function 'SAGE::RBPhysics::BoundingSphere::BoundingSphere(void)'
+      D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\BoundingSphere.h(11,3):
+      'SAGE::RBPhysics::BoundingSphere::BoundingSphere(void)': function was implicitly deleted because a base class 'SAGE::RBPhysics::Collider' has either no appropriate default constructor or overload resolution was ambiguous
+      D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\Collider.h(9,8):
+      see declaration of 'SAGE::RBPhysics::Collider'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(3465,35):
+      the template instantiation context (the oldest one first) is
+          D:\GitHubFiles\SageEngine\S.A.G.E\Apps\MyPhysicsDemo\GameState.cpp(23,12):
+          see reference to function template instantiation 'ServiceType *SAGE::GameWorld::AddService<SAGE::RBPhysicsService>(void)' being compiled
+          with
+          [
+              ServiceType=SAGE::RBPhysicsService
+          ]
+          D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\GameWorld.h(22,51):
+          see reference to function template instantiation 'std::unique_ptr<SAGE::RBPhysicsService,std::default_delete<SAGE::RBPhysicsService>> std::make_unique<SAGE::RBPhysicsService,,0>(void)' being compiled
+  

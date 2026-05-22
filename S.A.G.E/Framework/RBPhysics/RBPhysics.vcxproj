@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\BoundingSphere.h" />
+    <ClInclude Include="Inc\Collider.h" />
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\IntersectData.h" />
     <ClInclude Include="Inc\RBPhysicsWorld.h" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\BoundingSphere.cpp" />
+    <ClCompile Include="Src\Collider.cpp" />
     <ClCompile Include="Src\RBPhysicsObject.cpp" />
     <ClCompile Include="Src\RBPhysicsWorld.cpp" />
     <ClCompile Include="Src\Precompiled.cpp" />

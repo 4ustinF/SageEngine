@@ -1,17 +1,16 @@
 #pragma once
 
 #include "Common.h"
+#include "Collider.h"
 
 namespace SAGE::RBPhysics
 {
-	class IntersectData;
-
-	class BoundingSphere
+	class BoundingSphere : public Collider
 	{
 	public:
 		BoundingSphere() = default;
 		BoundingSphere(Math::Vector3 center, float radius)
-			: mCenter(center), mRadius(radius)
+			: Collider(Collider::TYPE_SPHERE), mCenter(center), mRadius(radius)
 		{
 		}
 

@@ -9,8 +9,11 @@ namespace SAGE::RBPhysics
 	{
 	public:
 		RBPhysicsObject() = default;
-		RBPhysicsObject(Math::Vector3 position, Math::Vector3 velocity, float radius)
-			: mPosition(position), mVelocity(velocity), mRadius(radius)
+		RBPhysicsObject(Math::Vector3 position, Math::Vector3 velocity, float radius) :
+			mPosition(position),
+			mVelocity(velocity),
+			mRadius(radius),
+			mBoundingSphere(position, radius)
 		{
 		}
 
@@ -23,9 +26,10 @@ namespace SAGE::RBPhysics
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
 		void SetRadius(float radius) { mRadius = radius; }
 
-		BoundingSphere GetBoundingSphere() // TODO: 
+		Collider GetBoundingSphere() // TODO: 
 		{
-			return BoundingSphere(mPosition, mRadius);
+			mBoundingSphere = BoundingSphere(mPosition, mRadius);
+			return mBoundingSphere;
 		}
 
 	private:
@@ -34,5 +38,8 @@ namespace SAGE::RBPhysics
 
 		// TODO: Remove later
 		float mRadius = 0.0f;
+
+		// TODO: This is temp.
+		BoundingSphere mBoundingSphere;
 	};
 }

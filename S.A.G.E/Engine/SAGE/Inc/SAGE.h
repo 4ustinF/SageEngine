@@ -25,6 +25,7 @@
 #include "PostProcessingService.h"
 #include "ParticleService.h"
 #include "PhysicsService.h"
+#include "RBPhysicsService.h"
 #include "RenderService.h"
 #include "TerrainService.h"
 #include "UIService.h"

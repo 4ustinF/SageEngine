@@ -20,6 +20,7 @@ void GameState::Initialize()
 {
 	mGameWorld.AddService<CameraService>();
 	mGameWorld.AddService<RenderService>()->SetSampleFilter(Sampler::Filter::Point);
+	mGameWorld.AddService<RBPhysicsService>();
 	mGameWorld.Initialize(1000);
 
 	GameObjectFactory::SetMakeOverride(OnMake);

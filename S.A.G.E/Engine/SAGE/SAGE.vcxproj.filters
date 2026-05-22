@@ -141,6 +141,9 @@
     <ClInclude Include="Inc\PhysicsDebugDraw.h">
       <Filter>Inc\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\RBPhysicsService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\App.cpp">
@@ -223,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="Src\PhysicsDebugDraw.cpp">
       <Filter>Src\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RBPhysicsService.cpp">
+      <Filter>Src\Services</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

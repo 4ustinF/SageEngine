@@ -25,6 +25,7 @@ namespace SAGE
 		Camera,
 		Particles,
 		BPhysics,
+		RBPhysics,
 		Physics,
 		PostProcessing,
 		Render,

@@ -3,28 +3,44 @@
   "WorkspaceRootPath": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RBPhysicsService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\RBPhysicsService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Inc\\RBPhysicsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RenderService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\RenderService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RBPhysicsService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\RBPhysicsService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RBPhysicsService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\RBPhysicsService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RenderService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\RenderService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D9D76C5-D8B2-4038-8502-1EE8F52A7A2F}|VGP330\\13_HelloCrossHatch\\13_HelloCrossHatch.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\VGP330\\13_HelloCrossHatch\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8D9D76C5-D8B2-4038-8502-1EE8F52A7A2F}|VGP330\\13_HelloCrossHatch\\13_HelloCrossHatch.vcxproj|solutionrelative:VGP330\\13_HelloCrossHatch\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Inc\\RBPhysicsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RBPhysicsService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\RBPhysicsService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,50 +50,102 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RenderService.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RenderService.cpp",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\RenderService.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RenderService.cpp",
+              "RelativeToolTip": "Engine\\SAGE\\Src\\RenderService.cpp",
+              "ViewState": "AgIAALsAAAAAAAAAAAAAAHQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-23T00:11:08.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "RenderService.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RenderService.h",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\RenderService.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RenderService.h",
+              "RelativeToolTip": "Engine\\SAGE\\Inc\\RenderService.h",
+              "ViewState": "AgIAACsAAAAAAAAAAAAowDkAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-23T00:11:24.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GameState.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\VGP330\\13_HelloCrossHatch\\GameState.cpp",
+              "RelativeDocumentMoniker": "VGP330\\13_HelloCrossHatch\\GameState.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\VGP330\\13_HelloCrossHatch\\GameState.cpp",
+              "RelativeToolTip": "VGP330\\13_HelloCrossHatch\\GameState.cpp",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAAAGUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-23T00:05:02.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GameState.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
+              "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\GameState.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
+              "RelativeToolTip": "Apps\\MyPhysicsDemo\\GameState.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAUwBoAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-23T00:01:10.531Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "RBPhysicsObject.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp",
               "RelativeToolTip": "Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp",
-              "ViewState": "AgIAAAUAAAAAAAAAAAASwBoAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAtwCEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-05-22T18:15:42.685Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "RBPhysicsObject.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
               "RelativeToolTip": "Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAtwBgAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAowCYAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-05-22T18:16:01.058Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "RBPhysicsWorld.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
               "RelativeToolTip": "Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAkwF0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAkwEkAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-05-22T02:54:44.745Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "RBPhysicsWorld.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h",
@@ -90,26 +158,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "RBPhysicsService.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RBPhysicsService.cpp",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\RBPhysicsService.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RBPhysicsService.cpp",
               "RelativeToolTip": "Engine\\SAGE\\Src\\RBPhysicsService.cpp",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-05-22T01:45:18.48Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "RBPhysicsService.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RBPhysicsService.h",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\RBPhysicsService.h",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RBPhysicsService.h",
               "RelativeToolTip": "Engine\\SAGE\\Inc\\RBPhysicsService.h",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABYAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-05-22T01:44:55.115Z",
               "EditorCaption": ""

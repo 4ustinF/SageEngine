@@ -2,6 +2,7 @@
 #include "RBPhysicsObject.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::RBPhysics;
 
 RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
@@ -14,8 +15,15 @@ RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
 	mCollider->AddReference();
 	mMass = 1.0f;
 	mInverseMass = 1.0f / mMass;
-	mInertia = Math::Matrix3::Identity;
-	mInverseInertia = Math::Inverse(mInertia);
+
+	// This is for sphere body 
+	float I = 2.0f / 5.0f * mMass * mMass * 1.0f; // Radius
+	mInertia = Matrix3(
+	I, 0.0f, 0.0f, 
+	0.0f, I, 0.0f,
+	0.0f, 0.0f, I);
+
+	mInverseInertia = Inverse(mInertia);
 }
 
 void RBPhysicsObject::operator=(RBPhysicsObject other) // TODO: Do this in a better fashion.
@@ -44,4 +52,17 @@ void RBPhysicsObject::Integrate(float deltaTime)
 
 	mPosition += mVelocity * deltaTime;
 	mVelocity += mAcceleration * deltaTime;
+}
+
+void RBPhysicsObject::ApplyForce(const Math::Vector3& force)
+{
+	mAcceleration += force * mInverseMass;
+}
+
+void RBPhysicsObject::ApplyTorque(const Math::Vector3& torque)
+{
+	// mAngularAcceleration += mInverseInertia * torque; // TODO: Turn this into nice math.
+	mAngularAcceleration += Vector3(mInverseInertia._11* torque.x + mInverseInertia._12 * torque.y + mInverseInertia._13 * torque.z,
+	mInverseInertia._21* torque.x + mInverseInertia._22 * torque.y + mInverseInertia._23 * torque.z,
+	mInverseInertia._31* torque.x + mInverseInertia._32 * torque.y + mInverseInertia._33 * torque.z);
 }

@@ -17,7 +17,14 @@ namespace SAGE::RBPhysics
 		{
 			mMass = 1.0f;
 			mInverseMass = 1.0f / mMass;
-			mInertia = Math::Matrix3::Identity;
+
+			// This is for sphere body 
+			float I = 2.0f / 5.0f * mMass * mMass * 1.0f; // Radius
+			mInertia = Math::Matrix3(
+				I, 0.0f, 0.0f,
+				0.0f, I, 0.0f,
+				0.0f, 0.0f, I);
+
 			mInverseInertia = Math::Inverse(mInertia);
 		}
 		RBPhysicsObject(const RBPhysicsObject& other);
@@ -31,6 +38,9 @@ namespace SAGE::RBPhysics
 		const Math::Quaternion& GetOrientation() const { return mOrientation; }
 
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
+
+		void ApplyForce(const Math::Vector3& force);
+		void ApplyTorque(const Math::Vector3& torque);
 
 		const Collider& GetCollider() // TODO: This is temp.
 		{

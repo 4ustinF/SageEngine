@@ -27,9 +27,9 @@ void RBPhysicsService::Initialize()
 
 	mPhysicsWorld.Initialize();
 
-	const Vector3 ballPos = Vector3(0.0f, 0.0f, 0.0f);
-	const float ballRadius = 1.5f;
-	mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(ballPos, ballRadius), Vector3(1.0f, 0.0f, 0.0f));
+	const Vector3 ballPos = Vector3(0.0f, 10.0f, 0.0f);
+	const float ballRadius = 1.0f;
+	mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(ballPos, ballRadius), Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, -9.81, 0.0f));
 	//mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f), Vector3(0.0f, 0.0f, 1.141f / 2.0f));
 	//mPhysicsObject2 = new RBPhysicsObject(new BoundingSphere(Vector3(1.414f / 2.0f * 7.0f, 0.0f, 1.414f / 2.0f * 7.0f), 1.0f), Vector3(-1.414f / 2.0f, 0.0f, -1.414f / 2.0f));
 	mPhysicsWorld.AddObject(*mPhysicsObject1);
@@ -58,7 +58,10 @@ void RBPhysicsService::Terminate()
 void RBPhysicsService::Update(float deltaTime)
 {
 	mPhysicsWorld.Update(deltaTime);
-	mBallRenderObject.transform.position = mPhysicsWorld.GetPhysicsObject(0).GetPosition();
+
+	auto physicsObject = mPhysicsWorld.GetPhysicsObject(0);
+	mBallRenderObject.transform.position = physicsObject.GetPosition();
+	mBallRenderObject.transform.rotation = physicsObject.GetOrientation();
 }
 
 void RBPhysicsService::Render()

@@ -8,9 +8,14 @@ RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
 	mPosition(other.mPosition),
 	mOldPosition(other.mOldPosition),
 	mVelocity(other.mVelocity),
-	mCollider(other.mCollider)
+	mCollider(other.mCollider),
+	mAcceleration(other.mAcceleration)
 {
 	mCollider->AddReference();
+	mMass = 1.0f;
+	mInverseMass = 1.0f / mMass;
+	mInertia = Math::Matrix3::Identity;
+	mInverseInertia = Math::Inverse(mInertia);
 }
 
 void RBPhysicsObject::operator=(RBPhysicsObject other) // TODO: Do this in a better fashion.
@@ -31,5 +36,12 @@ RBPhysicsObject::~RBPhysicsObject()
 
 void RBPhysicsObject::Integrate(float deltaTime)
 {
+	if (mPosition.y < 1.0f)
+	{
+		mPosition.y = 1.0f;
+		mVelocity = -mVelocity * 0.85f; // Damping.
+	}
+
 	mPosition += mVelocity * deltaTime;
+	mVelocity += mAcceleration * deltaTime;
 }

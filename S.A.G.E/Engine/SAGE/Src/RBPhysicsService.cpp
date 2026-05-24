@@ -59,9 +59,40 @@ void RBPhysicsService::Update(float deltaTime)
 {
 	mPhysicsWorld.Update(deltaTime);
 
-	auto physicsObject = mPhysicsWorld.GetPhysicsObject(0);
+	RBPhysicsObject& physicsObject = mPhysicsWorld.GetPhysicsObject(0);
 	mBallRenderObject.transform.position = physicsObject.GetPosition();
 	mBallRenderObject.transform.rotation = physicsObject.GetOrientation();
+
+	auto inputSystem = Input::InputSystem::Get();
+	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD1)) // Torque in x axis
+	{
+		physicsObject.ApplyTorque(Vector3(1.0f, 0.0f, 0.0f));
+	}
+
+	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD2)) // Torque in y axis
+	{
+		physicsObject.ApplyTorque(Vector3(0.0f, 1.0f, 0.0f));
+	}
+
+	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD3)) // Torque in z axis
+	{
+		physicsObject.ApplyTorque(Vector3(0.0f, 0.0f, 1.0f));
+	}
+
+	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD4)) // Force in x axis
+	{
+		physicsObject.ApplyForce(Vector3(1.0f, 0.0f, 0.0f));
+	}
+
+	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD5)) // Force in y axis
+	{
+		physicsObject.ApplyForce(Vector3(0.0f, 1.0f, 0.0f));
+	}
+
+	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD6)) // Force in z axis
+	{
+		physicsObject.ApplyForce(Vector3(0.0f, 0.0f, 1.0f));
+	}
 }
 
 void RBPhysicsService::Render()

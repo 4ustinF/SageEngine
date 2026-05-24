@@ -33,11 +33,18 @@ namespace SAGE::RBPhysics
 
 		void Integrate(float deltaTime);
 
+		float GetMass() const { return mMass; }
 		const Math::Vector3& GetPosition() const { return mPosition; }
 		const Math::Vector3& GetVelocity() const { return mVelocity; }
+		const Math::Vector3& GetAngularVelocity() const { return mAngularVelocity; }
 		const Math::Quaternion& GetOrientation() const { return mOrientation; }
+		const Math::Vector3& GetAcceleration() const { return mAcceleration; }
+		const Math::Vector3& GetAngularAcceleration() const { return mAngularAcceleration; }
 
+		void SetPosition(const Math::Vector3& position) { mPosition = position; }
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
+		void SetAngularVelocity(const Math::Vector3& velocity) { mAngularVelocity = velocity; }
+		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
 		void ApplyForce(const Math::Vector3& force);
 		void ApplyTorque(const Math::Vector3& torque);
@@ -52,7 +59,7 @@ namespace SAGE::RBPhysics
 		}
 
 	private:
-		float mMass = 0.0f;
+		float mMass = 1.0f;
 		float mInverseMass = 0.0f;
 
 		Math::Vector3 mPosition = Math::Vector3::Zero;

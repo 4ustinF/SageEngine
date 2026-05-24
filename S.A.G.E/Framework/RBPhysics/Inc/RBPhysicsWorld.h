@@ -28,7 +28,7 @@ namespace SAGE::RBPhysics
 		void AddObject(const RBPhysicsObject& object);
 
 		// TODO: These are temp please remove.
-		const RBPhysicsObject& GetPhysicsObject(int index) const
+		RBPhysicsObject& GetPhysicsObject(int index)
 		{
 			return mObjects[index];
 		}

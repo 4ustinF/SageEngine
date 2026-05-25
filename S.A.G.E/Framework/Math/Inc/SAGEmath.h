@@ -69,12 +69,23 @@ namespace SAGE::Math
 	constexpr Vector3 GetTranslation(const Matrix4& m)				{ return { m._41, m._42 , m._43 }; }
 	inline float Dot(const Vector3& a, const Vector3& b)			{ return (a.x * b.x) + (a.y * b.y) + (a.z * b.z); }
 	inline float MagnitudeSqr(const Vector3& v)						{ return (v.x * v.x) + (v.y * v.y) + (v.z * v.z); }
-	inline float Magnitude(const Vector3& v)						{ return sqrt(MagnitudeSqr(v)); }
+	inline float Magnitude(const Vector3& v)						{ return sqrt(MagnitudeSqr(v)); } // Length
 	inline float DistanceSqr(const Vector3& a, const Vector3& b)	{ return MagnitudeSqr(a - b);  }
 	inline float Distance(const Vector3& a, const Vector3& b)		{ return sqrt(DistanceSqr(a, b)); }
 	inline Vector3 Normalize(const Vector3& v)						{ return v / Magnitude(v); }
 	inline Vector3 Cross(const Vector3& a, const Vector3& b)		{ return Vector3((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x)); }
 	inline Vector3 Reflect(const Vector3& a, const Vector3& b)		{ return a - (b * (2.0f * Dot(a, b))); }
+
+	// Rotate a Vector3 by a Quaternion
+	inline Vector3 operator*(const Quaternion& q, const Vector3& v)
+	{
+		// q = (w, x, y, z) where vector part is (x, y, z)
+		const Vector3 quatVec(q.x, q.y, q.z);
+		const Vector3 uv = Cross(quatVec, v);
+		const Vector3 uuv = Cross(quatVec, uv);
+
+		return v + (uv * q.w + uuv) * 2.0f;
+	}
 #pragma endregion
 
 	//Matrix3
@@ -256,6 +267,11 @@ namespace SAGE::Math
 			(q0.y * scale0) + (q1.y * scale1),
 			(q0.z * scale0) + (q1.z * scale1)
 		);
+	}
+	
+	inline Quaternion Conjugate(const Quaternion& q)
+	{
+		return Quaternion{ q.w, -q.x, -q.y, -q.z };
 	}
 
 #pragma endregion

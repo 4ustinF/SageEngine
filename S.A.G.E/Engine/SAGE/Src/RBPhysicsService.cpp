@@ -104,6 +104,8 @@ void RBPhysicsService::Render()
 	mStandardEffect.Begin();
 	mStandardEffect.Render(mBallRenderObject);
 	mStandardEffect.End();
+
+	SimpleDraw::AddSphere(Vector3(0.0f, 8.0f, 0.0f), 32, 32, 8, Colors::Red);
 }
 
 void RBPhysicsService::DebugUI()

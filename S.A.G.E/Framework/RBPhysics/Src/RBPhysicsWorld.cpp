@@ -24,6 +24,8 @@ void RBPhysicsWorld::Update(float deltaTime)
 {
 	Simulate(deltaTime);
 	//HandleCollisions();
+
+	DetectCollisionWithDome(deltaTime);
 }
 
 void RBPhysicsWorld::DebugDraw()
@@ -118,4 +120,61 @@ void RBPhysicsWorld::HandleCollisions()
 			}
 		}
 	}
+}
+
+void RBPhysicsWorld::DetectCollisionWithDome(float deltaTime)
+{
+	const float domeRadius = 8.0f;
+	const Vector3 domeCenter = Vector3(0.0f, domeRadius, 0.0f);
+	const float ballRadius = 1.0f;
+	
+	for (RBPhysicsObject& object : mObjects)
+	{
+		if (Magnitude(object.GetPosition() - domeCenter) + ballRadius > domeRadius)
+		{
+			ResolveCollisionWithDome(object, deltaTime);
+		}
+	}
+}
+
+void RBPhysicsWorld::ResolveCollisionWithDome(RBPhysicsObject& object, float deltaTime)
+{
+	const Vector3 domeCenter = Vector3(0.0f, 8.0f, 0.0f);
+
+	Vector3 relativePos = object.GetPosition() - Vector3(0.0f, 8.0f, 0.0f);
+	Vector3 normal = -Normalize(relativePos);
+	Vector3 contactPoint = object.GetPosition() - normal * 1.0f; // Ball radius
+	Vector3 localContactPoint = object.GetLocalPosition(contactPoint);
+
+	Vector3 relativeVel = GetVelocityAtPoint(object, localContactPoint);
+	Vector3 normalVel = normal * Dot(relativeVel, normal);
+	Vector3 tangentialVel = relativeVel - normalVel;
+
+	float penetration = Magnitude(relativePos) + 1.0f - 8.0f; // Ball radius - dome radius. 
+	Vector3 normalDisplacement = normal * penetration;
+	Vector3 tangentialDisplacement = tangentialVel * deltaTime;
+
+	float effectiveMass = object.GetMass();
+	float normalStiffness = object.GetNormalStiffness();
+	float normalDampening = object.GetNormalDampening();
+	float tangentialStiffness = object.GetTangentialStiffness();
+	float tangentialDampening = object.GetTangentialDampening();
+
+	Vector3 normalForce = normalDisplacement * normalStiffness - normalVel * effectiveMass * normalDampening;
+
+	Vector3 tangentialForce = -tangentialDisplacement * tangentialStiffness - tangentialVel * effectiveMass * tangentialDampening;
+
+	float mu = 0.5f; // Friction coefficient - Column friction law.
+	if(Magnitude(tangentialForce) > mu * Magnitude(normalForce))
+	{
+		tangentialForce = Normalize(tangentialForce) * Magnitude(normalForce);
+	}
+
+	object.ApplyForce(normalForce);
+	object.ApplyForceAtPoint(tangentialForce, contactPoint);
+}
+
+Vector3 RBPhysicsWorld::GetVelocityAtPoint(const RBPhysicsObject& object, const Math::Vector3& localPoint)
+{
+	return object.GetVelocity() + object.GetOrientation() * Cross(object.GetAngularVelocity(), localPoint);
 }

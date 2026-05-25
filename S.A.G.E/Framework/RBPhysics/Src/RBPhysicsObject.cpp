@@ -42,27 +42,50 @@ RBPhysicsObject::~RBPhysicsObject()
 	}
 }
 
+Vector3 RBPhysicsObject::GetLocalPosition(const Math::Vector3& worldPos)
+{
+	return Conjugate(mOrientation) * (worldPos - mPosition);
+}
+
+Vector3 RBPhysicsObject::GetWorldPosition(const Math::Vector3& localPos)
+{
+	return mPosition + mOrientation * localPos;
+}
+
 void RBPhysicsObject::Integrate(float deltaTime)
 {
-	if (mPosition.y < 1.0f)
-	{
-		mPosition.y = 1.0f;
-		mVelocity.y = mVelocity.y * -0.85f;
-	}
+	//if (mPosition.y < 1.0f)
+	//{
+	//	mPosition.y = 1.0f;
+	//	mVelocity.y = mVelocity.y * -0.85f;
+	//}
 	
 	//mPosition += mVelocity * deltaTime;
 	//mVelocity += mAcceleration * deltaTime;
 }
 
-void RBPhysicsObject::ApplyForce(const Math::Vector3& force)
+void RBPhysicsObject::ApplyForce(const Vector3& force)
 {
 	mAcceleration += force * mInverseMass;
 }
 
-void RBPhysicsObject::ApplyTorque(const Math::Vector3& torque)
+void RBPhysicsObject::ApplyForceAtPoint(const Vector3& force, const Vector3& localPoint)
+{
+	const Vector3 localForce = Conjugate(mOrientation) * force;
+	const Vector3 torque = Cross(localPoint, localForce);
+	ApplyForce(force);
+	ApplyTorque(torque);
+}
+
+void RBPhysicsObject::ApplyTorque(const Vector3& torque)
 {
 	// mAngularAcceleration += mInverseInertia * torque; // TODO: Turn this into nice math.
-	mAngularAcceleration += Vector3(mInverseInertia._11 * torque.x + mInverseInertia._12 * torque.y + mInverseInertia._13 * torque.z,
-	mInverseInertia._21 * torque.x + mInverseInertia._22 * torque.y + mInverseInertia._23 * torque.z,
-	mInverseInertia._31 * torque.x + mInverseInertia._32 * torque.y + mInverseInertia._33 * torque.z);
+	mAngularAcceleration += QuatMulVec3(torque, mInverseInertia);
+}
+
+Math::Vector3 RBPhysicsObject::QuatMulVec3(const Math::Vector3& vec, const Math::Matrix3& m)
+{
+	return Vector3(m._11 * vec.x + m._12 * vec.y + m._13 * vec.z,
+		m._21 * vec.x + m._22 * vec.y + m._23 * vec.z,
+		m._31 * vec.x + m._32 * vec.y + m._33 * vec.z);
 }

@@ -48,5 +48,9 @@ namespace SAGE::RBPhysics
 		Settings mSettings;
 		bool mShowDebugLines = true;
 		bool mFillDebugShapes = false;
+
+		void DetectCollisionWithDome(float deltaTime);
+		void ResolveCollisionWithDome(RBPhysicsObject& object, float deltaTime);
+		Math::Vector3 GetVelocityAtPoint(const RBPhysicsObject& object, const Math::Vector3& localPoint);
 	};
 }

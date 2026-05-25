@@ -35,11 +35,17 @@ namespace SAGE::RBPhysics
 
 		float GetMass() const { return mMass; }
 		const Math::Vector3& GetPosition() const { return mPosition; }
+		Math::Vector3 GetLocalPosition(const Math::Vector3& worldPos);
+		Math::Vector3 GetWorldPosition(const Math::Vector3& localPos);
 		const Math::Vector3& GetVelocity() const { return mVelocity; }
 		const Math::Vector3& GetAngularVelocity() const { return mAngularVelocity; }
 		const Math::Quaternion& GetOrientation() const { return mOrientation; }
 		const Math::Vector3& GetAcceleration() const { return mAcceleration; }
 		const Math::Vector3& GetAngularAcceleration() const { return mAngularAcceleration; }
+		float GetNormalStiffness() const { return mNormalStiffness; }
+		float GetNormalDampening() const { return mNormalDampening; }
+		float GetTangentialStiffness() const { return mTangentialStiffness; }
+		float GetTangentialDampening() const { return mTangentialDampening; }
 
 		void SetPosition(const Math::Vector3& position) { mPosition = position; }
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
@@ -47,6 +53,7 @@ namespace SAGE::RBPhysics
 		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
 		void ApplyForce(const Math::Vector3& force);
+		void ApplyForceAtPoint(const Math::Vector3& force, const Math::Vector3& localPoint);
 		void ApplyTorque(const Math::Vector3& torque);
 
 		const Collider& GetCollider() // TODO: This is temp.
@@ -67,13 +74,20 @@ namespace SAGE::RBPhysics
 		Math::Vector3 mVelocity = Math::Vector3::Zero;
 		Math::Vector3 mAngularVelocity = Math::Vector3::Zero;
 
-		Math::Quaternion mOrientation= Math::Quaternion::Identity;
+		Math::Quaternion mOrientation = Math::Quaternion::Identity;
 		Math::Vector3 mAcceleration = Math::Vector3::Zero;
 		Math::Vector3 mAngularAcceleration = Math::Vector3::Zero;
 
 		Math::Matrix3 mInertia = Math::Matrix3::Identity;
 		Math::Matrix3 mInverseInertia = Math::Matrix3::Identity;
 
+		float mNormalStiffness = 0.8f;
+		float mNormalDampening = 0.85f;
+		float mTangentialStiffness = 0.8f;
+		float mTangentialDampening = 0.85f;
+
 		Collider* mCollider;
+
+		Math::Vector3 QuatMulVec3(const Math::Vector3& vec, const Math::Matrix3& m); // Remove;
 	};
 }

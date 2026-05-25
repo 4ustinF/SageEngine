@@ -20,9 +20,9 @@
   PostProcessingService.cpp
   RBPhysicsService.cpp
 D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\RBPhysicsService.cpp(32,123): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
   (compiling source file '/Src/RBPhysicsService.cpp')
   
-  Generating Code...
   Compiling...
   RenderService.cpp
   RigidBodyComponent.cpp

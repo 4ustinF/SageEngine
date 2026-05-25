@@ -26,6 +26,8 @@ namespace SAGE
 		SAGE::Graphics::RenderObject mBallRenderObject;
 
 
+		SAGE::Graphics::RenderObject mContainingBallRenderObject;
+
 	private:
 
 		SAGE::RBPhysics::RBPhysicsWorld mPhysicsWorld;

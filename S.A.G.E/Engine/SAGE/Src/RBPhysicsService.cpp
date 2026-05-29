@@ -63,35 +63,37 @@ void RBPhysicsService::Update(float deltaTime)
 	mBallRenderObject.transform.position = physicsObject.GetPosition();
 	mBallRenderObject.transform.rotation = physicsObject.GetOrientation();
 
+	float force = 50.0f;
+	float torque = 1.0f;
 	auto inputSystem = Input::InputSystem::Get();
-	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD1)) // Torque in x axis
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD1)) // Torque in x axis
 	{
-		physicsObject.ApplyTorque(Vector3(1.0f, 0.0f, 0.0f));
+		physicsObject.ApplyTorque(Vector3(torque, 0.0f, 0.0f));
 	}
 
-	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD2)) // Torque in y axis
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD2)) // Torque in y axis
 	{
-		physicsObject.ApplyTorque(Vector3(0.0f, 1.0f, 0.0f));
+		physicsObject.ApplyTorque(Vector3(0.0f, torque, 0.0f));
 	}
 
-	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD3)) // Torque in z axis
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD3)) // Torque in z axis
 	{
-		physicsObject.ApplyTorque(Vector3(0.0f, 0.0f, 1.0f));
+		physicsObject.ApplyTorque(Vector3(0.0f, 0.0f, torque));
 	}
 
-	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD4)) // Force in x axis
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD4)) // Force in x axis
 	{
-		physicsObject.ApplyForce(Vector3(1.0f, 0.0f, 0.0f));
+		physicsObject.ApplyForce(Vector3(force, 0.0f, 0.0f));
 	}
 
-	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD5)) // Force in y axis
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD5)) // Force in y axis
 	{
-		physicsObject.ApplyForce(Vector3(0.0f, 1.0f, 0.0f));
+		physicsObject.ApplyForce(Vector3(0.0f, force, 0.0f));
 	}
 
-	if (inputSystem->IsKeyPressed(Input::KeyCode::NUMPAD6)) // Force in z axis
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD6)) // Force in z axis
 	{
-		physicsObject.ApplyForce(Vector3(0.0f, 0.0f, 1.0f));
+		physicsObject.ApplyForce(Vector3(0.0f, 0.0f, force));
 	}
 }
 

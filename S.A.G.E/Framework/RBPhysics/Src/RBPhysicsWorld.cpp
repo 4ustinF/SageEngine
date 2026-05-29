@@ -59,59 +59,46 @@ void RBPhysicsWorld::DebugDraw()
 
 void RBPhysicsWorld::DebugUI()
 {
+	if (mObjects.empty())
+		return;
+
 	ImGui::Begin("Physics", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 	ImGui::DragFloat3("Gravity", &mSettings.gravity.x, 0.1f, -10.0f, 10.0f);
 
-	Vector3 acc = mObjects[0].GetAcceleration();
-	Vector3 vel = mObjects[0].GetVelocity();
-	Quaternion orientation = mObjects[0].GetOrientation();
-	ImGui::DragFloat3("Acc", &acc.x, 0.1f, -1000.0f, 1000.0f); // TODO: Remove
-	ImGui::DragFloat3("Vel", &vel.x, 0.1f, -1000.0f, 1000.0f); // TODO: Remove
-	ImGui::DragFloat4("Orientation", &orientation.x, 0.01f, -10000.0f, 10000.0f); // TODO: Remove
+	if (!mObjects.empty())
+	{
+		auto& o = mObjects[0];
+		ImGui::Text("Obj0 Pos: %.2f, %.2f, %.2f", o.GetPosition().x, o.GetPosition().y, o.GetPosition().z);
+		ImGui::Text("Obj0 Vel: %.2f, %.2f, %.2f", o.GetVelocity().x, o.GetVelocity().y, o.GetVelocity().z);
+		ImGui::Text("Obj0 Acc: %.3f, %.3f, %.3f", o.GetAcceleration().x, o.GetAcceleration().y, o.GetAcceleration().z);
+		Quaternion orientation = o.GetOrientation();
+		ImGui::DragFloat4("Orientation", &orientation.x, 0.01f, -10000.0f, 10000.0f); // TODO: Remove
+	}
 
 	ImGui::Checkbox("Show Debug Lines", &mShowDebugLines);
 	ImGui::Checkbox("Fill Debug Shapes", &mFillDebugShapes);
 	ImGui::End();
 }
 
-void RBPhysicsWorld::AddObject(const RBPhysicsObject& object)
+int RBPhysicsWorld::AddObject(const RBPhysicsObject& object)
 {
 	mObjects.push_back(object);
+	return static_cast<int>(mObjects.size()) - 1;
 }
 
 void RBPhysicsWorld::Simulate(float deltaTime)
 {
 	for (RBPhysicsObject& object : mObjects)
 	{
-		//// Gravity
-		//object.ApplyForce(mSettings.gravity * object.GetMass() * deltaTime);
-
-		//object.SetPosition(object.GetPosition() + object.GetVelocity() * deltaTime);
-		//object.SetVelocity(object.GetVelocity() + object.GetAcceleration() * deltaTime);
-
-		//object.SetAngularVelocity(object.GetAngularVelocity() + object.GetAngularAcceleration() * deltaTime);
-
-		//Quaternion deltaOrientation = object.GetOrientation() * 0.5f * deltaTime * Quaternion(0.0f, object.GetAngularVelocity().x, object.GetAngularVelocity().y, object.GetAngularVelocity().z);
-		//object.SetOrientation(Normalize(object.GetOrientation() + deltaOrientation));
-		//
-		//object.Integrate(deltaTime); // TODO: Move logic into integrate
-
-		// -------------------
-
+		// Apply gravity to acceleration accumulator
 		Vector3 acceleration = object.GetAcceleration() + mSettings.gravity;
-		// TODO: Clamp mAcceleration
 		object.SetAcceleration(acceleration);
 
-		object.SetVelocity(object.GetVelocity() + object.GetAcceleration() * deltaTime);
-		// TODO: Clamp velocity
-
-		object.SetPosition(object.GetPosition() + object.GetVelocity() * deltaTime);
-
+		// Compute simple air drag (force)
 		Vector3 dragForce = -object.GetVelocity() * mSettings.airDragCoeficient * 0.5f;
-		//Vector3 dragForce = -object.GetVelocity() * Abs(object.GetVelocity()) * mSettings.airDragCoeficient * 0.5f;
 		float magnitude = Magnitude(dragForce);
 
-		if (magnitude) // TODO: Figure out what this means?
+		if (magnitude > 0.0f)
 		{
 			if (magnitude > mSettings.maxAirdrag)
 			{
@@ -119,10 +106,12 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 				dragForce *= mSettings.maxAirdrag;
 			}
 
-			object.ApplyDrag(object.GetVelocity(), dragForce * deltaTime);
+			// Apply drag as a force (Integrate will use acceleration)
+			object.ApplyDrag(object.GetVelocity(), dragForce);
 		}
 
-		object.SetAcceleration(Vector3::Zero);
+		// Integrate linear and angular motion (RBPhysicsObject::Integrate clears accumulators)
+		object.Integrate(deltaTime);
 	}
 }
 
@@ -154,52 +143,108 @@ void RBPhysicsWorld::DetectCollisionWithDome(float deltaTime)
 {
 	const float domeRadius = 8.0f;
 	const Vector3 domeCenter = Vector3(0.0f, domeRadius, 0.0f);
-	const float ballRadius = 1.0f;
-	
+
 	for (RBPhysicsObject& object : mObjects)
 	{
-		if (Magnitude(object.GetPosition() - domeCenter) + ballRadius > domeRadius)
+		// Get ball radius from its collider (uses existing BoundingSphere)
+		auto& collider = (BoundingSphere&)object.GetCollider();
+		const float ballRadius = collider.GetRadius();
+
+		const float centerDistance = Magnitude(object.GetPosition() - domeCenter);
+		// If the ball center plus radius is outside the dome radius -> collision with inner surface
+		if (centerDistance + ballRadius > domeRadius)
 		{
 			ResolveCollisionWithDome(object, deltaTime);
 		}
 	}
 }
 
-void RBPhysicsWorld::ResolveCollisionWithDome(RBPhysicsObject& object, float deltaTime)
+void RBPhysicsWorld::ResolveCollisionWithDome(RBPhysicsObject& object, float /*deltaTime*/)
 {
 	const Vector3 domeCenter = Vector3(0.0f, 8.0f, 0.0f);
+	const float domeRadius = 8.0f;
 
-	Vector3 relativePos = object.GetPosition() - Vector3(0.0f, 8.0f, 0.0f);
-	Vector3 normal = -Normalize(relativePos);
-	Vector3 contactPoint = object.GetPosition() - normal * 1.0f; // Ball radius
-	Vector3 localContactPoint = object.GetLocalPosition(contactPoint);
+	// Ball radius from collider
+	auto& collider = (BoundingSphere&)object.GetCollider();
+	const float ballRadius = collider.GetRadius();
 
+	Vector3 relativePos = object.GetPosition() - domeCenter;
+	const float dist = Magnitude(relativePos);
+
+	// Guard: if degenerate, skip
+	if (dist <= 0.0f)
+		return;
+
+	// Normal pointing from dome center to ball (outward)
+	Vector3 normal = Normalize(relativePos);
+
+	// penetration amount (positive if ball is outside the dome surface)
+	float penetration = (dist + ballRadius) - domeRadius;
+	if (penetration <= 0.0f)
+		return;
+
+	// Positional correction: move ball back just inside the dome (small slop to avoid jitter)
+	const float k_slop = 0.001f;
+	const float correction = penetration + k_slop;
+	object.SetPosition(object.GetPosition() - normal * correction);
+
+	// Contact point in world space (on the sphere surface)
+	Vector3 contactPointWorld = object.GetPosition() - normal * ballRadius;
+	// Convert to local point for ApplyForceAtPoint (expects local point)
+	Vector3 localContactPoint = object.GetLocalPosition(contactPointWorld);
+
+	// Relative velocity at contact
 	Vector3 relativeVel = GetVelocityAtPoint(object, localContactPoint);
-	Vector3 normalVel = normal * Dot(relativeVel, normal);
-	Vector3 tangentialVel = relativeVel - normalVel;
+	Vector3 velNormal = normal * Dot(relativeVel, normal);
+	Vector3 velTangent = relativeVel - velNormal;
 
-	float penetration = Magnitude(relativePos) + 1.0f - 8.0f; // Ball radius - dome radius. 
-	Vector3 normalDisplacement = normal * penetration;
-	Vector3 tangentialDisplacement = tangentialVel * deltaTime;
-
-	float effectiveMass = object.GetMass();
-	float normalStiffness = object.GetNormalStiffness();
-	float normalDampening = object.GetNormalDampening();
-	float tangentialStiffness = object.GetTangentialStiffness();
-	float tangentialDampening = object.GetTangentialDampening();
-
-	Vector3 normalForce = normalDisplacement * normalStiffness - normalVel * effectiveMass * normalDampening;
-
-	Vector3 tangentialForce = -tangentialDisplacement * tangentialStiffness - tangentialVel * effectiveMass * tangentialDampening;
-
-	float mu = 0.5f; // Friction coefficient - Column friction law.
-	if(Magnitude(tangentialForce) > mu * Magnitude(normalForce))
+	// --- Normal response (velocity correction) ---
+	const float restitution = 0.3f; // bounce, tune as needed
+	// If there is outward normal velocity, reflect it (inelastic)
+	float vNormalScalar = Dot(relativeVel, normal);
+	if (vNormalScalar > 0.0f)
 	{
-		tangentialForce = Normalize(tangentialForce) * Magnitude(normalForce);
+		// Remove outgoing normal component with restitution
+		Vector3 v = object.GetVelocity();
+		v -= velNormal * (1.0f + restitution); // reflect outward component
+		object.SetVelocity(v);
 	}
 
+	// --- Tangential friction handled as a force at contact (produces torque) ---
+	// Estimate a tangential damping force (N) that tends to remove sliding
+	float effectiveMass = object.GetMass();
+	float tangentialDampening = object.GetTangentialDampening();
+	Vector3 tangentialForce = -velTangent * effectiveMass * tangentialDampening;
+
+	// Normal contact force magnitude estimate (simple)
+	float normalStiffness = object.GetNormalStiffness();
+	float normalDampening = object.GetNormalDampening();
+	Vector3 normalVel = velNormal;
+	Vector3 normalDisplacement = normal * penetration;
+	Vector3 normalForce = normalDisplacement * normalStiffness - normalVel * effectiveMass * normalDampening;
+
+	// Coulomb friction clamp
+	float mu = 0.5f;
+	float maxTangential = mu * Magnitude(normalForce);
+	if (Magnitude(tangentialForce) > maxTangential && maxTangential > 0.0f)
+	{
+		tangentialForce = Normalize(tangentialForce) * maxTangential;
+	}
+
+	// Apply normal support (linear)
 	object.ApplyForce(normalForce);
-	object.ApplyForceAtPoint(tangentialForce, contactPoint);
+
+	// Apply tangential friction at contact point to create torque / rolling
+	object.ApplyForceAtPoint(tangentialForce, localContactPoint);
+
+	// Remove any outward acceleration component to avoid immediate re-penetration
+	Vector3 acc = object.GetAcceleration();
+	float accOut = Dot(acc, normal);
+	if (accOut > 0.0f)
+	{
+		acc -= normal * accOut;
+		object.SetAcceleration(acc);
+	}
 }
 
 Vector3 RBPhysicsWorld::GetVelocityAtPoint(const RBPhysicsObject& object, const Math::Vector3& localPoint)

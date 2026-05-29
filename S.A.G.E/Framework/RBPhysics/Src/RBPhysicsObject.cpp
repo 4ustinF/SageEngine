@@ -1,4 +1,4 @@
-#include "Precompiled.h"
+﻿#include "Precompiled.h"
 #include "RBPhysicsObject.h"
 
 using namespace SAGE;
@@ -54,16 +54,29 @@ Vector3 RBPhysicsObject::GetWorldPosition(const Math::Vector3& localPos)
 
 void RBPhysicsObject::Integrate(float deltaTime)
 {
-	//if (mPosition.y < 1.0f)
-	//{
-	//	mPosition.y = 1.0f;
-	//	mVelocity.y = mVelocity.y * -0.85f;
-	//}
-	
-	//mPosition += mVelocity * deltaTime;
-	//mVelocity += mAcceleration * deltaTime;
+	// Linear integration
+	mVelocity += mAcceleration * deltaTime;
+	mPosition += mVelocity * deltaTime;
+
+	// Angular integration
+	mAngularVelocity += mAngularAcceleration * deltaTime;
+
+	// Update orientation via quaternion derivative: q' = 0.5 * q * w (w = [0, ω])
+	Quaternion w(0.0f, mAngularVelocity.x, mAngularVelocity.y, mAngularVelocity.z);
+	Quaternion deltaOrientation = mOrientation * w;
+	deltaOrientation.x *= 0.5f * deltaTime;
+	deltaOrientation.y *= 0.5f * deltaTime;
+	deltaOrientation.z *= 0.5f * deltaTime;
+	deltaOrientation.w *= 0.5f * deltaTime;
+
+	mOrientation = Normalize(mOrientation + deltaOrientation);
+
+	// Clear accumulators (forces/torques should be reapplied each frame)
+	mAcceleration = Vector3::Zero;
+	mAngularAcceleration = Vector3::Zero;
 }
 
+// Force applies acceleration directly (existing behavior kept)
 void RBPhysicsObject::ApplyForce(const Vector3& force)
 {
 	mAcceleration += force * mInverseMass;
@@ -85,7 +98,17 @@ void RBPhysicsObject::ApplyTorque(const Vector3& torque)
 
 void RBPhysicsObject::ApplyDrag(const Vector3& velocity, const Vector3& dragForce)
 {
-	// TODO: 
+	// dragForce is expected to be a force (N). Apply as linear force.
+	ApplyForce(dragForce);
+
+	// Simple angular damping proportional to linear drag magnitude (hacky but works for demo)
+	float dragMag = Magnitude(dragForce);
+	if (dragMag > 0.0f)
+	{
+		// Dampen angular acceleration/velocity slightly
+		const float angularDampCoef = 0.1f;
+		mAngularAcceleration += -mAngularVelocity * (angularDampCoef * dragMag);
+	}
 }
 
 Math::Vector3 RBPhysicsObject::QuatMulVec3(const Math::Vector3& vec, const Math::Matrix3& m)

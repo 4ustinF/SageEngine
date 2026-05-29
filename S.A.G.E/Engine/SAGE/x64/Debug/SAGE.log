@@ -2,6 +2,4 @@
 D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\RBPhysicsService.cpp(32,123): warning C4305: 'argument': truncation from 'double' to 'float'
   (compiling source file '/Src/RBPhysicsService.cpp')
   
-  SAGE.cpp
-  Generating Code...
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

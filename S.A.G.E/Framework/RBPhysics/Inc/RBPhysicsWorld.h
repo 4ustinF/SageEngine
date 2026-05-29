@@ -27,7 +27,8 @@ namespace SAGE::RBPhysics
 
 		void ShowDebugLines(bool showDebug) { mShowDebugLines = showDebug; }
 
-		void AddObject(const RBPhysicsObject& object);
+		// RBPhysicsWorld.h
+		int AddObject(const RBPhysicsObject& object);
 
 		// TODO: These are temp please remove.
 		RBPhysicsObject& GetPhysicsObject(int index)

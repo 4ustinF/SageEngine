@@ -63,11 +63,7 @@ void RBPhysicsObject::Integrate(float deltaTime)
 
 	// Update orientation via quaternion derivative: q' = 0.5 * q * w (w = [0, ω])
 	Quaternion w(0.0f, mAngularVelocity.x, mAngularVelocity.y, mAngularVelocity.z);
-	Quaternion deltaOrientation = mOrientation * w;
-	deltaOrientation.x *= 0.5f * deltaTime;
-	deltaOrientation.y *= 0.5f * deltaTime;
-	deltaOrientation.z *= 0.5f * deltaTime;
-	deltaOrientation.w *= 0.5f * deltaTime;
+	Quaternion deltaOrientation = mOrientation * w * 0.5f;// * deltaTime;
 
 	mOrientation = Normalize(mOrientation + deltaOrientation);
 

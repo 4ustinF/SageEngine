@@ -47,6 +47,7 @@ namespace SAGE::RBPhysics
 		float GetTangentialStiffness() const { return mTangentialStiffness; }
 		float GetTangentialDampening() const { return mTangentialDampening; }
 
+		void SetAcceleration(const Math::Vector3& acceleration) { mAcceleration = acceleration; } // TODO: Remove?
 		void SetPosition(const Math::Vector3& position) { mPosition = position; }
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
 		void SetAngularVelocity(const Math::Vector3& velocity) { mAngularVelocity = velocity; }
@@ -55,6 +56,7 @@ namespace SAGE::RBPhysics
 		void ApplyForce(const Math::Vector3& force);
 		void ApplyForceAtPoint(const Math::Vector3& force, const Math::Vector3& localPoint);
 		void ApplyTorque(const Math::Vector3& torque);
+		void ApplyDrag(const Math::Vector3& velocity, const Math::Vector3& dragForce);
 
 		const Collider& GetCollider() // TODO: This is temp.
 		{

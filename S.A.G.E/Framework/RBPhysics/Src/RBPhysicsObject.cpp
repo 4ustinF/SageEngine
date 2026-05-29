@@ -83,6 +83,11 @@ void RBPhysicsObject::ApplyTorque(const Vector3& torque)
 	mAngularAcceleration += QuatMulVec3(torque, mInverseInertia);
 }
 
+void RBPhysicsObject::ApplyDrag(const Vector3& velocity, const Vector3& dragForce)
+{
+	// TODO: 
+}
+
 Math::Vector3 RBPhysicsObject::QuatMulVec3(const Math::Vector3& vec, const Math::Matrix3& m)
 {
 	return Vector3(m._11 * vec.x + m._12 * vec.y + m._13 * vec.z,

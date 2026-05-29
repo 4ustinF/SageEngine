@@ -83,18 +83,46 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 {
 	for (RBPhysicsObject& object : mObjects)
 	{
-		// Gravity
-		object.ApplyForce(mSettings.gravity * object.GetMass() * deltaTime);
+		//// Gravity
+		//object.ApplyForce(mSettings.gravity * object.GetMass() * deltaTime);
+
+		//object.SetPosition(object.GetPosition() + object.GetVelocity() * deltaTime);
+		//object.SetVelocity(object.GetVelocity() + object.GetAcceleration() * deltaTime);
+
+		//object.SetAngularVelocity(object.GetAngularVelocity() + object.GetAngularAcceleration() * deltaTime);
+
+		//Quaternion deltaOrientation = object.GetOrientation() * 0.5f * deltaTime * Quaternion(0.0f, object.GetAngularVelocity().x, object.GetAngularVelocity().y, object.GetAngularVelocity().z);
+		//object.SetOrientation(Normalize(object.GetOrientation() + deltaOrientation));
+		//
+		//object.Integrate(deltaTime); // TODO: Move logic into integrate
+
+		// -------------------
+
+		Vector3 acceleration = object.GetAcceleration() + mSettings.gravity;
+		// TODO: Clamp mAcceleration
+		object.SetAcceleration(acceleration);
+
+		object.SetVelocity(object.GetVelocity() + object.GetAcceleration() * deltaTime);
+		// TODO: Clamp velocity
 
 		object.SetPosition(object.GetPosition() + object.GetVelocity() * deltaTime);
-		object.SetVelocity(object.GetVelocity() + object.GetAcceleration() * deltaTime);
 
-		object.SetAngularVelocity(object.GetAngularVelocity() + object.GetAngularAcceleration() * deltaTime);
+		Vector3 dragForce = -object.GetVelocity() * mSettings.airDragCoeficient * 0.5f;
+		//Vector3 dragForce = -object.GetVelocity() * Abs(object.GetVelocity()) * mSettings.airDragCoeficient * 0.5f;
+		float magnitude = Magnitude(dragForce);
 
-		Quaternion deltaOrientation = object.GetOrientation() * 0.5f * deltaTime * Quaternion(0.0f, object.GetAngularVelocity().x, object.GetAngularVelocity().y, object.GetAngularVelocity().z);
-		object.SetOrientation(Normalize(object.GetOrientation() + deltaOrientation));
-		
-		object.Integrate(deltaTime); // TODO: Move logic into integrate
+		if (magnitude) // TODO: Figure out what this means?
+		{
+			if (magnitude > mSettings.maxAirdrag)
+			{
+				dragForce /= magnitude;
+				dragForce *= mSettings.maxAirdrag;
+			}
+
+			object.ApplyDrag(object.GetVelocity(), dragForce * deltaTime);
+		}
+
+		object.SetAcceleration(Vector3::Zero);
 	}
 }
 

@@ -12,6 +12,8 @@ namespace SAGE::RBPhysics
 			Math::Vector3 gravity{ 0.0f, -9.81f, 0.0f };
 			float timeStep = 1.0f / 60.0f;
 			float drag = 0.0f;
+			float maxAirdrag = 1.0f;
+			float airDragCoeficient = 0.05f;
 			int iterations = 1;
 		};
 		RBPhysicsWorld() = default;

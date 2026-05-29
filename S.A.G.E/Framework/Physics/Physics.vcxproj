@@ -156,6 +156,7 @@
     <ClInclude Include="Inc\Particle.h" />
     <ClInclude Include="Inc\Physics.h" />
     <ClInclude Include="Inc\PhysicsWorld.h" />
+    <ClInclude Include="Inc\RBPhysicsObject.h" />
     <ClInclude Include="Inc\RigidAABB.h" />
     <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>

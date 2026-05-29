@@ -22,20 +22,22 @@ namespace SAGE::Math
 		const static Vector3 YAxis;
 		const static Vector3 ZAxis;
 
-		constexpr Vector3 operator-() const { return { -x, -y, -z }; }
-		constexpr Vector3 operator+(const Vector3& v) const { return { x + v.x, y + v.y, z + v.z }; }
-		constexpr Vector3 operator-(const Vector3& v) const { return { x - v.x, y - v.y, z - v.z }; }
-		constexpr Vector3 operator*(const Vector3& v) const { return { x * v.x, y * v.y, z * v.z }; }
-		constexpr Vector3 operator*(const float& f) const { return { x * f, y * f, z * f }; }
-		constexpr Vector3 operator/(const float& f) const { return { x / f, y / f, z / f }; }
+		constexpr Vector3 operator-() const noexcept { return { -x, -y, -z }; }
+		constexpr Vector3 operator+(const Vector3& v) const noexcept { return { x + v.x, y + v.y, z + v.z }; }
+		constexpr Vector3 operator-(const Vector3& v) const noexcept { return { x - v.x, y - v.y, z - v.z }; }
+		constexpr Vector3 operator*(const Vector3& v) const noexcept { return { x * v.x, y * v.y, z * v.z }; }
+		constexpr Vector3 operator*(float f) const noexcept { return { x * f, y * f, z * f }; }
+		constexpr Vector3 operator/(float f) const noexcept { return { x / f, y / f, z / f }; }
 
-		Vector3& operator+=(const Vector3& v) { x += v.x, y += v.y, z += v.z; return *this; }
-		Vector3& operator-=(const Vector3& v) { x -= v.x; y -= v.y; z -= v.z; return *this; }
-		Vector3& operator*=(const Vector3& v) { x *= v.x, y *= v.y, z *= v.z; return *this; }
-		bool operator==(const Vector3& v) const { return x == v.x && y == v.y && z == v.z;}
-		Vector3& operator*=(float f) { x *= f; y *= f; z *= f; return *this; }
-		Vector3& operator/=(float f) { x /= f; y /= f; z /= f; return *this; }
+		Vector3& operator+=(const Vector3& v) noexcept { x += v.x; y += v.y; z += v.z; return *this; }
+		Vector3& operator-=(const Vector3& v) noexcept { x -= v.x; y -= v.y; z -= v.z; return *this; }
+		Vector3& operator*=(const Vector3& v) noexcept { x *= v.x; y *= v.y; z *= v.z; return *this; }
+		bool operator==(const Vector3& v) const noexcept { return x == v.x && y == v.y && z == v.z;}
+		Vector3& operator*=(float f) noexcept { x *= f; y *= f; z *= f; return *this; }
+		Vector3& operator/=(float f) noexcept { x /= f; y /= f; z /= f; return *this; }
 	};
 
+	// Symmetric scalar ops
+	constexpr inline Vector3 operator*(float f, const Vector3& v) noexcept { return v * f; }
 }
 

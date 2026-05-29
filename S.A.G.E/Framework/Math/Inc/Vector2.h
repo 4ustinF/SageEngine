@@ -21,19 +21,23 @@ namespace SAGE::Math
 		const static Vector2 XAxis;
 		const static Vector2 YAxis;
 
-		constexpr Vector2 operator-() const { return { -x, -y }; }
-		constexpr Vector2 operator+(const Vector2& v) const { return { x + v.x, y + v.y }; }
-		constexpr Vector2 operator+(const float f) const { return { x + f, y + f }; }
-		constexpr Vector2 operator-(const Vector2& v) const { return { x - v.x, y - v.y }; }
-		constexpr Vector2 operator*(const float& f) const { return { x * f, y * f }; }
-		constexpr Vector2 operator/(const float& f) const { return { x / f, y / f }; }
+		constexpr Vector2 operator-() const noexcept { return { -x, -y }; }
+		constexpr Vector2 operator+(const Vector2& v) const noexcept { return { x + v.x, y + v.y }; }
+		constexpr Vector2 operator+(float f) const noexcept { return { x + f, y + f }; }
+		constexpr Vector2 operator-(const Vector2& v) const noexcept { return { x - v.x, y - v.y }; }
+		constexpr Vector2 operator*(float f) const noexcept { return { x * f, y * f }; }
+		constexpr Vector2 operator/(float f) const noexcept { return { x / f, y / f }; }
 
-		Vector2& operator+=(const Vector2& v) { x += v.x, y += v.y; return *this; }
-		Vector2& operator-=(const Vector2& v) { x -= v.x; y -= v.y; return *this; }
-		bool operator==(const Vector2& v) const { return x == v.x && y == v.y; }
-		Vector2& operator*=(float f) { x *= f; y *= f; return *this; }
-		Vector2& operator/=(float f) { x /= f; y /= f; return *this; }
+		Vector2& operator+=(const Vector2& v) noexcept { x += v.x; y += v.y; return *this; }
+		Vector2& operator-=(const Vector2& v) noexcept { x -= v.x; y -= v.y; return *this; }
+		bool operator==(const Vector2& v) const noexcept { return x == v.x && y == v.y; }
+		Vector2& operator*=(float f) noexcept { x *= f; y *= f; return *this; }
+		Vector2& operator/=(float f) noexcept { x /= f; y /= f; return *this; }
 	};
+
+	// Symmetric scalar ops
+	constexpr inline Vector2 operator*(float f, const Vector2& v) noexcept { return v * f; }
+	constexpr inline Vector2 operator+(float f, const Vector2& v) noexcept { return v + f; }
 
 }
 

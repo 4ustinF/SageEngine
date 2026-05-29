@@ -33,6 +33,7 @@
     <ClInclude Include="Inc\RigidAABB.h">
       <Filter>Inc\NonStatic</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\RBPhysicsObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">

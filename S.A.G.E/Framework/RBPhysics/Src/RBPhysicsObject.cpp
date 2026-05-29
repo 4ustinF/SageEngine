@@ -56,7 +56,7 @@ void RBPhysicsObject::Integrate(float deltaTime)
 {
 	// Linear integration
 	mVelocity += mAcceleration * deltaTime;
-	mPosition += mVelocity * deltaTime;
+	//mPosition += mVelocity * deltaTime;
 
 	// Angular integration
 	mAngularVelocity += mAngularAcceleration * deltaTime;

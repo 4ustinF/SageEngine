@@ -11,6 +11,7 @@
 #include "VertexTypes.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
 namespace
@@ -578,7 +579,7 @@ void SimpleDraw::AddSphere(const Math::Sphere& sphere, Color color)
 	AddSphere(sphere.center, sphere.slices, sphere.rings, sphere.radius, color);
 }
 
-void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float radius, Color color)
+void SimpleDraw::AddSphere(Vector3 center, int slices, int rings, float radius, Color color)
 {
 	if (slices < 4) {
 		slices = 4;
@@ -596,7 +597,7 @@ void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float ra
 	const float sectorLeap = Math::Constants::Pi / rings;
 	float sectorLeapAngle; //Radian
 
-	Math::Vector3 v0, v1 = {};
+	Vector3 v0, v1 = {};
 	std::vector<Math::Vector3> vertices;
 
 	for (int i = 0; i <= rings; ++i) {
@@ -625,6 +626,81 @@ void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float ra
 		AddLine(v0, v1, color);
 	}
 }
+
+
+void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float radius, Color color, const Quaternion& rotation)
+{
+	if (slices < 4) {
+		slices = 4;
+	}
+	if (rings < 2) {
+		rings = 2;
+	}
+	if (radius < 0.0f) {
+		radius *= -1.0f;
+	}
+
+	const float sectorStep = Math::Constants::TwoPi / slices;
+	const float ringStep = Math::Constants::Pi / rings;
+
+	std::vector<Math::Vector3> vertices;
+	vertices.reserve((rings + 1) * (slices + 1));
+
+	Math::Vector3 v0, v1;
+
+	// =========================
+	// Generate + horizontal lines
+	// =========================
+	for (int i = 0; i <= rings; ++i)
+	{
+		float ringAngle = i * ringStep;
+
+		for (int j = 0; j <= slices; ++j)
+		{
+			float sectorAngle = j * sectorStep;
+
+			// 1. Local position (centered at origin)
+			Math::Vector3 localPos = {
+				radius * sin(sectorAngle) * sin(ringAngle),
+				radius * cos(ringAngle),
+				radius * cos(sectorAngle) * sin(ringAngle)
+			};
+
+			// 2. Apply rotation
+			Math::Vector3 rotated = rotation * localPos;
+
+			// 3. Translate
+			v1 = rotated + center;
+
+			vertices.push_back(v1);
+
+			// Horizontal lines (along slices)
+			if (j > 0)
+			{
+				AddLine(v0, v1, color);
+			}
+
+			v0 = v1;
+		}
+	}
+
+	// =========================
+	// Vertical lines (fixed)
+	// =========================
+	const int stride = slices + 1;
+
+	for (int ring = 0; ring < rings; ++ring)
+	{
+		for (int slice = 0; slice <= slices; ++slice)
+		{
+			int current = ring * stride + slice;
+			int next = (ring + 1) * stride + slice;
+
+			AddLine(vertices[current], vertices[next], color);
+		}
+	}
+}
+
 
 void SimpleDraw::AddFilledSphere(const Math::Sphere& sphere, Color color)
 {

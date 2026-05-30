@@ -39,6 +39,7 @@ namespace SAGE::Graphics
 
 		void AddSphere(const Math::Sphere& sphere, Color color);
 		void AddSphere(Math::Vector3 center, int slices, int rings, float radius, Color color);
+		void AddSphere(Math::Vector3 center, int slices, int rings, float radius, Color color, const Math::Quaternion& rotation);
 		void AddFilledSphere(const Math::Sphere& sphere, Color color);
 		void AddFilledSphere(Math::Vector3 center, int slices, int rings, float radius, Color color);
 

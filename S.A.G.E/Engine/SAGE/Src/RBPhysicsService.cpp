@@ -14,100 +14,35 @@ void RBPhysicsService::Initialize()
 {
 	SetServiceName("RBPhysics Service");
 	
-	mDirectionalLight.direction = Math::Normalize({ 1.0f, -1.0f, 1.0f });
-	mDirectionalLight.ambient = { 0.1f, 0.1f, 0.1f, 1.0f };
-	mDirectionalLight.diffuse = { 0.7f, 0.7f, 0.7f, 1.0f };
-	mDirectionalLight.specular = { 0.7f, 0.7f, 0.7f, 1.0f };
-
-	mStandardEffect.Initialize(Sampler::Filter::Linear);
-	mStandardEffect.SetDirectionalLight(mDirectionalLight);
-	mStandardEffect.SetDepthBias(0.000021f);
-	mStandardEffect.SetBumpWeight(0.25f);
-	mStandardEffect.SetSampleSize(0);
-
 	mPhysicsWorld.Initialize();
 
 	const Vector3 ballPos = Vector3(0.0f, 10.0f, 0.0f);
 	const float ballRadius = 1.0f;
-	mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(ballPos, ballRadius), Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, -9.81, 0.0f));
+	mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(ballPos, ballRadius), Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, -9.81f, 0.0f));
 	//mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f), Vector3(0.0f, 0.0f, 1.141f / 2.0f));
 	//mPhysicsObject2 = new RBPhysicsObject(new BoundingSphere(Vector3(1.414f / 2.0f * 7.0f, 0.0f, 1.414f / 2.0f * 7.0f), 1.0f), Vector3(-1.414f / 2.0f, 0.0f, -1.414f / 2.0f));
 	mPhysicsWorld.AddObject(*mPhysicsObject1);
 	//mPhysicsWorld.AddObject(*mPhysicsObject2);
-
-	// Ball
-	// TODO: We need a mesh renderer comp.
-	auto tm = TextureManager::Get();
-	mBallRenderObject.material.ambient = { 0.5f, 0.5f, 0.5f, 1.0f };
-	mBallRenderObject.material.diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
-	mBallRenderObject.material.specular = { 0.5f, 0.5f, 0.5f, 1.0f };
-	mBallRenderObject.material.power = 10.0f;
-	mBallRenderObject.diffuseMapId = tm->LoadTexture("basketball.jpg");
-	mBallRenderObject.meshBuffer.Initialize(MeshBuilder::CreateSphere(512, 1024, ballRadius));
-	mBallRenderObject.transform.position = ballPos;
-	mBallRenderObject.transform.rotation = Quaternion::RotationLook(Vector3(1.0f, 0.0f, 1.0f));
 }
 
 void RBPhysicsService::Terminate()
 {
-	mStandardEffect.Terminate();
-	mBallRenderObject.Terminate();
 	mPhysicsWorld.Clear();
 }
 
 void RBPhysicsService::Update(float deltaTime)
 {
 	mPhysicsWorld.Update(deltaTime);
-
-	RBPhysicsObject& physicsObject = mPhysicsWorld.GetPhysicsObject(0);
-	mBallRenderObject.transform.position = physicsObject.GetPosition();
-	mBallRenderObject.transform.rotation = physicsObject.GetOrientation();
-
-	float force = 50.0f;
-	float torque = 1.0f;
-	auto inputSystem = Input::InputSystem::Get();
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD1)) // Torque in x axis
-	{
-		physicsObject.ApplyTorque(Vector3(torque, 0.0f, 0.0f));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD2)) // Torque in y axis
-	{
-		physicsObject.ApplyTorque(Vector3(0.0f, torque, 0.0f));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD3)) // Torque in z axis
-	{
-		physicsObject.ApplyTorque(Vector3(0.0f, 0.0f, torque));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD4)) // Force in x axis
-	{
-		physicsObject.ApplyForce(Vector3(force, 0.0f, 0.0f));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD5)) // Force in y axis
-	{
-		physicsObject.ApplyForce(Vector3(0.0f, force, 0.0f));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD6)) // Force in z axis
-	{
-		physicsObject.ApplyForce(Vector3(0.0f, 0.0f, force));
-	}
+	DebugInput();
 }
 
 void RBPhysicsService::Render()
 {
 	//mPhysicsWorld.DebugDraw(); // ?
-	auto& camera = GetWorld().GetService<CameraService>()->GetCamera();
-	mStandardEffect.SetCamera(camera);
+	SimpleDraw::AddSphere(Vector3(0.0f, 8.0f, 0.0f), 32, 32, 8, Colors::Red); // Render Dome
 
-	mStandardEffect.Begin();
-	mStandardEffect.Render(mBallRenderObject);
-	mStandardEffect.End();
-
-	SimpleDraw::AddSphere(Vector3(0.0f, 8.0f, 0.0f), 32, 32, 8, Colors::Red);
+	RBPhysicsObject& physicsObject = mPhysicsWorld.GetPhysicsObject(0);
+	SimpleDraw::AddSphere(physicsObject.GetPosition(), 16, 16, 1.0f, Colors::Blue, physicsObject.GetOrientation()); // Render Ball
 }
 
 void RBPhysicsService::DebugUI()
@@ -115,4 +50,42 @@ void RBPhysicsService::DebugUI()
 	ImGui::Checkbox("Render Physics##RBPhysics", &mRenderDebugUI);
 	//mPhysicsWorld.DebugDraw();
 	mPhysicsWorld.DebugUI();
+}
+
+void RBPhysicsService::DebugInput()
+{
+	//RBPhysicsObject& physicsObject = mPhysicsWorld.GetPhysicsObject(0);
+
+	float force = 50.0f;
+	float torque = 1.0f;
+	auto inputSystem = Input::InputSystem::Get();
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD1)) // Torque in x axis
+	{
+		mPhysicsObject1->ApplyTorque(Vector3(torque, 0.0f, 0.0f));
+	}
+
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD2)) // Torque in y axis
+	{
+		mPhysicsObject1->ApplyTorque(Vector3(0.0f, torque, 0.0f));
+	}
+
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD3)) // Torque in z axis
+	{
+		mPhysicsObject1->ApplyTorque(Vector3(0.0f, 0.0f, torque));
+	}
+
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD4)) // Force in x axis
+	{
+		mPhysicsObject1->ApplyForce(Vector3(force, 0.0f, 0.0f));
+	}
+
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD5)) // Force in y axis
+	{
+		mPhysicsObject1->ApplyForce(Vector3(0.0f, force, 0.0f));
+	}
+
+	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD6)) // Force in z axis
+	{
+		mPhysicsObject1->ApplyForce(Vector3(0.0f, 0.0f, force));
+	}
 }

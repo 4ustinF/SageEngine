@@ -15,6 +15,8 @@ namespace SAGE
 		void Render() override;
 		void DebugUI() override;
 
+		void DebugInput(); // TODO: Remove
+
 		// TODO: Game Objects will need to sub to this service and pass on there PhysicsObjectComp
 		// This comp will contain a physics object and do what it needs to accordingly.
 
@@ -23,17 +25,10 @@ namespace SAGE
 		// TODO: When this is in the comp it should be a ptr
 		SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject1;
 		SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject2;
-		SAGE::Graphics::RenderObject mBallRenderObject;
-
-
-		SAGE::Graphics::RenderObject mContainingBallRenderObject;
 
 	private:
 
 		SAGE::RBPhysics::RBPhysicsWorld mPhysicsWorld;
 		bool mRenderDebugUI = false;
-
-		SAGE::Graphics::DirectionalLight mDirectionalLight;
-		SAGE::Graphics::StandardEffect mStandardEffect;
 	};
 }

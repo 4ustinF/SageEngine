@@ -579,6 +579,11 @@ void SimpleDraw::AddSphere(const Math::Sphere& sphere, Color color)
 	AddSphere(sphere.center, sphere.slices, sphere.rings, sphere.radius, color);
 }
 
+void SimpleDraw::AddSphere(Math::Vector3 center, int divisions, float radius, Color color)
+{
+	AddSphere(center, divisions, divisions, radius, color);
+}
+
 void SimpleDraw::AddSphere(Vector3 center, int slices, int rings, float radius, Color color)
 {
 	if (slices < 4) {
@@ -627,6 +632,10 @@ void SimpleDraw::AddSphere(Vector3 center, int slices, int rings, float radius, 
 	}
 }
 
+void SimpleDraw::AddSphere(Math::Vector3 center, int divisions, float radius, Color color, const Quaternion& rotation)
+{
+	AddSphere(center, divisions, divisions, radius, color, rotation);
+}
 
 void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float radius, Color color, const Quaternion& rotation)
 {
@@ -705,6 +714,11 @@ void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float ra
 void SimpleDraw::AddFilledSphere(const Math::Sphere& sphere, Color color)
 {
 	AddFilledSphere(sphere.center, sphere.slices, sphere.rings, sphere.radius, color);
+}
+
+void SimpleDraw::AddFilledSphere(Math::Vector3 center, int divisions, float radius, Color color)
+{
+	AddFilledSphere(center, divisions, divisions, radius, color);
 }
 
 void SimpleDraw::AddFilledSphere(Math::Vector3 center, int slices, int rings, float radius, Color color)

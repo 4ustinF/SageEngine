@@ -18,11 +18,13 @@ void RBPhysicsService::Initialize()
 
 	const Vector3 ballPos = Vector3(0.0f, 10.0f, 0.0f);
 	const float ballRadius = 1.0f;
-	mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(ballPos, ballRadius), Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, -9.81f, 0.0f));
+	mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(ballPos, ballRadius), 1.0f);
 	//mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f), Vector3(0.0f, 0.0f, 1.141f / 2.0f));
 	//mPhysicsObject2 = new RBPhysicsObject(new BoundingSphere(Vector3(1.414f / 2.0f * 7.0f, 0.0f, 1.414f / 2.0f * 7.0f), 1.0f), Vector3(-1.414f / 2.0f, 0.0f, -1.414f / 2.0f));
 	mPhysicsWorld.AddObject(*mPhysicsObject1);
-	//mPhysicsWorld.AddObject(*mPhysicsObject2);
+
+	mPhysicsObject2 = new RBPhysicsObject(new BoundingBox(Vector3(0.0f, 5.0f, 0.0f), Vector3(1.0f, 1.0f, 1.0f)), 0.0f);
+	mPhysicsWorld.AddObject(*mPhysicsObject2);
 }
 
 void RBPhysicsService::Terminate()
@@ -38,17 +40,14 @@ void RBPhysicsService::Update(float deltaTime)
 
 void RBPhysicsService::Render()
 {
-	//mPhysicsWorld.DebugDraw(); // ?
-	SimpleDraw::AddSphere(Vector3(0.0f, 8.0f, 0.0f), 32, 32, 8, Colors::Red); // Render Dome
+	SimpleDraw::AddSphere(Vector3(0.0f, 8.0f, 0.0f), 32, 32, 8, Colors::Blue); // Render Dome
 
-	RBPhysicsObject& physicsObject = mPhysicsWorld.GetPhysicsObject(0);
-	SimpleDraw::AddSphere(physicsObject.GetPosition(), 16, 16, 1.0f, Colors::Blue, physicsObject.GetOrientation()); // Render Ball
+	mPhysicsWorld.DebugDraw(); // TODO: Move back to DebugUI
 }
 
 void RBPhysicsService::DebugUI()
 {
 	ImGui::Checkbox("Render Physics##RBPhysics", &mRenderDebugUI);
-	//mPhysicsWorld.DebugDraw();
 	mPhysicsWorld.DebugUI();
 }
 
@@ -76,7 +75,7 @@ void RBPhysicsService::DebugInput()
 
 	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD4)) // Force in x axis
 	{
-		mPhysicsObject1->ApplyForce(Vector3(force, 0.0f, 0.0f));
+		mPhysicsWorld.GetPhysicsObject(0).ApplyForce(Vector3(force, 0.0f, 0.0f));
 	}
 
 	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD5)) // Force in y axis

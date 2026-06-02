@@ -3,24 +3,33 @@
 #include "Common.h"
 #include "Collider.h"
 
+
 namespace SAGE::RBPhysics
 {
+	class BoundingBox;
+
 	class BoundingSphere : public Collider
 	{
 	public:
 		BoundingSphere(const Math::Vector3& center, float radius)
-			: Collider(Collider::TYPE_SPHERE), mCenter(center), mRadius(radius)
+			: Collider(Collider::TYPE_SPHERE), mRadius(radius)
 		{
+			mCenter = center;
 		}
 
-		IntersectData IntersectBoundingSphere(const BoundingSphere& other) const;
-		void Transform(const Math::Vector3& translation) override;
-		Math::Vector3 GetCenter() const override { return mCenter; }
+		void DebugDraw(SAGE::Math::Quaternion orientation, bool fillDebugShapes) override;
 
+		void Transform(const Math::Vector3& translation) override;
 		float GetRadius() const { return mRadius; }
+		float GetRadiusSquared() const { return mRadius * mRadius; }
+
+		IntersectData IntersectBoundingSphere(const BoundingSphere& other) const;
+		IntersectData IntersectBoundingSphere(const BoundingBox& other) const;
 
 	private:
-		Math::Vector3 mCenter = Math::Vector3::Zero;
 		float mRadius = 0.0f;
+
+		// Debug Draw
+		int mDebugDivisions = 16;
 	};
 }

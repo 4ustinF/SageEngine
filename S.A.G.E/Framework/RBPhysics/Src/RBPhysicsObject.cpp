@@ -3,6 +3,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Graphics;
 using namespace SAGE::RBPhysics;
 
 RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
@@ -10,10 +11,10 @@ RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
 	mOldPosition(other.mOldPosition),
 	mVelocity(other.mVelocity),
 	mCollider(other.mCollider),
-	mAcceleration(other.mAcceleration)
+	mAcceleration(other.mAcceleration),
+	mMass(other.mMass)
 {
 	mCollider->AddReference();
-	mMass = 1.0f;
 	mInverseMass = 1.0f / mMass;
 
 	// This is for sphere body 
@@ -39,6 +40,14 @@ RBPhysicsObject::~RBPhysicsObject()
 	if (mCollider && mCollider->RemoveReference())
 	{
 		delete mCollider;
+	}
+}
+
+void RBPhysicsObject::DebugDraw(bool fillDebugShapes)
+{
+	if (mCollider)
+	{
+		mCollider->DebugDraw(mOrientation, fillDebugShapes);
 	}
 }
 

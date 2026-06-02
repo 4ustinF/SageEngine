@@ -3,8 +3,6 @@
 
 #include "IntersectData.h"
 
-#include <Input/Inc/Input.h> // TODO: Remove
-
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
@@ -32,28 +30,9 @@ void RBPhysicsWorld::DebugDraw()
 {
 	//if (!mShowDebugLines) { return; }
 
-	bool isRed = true;
-	if (mFillDebugShapes)
+	for (RBPhysicsObject& object : mObjects)
 	{
-		for (RBPhysicsObject& object : mObjects)
-		{
-			auto BP = (BoundingSphere&)object.GetCollider();
-			const float radius = BP.GetRadius();
-			const Color color = isRed ? Colors::Red : Colors::Blue;
-			isRed = !isRed;
-			SimpleDraw::AddFilledSphere(object.GetPosition(), 16, 16, radius, color);
-		}
-	}
-	else
-	{
-		for (RBPhysicsObject& object : mObjects)
-		{
-			auto BP = (BoundingSphere&)object.GetCollider();
-			const float radius = BP.GetRadius();
-			const Color color = isRed ? Colors::Red : Colors::Blue;
-			isRed = !isRed;
-			SimpleDraw::AddSphere(object.GetPosition(), 16, 16, radius, color);
-		}
+		object.DebugDraw(mFillDebugShapes);
 	}
 }
 
@@ -90,6 +69,11 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 {
 	for (RBPhysicsObject& object : mObjects)
 	{
+		if (object.GetIsStatic())
+		{
+			continue;
+		}
+
 		// Apply gravity to acceleration accumulator
 		Vector3 acceleration = object.GetAcceleration() + mSettings.gravity;
 		object.SetAcceleration(acceleration);

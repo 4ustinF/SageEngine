@@ -8,14 +8,12 @@ namespace SAGE::RBPhysics
 	class RBPhysicsObject
 	{
 	public:
-		RBPhysicsObject(Collider* collider, const Math::Vector3& velocity, const Math::Vector3& acc) :
+		RBPhysicsObject(Collider* collider, float mass) :
 			mPosition(collider->GetCenter()),
 			mOldPosition(collider->GetCenter()),
-			mVelocity(velocity),
 			mCollider(collider),
-			mAcceleration(acc)
+			mMass(mass)
 		{
-			mMass = 1.0f;
 			mInverseMass = 1.0f / mMass;
 
 			// This is for sphere body 
@@ -31,9 +29,12 @@ namespace SAGE::RBPhysics
 		void operator=(RBPhysicsObject other);
 		virtual ~RBPhysicsObject();
 
+		void DebugDraw(bool fillDebugShapes);
+
 		void Integrate(float deltaTime);
 
 		float GetMass() const { return mMass; }
+		bool GetIsStatic() const { return mMass <= 0.0f; }
 		const Math::Vector3& GetPosition() const { return mPosition; }
 		Math::Vector3 GetLocalPosition(const Math::Vector3& worldPos);
 		Math::Vector3 GetWorldPosition(const Math::Vector3& localPos);
@@ -47,6 +48,7 @@ namespace SAGE::RBPhysics
 		float GetTangentialStiffness() const { return mTangentialStiffness; }
 		float GetTangentialDampening() const { return mTangentialDampening; }
 
+		void SetMass(float mass) { mMass = mass; } // TODO: Remove?
 		void SetAcceleration(const Math::Vector3& acceleration) { mAcceleration = acceleration; } // TODO: Remove?
 		void SetPosition(const Math::Vector3& position) { mPosition = position; }
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }

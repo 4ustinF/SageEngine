@@ -38,9 +38,12 @@ namespace SAGE::Graphics
 		void AddFilledPyramid(const Math::Vector3& center, float baseLength, float baseWidth, float height, const Math::Quaternion& rotation, Color color);
 
 		void AddSphere(const Math::Sphere& sphere, Color color);
+		void AddSphere(Math::Vector3 center, int divisions, float radius, Color color);
 		void AddSphere(Math::Vector3 center, int slices, int rings, float radius, Color color);
+		void AddSphere(Math::Vector3 center, int divisions, float radiusColor, Color color, const Math::Quaternion& rotation);
 		void AddSphere(Math::Vector3 center, int slices, int rings, float radius, Color color, const Math::Quaternion& rotation);
 		void AddFilledSphere(const Math::Sphere& sphere, Color color);
+		void AddFilledSphere(Math::Vector3 center, int divisions, float radius, Color color);
 		void AddFilledSphere(Math::Vector3 center, int slices, int rings, float radius, Color color);
 
 		void AddTransform(Math::Matrix4 matrix);

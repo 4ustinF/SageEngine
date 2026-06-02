@@ -11,8 +11,8 @@ namespace SAGE::RBPhysics
 	public:
 		enum
 		{
+			TYPE_BOX,
 			TYPE_SPHERE,
-			TYPE_AABB,
 
 			TYPE_SIZE,
 		};
@@ -22,9 +22,12 @@ namespace SAGE::RBPhysics
 		{
 		}
 
+		virtual void DebugDraw(SAGE::Math::Quaternion orientation, bool fillDebugShapes) {}
+
 		IntersectData Intersect(const Collider& other) const;
 		virtual void Transform(const Math::Vector3& translation) {}
-		virtual Math::Vector3 GetCenter() const { return Math::Vector3::Zero; }
+		Math::Vector3 GetCenter() const { return mCenter; }
+		const SAGE::Math::Quaternion& GetOrientation() const { return mOrientation; }
 
 		int GetType() const { return mType; }
 		
@@ -33,8 +36,16 @@ namespace SAGE::RBPhysics
 		void AddReference() { mRefCount++; }
 		bool RemoveReference() { return --mRefCount == 0; }
 
+		void SetDebugColor(SAGE::Graphics::Color debugColor) { mDebugColor = debugColor; }
+
+	protected:
+		SAGE::Graphics::Color mDebugColor = SAGE::Graphics::Colors::Red;
+		SAGE::Math::Vector3 mCenter = SAGE::Math::Vector3::Zero;
+		SAGE::Math::Quaternion mOrientation = SAGE::Math::Quaternion::Identity;
+
 	private:
 		int mType;
 		int mRefCount = 0;
+
 	};
 }

@@ -1,7 +1,32 @@
-﻿  RBPhysicsService.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\RBPhysicsService.cpp(21,123): warning C4305: 'argument': truncation from 'double' to 'float'
-  (compiling source file '/Src/RBPhysicsService.cpp')
-  
+﻿  Precompiled.cpp
+  AnimatorComponent.cpp
+  App.cpp
+  BPhysicsComponent.cpp
+  BPhysicsService.cpp
+  CameraComponent.cpp
+  CameraService.cpp
+  CameraUtil.cpp
+  ColliderComponent.cpp
+  FPSCameraControllerComponent.cpp
+  FollowCameraControllerComponent.cpp
+  GameObject.cpp
+  GameObjectFactory.cpp
+  GameWorld.cpp
+  ModelComponent.cpp
+  ParticleComponent.cpp
+  ParticleService.cpp
+  PhysicsDebugDraw.cpp
+  PhysicsService.cpp
+  PostProcessingService.cpp
+  RBPhysicsService.cpp
+  Generating Code...
+  Compiling...
+  RenderService.cpp
+  RigidBodyComponent.cpp
   SAGE.cpp
+  SpawnerComponent.cpp
+  TerrainService.cpp
+  TransformComponent.cpp
+  UIService.cpp
   Generating Code...
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

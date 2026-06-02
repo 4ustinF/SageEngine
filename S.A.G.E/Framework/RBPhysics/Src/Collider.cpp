@@ -1,8 +1,9 @@
 #include "Precompiled.h"
 #include "Collider.h"
 
-#include "IntersectData.h"
+#include "BoundingBox.h"
 #include "BoundingSphere.h"
+#include "IntersectData.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -10,10 +11,22 @@ using namespace SAGE::RBPhysics;
 
 IntersectData Collider::Intersect(const Collider& other) const
 {
-	if (mType == TYPE_SPHERE && other.GetType() == TYPE_SPHERE)
+	if (mType == TYPE_SPHERE)
 	{
 		BoundingSphere* self = (BoundingSphere*)this; // TODO: Safer cast?
-		return self->IntersectBoundingSphere((BoundingSphere&)other); // TODO: Better cast?
+
+		if (other.GetType() == TYPE_SPHERE)
+		{
+			return self->IntersectBoundingSphere((BoundingSphere&)other); // TODO: Better cast?
+		}
+		else if (other.GetType() == TYPE_BOX)
+		{
+			return self->IntersectBoundingSphere((BoundingBox&)other); // TODO: Better cast?
+		}
+	}
+	else if (mType == TYPE_BOX)
+	{
+		// TODO: 
 	}
 
 	return IntersectData(false, Vector3::Zero); // TODO: Should never reach this add error logs if we do.

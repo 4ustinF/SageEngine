@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\BoundingBox.h" />
     <ClInclude Include="Inc\BoundingSphere.h" />
     <ClInclude Include="Inc\Collider.h" />
     <ClInclude Include="Inc\Common.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\BoundingBox.cpp" />
     <ClCompile Include="Src\BoundingSphere.cpp" />
     <ClCompile Include="Src\Collider.cpp" />
     <ClCompile Include="Src\RBPhysicsObject.cpp" />

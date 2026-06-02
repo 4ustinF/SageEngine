@@ -2,6 +2,7 @@
 
 #include "Common.h"
 
+#include "BoundingBox.h"
 #include "BoundingSphere.h"
 //#include "Collider.h"
 #include "IntersectData.h"

@@ -29,5 +29,5 @@ IntersectData Collider::Intersect(const Collider& other) const
 		// TODO: 
 	}
 
-	return IntersectData(false, Vector3::Zero); // TODO: Should never reach this add error logs if we do.
+	return IntersectData(); // TODO: Should never reach this add error logs if we do.
 }

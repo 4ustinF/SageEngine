@@ -13,6 +13,7 @@ namespace SAGE::RBPhysics
 			float drag = 0.0f;
 			float maxAirdrag = 1.0f;
 			float airDragCoeficient = 0.05f;
+			float bounceCoeficient = 0.5f; // 0 = no bounce, 1 = perfect bounce
 		};
 		RBPhysicsWorld() = default;
 
@@ -65,5 +66,7 @@ namespace SAGE::RBPhysics
 		void DetectCollisionWithDome(float deltaTime);
 		void ResolveCollisionWithDome(RBPhysicsObject& object, float deltaTime);
 		Math::Vector3 GetVelocityAtPoint(const RBPhysicsObject& object, const Math::Vector3& localPoint);
+
+		void ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData);
 	};
 }

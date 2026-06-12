@@ -32,6 +32,7 @@ namespace SAGE::RBPhysics
 		void DebugDraw(bool fillDebugShapes);
 
 		void Integrate(float deltaTime);
+		void ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData);
 
 		float GetMass() const { return mMass; }
 		bool GetIsStatic() const { return mMass <= 0.0f; }

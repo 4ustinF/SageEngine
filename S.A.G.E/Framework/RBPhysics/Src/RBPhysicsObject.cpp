@@ -1,6 +1,8 @@
 ﻿#include "Precompiled.h"
 #include "RBPhysicsObject.h"
 
+#include "IntersectData.h"
+
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
@@ -79,6 +81,43 @@ void RBPhysicsObject::Integrate(float deltaTime)
 	// Clear accumulators (forces/torques should be reapplied each frame)
 	mAcceleration = Vector3::Zero;
 	mAngularAcceleration = Vector3::Zero;
+}
+
+void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData)
+{
+	const Vector3 normal = intersectData.GetNormal();
+	mPosition += normal * intersectData.GetPenetration(); // If other is static...
+
+	// If they both can move - Heavier objects move less
+	float invMassSphere = 1.0f / mMass;
+	float invMassBox = 1.0f / otherObject.GetMass();
+
+	//float totalInvMass = invMassSphere + invMassBox;
+	//mPosition += normal * intersectData.GetPenetration() * (invMassSphere / totalInvMass); // If other is not static
+	//otherPos -= normal * penetration * (invMassBox / totalInvMass);
+
+	// Velocity
+	Vector3 relativeVelocity = mVelocity - otherObject.GetVelocity(); // Relative velocity:
+
+	float velAlongNormal = Dot(relativeVelocity, normal); // Velocity along the collision normal
+	if (velAlongNormal > 0.0f) // If they're already separating:
+	{
+		return;
+	}
+
+	float e = 0.5f; // 0 = no bounce, 1 = perfect bounce // TODO: Adjust 
+
+	// Impulse magnitude:
+	float j = -(1.0f + e) * velAlongNormal / (invMassSphere + otherObject.GetMass());
+
+	// Impulse vector:
+	Vector3 impulse = j * normal;
+
+	////Apply:
+	//sphereVelocity += impulse * invMassSphere;
+	//boxVelocity -= impulse * invMassBox;
+
+	mVelocity += impulse * invMassSphere;
 }
 
 // Force applies acceleration directly (existing behavior kept)

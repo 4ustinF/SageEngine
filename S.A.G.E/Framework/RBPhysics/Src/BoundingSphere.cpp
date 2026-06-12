@@ -33,39 +33,30 @@ Vector3 BoundingSphere::GetClosestPoint(const Collider& otherCollider) const
 
 IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingSphere& other) const
 {
-	const float radiusDistance = mRadius + other.GetRadius();
-	Vector3 direction = (other.GetCenter() - mCenter);
-	const float centerDistance = Math::Magnitude(direction);
-	direction /= centerDistance;
+	//const float radiusDistance = mRadius + other.GetRadius();
+	//Vector3 direction = (other.GetCenter() - mCenter);
+	//const float centerDistance = Math::Magnitude(direction);
+	//direction /= centerDistance;
 
-	const float distance = centerDistance - radiusDistance;
-	return IntersectData(distance < 0, direction * distance);
+	//const float distance = centerDistance - radiusDistance;
+	//return IntersectData(distance < 0, direction * distance);
+
+	Vector3 delta = other.GetCenter() - mCenter;
+
+	float distance = Magnitude(delta);
+	float radiusSum = mRadius + other.GetRadius();
+
+	if (distance >= radiusSum)
+		return IntersectData();
+
+	const Vector3 normal = delta / distance;
+	const Vector3 contactPoint = mCenter + normal * mRadius;
+	const float penetration = radiusSum - distance;
+	return IntersectData(true, -normal, contactPoint , penetration);
 }
-
-//IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingBox& other) const
-//{
-//	bool doesIntersect = false;
-//	const Vector3 min = other.GetMinExtend();
-//	const Vector3 max = other.GetMaxExtend();
-//	const Vector3 point = GetClosestPoint(other);
-//
-//	if (point.x < min.x || point.x > max.x ||
-//		point.y < min.y || point.y > max.y ||
-//		point.z < min.z || point.z > max.z)
-//	{
-//		doesIntersect = false;
-//	}
-//	else
-//	{
-//		doesIntersect = true;
-//	}
-//
-//	return IntersectData(doesIntersect, {});
-//}
 
 IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingBox& other)// const
 {
-	IntersectData intersectData = IntersectData(false, {});
 	const Vector3 min = other.GetMinExtend();
 	const Vector3 max = other.GetMaxExtend();
 
@@ -81,16 +72,14 @@ IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingBox& other)/
 	float distSq = MagnitudeSqr(delta);
 	float radiusSq = mRadius * mRadius;
 
-	if (distSq > radiusSq)
+	if (distSq > radiusSq) // No intersection
 	{
-		// No intersection
-		return intersectData;
+		return IntersectData();
 	}
 
 	// 3. Compute penetration depth
 	float dist = Sqr(distSq);
-
-	float penetration;
+	float penetration = 0.0f;
 
 	if (dist > 0.0f)
 	{
@@ -114,10 +103,7 @@ IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingBox& other)/
 		penetration = mRadius + minPen;
 	}
 
-	intersectData.mDoesIntersect = true;
-	intersectData.tempDelta = delta;
-	intersectData.tempDist = dist;
-	intersectData.mPenetration = penetration;
-	return intersectData;
+	const Vector3 normal = delta / dist;
+	return IntersectData(true, normal, {}, penetration);
 }
 

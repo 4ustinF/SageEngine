@@ -16,7 +16,8 @@ void RBPhysicsService::Initialize()
 	
 	mPhysicsWorld.Initialize();
 
-	const Vector3 ballPos = Vector3(1.75f, 10.0f, 0.0f);
+	//const Vector3 ballPos = Vector3(1.75f, 10.0f, 0.0f);
+	const Vector3 ballPos = Vector3(0.0f, 10.0f, 0.0f);
 	const float ballRadius = 1.0f;
 	mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(ballPos, ballRadius), 1.0f);
 	//mPhysicsObject1 = new RBPhysicsObject(new BoundingSphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f), Vector3(0.0f, 0.0f, 1.141f / 2.0f));
@@ -24,6 +25,7 @@ void RBPhysicsService::Initialize()
 	mPhysicsWorld.AddObject(*mPhysicsObject1);
 
 	mPhysicsObject2 = new RBPhysicsObject(new BoundingBox(Vector3(0.0f, 3.0f, 0.0f), Vector3(1.0f, 1.0f, 1.0f)), 0.0f);
+	//mPhysicsObject2 = new RBPhysicsObject(new BoundingSphere(Vector3(0.0f, 3.0f, 0.0f), ballRadius), 0.0f);
 	mPhysicsWorld.AddObject(*mPhysicsObject2);
 }
 

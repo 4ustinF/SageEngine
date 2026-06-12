@@ -123,12 +123,13 @@ void RBPhysicsWorld::HandleCollisions()
 
 			if (intersectData.GetDoesIntersect())
 			{
-				const Vector3 direction = Normalize(intersectData.GetDirection());
-				const Vector3 primVel = primaryObject.GetVelocity();
-				const Vector3 otherDirection = Reflect(direction, Normalize(primVel));
-
-				primaryObject.SetVelocity(Reflect(primVel, otherDirection));
-				secondaryObject.SetVelocity(Reflect(secondaryObject.GetVelocity(), direction));
+				// Old sphere vs sphere logic
+				//const Vector3 direction = Normalize(intersectData.GetDirection());
+				//const Vector3 primVel = primaryObject.GetVelocity();
+				//const Vector3 otherDirection = Reflect(direction, Normalize(primVel));
+				//
+				//primaryObject.SetVelocity(Reflect(primVel, otherDirection));
+				//secondaryObject.SetVelocity(Reflect(secondaryObject.GetVelocity(), direction));
 			}
 		}
 	}
@@ -142,7 +143,60 @@ void RBPhysicsWorld::HandleCollisions()
 
 			if (intersectData.GetDoesIntersect())
 			{
-				// TODO:
+				// TODO: Do this better. 
+				if (primaryObject.GetCollider().GetType() == primaryObject.GetCollider().TYPE_SPHERE)
+				{
+					if (staticObject.GetCollider().GetType() == staticObject.GetCollider().TYPE_SPHERE)
+					{
+					}
+					else if (staticObject.GetCollider().GetType() == staticObject.GetCollider().TYPE_BOX)
+					{
+						//-------------------------------------------------------
+						// If aabb is static
+						Vector3 normal = intersectData.tempDelta / intersectData.tempDist;
+						primaryObject.SetPosition(primaryObject.GetPosition() + (normal * intersectData.GetPenetration()));
+
+						// If they both can move - Heavier objects move less
+						float invMassSphere = 1.0f / primaryObject.GetMass();
+						//float invMassBox = 1.0f / boxMass;
+
+						//float totalInvMass = invMassSphere + invMassBox;
+
+						//spherePos += normal * penetration * (invMassSphere / totalInvMass);
+						//boxPos -= normal * penetration * (invMassBox / totalInvMass);
+						//-------------------------------------------------------
+
+						// Velocity
+						//Vec3 relativeVelocity = sphereVelocity - boxVelocity; // Relative velocity:
+						Vector3 relativeVelocity = primaryObject.GetVelocity(); // - 0.0.0 The box isnt moving
+
+						//float velAlongNormal = dot(relativeVelocity, normal); // Velocity along the collision normal:
+						float velAlongNormal = Dot(relativeVelocity, normal);
+
+						//if (velAlongNormal > 0.0f) // If they're already separating:
+						//	return;
+						if (velAlongNormal > 0.0f) // If they're already separating:
+						{
+							continue;
+						}
+
+						float e = 0.5f; // 0 = no bounce, 1 = perfect bounce // TODO: Adjust 
+
+						// Impulse magnitude:
+						//float j = -(1.0f + e) * velAlongNormal / (invMassSphere + invMassBox);
+						float j = -(1.0f + e) * velAlongNormal / (invMassSphere + 0.0f);
+
+						// Impulse vector:
+						//Vec3 impulse = j * normal;
+						Vector3 impulse = j * normal;
+
+						////Apply:
+						//sphereVelocity += impulse * invMassSphere;
+						//boxVelocity -= impulse * invMassBox;
+
+						primaryObject.SetVelocity(primaryObject.GetVelocity() + (impulse * invMassSphere));
+					}
+				}
 			}
 		}
 	}

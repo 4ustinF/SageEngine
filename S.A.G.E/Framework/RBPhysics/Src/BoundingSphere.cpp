@@ -63,8 +63,9 @@ IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingSphere& othe
 //	return IntersectData(doesIntersect, {});
 //}
 
-IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingBox& other) const
+IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingBox& other)// const
 {
+	IntersectData intersectData = IntersectData(false, {});
 	const Vector3 min = other.GetMinExtend();
 	const Vector3 max = other.GetMaxExtend();
 
@@ -83,7 +84,7 @@ IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingBox& other) 
 	if (distSq > radiusSq)
 	{
 		// No intersection
-		return IntersectData(false, {});
+		return intersectData;
 	}
 
 	// 3. Compute penetration depth
@@ -113,6 +114,10 @@ IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingBox& other) 
 		penetration = mRadius + minPen;
 	}
 
-	return IntersectData(true, {});
+	intersectData.mDoesIntersect = true;
+	intersectData.tempDelta = delta;
+	intersectData.tempDist = dist;
+	intersectData.mPenetration = penetration;
+	return intersectData;
 }
 

@@ -25,7 +25,7 @@ namespace SAGE::RBPhysics
 		Math::Vector3 GetClosestPoint(const Collider& otherCollider) const;
 
 		IntersectData IntersectBoundingSphere(const BoundingSphere& other) const;
-		IntersectData IntersectBoundingSphere(const BoundingBox& other) const;
+		IntersectData IntersectBoundingSphere(const BoundingBox& other);// const;
 
 	private:
 		float mRadius = 0.0f;

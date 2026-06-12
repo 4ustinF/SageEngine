@@ -60,17 +60,17 @@ void RBPhysicsService::DebugInput()
 	auto inputSystem = Input::InputSystem::Get();
 	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD1)) // Torque in x axis
 	{
-		mPhysicsObject1->ApplyTorque(Vector3(torque, 0.0f, 0.0f));
+		mPhysicsWorld.GetPhysicsObject(0).ApplyTorque(Vector3(torque, 0.0f, 0.0f));
 	}
 
 	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD2)) // Torque in y axis
 	{
-		mPhysicsObject1->ApplyTorque(Vector3(0.0f, torque, 0.0f));
+		mPhysicsWorld.GetPhysicsObject(0).ApplyTorque(Vector3(0.0f, torque, 0.0f));
 	}
 
 	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD3)) // Torque in z axis
 	{
-		mPhysicsObject1->ApplyTorque(Vector3(0.0f, 0.0f, torque));
+		mPhysicsWorld.GetPhysicsObject(0).ApplyTorque(Vector3(0.0f, 0.0f, torque));
 	}
 
 	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD4)) // Force in x axis
@@ -80,11 +80,11 @@ void RBPhysicsService::DebugInput()
 
 	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD5)) // Force in y axis
 	{
-		mPhysicsObject1->ApplyForce(Vector3(0.0f, force, 0.0f));
+		mPhysicsWorld.GetPhysicsObject(0).ApplyForce(Vector3(0.0f, force, 0.0f));
 	}
 
 	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD6)) // Force in z axis
 	{
-		mPhysicsObject1->ApplyForce(Vector3(0.0f, 0.0f, force));
+		mPhysicsWorld.GetPhysicsObject(0).ApplyForce(Vector3(0.0f, 0.0f, force));
 	}
 }

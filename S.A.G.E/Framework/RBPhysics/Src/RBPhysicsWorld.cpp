@@ -21,7 +21,7 @@ void RBPhysicsWorld::Clear()
 void RBPhysicsWorld::Update(float deltaTime)
 {
 	Simulate(deltaTime);
-	//HandleCollisions();
+	HandleCollisions();
 
 	DetectCollisionWithDome(deltaTime);
 }
@@ -31,6 +31,11 @@ void RBPhysicsWorld::DebugDraw()
 	//if (!mShowDebugLines) { return; }
 
 	for (RBPhysicsObject& object : mObjects)
+	{
+		object.DebugDraw(mFillDebugShapes);
+	}
+
+	for (RBPhysicsObject& object : mStaticObjects)
 	{
 		object.DebugDraw(mFillDebugShapes);
 	}
@@ -61,8 +66,14 @@ void RBPhysicsWorld::DebugUI()
 
 int RBPhysicsWorld::AddObject(const RBPhysicsObject& object)
 {
-	mObjects.push_back(object);
-	return static_cast<int>(mObjects.size()) - 1;
+	if (object.GetMass() > 0.0f)
+	{
+		mObjects.push_back(object);
+		return static_cast<int>(mObjects.size()) - 1;
+	}
+
+	mStaticObjects.push_back(object);
+	return static_cast<int>(mStaticObjects.size()) - 1;
 }
 
 void RBPhysicsWorld::Simulate(float deltaTime)
@@ -118,6 +129,20 @@ void RBPhysicsWorld::HandleCollisions()
 
 				primaryObject.SetVelocity(Reflect(primVel, otherDirection));
 				secondaryObject.SetVelocity(Reflect(secondaryObject.GetVelocity(), direction));
+			}
+		}
+	}
+
+	// Static collision
+	for (RBPhysicsObject& primaryObject : mObjects)
+	{
+		for (RBPhysicsObject& staticObject : mStaticObjects)
+		{
+			IntersectData intersectData = primaryObject.GetCollider().Intersect(staticObject.GetCollider());
+
+			if (intersectData.GetDoesIntersect())
+			{
+				// TODO:
 			}
 		}
 	}

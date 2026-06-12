@@ -22,6 +22,7 @@ namespace SAGE::RBPhysics
 		void Transform(const Math::Vector3& translation) override;
 		float GetRadius() const { return mRadius; }
 		float GetRadiusSquared() const { return mRadius * mRadius; }
+		Math::Vector3 GetClosestPoint(const Collider& otherCollider) const;
 
 		IntersectData IntersectBoundingSphere(const BoundingSphere& other) const;
 		IntersectData IntersectBoundingSphere(const BoundingBox& other) const;

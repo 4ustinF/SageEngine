@@ -39,11 +39,24 @@ namespace SAGE::RBPhysics
 			return static_cast<int>(mObjects.size());
 		}
 
+		// TODO: These are temp please remove.
+		RBPhysicsObject& GetStaticPhysicsObject(int index)
+		{
+			return mStaticObjects[index];
+		}
+
+		// TODO: These are temp please remove.
+		int GetStaticObjectsCount() const
+		{
+			return static_cast<int>(mStaticObjects.size());
+		}
+
 	private:
 		void Simulate(float deltaTime);
 		void HandleCollisions();
 
 		std::vector<RBPhysicsObject> mObjects;
+		std::vector<RBPhysicsObject> mStaticObjects;
 
 		Settings mSettings;
 		bool mShowDebugLines = true;

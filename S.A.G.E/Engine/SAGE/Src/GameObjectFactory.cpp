@@ -43,6 +43,11 @@ void GameObjectFactory::Make(std::filesystem::path templateFile, GameObject& gam
 	rj::Document document;
 	document.ParseStream(readStream);
 
+	if (document.HasMember("ObjectName") && document["ObjectName"].IsString())
+	{
+		gameObject.SetName(document["ObjectName"].GetString());
+	}
+
 	auto components = document["Components"].GetObj();
 	for (auto& component : components)
 	{

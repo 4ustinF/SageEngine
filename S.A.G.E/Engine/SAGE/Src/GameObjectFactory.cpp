@@ -48,6 +48,11 @@ void GameObjectFactory::Make(std::filesystem::path templateFile, GameObject& gam
 		gameObject.SetName(document["ObjectName"].GetString());
 	}
 
+	if (document.HasMember("HierarchyPath") && document["HierarchyPath"].IsString())
+	{
+		gameObject.SetHierarchyPath(document["HierarchyPath"].GetString());
+	}
+
 	auto components = document["Components"].GetObj();
 	for (auto& component : components)
 	{

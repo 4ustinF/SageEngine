@@ -31,16 +31,14 @@ void GameWorld::Terminate()
 	ASSERT(!mUpdating, "GameWorld - Cannot terminate world during update.");
 	if (!mInitialized) { return; }
 
+	mHierarchySections.clear();
+
 	// Destroy all remaining game objects
 	for (auto gameObject : mUpdateList) {
 		DestroyGameObject(gameObject->GetHandle());
 	}
 	ProcessDestroyList();
 	ASSERT(mUpdateList.empty(), "GameWorld - failed to clean up game objects.");
-
-	//for (auto& service : mServices) {
-	//	service->Terminate();
-	//}
 
 	for (std::vector<std::unique_ptr<SAGE::Service>>::reverse_iterator it = mServices.rbegin(); it != mServices.rend(); ++it) {
 		it->get()->Terminate();
@@ -86,31 +84,8 @@ void GameWorld::Render()
 
 void GameWorld::DebugUI()
 {
-	//for (auto& service : mServices) {
-	//	service->DebugUI();
-	//}
-
-	// List of Services
 	ImGui::Begin("Hierarchy##GameWorld", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-	for (auto& service : mServices) {
-		const std::string objectName = service.get()->GetServiceName() + "##GameWorld";
-		if (ImGui::Button(objectName.c_str()))
-		{
-			mInspectorService = service.get();
-			mInspectorGameObject = nullptr;
-		}
-	}
-	ImGui::Separator();
-
-	// List of gameobjects
-	for (auto& object : mUpdateList) {
-		const std::string objectName = object->GetName() + "##GameWorld";
-		if (ImGui::Button(objectName.c_str()))
-		{
-			mInspectorService = nullptr;
-			mInspectorGameObject = object;
-		}
-	}
+	DrawHierarchy();
 	ImGui::End();
 
 	ImGui::Begin("Inspector##GameWorld", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
@@ -245,8 +220,11 @@ GameObject* GameWorld::CreateGameObject(std::filesystem::path templateFile)
 	newObject->mHandle = handle;
 	newObject->Initialize();
 
-	// Add gameonject to update list
+	// Add gameobject to update list
 	mUpdateList.push_back(newObject.get());
+
+	// Dirty Hierarchy
+	mHierarchyDirty = true;
 
 	return newObject.get();
 }
@@ -288,6 +266,11 @@ void GameWorld::ProcessDestroyList()
 {
 	ASSERT(mInitialized, "GameWorld - world must be initialized first before destroying game objects.");
 
+	if (mToBeDestroyed.size() > 0)
+	{
+		mHierarchyDirty = true;
+	}
+
 	for (auto index : mToBeDestroyed)
 	{
 		auto& slot = mGameObjectSlots[index];
@@ -308,3 +291,91 @@ void GameWorld::ProcessDestroyList()
 
 	mToBeDestroyed.clear();
 }
+
+void GameWorld::RebuildHierarchy()
+{
+	mHierarchySections.clear();
+
+	for (auto& object : mUpdateList) 
+	{
+		std::string hierarchyPath = object->GetHierarchyPath();
+		if (hierarchyPath.size() == 0) // Group everything into a section even if it doesn't have a section.
+		{
+			hierarchyPath = mRemainingSectionName;
+		}
+
+		bool bAddedToHierarchy = false;
+
+		// Check if an section already exist.
+		for (HierarchySection& section : mHierarchySections)
+		{
+			if (section.name == hierarchyPath)
+			{
+				section.hierarchyNodes.push_back(object);
+				bAddedToHierarchy = true;
+				break;
+			}
+		}
+
+		// Create new section if there wasn't one preexisting to add to.
+		if (bAddedToHierarchy == false)
+		{
+			HierarchySection newHierarchySection = HierarchySection(hierarchyPath);
+			newHierarchySection.hierarchyNodes.push_back(object);
+			mHierarchySections.push_back(newHierarchySection);
+		}
+	}
+
+	mHierarchyDirty = false;
+}
+
+void GameWorld::DrawHierarchy()
+{
+	if (mHierarchyDirty)
+	{
+		RebuildHierarchy();
+	}
+
+	// List of Services
+	for (auto& service : mServices) {
+		const std::string objectName = service.get()->GetServiceName() + "##GameWorld";
+		if (ImGui::Button(objectName.c_str()))
+		{
+			mInspectorService = service.get();
+			mInspectorGameObject = nullptr;
+		}
+	}
+
+	ImGui::Separator(); // --------------------------------------------------
+
+	// List of sections
+	for (const HierarchySection& section : mHierarchySections)
+	{
+		const std::string sectionName = section.name + "##GameWorld";
+		if (ImGui::CollapsingHeader(sectionName.c_str(), ImGuiTreeNodeFlags_CollapsingHeader))
+		{
+			// List of game objects
+			for (auto& object : section.hierarchyNodes)
+			{
+				const std::string objectName = object->GetName() + "##GameWorld";
+				if (ImGui::Button(objectName.c_str()))
+				{
+					mInspectorService = nullptr;
+					mInspectorGameObject = object;
+				}
+			}
+		}
+	}
+
+
+	//// List of game objects
+	//for (auto& object : mUpdateList) {
+	//	const std::string objectName = object->GetName() + "##GameWorld";
+	//	if (ImGui::Button(objectName.c_str()))
+	//	{
+	//		mInspectorService = nullptr;
+	//		mInspectorGameObject = object;
+	//	}
+	//}
+}
+

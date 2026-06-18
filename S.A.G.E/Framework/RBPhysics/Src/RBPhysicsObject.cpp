@@ -117,7 +117,7 @@ void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const
 	//sphereVelocity += impulse * invMassSphere;
 	//boxVelocity -= impulse * invMassBox;
 
-	mVelocity += impulse * invMassSphere;
+	ApplyForce(-impulse * invMassSphere);
 }
 
 // Force applies acceleration directly (existing behavior kept)

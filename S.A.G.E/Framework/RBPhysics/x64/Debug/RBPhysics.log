@@ -1,2 +1,7 @@
-﻿  RBPhysicsWorld.cpp
+﻿  BoundingBox.cpp
+  BoundingSphere.cpp
+  Collider.cpp
+  Precompiled.cpp
+  RBPhysicsObject.cpp
+  RBPhysicsWorld.cpp
   RBPhysics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\RBPhysics.lib

@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameWorld.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\GameWorld.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|solutionrelative:Apps\\HalfLife3\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|solutionrelative:Apps\\HalfLife3\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|solutionrelative:Apps\\HalfLife3\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\GameWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -21,6 +25,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\IntersectData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Inc\\IntersectData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|solutionrelative:Apps\\MyPhysicsDemo\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C6AEDF8A-E4A3-4C2B-BFC1-ADEBB0A0DB85}|Apps\\MyPhysicsDemo\\MyPhysicsDemo.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -41,10 +53,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\FRAMEWORK\\RBPHYSICS\\INC\\RBPHYSICSOBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:FRAMEWORK\\RBPHYSICS\\INC\\RBPHYSICSOBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|solutionrelative:Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA7C9F4A-F963-4E13-BBB2-9CA0757F761B}|Framework\\RBPhysics\\RBPhysics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\Collider.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -78,63 +86,89 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GameWorld.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp",
-              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameWorld.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp",
-              "RelativeToolTip": "Engine\\SAGE\\Src\\GameWorld.cpp",
-              "ViewState": "AgIAAO8AAAAAAAAAAAAmwDEBAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "GameState.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.cpp",
+              "RelativeDocumentMoniker": "Apps\\HalfLife3\\GameState.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.cpp",
+              "RelativeToolTip": "Apps\\HalfLife3\\GameState.cpp",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-17T23:28:17.553Z",
+              "WhenOpened": "2026-06-19T16:26:52.521Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GameWorld.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameWorld.h",
-              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\GameWorld.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameWorld.h",
-              "RelativeToolTip": "Engine\\SAGE\\Inc\\GameWorld.h",
-              "ViewState": "AgIAADIAAAAAAAAAAAAAAEYAAAAjAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "GameState.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.h",
+              "RelativeDocumentMoniker": "Apps\\HalfLife3\\GameState.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.h",
+              "RelativeToolTip": "Apps\\HalfLife3\\GameState.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-17T23:37:11.021Z",
+              "WhenOpened": "2026-06-19T16:26:49.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WinMain.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\WinMain.cpp",
+              "RelativeDocumentMoniker": "Apps\\HalfLife3\\WinMain.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\WinMain.cpp",
+              "RelativeToolTip": "Apps\\HalfLife3\\WinMain.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-19T16:26:31.633Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "GameObject.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameObject.h",
-              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\GameObject.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameObject.h",
-              "RelativeToolTip": "Engine\\SAGE\\Inc\\GameObject.h",
-              "ViewState": "AgIAABcAAAAAAAAAAIAwwD8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-17T23:26:38.448Z",
+              "Title": "GameWorld.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameWorld.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp",
+              "RelativeToolTip": "Engine\\SAGE\\Src\\GameWorld.cpp",
+              "ViewState": "AgIAAHEBAAAAAAAAAAAAAHABAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-19T07:38:01.342Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "GameObject.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameObject.h",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\GameObject.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameObject.h",
+              "RelativeToolTip": "Engine\\SAGE\\Inc\\GameObject.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-06-19T07:37:20.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "IntersectData.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\IntersectData.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\IntersectData.h",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\IntersectData.h",
               "RelativeToolTip": "Framework\\RBPhysics\\Inc\\IntersectData.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-06-01T22:56:46.628Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "BoundingBox.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\BoundingBox.cpp",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Src\\BoundingBox.cpp",
@@ -147,7 +181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "BoundingBox.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\BoundingBox.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\BoundingBox.h",
@@ -160,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "BoundingSphere.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\BoundingSphere.cpp",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Src\\BoundingSphere.cpp",
@@ -173,7 +207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "BoundingSphere.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\BoundingSphere.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\BoundingSphere.h",
@@ -186,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "Collider.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\Collider.cpp",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Src\\Collider.cpp",
@@ -199,20 +233,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 6,
               "Title": "RBPhysicsObject.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp",
               "RelativeToolTip": "Framework\\RBPhysics\\Src\\RBPhysicsObject.cpp",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAAAHcAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAowHcAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-05-22T18:15:42.685Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "RBPhysicsObject.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\RBPhysicsObject.h",
@@ -225,7 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "RBPhysicsWorld.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Src\\RBPhysicsWorld.cpp",
@@ -238,7 +272,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "RBPhysicsWorld.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h",
               "RelativeDocumentMoniker": "Framework\\RBPhysics\\Inc\\RBPhysicsWorld.h",
@@ -251,7 +285,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "RBPhysicsService.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RBPhysicsService.cpp",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\RBPhysicsService.cpp",
@@ -264,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "RBPhysicsService.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RBPhysicsService.h",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\RBPhysicsService.h",
@@ -277,20 +311,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "GameState.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
               "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\GameState.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.cpp",
               "RelativeToolTip": "Apps\\MyPhysicsDemo\\GameState.cpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABcAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-05-30T00:04:51.084Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "GameState.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\MyPhysicsDemo\\GameState.h",
               "RelativeDocumentMoniker": "Apps\\MyPhysicsDemo\\GameState.h",

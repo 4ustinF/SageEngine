@@ -1,1 +1,350 @@
-﻿  Graphics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Graphics.lib
+﻿  Precompiled.cpp
+  Animation.cpp
+  AnimationBuilder.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(54,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file '/Src/Animation.cpp')
+      D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(54,41):
+      the template instantiation context (the oldest one first) is
+          D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\Animation.cpp(63,9):
+          see reference to function template instantiation 'T `anonymous-namespace'::GetValue<SAGE::Math::Vector3>(const std::vector<SAGE::Graphics::KeyFrame<T>,std::allocator<SAGE::Graphics::KeyFrame<T>>> &,float)' being compiled
+          with
+          [
+              T=SAGE::Math::Vector3
+          ]
+  
+  AnimationIO.cpp
+  AnimationUtil.cpp
+  Animator.cpp
+  AudioSystem.cpp
+  BlendState.cpp
+  Camera.cpp
+  ConstantBuffer.cpp
+  CrossHatchEffect.cpp
+  DebugUI.cpp
+  Font.cpp
+  GaussianBlurEffect.cpp
+  GraphicsSystem.cpp
+  HologramEffect.cpp
+  MeshBuffer.cpp
+  MeshBuilder.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
+  
+  MeshUtil.cpp
+  ModelIO.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 1 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 2 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 3 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 4 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 5 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 6 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 7 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 8 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 9 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 10 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 11 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 12 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 13 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 14 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 15 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(23,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 16 has type 'const float *'
+  (compiling source file '/Src/ModelIO.cpp')
+  
+  ModelManager.cpp
+  Generating Code...
+  Compiling...
+  ParticleEffect.cpp
+  PixelShader.cpp
+  PostProccessingEffect.cpp
+  ReflectionEffect.cpp
+  RenderObject.cpp
+  RenderTarget.cpp
+  Sampler.cpp
+  ShadowEffect.cpp
+  SimpleDraw.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(382,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(418,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(418,48): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(418,48): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(418,48): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(418,48): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(419,44): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(419,44): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(419,44): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(419,44): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(419,44): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(420,29): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(420,29): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(420,29): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(420,29): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(420,29): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(422,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(422,48): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(422,48): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(422,48): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(422,48): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(423,29): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(423,29): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(423,29): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(423,29): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(423,29): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(424,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(424,48): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(424,48): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(424,48): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(424,48): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(427,30): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(427,30): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(427,30): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(427,30): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(427,30): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(428,45): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(428,45): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(428,45): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(428,45): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(428,45): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(429,49): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(429,49): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(429,49): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(429,49): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(429,49): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(431,49): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(431,49): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(431,49): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(431,49): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(431,49): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(432,30): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(432,30): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(432,30): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(432,30): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(432,30): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(433,49): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(433,49): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(433,49): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(433,49): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(433,49): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(445,38): warning C4244: 'argument': conversion from 'unsigned __int64' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(445,38): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(445,38): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(445,38): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(445,38): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(446,38): warning C4244: 'argument': conversion from 'unsigned __int64' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(446,38): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(446,38): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(446,38): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(446,38): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(447,38): warning C4244: 'argument': conversion from 'unsigned __int64' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(447,38): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(447,38): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(447,38): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(447,38): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(449,38): warning C4244: 'argument': conversion from 'unsigned __int64' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(449,38): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(449,38): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(449,38): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(449,38): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(450,22): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(450,22): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(450,22): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(450,22): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(450,22): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(451,24): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(451,24): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(451,24): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(451,24): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(451,24): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,40): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,40): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,40): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,40): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,40): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,66): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,66): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,66): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,66): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,66): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,92): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,92): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,92): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,92): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(456,92): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(755,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(755,48): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(755,48): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(755,48): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(755,48): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(756,44): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(756,44): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(756,44): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(756,44): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(756,44): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(757,29): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(757,29): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(757,29): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(757,29): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(757,29): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(759,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(759,48): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(759,48): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(759,48): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(759,48): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(760,29): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(760,29): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(760,29): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(760,29): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(760,29): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(761,48): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(761,48): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(761,48): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(761,48): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(761,48): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,40): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,40): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,40): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,40): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,40): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,66): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,66): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,66): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,66): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,66): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,92): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,92): warning C4244:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,92): warning C4244:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,92): warning C4244:             _Ty=float
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\SimpleDraw.cpp(767,92): warning C4244:         ]
+  (compiling source file '/Src/SimpleDraw.cpp')
+  
+  SoundEffectManager.cpp
+  SpriteRenderer.cpp
+  StandardEffect.cpp
+  Terrain.cpp
+  TerrainEffect.cpp
+  Texture.cpp
+  TextureManager.cpp
+  TexturingEffect.cpp
+  ToonEffect .cpp
+  UIButton.cpp
+  VertexShader.cpp
+  Generating Code...
+  Compiling...
+  VoxelCloudsEffect.cpp
+  VoxelTerrainEffect.cpp
+  VoxelWaterEffect.cpp
+  Generating Code...
+  Graphics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Graphics.lib

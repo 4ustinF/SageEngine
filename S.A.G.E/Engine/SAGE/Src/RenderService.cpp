@@ -91,9 +91,21 @@ void RenderService::Render()
 		}
 	}
 
+	for (auto& entry : mBasicRenderEntries)
+	{
+		for (auto& renderObject : entry.renderGroup)
+		{
+			auto transform = *(static_cast<const Graphics::Transform*>(entry.transformComponent));
+			renderObject.transform = transform;
+		}
+	}
+
 	mTexturingEffect.Begin();
 	if (mSkyDome.diffuseMapId != 0) { mTexturingEffect.Render(mSkyDome); }
 	if (mSkyBox.diffuseMapId != 0) { mTexturingEffect.Render(mSkyBox); }
+	for (auto& entry : mBasicRenderEntries) {
+		mTexturingEffect.Render(entry.renderGroup);
+	}
 	mTexturingEffect.End();
 
 	mShadowEffect.Begin();
@@ -168,9 +180,9 @@ void RenderService::SetShadowFocus(const Math::Vector3& focusPosition)
 	mShadowEffect.SetFocus(focusPosition);
 }
 
-void RenderService::Register(const ModelComponent* modelComponent)
+void RenderService::Register(const ModelComponent* modelComponent, bool isBasic)
 {
-	Entry& entry = mRenderEntries.emplace_back();
+	Entry& entry = isBasic ? mBasicRenderEntries.emplace_back() : mRenderEntries.emplace_back();
 	auto& gameObject = modelComponent->GetOwner();
 
 	entry.animatorComponent = gameObject.GetComponent<AnimatorComponent>();
@@ -185,14 +197,16 @@ void RenderService::Register(const ModelComponent* modelComponent)
 	entry.renderGroup = CreateRenderGroup(modelComponent->GetModel(), animator);
 }
 
-void RenderService::Unregister(const ModelComponent* modelComponent)
+void RenderService::Unregister(const ModelComponent* modelComponent, bool isBasic)
 {
-	auto match = [&](const auto& entry) {return entry.modelComponent == modelComponent; };
-	auto iter = std::find_if(mRenderEntries.begin(), mRenderEntries.end(), match);
-	if (iter != mRenderEntries.end())
+	std::vector<Entry>& renderEntrys = isBasic ? mBasicRenderEntries : mRenderEntries;
+	auto match = [&](const auto& entry) { return entry.modelComponent == modelComponent; };
+	auto iter = std::find_if(renderEntrys.begin(), renderEntrys.end(), match);
+	if (iter != renderEntrys.end())
 	{
 		Entry& entry = *iter;
 		CleanUpRenderGroup(entry.renderGroup);
-		mRenderEntries.erase(iter);
+		renderEntrys.erase(iter);
+		return;
 	}
 }

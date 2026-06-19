@@ -236,6 +236,11 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			const char* fileName = value["FileName"].GetString();
 			modelComponent->SetFileName(fileName);
 		}
+		if (value.HasMember("IsBasicModel"))
+		{
+			const bool isBasic = value["IsBasicModel"].GetBool();
+			modelComponent->SetIsBasicModel(isBasic);
+		}
 		if (value.HasMember("Rotation"))
 		{
 			const auto& rotation = value["Rotation"].GetArray();

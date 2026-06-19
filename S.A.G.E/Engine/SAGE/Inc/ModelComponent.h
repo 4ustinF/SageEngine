@@ -27,12 +27,15 @@ namespace SAGE
 
 		void SetFileName(const char* fileName) { mFileName = fileName; }
 		void SetRotation(const Math::Vector3& rotation) { mRotation = rotation; }
+		
+		void SetIsBasicModel(bool isBasic) { mIsBasicModel = isBasic; }
 
 	private:
 		std::string mFileName;
 		Graphics::ModelId mModelId;
 		Math::Vector3 mRotation = Math::Vector3::Zero;
 
+		bool mIsBasicModel = false;
 		float mIdentSize = 5.0f;
 	};
 }

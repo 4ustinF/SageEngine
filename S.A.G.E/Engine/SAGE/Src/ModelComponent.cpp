@@ -40,11 +40,11 @@ void ModelComponent::OnEnable()
 	mModelId = ModelManager::Get()->LoadModel(modelFileName);
 
 	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
-	renderService->Register(this);
+	renderService->Register(this, mIsBasicModel);
 }
 
 void ModelComponent::OnDisable()
 {
 	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
-	renderService->Unregister(this);
+	renderService->Unregister(this, mIsBasicModel);
 }

@@ -38,8 +38,8 @@ namespace SAGE
 
 	private:
 		friend class ModelComponent;
-		void Register(const ModelComponent* modelComponent);
-		void Unregister(const ModelComponent* modelComponent);
+		void Register(const ModelComponent* modelComponent, bool isBasic = false);
+		void Unregister(const ModelComponent* modelComponent, bool isBasic = false);
 
 		struct Entry
 		{
@@ -50,6 +50,7 @@ namespace SAGE
 		};
 
 		std::vector<Entry> mRenderEntries;
+		std::vector<Entry> mBasicRenderEntries;
 
 		const CameraService* mCameraService = nullptr;
 		const TerrainService* mTerrainService = nullptr;

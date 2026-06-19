@@ -81,8 +81,14 @@ namespace SAGE
 		std::vector<HierarchySection> mHierarchySections;
 		std::string mRemainingSectionName = "Other";
 
+		void DrawInspector();
 		Service* mInspectorService = nullptr;
 		GameObject* mInspectorGameObject = nullptr;
+
+		void LoadComponentNames();
+		void DrawAddComponentWindow();
+		bool mAddComponentWindowActive = false;
+		std::vector<const char*> mComponentNames;
 
 		bool mInitialized = false;
 		bool mUpdating = false;

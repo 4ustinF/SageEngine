@@ -26,7 +26,7 @@ namespace SAGE
 		template<class ComponentType>
 		ComponentType* AddComponent()
 		{
-			ASSERT(!mInitialize, "GameObject - can only add compnents before object is initialized.");
+			ASSERT(!mInitialize, "GameObject - can only add components before object is initialized.");
 			auto& newComponent = mComponents.emplace_back(std::make_unique<ComponentType>());
 			newComponent->mOwner = this;
 			return static_cast<ComponentType*>(newComponent.get());

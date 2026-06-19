@@ -23,6 +23,8 @@ void GameWorld::Initialize(uint32_t capacity)
 	mFreeSlots.resize(capacity);
 	std::iota(mFreeSlots.rbegin(), mFreeSlots.rend(), 0);
 
+	LoadComponentNames();
+
 	mInitialized = true;
 }
 
@@ -32,6 +34,7 @@ void GameWorld::Terminate()
 	if (!mInitialized) { return; }
 
 	mHierarchySections.clear();
+	mComponentNames.clear();
 
 	// Destroy all remaining game objects
 	for (auto gameObject : mUpdateList) {
@@ -89,8 +92,7 @@ void GameWorld::DebugUI()
 	ImGui::End();
 
 	ImGui::Begin("Inspector##GameWorld", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-	if (mInspectorService != nullptr) { mInspectorService->DebugUI(); }
-	if (mInspectorGameObject != nullptr) { mInspectorGameObject->DebugUI(); }
+	DrawInspector();
 	ImGui::End();
 }
 
@@ -343,6 +345,7 @@ void GameWorld::DrawHierarchy()
 		{
 			mInspectorService = service.get();
 			mInspectorGameObject = nullptr;
+			mAddComponentWindowActive = false;
 		}
 	}
 
@@ -366,16 +369,59 @@ void GameWorld::DrawHierarchy()
 			}
 		}
 	}
-
-
-	//// List of game objects
-	//for (auto& object : mUpdateList) {
-	//	const std::string objectName = object->GetName() + "##GameWorld";
-	//	if (ImGui::Button(objectName.c_str()))
-	//	{
-	//		mInspectorService = nullptr;
-	//		mInspectorGameObject = object;
-	//	}
-	//}
 }
 
+void GameWorld::DrawInspector()
+{
+	if (mInspectorService != nullptr) 
+	{
+		mInspectorService->DebugUI(); 
+		return;
+	}
+
+	if (mInspectorGameObject != nullptr) 
+	{ 
+		mInspectorGameObject->DebugUI();
+		ImGui::Separator();
+
+		if (ImGui::Button("Add Component"))
+		{
+			mAddComponentWindowActive = !mAddComponentWindowActive;
+		}
+	}
+
+	if (mAddComponentWindowActive)
+	{
+		if (mInspectorGameObject == nullptr)
+		{
+			mAddComponentWindowActive = false;
+		}
+		else
+		{
+			ImGui::Begin("AddComponent##GameWorld", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+			DrawAddComponentWindow();
+			ImGui::End();
+		}
+	}
+}
+
+void GameWorld::LoadComponentNames() // TODO:
+{
+	//mComponentNames.push_back("TransformComponent");
+}
+
+void GameWorld::DrawAddComponentWindow()
+{
+	ImGui::Text("TODO: Setup Add Comp Window"); // TODO: Remove this.
+
+	for (const char* compName : mComponentNames)
+	{
+		ImGui::Text(compName);
+		ImGui::SameLine();
+
+		if (ImGui::Button("Add")) // TODO:
+		{
+			//GameObjectFactory::TryMakeComponent(compName, {}, *mInspectorGameObject);
+		}
+	}
+}

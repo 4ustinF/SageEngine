@@ -5,6 +5,7 @@
 #include "AnimationIO.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
 namespace
@@ -76,7 +77,7 @@ void ModelIO::SaveModel(std::filesystem::path filePath, const Model& model)
 	fclose(file);
 }
 
-void ModelIO::LoadModel(std::filesystem::path filePath, Model& model)
+void ModelIO::LoadModel(std::filesystem::path filePath, Model& model, Math::Vector2 tilingSize)
 {
 	FILE* file = nullptr;
 	fopen_s(&file, filePath.u8string().c_str(), "r");
@@ -108,6 +109,9 @@ void ModelIO::LoadModel(std::filesystem::path filePath, Model& model)
 				&vertex.boneIndices[0], &vertex.boneIndices[1], &vertex.boneIndices[2], &vertex.boneIndices[3],
 				&vertex.boneWeights[0], &vertex.boneWeights[1], &vertex.boneWeights[2], &vertex.boneWeights[3]
 			);
+
+			vertex.uv.x *= tilingSize.x;
+			vertex.uv.y *= tilingSize.y;
 		}
 
 		uint32_t indexCount = 0;

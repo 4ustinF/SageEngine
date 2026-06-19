@@ -7,7 +7,7 @@ namespace SAGE::Graphics
 	namespace ModelIO
 	{
 		void SaveModel(std::filesystem::path filePath, const Model& model);
-		void LoadModel(std::filesystem::path filePath, Model& model);
+		void LoadModel(std::filesystem::path filePath, Model& model, Math::Vector2 tilingSize = Math::Vector2::One);
 
 		void SaveMaterial(std::filesystem::path filePath, const Model& model);
 		void LoadMaterial(std::filesystem::path filePath, Model& model);

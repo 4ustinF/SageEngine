@@ -1,8 +1,2 @@
-﻿  AnimatorComponent.cpp
-  BPhysicsComponent.cpp
-  GameObjectFactory.cpp
-  ModelComponent.cpp
-  RenderService.cpp
-  SAGE.cpp
-  Generating Code...
+﻿  GameWorld.cpp
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

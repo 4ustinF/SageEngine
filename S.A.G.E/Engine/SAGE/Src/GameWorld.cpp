@@ -373,6 +373,7 @@ void GameWorld::DrawHierarchy()
 		const std::string sectionName = section.name + "##GameWorld";
 		if (ImGui::CollapsingHeader(sectionName.c_str(), section.name == mRemainingSectionName ? remainingSectionflags : sectionflags))
 		{
+			ImGui::Indent(6.0f);
 			// List of game objects
 			for (auto& object : section.hierarchyNodes)
 			{
@@ -384,6 +385,8 @@ void GameWorld::DrawHierarchy()
 					mAddComponentWindowActive = false;
 				}
 			}
+
+			ImGui::Unindent(6.0f);
 		}
 	}
 }

@@ -228,7 +228,7 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			cameraComponent->SetTurnSpeed(speed);
 		}
 	}
-	else if (strcmp(componentName, "ModelComponent") == 0)
+	else if (strcmp(componentName, "Model Component") == 0)
 	{
 		auto modelComponent = gameObject.AddComponent<ModelComponent>();
 		if (value.HasMember("FileName"))
@@ -236,10 +236,12 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			const char* fileName = value["FileName"].GetString();
 			modelComponent->SetFileName(fileName);
 		}
-		if (value.HasMember("IsBasicModel"))
+		if (value.HasMember("TilingSize"))
 		{
-			const bool isBasic = value["IsBasicModel"].GetBool();
-			modelComponent->SetIsBasicModel(isBasic);
+			const auto& rotation = value["TilingSize"].GetArray();
+			const float x = rotation[0].GetFloat();
+			const float y = rotation[1].GetFloat();
+			modelComponent->SetTilingSize({ x, y });
 		}
 		if (value.HasMember("Rotation"))
 		{
@@ -248,6 +250,11 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			const float y = rotation[1].GetFloat() * Math::Constants::DegToRad;
 			const float z = rotation[2].GetFloat() * Math::Constants::DegToRad;
 			modelComponent->SetRotation({ x, y, z });
+		}
+		if (value.HasMember("IsBasicModel"))
+		{
+			const bool isBasic = value["IsBasicModel"].GetBool();
+			modelComponent->SetIsBasicModel(isBasic);
 		}
 	}
 	else if (strcmp(componentName, "ParticleComponent") == 0)
@@ -298,7 +305,7 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			spawnerComponent->SetWaitTime(waitTime);
 		}
 	}
-	else if (strcmp(componentName, "TransformComponent") == 0)
+	else if (strcmp(componentName, "Transform Component") == 0)
 	{
 		auto transformComponent = gameObject.AddComponent<TransformComponent>();
 		if (value.HasMember("Position"))

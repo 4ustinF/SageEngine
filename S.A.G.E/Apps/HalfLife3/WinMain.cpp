@@ -8,6 +8,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int)
 	appConfig.appName = L"Half-Life";
 	appConfig.winWidth = 1280;
 	appConfig.winHeight = 720;
+	//appConfig.winWidth = 10;
+	//appConfig.winHeight = 10;
 	appConfig.debugDrawLimit = 10000;
 	appConfig.textureRoot = "../../Assets/Images";
 	appConfig.audioRoot = "../../Assets/Audio";

@@ -12,8 +12,4 @@ public:
 
 private:
 	SAGE::GameWorld mGameWorld;
-
-	SAGE::Graphics::DirectionalLight mDirectionalLight;
-	SAGE::Graphics::StandardEffect mStandardEffect;
-	SAGE::Graphics::ShadowEffect mShadowEffect;
 };

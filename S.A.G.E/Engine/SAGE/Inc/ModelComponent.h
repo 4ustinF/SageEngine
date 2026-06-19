@@ -14,6 +14,9 @@ namespace SAGE
 		void OnEnable() override;
 		void OnDisable() override;
 
+		virtual const char* GetCompName() { return "Model Component"; }
+		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
+
 		Graphics::Model& GetModel() 
 		{ 
 			return const_cast<Graphics::Model&>(*Graphics::ModelManager::Get()->GetModel(mModelId));
@@ -27,13 +30,15 @@ namespace SAGE
 
 		void SetFileName(const char* fileName) { mFileName = fileName; }
 		void SetRotation(const Math::Vector3& rotation) { mRotation = rotation; }
+		void SetTilingSize(const Math::Vector2& tilingSize) { mTilingSize = tilingSize; }
 		
 		void SetIsBasicModel(bool isBasic) { mIsBasicModel = isBasic; }
 
 	private:
 		std::string mFileName;
 		Graphics::ModelId mModelId;
-		Math::Vector3 mRotation = Math::Vector3::Zero;
+		Math::Vector3 mRotation = Math::Vector3::Zero; // TODO: I don't think this does anything.
+		Math::Vector2 mTilingSize = Math::Vector2(2.0f, 1.0f);// Math::Vector2::One;
 
 		bool mIsBasicModel = false;
 		float mIdentSize = 5.0f;

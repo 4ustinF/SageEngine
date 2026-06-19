@@ -222,10 +222,11 @@ GameObject* GameWorld::CreateGameObject(std::filesystem::path templateFile)
 	newObject->mHandle = handle;
 	newObject->Initialize();
 
-	// Add gameobject to update list
+	// Add game object to update list
 	mUpdateList.push_back(newObject.get());
 
 	// Dirty Hierarchy
+	newObject->SetTemplatePath(templateFile);
 	mHierarchyDirty = true;
 
 	return newObject.get();
@@ -298,6 +299,11 @@ void GameWorld::RebuildHierarchy()
 {
 	mHierarchySections.clear();
 
+	// Create Empty Section First
+	HierarchySection emptyHierarchySection = HierarchySection(mRemainingSectionName);
+	mHierarchySections.push_back(emptyHierarchySection);
+
+	// Sort objects into sections
 	for (auto& object : mUpdateList) 
 	{
 		std::string hierarchyPath = object->GetHierarchyPath();
@@ -328,6 +334,12 @@ void GameWorld::RebuildHierarchy()
 		}
 	}
 
+	if (mHierarchySections.size() > 1) 
+	{
+		// Make sure empty section is at the end.
+		std::swap(mHierarchySections.front(), mHierarchySections.back());
+	}
+
 	mHierarchyDirty = false;
 }
 
@@ -351,11 +363,15 @@ void GameWorld::DrawHierarchy()
 
 	ImGui::Separator(); // --------------------------------------------------
 
+	// For now default empty section open, the rest can start closed. TODO: Maybe add logic to know which ones were left open or not.
+	const ImGuiTreeNodeFlags remainingSectionflags = ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen;
+	const ImGuiTreeNodeFlags sectionflags = ImGuiTreeNodeFlags_CollapsingHeader;
+
 	// List of sections
 	for (const HierarchySection& section : mHierarchySections)
 	{
 		const std::string sectionName = section.name + "##GameWorld";
-		if (ImGui::CollapsingHeader(sectionName.c_str(), ImGuiTreeNodeFlags_CollapsingHeader))
+		if (ImGui::CollapsingHeader(sectionName.c_str(), section.name == mRemainingSectionName ? remainingSectionflags : sectionflags))
 		{
 			// List of game objects
 			for (auto& object : section.hierarchyNodes)
@@ -365,6 +381,7 @@ void GameWorld::DrawHierarchy()
 				{
 					mInspectorService = nullptr;
 					mInspectorGameObject = object;
+					mAddComponentWindowActive = false;
 				}
 			}
 		}
@@ -388,6 +405,13 @@ void GameWorld::DrawInspector()
 		{
 			mAddComponentWindowActive = !mAddComponentWindowActive;
 		}
+
+		ImGui::SameLine(0.0f, mImguiSpacing);
+
+		if (ImGui::Button("Save Game Object"))
+		{
+			mInspectorGameObject->SaveComponents();
+		}
 	}
 
 	if (mAddComponentWindowActive)
@@ -398,8 +422,8 @@ void GameWorld::DrawInspector()
 		}
 		else
 		{
-			ImGui::Begin("AddComponent##GameWorld", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-			DrawAddComponentWindow();
+			ImGui::Begin("Add Component##GameWorld", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+			DrawAddComponentWindow(); // TODO: Maybe lets not make this an extra window? Just attach it to the inspector? or at least calculate the bottom of the inspector so it stays attached.
 			ImGui::End();
 		}
 	}

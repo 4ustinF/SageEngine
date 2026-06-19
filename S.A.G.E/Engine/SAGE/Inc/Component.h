@@ -19,6 +19,8 @@ namespace SAGE
 
 		virtual uint32_t GetTypeId() const = 0;
 
+		virtual const char* GetCompName() { return ""; }
+
 		virtual void Initialize() {}
 		virtual void Terminate() {}
 
@@ -35,6 +37,10 @@ namespace SAGE
 
 		GameObject& GetOwner() { return *mOwner; }
 		const GameObject& GetOwner() const { return *mOwner; }
+
+	protected:
+		virtual void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) {}
+
 	private:
 		friend class GameObject;
 		GameObject* mOwner = nullptr;

@@ -25,6 +25,8 @@ void GameState::Initialize()
 
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/my_physics_demo_level.json");
+
+	mGameWorld.CreateGameObject("../../Assets/Templates/empty.json");
 }
 
 void GameState::Terminate()

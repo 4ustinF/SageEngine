@@ -58,6 +58,7 @@ namespace SAGE
 		void SetName(const char* name) { mName = name; }
 		const std::string& GetName() const { return mName; }
 
+
 		void SetHierarchyPath(const char* hierarchyPath) { mHierarchyPath = hierarchyPath; }
 		const std::string& GetConstHierarchyPath() const { return mHierarchyPath; }
 		std::string GetHierarchyPath() const { return mHierarchyPath; }
@@ -66,15 +67,20 @@ namespace SAGE
 		friend class GameWorld;
 		using Components = std::vector<std::unique_ptr<Component>>;
 
+		void OnEnable();
+		void OnDisable();
+		void SaveComponents();
+
+		std::filesystem::path mTemplatePath = "";
+		void SetTemplatePath(const std::filesystem::path& path) { mTemplatePath = path; }
+
 		Components mComponents;
 		GameWorld* mWorld = nullptr;
 		GameObjectHandle mHandle;
+
 		std::string mName = "NoName";
 		std::string mHierarchyPath = "";
 		bool mInitialize = false;
 		bool mIsActive = true;
-
-		void OnEnable();
-		void OnDisable();
 	};
 }

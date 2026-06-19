@@ -17,6 +17,7 @@ namespace SAGE::Math
 		static Quaternion RotationMatrix(const Matrix4& m); // Use the WWW
 		static Quaternion RotationLook(const Vector3& direction, const Vector3& up = Vector3::YAxis); // Use RotationMatrix
 		static Quaternion RotationFromTo(const Vector3& from, const Vector3& to); // Use RotationAxis
+		Vector3 ToEuler() const noexcept;
 
 		constexpr Quaternion operator-() const
 		{

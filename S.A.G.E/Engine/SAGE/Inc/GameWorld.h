@@ -77,7 +77,6 @@ namespace SAGE
 		void RebuildHierarchy();
 		void DrawHierarchy();
 		bool mHierarchyDirty = true;
-		float mHierarchyIndentSize = 5.0f;
 		std::vector<HierarchySection> mHierarchySections;
 		std::string mRemainingSectionName = "Other";
 
@@ -92,5 +91,7 @@ namespace SAGE
 
 		bool mInitialized = false;
 		bool mUpdating = false;
+		float mImguiSpacing = 5.0f;
+
 	};
 }

@@ -1,0 +1,11 @@
+{
+  "Components": {
+    "TransformComponent": {
+      "Position": [ 0, 0, 0 ],
+      "Scale": [ 1, 1, 1 ]
+    },
+    "ModelComponent": {
+      "FileName": "../../Assets/Models/HalfLife/Wall/wall.model"
+    }
+  }
+}

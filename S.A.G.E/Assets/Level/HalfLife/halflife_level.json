@@ -3,15 +3,16 @@
   "Services": {
     "CameraService": {
 
-    },
-    "RenderService": {
-      "SkyDomeTexture": "Neptune.jpg"
     }
   },
   "GameObjects": [
     {
       "Name": "Player",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/PlayerController.json"
+    },
+    {
+      "Name": "Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempWall.json"
     }
   ]
 }

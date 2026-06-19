@@ -164,33 +164,33 @@ void GameWorld::LoadLevel(std::filesystem::path levelFile)
 		const char* name = gameObject["Name"].GetString();
 		newObject->SetName(name);
 
-		if (gameObject.HasMember("Components"))
-		{
-			for (auto& component : gameObject["Components"].GetObj())
-			{
-				const char* componentName = component.name.GetString();
-				if (strcmp(componentName, "TransformComponent") == 0)
-				{
-					//auto transformComponent = gameObject.AddComponent<TransformComponent>();
-					if (component.value.HasMember("Position"))
-					{
-						const auto& position = component.value["Position"].GetArray();
-						const float x = position[0].GetFloat();
-						const float y = position[1].GetFloat();
-						const float z = position[2].GetFloat();
-						auto transform = newObject->GetComponent<TransformComponent>();
-						transform->position = {x, y, z};
+		//if (gameObject.HasMember("Components"))
+		//{
+		//	for (auto& component : gameObject["Components"].GetObj())
+		//	{
+		//		const char* componentName = component.name.GetString();
+		//		if (strcmp(componentName, "TransformComponent") == 0)
+		//		{
+		//			//auto transformComponent = gameObject.AddComponent<TransformComponent>();
+		//			if (component.value.HasMember("Position"))
+		//			{
+		//				const auto& position = component.value["Position"].GetArray();
+		//				const float x = position[0].GetFloat();
+		//				const float y = position[1].GetFloat();
+		//				const float z = position[2].GetFloat();
+		//				auto transform = newObject->GetComponent<TransformComponent>();
+		//				transform->position = {x, y, z};
 
-						auto rigidBody = newObject->GetComponent<RigidBodyComponent>();
-						if (rigidBody != nullptr)
-						{
-							auto rb = rigidBody->GetRigidBody();
-							rb->setWorldTransform(ConvertToBtTransform(*transform));
-						}
-					}
-				}
-			}
-		}
+		//				auto rigidBody = newObject->GetComponent<RigidBodyComponent>();
+		//				if (rigidBody != nullptr)
+		//				{
+		//					auto rb = rigidBody->GetRigidBody();
+		//					rb->setWorldTransform(ConvertToBtTransform(*transform));
+		//				}
+		//			}
+		//		}
+		//	}
+		//}
 	}
 }
 

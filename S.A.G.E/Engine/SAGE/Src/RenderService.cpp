@@ -91,19 +91,10 @@ void RenderService::Render()
 		}
 	}
 
-	if (mSkyDome.diffuseMapId != 0)
-	{
-		mTexturingEffect.Begin();
-		mTexturingEffect.Render(mSkyDome);
-		mTexturingEffect.End();
-	}
-
-	if (mSkyBox.diffuseMapId != 0)
-	{
-		mTexturingEffect.Begin();
-		mTexturingEffect.Render(mSkyBox);
-		mTexturingEffect.End();
-	}
+	mTexturingEffect.Begin();
+	if (mSkyDome.diffuseMapId != 0) { mTexturingEffect.Render(mSkyDome); }
+	if (mSkyBox.diffuseMapId != 0) { mTexturingEffect.Render(mSkyBox); }
+	mTexturingEffect.End();
 
 	mShadowEffect.Begin();
 	for (auto& entry : mRenderEntries) {

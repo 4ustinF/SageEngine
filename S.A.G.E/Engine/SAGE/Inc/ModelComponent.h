@@ -32,5 +32,7 @@ namespace SAGE
 		std::string mFileName;
 		Graphics::ModelId mModelId;
 		Math::Vector3 mRotation = Math::Vector3::Zero;
+
+		float mIdentSize = 5.0f;
 	};
 }

@@ -78,7 +78,7 @@ void RigidBodyComponent::OnEnable()
 	Transform origin;
 	origin.position = colliderComponent->GetCenter();
 
-	btDefaultMotionState* motionState = new btDefaultMotionState(ConvertToBtTransform(*transformComponent), ConvertToBtTransform(origin));
+	btDefaultMotionState* motionState = new btDefaultMotionState(ConvertToBtTransform(transformComponent->GetTransform()), ConvertToBtTransform(origin));
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mMass, motionState, collisionShape, localIntertia);
 	mRigidBody = new btRigidBody(rbInfo);
 

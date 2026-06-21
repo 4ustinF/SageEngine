@@ -246,32 +246,62 @@ Quaternion Quaternion::RotationFromTo(const Vector3& from, const Vector3& to)
 	return Normalize(quat);
 }
 
-Vector3 Quaternion::ToEuler() const noexcept// TODO: Replace, this is ripped from simple math.
+Vector3 Quaternion::ToEuler()
 {
-	const float xx = x * x;
-	const float yy = y * y;
-	const float zz = z * z;
+	Vector3 euler = Vector3::Zero;
 
-	const float m31 = 2.f * x * z + 2.f * y * w;
-	const float m32 = 2.f * y * z - 2.f * x * w;
-	const float m33 = 1.f - 2.f * xx - 2.f * yy;
+	// 1. Ensure the quaternion is normalized to prevent scaling bugs
+	float len = std::sqrt(w * w + x * x + y * y + z * z);
+	w /= len;
+	x /= len;
+	y /= len;
+	z /= len;
 
-	const float cy = sqrtf(m33 * m33 + m31 * m31);
-	const float cx = atan2f(-m32, cy);
-	if (cy > 16.f * FLT_EPSILON)
-	{
-		const float m12 = 2.f * x * y + 2.f * z * w;
-		const float m22 = 1.f - 2.f * xx - 2.f * zz;
+	// 2. Calculate the Gimbal Lock test variable (sin of the Pitch angle)
+	float sinp = 2.0f * (w * y - z * x);
 
-		return Vector3(cx, atan2f(m31, m33), atan2f(m12, m22));
+	// 3. Handle Singularities (Gimbal Lock)
+	if (std::abs(sinp) >= 0.99999f) {
+		// Looking straight up or straight down
+		euler.y = std::copysign(Constants::HalfPi, sinp);	// Pitch is +/- 90 degrees
+		euler.x = 0.0f;										// Roll becomes zero
+		euler.z = 2.0f * std::atan2(x, w);					// Yaw combined with Roll
 	}
-	else
-	{
-		const float m11 = 1.f - 2.f * yy - 2.f * zz;
-		const float m21 = 2.f * x * y - 2.f * z * w;
-
-		return Vector3(cx, 0.f, atan2f(-m21, m11));
+	else {
+		// Standard non-gimbal locked case
+		euler.y = std::asin(sinp);
+		euler.x = std::atan2(2.0f * (w * x + y * z), 1.0f - 2.0f * (x * x + y * y));
+		euler.z = std::atan2(2.0f * (w * z + x * y), 1.0f - 2.0f * (y * y + z * z));
 	}
+
+	return euler;
+}
+
+Vector3 Quaternion::ToDegree()
+{
+	// 1. Get Radian Angles.
+	Vector3 degrees = ToEuler();
+
+	// 2. Convert radians to degrees.
+	const float radToDeg = Constants::RadToDeg;
+	degrees.x *= radToDeg;
+	degrees.y *= radToDeg;
+	degrees.z *= radToDeg;
+
+	return degrees;
+}
+
+Vector3 Quaternion::ToClampedDegree()
+{
+	// 1. Get Degree Angles.
+	Vector3 degrees = ToDegree();
+
+	// 2. Clamp values between 0 and 360 degrees if preferred
+	if (degrees.x < 0) degrees.x += 360.0f;
+	if (degrees.y < 0) degrees.y += 360.0f;
+	if (degrees.z < 0) degrees.z += 360.0f;
+
+	return degrees;
 }
 
 #pragma endregion

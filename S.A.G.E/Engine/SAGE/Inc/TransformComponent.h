@@ -6,7 +6,6 @@ namespace SAGE
 {
 	class TransformComponent final 
 		: public Component
-		, public Graphics::Transform
 	{
 	public:
 		SET_TYPE_ID(ComponentId::Transform)
@@ -17,6 +16,22 @@ namespace SAGE
 		void DebugUI() override;
 		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
-		void SetPosition(const SAGE::Math::Vector3& pos);
+		// Getters
+		const SAGE::Graphics::Transform& GetTransform() const { return mTransform; }
+		const SAGE::Math::Vector3& GetPosition() const { return mTransform.position; }
+		const SAGE::Math::Vector3& GetRotationDegreeAngles() const { return mDegreeAngles; }
+		const SAGE::Math::Quaternion& GetRotation() const { return mTransform.rotation; }
+		const SAGE::Math::Vector3& GetScale() const { return mTransform.scale; }
+		const SAGE::Math::Matrix4 GetMatrix4() const { return mTransform.GetMatrix4(); }
+
+		// Setters
+		void SetPosition(const SAGE::Math::Vector3& inPos);
+		void SetRotation(const SAGE::Math::Vector3& inRotation);
+		void SetRotation(const SAGE::Math::Quaternion& inRotation);
+		void SetScale(const SAGE::Math::Vector3& inScale);
+
+	private:
+		SAGE::Graphics::Transform mTransform;
+		SAGE::Math::Vector3 mDegreeAngles = SAGE::Math::Vector3::Zero;
 	};
 }

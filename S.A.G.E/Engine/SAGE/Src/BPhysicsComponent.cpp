@@ -44,13 +44,18 @@ void BPhysicsComponent::UpdatePhysics(float deltaTime)
 	if (mRigidBodyComponent != nullptr)
 	{
 		auto& rigidBodyTransform = mRigidBodyComponent->GetRigidBody()->getWorldTransform();
-		ConvertToTransform(rigidBodyTransform, *mTransformComponent, mColliderComponent->GetCenter());
+		//ConvertToTransform(rigidBodyTransform, *mTransformComponent, mColliderComponent->GetCenter());
+		const auto& origin = rigidBodyTransform.getOrigin();
+		const auto& rotation = rigidBodyTransform.getRotation();
+		const auto& center = mColliderComponent->GetCenter();
+		mTransformComponent->SetPosition(SAGE::Math::Vector3(origin.x() - center.x, origin.y() - center.y, origin.z() - center.z));
+		mTransformComponent->SetRotation(SAGE::Math::Quaternion(rotation.w(), rotation.x(), rotation.y(), rotation.z()));
 
 		if (mModelComponent)
 		{
 			const auto angles = mModelComponent->GetRotation();
 			const auto rotation = Math::Quaternion::RotationEuler(angles);
-			mTransformComponent->rotation = mTransformComponent->rotation * rotation;
+			mTransformComponent->SetRotation(mTransformComponent->GetRotation() * rotation);
 		}
 	}
 }

@@ -23,6 +23,12 @@ void GameState::Initialize()
 
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/HalfLife/halflife_level.json");
+
+	// TODO: Fix get/set rotation in transform comp
+
+	// Render service:
+	// Update FPS less frequently
+	// Grid settings like size, on/off, and y value?
 }
 
 void GameState::Terminate()

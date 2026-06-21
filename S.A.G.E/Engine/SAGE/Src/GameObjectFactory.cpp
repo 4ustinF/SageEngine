@@ -314,16 +314,16 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			const float x = position[0].GetFloat();
 			const float y = position[1].GetFloat();
 			const float z = position[2].GetFloat();
-			transformComponent->position = { x, y, z };
+			transformComponent->SetPosition(Vector3(x, y, z));
 		}
 
 		if (value.HasMember("Rotation"))
 		{
 			const auto& rotation = value["Rotation"].GetArray();
-			const float x = rotation[0].GetFloat() * Math::Constants::DegToRad;
-			const float y = rotation[1].GetFloat() * Math::Constants::DegToRad;
-			const float z = rotation[2].GetFloat() * Math::Constants::DegToRad;
-			transformComponent->rotation = Math::Quaternion::RotationEuler({ x, y, z });
+			const float x = rotation[0].GetFloat();
+			const float y = rotation[1].GetFloat();
+			const float z = rotation[2].GetFloat();
+			transformComponent->SetRotation(Vector3(x, y, z));
 		}
 
 		if (value.HasMember("Scale"))
@@ -332,7 +332,7 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			const float x = scale[0].GetFloat();
 			const float y = scale[1].GetFloat();
 			const float z = scale[2].GetFloat();
-			transformComponent->scale = { x, y, z };
+			transformComponent->SetScale(Vector3(x, y, z));
 		}
 	}
 	// ... more components here

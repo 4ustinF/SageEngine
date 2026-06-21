@@ -23,12 +23,12 @@ void SpawnerComponent::Update(float deltaTime)
 	mTimer = 0.0f;
 	++mSpawnCount;
 
-	auto gameObject = GetOwner().GetWorld().CreateGameObject(mFileName);
-	auto transformComponent = gameObject->GetComponent<TransformComponent>();
-	if (transformComponent)
-	{
-		transformComponent->position = mTransformComponent->position;
-		transformComponent->rotation = mTransformComponent->rotation;
-		transformComponent->scale = mTransformComponent->scale;
-	}
+	//auto gameObject = GetOwner().GetWorld().CreateGameObject(mFileName);
+	//auto transformComponent = gameObject->GetComponent<TransformComponent>();
+	//if (transformComponent)
+	//{
+	//	transformComponent->position = mTransformComponent->position;
+	//	transformComponent->rotation = mTransformComponent->rotation;
+	//	transformComponent->scale = mTransformComponent->scale;
+	//}
 }

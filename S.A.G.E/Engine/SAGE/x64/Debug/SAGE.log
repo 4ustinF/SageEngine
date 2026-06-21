@@ -1,2 +1,13 @@
-﻿  GameWorld.cpp
+﻿  BPhysicsComponent.cpp
+  BPhysicsService.cpp
+  ColliderComponent.cpp
+  FollowCameraControllerComponent.cpp
+  GameObjectFactory.cpp
+  GameWorld.cpp
+  RenderService.cpp
+  RigidBodyComponent.cpp
+  SAGE.cpp
+  SpawnerComponent.cpp
+  TransformComponent.cpp
+  Generating Code...
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

@@ -70,7 +70,7 @@ Math::AABB ColliderComponent::GetLocalAABB() const
 
 Math::AABB ColliderComponent::GetWorldAABB() const
 {
-	return AABB(mTransformComponent->position + mCenter, mExtend);
+	return AABB(mTransformComponent->GetPosition() + mCenter, mExtend);
 }
 
 btCollisionShape* ColliderComponent::GetCollisionShape()

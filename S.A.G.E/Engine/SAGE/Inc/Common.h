@@ -50,12 +50,12 @@ inline SAGE::Graphics::Transform ConvertToTransform(const btTransform& t, const 
 	return retTrans;
 }
 
-inline void ConvertToTransform(const btTransform& t, SAGE::Graphics::Transform& transform, const SAGE::Math::Vector3& center)
-{
-	const auto& origin = t.getOrigin();
-	const auto& rotation = t.getRotation();
-	transform.position = SAGE::Math::Vector3(origin.x() - center.x, origin.y() - center.y, origin.z() - center.z);
-	transform.rotation = SAGE::Math::Quaternion(rotation.w(), rotation.x(), rotation.y(), rotation.z());
-	//transform.rotation = SAGE::Math::Quaternion(rotation.x(), rotation.y(), rotation.z(), rotation.w());
-}
+//inline void ConvertToTransform(const btTransform& t, SAGE::Graphics::Transform& transform, const SAGE::Math::Vector3& center)
+//{
+//	const auto& origin = t.getOrigin();
+//	const auto& rotation = t.getRotation();
+//	transform.position = SAGE::Math::Vector3(origin.x() - center.x, origin.y() - center.y, origin.z() - center.z);
+//	transform.rotation = SAGE::Math::Quaternion(rotation.w(), rotation.x(), rotation.y(), rotation.z());
+//	//transform.rotation = SAGE::Math::Quaternion(rotation.x(), rotation.y(), rotation.z(), rotation.w());
+//}
 

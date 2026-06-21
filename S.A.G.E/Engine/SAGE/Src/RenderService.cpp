@@ -85,9 +85,9 @@ void RenderService::Render()
 		{
 			//const auto angles = entry.modelComponent->GetRotation();
 			//const auto rotation = Math::Quaternion::RotationEuler(angles);
-			auto transform = *(static_cast<const Graphics::Transform*>(entry.transformComponent));
+			////auto transform = *(static_cast<const Graphics::Transform*>(entry.transformComponent));
 			//transform.rotation = rotation * transform.rotation;
-			renderObject.transform = transform;
+			renderObject.transform = entry.transformComponent->GetTransform();
 		}
 	}
 
@@ -95,8 +95,7 @@ void RenderService::Render()
 	{
 		for (auto& renderObject : entry.renderGroup)
 		{
-			auto transform = *(static_cast<const Graphics::Transform*>(entry.transformComponent));
-			renderObject.transform = transform;
+			renderObject.transform = entry.transformComponent->GetTransform();
 		}
 	}
 

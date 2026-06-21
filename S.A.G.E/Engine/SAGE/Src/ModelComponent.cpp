@@ -18,16 +18,6 @@ void ModelComponent::DebugUI()
 	{
 		ImGui::Indent(mIdentSize);
 
-		Vector2 prevTilingSize = mTilingSize;
-		if (ImGui::DragFloat2("Tiling Size##ModelComponent", &mTilingSize.x, 0.5f, 0.5, 10))
-		{
-			// TODO:
-			if (mTilingSize != prevTilingSize)
-			{
-
-			}
-		}
-
 		Model& model = GetModel();
 		const int materialSize = static_cast<int>(model.materialData.size());
 		for (int materialIndex = 0; materialIndex < materialSize; ++materialIndex)
@@ -49,7 +39,7 @@ void ModelComponent::DebugUI()
 void ModelComponent::OnEnable() 
 {
 	const char* modelFileName = mFileName.c_str();
-	mModelId = ModelManager::Get()->LoadModel(modelFileName, mTilingSize);
+	mModelId = ModelManager::Get()->LoadModel(modelFileName);
 
 	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
 	renderService->Register(this, mIsBasicModel);
@@ -70,14 +60,6 @@ void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjso
 		allocator
 	);
 
-	// --- Tiling Size ---
-	{
-		rj::Value position(rj::kArrayType);
-		position.PushBack(this->mTilingSize.x, allocator);
-		position.PushBack(this->mTilingSize.y, allocator);
-		compObj.AddMember("TilingSize", position, allocator);
-	}
-
 	// --- Rotation (convert back to degrees!) ---
 	{
 		rj::Value rotation(rj::kArrayType);
@@ -87,29 +69,10 @@ void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjso
 		compObj.AddMember("Rotation", rotation, allocator);
 	}
 
+	// --- Is Basic Model ---
 	compObj.AddMember(
 		rj::Value("IsBasicModel", allocator),
 		rj::Value(mIsBasicModel),
 		allocator
 	);
-
-	//{
-	//	rj::Value isBasicModel(rj::type);
-	//	compObj.AddMember("TilingSize", isBasicModel, allocator);
-	//}
 }
-
-
-//if (value.HasMember("Rotation"))
-//{
-//	const auto& rotation = value["Rotation"].GetArray();
-//	const float x = rotation[0].GetFloat() * Math::Constants::DegToRad;
-//	const float y = rotation[1].GetFloat() * Math::Constants::DegToRad;
-//	const float z = rotation[2].GetFloat() * Math::Constants::DegToRad;
-//	modelComponent->SetRotation({ x, y, z });
-//}
-//if (value.HasMember("IsBasicModel"))
-//{
-//	const bool isBasic = value["IsBasicModel"].GetBool();
-//	modelComponent->SetIsBasicModel(isBasic);
-//}

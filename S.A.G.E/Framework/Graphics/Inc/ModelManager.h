@@ -14,7 +14,7 @@ namespace SAGE::Graphics
 		static ModelManager* Get();
 
 	public:
-		ModelId LoadModel(std::filesystem::path fileName, Math::Vector2 tilingSize = Math::Vector2::One)
+		ModelId LoadModel(std::filesystem::path fileName)
 		{
 			auto modelId = std::filesystem::hash_value(fileName);
 			auto [iter, success] = mInventory.insert({modelId, nullptr});
@@ -22,7 +22,7 @@ namespace SAGE::Graphics
 			{
 				auto& modelPtr = iter->second;
 				modelPtr = std::make_unique<Model>();
-				ModelIO::LoadModel(fileName, *modelPtr, tilingSize);
+				ModelIO::LoadModel(fileName, *modelPtr);
 				ModelIO::LoadMaterial(fileName, *modelPtr);
 				ModelIO::LoadSkeleton(fileName, *modelPtr);
 				ModelIO::LoadAnimationSet(fileName, *modelPtr);

@@ -236,13 +236,6 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			const char* fileName = value["FileName"].GetString();
 			modelComponent->SetFileName(fileName);
 		}
-		if (value.HasMember("TilingSize"))
-		{
-			const auto& rotation = value["TilingSize"].GetArray();
-			const float x = rotation[0].GetFloat();
-			const float y = rotation[1].GetFloat();
-			modelComponent->SetTilingSize({ x, y });
-		}
 		if (value.HasMember("Rotation"))
 		{
 			const auto& rotation = value["Rotation"].GetArray();

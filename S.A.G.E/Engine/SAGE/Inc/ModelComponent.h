@@ -30,15 +30,13 @@ namespace SAGE
 
 		void SetFileName(const char* fileName) { mFileName = fileName; }
 		void SetRotation(const Math::Vector3& rotation) { mRotation = rotation; }
-		void SetTilingSize(const Math::Vector2& tilingSize) { mTilingSize = tilingSize; }
 		
 		void SetIsBasicModel(bool isBasic) { mIsBasicModel = isBasic; }
 
 	private:
 		std::string mFileName;
 		Graphics::ModelId mModelId;
-		Math::Vector3 mRotation = Math::Vector3::Zero; // TODO: I don't think this does anything.
-		Math::Vector2 mTilingSize = Math::Vector2(2.0f, 1.0f);// Math::Vector2::One;
+		Math::Vector3 mRotation = Math::Vector3::Zero;
 
 		bool mIsBasicModel = false;
 		float mIdentSize = 5.0f;

@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\EastWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Templates\\HalfLifeTemplates\\TempRoom\\EastWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\TransformComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\TransformComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -31,10 +35,6 @@
       "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\GameWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\EastWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Templates\\HalfLifeTemplates\\TempRoom\\EastWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\SouthWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Templates\\HalfLifeTemplates\\TempRoom\\SouthWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -58,24 +58,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TransformComponent.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\TransformComponent.cpp",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\TransformComponent.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\TransformComponent.cpp",
               "RelativeToolTip": "Engine\\SAGE\\Src\\TransformComponent.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-06-21T05:29:30.433Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "TransformComponent.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\TransformComponent.h",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\TransformComponent.h",
@@ -88,7 +88,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "GameObjectFactory.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObjectFactory.cpp",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameObjectFactory.cpp",
@@ -101,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "GameWorld.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameWorld.cpp",
@@ -120,20 +120,20 @@
               "RelativeDocumentMoniker": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\SouthWall.json",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\SouthWall.json",
               "RelativeToolTip": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\SouthWall.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAACvAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAACWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-06-19T23:42:35.178Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "EastWall.json",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\EastWall.json",
               "RelativeDocumentMoniker": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\EastWall.json",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\EastWall.json",
               "RelativeToolTip": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\EastWall.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAtAQAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-06-19T23:42:34.491Z",
               "EditorCaption": ""
@@ -146,14 +146,14 @@
               "RelativeDocumentMoniker": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\WestWall.json",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\WestWall.json",
               "RelativeToolTip": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\WestWall.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAvAQAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABAAQAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-06-19T23:42:33.766Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "halflife_level.json",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\HalfLife\\halflife_level.json",
               "RelativeDocumentMoniker": "Assets\\Level\\HalfLife\\halflife_level.json",
@@ -166,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "GameState.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.cpp",
               "RelativeDocumentMoniker": "Apps\\HalfLife3\\GameState.cpp",
@@ -226,13 +226,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "NorthWall.json",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json",
               "RelativeDocumentMoniker": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json",
               "RelativeToolTip": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-06-19T23:41:37.627Z",
               "EditorCaption": ""

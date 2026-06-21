@@ -34,7 +34,13 @@ namespace SAGE::Graphics
 		void DebugUI();
 
 	private:
-		using TransformBuffer = TypedConstantBuffer<Math::Matrix4>;
+		struct ConstantData
+		{
+			SAGE::Math::Matrix4 wvp;
+			SAGE::Math::Vector2 tiling;
+			SAGE::Math::Vector2 other;
+		};
+		using TransformBuffer = TypedConstantBuffer<ConstantData>;
 
 		const Camera* mCamera = nullptr;
 

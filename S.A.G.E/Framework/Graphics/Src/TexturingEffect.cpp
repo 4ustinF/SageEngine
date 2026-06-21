@@ -51,7 +51,10 @@ void TexturingEffect::Render(const RenderObject& renderObject)
 	const auto& view = mCamera->GetViewMatrix();
 	const auto& proj = mCamera->GetProjectionMatrix();
 
-	mTransformBuffer.Update(Transpose(matWorld * view * proj));
+	ConstantData constantData;
+	constantData.wvp = Transpose(matWorld * view * proj);
+	constantData.tiling = SAGE::Math::Vector2(1.0f, 1.0f); // TODO: 
+	mTransformBuffer.Update(constantData);
 
 	auto tm = TextureManager::Get();
 	tm->BindPS(renderObject.diffuseMapId, 0);

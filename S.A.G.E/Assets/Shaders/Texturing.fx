@@ -3,6 +3,8 @@
 cbuffer ConstantBuffer : register(b0)
 {
     matrix wvp;
+    float2 tiling;
+    float2 other;
 }
 
 Texture2D diffuseMap : register(t0);
@@ -29,7 +31,7 @@ VS_OUTPUT VS(VS_INPUT input)
 {    
     VS_OUTPUT output;
     output.position = mul(float4(input.position, 1.0f), wvp);
-    output.texCoord = input.texCoord;
+    output.texCoord = input.texCoord * tiling;
     return output;
 }
 

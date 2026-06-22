@@ -33,6 +33,10 @@ namespace SAGE
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }
+		void SetDiffuseMapFileName(const char* fileName) { diffuseMapFileName = fileName; }
+		void SetSpecularMapFileName(const char* fileName) { specularMapFileName = fileName; }
+		void SetBumpMapFileName(const char* fileName) { bumpMapFileName = fileName; }
+		void SetNormalMapFileName(const char* fileName) { normalMapFileName = fileName; }
 		void SetTilingSize(float xTilingSize, float yTilingSize);
 		void SetTilingSize(const SAGE::Math::Vector2& tilingSize);
 		void SetTileToScale(bool tileToXScale = false, bool tileToYScale = false, bool tileToZScale = false);
@@ -45,11 +49,14 @@ namespace SAGE
 		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
 
+		std::string diffuseMapFileName = "";
+		std::string specularMapFileName = "";
+		std::string bumpMapFileName = "";
+		std::string normalMapFileName = "";
+
 		SAGE::Math::Vector2 mTilingSize = SAGE::Math::Vector2::One;
 		bool mTileToXScale = false;
 		bool mTileToYScale = false;
 		bool mTileToZScale = false;
-
-		// TODO: Make it so tiling size matches scale.
 	};
 }

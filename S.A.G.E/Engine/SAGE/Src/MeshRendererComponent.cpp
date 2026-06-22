@@ -16,7 +16,55 @@ MEMORY_POOL_DEFINE(MeshRendererComponent, 500);
 
 void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
 {
-	// TODO: 
+	if (value.HasMember("DiffuseMapFileName"))
+	{
+		const auto& diffuseMapFileName = value["DiffuseMapFileName"].GetString();
+		SetDiffuseMapFileName(diffuseMapFileName);
+	}
+
+	if (value.HasMember("SpecularMapFileName"))
+	{
+		const auto& specularMapFileName = value["SpecularMapFileName"].GetString();
+		SetDiffuseMapFileName(specularMapFileName);
+	}
+
+	if (value.HasMember("BumpMapFileName"))
+	{
+		const auto& bumpMapFileName = value["BumpMapFileName"].GetString();
+		SetBumpMapFileName(bumpMapFileName);
+	}
+
+	if (value.HasMember("NormalMapFileName"))
+	{
+		const auto& normalMapFileName = value["NormalMapFileName"].GetString();
+		SetDiffuseMapFileName(normalMapFileName);
+	}
+
+	if (value.HasMember("TilingSize"))
+	{
+		const auto& tilingSize = value["TilingSize"].GetArray();
+		const float x = tilingSize[0].GetFloat();
+		const float y = tilingSize[1].GetFloat();
+		SetTilingSize(Vector2(x, y));
+	}
+
+	if (value.HasMember("TileToXScale"))
+	{
+		const auto& tileToXScale = value["TileToXScale"].GetBool();
+		SetTileToXScale(tileToXScale);
+	}
+
+	if (value.HasMember("TileToYScale"))
+	{
+		const auto& tileToYScale = value["TileToYScale"].GetBool();
+		SetTileToYScale(tileToYScale);
+	}
+
+	if (value.HasMember("TileToZScale"))
+	{
+		const auto& tileToZScale = value["TileToZScale"].GetBool();
+		SetTileToXScale(tileToZScale);
+	}
 }
 
 void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
@@ -31,10 +79,26 @@ void MeshRendererComponent::Initialize()
 
 	auto tm = TextureManager::Get();
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
-	renderObject.diffuseMapId = tm->LoadTexture("../Sprites/HalfLife/Surfaces/c1a0_w1d1.png"); // TODO: 
-	//renderObject.specularMapId = tm->LoadTexture(fileName);
-	//renderObject.bumpMapId = tm->LoadTexture(fileName);
-	//renderObject.normalMapId = tm->LoadTexture(fileName);
+
+	if (!diffuseMapFileName.empty())
+	{
+		renderObject.diffuseMapId = tm->LoadTexture(diffuseMapFileName);
+	}
+
+	if (!specularMapFileName.empty())
+	{
+		renderObject.specularMapId = tm->LoadTexture(specularMapFileName);
+	}
+
+	if (!bumpMapFileName.empty())
+	{
+		renderObject.bumpMapId = tm->LoadTexture(bumpMapFileName);
+	}
+
+	if (!normalMapFileName.empty())
+	{
+		renderObject.normalMapId = tm->LoadTexture(normalMapFileName);
+	}
 }
 
 void MeshRendererComponent::Terminate()

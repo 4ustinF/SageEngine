@@ -3,64 +3,76 @@
   "WorkspaceRootPath": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A64BD2BB-4ADD-45CF-A8B7-30778E9B71CD}|Shaders{A64BD2BB-4ADD-45CF-A8B7-30778E9B71CD}|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Shaders\\Texturing.fx||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A64BD2BB-4ADD-45CF-A8B7-30778E9B71CD}|Shaders{A64BD2BB-4ADD-45CF-A8B7-30778E9B71CD}|solutionrelative:Assets\\Shaders\\Texturing.fx||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshRendererComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\MeshRendererComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\TexturingEffect.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|solutionrelative:Framework\\Graphics\\Inc\\TexturingEffect.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GITHUBFILES\\SAGEENGINE\\S.A.G.E\\FRAMEWORK\\GRAPHICS\\INC\\RENDEROBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:FRAMEWORK\\GRAPHICS\\INC\\RENDEROBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\TexturingEffect.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|solutionrelative:Framework\\Graphics\\Src\\TexturingEffect.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\HologramEffect.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|solutionrelative:Framework\\Graphics\\Src\\HologramEffect.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A64BD2BB-4ADD-45CF-A8B7-30778E9B71CD}|Shaders{A64BD2BB-4ADD-45CF-A8B7-30778E9B71CD}|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Shaders\\HologramShader.fx||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A64BD2BB-4ADD-45CF-A8B7-30778E9B71CD}|Shaders{A64BD2BB-4ADD-45CF-A8B7-30778E9B71CD}|solutionrelative:Assets\\Shaders\\HologramShader.fx||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RenderService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\RenderService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RenderService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\RenderService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\RenderObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|solutionrelative:Framework\\Graphics\\Inc\\RenderObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshRendererComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\MeshRendererComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObjectFactory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\GameObjectFactory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\MeshBuilder.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|solutionrelative:Framework\\Graphics\\Inc\\MeshBuilder.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RenderService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\RenderService.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\HalfLife\\halflife_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Level\\HalfLife\\halflife_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\TextureManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|solutionrelative:Framework\\Graphics\\Src\\TextureManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RenderService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\RenderService.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshFilterComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\MeshFilterComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshFilterComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\MeshFilterComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|Level{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\voxel_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|Level{DFEE8655-98E1-41A4-9DF3-C3B7351FC037}|solutionrelative:Assets\\Level\\voxel_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\GameWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NewWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NewWall.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|solutionrelative:Apps\\HalfLife3\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GITHUBFILES\\SAGEENGINE\\S.A.G.E\\FRAMEWORK\\GRAPHICS\\INC\\MESHBUILDER.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:FRAMEWORK\\GRAPHICS\\INC\\MESHBUILDER.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|solutionrelative:Apps\\HalfLife3\\GameState.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\TexturingEffect.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|solutionrelative:Framework\\Graphics\\Inc\\TexturingEffect.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\HalfLife\\halflife_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Level\\HalfLife\\halflife_level.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\TexturingEffect.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6D757BDD-5D81-4AF5-B761-67C06FF33880}|Framework\\Graphics\\Graphics.vcxproj|solutionrelative:Framework\\Graphics\\Src\\TexturingEffect.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|solutionrelative:Apps\\HalfLife3\\GameState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39D5087D-114B-447B-A3BA-22C664F934B5}|Apps\\HalfLife3\\HalfLife3.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\WinMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -74,167 +86,219 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HologramEffect.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\HologramEffect.cpp",
-              "RelativeDocumentMoniker": "Framework\\Graphics\\Src\\HologramEffect.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\HologramEffect.cpp",
-              "RelativeToolTip": "Framework\\Graphics\\Src\\HologramEffect.cpp",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAEcAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "TextureManager.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\TextureManager.cpp",
+              "RelativeDocumentMoniker": "Framework\\Graphics\\Src\\TextureManager.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\TextureManager.cpp",
+              "RelativeToolTip": "Framework\\Graphics\\Src\\TextureManager.cpp",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAlwCwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-21T08:53:04.319Z",
+              "WhenOpened": "2026-06-22T02:47:33.99Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HologramShader.fx",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Shaders\\HologramShader.fx",
-              "RelativeDocumentMoniker": "Assets\\Shaders\\HologramShader.fx",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Shaders\\HologramShader.fx",
-              "RelativeToolTip": "Assets\\Shaders\\HologramShader.fx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-21T08:52:54.163Z",
+              "DocumentIndex": 9,
+              "Title": "voxel_level.json",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\voxel_level.json",
+              "RelativeDocumentMoniker": "Assets\\Level\\voxel_level.json",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\voxel_level.json",
+              "RelativeToolTip": "Assets\\Level\\voxel_level.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-22T02:08:09.584Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TexturingEffect.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\TexturingEffect.cpp",
-              "RelativeDocumentMoniker": "Framework\\Graphics\\Src\\TexturingEffect.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\TexturingEffect.cpp",
-              "RelativeToolTip": "Framework\\Graphics\\Src\\TexturingEffect.cpp",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAADoAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-21T08:52:25.06Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TexturingEffect.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\TexturingEffect.h",
-              "RelativeDocumentMoniker": "Framework\\Graphics\\Inc\\TexturingEffect.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\TexturingEffect.h",
-              "RelativeToolTip": "Framework\\Graphics\\Inc\\TexturingEffect.h",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACgAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-21T08:52:23.558Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Texturing.fx",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Shaders\\Texturing.fx",
-              "RelativeDocumentMoniker": "Assets\\Shaders\\Texturing.fx",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Shaders\\Texturing.fx",
-              "RelativeToolTip": "Assets\\Shaders\\Texturing.fx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-21T08:25:18.951Z",
+              "DocumentIndex": 11,
+              "Title": "NewWall.json",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NewWall.json",
+              "RelativeDocumentMoniker": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NewWall.json",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NewWall.json",
+              "RelativeToolTip": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NewWall.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-22T00:58:10.288Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "RenderObject.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\RenderObject.h",
-              "RelativeDocumentMoniker": "Framework\\Graphics\\Inc\\RenderObject.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\RenderObject.h",
-              "RelativeToolTip": "Framework\\Graphics\\Inc\\RenderObject.h",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA0AAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-21T08:07:28.672Z",
+              "Title": "MeshFilterComponent.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshFilterComponent.cpp",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\MeshFilterComponent.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshFilterComponent.cpp",
+              "RelativeToolTip": "Engine\\SAGE\\Src\\MeshFilterComponent.cpp",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAhwBIAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-22T00:29:39.833Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
+              "Title": "MeshFilterComponent.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshFilterComponent.h",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\MeshFilterComponent.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshFilterComponent.h",
+              "RelativeToolTip": "Engine\\SAGE\\Inc\\MeshFilterComponent.h",
+              "ViewState": "AgIAABwAAAAAAAAAAAAhwCAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-06-22T00:30:23.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MeshRendererComponent.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshRendererComponent.cpp",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\MeshRendererComponent.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshRendererComponent.cpp",
+              "RelativeToolTip": "Engine\\SAGE\\Src\\MeshRendererComponent.cpp",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-22T00:03:42.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MeshRendererComponent.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshRendererComponent.h",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\MeshRendererComponent.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshRendererComponent.h",
+              "RelativeToolTip": "Engine\\SAGE\\Inc\\MeshRendererComponent.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-06-22T00:02:48.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "RenderService.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RenderService.cpp",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\RenderService.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\RenderService.cpp",
               "RelativeToolTip": "Engine\\SAGE\\Src\\RenderService.cpp",
-              "ViewState": "AgIAABYAAAAAAAAAAAAAACYAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAOIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-06-21T08:05:10.609Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "RenderService.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RenderService.h",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\RenderService.h",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\RenderService.h",
               "RelativeToolTip": "Engine\\SAGE\\Inc\\RenderService.h",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAwwD0AAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAACAAAAAAAAAAAAAhwCMAAABXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-06-21T08:05:35.046Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 16,
+              "Title": "TexturingEffect.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\TexturingEffect.cpp",
+              "RelativeDocumentMoniker": "Framework\\Graphics\\Src\\TexturingEffect.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Src\\TexturingEffect.cpp",
+              "RelativeToolTip": "Framework\\Graphics\\Src\\TexturingEffect.cpp",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADYAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-21T08:52:25.06Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TexturingEffect.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\TexturingEffect.h",
+              "RelativeDocumentMoniker": "Framework\\Graphics\\Inc\\TexturingEffect.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\TexturingEffect.h",
+              "RelativeToolTip": "Framework\\Graphics\\Inc\\TexturingEffect.h",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAB0AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-06-21T08:52:23.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RenderObject.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\RenderObject.h",
+              "RelativeDocumentMoniker": "Framework\\Graphics\\Inc\\RenderObject.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\RenderObject.h",
+              "RelativeToolTip": "Framework\\Graphics\\Inc\\RenderObject.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAIAwwBIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-06-21T08:07:28.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "MeshBuilder.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\MeshBuilder.h",
               "RelativeDocumentMoniker": "Framework\\Graphics\\Inc\\MeshBuilder.h",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\MeshBuilder.h",
               "RelativeToolTip": "Framework\\Graphics\\Inc\\MeshBuilder.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABsAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAhwBgAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-06-21T08:04:38.547Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "GameObjectFactory.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObjectFactory.cpp",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameObjectFactory.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObjectFactory.cpp",
               "RelativeToolTip": "Engine\\SAGE\\Src\\GameObjectFactory.cpp",
-              "ViewState": "AgIAAEMAAAAAAAAAAADwv+0AAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAAPEAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-06-20T15:48:13.794Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "GameWorld.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameWorld.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp",
               "RelativeToolTip": "Engine\\SAGE\\Src\\GameWorld.cpp",
-              "ViewState": "AgIAAHcBAAAAAAAAAAAYwHQBAAA/AAAAAAAAAA==",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAAAHoAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-06-19T23:45:19.638Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "halflife_level.json",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\HalfLife\\halflife_level.json",
               "RelativeDocumentMoniker": "Assets\\Level\\HalfLife\\halflife_level.json",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Level\\HalfLife\\halflife_level.json",
               "RelativeToolTip": "Assets\\Level\\HalfLife\\halflife_level.json",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-06-19T22:57:25.377Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "GameState.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.cpp",
               "RelativeDocumentMoniker": "Apps\\HalfLife3\\GameState.cpp",
@@ -247,7 +311,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "GameState.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\GameState.h",
               "RelativeDocumentMoniker": "Apps\\HalfLife3\\GameState.h",
@@ -260,7 +324,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "WinMain.cpp",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Apps\\HalfLife3\\WinMain.cpp",
               "RelativeDocumentMoniker": "Apps\\HalfLife3\\WinMain.cpp",
@@ -269,40 +333,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-06-19T16:26:31.633Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "7d7f18a8-e72b-4b5d-b588-675e837a32e9",
-        "Display": 2,
-        "X": 1204,
-        "Y": 409,
-        "Width": 1594,
-        "Height": 831,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "NorthWall.json",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json",
-              "RelativeDocumentMoniker": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json",
-              "RelativeToolTip": "Assets\\Templates\\HalfLifeTemplates\\TempRoom\\NorthWall.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-06-19T23:41:37.627Z",
               "EditorCaption": ""
             }
           ]

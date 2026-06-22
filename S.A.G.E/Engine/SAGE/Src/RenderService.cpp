@@ -8,6 +8,7 @@
 #include "GameWorld.h"
 
 #include "AnimatorComponent.h"
+#include "MeshRendererComponent.h"
 #include "ModelComponent.h"
 #include "TransformComponent.h"
 
@@ -105,11 +106,17 @@ void RenderService::Render()
 	for (auto& entry : mBasicRenderEntries) {
 		mTexturingEffect.Render(entry.renderGroup);
 	}
+	for (auto& entry : mBasicMeshRendererEntrys) {
+		mTexturingEffect.Render(entry->GetRenderObject());
+	}
 	mTexturingEffect.End();
 
 	mShadowEffect.Begin();
 	for (auto& entry : mRenderEntries) {
 		mShadowEffect.Render(entry.renderGroup);
+	}
+	for (auto& entry : mMeshRendererEntrys) {
+		mShadowEffect.Render(entry->GetRenderObject());
 	}
 	if (mTerrainService) {
 		mShadowEffect.Render(mTerrainService->GetTerrainRenderObject());
@@ -119,6 +126,9 @@ void RenderService::Render()
 	mStandardEffect.Begin();
 	for (auto& entry : mRenderEntries) {
 		mStandardEffect.Render(entry.renderGroup);
+	}
+	for (auto& entry : mMeshRendererEntrys) {
+		mStandardEffect.Render(entry->GetRenderObject());
 	}
 	mStandardEffect.End();
 
@@ -205,6 +215,25 @@ void RenderService::Unregister(const ModelComponent* modelComponent, bool isBasi
 	{
 		Entry& entry = *iter;
 		CleanUpRenderGroup(entry.renderGroup);
+		renderEntrys.erase(iter);
+		return;
+	}
+}
+
+void RenderService::RegisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic)
+{
+	std::vector<MeshRendererComponent*>& renderEntrys = isBasic ? mBasicMeshRendererEntrys : mMeshRendererEntrys;
+	renderEntrys.push_back(meshRendererComponent);
+}
+
+void RenderService::UnregisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic)
+{
+	std::vector<MeshRendererComponent*>& renderEntrys = isBasic ? mBasicMeshRendererEntrys : mMeshRendererEntrys;
+	auto match = [&](const auto& entry) { return entry == meshRendererComponent; };
+	auto iter = std::find_if(renderEntrys.begin(), renderEntrys.end(), match);
+	if (iter != renderEntrys.end())
+	{
+		const MeshRendererComponent* entry = *iter;
 		renderEntrys.erase(iter);
 		return;
 	}

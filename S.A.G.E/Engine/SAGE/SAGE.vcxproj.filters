@@ -144,6 +144,12 @@
     <ClInclude Include="Inc\RBPhysicsService.h">
       <Filter>Inc\Services</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\MeshRendererComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\MeshFilterComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\App.cpp">
@@ -229,6 +235,12 @@
     </ClCompile>
     <ClCompile Include="Src\RBPhysicsService.cpp">
       <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MeshRendererComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MeshFilterComponent.cpp">
+      <Filter>Src\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

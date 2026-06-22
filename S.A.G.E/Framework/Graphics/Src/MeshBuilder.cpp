@@ -506,6 +506,16 @@ Mesh MeshBuilder::CreateSkyBox()
 	return mesh;
 }
 
+Mesh MeshBuilder::CreateCylinder(const Math::Cylinder& cylinder)
+{
+	return CreateCylinder(cylinder.slices, cylinder.rings);
+}
+
+Mesh MeshBuilder::CreateCylinder(int slices, int rings)
+{
+	return CreateSphere(slices, rings, 1.0f); // TODO:
+}
+
 Mesh MeshBuilder::CreateSphere(const Math::Sphere& sphere)
 {
 	return CreateSphere(sphere.slices, sphere.rings, sphere.radius);

@@ -25,6 +25,10 @@
     {
       "Name": "South Wall",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/SouthWall.json"
+    },
+    {
+      "Name": "New Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/NewWall.json"
     }
   ]
 }

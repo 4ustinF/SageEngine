@@ -18,6 +18,7 @@ namespace SAGE
 
 		// Getters
 		const SAGE::Graphics::Transform& GetTransform() const { return mTransform; }
+		SAGE::Graphics::Transform GetTransform() { return mTransform; }
 		const SAGE::Math::Vector3& GetPosition() const { return mTransform.position; }
 		const SAGE::Math::Vector3& GetRotationDegreeAngles() const { return mDegreeAngles; }
 		const SAGE::Math::Quaternion& GetRotation() const { return mTransform.rotation; }

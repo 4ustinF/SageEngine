@@ -12,6 +12,8 @@ namespace SAGE
 		Collider,
 		FollowCameraController,
 		FPSCameraController,
+		MeshFilter,
+		MeshRenderer,
 		Model,
 		Particle,
 		RigidBody,

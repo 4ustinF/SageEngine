@@ -1,52 +1,30 @@
-﻿  ModelIO.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 1 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
+﻿  MeshBuilder.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(128,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 2 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 3 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 4 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(132,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 5 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 6 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 7 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 8 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 9 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 10 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 11 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 12 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 13 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 14 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 15 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\ModelIO.cpp(24,18): warning C4477: 'fscanf_s' : format string '%f' requires an argument of type 'float *', but variadic argument 16 has type 'const float *'
-  (compiling source file '/Src/ModelIO.cpp')
-  
-  ModelManager.cpp
-  Generating Code...
   Graphics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Graphics.lib

@@ -13,6 +13,8 @@
 #include "ColliderComponent.h"
 #include "FollowCameraControllerComponent.h"
 #include "FPSCameraControllerComponent.h"
+#include "MeshFilterComponent.h"
+#include "MeshRendererComponent.h"
 #include "ModelComponent.h"
 #include "ParticleComponent.h"
 #include "RigidBodyComponent.h"

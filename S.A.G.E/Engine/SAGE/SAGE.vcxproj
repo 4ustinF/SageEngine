@@ -36,6 +36,8 @@
     <ClInclude Include="Inc\GameObjectFactory.h" />
     <ClInclude Include="Inc\GameObjectHandle.h" />
     <ClInclude Include="Inc\GameWorld.h" />
+    <ClInclude Include="Inc\MeshFilterComponent.h" />
+    <ClInclude Include="Inc\MeshRendererComponent.h" />
     <ClInclude Include="Inc\ModelComponent.h" />
     <ClInclude Include="Inc\ParticleComponent.h" />
     <ClInclude Include="Inc\ParticleService.h" />
@@ -68,6 +70,8 @@
     <ClCompile Include="Src\GameObject.cpp" />
     <ClCompile Include="Src\GameObjectFactory.cpp" />
     <ClCompile Include="Src\GameWorld.cpp" />
+    <ClCompile Include="Src\MeshFilterComponent.cpp" />
+    <ClCompile Include="Src\MeshRendererComponent.cpp" />
     <ClCompile Include="Src\ModelComponent.cpp" />
     <ClCompile Include="Src\ParticleComponent.cpp" />
     <ClCompile Include="Src\ParticleService.cpp" />

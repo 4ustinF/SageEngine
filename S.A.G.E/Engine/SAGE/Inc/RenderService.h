@@ -41,6 +41,10 @@ namespace SAGE
 		void Register(const ModelComponent* modelComponent, bool isBasic = false);
 		void Unregister(const ModelComponent* modelComponent, bool isBasic = false);
 
+		friend class MeshRendererComponent;
+		void RegisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic = false);
+		void UnregisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic = false);
+
 		struct Entry
 		{
 			const AnimatorComponent* animatorComponent = nullptr;
@@ -51,6 +55,9 @@ namespace SAGE
 
 		std::vector<Entry> mRenderEntries;
 		std::vector<Entry> mBasicRenderEntries;
+
+		std::vector<MeshRendererComponent*> mMeshRendererEntrys;
+		std::vector<MeshRendererComponent*> mBasicMeshRendererEntrys;
 
 		const CameraService* mCameraService = nullptr;
 		const TerrainService* mTerrainService = nullptr;

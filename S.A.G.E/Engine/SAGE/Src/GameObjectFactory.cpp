@@ -9,6 +9,8 @@
 #include "ColliderComponent.h"
 #include "FollowCameraControllerComponent.h"
 #include "FPSCameraControllerComponent.h"
+#include "MeshFilterComponent.h"
+#include "MeshRendererComponent.h"
 #include "ModelComponent.h"
 #include "ParticleComponent.h"
 #include "RigidBodyComponent.h"
@@ -227,6 +229,23 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			const auto speed = value["TurnSpeed"].GetFloat();
 			cameraComponent->SetTurnSpeed(speed);
 		}
+	}
+	else if (strcmp(componentName, "Mesh Filter Component") == 0)
+	{
+		auto meshFilterComponent = gameObject.AddComponent<MeshFilterComponent>();
+	}
+	else if (strcmp(componentName, "Mesh Renderer Component") == 0)
+	{
+		MeshRendererComponent* meshRendererComponent = gameObject.AddComponent<MeshRendererComponent>();
+
+		// Mesh Renderer Requires a Mesh Filter Component as well.
+		MeshFilterComponent* meshFilterComponent = gameObject.GetComponent<MeshFilterComponent>();
+		if (meshFilterComponent == nullptr)
+		{
+			meshFilterComponent = gameObject.AddComponent<MeshFilterComponent>();
+		}
+
+		meshRendererComponent->SetMeshFilterComponent(meshFilterComponent);
 	}
 	else if (strcmp(componentName, "Model Component") == 0)
 	{

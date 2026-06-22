@@ -11,6 +11,8 @@ D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\FPSCameraControllerComponent.c
 D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\GameObject.cpp;D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\x64\Debug\GameObject.obj
 D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\GameObjectFactory.cpp;D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\x64\Debug\GameObjectFactory.obj
 D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\GameWorld.cpp;D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\x64\Debug\GameWorld.obj
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\MeshFilterComponent.cpp;D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\x64\Debug\MeshFilterComponent.obj
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\MeshRendererComponent.cpp;D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\x64\Debug\MeshRendererComponent.obj
 D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\ModelComponent.cpp;D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\x64\Debug\ModelComponent.obj
 D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\ParticleComponent.cpp;D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\x64\Debug\ParticleComponent.obj
 D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\ParticleService.cpp;D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\x64\Debug\ParticleService.obj

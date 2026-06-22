@@ -1,10 +1,18 @@
-﻿  AnimatorComponent.cpp
+﻿  BPhysicsComponent.cpp
+  BPhysicsService.cpp
+  ColliderComponent.cpp
+  FollowCameraControllerComponent.cpp
   GameObjectFactory.cpp
+  GameWorld.cpp
+  MeshFilterComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\MeshFilterComponent.cpp(108,86): warning C4305: 'argument': truncation from 'double' to 'float'
+  (compiling source file '/Src/MeshFilterComponent.cpp')
+  
   MeshRendererComponent.cpp
-  ModelComponent.cpp
-  PhysicsService.cpp
   RenderService.cpp
+  RigidBodyComponent.cpp
   SAGE.cpp
-  UIService.cpp
+  SpawnerComponent.cpp
+  TransformComponent.cpp
   Generating Code...
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

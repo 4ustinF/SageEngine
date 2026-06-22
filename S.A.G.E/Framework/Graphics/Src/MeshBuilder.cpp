@@ -2,6 +2,7 @@
 #include "MeshBuilder.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
 Color GetNextColor(int& index)
@@ -620,24 +621,32 @@ Mesh MeshBuilder::CreateSkyDome(int slices, int rings, float radius)
 
 Mesh MeshBuilder::CreatePlane(int columns, int rows, float spacing, bool flipVertices)
 {
+	return CreatePlane(columns, rows, Vector2(spacing, spacing), flipVertices);
+}
+
+Mesh MeshBuilder::CreatePlane(int columns, int rows, const Vector2& spacing, bool flipVertices)
+{
 	if (columns < 1) { columns = 1; }
 	if (rows < 1) { rows = 1; }
 
 	Mesh mesh;
-	//const float spacing = 1.0f;
-	const float xOffSet = columns * 0.5f;
-	const float zOffSet = rows * 0.5f;
+	const float width = columns * spacing.x;
+	const float height = rows * spacing.y;
+	const float xOffSet = width * 0.5f;
+	const float zOffSet = height * 0.5f;
+	const float invCols = 1.0f / static_cast<float>(columns);
+	const float invRows = 1.0f / static_cast<float>(rows);
 
 	mesh.indices = {};
 
 	for (int i = 0; i <= rows; ++i) {
 		for (int j = 0; j <= columns; ++j) {
 			// pos, normal, tangent, uv
-			Math::Vector3 pos = { j * spacing - xOffSet, 0.0f, i * spacing - zOffSet };
-			const float u = 1.0f - (1.0f / columns) * j;
-			const float v = (1.0f / rows) * i;
+			Math::Vector3 pos = { j * spacing.x - xOffSet, 0.0f, i * spacing.y - zOffSet };
+			const float u = j * invCols; // 1.0f - (1.0f / columns) * j;
+			const float v = 1.0f - i * invRows; // 1.0f - ((1.0f / rows) * i);
 
-			mesh.vertices.push_back({ pos, Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{u, v} });
+			mesh.vertices.push_back({ pos, Vector3::YAxis, Vector3::XAxis, Vector2{u, v} });
 
 			if (!flipVertices) {
 				if (i != rows && j != columns) {

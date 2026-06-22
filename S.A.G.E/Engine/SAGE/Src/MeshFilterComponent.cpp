@@ -8,6 +8,16 @@ namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(MeshFilterComponent, 500);
 
+void MeshFilterComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
+{
+	// TODO: 
+}
+
+void MeshFilterComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
+{
+	// TODO: 
+}
+
 void MeshFilterComponent::Initialize()
 {
 	GenerateMesh();
@@ -29,11 +39,6 @@ void MeshFilterComponent::DebugUI()
 		ImGui::SameLine(); 
 		ImGui::Text(mMeshTypeName.c_str());
 	}
-}
-
-void MeshFilterComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
-{
-	// TODO: 
 }
 
 std::string MeshFilterComponent::MeshTypeToString(MeshType meshType)
@@ -99,7 +104,8 @@ void MeshFilterComponent::GeneratePlaneMesh()
 
 void MeshFilterComponent::GenerateQuadMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, 1.0f));
+	//mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, 1.0f)); // TODO:
+	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, Vector2(3.2512f, 4.064))); // TODO:
 }
 
 void MeshFilterComponent::GenerateSphereMesh()

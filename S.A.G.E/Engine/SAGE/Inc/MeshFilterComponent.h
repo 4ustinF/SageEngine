@@ -22,12 +22,13 @@ namespace SAGE
 		MEMORY_POOL_DECLARE
 
 		virtual const char* GetCompName() { return "Mesh Filter Component"; }
+		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
+		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
 		void Initialize() override;
 		void Terminate() override;
 
 		void DebugUI() override;
-		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
 		// Getters
 		SAGE::Graphics::RenderObject& GetRenderObject() { return mRenderObject; };
@@ -39,7 +40,7 @@ namespace SAGE
 		std::string MeshTypeToString(MeshType meshType); // TODO: Move to a utils class?
 
 	private:
-		void GenerateMesh();
+		void GenerateMesh(); // TODO: We need to be able to pass values in.
 		void GenerateCubeMesh();
 		void GenerateCylinderMesh();
 		void GeneratePlaneMesh();

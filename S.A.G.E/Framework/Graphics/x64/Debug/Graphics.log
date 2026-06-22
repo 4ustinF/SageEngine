@@ -1,17 +1,30 @@
-﻿  CrossHatchEffect.cpp
-  GaussianBlurEffect.cpp
-  HologramEffect.cpp
-  ParticleEffect.cpp
-  PostProccessingEffect.cpp
-  ReflectionEffect.cpp
-  RenderObject.cpp
-  ShadowEffect.cpp
-  StandardEffect.cpp
-  TerrainEffect.cpp
-  TexturingEffect.cpp
-  ToonEffect .cpp
-  VoxelCloudsEffect.cpp
-  VoxelTerrainEffect.cpp
-  VoxelWaterEffect.cpp
-  Generating Code...
+﻿  MeshBuilder.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(129,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(130,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(131,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(131,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(131,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(131,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(131,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(133,47): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(133,47): warning C4267:         with
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(133,47): warning C4267:         [
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(133,47): warning C4267:             _Ty=std::seed_seq::result_type
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(133,47): warning C4267:         ]
+  (compiling source file '/Src/MeshBuilder.cpp')
+  
   Graphics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Graphics.lib

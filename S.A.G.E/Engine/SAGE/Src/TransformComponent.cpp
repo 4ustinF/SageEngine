@@ -27,7 +27,7 @@ void TransformComponent::DebugUI()
 		ImGui::DragFloat3("Scale##TransformComponent", &mTransform.scale.x, 0.1f);
 	}
 
-	Graphics::SimpleDraw::AddTransform(mTransform.GetMatrix4());
+	Graphics::SimpleDraw::AddTransform(mTransform.GetMatrix4()); // TODO: This should not grow with scale. 
 }
 
 void TransformComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)

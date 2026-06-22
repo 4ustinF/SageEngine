@@ -14,6 +14,16 @@ namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(MeshRendererComponent, 500);
 
+void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
+{
+	// TODO: 
+}
+
+void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
+{
+	// TODO: 
+}
+
 void MeshRendererComponent::Initialize()
 {
 	mRenderService = GetOwner().GetWorld().GetService<RenderService>();
@@ -66,11 +76,6 @@ void MeshRendererComponent::OnEnable()
 void MeshRendererComponent::OnDisable()
 {
 	mRenderService->UnregisterMeshRenderer(this, true); // TODO: Don't default true
-}
-
-void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
-{
-	// TODO: 
 }
 
 RenderObject& MeshRendererComponent::GetRenderObject()

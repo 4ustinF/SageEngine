@@ -56,7 +56,7 @@ namespace SAGE
 		std::vector<Entry> mRenderEntries;
 		std::vector<Entry> mBasicRenderEntries;
 
-		std::vector<MeshRendererComponent*> mMeshRendererEntrys;
+		std::vector<MeshRendererComponent*> mMeshRendererEntrys; // TODO: Add tiling support to this.
 		std::vector<MeshRendererComponent*> mBasicMeshRendererEntrys;
 
 		const CameraService* mCameraService = nullptr;

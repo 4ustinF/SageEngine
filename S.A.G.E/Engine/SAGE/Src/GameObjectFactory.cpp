@@ -235,7 +235,8 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 	}
 	else if (strcmp(componentName, "Mesh Filter Component") == 0)
 	{
-		auto meshFilterComponent = gameObject.AddComponent<MeshFilterComponent>();
+		MeshFilterComponent* meshFilterComponent = gameObject.AddComponent<MeshFilterComponent>();
+		meshFilterComponent->LoadComponentFromTemplate(value);
 	}
 	else if (strcmp(componentName, "Mesh Renderer Component") == 0)
 	{
@@ -249,6 +250,7 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 		}
 
 		meshRendererComponent->SetMeshFilterComponent(meshFilterComponent);
+		meshRendererComponent->LoadComponentFromTemplate(value);
 	}
 	else if (strcmp(componentName, "Model Component") == 0)
 	{

@@ -27,4 +27,6 @@ D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(134,47)
 D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Graphics\Src\MeshBuilder.cpp(134,47): warning C4267:         ]
   (compiling source file '/Src/MeshBuilder.cpp')
   
+  SpriteRenderer.cpp
+  Generating Code...
   Graphics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Graphics.lib

@@ -11,7 +11,6 @@ MEMORY_POOL_DEFINE(MeshFilterComponent, 500);
 
 void MeshFilterComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
 {
-	// TODO: 
 	if (value.HasMember("MeshType"))
 	{
 		const auto& meshType = value["MeshType"].GetString();
@@ -20,7 +19,8 @@ void MeshFilterComponent::LoadComponentFromTemplate(const rapidjson::Value& valu
 
 	if (value.HasMember("Pivot"))
 	{
-		// SetPivotType(SAGE::Input::Pivot pivot) { mPivot = pivot; }
+		const auto& pivot = value["Pivot"].GetString();
+		SetPivotType(StringToPivot(pivot));
 	}
 
 	if (value.HasMember("Divisions"))

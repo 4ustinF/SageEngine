@@ -155,4 +155,19 @@ namespace SAGE::Input
 		RBUTTON		= 1,
 		MBUTTON		= 2,
 	};
+
+	static Pivot StringToPivot(std::string pivot)
+	{
+		if (pivot == "BottomLeft") { return Pivot::BottomLeft; }
+		if (pivot == "Bottom") { return Pivot::Bottom; }
+		if (pivot == "BottomRight") { return Pivot::BottomRight; }
+		if (pivot == "Left") { return Pivot::Left; }
+		if (pivot == "Center") { return Pivot::Center; }
+		if (pivot == "Right") { return Pivot::Right; }
+		if (pivot == "TopLeft") { return Pivot::TopLeft; }
+		if (pivot == "Top") { return Pivot::Top; }
+		if (pivot == "TopRight") { return Pivot::TopRight; }
+
+		return Pivot::Center;
+	}
 }

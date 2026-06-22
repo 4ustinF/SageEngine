@@ -27,6 +27,7 @@ namespace SAGE
 		virtual void Terminate() {}
 
 		virtual void Update(float deltaTime) {}
+		virtual void OnQueueUpdate(float deltaTime) {}
 		virtual void DebugUI() {}
 
 		virtual void OnEnable() {}
@@ -35,7 +36,6 @@ namespace SAGE
 		void EnqueueUpdate() { mQueueUpdate = true; }
 		void ClearQueueUpdate() { mQueueUpdate = false; }
 		bool CanQueueUpdate() const { return mQueueUpdate; }
-		virtual void OnQueueUpdate(float deltaTime) {}
 
 		GameObject& GetOwner() { return *mOwner; }
 		const GameObject& GetOwner() const { return *mOwner; }

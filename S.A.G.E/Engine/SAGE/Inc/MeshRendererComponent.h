@@ -33,7 +33,12 @@ namespace SAGE
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }
+		void SetTilingSize(float xTilingSize, float yTilingSize);
 		void SetTilingSize(const SAGE::Math::Vector2& tilingSize);
+		void SetTileToScale(bool tileToXScale = false, bool tileToYScale = false, bool tileToZScale = false);
+		void SetTileToXScale(bool tileToXScale);
+		void SetTileToYScale(bool tileToYScale);
+		void SetTileToZScale(bool tileToYScale);
 
 	private:
 		MeshFilterComponent* mMeshFilter = nullptr;
@@ -41,6 +46,9 @@ namespace SAGE
 		TransformComponent* mTransformComponent = nullptr;
 
 		SAGE::Math::Vector2 mTilingSize = SAGE::Math::Vector2::One;
+		bool mTileToXScale = false;
+		bool mTileToYScale = false;
+		bool mTileToZScale = false;
 
 		// TODO: Make it so tiling size matches scale.
 	};

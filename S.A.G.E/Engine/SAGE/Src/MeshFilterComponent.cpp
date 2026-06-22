@@ -105,7 +105,7 @@ void MeshFilterComponent::GeneratePlaneMesh()
 void MeshFilterComponent::GenerateQuadMesh()
 {
 	//mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, 1.0f)); // TODO:
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, Vector2(3.2512f, 4.064))); // TODO:
+	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, Vector2(3.2512f, 4.064f))); // TODO:
 }
 
 void MeshFilterComponent::GenerateSphereMesh()

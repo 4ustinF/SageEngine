@@ -46,10 +46,35 @@ void MeshRendererComponent::Terminate()
 
 void MeshRendererComponent::Update(float deltaTime)
 {
+	// Update Render Objects Transform based off of our transform Comp.
 	if (mTransformComponent != nullptr)
 	{
 		RenderObject& renderObject = mMeshFilter->GetRenderObject();
 		renderObject.transform = mTransformComponent->GetTransform();
+	}
+
+	// TODO: Move to a delegate call from scale changing.
+	if (mTransformComponent != nullptr)
+	{
+		if (mTileToXScale || mTileToYScale || mTileToZScale)
+		{
+			const Vector3& scale = mTransformComponent->GetScale();
+
+			if (mTileToXScale && mTilingSize.x != scale.x)
+			{
+				SetTilingSize(scale.x, mTilingSize.y);
+			}
+
+			if (mTileToYScale && mTilingSize.y != scale.y)
+			{
+				SetTilingSize(mTilingSize.x, scale.y);
+			}
+
+			if (mTileToZScale && mTilingSize.y != scale.y)
+			{
+				SetTilingSize(mTilingSize.x, scale.z);
+			}
+		}
 	}
 }
 
@@ -64,7 +89,24 @@ void MeshRendererComponent::DebugUI()
 		{
 			SetTilingSize(mTilingSize);
 		}
-		// TODO: mTilingSize
+
+		bool tileToXScale = mTileToXScale;
+		if (ImGui::Checkbox("Tile To X Scale##MeshRendererComponent", &tileToXScale))
+		{
+			SetTileToXScale(tileToXScale);
+		}
+
+		bool tileToYScale = mTileToYScale;
+		if (ImGui::Checkbox("Tile To Y Scale##MeshRendererComponent", &tileToYScale))
+		{
+			SetTileToYScale(tileToYScale);
+		}
+
+		bool tileToZScale = mTileToZScale;
+		if (ImGui::Checkbox("Tile To Z Scale##MeshRendererComponent", &tileToZScale))
+		{
+			SetTileToZScale(tileToZScale);
+		}
 	}
 }
 
@@ -83,8 +125,50 @@ RenderObject& MeshRendererComponent::GetRenderObject()
 	return mMeshFilter->GetRenderObject();
 }
 
+void MeshRendererComponent::SetTilingSize(float xTilingSize, float yTilingSize)
+{
+	SetTilingSize(Vector2(xTilingSize, yTilingSize));
+}
+
 void MeshRendererComponent::SetTilingSize(const Vector2& tilingSize)
 {
 	mTilingSize = tilingSize;
 	mMeshFilter->GetRenderObject().tilingSize = mTilingSize;
+}
+
+void MeshRendererComponent::SetTileToScale(bool tileToXScale, bool tileToYScale, bool tileToZScale)
+{
+	SetTileToXScale(tileToXScale);
+	SetTileToYScale(tileToYScale);
+	SetTileToZScale(tileToZScale);
+}
+
+void MeshRendererComponent::SetTileToXScale(bool tileToXScale)
+{
+	if (mTileToXScale == tileToXScale)
+	{
+		return;
+	}
+
+	mTileToXScale = tileToXScale;
+}
+
+void MeshRendererComponent::SetTileToYScale(bool tileToYScale)
+{
+	if (mTileToYScale == tileToYScale)
+	{
+		return;
+	}
+
+	mTileToYScale = tileToYScale;
+}
+
+void MeshRendererComponent::SetTileToZScale(bool tileToZScale)
+{
+	if (mTileToZScale == tileToZScale)
+	{
+		return;
+	}
+
+	mTileToZScale = tileToZScale;
 }

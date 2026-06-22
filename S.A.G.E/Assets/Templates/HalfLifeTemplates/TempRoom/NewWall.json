@@ -17,7 +17,8 @@
       ]
     },
     "Mesh Renderer Component": {
-      "DiffuseMapFileName": "../Sprites/HalfLife/Surfaces/c1a0_w1d1.png"
+      "DiffuseMapFileName": "../Sprites/HalfLife/Surfaces/c1a0_w1d1.png",
+      "TileToXScale": true
     }
   }
 }

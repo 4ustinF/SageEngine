@@ -134,7 +134,7 @@ void MeshRendererComponent::Update(float deltaTime)
 				SetTilingSize(mTilingSize.x, scale.y);
 			}
 
-			if (mTileToZScale && mTilingSize.y != scale.y)
+			if (mTileToZScale && mTilingSize.y != scale.z)
 			{
 				SetTilingSize(mTilingSize.x, scale.z);
 			}

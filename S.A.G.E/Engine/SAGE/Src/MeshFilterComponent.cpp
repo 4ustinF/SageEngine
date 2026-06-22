@@ -12,6 +12,44 @@ MEMORY_POOL_DEFINE(MeshFilterComponent, 500);
 void MeshFilterComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
 {
 	// TODO: 
+	if (value.HasMember("MeshType"))
+	{
+		const auto& meshType = value["MeshType"].GetString();
+		SetMeshType(StringToMeshType(meshType));
+	}
+
+	if (value.HasMember("Pivot"))
+	{
+		// SetPivotType(SAGE::Input::Pivot pivot) { mPivot = pivot; }
+	}
+
+	if (value.HasMember("Divisions"))
+	{
+		const auto& divisions = value["Divisions"].GetArray();
+		const int x = divisions[0].GetInt();
+		const int y = divisions[1].GetInt();
+		SetDivisions(Vector2Int(x, y));
+	}
+
+	if (value.HasMember("Spacing"))
+	{
+		const auto& spacing = value["Spacing"].GetArray();
+		const float x = spacing[0].GetFloat();
+		const float y = spacing[1].GetFloat();
+		SetSpacing(Vector2(x, y));
+	}
+
+	if (value.HasMember("FlipVertices"))
+	{
+		const auto& flipVertices = value["FlipVertices"].GetBool();
+		SetFlipVertices(flipVertices);
+	}
+
+	if (value.HasMember("Radius"))
+	{
+		const auto& radius = value["Radius"].GetFloat();
+		SetRadius(radius);
+	}
 }
 
 void MeshFilterComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
@@ -63,6 +101,18 @@ std::string MeshFilterComponent::MeshTypeToString(MeshType meshType)
 	return "Missing";
 }
 
+MeshType MeshFilterComponent::StringToMeshType(const std::string& meshType)
+{
+	if (meshType == "Cube") { return MeshType::Cube; }
+	if (meshType == "Cylinder") { return MeshType::Cylinder; }
+	if (meshType == "Plane") { return MeshType::Plane; }
+	if (meshType == "Quad") { return MeshType::Quad; }
+	if (meshType == "Sphere") { return MeshType::Sphere; }
+	if (meshType == "Custom") { return MeshType::Custom; }
+
+	return MeshType::Custom;
+}
+
 void MeshFilterComponent::GenerateMesh()
 {
 	switch (mMeshType)
@@ -95,24 +145,23 @@ void MeshFilterComponent::GenerateCubeMesh()
 
 void MeshFilterComponent::GenerateCylinderMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreateCylinder(1, 1)); // TODO: 
+	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreateCylinder(mDivisions.x, mDivisions.y));
 }
 
 void MeshFilterComponent::GeneratePlaneMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, 1.0f)); // TODO: 
+	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mRadius));
 }
 
 void MeshFilterComponent::GenerateQuadMesh()
 {
-	//mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, 1.0f)); // TODO:
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, Vector2(3.2512f, 4.064f), false, Pivot::Bottom)); // TODO:
-	// SAGE::Input::Pivot pivot = SAGE::Input::Pivot::TopLeft;
+	//mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, Vector2(3.2512f, 4.064f), false, Pivot::Bottom)); // TODO:
+	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mSpacing, mFlipVertices, mPivot));
 }
 
 void MeshFilterComponent::GenerateSphereMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreateSphere(1, 1, 1.0f)); // TODO: 
+	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreateSphere(mDivisions.x, mDivisions.y, mRadius));
 }
 
 void MeshFilterComponent::GenerateCustomMesh()

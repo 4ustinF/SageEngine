@@ -35,9 +35,15 @@ namespace SAGE
 
 		// Setters
 		void SetMeshType(MeshType meshType) { mMeshType = meshType; }
+		void SetPivotType(SAGE::Input::Pivot pivot) { mPivot = pivot; }
+		void SetDivisions(SAGE::Math::Vector2Int divisions) { mDivisions = divisions; }
+		void SetSpacing(SAGE::Math::Vector2 spacing) { mSpacing = spacing; }
+		void SetFlipVertices(bool flipVertices) { mFlipVertices = flipVertices; }
+		void SetRadius(float radius) { mRadius = radius; }
 
 		// Helpers
 		std::string MeshTypeToString(MeshType meshType); // TODO: Move to a utils class?
+		MeshType StringToMeshType(const std::string& meshType); // TODO: Move to a utils class?
 
 	private:
 		void GenerateMesh(); // TODO: We need to be able to pass values in.
@@ -51,6 +57,12 @@ namespace SAGE
 		SAGE::Graphics::RenderObject mRenderObject;
 		MeshType mMeshType = MeshType::Quad; // TODO: default on cube.
 		std::string mMeshTypeName = "Cube";
+
+		SAGE::Input::Pivot mPivot = Input::Pivot::Center;
+		Math::Vector2Int mDivisions = Math::Vector2Int::One;
+		Math::Vector2 mSpacing = Math::Vector2::One;
+		bool mFlipVertices = false;
+		float mRadius = 1.0f;
 
 		// TODO: Add support to take in and generate custom meshes.
 	};

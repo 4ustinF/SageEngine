@@ -1,1 +1,22 @@
-{"HierarchyPath":"","Components":{"Transform Component":{"Rotation":[-90.0,0.0,0.0]},"Mesh Filter Component":{},"Mesh Renderer Component":{}}}
+{
+  "HierarchyPath": "",
+  "Components": {
+    "Transform Component": {
+      "Rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ]
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Quad",
+      "Pivot":  "Bottom",
+      "Spacing": [
+        3.2512,
+        4.064
+      ]
+    },
+    "Mesh Renderer Component": {
+    }
+  }
+}

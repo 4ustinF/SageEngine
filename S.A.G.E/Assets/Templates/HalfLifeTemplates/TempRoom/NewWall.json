@@ -4,18 +4,13 @@
     "Transform Component": {
       "Position": [
         0.0,
-        2.032,
+        2.0320000648498535,
         0.0
       ],
       "Rotation": [
         -90.0,
         0.0,
         0.0
-      ],
-      "Scale": [
-        1.0,
-        1.0,
-        1.0
       ]
     },
     "Mesh Filter Component": {

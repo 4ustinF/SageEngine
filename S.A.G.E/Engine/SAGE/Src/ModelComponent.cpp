@@ -12,6 +12,37 @@ namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(ModelComponent, 1000);
 
+void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
+{
+	// --- File Name ---
+	compObj.AddMember(
+		rj::Value("FileName", allocator),
+		rj::Value(mFileName.c_str(), allocator),
+		allocator
+	);
+
+	// --- Rotation (convert back to degrees!) ---
+	if (mRotation != Vector3::Zero)
+	{
+		rj::Value rotation(rj::kArrayType);
+		rotation.PushBack(mRotation.x * Constants::RadToDeg, allocator);
+		rotation.PushBack(mRotation.y * Constants::RadToDeg, allocator);
+		rotation.PushBack(mRotation.z * Constants::RadToDeg, allocator);
+		compObj.AddMember("Rotation", rotation, allocator);
+	}
+
+	// --- Is Basic Model ---
+	if (mIsBasicModel == true)
+	{
+		compObj.AddMember(
+			rj::Value("IsBasicModel", allocator),
+			rj::Value(mIsBasicModel),
+			allocator
+		);
+	}
+
+}
+
 void ModelComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Model Component##ModelComponent", ImGuiTreeNodeFlags_CollapsingHeader))
@@ -49,30 +80,4 @@ void ModelComponent::OnDisable()
 {
 	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
 	renderService->Unregister(this, mIsBasicModel);
-}
-
-void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
-{
-	// --- File Name ---
-	compObj.AddMember(
-		rj::Value("FileName", allocator),
-		rj::Value(mFileName.c_str(), allocator),
-		allocator
-	);
-
-	// --- Rotation (convert back to degrees!) ---
-	{
-		rj::Value rotation(rj::kArrayType);
-		rotation.PushBack(mRotation.x * Constants::RadToDeg, allocator);
-		rotation.PushBack(mRotation.y * Constants::RadToDeg, allocator);
-		rotation.PushBack(mRotation.z * Constants::RadToDeg, allocator);
-		compObj.AddMember("Rotation", rotation, allocator);
-	}
-
-	// --- Is Basic Model ---
-	compObj.AddMember(
-		rj::Value("IsBasicModel", allocator),
-		rj::Value(mIsBasicModel),
-		allocator
-	);
 }

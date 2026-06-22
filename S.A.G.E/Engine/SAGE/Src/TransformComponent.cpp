@@ -33,6 +33,7 @@ void TransformComponent::DebugUI()
 void TransformComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
 	// --- Position ---
+	if (mTransform.position != Vector3::Zero)
 	{
 		rj::Value position(rj::kArrayType);
 		position.PushBack(mTransform.position.x, allocator);
@@ -43,6 +44,7 @@ void TransformComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapi
 	}
 
 	// --- Rotation ---
+	if (mDegreeAngles != Vector3::Zero)
 	{
 		rj::Value rotation(rj::kArrayType);
 		rotation.PushBack(mDegreeAngles.x, allocator);
@@ -53,6 +55,7 @@ void TransformComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapi
 	}
 
 	// --- Scale ---
+	if (mTransform.scale != Vector3::One)
 	{
 		rj::Value scale(rj::kArrayType);
 		scale.PushBack(mTransform.scale.x, allocator);

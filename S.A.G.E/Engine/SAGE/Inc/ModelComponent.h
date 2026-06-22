@@ -10,12 +10,12 @@ namespace SAGE
 		SET_TYPE_ID(ComponentId::Model)
 		MEMORY_POOL_DECLARE
 
+		const char* GetCompName() override { return "Model Component"; }
+		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
+
 		void DebugUI() override;
 		void OnEnable() override;
 		void OnDisable() override;
-
-		virtual const char* GetCompName() { return "Model Component"; }
-		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
 		Graphics::Model& GetModel() 
 		{ 

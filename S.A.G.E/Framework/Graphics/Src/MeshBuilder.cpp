@@ -3,6 +3,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Input;
 using namespace SAGE::Graphics;
 
 Color GetNextColor(int& index)
@@ -624,7 +625,7 @@ Mesh MeshBuilder::CreatePlane(int columns, int rows, float spacing, bool flipVer
 	return CreatePlane(columns, rows, Vector2(spacing, spacing), flipVertices);
 }
 
-Mesh MeshBuilder::CreatePlane(int columns, int rows, const Vector2& spacing, bool flipVertices)
+Mesh MeshBuilder::CreatePlane(int columns, int rows, const Vector2& spacing, bool flipVertices, Pivot pivot)
 {
 	if (columns < 1) { columns = 1; }
 	if (rows < 1) { rows = 1; }
@@ -632,47 +633,161 @@ Mesh MeshBuilder::CreatePlane(int columns, int rows, const Vector2& spacing, boo
 	Mesh mesh;
 	const float width = columns * spacing.x;
 	const float height = rows * spacing.y;
-	const float xOffSet = width * 0.5f;
-	const float zOffSet = height * 0.5f;
 	const float invCols = 1.0f / static_cast<float>(columns);
 	const float invRows = 1.0f / static_cast<float>(rows);
+	float xOffset = 0.0f;
+	float zOffset = 0.0f;
 
-	mesh.indices = {};
+	switch (pivot)
+	{
+	case Pivot::BottomLeft:
+		xOffset = 0.0f;
+		zOffset = 0.0f;
+		break;
+	case Pivot::Bottom:
+		xOffset = width * 0.5f;
+		zOffset = 0.0f;
+		break;
+	case Pivot::BottomRight:
+		xOffset = width;
+		zOffset = 0.0f;
+		break;
+	case Pivot::Left:
+		xOffset = 0.0f;
+		zOffset = height * 0.5f;
+		break;
+	case Pivot::Center:
+		xOffset = width * 0.5f;
+		zOffset = height * 0.5f;
+		break;
+	case Pivot::Right:
+		xOffset = width;
+		zOffset = height * 0.5f;
+		break;
+	case Pivot::TopLeft:
+		xOffset = 0.0f;
+		zOffset = height;
+		break;
+	case Pivot::Top:
+		xOffset = width * 0.5f;
+		zOffset = height;
+		break;
+	case Pivot::TopRight:
+		xOffset = width;
+		zOffset = height;
+		break;
+	}
 
-	for (int i = 0; i <= rows; ++i) {
-		for (int j = 0; j <= columns; ++j) {
-			// pos, normal, tangent, uv
-			Math::Vector3 pos = { j * spacing.x - xOffSet, 0.0f, i * spacing.y - zOffSet };
-			const float u = j * invCols; // 1.0f - (1.0f / columns) * j;
-			const float v = 1.0f - i * invRows; // 1.0f - ((1.0f / rows) * i);
+	const int stride = columns + 1;
 
-			mesh.vertices.push_back({ pos, Vector3::YAxis, Vector3::XAxis, Vector2{u, v} });
+	mesh.vertices.reserve((columns + 1) * (rows + 1));
+	mesh.indices.reserve(columns * rows * 6);
 
-			if (!flipVertices) {
-				if (i != rows && j != columns) {
-					mesh.indices.push_back(j + i + (i * columns) + 2 + columns);	//TopRight
-					mesh.indices.push_back(j + i + (i * columns) + 1);				//Bottom Right
-					mesh.indices.push_back(j + i + (i * columns));					//Bottom Left
+	for (int i = 0; i <= rows; ++i)
+	{
+		for (int j = 0; j <= columns; ++j)
+		{
+			Math::Vector3 pos =
+			{
+				j * spacing.x - xOffset,
+				0.0f,
+				i * spacing.y - zOffset
+			};
 
-					mesh.indices.push_back(j + i + (i * columns) + 2 + columns);	//TopRight
-					mesh.indices.push_back(j + i + (i * columns));					//Bottom Left
-					mesh.indices.push_back(j + i + (i * columns) + 1 + columns);	//TopLeft
+			const float u = j * invCols;
+			const float v = 1.0f - i * invRows;
+
+			mesh.vertices.push_back(
+				{
+					pos,
+					Vector3::YAxis,
+					Vector3::XAxis,
+					Vector2{ u, v }
+				});
+
+			if (i < rows && j < columns)
+			{
+				const uint32_t bottomLeft = j + i * stride;
+				const uint32_t bottomRight = (j + 1) + i * stride;
+				const uint32_t topLeft = j + (i + 1) * stride;
+				const uint32_t topRight = (j + 1) + (i + 1) * stride;
+
+				if (!flipVertices)
+				{
+					mesh.indices.push_back(topRight);
+					mesh.indices.push_back(bottomRight);
+					mesh.indices.push_back(bottomLeft);
+
+					mesh.indices.push_back(topRight);
+					mesh.indices.push_back(bottomLeft);
+					mesh.indices.push_back(topLeft);
 				}
-			}
-			else {
-				if (i != rows && j != columns) {
-					mesh.indices.push_back(j + i + (i * columns));					//Bottom Left
-					mesh.indices.push_back(j + i + (i * columns) + 1);				//Bottom Right
-					mesh.indices.push_back(j + i + (i * columns) + 2 + columns);	//TopRight
+				else
+				{
+					mesh.indices.push_back(bottomLeft);
+					mesh.indices.push_back(bottomRight);
+					mesh.indices.push_back(topRight);
 
-					mesh.indices.push_back(j + i + (i * columns) + 1 + columns);	//TopLeft
-					mesh.indices.push_back(j + i + (i * columns));					//Bottom Left
-					mesh.indices.push_back(j + i + (i * columns) + 2 + columns);	//TopRight
+					mesh.indices.push_back(topLeft);
+					mesh.indices.push_back(bottomLeft);
+					mesh.indices.push_back(topRight);
 				}
 			}
 		}
 	}
+
 	return mesh;
 }
+
+//Mesh MeshBuilder::CreatePlane(int columns, int rows, const Vector2& spacing, bool flipVertices)
+//{
+//	if (columns < 1) { columns = 1; }
+//	if (rows < 1) { rows = 1; }
+//
+//	Mesh mesh;
+//	const float width = columns * spacing.x;
+//	const float height = rows * spacing.y;
+//	const float xOffSet = width * 0.5f;
+//	const float zOffSet = height * 0.5f;
+//	const float invCols = 1.0f / static_cast<float>(columns);
+//	const float invRows = 1.0f / static_cast<float>(rows);
+//
+//	mesh.indices = {};
+//
+//	for (int i = 0; i <= rows; ++i) {
+//		for (int j = 0; j <= columns; ++j) {
+//			// pos, normal, tangent, uv
+//			Math::Vector3 pos = { j * spacing.x - xOffSet, 0.0f, i * spacing.y - zOffSet };
+//			const float u = j * invCols; // 1.0f - (1.0f / columns) * j;
+//			const float v = 1.0f - i * invRows; // 1.0f - ((1.0f / rows) * i);
+//
+//			mesh.vertices.push_back({ pos, Vector3::YAxis, Vector3::XAxis, Vector2{u, v} });
+//
+//			if (!flipVertices) {
+//				if (i != rows && j != columns) {
+//					mesh.indices.push_back(j + i + (i * columns) + 2 + columns);	//TopRight
+//					mesh.indices.push_back(j + i + (i * columns) + 1);				//Bottom Right
+//					mesh.indices.push_back(j + i + (i * columns));					//Bottom Left
+//
+//					mesh.indices.push_back(j + i + (i * columns) + 2 + columns);	//TopRight
+//					mesh.indices.push_back(j + i + (i * columns));					//Bottom Left
+//					mesh.indices.push_back(j + i + (i * columns) + 1 + columns);	//TopLeft
+//				}
+//			}
+//			else {
+//				if (i != rows && j != columns) {
+//					mesh.indices.push_back(j + i + (i * columns));					//Bottom Left
+//					mesh.indices.push_back(j + i + (i * columns) + 1);				//Bottom Right
+//					mesh.indices.push_back(j + i + (i * columns) + 2 + columns);	//TopRight
+//
+//					mesh.indices.push_back(j + i + (i * columns) + 1 + columns);	//TopLeft
+//					mesh.indices.push_back(j + i + (i * columns));					//Bottom Left
+//					mesh.indices.push_back(j + i + (i * columns) + 2 + columns);	//TopRight
+//				}
+//			}
+//		}
+//	}
+//	return mesh;
+//}
 
 #pragma endregion

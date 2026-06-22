@@ -3,6 +3,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Input;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
@@ -105,7 +106,8 @@ void MeshFilterComponent::GeneratePlaneMesh()
 void MeshFilterComponent::GenerateQuadMesh()
 {
 	//mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, 1.0f)); // TODO:
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, Vector2(3.2512f, 4.064f))); // TODO:
+	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(1, 1, Vector2(3.2512f, 4.064f), false, Pivot::Bottom)); // TODO:
+	// SAGE::Input::Pivot pivot = SAGE::Input::Pivot::TopLeft;
 }
 
 void MeshFilterComponent::GenerateSphereMesh()

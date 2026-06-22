@@ -26,6 +26,7 @@ namespace SAGE::Graphics
 		TextureId normalMapId = 0;
 
 		MeshBuffer meshBuffer;
+		SAGE::Math::Vector2 tilingSize = SAGE::Math::Vector2::One;
 
 		const Skeleton* skeleton = nullptr;
 		const IAnimator* animator = nullptr;

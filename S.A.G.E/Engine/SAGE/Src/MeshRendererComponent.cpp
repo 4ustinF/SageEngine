@@ -8,6 +8,7 @@
 #include "TransformComponent.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
@@ -48,6 +49,12 @@ void MeshRendererComponent::DebugUI()
 	{
 		// TODO: Display map texture names?
 		// TODO: Make it so we can swap out textures at run time.
+
+		if (ImGui::DragFloat2("Tiling Size##MeshRendererComponent", &mTilingSize.x, 0.1f))
+		{
+			SetTilingSize(mTilingSize);
+		}
+		// TODO: mTilingSize
 	}
 }
 
@@ -63,10 +70,16 @@ void MeshRendererComponent::OnDisable()
 
 void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
-	
+	// TODO: 
 }
 
 RenderObject& MeshRendererComponent::GetRenderObject()
 {
 	return mMeshFilter->GetRenderObject();
+}
+
+void MeshRendererComponent::SetTilingSize(const Vector2& tilingSize)
+{
+	mTilingSize = tilingSize;
+	mMeshFilter->GetRenderObject().tilingSize = mTilingSize;
 }

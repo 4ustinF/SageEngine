@@ -69,6 +69,9 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 		return;
 	}
 
+	// TODO: Should we just pass value to each of the component to load themselves accordingly?
+	// It would clean this up and keep save/load logic confine to the one who cares about it.
+
 	if (strcmp(componentName, "AnimatorComponent") == 0)
 	{
 		auto animator = gameObject.AddComponent<AnimatorComponent>();

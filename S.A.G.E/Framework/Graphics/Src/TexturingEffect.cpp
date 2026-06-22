@@ -53,7 +53,7 @@ void TexturingEffect::Render(const RenderObject& renderObject)
 
 	ConstantData constantData;
 	constantData.wvp = Transpose(matWorld * view * proj);
-	constantData.tiling = SAGE::Math::Vector2(2.0f, 1.0f); // TODO: 
+	constantData.tiling = renderObject.tilingSize;
 	mTransformBuffer.Update(constantData);
 
 	auto tm = TextureManager::Get();

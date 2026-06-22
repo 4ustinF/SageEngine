@@ -6,6 +6,7 @@ namespace SAGE
 {
 	class RenderService;
 	class MeshFilterComponent;
+	class TransformComponent;
 
 	class MeshRendererComponent final 
 		: public Component
@@ -32,10 +33,13 @@ namespace SAGE
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }
+		void SetTilingSize(const SAGE::Math::Vector2& tilingSize);
 
 	private:
 		MeshFilterComponent* mMeshFilter = nullptr;
 		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
+
+		SAGE::Math::Vector2 mTilingSize = SAGE::Math::Vector2::One;
 	};
 }

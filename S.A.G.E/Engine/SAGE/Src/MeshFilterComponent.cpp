@@ -77,6 +77,13 @@ void MeshFilterComponent::DebugUI()
 		ImGui::Text("Mesh:"); 
 		ImGui::SameLine(); 
 		ImGui::Text(mMeshTypeName.c_str());
+
+		// Display vertices count?
+		ImGui::Text("Vertex Count:");
+		ImGui::SameLine();
+		ImGui::Text(std::to_string(mRenderObject.meshBuffer.GetVertexCount()).c_str());
+
+		// Display data accordingly to mesh type
 	}
 }
 

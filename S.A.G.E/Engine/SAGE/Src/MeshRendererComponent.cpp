@@ -77,11 +77,7 @@ void MeshRendererComponent::Initialize()
 {
 	mRenderService = GetOwner().GetWorld().GetService<RenderService>();
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
-
-	if (mTransformComponent != nullptr)
-	{
-		ScaleChangedHandle = mTransformComponent->GetOnScaleChangeDelegate().AddRaw(this, &MeshRendererComponent::OnScaleSizeChanged);
-	}
+	UpdateScaleSizeDelegateHandle();
 
 	auto tm = TextureManager::Get();
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
@@ -202,6 +198,7 @@ void MeshRendererComponent::SetTileToXScale(bool tileToXScale)
 	}
 
 	mTileToXScale = tileToXScale;
+	UpdateScaleSizeDelegateHandle();
 }
 
 void MeshRendererComponent::SetTileToYScale(bool tileToYScale)
@@ -212,6 +209,7 @@ void MeshRendererComponent::SetTileToYScale(bool tileToYScale)
 	}
 
 	mTileToYScale = tileToYScale;
+	UpdateScaleSizeDelegateHandle();
 }
 
 void MeshRendererComponent::SetTileToZScale(bool tileToZScale)
@@ -222,6 +220,31 @@ void MeshRendererComponent::SetTileToZScale(bool tileToZScale)
 	}
 
 	mTileToZScale = tileToZScale;
+	UpdateScaleSizeDelegateHandle();
+}
+
+void MeshRendererComponent::UpdateScaleSizeDelegateHandle()
+{
+	if (mTransformComponent == nullptr)
+	{
+		return;
+	}
+
+	if (mTileToXScale || mTileToYScale || mTileToZScale)
+	{
+		if (!ScaleChangedHandle.IsValid())
+		{
+			ScaleChangedHandle = mTransformComponent->GetOnScaleChangeDelegate().AddRaw(this, &MeshRendererComponent::OnScaleSizeChanged);
+			OnScaleSizeChanged(mTransformComponent->GetScale());
+		}
+	}
+	else
+	{
+		if (ScaleChangedHandle.IsValid())
+		{
+			mTransformComponent->GetOnScaleChangeDelegate().Remove(ScaleChangedHandle);
+		}
+	}
 }
 
 void MeshRendererComponent::OnScaleSizeChanged(const Vector3& scale)
@@ -246,3 +269,4 @@ void MeshRendererComponent::OnScaleSizeChanged(const Vector3& scale)
 		}
 	}
 }
+

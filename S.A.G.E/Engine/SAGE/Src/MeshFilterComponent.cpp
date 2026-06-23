@@ -7,7 +7,7 @@ using namespace SAGE::Input;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(MeshFilterComponent, 500);
+MEMORY_POOL_DEFINE(MeshFilterComponent, 1000);
 
 void MeshFilterComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
 {

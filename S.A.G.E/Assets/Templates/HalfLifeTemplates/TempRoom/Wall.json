@@ -1,5 +1,5 @@
 {
-  "HierarchyPath": "",
+  "HierarchyPath": "Temp Room",
   "Components": {
     "Transform Component": {
       "Rotation": [
@@ -10,7 +10,7 @@
     },
     "Mesh Filter Component": {
       "MeshType": "Quad",
-      "Pivot":  "Bottom",
+      "Pivot": "Bottom",
       "Spacing": [
         3.2512,
         4.064

@@ -170,4 +170,31 @@ namespace SAGE::Input
 
 		return Pivot::Center;
 	}
+
+	static std::string PivotToString(Pivot pivot)
+	{
+		switch (pivot)
+		{
+		case Pivot::TopLeft:
+			return "TopLeft";
+		case Pivot::Top:
+			return "Top";
+		case Pivot::TopRight:
+			return "TopRight";
+		case Pivot::Left:
+			return "Left";
+		case Pivot::Center:
+			return "Center";
+		case Pivot::Right:
+			return "Right";
+		case Pivot::BottomLeft:
+			return "BottomLeft";
+		case Pivot::Bottom:
+			return "Bottom";
+		case Pivot::BottomRight:
+			return "BottomRight";
+		}
+
+		return "";
+	}
 }

@@ -72,18 +72,37 @@ void MeshFilterComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Mesh Filter Component##MeshFilterComponent ", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		// TODO: Display mMeshType for now.
 		// TODO: Make it so we can swap mesh data out.
-		ImGui::Text("Mesh:"); 
-		ImGui::SameLine(); 
-		ImGui::Text(mMeshTypeName.c_str());
+		ImGui::Text("Mesh: %s", mMeshTypeName.c_str());
 
-		// Display vertices count?
-		ImGui::Text("Vertex Count:");
-		ImGui::SameLine();
-		ImGui::Text(std::to_string(mRenderObject.meshBuffer.GetVertexCount()).c_str());
+		// Display vertices count
+		ImGui::Text("Vertex Count: %s", std::to_string(mRenderObject.meshBuffer.GetVertexCount()).c_str());
 
-		// Display data accordingly to mesh type
+		// Display data accordingly per mesh type
+		switch (mMeshType)
+		{
+		case MeshType::Cube:
+			break;
+		case MeshType::Cylinder:
+			ImGui::Text("Divisions: %i %i", mDivisions.x, mDivisions.y);
+			ImGui::Text("Radius: %f", mRadius);
+			break;
+		case MeshType::Plane:
+		case MeshType::Quad:
+			ImGui::Text("Divisions: %i %i", mDivisions.x, mDivisions.y);
+			ImGui::Text("Spacing: %f %f", mSpacing.x, mSpacing.y);
+			ImGui::Text("Radius: %f", mRadius);
+			ImGui::Text("Flip Vertices: %s", mFlipVertices ? "true" : "false");
+			ImGui::Text("Pivot: %s", PivotToString(mPivot).c_str());
+			break;
+		case MeshType::Sphere:
+			ImGui::Text("Divisions: %i %i", mDivisions.x, mDivisions.y);
+			ImGui::Text("Spacing: %f %f", mSpacing.x, mSpacing.y);
+			ImGui::Text("Radius: %f", mRadius);
+			break;
+		case MeshType::Custom:
+			break;
+		}
 	}
 }
 
@@ -152,17 +171,16 @@ void MeshFilterComponent::GenerateCubeMesh()
 
 void MeshFilterComponent::GenerateCylinderMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreateCylinder(mDivisions.x, mDivisions.y));
+	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreateCylinder(mDivisions.x, mDivisions.y)); // And radius?
 }
 
 void MeshFilterComponent::GeneratePlaneMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mRadius));
+	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mSpacing, mFlipVertices, mPivot));
 }
 
 void MeshFilterComponent::GenerateQuadMesh()
 {
-	//mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, Vector2(3.2512f, 4.064f), false, Pivot::Bottom)); // TODO:
 	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mSpacing, mFlipVertices, mPivot));
 }
 

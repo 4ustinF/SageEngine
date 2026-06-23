@@ -11,12 +11,24 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/PlayerController.json"
     },
     {
-      "Name": "Wall",
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/Wall.json"
-    },
-    {
       "Name": "Floor",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/Floor.json"
+    },
+    {
+      "Name": "North Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/NorthWall.json"
+    },
+    {
+      "Name": "East Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/EastWall.json"
+    },
+    {
+      "Name": "South Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/SouthWall.json"
+    },
+    {
+      "Name": "West Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/WestWall.json"
     }
   ]
 }

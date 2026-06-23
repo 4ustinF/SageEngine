@@ -70,7 +70,84 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 
 void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
-	// TODO: 
+	// --- Diffuse Map File Name ---
+	if (!diffuseMapFileName.empty())
+	{
+		compObj.AddMember(
+			rj::Value("DiffuseMapFileName", allocator),
+			rj::Value(mDiffuseMapFileName.c_str(), allocator),
+			allocator
+		);
+	}
+
+	// --- Specular Map File Name ---
+	if (!diffuseMapFileName.empty())
+	{
+		compObj.AddMember(
+			rj::Value("SpecularMapFileName", allocator),
+			rj::Value(mSpecularMapFileName.c_str(), allocator),
+			allocator
+		);
+	}
+
+	// --- Bump Map File Name ---
+	if (!diffuseMapFileName.empty())
+	{
+		compObj.AddMember(
+			rj::Value("BumpMapFileName", allocator),
+			rj::Value(mBumpMapFileName.c_str(), allocator),
+			allocator
+		);
+	}
+
+	// --- Normal Map File Name ---
+	if (!diffuseMapFileName.empty())
+	{
+		compObj.AddMember(
+			rj::Value("NormalMapFileName", allocator),
+			rj::Value(mNormalMapFileName.c_str(), allocator),
+			allocator
+		);
+	}
+
+	// --- Tiling Size ---
+	if (mTilingSize != Vector2::One)
+	{
+		rj::Value tilingSize(rj::kArrayType);
+		tilingSize.PushBack(mTilingSize.x, allocator);
+		tilingSize.PushBack(mTilingSize.y, allocator);
+		compObj.AddMember("TilingSize", tilingSize, allocator);
+	}
+
+	// --- Tile To X Scale ---
+	if (mTileToXScale == true)
+	{
+		compObj.AddMember(
+			rj::Value("TileToXScale", allocator),
+			rj::Value(mTileToXScale),
+			allocator
+		);
+	}
+
+	// --- Tile To Y Scale ---
+	if (mTileToYScale == true)
+	{
+		compObj.AddMember(
+			rj::Value("TileToYScale", allocator),
+			rj::Value(mTileToYScale),
+			allocator
+		);
+	}
+
+	// --- Tile To Z Scale ---
+	if (mTileToZScale == true)
+	{
+		compObj.AddMember(
+			rj::Value("TileToZScale", allocator),
+			rj::Value(mTileToZScale),
+			allocator
+		);
+	}
 }
 
 void MeshRendererComponent::Initialize()
@@ -84,22 +161,22 @@ void MeshRendererComponent::Initialize()
 
 	if (!diffuseMapFileName.empty())
 	{
-		renderObject.diffuseMapId = tm->LoadTexture(diffuseMapFileName);
+		renderObject.diffuseMapId = tm->LoadTexture(mDiffuseMapFileName);
 	}
 
 	if (!specularMapFileName.empty())
 	{
-		renderObject.specularMapId = tm->LoadTexture(specularMapFileName);
+		renderObject.specularMapId = tm->LoadTexture(mSpecularMapFileName);
 	}
 
 	if (!bumpMapFileName.empty())
 	{
-		renderObject.bumpMapId = tm->LoadTexture(bumpMapFileName);
+		renderObject.bumpMapId = tm->LoadTexture(mBumpMapFileName);
 	}
 
 	if (!normalMapFileName.empty())
 	{
-		renderObject.normalMapId = tm->LoadTexture(normalMapFileName);
+		renderObject.normalMapId = tm->LoadTexture(mNormalMapFileName);
 	}
 }
 

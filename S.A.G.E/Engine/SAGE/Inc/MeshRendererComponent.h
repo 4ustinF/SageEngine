@@ -33,10 +33,10 @@ namespace SAGE
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }
-		void SetDiffuseMapFileName(const char* fileName) { diffuseMapFileName = fileName; }
-		void SetSpecularMapFileName(const char* fileName) { specularMapFileName = fileName; }
-		void SetBumpMapFileName(const char* fileName) { bumpMapFileName = fileName; }
-		void SetNormalMapFileName(const char* fileName) { normalMapFileName = fileName; }
+		void SetDiffuseMapFileName(const char* fileName) { mDiffuseMapFileName = fileName; }
+		void SetSpecularMapFileName(const char* fileName) { mSpecularMapFileName = fileName; }
+		void SetBumpMapFileName(const char* fileName) { mBumpMapFileName = fileName; }
+		void SetNormalMapFileName(const char* fileName) { mNormalMapFileName = fileName; }
 		void SetTilingSize(float xTilingSize, float yTilingSize);
 		void SetTilingSize(const SAGE::Math::Vector2& tilingSize);
 		void SetTileToScale(bool tileToXScale = false, bool tileToYScale = false, bool tileToZScale = false);
@@ -49,10 +49,10 @@ namespace SAGE
 		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
 
-		std::string diffuseMapFileName = "";
-		std::string specularMapFileName = "";
-		std::string bumpMapFileName = "";
-		std::string normalMapFileName = "";
+		std::string mDiffuseMapFileName = "";
+		std::string mSpecularMapFileName = "";
+		std::string mBumpMapFileName = "";
+		std::string mNormalMapFileName = "";
 
 		void UpdateScaleSizeDelegateHandle();
 		void OnScaleSizeChanged(const SAGE::Math::Vector3& scale);

@@ -13,6 +13,10 @@
     {
       "Name": "Wall",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/Wall.json"
+    },
+    {
+      "Name": "Floor",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/Floor.json"
     }
   ]
 }

@@ -64,7 +64,7 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 	if (value.HasMember("TileToZScale"))
 	{
 		const auto& tileToZScale = value["TileToZScale"].GetBool();
-		SetTileToXScale(tileToZScale);
+		SetTileToZScale(tileToZScale);
 	}
 }
 

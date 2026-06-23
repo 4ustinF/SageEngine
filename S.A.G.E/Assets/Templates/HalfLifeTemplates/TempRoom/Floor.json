@@ -1,0 +1,25 @@
+{
+  "HierarchyPath": "Temp Room",
+  "Components": {
+    "Transform Component": {
+      "Scale": [
+        3.0,
+        1.0,
+        3.0
+      ]
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Quad",
+      "Pivot": "Center",
+      "Spacing": [
+        3.2512,
+        3.2512
+      ]
+    },
+    "Mesh Renderer Component": {
+      "DiffuseMapFileName": "../Sprites/HalfLife/Surfaces/c1a0_labflr.png",
+      "TileToXScale": true,
+      "TileToZScale": true
+    }
+  }
+}

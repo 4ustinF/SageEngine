@@ -54,6 +54,9 @@ namespace SAGE
 		std::string bumpMapFileName = "";
 		std::string normalMapFileName = "";
 
+		void OnScaleSizeChanged(const SAGE::Math::Vector3& scale);
+		SAGE::Core::Delegate::FDelegateHandle ScaleChangedHandle;
+
 		SAGE::Math::Vector2 mTilingSize = SAGE::Math::Vector2::One;
 		bool mTileToXScale = false;
 		bool mTileToYScale = false;

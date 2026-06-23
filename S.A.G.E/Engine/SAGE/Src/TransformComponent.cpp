@@ -16,7 +16,7 @@ void TransformComponent::DebugUI()
 	{
 		if (ImGui::DragFloat3("Position##TransformComponent", &mTransform.position.x, 0.1f))
 		{
-			SetPosition(mTransform.position); // TODO: Remove this is dumb. All because old physics system smh.
+			SetPosition(mTransform.position);
 		}
 
 		if (ImGui::DragFloat3("Rotation##TransformComponent", &mDegreeAngles.x, 0.1f))
@@ -24,7 +24,10 @@ void TransformComponent::DebugUI()
 			SetRotation(mDegreeAngles);
 		}
 
-		ImGui::DragFloat3("Scale##TransformComponent", &mTransform.scale.x, 0.1f);
+		if (ImGui::DragFloat3("Scale##TransformComponent", &mTransform.scale.x, 0.1f))
+		{
+			SetScale(mTransform.scale);
+		}
 	}
 
 	Graphics::SimpleDraw::AddTransform(mTransform.GetMatrix4()); // TODO: This should not grow with scale. 
@@ -69,6 +72,7 @@ void TransformComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapi
 void TransformComponent::SetPosition(const Vector3& InPos)
 {
 	mTransform.position = InPos;
+	mOnPositionChange.Broadcast(InPos);
 
 	// TODO: Remove this block.
 	auto rbc = GetOwner().GetComponent<RigidBodyComponent>();
@@ -98,4 +102,5 @@ void TransformComponent::SetRotation(const SAGE::Math::Quaternion& inRotation)
 void TransformComponent::SetScale(const SAGE::Math::Vector3& inScale)
 {
 	mTransform.scale = inScale;
+	mOnScaleChange.Broadcast(inScale);
 }

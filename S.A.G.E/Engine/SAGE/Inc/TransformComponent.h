@@ -4,6 +4,9 @@
 
 namespace SAGE
 {
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnPositionChange, SAGE::Math::Vector3);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnScaleChange, const SAGE::Math::Vector3&);
+
 	class TransformComponent final 
 		: public Component
 	{
@@ -25,6 +28,9 @@ namespace SAGE
 		const SAGE::Math::Vector3& GetScale() const { return mTransform.scale; }
 		const SAGE::Math::Matrix4 GetMatrix4() const { return mTransform.GetMatrix4(); }
 
+		FOnPositionChange& GetOnPositionChangeDelegate() { return mOnPositionChange; }
+		FOnScaleChange& GetOnScaleChangeDelegate() { return mOnScaleChange; }
+
 		// Setters
 		void SetPosition(const SAGE::Math::Vector3& inPos);
 		void SetRotation(const SAGE::Math::Vector3& inRotation);
@@ -34,5 +40,8 @@ namespace SAGE
 	private:
 		SAGE::Graphics::Transform mTransform;
 		SAGE::Math::Vector3 mDegreeAngles = SAGE::Math::Vector3::Zero;
+
+		FOnPositionChange mOnPositionChange;
+		FOnScaleChange mOnScaleChange;
 	};
 }

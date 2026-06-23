@@ -151,6 +151,7 @@
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\Core.h" />
     <ClInclude Include="Inc\DebugUtil.h" />
+    <ClInclude Include="Inc\Delegate.h" />
     <ClInclude Include="Inc\TimeUtil.h" />
     <ClInclude Include="Inc\TypedAllocator.h" />
     <ClInclude Include="Inc\Window.h" />

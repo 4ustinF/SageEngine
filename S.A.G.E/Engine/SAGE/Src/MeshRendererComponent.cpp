@@ -10,6 +10,7 @@
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
+using namespace SAGE::Core::Delegate;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(MeshRendererComponent, 500);
@@ -77,6 +78,11 @@ void MeshRendererComponent::Initialize()
 	mRenderService = GetOwner().GetWorld().GetService<RenderService>();
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 
+	if (mTransformComponent != nullptr)
+	{
+		ScaleChangedHandle = mTransformComponent->GetOnScaleChangeDelegate().AddRaw(this, &MeshRendererComponent::OnScaleSizeChanged);
+	}
+
 	auto tm = TextureManager::Get();
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
 
@@ -103,6 +109,11 @@ void MeshRendererComponent::Initialize()
 
 void MeshRendererComponent::Terminate()
 {
+	if (mTransformComponent != nullptr && ScaleChangedHandle.IsValid())
+	{
+		mTransformComponent->GetOnScaleChangeDelegate().Remove(ScaleChangedHandle);
+	}
+
 	mMeshFilter = nullptr;
 	mTransformComponent = nullptr;
 	mRenderService = nullptr;
@@ -115,30 +126,6 @@ void MeshRendererComponent::Update(float deltaTime)
 	{
 		RenderObject& renderObject = mMeshFilter->GetRenderObject();
 		renderObject.transform = mTransformComponent->GetTransform();
-	}
-
-	// TODO: Move to a delegate call from scale changing.
-	if (mTransformComponent != nullptr)
-	{
-		if (mTileToXScale || mTileToYScale || mTileToZScale)
-		{
-			const Vector3& scale = mTransformComponent->GetScale();
-
-			if (mTileToXScale && mTilingSize.x != scale.x)
-			{
-				SetTilingSize(scale.x, mTilingSize.y);
-			}
-
-			if (mTileToYScale && mTilingSize.y != scale.y)
-			{
-				SetTilingSize(mTilingSize.x, scale.y);
-			}
-
-			if (mTileToZScale && mTilingSize.y != scale.z)
-			{
-				SetTilingSize(mTilingSize.x, scale.z);
-			}
-		}
 	}
 }
 
@@ -235,4 +222,27 @@ void MeshRendererComponent::SetTileToZScale(bool tileToZScale)
 	}
 
 	mTileToZScale = tileToZScale;
+}
+
+void MeshRendererComponent::OnScaleSizeChanged(const Vector3& scale)
+{
+	if (mTileToXScale || mTileToYScale || mTileToZScale)
+	{
+		const Vector3& scale = mTransformComponent->GetScale();
+
+		if (mTileToXScale && mTilingSize.x != scale.x)
+		{
+			SetTilingSize(scale.x, mTilingSize.y);
+		}
+
+		if (mTileToYScale && mTilingSize.y != scale.y)
+		{
+			SetTilingSize(mTilingSize.x, scale.y);
+		}
+
+		if (mTileToZScale && mTilingSize.y != scale.z)
+		{
+			SetTilingSize(mTilingSize.x, scale.z);
+		}
+	}
 }

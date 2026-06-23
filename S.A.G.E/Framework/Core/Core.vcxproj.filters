@@ -57,6 +57,9 @@
     <ClInclude Include="Inc\TypedAllocator.h">
       <Filter>Inc\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\Delegate.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">

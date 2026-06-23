@@ -54,7 +54,55 @@ void MeshFilterComponent::LoadComponentFromTemplate(const rapidjson::Value& valu
 
 void MeshFilterComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
-	// TODO: 
+	// --- Mesh Type ---
+	if (!mMeshTypeName.empty())
+	{
+		compObj.AddMember(
+			rj::Value("MeshType", allocator),
+			rj::Value(mMeshTypeName.c_str(), allocator),
+			allocator
+		);
+	}
+
+	// --- Pivot ---
+	if (mPivot != Pivot::Center)
+	{
+		compObj.AddMember(
+			rj::Value("Pivot", allocator),
+			rj::Value(PivotToString(mPivot).c_str(), allocator),
+			allocator
+		);
+	}
+
+	// --- Divisions ---
+	if (mDivisions != Vector2Int::One)
+	{
+		rj::Value divisions(rj::kArrayType);
+		divisions.PushBack(mDivisions.x, allocator);
+		divisions.PushBack(mDivisions.y, allocator);
+		compObj.AddMember("Divisions", divisions, allocator);
+	}
+
+	// --- Spacing ---
+	if (mSpacing != Vector2::One)
+	{
+		rj::Value spacing(rj::kArrayType);
+		spacing.PushBack(mSpacing.x, allocator);
+		spacing.PushBack(mSpacing.y, allocator);
+		compObj.AddMember("Spacing", spacing, allocator);
+	}
+
+	// --- Flip Vertices ---
+	if (mFlipVertices == true)
+	{
+		compObj.AddMember("FlipVertices", mFlipVertices, allocator);
+	}
+
+	// --- Radius ---
+	if (mRadius != 1.0f)
+	{
+		compObj.AddMember("Radius", mRadius, allocator);
+	}
 }
 
 void MeshFilterComponent::Initialize()

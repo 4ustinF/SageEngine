@@ -10,7 +10,6 @@
     },
     "Mesh Filter Component": {
       "MeshType": "Quad",
-      "Pivot": "Center",
       "Spacing": [
         3.2512,
         3.2512
@@ -18,6 +17,10 @@
     },
     "Mesh Renderer Component": {
       "DiffuseMapFileName": "../Sprites/HalfLife/Surfaces/c1a0_labflr.png",
+      "TilingSize": [
+        3.0,
+        3.0
+      ],
       "TileToXScale": true,
       "TileToZScale": true
     }

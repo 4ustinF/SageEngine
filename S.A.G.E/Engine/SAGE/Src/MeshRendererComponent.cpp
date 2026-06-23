@@ -71,7 +71,7 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
 	// --- Diffuse Map File Name ---
-	if (!diffuseMapFileName.empty())
+	if (!mDiffuseMapFileName.empty())
 	{
 		compObj.AddMember(
 			rj::Value("DiffuseMapFileName", allocator),
@@ -81,7 +81,7 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 	}
 
 	// --- Specular Map File Name ---
-	if (!diffuseMapFileName.empty())
+	if (!mSpecularMapFileName.empty())
 	{
 		compObj.AddMember(
 			rj::Value("SpecularMapFileName", allocator),
@@ -91,7 +91,7 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 	}
 
 	// --- Bump Map File Name ---
-	if (!diffuseMapFileName.empty())
+	if (!mBumpMapFileName.empty())
 	{
 		compObj.AddMember(
 			rj::Value("BumpMapFileName", allocator),
@@ -101,7 +101,7 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 	}
 
 	// --- Normal Map File Name ---
-	if (!diffuseMapFileName.empty())
+	if (!mNormalMapFileName.empty())
 	{
 		compObj.AddMember(
 			rj::Value("NormalMapFileName", allocator),
@@ -159,22 +159,22 @@ void MeshRendererComponent::Initialize()
 	auto tm = TextureManager::Get();
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
 
-	if (!diffuseMapFileName.empty())
+	if (!mDiffuseMapFileName.empty())
 	{
 		renderObject.diffuseMapId = tm->LoadTexture(mDiffuseMapFileName);
 	}
 
-	if (!specularMapFileName.empty())
+	if (!mSpecularMapFileName.empty())
 	{
 		renderObject.specularMapId = tm->LoadTexture(mSpecularMapFileName);
 	}
 
-	if (!bumpMapFileName.empty())
+	if (!mBumpMapFileName.empty())
 	{
 		renderObject.bumpMapId = tm->LoadTexture(mBumpMapFileName);
 	}
 
-	if (!normalMapFileName.empty())
+	if (!mNormalMapFileName.empty())
 	{
 		renderObject.normalMapId = tm->LoadTexture(mNormalMapFileName);
 	}

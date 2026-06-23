@@ -21,7 +21,7 @@ namespace SAGE
 
 		virtual const char* GetCompName() { return ""; }
 		virtual void LoadComponentFromTemplate(const rapidjson::Value& value) {}
-		virtual void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) {}
+		virtual void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) {} // TODO: We should templatize the save code for each type.
 
 		virtual void Initialize() {}
 		virtual void Terminate() {}

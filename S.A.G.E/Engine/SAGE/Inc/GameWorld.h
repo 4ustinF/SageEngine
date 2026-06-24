@@ -70,7 +70,6 @@ namespace SAGE
 		void DrawHierarchy();
 
 		// TODO: Allow for item renaming using something like ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)
-		std::vector<GameObject*> GetRootObjects();
 		void DrawGameObjectNode(GameObject* object);
 
 		bool mHierarchyDirty = true;
@@ -86,5 +85,7 @@ namespace SAGE
 		bool mInitialized = false;
 		bool mUpdating = false;
 		float mImguiSpacing = 5.0f;
+
+		std::vector<GameObjectHandle> mRootGameObjectHandles;
 	};
 }

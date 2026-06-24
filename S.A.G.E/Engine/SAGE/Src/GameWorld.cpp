@@ -31,6 +31,8 @@ void GameWorld::Terminate()
 	ASSERT(!mUpdating, "GameWorld - Cannot terminate world during update.");
 	if (!mInitialized) { return; }
 
+	mRootGameObjectHandles.clear();
+
 	// Destroy all remaining game objects
 	for (auto gameObject : mUpdateList) {
 		DestroyGameObject(gameObject->GetHandle());
@@ -250,7 +252,6 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	return newObject.get();
 }
 
-
 GameObject* GameWorld::CreateGameObject(std::filesystem::path templateFile)
 {
 	ASSERT(mInitialized, "GameWorld - World must be initialized frist before creating game objects.");
@@ -312,6 +313,7 @@ void GameWorld::DestroyGameObject(GameObjectHandle handle)
 	auto& slot = mGameObjectSlots[handle.mIndex];
 	slot.generation++; // This invalidates all existing handles to the slot
 	mToBeDestroyed.push_back(handle.mIndex);
+	mHierarchyDirty = true;
 }
 
 bool GameWorld::IsValid(GameObjectHandle handle) const
@@ -354,6 +356,18 @@ void GameWorld::ProcessDestroyList()
 
 void GameWorld::RebuildHierarchy()
 {
+	mRootGameObjectHandles.clear();
+	for (auto& obj : mUpdateList)
+	{
+		GameObjectHandle handle = obj->GetHandle();
+		if (!IsValid(handle) || IsValid(obj->GetParentHandle()))
+		{
+			continue;
+		}
+
+		mRootGameObjectHandles.push_back(handle);
+	}
+
 	mHierarchyDirty = false;
 }
 
@@ -380,27 +394,13 @@ void GameWorld::DrawHierarchy()
 	ImGui::Separator();
 
 	// --- GameObject Hierarchy ---
-	auto roots = GetRootObjects();
-
-	for (auto* root : roots)
+	for (const GameObjectHandle& rootHandle : mRootGameObjectHandles)
 	{
-		DrawGameObjectNode(root);
-	}
-}
-
-std::vector<GameObject*> GameWorld::GetRootObjects()
-{
-	std::vector<GameObject*> roots;
-
-	for (auto& obj : mUpdateList)
-	{
-		if (!IsValid(obj->GetParentHandle()))
+		if (IsValid(rootHandle))
 		{
-			roots.push_back(obj);
+			DrawGameObjectNode(GetGameObject(rootHandle));
 		}
 	}
-
-	return roots;
 }
 
 void GameWorld::DrawGameObjectNode(GameObject* object)

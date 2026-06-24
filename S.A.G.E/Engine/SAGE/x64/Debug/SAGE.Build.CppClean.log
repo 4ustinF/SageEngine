@@ -1,7 +1,8 @@
-d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\sage.pch
 d:\githubfiles\sageengine\s.a.g.e\x64\debug\sage.pdb
 d:\githubfiles\sageengine\s.a.g.e\x64\debug\sage.idb
-d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\precompiled.obj
+d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\sage.obj
+d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\gameobjectfactory.obj
+d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\fpscameracontrollercomponent.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\renderservice.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\postprocessingservice.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\physicsservice.obj
@@ -10,9 +11,7 @@ d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\particleservice.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\particlecomponent.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\modelcomponent.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\gameworld.obj
-d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\gameobjectfactory.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\gameobject.obj
-d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\fpscameracontrollercomponent.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\followcameracontrollercomponent.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\collidercomponent.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\camerautil.obj
@@ -26,8 +25,12 @@ d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\uiservice.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\transformcomponent.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\terrainservice.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\spawnercomponent.obj
-d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\sage.obj
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\rigidbodycomponent.obj
+d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\rbphysicsservice.obj
+d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\meshrenderercomponent.obj
+d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\meshfiltercomponent.obj
+d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\sage.pch
+d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\precompiled.obj
 d:\githubfiles\sageengine\s.a.g.e\x64\debug\sage.lib
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\sage.tlog\cl.command.1.tlog
 d:\githubfiles\sageengine\s.a.g.e\engine\sage\x64\debug\sage.tlog\cl.items.tlog

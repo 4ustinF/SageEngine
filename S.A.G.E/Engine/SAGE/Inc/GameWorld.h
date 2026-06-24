@@ -72,7 +72,6 @@ namespace SAGE
 		// TODO: Allow for item renaming using something like ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)
 		std::vector<GameObject*> GetRootObjects();
 		void DrawGameObjectNode(GameObject* object);
-		std::vector<GameObjectHandle> mRootObjectHandles;
 
 		bool mHierarchyDirty = true;
 		std::string mRemainingSectionName = "Other";
@@ -81,14 +80,11 @@ namespace SAGE
 		Service* mInspectorService = nullptr;
 		GameObject* mInspectorGameObject = nullptr;
 
-		void LoadComponentNames();
 		void DrawAddComponentWindow();
 		bool mAddComponentWindowActive = false;
-		std::vector<const char*> mComponentNames;
 
 		bool mInitialized = false;
 		bool mUpdating = false;
 		float mImguiSpacing = 5.0f;
-
 	};
 }

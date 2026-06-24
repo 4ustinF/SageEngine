@@ -58,11 +58,6 @@ namespace SAGE
 		void SetName(const char* name) { mName = name; }
 		const std::string& GetName() const { return mName; }
 
-		// TODO: Remove or update
-		void SetHierarchyPath(const char* hierarchyPath) { mHierarchyPath = hierarchyPath; }
-		const std::string& GetConstHierarchyPath() const { return mHierarchyPath; }
-		std::string GetHierarchyPath() const { return mHierarchyPath; }
-
 		// New Hierarchy Flow
 		GameObjectHandle GetParentHandle() { return mParentGameObjectHandle; }
 		void SetParent(const std::string& parentObjectName);
@@ -81,17 +76,15 @@ namespace SAGE
 		void OnDisable();
 		void SaveComponents();
 
+		std::string mName = "No Name";
 		std::filesystem::path mTemplatePath = "";
 		void SetTemplatePath(const std::filesystem::path& path) { mTemplatePath = path; }
+		bool mInitialize = false;
+		bool mIsActive = true;
 
 		Components mComponents;
 		GameWorld* mWorld = nullptr;
 		GameObjectHandle mHandle;
-
-		std::string mName = "NoName";
-		std::string mHierarchyPath = "";
-		bool mInitialize = false;
-		bool mIsActive = true;
 
 		GameObjectHandle mParentGameObjectHandle;
 		std::vector<GameObjectHandle> mChildGameObjectHandles;

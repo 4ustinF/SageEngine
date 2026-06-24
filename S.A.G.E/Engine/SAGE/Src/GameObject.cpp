@@ -143,6 +143,8 @@ void GameObject::SaveComponents()
 	doc.Accept(writer);
 
 	fclose(file);
+
+	// TODO: Also save pathing to children game objects
 }
 
 void GameObject::SetParent(const std::string& name)

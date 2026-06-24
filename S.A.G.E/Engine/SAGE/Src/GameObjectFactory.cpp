@@ -55,11 +55,6 @@ void GameObjectFactory::Make(const rj::Document& document, GameObject& gameObjec
 		gameObject.SetName(document["Name"].GetString());
 	}
 
-	if (document.HasMember("HierarchyPath") && document["HierarchyPath"].IsString())
-	{
-		gameObject.SetHierarchyPath(document["HierarchyPath"].GetString());
-	}
-
 	if (document.HasMember("Components") && document["Components"].IsObject())
 	{
 		auto components = document["Components"].GetObj();

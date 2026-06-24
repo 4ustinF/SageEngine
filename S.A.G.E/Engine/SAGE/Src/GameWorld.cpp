@@ -23,8 +23,6 @@ void GameWorld::Initialize(uint32_t capacity)
 	mFreeSlots.resize(capacity);
 	std::iota(mFreeSlots.rbegin(), mFreeSlots.rend(), 0);
 
-	LoadComponentNames();
-
 	mInitialized = true;
 }
 
@@ -32,9 +30,6 @@ void GameWorld::Terminate()
 {
 	ASSERT(!mUpdating, "GameWorld - Cannot terminate world during update.");
 	if (!mInitialized) { return; }
-
-	//mRootObjectHandles.clear();
-	mComponentNames.clear();
 
 	// Destroy all remaining game objects
 	for (auto gameObject : mUpdateList) {
@@ -168,7 +163,6 @@ void GameWorld::LoadLevel(std::filesystem::path levelFile)
 			objectName = gameObject["Name"].GetString();
 		}
 
-		const char* templateFile = gameObject["TemplateFile"].GetString();
 		CreateGameObjectRecursive(gameObject["TemplateFile"].GetString(), nullptr, objectName);
 	}
 }
@@ -214,7 +208,6 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	if (parentGO != nullptr)
 	{
 		newObject->SetParent(parentGO);
-		//parentGO->AddChild(GetGameObject(newObject->mHandle));
 	}
 
 	// Add game object to update list
@@ -229,6 +222,7 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	ASSERT(err == 0 && file != nullptr, "GameWorld --- Failed to open level file '%s'", templateFile.u8string().c_str());
 
 	char readBuffer[65536];
+
 	rj::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
 
 	rj::Document document;
@@ -360,7 +354,6 @@ void GameWorld::ProcessDestroyList()
 
 void GameWorld::RebuildHierarchy()
 {
-	//mRootObjectHandles.clear();
 	mHierarchyDirty = false;
 }
 
@@ -496,23 +489,7 @@ void GameWorld::DrawInspector()
 	}
 }
 
-void GameWorld::LoadComponentNames() // TODO:
-{
-	//mComponentNames.push_back("TransformComponent");
-}
-
 void GameWorld::DrawAddComponentWindow()
 {
 	ImGui::Text("TODO: Setup Add Comp Window"); // TODO: Remove this.
-
-	for (const char* compName : mComponentNames)
-	{
-		ImGui::Text(compName);
-		ImGui::SameLine();
-
-		if (ImGui::Button("Add")) // TODO:
-		{
-			//GameObjectFactory::TryMakeComponent(compName, {}, *mInspectorGameObject);
-		}
-	}
 }

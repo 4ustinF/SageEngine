@@ -1,2 +1,34 @@
-﻿  MeshFilterComponent.cpp
+﻿  Precompiled.cpp
+  AnimatorComponent.cpp
+  App.cpp
+  BPhysicsComponent.cpp
+  BPhysicsService.cpp
+  CameraComponent.cpp
+  CameraService.cpp
+  CameraUtil.cpp
+  ColliderComponent.cpp
+  FollowCameraControllerComponent.cpp
+  FPSCameraControllerComponent.cpp
+  GameObject.cpp
+  GameObjectFactory.cpp
+  GameWorld.cpp
+  MeshFilterComponent.cpp
+  MeshRendererComponent.cpp
+  ModelComponent.cpp
+  ParticleComponent.cpp
+  ParticleService.cpp
+  PhysicsDebugDraw.cpp
+  PhysicsService.cpp
+  Generating Code...
+  Compiling...
+  PostProcessingService.cpp
+  RBPhysicsService.cpp
+  RenderService.cpp
+  RigidBodyComponent.cpp
+  SAGE.cpp
+  SpawnerComponent.cpp
+  TerrainService.cpp
+  TransformComponent.cpp
+  UIService.cpp
+  Generating Code...
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

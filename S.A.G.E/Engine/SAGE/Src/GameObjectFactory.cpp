@@ -40,14 +40,19 @@ void GameObjectFactory::Make(std::filesystem::path templateFile, GameObject& gam
 	char readBuffer[65536];
 	rj::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
 
-	fclose(file);
-
 	rj::Document document;
 	document.ParseStream(readStream);
 
-	if (document.HasMember("ObjectName") && document["ObjectName"].IsString())
+	fclose(file);
+
+	Make(document, gameObject);
+}
+
+void GameObjectFactory::Make(const rj::Document& document, GameObject& gameObject)
+{
+	if (document.HasMember("Name") && document["Name"].IsString())
 	{
-		gameObject.SetName(document["ObjectName"].GetString());
+		gameObject.SetName(document["Name"].GetString());
 	}
 
 	if (document.HasMember("HierarchyPath") && document["HierarchyPath"].IsString())
@@ -55,11 +60,15 @@ void GameObjectFactory::Make(std::filesystem::path templateFile, GameObject& gam
 		gameObject.SetHierarchyPath(document["HierarchyPath"].GetString());
 	}
 
-	auto components = document["Components"].GetObj();
-	for (auto& component : components)
+	if (document.HasMember("Components") && document["Components"].IsObject())
 	{
-		const char* componentName = component.name.GetString();
-		TryMakeComponent(componentName, component.value, gameObject);
+		auto components = document["Components"].GetObj();
+
+		for (auto& component : components)
+		{
+			const char* componentName = component.name.GetString();
+			TryMakeComponent(componentName, component.value, gameObject);
+		}
 	}
 }
 
@@ -68,9 +77,6 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 	if (OnMake(componentName, value, gameObject)) {
 		return;
 	}
-
-	// TODO: Should we just pass value to each of the component to load themselves accordingly?
-	// It would clean this up and keep save/load logic confine to the one who cares about it.
 
 	if (strcmp(componentName, "AnimatorComponent") == 0)
 	{

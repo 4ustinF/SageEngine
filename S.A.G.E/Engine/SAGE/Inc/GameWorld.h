@@ -52,6 +52,9 @@ namespace SAGE
 		GameObject* GetGameObject(GameObjectHandle handle);
 		void DestroyGameObject(GameObjectHandle handle);
 
+		// TODO:
+		GameObject* CreateGameObjectRecursive(std::filesystem::path templateFile, GameObject* parentGO, const char* overrideName);
+
 	private:
 		bool IsValid(GameObjectHandle handle) const;
 		void ProcessDestroyList();
@@ -76,6 +79,10 @@ namespace SAGE
 
 		void RebuildHierarchy();
 		void DrawHierarchy();
+
+		std::vector<GameObject*> GetRootObjects();
+		void DrawGameObjectNode(GameObject* object);
+
 		bool mHierarchyDirty = true;
 		std::vector<HierarchySection> mHierarchySections;
 		std::string mRemainingSectionName = "Other";

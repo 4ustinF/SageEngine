@@ -64,12 +64,14 @@ namespace SAGE
 		std::string GetHierarchyPath() const { return mHierarchyPath; }
 
 		// New Hierarchy Flow
+		GameObject* GetParent() { return mParentGameObject; }
 		void SetParent(const std::string& parentObjectName);
 		void SetParent(GameObjectHandle* parentObjectHandle);
 		void SetParent(GameObject* parentGameObject);
 
 		void AddChild(GameObject* childObject);		// Protect?
 		void RemoveChild(GameObject* childObject);	// Protect?
+		std::vector<GameObject*> GetChildren() { return mChildGameObjects; }
 
 	private:
 		friend class GameWorld;

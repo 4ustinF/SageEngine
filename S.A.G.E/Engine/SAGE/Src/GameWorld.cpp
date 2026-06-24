@@ -105,10 +105,10 @@ void GameWorld::LoadLevel(std::filesystem::path levelFile)
 	char readBuffer[65536];
 	rj::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
 
-	fclose(file);
-
 	rj::Document document;
 	document.ParseStream(readStream);
+
+	fclose(file);
 
 	auto services = document["Services"].GetObj();
 	for (auto& service : services)
@@ -155,46 +155,118 @@ void GameWorld::LoadLevel(std::filesystem::path levelFile)
 		// ... more services here
 	}
 
-	auto gameObjects = document["GameObjects"].GetArray();
-	for (auto& gameObject : gameObjects)
-	{
-		const char* templateFile = gameObject["TemplateFile"].GetString();
-		auto newObject = CreateGameObject(templateFile);
+	//for (auto& gameObject : document["GameObjects"].GetArray())
+	//{
+	//	const char* templateFile = gameObject["TemplateFile"].GetString();
+	//	auto newObject = CreateGameObject(templateFile);
 
-		if (gameObject.HasMember("Name") && gameObject["Name"].IsString())
+	//	if (gameObject.HasMember("Name") && gameObject["Name"].IsString())
+	//	{
+	//		newObject->SetName(gameObject["Name"].GetString());
+	//	}
+	//}
+
+	for (auto& gameObject : document["GameObjects"].GetArray())
+	{
+		if (!gameObject.HasMember("TemplateFile") || !gameObject["TemplateFile"].IsString())
 		{
-			newObject->SetName(gameObject["Name"].GetString());
+			continue;
 		}
 
-		//if (gameObject.HasMember("Components"))
-		//{
-		//	for (auto& component : gameObject["Components"].GetObj())
-		//	{
-		//		const char* componentName = component.name.GetString();
-		//		if (strcmp(componentName, "TransformComponent") == 0)
-		//		{
-		//			//auto transformComponent = gameObject.AddComponent<TransformComponent>();
-		//			if (component.value.HasMember("Position"))
-		//			{
-		//				const auto& position = component.value["Position"].GetArray();
-		//				const float x = position[0].GetFloat();
-		//				const float y = position[1].GetFloat();
-		//				const float z = position[2].GetFloat();
-		//				auto transform = newObject->GetComponent<TransformComponent>();
-		//				transform->position = {x, y, z};
+		const char* objectName = nullptr;
+		if (gameObject.HasMember("Name") && gameObject["Name"].IsString())
+		{
+			objectName = gameObject["Name"].GetString();
+		}
 
-		//				auto rigidBody = newObject->GetComponent<RigidBodyComponent>();
-		//				if (rigidBody != nullptr)
-		//				{
-		//					auto rb = rigidBody->GetRigidBody();
-		//					rb->setWorldTransform(ConvertToBtTransform(*transform));
-		//				}
-		//			}
-		//		}
-		//	}
-		//}
+		const char* templateFile = gameObject["TemplateFile"].GetString();
+		CreateGameObjectRecursive(gameObject["TemplateFile"].GetString(), nullptr, objectName);
 	}
 }
+
+GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateFile, GameObject* parentGO, const char* overrideName)
+{
+	ASSERT(mInitialized, "GameWorld - World must be initialized frist before creating game objects.");
+
+	if (mFreeSlots.empty()) {
+		return nullptr;
+	}
+
+	// Reserve slot
+	const uint32_t freeSlot = mFreeSlots.back();
+	mFreeSlots.pop_back();
+
+	auto& slot = mGameObjectSlots[freeSlot];
+	auto& newObject = slot.gameObject;
+	newObject = std::make_unique<GameObject>();
+
+	// Attach components
+	GameObjectFactory::Make(templateFile, *newObject);
+
+	// Initialize handle
+	GameObjectHandle handle;
+	handle.mIndex = freeSlot;
+	handle.mGeneration = slot.generation;
+
+	// Initialize game object
+	newObject->mWorld = this;
+	newObject->mHandle = handle;
+	newObject->Initialize();
+
+	// Set template path
+	newObject->SetTemplatePath(templateFile);
+
+	if (overrideName != nullptr)
+	{
+		newObject->SetName(overrideName);
+	}
+
+	// Parent/child setup
+	if (parentGO != nullptr)
+	{
+		newObject->SetParent(parentGO);
+		//parentGO->AddChild(GetGameObject(newObject->mHandle));
+	}
+
+	// Add game object to update list
+	mUpdateList.push_back(newObject.get());
+
+	// Dirty Hierarchy
+	newObject->SetTemplatePath(templateFile);
+	mHierarchyDirty = true;
+
+	FILE* file = nullptr;
+	auto err = fopen_s(&file, templateFile.u8string().c_str(), "r"); // TODO: This is a double read because of GameObjectFactory::Make(templateFile, *newObject); lets fix this
+	ASSERT(err == 0 && file != nullptr, "GameWorld --- Failed to open level file '%s'", templateFile.u8string().c_str());
+
+	char readBuffer[65536];
+	rj::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
+
+	rj::Document document;
+	document.ParseStream(readStream);
+
+	fclose(file);
+
+	if (document.HasMember("GameObjects") && document["GameObjects"].IsArray())
+	{
+		for (auto& childObject : document["GameObjects"].GetArray())
+		{
+			const char* childName = nullptr;
+			if (childObject.HasMember("Name") && childObject["Name"].IsString())
+			{
+				childName = childObject["Name"].GetString();
+			}
+
+			if (childObject.HasMember("TemplateFile") && childObject["TemplateFile"].IsString())
+			{
+				CreateGameObjectRecursive(childObject["TemplateFile"].GetString(), newObject.get(), childName);
+			}
+		}
+	}
+
+	return newObject.get();
+}
+
 
 GameObject* GameWorld::CreateGameObject(std::filesystem::path templateFile)
 {
@@ -345,17 +417,62 @@ void GameWorld::RebuildHierarchy()
 	mHierarchyDirty = false;
 }
 
+//void GameWorld::DrawHierarchy()
+//{
+//	//if (mHierarchyDirty)
+//	//{
+//	//	RebuildHierarchy();
+//	//}
+//
+//	//// List of Services
+//	//for (auto& service : mServices) {
+//	//	const std::string objectName = service.get()->GetServiceName() + "##GameWorld";
+//	//	if (ImGui::Button(objectName.c_str()))
+//	//	{
+//	//		mInspectorService = service.get();
+//	//		mInspectorGameObject = nullptr;
+//	//		mAddComponentWindowActive = false;
+//	//	}
+//	//}
+//
+//	//ImGui::Separator(); // --------------------------------------------------
+//
+//	//// For now default empty section open, the rest can start closed. TODO: Maybe add logic to know which ones were left open or not.
+//	//const ImGuiTreeNodeFlags remainingSectionflags = ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen;
+//	//const ImGuiTreeNodeFlags sectionflags = ImGuiTreeNodeFlags_CollapsingHeader;
+//
+//	//// List of sections
+//	//for (const HierarchySection& section : mHierarchySections)
+//	//{
+//	//	const std::string sectionName = section.name + "##GameWorld";
+//	//	if (ImGui::CollapsingHeader(sectionName.c_str(), section.name == mRemainingSectionName ? remainingSectionflags : sectionflags))
+//	//	{
+//	//		ImGui::Indent(6.0f);
+//	//		// List of game objects
+//	//		for (auto& object : section.hierarchyNodes)
+//	//		{
+//	//			const std::string objectName = object->GetName() + "##GameWorld";
+//	//			if (ImGui::Button(objectName.c_str()))
+//	//			{
+//	//				mInspectorService = nullptr;
+//	//				mInspectorGameObject = object;
+//	//				mAddComponentWindowActive = false;
+//	//			}
+//	//		}
+//
+//	//		ImGui::Unindent(6.0f);
+//	//	}
+//	//}
+//}
+
 void GameWorld::DrawHierarchy()
 {
-	if (mHierarchyDirty)
+	// --- Services ---
+	for (auto& service : mServices)
 	{
-		RebuildHierarchy();
-	}
+		const std::string name = service->GetServiceName() + "##GameWorld";
 
-	// List of Services
-	for (auto& service : mServices) {
-		const std::string objectName = service.get()->GetServiceName() + "##GameWorld";
-		if (ImGui::Button(objectName.c_str()))
+		if (ImGui::Button(name.c_str()))
 		{
 			mInspectorService = service.get();
 			mInspectorGameObject = nullptr;
@@ -363,33 +480,74 @@ void GameWorld::DrawHierarchy()
 		}
 	}
 
-	ImGui::Separator(); // --------------------------------------------------
+	ImGui::Separator();
 
-	// For now default empty section open, the rest can start closed. TODO: Maybe add logic to know which ones were left open or not.
-	const ImGuiTreeNodeFlags remainingSectionflags = ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen;
-	const ImGuiTreeNodeFlags sectionflags = ImGuiTreeNodeFlags_CollapsingHeader;
+	// --- GameObject Hierarchy ---
+	auto roots = GetRootObjects();
 
-	// List of sections
-	for (const HierarchySection& section : mHierarchySections)
+	for (auto* root : roots)
 	{
-		const std::string sectionName = section.name + "##GameWorld";
-		if (ImGui::CollapsingHeader(sectionName.c_str(), section.name == mRemainingSectionName ? remainingSectionflags : sectionflags))
-		{
-			ImGui::Indent(6.0f);
-			// List of game objects
-			for (auto& object : section.hierarchyNodes)
-			{
-				const std::string objectName = object->GetName() + "##GameWorld";
-				if (ImGui::Button(objectName.c_str()))
-				{
-					mInspectorService = nullptr;
-					mInspectorGameObject = object;
-					mAddComponentWindowActive = false;
-				}
-			}
+		DrawGameObjectNode(root);
+	}
+}
 
-			ImGui::Unindent(6.0f);
+std::vector<GameObject*> GameWorld::GetRootObjects()
+{
+	std::vector<GameObject*> roots;
+
+	for (auto& obj : mUpdateList)
+	{
+		if (obj->GetParent() == nullptr)
+		{
+			roots.push_back(obj);
 		}
+	}
+
+	return roots;
+}
+
+void GameWorld::DrawGameObjectNode(GameObject* object)
+{
+	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow;
+
+	if (object->GetChildren().empty())
+	{
+		flags |= ImGuiTreeNodeFlags_Leaf;
+	}
+
+	if (mInspectorGameObject == object)
+	{
+		flags |= ImGuiTreeNodeFlags_Selected;
+	}
+
+	const std::string label = object->GetName() + "##GameWorld";
+
+	const bool open = ImGui::TreeNodeEx(label.c_str(), flags);
+
+	// Selection
+	if (ImGui::IsItemClicked())
+	{
+		mInspectorService = nullptr;
+		mInspectorGameObject = object;
+		mAddComponentWindowActive = false;
+	}
+
+	//if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0))
+	//{
+	//	// TODO: Start rename
+	//}
+
+	if (open)
+	{
+		for (auto& childObject: object->GetChildren())
+		{
+			if (childObject != nullptr)
+			{
+				DrawGameObjectNode(childObject);
+			}
+		}
+
+		ImGui::TreePop();
 	}
 }
 

@@ -10,6 +10,7 @@ namespace SAGE
 	{
 		void SetMakeOverride(MakeOverride makeOverride);
 		void Make(std::filesystem::path templateFile, GameObject& gameObject);
+		void Make(const rapidjson::Document& document, GameObject& gameObject);
 		void TryMakeComponent(const char* componentName, const rapidjson::Value& value, GameObject& gameObject);
 	};
 }

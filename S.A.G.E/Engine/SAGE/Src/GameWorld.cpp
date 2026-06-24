@@ -33,7 +33,7 @@ void GameWorld::Terminate()
 	ASSERT(!mUpdating, "GameWorld - Cannot terminate world during update.");
 	if (!mInitialized) { return; }
 
-	mHierarchySections.clear();
+	//mRootObjectHandles.clear();
 	mComponentNames.clear();
 
 	// Destroy all remaining game objects
@@ -154,17 +154,6 @@ void GameWorld::LoadLevel(std::filesystem::path levelFile)
 		}
 		// ... more services here
 	}
-
-	//for (auto& gameObject : document["GameObjects"].GetArray())
-	//{
-	//	const char* templateFile = gameObject["TemplateFile"].GetString();
-	//	auto newObject = CreateGameObject(templateFile);
-
-	//	if (gameObject.HasMember("Name") && gameObject["Name"].IsString())
-	//	{
-	//		newObject->SetName(gameObject["Name"].GetString());
-	//	}
-	//}
 
 	for (auto& gameObject : document["GameObjects"].GetArray())
 	{
@@ -371,102 +360,17 @@ void GameWorld::ProcessDestroyList()
 
 void GameWorld::RebuildHierarchy()
 {
-	mHierarchySections.clear();
-
-	// Create Empty Section First
-	HierarchySection emptyHierarchySection = HierarchySection(mRemainingSectionName);
-	mHierarchySections.push_back(emptyHierarchySection);
-
-	// Sort objects into sections
-	for (auto& object : mUpdateList) 
-	{
-		std::string hierarchyPath = object->GetHierarchyPath();
-		if (hierarchyPath.size() == 0) // Group everything into a section even if it doesn't have a section.
-		{
-			hierarchyPath = mRemainingSectionName;
-		}
-
-		bool bAddedToHierarchy = false;
-
-		// Check if an section already exist.
-		for (HierarchySection& section : mHierarchySections)
-		{
-			if (section.name == hierarchyPath)
-			{
-				section.hierarchyNodes.push_back(object);
-				bAddedToHierarchy = true;
-				break;
-			}
-		}
-
-		// Create new section if there wasn't one preexisting to add to.
-		if (bAddedToHierarchy == false)
-		{
-			HierarchySection newHierarchySection = HierarchySection(hierarchyPath);
-			newHierarchySection.hierarchyNodes.push_back(object);
-			mHierarchySections.push_back(newHierarchySection);
-		}
-	}
-
-	if (mHierarchySections.size() > 1) 
-	{
-		// Make sure empty section is at the end.
-		std::swap(mHierarchySections.front(), mHierarchySections.back());
-	}
-
+	//mRootObjectHandles.clear();
 	mHierarchyDirty = false;
 }
 
-//void GameWorld::DrawHierarchy()
-//{
-//	//if (mHierarchyDirty)
-//	//{
-//	//	RebuildHierarchy();
-//	//}
-//
-//	//// List of Services
-//	//for (auto& service : mServices) {
-//	//	const std::string objectName = service.get()->GetServiceName() + "##GameWorld";
-//	//	if (ImGui::Button(objectName.c_str()))
-//	//	{
-//	//		mInspectorService = service.get();
-//	//		mInspectorGameObject = nullptr;
-//	//		mAddComponentWindowActive = false;
-//	//	}
-//	//}
-//
-//	//ImGui::Separator(); // --------------------------------------------------
-//
-//	//// For now default empty section open, the rest can start closed. TODO: Maybe add logic to know which ones were left open or not.
-//	//const ImGuiTreeNodeFlags remainingSectionflags = ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen;
-//	//const ImGuiTreeNodeFlags sectionflags = ImGuiTreeNodeFlags_CollapsingHeader;
-//
-//	//// List of sections
-//	//for (const HierarchySection& section : mHierarchySections)
-//	//{
-//	//	const std::string sectionName = section.name + "##GameWorld";
-//	//	if (ImGui::CollapsingHeader(sectionName.c_str(), section.name == mRemainingSectionName ? remainingSectionflags : sectionflags))
-//	//	{
-//	//		ImGui::Indent(6.0f);
-//	//		// List of game objects
-//	//		for (auto& object : section.hierarchyNodes)
-//	//		{
-//	//			const std::string objectName = object->GetName() + "##GameWorld";
-//	//			if (ImGui::Button(objectName.c_str()))
-//	//			{
-//	//				mInspectorService = nullptr;
-//	//				mInspectorGameObject = object;
-//	//				mAddComponentWindowActive = false;
-//	//			}
-//	//		}
-//
-//	//		ImGui::Unindent(6.0f);
-//	//	}
-//	//}
-//}
-
 void GameWorld::DrawHierarchy()
 {
+	if (mHierarchyDirty)
+	{
+		RebuildHierarchy();
+	}
+
 	// --- Services ---
 	for (auto& service : mServices)
 	{
@@ -497,7 +401,7 @@ std::vector<GameObject*> GameWorld::GetRootObjects()
 
 	for (auto& obj : mUpdateList)
 	{
-		if (obj->GetParent() == nullptr)
+		if (!IsValid(obj->GetParentHandle()))
 		{
 			roots.push_back(obj);
 		}
@@ -510,7 +414,7 @@ void GameWorld::DrawGameObjectNode(GameObject* object)
 {
 	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow;
 
-	if (object->GetChildren().empty())
+	if (object->GetChildrenHandles().empty())
 	{
 		flags |= ImGuiTreeNodeFlags_Leaf;
 	}
@@ -539,9 +443,9 @@ void GameWorld::DrawGameObjectNode(GameObject* object)
 
 	if (open)
 	{
-		for (auto& childObject: object->GetChildren())
+		for (auto& childObjectHandle : object->GetChildrenHandles())
 		{
-			if (childObject != nullptr)
+			if (GameObject* childObject = GetGameObject(childObjectHandle))
 			{
 				DrawGameObjectNode(childObject);
 			}

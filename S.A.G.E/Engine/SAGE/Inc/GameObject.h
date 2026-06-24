@@ -64,14 +64,14 @@ namespace SAGE
 		std::string GetHierarchyPath() const { return mHierarchyPath; }
 
 		// New Hierarchy Flow
-		GameObject* GetParent() { return mParentGameObject; }
+		GameObjectHandle GetParentHandle() { return mParentGameObjectHandle; }
 		void SetParent(const std::string& parentObjectName);
-		void SetParent(GameObjectHandle* parentObjectHandle);
-		void SetParent(GameObject* parentGameObject);
+		void SetParent(GameObject* parentObject);
+		void SetParent(GameObjectHandle parentObjectHandle);
 
-		void AddChild(GameObject* childObject);		// Protect?
-		void RemoveChild(GameObject* childObject);	// Protect?
-		std::vector<GameObject*> GetChildren() { return mChildGameObjects; }
+		void AddChild(GameObjectHandle childObjectHandle);
+		void RemoveChild(GameObjectHandle childObjectHandle);
+		const std::vector<GameObjectHandle>& GetChildrenHandles() const { return mChildGameObjectHandles; }
 
 	private:
 		friend class GameWorld;
@@ -93,7 +93,7 @@ namespace SAGE
 		bool mInitialize = false;
 		bool mIsActive = true;
 
-		GameObject* mParentGameObject= nullptr;
-		std::vector<GameObject*> mChildGameObjects;
+		GameObjectHandle mParentGameObjectHandle;
+		std::vector<GameObjectHandle> mChildGameObjectHandles;
 	};
 }

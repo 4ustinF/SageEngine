@@ -20,6 +20,8 @@ void GameObject::Initialize()
 
 void GameObject::Terminate()
 {
+	mChildGameObjectHandles.clear(); // TODO: More clean up like removing itself from parent and children.
+
 	for (auto& component : mComponents) {
 		component->OnDisable();
 		component->Terminate();
@@ -145,7 +147,7 @@ void GameObject::SaveComponents()
 
 void GameObject::SetParent(const std::string& name)
 {
-	if (name.empty() || mWorld == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
@@ -156,42 +158,42 @@ void GameObject::SetParent(const std::string& name)
 	}
 }
 
-void GameObject::SetParent(GameObjectHandle* handle)
+void GameObject::SetParent(GameObject* parentObject)
 {
-	if (handle == nullptr || mWorld == nullptr)
+	if (parentObject == nullptr)
 	{
 		return;
 	}
 
-	SetParent(mWorld->GetGameObject(*handle));
+	SetParent(parentObject->GetHandle());
 }
 
-void GameObject::SetParent(GameObject* parentGameObject)
+void GameObject::SetParent(GameObjectHandle parentObjectHandle)
 {
-	if (mParentGameObject != nullptr) // Remove self from old parent.
+	if (GameObject* oldParentGameObject = mWorld->GetGameObject(mParentGameObjectHandle))
 	{
-		parentGameObject->RemoveChild(this);
-		mParentGameObject = nullptr;
+		oldParentGameObject->RemoveChild(mHandle);
 	}
 
-	mParentGameObject = parentGameObject; // Set new parent.
-	if (mParentGameObject != nullptr)
+	mParentGameObjectHandle = parentObjectHandle;
+
+	if (GameObject* newParentGameObject = mWorld->GetGameObject(mParentGameObjectHandle))
 	{
-		mParentGameObject->AddChild(this); // Set self to be child of parent.
+		newParentGameObject->AddChild(mHandle);
 	}
 }
 
-void GameObject::AddChild(GameObject* childObject)
-{
-	if(childObject == nullptr)
+void GameObject::AddChild(GameObjectHandle childObjectHandle)
+{	
+	if (mWorld->GetGameObject(childObjectHandle) == nullptr)
 	{
 		return;
 	}
 
-	mChildGameObjects.push_back(childObject);
+	mChildGameObjectHandles.push_back(childObjectHandle);
 }
 
-void GameObject::RemoveChild(GameObject* childObject)
+void GameObject::RemoveChild(GameObjectHandle childObjectHandle)
 {
-	mChildGameObjects.erase(std::remove(mChildGameObjects.begin(), mChildGameObjects.end(), childObject)); // Erase-Remove Idiom
+	mChildGameObjectHandles.erase(std::remove(mChildGameObjectHandles.begin(), mChildGameObjectHandles.end(), childObjectHandle), mChildGameObjectHandles.end()); // Erase-Remove Idiom
 }

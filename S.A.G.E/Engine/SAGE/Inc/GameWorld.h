@@ -5,17 +5,6 @@
 
 namespace SAGE
 {
-	struct HierarchySection // TODO: For now this is to put objects into a single layer folder. We will add a proper Hierarchy later.
-	{
-		HierarchySection(std::string sectionName)
-		: name(sectionName)
-		{
-		}
-
-		std::string name = "";
-		std::vector<GameObject*> hierarchyNodes;
-	};
-
 	class GameWorld final
 	{
 	public:
@@ -80,11 +69,12 @@ namespace SAGE
 		void RebuildHierarchy();
 		void DrawHierarchy();
 
+		// TODO: Allow for item renaming using something like ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)
 		std::vector<GameObject*> GetRootObjects();
 		void DrawGameObjectNode(GameObject* object);
+		std::vector<GameObjectHandle> mRootObjectHandles;
 
 		bool mHierarchyDirty = true;
-		std::vector<HierarchySection> mHierarchySections;
 		std::string mRemainingSectionName = "Other";
 
 		void DrawInspector();

@@ -75,6 +75,6 @@ namespace SAGE
 
 		SAGE::Graphics::Sampler::Filter mSampleFilter = SAGE::Graphics::Sampler::Filter::Linear;
 
-		float mFPS = 0.0f;
+		int mFPS = 0;
 	};
 }

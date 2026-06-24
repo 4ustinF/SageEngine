@@ -60,7 +60,7 @@ void RenderService::Terminate()
 
 void RenderService::Update(float deltaTime)
 {
-	mFPS = 1.0f / deltaTime;
+	mFPS = static_cast<int>((1.0f / deltaTime) + 0.5f);
 
 	if (mSkyDome.diffuseMapId != 0)
 	{
@@ -145,7 +145,7 @@ void RenderService::Render()
 
 void RenderService::DebugUI()
 {
-	ImGui::Text("FPS: %f", mFPS);
+	ImGui::Text("FPS: %i", mFPS);
 
 	if (ImGui::CollapsingHeader("Light##RenderServiceLight", ImGuiTreeNodeFlags_CollapsingHeader))
 	{

@@ -161,8 +161,10 @@ void GameWorld::LoadLevel(std::filesystem::path levelFile)
 		const char* templateFile = gameObject["TemplateFile"].GetString();
 		auto newObject = CreateGameObject(templateFile);
 
-		const char* name = gameObject["Name"].GetString();
-		newObject->SetName(name);
+		if (gameObject.HasMember("Name") && gameObject["Name"].IsString())
+		{
+			newObject->SetName(gameObject["Name"].GetString());
+		}
 
 		//if (gameObject.HasMember("Components"))
 		//{

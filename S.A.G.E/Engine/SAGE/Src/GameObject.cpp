@@ -1,6 +1,8 @@
 ﻿#include "Precompiled.h"
 #include "GameObject.h"
 
+#include "GameWorld.h"
+
 using namespace SAGE;
 namespace rj = rapidjson;
 
@@ -139,4 +141,57 @@ void GameObject::SaveComponents()
 	doc.Accept(writer);
 
 	fclose(file);
+}
+
+void GameObject::SetParent(const std::string& name)
+{
+	if (name.empty() || mWorld == nullptr)
+	{
+		return;
+	}
+
+	if (GameObject* parentObject = mWorld->FindGameObject(name))
+	{
+		SetParent(parentObject);
+	}
+}
+
+void GameObject::SetParent(GameObjectHandle* handle)
+{
+	if (handle == nullptr || mWorld == nullptr)
+	{
+		return;
+	}
+
+	SetParent(mWorld->GetGameObject(*handle));
+}
+
+void GameObject::SetParent(GameObject* parentGameObject)
+{
+	if (mParentGameObject != nullptr) // Remove self from old parent.
+	{
+		parentGameObject->RemoveChild(this);
+		mParentGameObject = nullptr;
+	}
+
+	mParentGameObject = parentGameObject; // Set new parent.
+	if (mParentGameObject != nullptr)
+	{
+		mParentGameObject->AddChild(this); // Set self to be child of parent.
+	}
+}
+
+void GameObject::AddChild(GameObject* childObject)
+{
+	if(childObject == nullptr)
+	{
+		return;
+	}
+
+	mChildGameObjects.push_back(childObject);
+}
+
+void GameObject::RemoveChild(GameObject* childObject)
+{
+	mChildGameObjects.erase(std::remove(mChildGameObjects.begin(), mChildGameObjects.end(), childObject)); // Erase-Remove Idiom
 }

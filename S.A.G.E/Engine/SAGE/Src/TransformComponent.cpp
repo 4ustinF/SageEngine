@@ -2,6 +2,8 @@
 #include "TransformComponent.h"
 
 #include "GameObject.h"
+#include "GameObjectHandle.h"
+#include "GameWorld.h"
 #include "RigidBodyComponent.h"
 
 using namespace SAGE;
@@ -14,9 +16,15 @@ void TransformComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Transform Component##TransformComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		if (ImGui::DragFloat3("Position##TransformComponent", &mTransform.position.x, 0.1f))
+		Vector3 pos = mTransform.position;
+		if (ImGui::DragFloat3("Position##TransformComponent", &pos.x, 0.1f))
 		{
-			SetPosition(mTransform.position);
+			SetPosition(pos - mLocalTransform.position); // TODO: Figure out when we are calling set position on a child to update that accordingly?
+		}
+
+		if (ImGui::DragFloat3("Local Position##TransformComponent", &mLocalTransform.position.x, 0.1f))
+		{
+			SetLocalPosition(mLocalTransform.position);
 		}
 
 		if (ImGui::DragFloat3("Rotation##TransformComponent", &mDegreeAngles.x, 0.1f))
@@ -69,14 +77,18 @@ void TransformComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapi
 	}
 }
 
-void TransformComponent::SetPosition(const Vector3& InPos)
+void TransformComponent::SetPosition(const Vector3& inPos)
 {
-	mTransform.position = InPos;
-	mOnPositionChange.Broadcast(InPos);
+	mTransform.position = inPos + mLocalTransform.position;
+	mOnPositionChange.Broadcast(mTransform.position);
+
+	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
+	{
+		UpdateRecursivePosition(childHandle, mTransform.position);
+	}
 
 	// TODO: Remove this block.
-	auto rbc = GetOwner().GetComponent<RigidBodyComponent>();
-	if (rbc != nullptr)
+	if (RigidBodyComponent* rbc = GetOwner().GetComponent<RigidBodyComponent>())
 	{
 		SAGE::Graphics::Transform transform;
 		transform.position = mTransform.position;
@@ -103,4 +115,43 @@ void TransformComponent::SetScale(const SAGE::Math::Vector3& inScale)
 {
 	mTransform.scale = inScale;
 	mOnScaleChange.Broadcast(inScale);
+}
+
+void TransformComponent::SetLocalPosition(const SAGE::Math::Vector3& inPos)
+{
+	mLocalTransform.position = inPos;
+}
+
+void TransformComponent::SetLocalRotation(const SAGE::Math::Vector3& inRotation)
+{
+	mLocalDegreeAngles = inRotation;
+	mLocalTransform.rotation = Quaternion::RotationEuler(mLocalDegreeAngles * Constants::DegToRad);
+}
+
+void TransformComponent::SetLocalRotation(const SAGE::Math::Quaternion& inRotation)
+{
+	mLocalTransform.rotation = inRotation;
+	mLocalDegreeAngles = mLocalTransform.rotation.ToClampedDegree();
+}
+
+void TransformComponent::SetLocalScale(const SAGE::Math::Vector3& inScale)
+{
+	mLocalTransform.scale = inScale;
+}
+
+void TransformComponent::UpdateRecursivePosition(const GameObjectHandle& gameObjectHandle, const Vector3& inWorldPos)
+{
+	if (GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle))
+	{
+		if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
+		{
+			transformComponent->SetPosition(inWorldPos);
+			return;
+		}
+	}
+
+	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
+	{
+		UpdateRecursivePosition(childHandle, inWorldPos);
+	}
 }

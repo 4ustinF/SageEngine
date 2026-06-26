@@ -2,6 +2,8 @@
 
 #include "Component.h"
 
+#include "GameObjectHandle.h"
+
 namespace SAGE
 {
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnPositionChange, SAGE::Math::Vector3);
@@ -28,18 +30,31 @@ namespace SAGE
 		const SAGE::Math::Vector3& GetScale() const { return mTransform.scale; }
 		const SAGE::Math::Matrix4 GetMatrix4() const { return mTransform.GetMatrix4(); }
 
+		const SAGE::Math::Vector3& GetLocalPosition() const { return mLocalTransform.position; }
+
 		FOnPositionChange& GetOnPositionChangeDelegate() { return mOnPositionChange; }
 		FOnScaleChange& GetOnScaleChangeDelegate() { return mOnScaleChange; }
 
 		// Setters
 		void SetPosition(const SAGE::Math::Vector3& inPos);
+		void SetLocalPosition(const SAGE::Math::Vector3& inPos);
+
 		void SetRotation(const SAGE::Math::Vector3& inRotation);
 		void SetRotation(const SAGE::Math::Quaternion& inRotation);
+		void SetLocalRotation(const SAGE::Math::Vector3& inRotation);
+		void SetLocalRotation(const SAGE::Math::Quaternion& inRotation);
+
 		void SetScale(const SAGE::Math::Vector3& inScale);
+		void SetLocalScale(const SAGE::Math::Vector3& inScale);
+
+		// Other
+		void UpdateRecursivePosition(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldPos);
 
 	private:
 		SAGE::Graphics::Transform mTransform;
+		SAGE::Graphics::Transform mLocalTransform;
 		SAGE::Math::Vector3 mDegreeAngles = SAGE::Math::Vector3::Zero;
+		SAGE::Math::Vector3 mLocalDegreeAngles = SAGE::Math::Vector3::Zero;
 
 		FOnPositionChange mOnPositionChange;
 		FOnScaleChange mOnScaleChange;

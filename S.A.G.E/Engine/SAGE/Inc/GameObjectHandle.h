@@ -8,7 +8,7 @@ namespace SAGE
 	{
 	public:
 		GameObjectHandle() = default;
-		bool operator==(const GameObjectHandle& h) const noexcept { return mIndex == h.mGeneration && mGeneration == h.mGeneration; }
+		bool operator==(const GameObjectHandle& h) const noexcept { return mIndex == h.mIndex && mGeneration == h.mGeneration; }
 
 	private:
 		friend class GameWorld;

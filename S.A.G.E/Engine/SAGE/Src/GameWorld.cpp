@@ -185,9 +185,6 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	auto& newObject = slot.gameObject;
 	newObject = std::make_unique<GameObject>();
 
-	// Attach components
-	GameObjectFactory::Make(templateFile, *newObject);
-
 	// Initialize handle
 	GameObjectHandle handle;
 	handle.mIndex = freeSlot;
@@ -211,6 +208,9 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	{
 		newObject->SetParent(parentGO);
 	}
+
+	// Attach components
+	GameObjectFactory::Make(templateFile, *newObject);
 
 	// Initialize game object
 	newObject->Initialize();

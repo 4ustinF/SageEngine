@@ -1,4 +1,4 @@
-#include "Precompiled.h"
+﻿#include "Precompiled.h"
 #include "TransformComponent.h"
 
 #include "GameObject.h"
@@ -138,24 +138,30 @@ void TransformComponent::DebugUI()
 
 void TransformComponent::SetPosition(const Vector3& inPos)
 {
-	if (GetOwner().GetParentGameObject() == nullptr) // Is not a child
+	if (const TransformComponent* parent = FindParentTransformComponent())
 	{
-		UpdateWorldPosition(inPos);
+		// Convert world -> local
+		mLocalTransform.position = inPos - parent->GetTransform().position;
 	}
-	else // Is a child
+	else
 	{
-		SetLocalPosition(mLocalTransform.position + (mTransform.position - inPos)); 
+		mLocalTransform.position = inPos;
 	}
 
+	UpdateWorldPosition(inPos);
+
 	// TODO: Remove this block.
-	if (RigidBodyComponent* rbc = GetOwner().GetComponent<RigidBodyComponent>())
+	if (RigidBodyComponent* rbc = GetOwner().GetComponent<RigidBodyComponent>()) 
 	{
 		SAGE::Graphics::Transform transform;
 		transform.position = mTransform.position;
 		transform.rotation = mTransform.rotation;
 		transform.scale = mTransform.scale;
-		auto rb = rbc->GetRigidBody();
-		rb->setWorldTransform(ConvertToBtTransform(transform));
+
+		if (auto rb = rbc->GetRigidBody())
+		{
+			rb->setWorldTransform(ConvertToBtTransform(transform));
+		}
 	}
 }
 
@@ -177,14 +183,17 @@ void TransformComponent::SetScale(const SAGE::Math::Vector3& inScale)
 	mOnScaleChange.Broadcast(inScale);
 }
 
-void TransformComponent::SetLocalPosition(const SAGE::Math::Vector3& inPos)
+void TransformComponent::SetLocalPosition(const Vector3& inPos)
 {
-	if (GetOwner().GetParentGameObject() != nullptr) // Is a child GO
-	{
-		Vector3 localOffset = inPos - mLocalTransform.position;
-		mLocalTransform.position = inPos;
+	mLocalTransform.position = inPos;
 
-		UpdateWorldPosition(mTransform.position + localOffset);
+	if (const TransformComponent* parent = FindParentTransformComponent())
+	{
+		UpdateWorldPosition(parent->GetTransform().position + mLocalTransform.position);
+	}
+	else
+	{
+		UpdateWorldPosition(mLocalTransform.position);
 	}
 }
 
@@ -228,23 +237,35 @@ void TransformComponent::UpdateWorldPosition(const SAGE::Math::Vector3& inPos)
 
 	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
 	{
-		UpdateChildrenPositions(childHandle, mTransform.position);
+		UpdateChildrenPositions(childHandle, inPos);
 	}
 }
 
 void TransformComponent::UpdateChildrenPositions(const GameObjectHandle& gameObjectHandle, const Vector3& inWorldPos)
 {
-	if (GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle))
+	GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle);
+	if (gameObject == nullptr)
 	{
-		if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
-		{
-			transformComponent->SetPosition(inWorldPos);
-			return;
-		}
+		return;
 	}
 
-	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
+	// If this object has a transform → update it
+	if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
 	{
-		UpdateChildrenPositions(childHandle, inWorldPos);
+		transformComponent->SetLocalPosition(transformComponent->mLocalTransform.position);
+
+		// Recurse this object's children using this objects world pos.
+		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
+		{
+			transformComponent->UpdateChildrenPositions(childHandle, transformComponent->mTransform.position);
+		}
+	}
+	else
+	{
+		// Recurse this object's children using this the passed in world pos.
+		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
+		{
+			UpdateChildrenPositions(childHandle, inWorldPos);
+		}
 	}
 }

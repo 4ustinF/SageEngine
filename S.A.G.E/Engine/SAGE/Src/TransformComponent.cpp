@@ -100,9 +100,6 @@ void TransformComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapi
 
 void TransformComponent::TransformComponent::Initialize()
 {
-	// TODO: keep going up parent chain till invalid or has a transform comp
-	// mPos = parentPos + mLocPos
-	
 	if (const TransformComponent* transformComponent = FindParentTransformComponent())
 	{
 		mTransform.position = transformComponent->GetTransform().position + mLocalTransform.position;
@@ -116,11 +113,11 @@ void TransformComponent::DebugUI()
 		Vector3 pos = mTransform.position;
 		if (ImGui::DragFloat3("Position##TransformComponent", &pos.x, 0.1f))
 		{
-			SetPosition(pos - mLocalTransform.position); // TODO: Figure out when we are calling set position on a child to update that accordingly?
+			SetPosition(pos);
 		}
 
 		Vector3 locPos = mLocalTransform.position;
-		if (ImGui::DragFloat3("Local Position##TransformComponent", &locPos.x, 0.1f)) // TODO: If you don't have a parent you dont get local pos.
+		if (ImGui::DragFloat3("Local Position##TransformComponent", &locPos.x, 0.1f))
 		{
 			SetLocalPosition(locPos);
 		}
@@ -141,12 +138,13 @@ void TransformComponent::DebugUI()
 
 void TransformComponent::SetPosition(const Vector3& inPos)
 {
-	mTransform.position = inPos + mLocalTransform.position;
-	mOnPositionChange.Broadcast(mTransform.position);
-
-	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
+	if (GetOwner().GetParentGameObject() == nullptr) // Is not a child
 	{
-		UpdateRecursivePosition(childHandle, mTransform.position);
+		UpdateWorldPosition(inPos);
+	}
+	else // Is a child
+	{
+		SetLocalPosition(mLocalTransform.position + (mTransform.position - inPos)); 
 	}
 
 	// TODO: Remove this block.
@@ -181,9 +179,13 @@ void TransformComponent::SetScale(const SAGE::Math::Vector3& inScale)
 
 void TransformComponent::SetLocalPosition(const SAGE::Math::Vector3& inPos)
 {
-	Vector3 localOffset = inPos - mLocalTransform.position;
-	mTransform.position += localOffset;
-	mLocalTransform.position = inPos;
+	if (GetOwner().GetParentGameObject() != nullptr) // Is a child GO
+	{
+		Vector3 localOffset = inPos - mLocalTransform.position;
+		mLocalTransform.position = inPos;
+
+		UpdateWorldPosition(mTransform.position + localOffset);
+	}
 }
 
 void TransformComponent::SetLocalRotation(const SAGE::Math::Vector3& inRotation)
@@ -203,24 +205,7 @@ void TransformComponent::SetLocalScale(const SAGE::Math::Vector3& inScale)
 	mLocalTransform.scale = inScale;
 }
 
-void TransformComponent::UpdateRecursivePosition(const GameObjectHandle& gameObjectHandle, const Vector3& inWorldPos)
-{
-	if (GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle))
-	{
-		if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
-		{
-			transformComponent->SetPosition(inWorldPos);
-			return;
-		}
-	}
-
-	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
-	{
-		UpdateRecursivePosition(childHandle, inWorldPos);
-	}
-}
-
-const TransformComponent* TransformComponent::FindParentTransformComponent()
+const TransformComponent* TransformComponent::FindParentTransformComponent() const
 {
 	GameObject* current = GetOwner().GetParentGameObject();
 	while (current != nullptr)
@@ -234,4 +219,32 @@ const TransformComponent* TransformComponent::FindParentTransformComponent()
 	}
 
 	return nullptr; // nothing found
+}
+
+void TransformComponent::UpdateWorldPosition(const SAGE::Math::Vector3& inPos)
+{
+	mTransform.position = inPos;
+	mOnPositionChange.Broadcast(inPos);
+
+	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
+	{
+		UpdateChildrenPositions(childHandle, mTransform.position);
+	}
+}
+
+void TransformComponent::UpdateChildrenPositions(const GameObjectHandle& gameObjectHandle, const Vector3& inWorldPos)
+{
+	if (GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle))
+	{
+		if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
+		{
+			transformComponent->SetPosition(inWorldPos);
+			return;
+		}
+	}
+
+	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
+	{
+		UpdateChildrenPositions(childHandle, inWorldPos);
+	}
 }

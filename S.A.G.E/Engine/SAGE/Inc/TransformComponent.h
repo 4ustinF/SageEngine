@@ -32,28 +32,32 @@ namespace SAGE
 		const SAGE::Math::Vector3& GetScale() const { return mTransform.scale; }
 		const SAGE::Math::Matrix4 GetMatrix4() const { return mTransform.GetMatrix4(); }
 
+		const SAGE::Graphics::Transform& GetLocalTransform() const { return mLocalTransform; }
+		SAGE::Graphics::Transform GetLocalTransform() { return mLocalTransform; }
 		const SAGE::Math::Vector3& GetLocalPosition() const { return mLocalTransform.position; }
+		const SAGE::Math::Vector3& GetLocalRotationDegreeAngles() const { return mLocalDegreeAngles; }
+		const SAGE::Math::Quaternion& GetLocalRotation() const { return mLocalTransform.rotation; }
+		const SAGE::Math::Vector3& GetLocalScale() const { return mLocalTransform.scale; }
+		const SAGE::Math::Matrix4 GetLocalMatrix4() const { return mLocalTransform.GetMatrix4(); }
 
 		FOnPositionChange& GetOnPositionChangeDelegate() { return mOnPositionChange; }
 		FOnScaleChange& GetOnScaleChangeDelegate() { return mOnScaleChange; }
 
 		// Setters
 		void SetPosition(const SAGE::Math::Vector3& inPos);
-		void SetLocalPosition(const SAGE::Math::Vector3& inPos);
-
 		void SetRotation(const SAGE::Math::Vector3& inRotation);
 		void SetRotation(const SAGE::Math::Quaternion& inRotation);
+		void SetScale(const SAGE::Math::Vector3& inScale);
+
+		void SetLocalPosition(const SAGE::Math::Vector3& inPos);
 		void SetLocalRotation(const SAGE::Math::Vector3& inRotation);
 		void SetLocalRotation(const SAGE::Math::Quaternion& inRotation);
-
-		void SetScale(const SAGE::Math::Vector3& inScale);
 		void SetLocalScale(const SAGE::Math::Vector3& inScale);
 
-		// Other
-		void UpdateRecursivePosition(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldPos);
-
 	private:
-		const TransformComponent* FindParentTransformComponent();
+		const TransformComponent* FindParentTransformComponent() const;
+		void UpdateWorldPosition(const SAGE::Math::Vector3& inPos);
+		void UpdateChildrenPositions(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldPos);
 
 		SAGE::Graphics::Transform mTransform;
 		SAGE::Graphics::Transform mLocalTransform;

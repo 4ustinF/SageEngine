@@ -147,6 +147,11 @@ void GameObject::SaveComponents()
 	// TODO: Also save pathing to children game objects
 }
 
+GameObject* GameObject::GetParentGameObject() const
+{
+	return mWorld->GetGameObject(mParentGameObjectHandle);
+}
+
 void GameObject::SetParent(const std::string& name)
 {
 	if (name.empty())

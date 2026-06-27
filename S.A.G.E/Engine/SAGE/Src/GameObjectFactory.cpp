@@ -324,34 +324,9 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 		}
 	}
 	else if (strcmp(componentName, "Transform Component") == 0)
-	{
-		auto transformComponent = gameObject.AddComponent<TransformComponent>();
-		if (value.HasMember("Position"))
-		{
-			const auto& position = value["Position"].GetArray();
-			const float x = position[0].GetFloat();
-			const float y = position[1].GetFloat();
-			const float z = position[2].GetFloat();
-			transformComponent->SetPosition(Vector3(x, y, z));
-		}
-
-		if (value.HasMember("Rotation"))
-		{
-			const auto& rotation = value["Rotation"].GetArray();
-			const float x = rotation[0].GetFloat();
-			const float y = rotation[1].GetFloat();
-			const float z = rotation[2].GetFloat();
-			transformComponent->SetRotation(Vector3(x, y, z));
-		}
-
-		if (value.HasMember("Scale"))
-		{
-			const auto& scale = value["Scale"].GetArray();
-			const float x = scale[0].GetFloat();
-			const float y = scale[1].GetFloat();
-			const float z = scale[2].GetFloat();
-			transformComponent->SetScale(Vector3(x, y, z));
-		}
+	{	
+		TransformComponent* transformComponent = gameObject.AddComponent<TransformComponent>();
+		transformComponent->LoadComponentFromTemplate(value);
 	}
 	// ... more components here
 }

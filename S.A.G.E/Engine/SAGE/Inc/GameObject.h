@@ -60,6 +60,7 @@ namespace SAGE
 
 		// New Hierarchy Flow
 		GameObjectHandle GetParentHandle() { return mParentGameObjectHandle; }
+		GameObject* GetParentGameObject() const;
 		void SetParent(const std::string& parentObjectName);
 		void SetParent(GameObject* parentObject);
 		void SetParent(GameObjectHandle parentObjectHandle);

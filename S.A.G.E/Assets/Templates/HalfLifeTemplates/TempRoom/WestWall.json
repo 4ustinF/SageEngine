@@ -2,6 +2,11 @@
   "Components": {
     "Transform Component": {
       "Position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Local Position": [
         -4.876800060272217,
         0.0,
         0.0

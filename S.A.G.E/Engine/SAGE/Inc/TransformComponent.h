@@ -16,10 +16,12 @@ namespace SAGE
 		SET_TYPE_ID(ComponentId::Transform)
 		MEMORY_POOL_DECLARE
 
-		virtual const char* GetCompName() { return "Transform Component"; }
-
-		void DebugUI() override;
+		const char* GetCompName() override { return "Transform Component"; }
+		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
 		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
+
+		void Initialize() override;
+		void DebugUI() override;
 
 		// Getters
 		const SAGE::Graphics::Transform& GetTransform() const { return mTransform; }
@@ -51,6 +53,8 @@ namespace SAGE
 		void UpdateRecursivePosition(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldPos);
 
 	private:
+		const TransformComponent* FindParentTransformComponent();
+
 		SAGE::Graphics::Transform mTransform;
 		SAGE::Graphics::Transform mLocalTransform;
 		SAGE::Math::Vector3 mDegreeAngles = SAGE::Math::Vector3::Zero;

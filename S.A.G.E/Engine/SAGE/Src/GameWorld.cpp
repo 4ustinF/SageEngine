@@ -193,18 +193,18 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	handle.mIndex = freeSlot;
 	handle.mGeneration = slot.generation;
 
-	// Initialize game object
-	newObject->mWorld = this;
-	newObject->mHandle = handle;
-	newObject->Initialize();
-
 	// Set template path
 	newObject->SetTemplatePath(templateFile);
 
+	// Set object name
 	if (overrideName != nullptr)
 	{
 		newObject->SetName(overrideName);
 	}
+
+	// Initialize game object
+	newObject->mWorld = this;
+	newObject->mHandle = handle;
 
 	// Parent/child setup
 	if (parentGO != nullptr)
@@ -212,11 +212,13 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 		newObject->SetParent(parentGO);
 	}
 
+	// Initialize game object
+	newObject->Initialize();
+
 	// Add game object to update list
 	mUpdateList.push_back(newObject.get());
 
 	// Dirty Hierarchy
-	newObject->SetTemplatePath(templateFile);
 	mHierarchyDirty = true;
 
 	FILE* file = nullptr;

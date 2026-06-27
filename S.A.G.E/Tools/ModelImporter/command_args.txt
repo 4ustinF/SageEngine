@@ -27,3 +27,5 @@
 -scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_swipe.fbx ../../Assets/Models/Mutant/mutant_swipe.model
 -scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_punch.fbx ../../Assets/Models/Mutant/mutant_punch.model
 -scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_muscle_flex.fbx ../../Assets/Models/Mutant/mutant_muscle_flex.model
+
+-scale 0.03 ../../Assets/Models/Pig/pig.fbx ../../Assets/Models/Pig/pig.model

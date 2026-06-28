@@ -7,13 +7,28 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)External\assimp-5.0.1\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)External\assimp-5.0.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <PostBuildEvent>
-      <Command>copy /y "$(SolutionDir)External\assimp-5.0.1\Bin\*.dll" "$(OutDir)"</Command>
-    </PostBuildEvent>
+	  <Link>
+		  <AdditionalLibraryDirectories>
+			  $(ProjectDir)..\..\External\assimp-5.0.1\Lib;
+			  %(AdditionalLibraryDirectories)
+		  </AdditionalLibraryDirectories>
+
+		  <!-- Release -->
+		  <AdditionalDependencies Condition="'$(Configuration)'=='Release'">
+			  $(ProjectDir)..\..\External\assimp-5.0.1\Lib\assimp-vc143-mt.lib;
+			  $(ProjectDir)..\..\External\assimp-5.0.1\Lib\IrrXML.lib;
+			  $(ProjectDir)..\..\External\assimp-5.0.1\Lib\zlibstatic.lib;
+			  %(AdditionalDependencies)
+		  </AdditionalDependencies>
+
+		  <!-- Debug -->
+		  <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">
+			  $(ProjectDir)..\..\External\assimp-5.0.1\Lib\assimp-vc143-mtd.lib;
+			  $(ProjectDir)..\..\External\assimp-5.0.1\Lib\IrrXMLd.lib;
+			  $(ProjectDir)..\..\External\assimp-5.0.1\Lib\zlibstaticd.lib;
+			  %(AdditionalDependencies)
+		  </AdditionalDependencies>
+	  </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

@@ -116,6 +116,7 @@ void ShadowEffect::DebugUI()
 	{
 		ImGui::Text("Depth Map");
 		ImGui::Image(mDepthMapRenderTarget.GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, {1, 1, 1, 1}, { 1, 1, 1, 1 });
+		ImGui::DragFloat3("Focus", &mFocusPosition.x, 0.01f);
 		ImGui::DragFloat("Size", &mSize, 1.0f, 1.0f, 1000.0f);
 	}
 }

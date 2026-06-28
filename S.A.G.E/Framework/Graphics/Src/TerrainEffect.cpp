@@ -122,7 +122,7 @@ void TerrainEffect::SetShadowMap(const Texture* shadowMap)
 
 void TerrainEffect::DebugUI()
 {
-	if (ImGui::CollapsingHeader("Standard Effect", ImGuiTreeNodeFlags_CollapsingHeader))
+	if (ImGui::CollapsingHeader("Terrain Effect", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		bool useShadowMap = (mSettingsData.useShadowMap == 1);
 		ImGui::Checkbox("Use Shadow Map", &useShadowMap);

@@ -146,6 +146,7 @@ void RenderService::Render()
 void RenderService::DebugUI()
 {
 	ImGui::Text("FPS: %i", mFPS);
+	// TODO: Make it so we can swap mSampleFilter on the fly.
 
 	if (ImGui::CollapsingHeader("Light##RenderServiceLight", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
@@ -157,6 +158,16 @@ void RenderService::DebugUI()
 		ImGui::ColorEdit4("Diffuse##RenderServiceLight", &mDirectionalLight.diffuse.r);
 		ImGui::ColorEdit4("Specular##RenderServiceLight", &mDirectionalLight.specular.r);
 	}
+
+	ImGui::Separator();
+	mStandardEffect.DebugUI();
+	ImGui::Separator();
+	mTexturingEffect.DebugUI();
+	ImGui::Separator();
+	mShadowEffect.DebugUI();
+	ImGui::Separator();
+	mTerrainEffect.DebugUI();
+	ImGui::Separator();
 }
 
 void RenderService::LoadSkyDome(const char* fileName)

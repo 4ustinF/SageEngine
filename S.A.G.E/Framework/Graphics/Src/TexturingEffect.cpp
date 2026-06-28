@@ -72,5 +72,8 @@ void TexturingEffect::SetCamera(const Camera& camera)
 
 void TexturingEffect::DebugUI()
 {
-
+	if (ImGui::CollapsingHeader("Texturing Effect", ImGuiTreeNodeFlags_CollapsingHeader))
+	{
+		
+	}
 }

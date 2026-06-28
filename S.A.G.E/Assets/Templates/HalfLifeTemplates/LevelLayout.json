@@ -1,0 +1,15 @@
+{
+  "Components": {
+    "Transform Component": {
+      "Rotation": [
+        90.0,
+        0.0,
+        0.0
+      ]
+    },
+    "Model Component": {
+      "FileName": "../../Assets/Models/HalfLife/c1a0/c1a0.model",
+      "IsBasicModel": true
+    }
+  }
+}

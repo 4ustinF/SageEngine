@@ -58,6 +58,8 @@ namespace SAGE
 		const TransformComponent* FindParentTransformComponent() const;
 		void UpdateWorldPosition(const SAGE::Math::Vector3& inPos);
 		void UpdateChildrenPositions(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldPos);
+		void UpdateWorldScale(const SAGE::Math::Vector3& inScale);
+		void UpdateChildrenScales(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldScale);
 
 		SAGE::Graphics::Transform mTransform;
 		SAGE::Graphics::Transform mLocalTransform;

@@ -12,7 +12,7 @@ namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(TransformComponent, 500);
 
-void TransformComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
+void TransformComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
 	if (value.HasMember("Position"))
 	{
@@ -51,7 +51,7 @@ void TransformComponent::LoadComponentFromTemplate(const rapidjson::Value& value
 	}
 }
 
-void TransformComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
+void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
 	// --- Position ---
 	if (mTransform.position != Vector3::Zero)
@@ -165,22 +165,31 @@ void TransformComponent::SetPosition(const Vector3& inPos)
 	}
 }
 
-void TransformComponent::SetRotation(const SAGE::Math::Vector3& inRotation)
+void TransformComponent::SetRotation(const Vector3& inRotation)
 {
 	mDegreeAngles = inRotation;
 	mTransform.rotation = Quaternion::RotationEuler(mDegreeAngles * Constants::DegToRad);
 }
 
-void TransformComponent::SetRotation(const SAGE::Math::Quaternion& inRotation)
+void TransformComponent::SetRotation(const Quaternion& inRotation)
 {
 	mTransform.rotation = inRotation;
 	mDegreeAngles = mTransform.rotation.ToClampedDegree();
 }
 
-void TransformComponent::SetScale(const SAGE::Math::Vector3& inScale)
+void TransformComponent::SetScale(const Vector3& inScale)
 {
-	mTransform.scale = inScale;
-	mOnScaleChange.Broadcast(inScale);
+	if (const TransformComponent* parent = FindParentTransformComponent())
+	{
+		// Convert world -> local
+		mLocalTransform.scale = inScale - parent->GetTransform().scale;
+	}
+	else
+	{
+		mLocalTransform.scale = inScale;
+	}
+
+	UpdateWorldScale(inScale);
 }
 
 void TransformComponent::SetLocalPosition(const Vector3& inPos)
@@ -197,21 +206,30 @@ void TransformComponent::SetLocalPosition(const Vector3& inPos)
 	}
 }
 
-void TransformComponent::SetLocalRotation(const SAGE::Math::Vector3& inRotation)
+void TransformComponent::SetLocalRotation(const Vector3& inRotation)
 {
 	mLocalDegreeAngles = inRotation;
 	mLocalTransform.rotation = Quaternion::RotationEuler(mLocalDegreeAngles * Constants::DegToRad);
 }
 
-void TransformComponent::SetLocalRotation(const SAGE::Math::Quaternion& inRotation)
+void TransformComponent::SetLocalRotation(const Quaternion& inRotation)
 {
 	mLocalTransform.rotation = inRotation;
 	mLocalDegreeAngles = mLocalTransform.rotation.ToClampedDegree();
 }
 
-void TransformComponent::SetLocalScale(const SAGE::Math::Vector3& inScale)
+void TransformComponent::SetLocalScale(const Vector3& inScale)
 {
 	mLocalTransform.scale = inScale;
+
+	if (const TransformComponent* parent = FindParentTransformComponent())
+	{
+		UpdateWorldScale(parent->GetTransform().scale + mLocalTransform.scale);
+	}
+	else
+	{
+		UpdateWorldScale(mLocalTransform.scale);
+	}
 }
 
 const TransformComponent* TransformComponent::FindParentTransformComponent() const
@@ -230,7 +248,7 @@ const TransformComponent* TransformComponent::FindParentTransformComponent() con
 	return nullptr; // nothing found
 }
 
-void TransformComponent::UpdateWorldPosition(const SAGE::Math::Vector3& inPos)
+void TransformComponent::UpdateWorldPosition(const Vector3& inPos)
 {
 	mTransform.position = inPos;
 	mOnPositionChange.Broadcast(inPos);
@@ -249,7 +267,7 @@ void TransformComponent::UpdateChildrenPositions(const GameObjectHandle& gameObj
 		return;
 	}
 
-	// If this object has a transform → update it
+	// If this object has a transform comp → update it
 	if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
 	{
 		transformComponent->SetLocalPosition(transformComponent->mLocalTransform.position);
@@ -266,6 +284,46 @@ void TransformComponent::UpdateChildrenPositions(const GameObjectHandle& gameObj
 		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
 		{
 			UpdateChildrenPositions(childHandle, inWorldPos);
+		}
+	}
+}
+
+void TransformComponent::UpdateWorldScale(const Vector3& inScale)
+{
+	mTransform.scale = inScale;
+	mOnScaleChange.Broadcast(inScale);
+
+	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
+	{
+		UpdateChildrenScales(childHandle, inScale);
+	}
+}
+
+void TransformComponent::UpdateChildrenScales(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldScale)
+{
+	GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle);
+	if (gameObject == nullptr)
+	{
+		return;
+	}
+
+	// If this object has a transform comp → update it
+	if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
+	{
+		transformComponent->SetLocalScale(transformComponent->mLocalTransform.scale);
+
+		// Recurse this object's children using this objects world scale.
+		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
+		{
+			transformComponent->UpdateChildrenScales(childHandle, transformComponent->mTransform.scale);
+		}
+	}
+	else
+	{
+		// Recurse this object's children using this the passed in world pos.
+		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
+		{
+			UpdateChildrenScales(childHandle, inWorldScale);
 		}
 	}
 }

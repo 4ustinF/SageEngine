@@ -1,1 +1,38 @@
-{"Components":{"Transform Component":{"Position":[0.0,5.0,0.0],"Local Position":[0.0,5.0,0.0]}},"GameObjects":[{"Name":"Floor","TemplateFile":"../../Assets/Templates/HalfLifeTemplates/TempRoom/Floor.json"},{"Name":"North Wall","TemplateFile":"../../Assets/Templates/HalfLifeTemplates/TempRoom/NorthWall.json"},{"Name":"East Wall","TemplateFile":"../../Assets/Templates/HalfLifeTemplates/TempRoom/EastWall.json"},{"Name":"South Wall","TemplateFile":"../../Assets/Templates/HalfLifeTemplates/TempRoom/SouthWall.json"},{"Name":"West Wall","TemplateFile":"../../Assets/Templates/HalfLifeTemplates/TempRoom/WestWall.json"}]}
+{
+  "Components": {
+    "Transform Component": {
+      "Position": [
+        0.0,
+        5.0,
+        0.0
+      ],
+      "Local Position": [
+        0.0,
+        5.0,
+        0.0
+      ]
+    }
+  },
+  "GameObjects": [
+    {
+      "Name": "Floor",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/Floor.json"
+    },
+    {
+      "Name": "North Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/NorthWall.json"
+    },
+    {
+      "Name": "East Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/EastWall.json"
+    },
+    {
+      "Name": "South Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/SouthWall.json"
+    },
+    {
+      "Name": "West Wall",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/WestWall.json"
+    }
+  ]
+}

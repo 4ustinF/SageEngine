@@ -46,7 +46,7 @@ namespace SAGE
 		MeshType StringToMeshType(const std::string& meshType); // TODO: Move to a utils class?
 
 	private:
-		void GenerateMesh(); // TODO: We need to be able to pass values in.
+		void GenerateMesh();
 		void GenerateCubeMesh();
 		void GenerateCylinderMesh();
 		void GeneratePlaneMesh();
@@ -55,9 +55,10 @@ namespace SAGE
 		void GenerateCustomMesh();
 
 		SAGE::Graphics::RenderObject mRenderObject;
-		MeshType mMeshType = MeshType::Quad; // TODO: default on cube.
+		MeshType mMeshType = MeshType::Cube;
 		std::string mMeshTypeName = "Cube";
 
+		std::string mCustomFilePath = ""; // TODO: Convert to std::filesystem::path
 		SAGE::Input::Pivot mPivot = Input::Pivot::Center;
 		Math::Vector2Int mDivisions = Math::Vector2Int::One;
 		Math::Vector2 mSpacing = Math::Vector2::One;

@@ -15,8 +15,8 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/TempRoom.json"
     },
     {
-      "Name": "LevelLayout",
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/LevelLayout.json"
+      "Name": "Random Mesh",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/RandomMesh.json"
     }
   ]
 }

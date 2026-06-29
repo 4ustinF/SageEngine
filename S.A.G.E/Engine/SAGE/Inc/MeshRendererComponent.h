@@ -62,5 +62,8 @@ namespace SAGE
 		bool mTileToXScale = false;
 		bool mTileToYScale = false;
 		bool mTileToZScale = false;
+
+		// TODO: Take in a .material file
+		// Add debug info on .mat and just regular mDiffuseMapFileName maybe use the .mat to get the relevant info?
 	};
 }

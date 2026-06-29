@@ -1,0 +1,18 @@
+{
+  "Components": {
+    "Transform Component": {
+      "Rotation": [
+        90.0,
+        0.0,
+        0.0
+      ]
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/c1a0.model"
+    },
+    "Mesh Renderer Component": {
+      "DiffuseMapFileName": "../../Assets/Models/HalfLife/c1a0/C2A4E_W1B.png"
+    }
+  }
+}

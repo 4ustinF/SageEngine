@@ -56,7 +56,7 @@ void ModelComponent::DebugUI()
 			const std::string headerText = "Material Data " + std::to_string(materialIndex) + "##ModelComponent";
 			if (ImGui::CollapsingHeader(headerText.c_str(), ImGuiTreeNodeFlags_CollapsingHeader))
 			{
-				auto& materialData = model.materialData[materialIndex]; // TODO: Figure out why we cannot modify these values.
+				auto& materialData = model.materialData[materialIndex]; // TODO: Figure out why we cannot modify these values. Maybe needs to be a CreateRenderGroup?
 				ImGui::ColorEdit4("Ambient##ModelComponent", &materialData.material.ambient.r);
 				ImGui::ColorEdit4("Diffuse##ModelComponent", &materialData.material.diffuse.r);
 				ImGui::ColorEdit4("Specular##ModelComponent", &materialData.material.specular.r);

@@ -93,9 +93,6 @@ void GameObject::SaveComponents()
 	assert(err == 0);
 	assert(file != nullptr);
 
-	//FILE* file = nullptr;
-	//fopen_s(&file, mTemplatePath.u8string().c_str(), "r");
-
 	char readBuffer[65536];
 	rj::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
 

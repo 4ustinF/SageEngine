@@ -419,22 +419,25 @@ int main(int argc, char* argv[])
 		{
 			const auto aiMaterial = scene->mMaterials[materialIndex];
 
-			aiColor3D ambient, diffuse, specular;
+			aiColor3D ambient, diffuse, specular, emissive;
 			ai_real specularPower = 1.0f;
 
 			aiMaterial->Get(AI_MATKEY_COLOR_AMBIENT, ambient);
 			aiMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
 			aiMaterial->Get(AI_MATKEY_COLOR_SPECULAR, specular);
+			aiMaterial->Get(AI_MATKEY_COLOR_EMISSIVE, emissive);
 			aiMaterial->Get(AI_MATKEY_SHININESS, specularPower);
 
 			auto& materialData = model.materialData.emplace_back();
+
 			materialData.material.ambient = ToColor(ambient);
 			materialData.material.diffuse = ToColor(diffuse);
 			materialData.material.specular = ToColor(specular);
+			materialData.material.emissive = ToColor(emissive);
 			materialData.material.power = static_cast<float>(specularPower);
+
 			materialData.diffuseMapName = FindTexture(scene, aiMaterial, aiTextureType_DIFFUSE, arguments, "_diffuse", materialIndex);
 			materialData.specularMapName = FindTexture(scene, aiMaterial, aiTextureType_SPECULAR, arguments, "_specular", materialIndex);
-			//materialData.specularMapName = FindTexture(scene, aiMaterial, aiTextureType_SHININESS, arguments, "_specular", materialIndex);
 			materialData.bumpMapName = FindTexture(scene, aiMaterial, aiTextureType_DISPLACEMENT, arguments, "_bump", materialIndex);
 			materialData.normalMapName = FindTexture(scene, aiMaterial, aiTextureType_NORMALS, arguments, "_normal", materialIndex);
 		}

@@ -35,10 +35,10 @@ namespace SAGE
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }
-		void SetDiffuseMapFileName(const char* fileName) { mDiffuseMapFileName = fileName; }
-		void SetSpecularMapFileName(const char* fileName) { mSpecularMapFileName = fileName; }
-		void SetBumpMapFileName(const char* fileName) { mBumpMapFileName = fileName; }
-		void SetNormalMapFileName(const char* fileName) { mNormalMapFileName = fileName; }
+		void SetDiffuseMapFileName(const char* fileName) { mMaterialData.diffuseMapName = fileName; }					// TODO: Might need to update mMaterialData when these update as well.
+		void SetSpecularMapFileName(const char* fileName) { mMaterialData.specularMapName = fileName; }					// TODO: Might need to update mMaterialData when these update as well.
+		void SetBumpMapFileName(const char* fileName) { mMaterialData.bumpMapName = fileName; }							// TODO: Might need to update mMaterialData when these update as well.
+		void SetNormalMapFileName(const char* fileName) { mMaterialData.normalMapName = fileName; }						// TODO: Might need to update mMaterialData when these update as well.
 		void SetTilingSize(float xTilingSize, float yTilingSize);
 		void SetTilingSize(const SAGE::Math::Vector2& tilingSize);
 		void SetTileToScale(bool tileToXScale = false, bool tileToYScale = false, bool tileToZScale = false);
@@ -56,10 +56,6 @@ namespace SAGE
 		const float mMaxPreviewSize = 64.0f;
 		const std::string mMissingDiffuseMapFileName = "missing.png";
 		SAGE::Graphics::TextureId mMissingTextureID;
-		std::string mDiffuseMapFileName = "";
-		std::string mSpecularMapFileName = "";
-		std::string mBumpMapFileName = "";
-		std::string mNormalMapFileName = "";
 
 		void UpdateScaleSizeDelegateHandle();
 		void OnScaleSizeChanged(const SAGE::Math::Vector3& scale);
@@ -70,8 +66,9 @@ namespace SAGE
 		bool mTileToYScale = false;
 		bool mTileToZScale = false;
 
-		// TODO: Take in a .material file
-		// Add debug info on .mat and just regular mDiffuseMapFileName maybe use the .mat to get the relevant info?
+		void LoadMaterial(std::filesystem::path filePath);
+		SAGE::Graphics::Model::MaterialData mMaterialData; // TODO tidy up in here.
+		std::string mMaterialFilePath = "";
 
 		// TODO: Move out
 		std::string OpenFileDialog()

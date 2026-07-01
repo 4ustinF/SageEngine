@@ -17,25 +17,31 @@ MEMORY_POOL_DEFINE(MeshRendererComponent, 500);
 
 void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
 {
-	if (value.HasMember("DiffuseMapFileName"))
+	if (value.HasMember("MaterialFilePath"))
+	{
+		mMaterialFilePath = value["MaterialFilePath"].GetString(); // TODO: Save value.
+		LoadMaterial(mMaterialFilePath);
+	}
+
+	if (mMaterialData.diffuseMapName.empty() && value.HasMember("DiffuseMapFileName"))
 	{
 		const auto& diffuseMapFileName = value["DiffuseMapFileName"].GetString();
 		SetDiffuseMapFileName(diffuseMapFileName);
 	}
 
-	if (value.HasMember("SpecularMapFileName"))
+	if (mMaterialData.specularMapName.empty() && value.HasMember("SpecularMapFileName"))
 	{
 		const auto& specularMapFileName = value["SpecularMapFileName"].GetString();
 		SetSpecularMapFileName(specularMapFileName);
 	}
 
-	if (value.HasMember("BumpMapFileName"))
+	if (mMaterialData.bumpMapName.empty() && value.HasMember("BumpMapFileName"))
 	{
 		const auto& bumpMapFileName = value["BumpMapFileName"].GetString();
 		SetBumpMapFileName(bumpMapFileName);
 	}
 
-	if (value.HasMember("NormalMapFileName"))
+	if (mMaterialData.normalMapName.empty() && value.HasMember("NormalMapFileName"))
 	{
 		const auto& normalMapFileName = value["NormalMapFileName"].GetString();
 		SetDiffuseMapFileName(normalMapFileName);
@@ -66,48 +72,71 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 		const auto& tileToZScale = value["TileToZScale"].GetBool();
 		SetTileToZScale(tileToZScale);
 	}
+
+	RenderObject& renderObject = mMeshFilter->GetRenderObject();
+	renderObject.material = mMaterialData.material;
 }
 
 void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
-	// --- Diffuse Map File Name ---
-	if (!mDiffuseMapFileName.empty())
+	if (!mMaterialFilePath.empty())
 	{
+		Model model;
+		model.materialData.push_back(mMaterialData);
+		Model::MaterialData& materialData = model.materialData[0];
+		materialData.diffuseMapName = static_cast<std::filesystem::path>(materialData.diffuseMapName).filename().string();
+		materialData.specularMapName = static_cast<std::filesystem::path>(materialData.specularMapName).filename().string();
+		materialData.bumpMapName = static_cast<std::filesystem::path>(materialData.bumpMapName).filename().string();
+		materialData.normalMapName = static_cast<std::filesystem::path>(materialData.normalMapName).filename().string();
+
+		ModelIO::SaveMaterial(mMaterialFilePath, model);
 		compObj.AddMember(
-			rj::Value("DiffuseMapFileName", allocator),
-			rj::Value(mDiffuseMapFileName.c_str(), allocator),
+			rj::Value("MaterialFilePath", allocator),
+			rj::Value(mMaterialFilePath.c_str(), allocator),
 			allocator
 		);
 	}
-
-	// --- Specular Map File Name ---
-	if (!mSpecularMapFileName.empty())
+	else
 	{
-		compObj.AddMember(
-			rj::Value("SpecularMapFileName", allocator),
-			rj::Value(mSpecularMapFileName.c_str(), allocator),
-			allocator
-		);
-	}
+		// --- Diffuse Map File Name ---
+		if (!mMaterialData.diffuseMapName.empty())
+		{
+			compObj.AddMember(
+				rj::Value("DiffuseMapFileName", allocator),
+				rj::Value(mMaterialData.diffuseMapName.c_str(), allocator),
+				allocator
+			);
+		}
 
-	// --- Bump Map File Name ---
-	if (!mBumpMapFileName.empty())
-	{
-		compObj.AddMember(
-			rj::Value("BumpMapFileName", allocator),
-			rj::Value(mBumpMapFileName.c_str(), allocator),
-			allocator
-		);
-	}
+		// --- Specular Map File Name ---
+		if (!mMaterialData.specularMapName.empty())
+		{
+			compObj.AddMember(
+				rj::Value("SpecularMapFileName", allocator),
+				rj::Value(mMaterialData.specularMapName.c_str(), allocator),
+				allocator
+			);
+		}
 
-	// --- Normal Map File Name ---
-	if (!mNormalMapFileName.empty())
-	{
-		compObj.AddMember(
-			rj::Value("NormalMapFileName", allocator),
-			rj::Value(mNormalMapFileName.c_str(), allocator),
-			allocator
-		);
+		// --- Bump Map File Name ---
+		if (!mMaterialData.bumpMapName.empty())
+		{
+			compObj.AddMember(
+				rj::Value("BumpMapFileName", allocator),
+				rj::Value(mMaterialData.bumpMapName.c_str(), allocator),
+				allocator
+			);
+		}
+
+		// --- Normal Map File Name ---
+		if (!mMaterialData.normalMapName.empty())
+		{
+			compObj.AddMember(
+				rj::Value("NormalMapFileName", allocator),
+				rj::Value(mMaterialData.normalMapName.c_str(), allocator),
+				allocator
+			);
+		}
 	}
 
 	// --- Tiling Size ---
@@ -160,28 +189,28 @@ void MeshRendererComponent::Initialize()
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
 	mMissingTextureID = mTextureManager->LoadTexture(mMissingDiffuseMapFileName);
 
-	if (!mDiffuseMapFileName.empty())
+	if (!mMaterialData.diffuseMapName.empty())
 	{
-		renderObject.diffuseMapId = mTextureManager->LoadTexture(mDiffuseMapFileName);
+		renderObject.diffuseMapId = mTextureManager->LoadTexture(mMaterialData.diffuseMapName);
 	}
 	else
 	{
 		renderObject.diffuseMapId = mMissingTextureID;
 	}
 
-	if (!mSpecularMapFileName.empty())
+	if (!mMaterialData.specularMapName.empty())
 	{
-		renderObject.specularMapId = mTextureManager->LoadTexture(mSpecularMapFileName);
+		renderObject.specularMapId = mTextureManager->LoadTexture(mMaterialData.specularMapName);
 	}
 
-	if (!mBumpMapFileName.empty())
+	if (!mMaterialData.bumpMapName.empty())
 	{
-		renderObject.bumpMapId = mTextureManager->LoadTexture(mBumpMapFileName);
+		renderObject.bumpMapId = mTextureManager->LoadTexture(mMaterialData.bumpMapName);
 	}
 
-	if (!mNormalMapFileName.empty())
+	if (!mMaterialData.normalMapName.empty())
 	{
-		renderObject.normalMapId = mTextureManager->LoadTexture(mNormalMapFileName);
+		renderObject.normalMapId = mTextureManager->LoadTexture(mMaterialData.normalMapName);
 	}
 }
 
@@ -221,9 +250,10 @@ void MeshRendererComponent::DebugUI()
 			SetTilingSize(mTilingSize);
 		}
 
+		// Tile To Scale
+		{
 		ImGui::Text("Tile To Scale");
 		ImGui::SameLine();
-
 		bool tileToXScale = mTileToXScale;
 		if (ImGui::Checkbox("X##TileX", &tileToXScale))
 		{
@@ -231,7 +261,6 @@ void MeshRendererComponent::DebugUI()
 		}
 
 		ImGui::SameLine();
-
 		bool tileToYScale = mTileToYScale;
 		if (ImGui::Checkbox("Y##TileY", &tileToYScale))
 		{
@@ -239,25 +268,46 @@ void MeshRendererComponent::DebugUI()
 		}
 
 		ImGui::SameLine();
-
 		bool tileToZScale = mTileToZScale;
 		if (ImGui::Checkbox("Z##TileZ", &tileToZScale))
 		{
 			SetTileToZScale(tileToZScale);
 		}
+		}
 
 		RenderObject& renderObject = mMeshFilter->GetRenderObject();
-		TextureDebugUI("Diffuse Map", renderObject.diffuseMapId, mDiffuseMapFileName);
-		TextureDebugUI("Specular Map", renderObject.specularMapId, mSpecularMapFileName);
-		TextureDebugUI("Bump Map", renderObject.bumpMapId, mBumpMapFileName);
-		TextureDebugUI("Normal Map", renderObject.normalMapId, mNormalMapFileName);
+		TextureDebugUI("Diffuse Map", renderObject.diffuseMapId, mMaterialData.diffuseMapName);
+		TextureDebugUI("Specular Map", renderObject.specularMapId, mMaterialData.specularMapName);
+		TextureDebugUI("Bump Map", renderObject.bumpMapId, mMaterialData.bumpMapName);
+		TextureDebugUI("Normal Map", renderObject.normalMapId, mMaterialData.normalMapName);
 
-		// renderObject.material
-		//ImGui::ColorEdit4("Ambient##MeshRendererComponent", &materialData.material.ambient.r);
-		//ImGui::ColorEdit4("Diffuse##MeshRendererComponent", &materialData.material.diffuse.r);
-		//ImGui::ColorEdit4("Specular##MeshRendererComponent", &materialData.material.specular.r);
-		//ImGui::ColorEdit4("Emissive##MeshRendererComponent", &materialData.material.emissive.r);
-		//ImGui::DragFloat("Power##MeshRendererComponent", &materialData.material.power, 1.0f, 1.0f, 100.0f);
+		if (ImGui::ColorEdit4("Ambient##MeshRendererComponent", &renderObject.material.ambient.r))
+		{
+			mMaterialData.material.ambient = renderObject.material.ambient;
+		}
+
+		if (ImGui::ColorEdit4("Diffuse##MeshRendererComponent", &renderObject.material.diffuse.r))
+		{
+			mMaterialData.material.diffuse = renderObject.material.diffuse;
+		}
+
+		if (ImGui::ColorEdit4("Specular##MeshRendererComponent", &renderObject.material.specular.r))
+		{
+			mMaterialData.material.specular = renderObject.material.specular;
+		}
+
+		if (ImGui::ColorEdit4("Emissive##MeshRendererComponent", &renderObject.material.emissive.r))
+		{
+			mMaterialData.material.emissive = renderObject.material.emissive;
+		}
+
+		if (ImGui::DragFloat("Power##MeshRendererComponent", &renderObject.material.power, 1.0f, 1.0f, 100.0f))
+		{
+			mMaterialData.material.power = renderObject.material.power;
+		}
+
+		//RenderObject& renderObject = mMeshFilter->GetRenderObject();
+		//renderObject.material = mMaterialData.material;
 	}
 }
 
@@ -412,4 +462,44 @@ void MeshRendererComponent::OnScaleSizeChanged(const Vector3& scale)
 			SetTilingSize(mTilingSize.x, scale.z);
 		}
 	}
+}
+
+void MeshRendererComponent::LoadMaterial(std::filesystem::path filePath)
+{
+	filePath.replace_extension("material");
+	FILE* file = nullptr;
+	auto err = fopen_s(&file, filePath.u8string().c_str(), "r");
+	if (err != 0 || file == nullptr) {
+		printf("Error: failed to open file %s for loading.", filePath.u8string().c_str());
+		return;
+	}
+
+	uint32_t numMaterials = 0;
+	fscanf_s(file, "MaterialCount: %d\n", &numMaterials);
+
+	auto TryReadTextureName = [&](auto& destName)
+		{
+			char textureName[1024]{};
+			if (fscanf_s(file, "%s\n", textureName, (uint32_t)sizeof(textureName)) && strcmp(textureName, "none") != 0) {
+				destName = filePath.replace_filename(textureName).u8string().c_str();
+			}
+		};
+
+	auto& material = mMaterialData.material;
+	fscanf_s(file, "%f %f %f %f\n", &material.ambient.r, &material.ambient.g, &material.ambient.b, &material.ambient.a);
+	fscanf_s(file, "%f %f %f %f\n", &material.diffuse.r, &material.diffuse.g, &material.diffuse.b, &material.diffuse.a);
+	fscanf_s(file, "%f %f %f %f\n", &material.specular.r, &material.specular.g, &material.specular.b, &material.specular.a);
+	fscanf_s(file, "%f %f %f %f\n", &material.emissive.r, &material.emissive.g, &material.emissive.b, &material.emissive.a);
+	fscanf_s(file, "%f\n", &material.power);
+
+	TryReadTextureName(mMaterialData.diffuseMapName);
+	TryReadTextureName(mMaterialData.specularMapName);
+	TryReadTextureName(mMaterialData.bumpMapName);
+	TryReadTextureName(mMaterialData.normalMapName);
+
+	fclose(file);
+
+	// might be good to uncomment this if the function goes public or goes anywhere thats not just in the load from template function?
+	//RenderObject& renderObject = mMeshFilter->GetRenderObject();
+	//renderObject.material = mMaterialData.material;
 }

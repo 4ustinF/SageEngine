@@ -16,6 +16,10 @@
     {
       "Name": "Section 002",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_002.json"
+    },
+    {
+      "Name": "Section 003",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_003.json"
     }
   ]
 }

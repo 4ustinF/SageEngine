@@ -74,7 +74,7 @@ void MeshFilterComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rap
 	if (!mCustomFilePath.empty())
 	{
 		compObj.AddMember(
-			rj::Value("MeshType", allocator),
+			rj::Value("Custom Mesh File Path", allocator),
 			rj::Value(mCustomFilePath.c_str(), allocator),
 			allocator
 		);

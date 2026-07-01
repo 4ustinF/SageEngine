@@ -7,7 +7,7 @@
       "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/c1a0_CustomMesh_002.mesh"
     },
     "Mesh Renderer Component": {
-      "DiffuseMapFileName": "../../Assets/Models/HalfLife/c1a0/PAPER1.png"
+      "DiffuseMapFileName": "../../Assets/Models/HalfLife/c1a0/BABTECH_CEIL01.png"
     }
   }
 }

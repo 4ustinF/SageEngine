@@ -235,6 +235,12 @@ void MeshRendererComponent::DebugUI()
 		{
 			SetTileToZScale(tileToZScale);
 		}
+
+		//ImGui::ColorEdit4("Ambient##MeshRendererComponent", &materialData.material.ambient.r);
+		//ImGui::ColorEdit4("Diffuse##MeshRendererComponent", &materialData.material.diffuse.r);
+		//ImGui::ColorEdit4("Specular##MeshRendererComponent", &materialData.material.specular.r);
+		//ImGui::ColorEdit4("Emissive##MeshRendererComponent", &materialData.material.emissive.r);
+		//ImGui::DragFloat("Power##MeshRendererComponent", &materialData.material.power, 1.0f, 1.0f, 100.0f);
 	}
 }
 

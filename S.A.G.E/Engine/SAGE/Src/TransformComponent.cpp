@@ -74,8 +74,10 @@ void TransformComponent::LoadComponentFromTemplate(const rj::Value& value)
 
 void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
+	const bool hasParentTransformComponent = FindParentTransformComponent() != nullptr;
+
 	// --- Position ---
-	if (mTransform.position != Vector3::Zero)
+	if (mTransform.position != Vector3::Zero && !hasParentTransformComponent)
 	{
 		rj::Value position(rj::kArrayType);
 		position.PushBack(mTransform.position.x, allocator);
@@ -97,7 +99,7 @@ void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 	}
 
 	// --- Rotation ---
-	if (mDegreeAngles != Vector3::Zero)
+	if (mDegreeAngles != Vector3::Zero && !hasParentTransformComponent)
 	{
 		rj::Value rotation(rj::kArrayType);
 		rotation.PushBack(mDegreeAngles.x, allocator);
@@ -119,7 +121,7 @@ void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 	}
 
 	// --- Scale ---
-	if (mTransform.scale != Vector3::One)
+	if (mTransform.scale != Vector3::One && !hasParentTransformComponent)
 	{
 		rj::Value scale(rj::kArrayType);
 		scale.PushBack(mTransform.scale.x, allocator);

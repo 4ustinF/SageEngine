@@ -159,13 +159,15 @@ namespace SAGE::Core::Delegate // TODO: Maybe move to their own framework?
 		}
 
 		// REMOVE BY HANDLE
-		void Remove(FDelegateHandle Handle) {
+		void Remove(FDelegateHandle& Handle) {
 			if (!Handle.IsValid()) return;
 
 			InvocationList.erase(
 				std::remove_if(InvocationList.begin(), InvocationList.end(),
 					[Handle](const auto& item) { return item->GetHandle() == Handle; }),
 				InvocationList.end());
+
+			Handle = FDelegateHandle();
 		}
 
 		void Broadcast(Args... args) {

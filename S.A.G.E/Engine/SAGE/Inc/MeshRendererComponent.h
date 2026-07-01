@@ -50,7 +50,9 @@ namespace SAGE
 		MeshFilterComponent* mMeshFilter = nullptr;
 		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
+		SAGE::Graphics::TextureManager* mTextureManager = nullptr;
 
+		const float mMaxPreviewSize = 128.0f;
 		const std::string mMissingDiffuseMapFileName = "missing.png";
 		std::string mDiffuseMapFileName = "";
 		std::string mSpecularMapFileName = "";

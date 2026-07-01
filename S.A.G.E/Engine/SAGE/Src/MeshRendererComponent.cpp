@@ -156,31 +156,31 @@ void MeshRendererComponent::Initialize()
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	UpdateScaleSizeDelegateHandle();
 
-	auto tm = TextureManager::Get();
+	mTextureManager = TextureManager::Get();
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
 
 	if (!mDiffuseMapFileName.empty())
 	{
-		renderObject.diffuseMapId = tm->LoadTexture(mDiffuseMapFileName);
+		renderObject.diffuseMapId = mTextureManager->LoadTexture(mDiffuseMapFileName);
 	}
 	else
 	{
-		renderObject.diffuseMapId = tm->LoadTexture(mMissingDiffuseMapFileName);
+		renderObject.diffuseMapId = mTextureManager->LoadTexture(mMissingDiffuseMapFileName);
 	}
 
 	if (!mSpecularMapFileName.empty())
 	{
-		renderObject.specularMapId = tm->LoadTexture(mSpecularMapFileName);
+		renderObject.specularMapId = mTextureManager->LoadTexture(mSpecularMapFileName);
 	}
 
 	if (!mBumpMapFileName.empty())
 	{
-		renderObject.bumpMapId = tm->LoadTexture(mBumpMapFileName);
+		renderObject.bumpMapId = mTextureManager->LoadTexture(mBumpMapFileName);
 	}
 
 	if (!mNormalMapFileName.empty())
 	{
-		renderObject.normalMapId = tm->LoadTexture(mNormalMapFileName);
+		renderObject.normalMapId = mTextureManager->LoadTexture(mNormalMapFileName);
 	}
 }
 
@@ -194,6 +194,7 @@ void MeshRendererComponent::Terminate()
 	mMeshFilter = nullptr;
 	mTransformComponent = nullptr;
 	mRenderService = nullptr;
+	mTextureManager = nullptr;
 }
 
 void MeshRendererComponent::Update(float deltaTime)
@@ -218,37 +219,58 @@ void MeshRendererComponent::DebugUI()
 			SetTilingSize(mTilingSize);
 		}
 
+		//bool tileToXScale = mTileToXScale;
+		//if (ImGui::Checkbox("Tile To X Scale##MeshRendererComponent", &tileToXScale))
+		//{
+		//	SetTileToXScale(tileToXScale);
+		//}
+
+		//bool tileToYScale = mTileToYScale;
+		//if (ImGui::Checkbox("Tile To Y Scale##MeshRendererComponent", &tileToYScale))
+		//{
+		//	SetTileToYScale(tileToYScale);
+		//}
+
+		//bool tileToZScale = mTileToZScale;
+		//if (ImGui::Checkbox("Tile To Z Scale##MeshRendererComponent", &tileToZScale))
+		//{
+		//	SetTileToZScale(tileToZScale);
+		//}
+
+
+		ImGui::Text("Tile To Scale");
+		ImGui::SameLine();
+
 		bool tileToXScale = mTileToXScale;
-		if (ImGui::Checkbox("Tile To X Scale##MeshRendererComponent", &tileToXScale))
+		if (ImGui::Checkbox("X##TileX", &tileToXScale))
 		{
 			SetTileToXScale(tileToXScale);
 		}
 
+		ImGui::SameLine();
+
 		bool tileToYScale = mTileToYScale;
-		if (ImGui::Checkbox("Tile To Y Scale##MeshRendererComponent", &tileToYScale))
+		if (ImGui::Checkbox("Y##TileY", &tileToYScale))
 		{
 			SetTileToYScale(tileToYScale);
 		}
 
+		ImGui::SameLine();
+
 		bool tileToZScale = mTileToZScale;
-		if (ImGui::Checkbox("Tile To Z Scale##MeshRendererComponent", &tileToZScale))
+		if (ImGui::Checkbox("Z##TileZ", &tileToZScale))
 		{
 			SetTileToZScale(tileToZScale);
 		}
 
-		ImGui::Text("Selected Texture:");
-		auto tm = TextureManager::Get();
+		ImGui::Text("Diffuse Map");
 		RenderObject& renderObject = mMeshFilter->GetRenderObject();
-		Texture* texture = tm->GetTexture(renderObject.diffuseMapId);
+		Texture* texture = mTextureManager->GetTexture(renderObject.diffuseMapId);
 
-		const float maxSize = 128.0f;
 		const float width = static_cast<float>(texture->GetWidth());
 		const float height = static_cast<float>(texture->GetHeight());
-		const float scale = maxSize / std::max(width, height);
+		const float scale = mMaxPreviewSize / std::max(width, height);
 		ImVec2 previewSize(width * scale, height * scale);
-
-		//ImGui::Image(texture->GetRawData(), previewSize);
-		//ImGui::TextWrapped("%s", mDiffuseMapFileName.c_str());
 
 		if (ImGui::ImageButton(texture->GetRawData(), previewSize))
 		{
@@ -257,10 +279,10 @@ void MeshRendererComponent::DebugUI()
 
 			if (!newPath.empty())
 			{
-				std::filesystem::path relativePath = std::filesystem::relative(newPath, tm->GetRootDirectory());
+				std::filesystem::path relativePath = std::filesystem::relative(newPath, mTextureManager->GetRootDirectory());
 
 				mDiffuseMapFileName = relativePath.generic_string();
-				renderObject.diffuseMapId = tm->LoadTexture(mDiffuseMapFileName);
+				renderObject.diffuseMapId = mTextureManager->LoadTexture(mDiffuseMapFileName);
 			}
 		}
 

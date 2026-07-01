@@ -15,13 +15,15 @@ MEMORY_POOL_DEFINE(TransformComponent, 500);
 
 void TransformComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
+	const bool hasParentTransformComponent = FindParentTransformComponent() != nullptr;
+
 	if (value.HasMember("Position"))
 	{
 		const auto& position = value["Position"].GetArray();
 		const float x = position[0].GetFloat();
 		const float y = position[1].GetFloat();
 		const float z = position[2].GetFloat();
-		SetPosition(Vector3(x, y, z));
+		hasParentTransformComponent ? SetLocalPosition(Vector3(x, y, z)) : SetPosition(Vector3(x, y, z));
 	}
 
 	if (value.HasMember("Local Position"))
@@ -39,7 +41,16 @@ void TransformComponent::LoadComponentFromTemplate(const rj::Value& value)
 		const float x = rotation[0].GetFloat();
 		const float y = rotation[1].GetFloat();
 		const float z = rotation[2].GetFloat();
-		SetRotation(Vector3(x, y, z));
+		hasParentTransformComponent ? SetLocalRotation(Vector3(x, y, z)) : SetRotation(Vector3(x, y, z));
+	}
+
+	if (value.HasMember("Local Rotation"))
+	{
+		const auto& rotation = value["Local Rotation"].GetArray();
+		const float x = rotation[0].GetFloat();
+		const float y = rotation[1].GetFloat();
+		const float z = rotation[2].GetFloat();
+		SetLocalRotation(Vector3(x, y, z));
 	}
 
 	if (value.HasMember("Scale"))
@@ -48,7 +59,16 @@ void TransformComponent::LoadComponentFromTemplate(const rj::Value& value)
 		const float x = scale[0].GetFloat();
 		const float y = scale[1].GetFloat();
 		const float z = scale[2].GetFloat();
-		SetScale(Vector3(x, y, z));
+		hasParentTransformComponent ? SetLocalScale(Vector3(x, y, z)) : SetScale(Vector3(x, y, z));
+	}
+
+	if (value.HasMember("Local Scale"))
+	{
+		const auto& scale = value["Local Scale"].GetArray();
+		const float x = scale[0].GetFloat();
+		const float y = scale[1].GetFloat();
+		const float z = scale[2].GetFloat();
+		SetLocalScale(Vector3(x, y, z));
 	}
 }
 
@@ -65,7 +85,7 @@ void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 		compObj.AddMember("Position", position, allocator);
 	}
 
-	// --- Position ---
+	// --- Local Position ---
 	if (mLocalTransform.position != Vector3::Zero)
 	{
 		rj::Value localPosition(rj::kArrayType);
@@ -87,6 +107,17 @@ void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 		compObj.AddMember("Rotation", rotation, allocator);
 	}
 
+	// --- Local Rotation ---
+	if (mLocalDegreeAngles != Vector3::Zero)
+	{
+		rj::Value localRotation(rj::kArrayType);
+		localRotation.PushBack(mLocalDegreeAngles.x, allocator);
+		localRotation.PushBack(mLocalDegreeAngles.y, allocator);
+		localRotation.PushBack(mLocalDegreeAngles.z, allocator);
+
+		compObj.AddMember("Local Rotation", localRotation, allocator);
+	}
+
 	// --- Scale ---
 	if (mTransform.scale != Vector3::One)
 	{
@@ -96,6 +127,17 @@ void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 		scale.PushBack(mTransform.scale.z, allocator);
 
 		compObj.AddMember("Scale", scale, allocator);
+	}
+
+	// --- Local Scale ---
+	if (mLocalTransform.scale != Vector3::One)
+	{
+		rj::Value localScale(rj::kArrayType);
+		localScale.PushBack(mLocalTransform.scale.x, allocator);
+		localScale.PushBack(mLocalTransform.scale.y, allocator);
+		localScale.PushBack(mLocalTransform.scale.z, allocator);
+
+		compObj.AddMember("Local Scale", localScale, allocator);
 	}
 }
 
@@ -129,14 +171,16 @@ void TransformComponent::DebugUI()
 			SetLocalPosition(locPos);
 		}
 
-		if (ImGui::DragFloat3("Rotation##TransformComponent", &mDegreeAngles.x, 0.1f))
+		Vector3 rot = mDegreeAngles;
+		if (ImGui::DragFloat3("Rotation##TransformComponent", &rot.x, 0.1f))
 		{
-			SetRotation(mDegreeAngles);
+			SetRotation(rot);
 		}
 
-		if (ImGui::DragFloat3("Local Rotation##TransformComponent", &mLocalDegreeAngles.x, 0.1f))
+		Vector3 locRot = mLocalDegreeAngles;
+		if (ImGui::DragFloat3("Local Rotation##TransformComponent", &locRot.x, 0.1f))
 		{
-			SetLocalRotation(mLocalDegreeAngles);
+			SetLocalRotation(locRot);
 		}
 
 		Vector3 scale = mTransform.scale;
@@ -186,14 +230,24 @@ void TransformComponent::SetPosition(const Vector3& inPos)
 
 void TransformComponent::SetRotation(const Vector3& inRotation)
 {
-	mDegreeAngles = inRotation;
-	mTransform.rotation = Quaternion::RotationEuler(mDegreeAngles * Constants::DegToRad);
+	SetRotation(Quaternion::RotationEuler(inRotation * Constants::DegToRad));
 }
 
 void TransformComponent::SetRotation(const Quaternion& inRotation)
 {
-	mTransform.rotation = inRotation;
-	mDegreeAngles = mTransform.rotation.ToClampedDegree();
+	if (const TransformComponent* parent = FindParentTransformComponent())
+	{
+		// Convert world -> local
+		mLocalTransform.rotation = parent->GetTransform().rotation * Conjugate(inRotation); // TODO?
+		//mLocalTransform.rotation = parent->GetTransform().rotation * inRotation;
+	}
+	else
+	{
+		mLocalTransform.rotation = inRotation;
+	}
+
+	mLocalDegreeAngles = mLocalTransform.rotation.ToClampedDegree();
+	UpdateWorldRotation(inRotation);
 }
 
 void TransformComponent::SetScale(const Vector3& inScale)
@@ -227,14 +281,22 @@ void TransformComponent::SetLocalPosition(const Vector3& inPos)
 
 void TransformComponent::SetLocalRotation(const Vector3& inRotation)
 {
-	mLocalDegreeAngles = inRotation;
-	mLocalTransform.rotation = Quaternion::RotationEuler(mLocalDegreeAngles * Constants::DegToRad);
+	SetLocalRotation(Quaternion::RotationEuler(inRotation * Constants::DegToRad));
 }
 
 void TransformComponent::SetLocalRotation(const Quaternion& inRotation)
 {
 	mLocalTransform.rotation = inRotation;
 	mLocalDegreeAngles = mLocalTransform.rotation.ToClampedDegree();
+
+	if (const TransformComponent* parentTransformComp = FindParentTransformComponent())
+	{
+		UpdateWorldRotation(parentTransformComp->GetTransform().rotation * mLocalTransform.rotation);
+	}
+	else
+	{
+		UpdateWorldRotation(mLocalTransform.rotation);
+	}
 }
 
 void TransformComponent::SetLocalScale(const Vector3& inScale)
@@ -310,6 +372,7 @@ void TransformComponent::UpdateChildrenPositions(const GameObjectHandle& gameObj
 void TransformComponent::UpdateWorldRotation(const Quaternion& inRotation)
 {
 	mTransform.rotation = inRotation;
+	mDegreeAngles = mTransform.rotation.ToClampedDegree();
 	mOnRotationChange.Broadcast(inRotation);
 
 	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())

@@ -36,28 +36,28 @@ namespace SAGE::Math
 			return { w - rhs.w, x - rhs.x, y - rhs.y, z - rhs.z };
 		}
 
-		//constexpr Quaternion operator*(const Quaternion& rhs) const
-		//{
-		//	Quaternion result
-		//	{
-		//		(rhs.w * w) - (rhs.x * x) - (rhs.y * y) - (rhs.z * z),
-		//		(rhs.w * x) + (rhs.x * w) - (rhs.y * z) + (rhs.z * y),
-		//		(rhs.w * y) + (rhs.x * z) + (rhs.y * w) - (rhs.z * x),
-		//		(rhs.w * z) - (rhs.x * y) + (rhs.y * x) + (rhs.z * w)
-		//	};
-		//	return result;
-		//}
-
 		constexpr Quaternion operator*(const Quaternion& rhs) const
 		{
-			return
+			Quaternion result
 			{
-				w * rhs.w - x * rhs.x - y * rhs.y - z * rhs.z,
-				w * rhs.x + x * rhs.w + y * rhs.z - z * rhs.y,
-				w * rhs.y - x * rhs.z + y * rhs.w + z * rhs.x,
-				w * rhs.z + x * rhs.y - y * rhs.x + z * rhs.w
+				(rhs.w * w) - (rhs.x * x) - (rhs.y * y) - (rhs.z * z),
+				(rhs.w * x) + (rhs.x * w) - (rhs.y * z) + (rhs.z * y),
+				(rhs.w * y) + (rhs.x * z) + (rhs.y * w) - (rhs.z * x),
+				(rhs.w * z) - (rhs.x * y) + (rhs.y * x) + (rhs.z * w)
 			};
+			return result;
 		}
+
+		//constexpr Quaternion operator*(const Quaternion& rhs) const
+		//{
+		//	return
+		//	{
+		//		w * rhs.w - x * rhs.x - y * rhs.y - z * rhs.z,
+		//		w * rhs.x + x * rhs.w + y * rhs.z - z * rhs.y,
+		//		w * rhs.y - x * rhs.z + y * rhs.w + z * rhs.x,
+		//		w * rhs.z + x * rhs.y - y * rhs.x + z * rhs.w
+		//	};
+		//}
 
 		constexpr Quaternion operator*(float s) const
 		{

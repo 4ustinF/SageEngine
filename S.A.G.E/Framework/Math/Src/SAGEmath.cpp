@@ -246,7 +246,7 @@ Quaternion Quaternion::RotationFromTo(const Vector3& from, const Vector3& to)
 	return Normalize(quat);
 }
 
-Vector3 Quaternion::ToEuler()
+Vector3 Quaternion::ToEuler() // TODO: Move to vector3 section
 {
 	Vector3 euler = Vector3::Zero;
 

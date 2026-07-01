@@ -236,6 +236,36 @@ void MeshRendererComponent::DebugUI()
 			SetTileToZScale(tileToZScale);
 		}
 
+		ImGui::Text("Selected Texture:");
+		auto tm = TextureManager::Get();
+		RenderObject& renderObject = mMeshFilter->GetRenderObject();
+		Texture* texture = tm->GetTexture(renderObject.diffuseMapId);
+
+		const float maxSize = 128.0f;
+		const float width = static_cast<float>(texture->GetWidth());
+		const float height = static_cast<float>(texture->GetHeight());
+		const float scale = maxSize / std::max(width, height);
+		ImVec2 previewSize(width * scale, height * scale);
+
+		//ImGui::Image(texture->GetRawData(), previewSize);
+		//ImGui::TextWrapped("%s", mDiffuseMapFileName.c_str());
+
+		if (ImGui::ImageButton(texture->GetRawData(), previewSize))
+		{
+			// Open file picker
+			std::string newPath = OpenFileDialog();
+
+			if (!newPath.empty())
+			{
+				std::filesystem::path relativePath = std::filesystem::relative(newPath, tm->GetRootDirectory());
+
+				mDiffuseMapFileName = relativePath.generic_string();
+				renderObject.diffuseMapId = tm->LoadTexture(mDiffuseMapFileName);
+			}
+		}
+
+
+		// renderObject.material
 		//ImGui::ColorEdit4("Ambient##MeshRendererComponent", &materialData.material.ambient.r);
 		//ImGui::ColorEdit4("Diffuse##MeshRendererComponent", &materialData.material.diffuse.r);
 		//ImGui::ColorEdit4("Specular##MeshRendererComponent", &materialData.material.specular.r);
@@ -356,4 +386,3 @@ void MeshRendererComponent::OnScaleSizeChanged(const Vector3& scale)
 		}
 	}
 }
-

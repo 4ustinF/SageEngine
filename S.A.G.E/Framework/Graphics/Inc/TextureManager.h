@@ -22,6 +22,7 @@ namespace SAGE::Graphics
 		TextureManager(TextureManager&&) = delete;
 		TextureManager& operator=(TextureManager&&) = delete;
 
+		const std::filesystem::path& GetRootDirectory() const { return mRootDiretory; }
 		void SetRootDirectory(std::filesystem::path root) { mRootDiretory = std::move(root); }
 
 		TextureId LoadTexture(std::filesystem::path fileName);

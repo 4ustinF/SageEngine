@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Component.h"
+#include <Windows.h> // TODO: Move out
+#include <commdlg.h> // TODO: Move out
 
 namespace SAGE
 {
@@ -66,5 +68,31 @@ namespace SAGE
 
 		// TODO: Take in a .material file
 		// Add debug info on .mat and just regular mDiffuseMapFileName maybe use the .mat to get the relevant info?
+
+		// TODO: Move out
+		std::string OpenFileDialog()
+		{
+			char fileName[MAX_PATH] = "";
+
+			OPENFILENAMEA ofn = {};
+			ofn.lStructSize = sizeof(ofn);
+			ofn.lpstrFile = fileName;
+			ofn.nMaxFile = MAX_PATH;
+
+			ofn.lpstrFilter =
+				"Image Files\0*.png;*.jpg;*.jpeg;*.dds;*.tga\0";
+
+			ofn.Flags =
+				OFN_FILEMUSTEXIST |
+				OFN_PATHMUSTEXIST |
+				OFN_NOCHANGEDIR;
+
+			if (GetOpenFileNameA(&ofn))
+			{
+				return fileName;
+			}
+
+			return "";
+		}
 	};
 }

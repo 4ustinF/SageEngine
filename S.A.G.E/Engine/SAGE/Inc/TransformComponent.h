@@ -7,6 +7,7 @@
 namespace SAGE
 {
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnPositionChange, SAGE::Math::Vector3);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnRotationChange, const SAGE::Math::Quaternion&);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnScaleChange, const SAGE::Math::Vector3&);
 
 	class TransformComponent final 
@@ -41,6 +42,7 @@ namespace SAGE
 		const SAGE::Math::Matrix4 GetLocalMatrix4() const { return mLocalTransform.GetMatrix4(); }
 
 		FOnPositionChange& GetOnPositionChangeDelegate() { return mOnPositionChange; }
+		FOnRotationChange& GetOnRotationChangeDelegate() { return mOnRotationChange; }
 		FOnScaleChange& GetOnScaleChangeDelegate() { return mOnScaleChange; }
 
 		// Setters
@@ -58,6 +60,10 @@ namespace SAGE
 		const TransformComponent* FindParentTransformComponent() const;
 		void UpdateWorldPosition(const SAGE::Math::Vector3& inPos);
 		void UpdateChildrenPositions(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldPos);
+
+		void UpdateWorldRotation(const SAGE::Math::Quaternion& inRotation);
+		void UpdateChildrenRotation(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Quaternion& inWorldRotation);
+
 		void UpdateWorldScale(const SAGE::Math::Vector3& inScale);
 		void UpdateChildrenScales(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldScale);
 
@@ -67,6 +73,7 @@ namespace SAGE
 		SAGE::Math::Vector3 mLocalDegreeAngles = SAGE::Math::Vector3::Zero;
 
 		FOnPositionChange mOnPositionChange;
+		FOnRotationChange mOnRotationChange;
 		FOnScaleChange mOnScaleChange;
 	};
 }

@@ -255,12 +255,10 @@ void MeshFilterComponent::GenerateSphereMesh()
 
 void MeshFilterComponent::GenerateCustomMesh()
 {
-	// TODO: Read mesh data from a file
 	if (mCustomFilePath.empty())
 	{
 		return;
 	}
-
 
 	FILE* file = nullptr;
 	fopen_s(&file, mCustomFilePath.c_str(), "r"); // fopen_s(&file, filePath.u8string().c_str(), "r");
@@ -268,44 +266,34 @@ void MeshFilterComponent::GenerateCustomMesh()
 		return;
 
 	SAGE::Graphics::Model::MeshData meshData;
-	uint32_t meshCount = 0;
-	fscanf_s(file, "MeshCount: %u\n", &meshCount);
-	meshCount = 7; // TODO:
+	SAGE::Graphics::Mesh& mesh = meshData.mesh;
 
-	for (uint32_t i = 0; i < meshCount; ++i)
+	uint32_t vertexCount = 0;
+	fscanf_s(file, "VertexCount: %u\n", &vertexCount);
+	mesh.vertices.resize(vertexCount);
+
+	for (auto& vertex : mesh.vertices)
 	{
-		//auto& meshData = model.meshData[i];
-		fscanf_s(file, "MaterialIndex: %u\n", &meshData.materialIndex);
+		fscanf_s(file, "%f %f %f %f %f %f %f %f %f %f %f %d %d %d %d %f %f %f %f\n",
+			&vertex.position.x, &vertex.position.y, &vertex.position.z,
+			&vertex.normal.x, &vertex.normal.y, &vertex.normal.z,
+			&vertex.tangent.x, &vertex.tangent.y, &vertex.tangent.z,
+			&vertex.uv.x, &vertex.uv.y,
+			&vertex.boneIndices[0], &vertex.boneIndices[1], &vertex.boneIndices[2], &vertex.boneIndices[3],
+			&vertex.boneWeights[0], &vertex.boneWeights[1], &vertex.boneWeights[2], &vertex.boneWeights[3]
+		);
+	}
 
-		auto& mesh = meshData.mesh;
+	uint32_t indexCount = 0;
+	fscanf_s(file, "IndexCount: %u\n", &indexCount);
+	mesh.indices.resize(indexCount);
 
-		uint32_t vertexCount = 0;
-		fscanf_s(file, "VertexCount: %u\n", &vertexCount);
-		mesh.vertices.resize(vertexCount);
-
-		for (auto& vertex : mesh.vertices)
-		{
-			fscanf_s(file, "%f %f %f %f %f %f %f %f %f %f %f %d %d %d %d %f %f %f %f\n",
-				&vertex.position.x, &vertex.position.y, &vertex.position.z,
-				&vertex.normal.x, &vertex.normal.y, &vertex.normal.z,
-				&vertex.tangent.x, &vertex.tangent.y, &vertex.tangent.z,
-				&vertex.uv.x, &vertex.uv.y,
-				&vertex.boneIndices[0], &vertex.boneIndices[1], &vertex.boneIndices[2], &vertex.boneIndices[3],
-				&vertex.boneWeights[0], &vertex.boneWeights[1], &vertex.boneWeights[2], &vertex.boneWeights[3]
-			);
-		}
-
-		uint32_t indexCount = 0;
-		fscanf_s(file, "IndexCount: %u\n", &indexCount);
-		mesh.indices.resize(indexCount);
-
-		for (size_t i = 0; i < indexCount; i += 3)
-		{
-			fscanf_s(file, "%d %d %d\n",
-				&mesh.indices[i],
-				&mesh.indices[i + 1u],
-				&mesh.indices[i + 2u]);
-		}
+	for (size_t i = 0; i < indexCount; i += 3)
+	{
+		fscanf_s(file, "%d %d %d\n",
+			&mesh.indices[i],
+			&mesh.indices[i + 1u],
+			&mesh.indices[i + 2u]);
 	}
 
 	fclose(file);

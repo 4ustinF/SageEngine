@@ -1,0 +1,26 @@
+{
+  "Components": {
+    "Transform Component": {
+      "Rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "Scale": [
+        2.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "GameObjects": [
+    {
+      "Name": "Section 001",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_001.json"
+    },
+    {
+      "Name": "Section 002",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_002.json"
+    }
+  ]
+}

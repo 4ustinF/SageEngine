@@ -2,7 +2,6 @@
   "Capacity":  1000,
   "Services": {
     "CameraService": {
-
     }
   },
   "GameObjects": [
@@ -11,12 +10,8 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/PlayerController.json"
     },
     {
-      "Name": "Room",
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempRoom/TempRoom.json"
-    },
-    {
-      "Name": "Random Mesh",
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/RandomMesh.json"
+      "Name": "Custom c1a0",
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0.json"
     }
   ]
 }

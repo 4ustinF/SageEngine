@@ -163,6 +163,10 @@ void MeshRendererComponent::Initialize()
 	{
 		renderObject.diffuseMapId = tm->LoadTexture(mDiffuseMapFileName);
 	}
+	else
+	{
+		renderObject.diffuseMapId = tm->LoadTexture(mMissingDiffuseMapFileName);
+	}
 
 	if (!mSpecularMapFileName.empty())
 	{

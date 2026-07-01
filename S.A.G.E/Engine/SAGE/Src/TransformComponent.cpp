@@ -8,6 +8,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(TransformComponent, 500);
@@ -102,8 +103,14 @@ void TransformComponent::TransformComponent::Initialize()
 {
 	if (const TransformComponent* transformComponent = FindParentTransformComponent())
 	{
-		mTransform.position = transformComponent->GetTransform().position + mLocalTransform.position;
+		const Transform& parentTransform = transformComponent->GetTransform();
+		mTransform.position = parentTransform.position + mLocalTransform.position; // parent.pos + (parent.rot * (parent.scale * local.pos)); // Scale and rotation might effect pos?
+		mTransform.rotation = parentTransform.rotation * mLocalTransform.rotation;
+		mTransform.scale = parentTransform.scale * mLocalTransform.scale;
 	}
+
+	mDegreeAngles = mTransform.rotation.ToClampedDegree();
+	mLocalDegreeAngles = mLocalTransform.rotation.ToClampedDegree();
 }
 
 void TransformComponent::DebugUI()
@@ -127,9 +134,21 @@ void TransformComponent::DebugUI()
 			SetRotation(mDegreeAngles);
 		}
 
-		if (ImGui::DragFloat3("Scale##TransformComponent", &mTransform.scale.x, 0.1f))
+		if (ImGui::DragFloat3("Local Rotation##TransformComponent", &mLocalDegreeAngles.x, 0.1f))
 		{
-			SetScale(mTransform.scale);
+			SetLocalRotation(mLocalDegreeAngles);
+		}
+
+		Vector3 scale = mTransform.scale;
+		if (ImGui::DragFloat3("Scale##TransformComponent", &scale.x, 0.1f))
+		{
+			SetScale(scale);
+		}
+
+		Vector3 localScale = mLocalTransform.scale;
+		if (ImGui::DragFloat3("Local Scale##TransformComponent", &localScale.x, 0.1f))
+		{
+			SetLocalScale(localScale);
 		}
 	}
 
@@ -224,7 +243,7 @@ void TransformComponent::SetLocalScale(const Vector3& inScale)
 
 	if (const TransformComponent* parent = FindParentTransformComponent())
 	{
-		UpdateWorldScale(parent->GetTransform().scale + mLocalTransform.scale);
+		UpdateWorldScale(parent->GetTransform().scale * mLocalTransform.scale);
 	}
 	else
 	{
@@ -288,6 +307,46 @@ void TransformComponent::UpdateChildrenPositions(const GameObjectHandle& gameObj
 	}
 }
 
+void TransformComponent::UpdateWorldRotation(const Quaternion& inRotation)
+{
+	mTransform.rotation = inRotation;
+	mOnRotationChange.Broadcast(inRotation);
+
+	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
+	{
+		UpdateChildrenRotation(childHandle, inRotation);
+	}
+}
+
+void TransformComponent::UpdateChildrenRotation(const GameObjectHandle& gameObjectHandle, const Quaternion& inWorldRotation)
+{
+	GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle);
+	if (gameObject == nullptr)
+	{
+		return;
+	}
+
+	// If this object has a transform comp → update it
+	if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
+	{
+		transformComponent->SetLocalRotation(transformComponent->mLocalTransform.rotation);
+
+		// Recurse this object's children using this objects world rotation.
+		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
+		{
+			transformComponent->UpdateChildrenRotation(childHandle, transformComponent->mTransform.rotation);
+		}
+	}
+	else
+	{
+		// Recurse this object's children using this the passed in world rotation.
+		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
+		{
+			UpdateChildrenRotation(childHandle, inWorldRotation);
+		}
+	}
+}
+
 void TransformComponent::UpdateWorldScale(const Vector3& inScale)
 {
 	mTransform.scale = inScale;
@@ -320,7 +379,7 @@ void TransformComponent::UpdateChildrenScales(const GameObjectHandle& gameObject
 	}
 	else
 	{
-		// Recurse this object's children using this the passed in world pos.
+		// Recurse this object's children using this the passed in world scale.
 		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
 		{
 			UpdateChildrenScales(childHandle, inWorldScale);

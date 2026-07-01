@@ -49,6 +49,7 @@ namespace SAGE
 		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
 
+		const std::string mMissingDiffuseMapFileName = "missing.png";
 		std::string mDiffuseMapFileName = "";
 		std::string mSpecularMapFileName = "";
 		std::string mBumpMapFileName = "";

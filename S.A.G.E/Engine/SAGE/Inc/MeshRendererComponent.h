@@ -52,8 +52,10 @@ namespace SAGE
 		TransformComponent* mTransformComponent = nullptr;
 		SAGE::Graphics::TextureManager* mTextureManager = nullptr;
 
-		const float mMaxPreviewSize = 128.0f;
+		void TextureDebugUI(const char* mapName, SAGE::Graphics::TextureId& textureId, std::string& filePath);
+		const float mMaxPreviewSize = 64.0f;
 		const std::string mMissingDiffuseMapFileName = "missing.png";
+		SAGE::Graphics::TextureId mMissingTextureID;
 		std::string mDiffuseMapFileName = "";
 		std::string mSpecularMapFileName = "";
 		std::string mBumpMapFileName = "";
@@ -81,8 +83,7 @@ namespace SAGE
 			ofn.lpstrFile = fileName;
 			ofn.nMaxFile = MAX_PATH;
 
-			ofn.lpstrFilter =
-				"Image Files\0*.png;*.jpg;*.jpeg;*.dds;*.tga\0";
+			ofn.lpstrFilter = "Image Files\0*.png;*.jpg;*.jpeg;*.dds;*.tga\0";
 
 			ofn.Flags =
 				OFN_FILEMUSTEXIST |

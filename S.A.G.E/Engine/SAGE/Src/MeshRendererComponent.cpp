@@ -26,7 +26,7 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 	if (value.HasMember("SpecularMapFileName"))
 	{
 		const auto& specularMapFileName = value["SpecularMapFileName"].GetString();
-		SetDiffuseMapFileName(specularMapFileName);
+		SetSpecularMapFileName(specularMapFileName);
 	}
 
 	if (value.HasMember("BumpMapFileName"))
@@ -158,6 +158,7 @@ void MeshRendererComponent::Initialize()
 
 	mTextureManager = TextureManager::Get();
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
+	mMissingTextureID = mTextureManager->LoadTexture(mMissingDiffuseMapFileName);
 
 	if (!mDiffuseMapFileName.empty())
 	{
@@ -165,7 +166,7 @@ void MeshRendererComponent::Initialize()
 	}
 	else
 	{
-		renderObject.diffuseMapId = mTextureManager->LoadTexture(mMissingDiffuseMapFileName);
+		renderObject.diffuseMapId = mMissingTextureID;
 	}
 
 	if (!mSpecularMapFileName.empty())
@@ -191,6 +192,7 @@ void MeshRendererComponent::Terminate()
 		mTransformComponent->GetOnScaleChangeDelegate().Remove(ScaleChangedHandle);
 	}
 
+	mMissingTextureID = 0;
 	mMeshFilter = nullptr;
 	mTransformComponent = nullptr;
 	mRenderService = nullptr;
@@ -219,25 +221,6 @@ void MeshRendererComponent::DebugUI()
 			SetTilingSize(mTilingSize);
 		}
 
-		//bool tileToXScale = mTileToXScale;
-		//if (ImGui::Checkbox("Tile To X Scale##MeshRendererComponent", &tileToXScale))
-		//{
-		//	SetTileToXScale(tileToXScale);
-		//}
-
-		//bool tileToYScale = mTileToYScale;
-		//if (ImGui::Checkbox("Tile To Y Scale##MeshRendererComponent", &tileToYScale))
-		//{
-		//	SetTileToYScale(tileToYScale);
-		//}
-
-		//bool tileToZScale = mTileToZScale;
-		//if (ImGui::Checkbox("Tile To Z Scale##MeshRendererComponent", &tileToZScale))
-		//{
-		//	SetTileToZScale(tileToZScale);
-		//}
-
-
 		ImGui::Text("Tile To Scale");
 		ImGui::SameLine();
 
@@ -263,29 +246,11 @@ void MeshRendererComponent::DebugUI()
 			SetTileToZScale(tileToZScale);
 		}
 
-		ImGui::Text("Diffuse Map");
 		RenderObject& renderObject = mMeshFilter->GetRenderObject();
-		Texture* texture = mTextureManager->GetTexture(renderObject.diffuseMapId);
-
-		const float width = static_cast<float>(texture->GetWidth());
-		const float height = static_cast<float>(texture->GetHeight());
-		const float scale = mMaxPreviewSize / std::max(width, height);
-		ImVec2 previewSize(width * scale, height * scale);
-
-		if (ImGui::ImageButton(texture->GetRawData(), previewSize))
-		{
-			// Open file picker
-			std::string newPath = OpenFileDialog();
-
-			if (!newPath.empty())
-			{
-				std::filesystem::path relativePath = std::filesystem::relative(newPath, mTextureManager->GetRootDirectory());
-
-				mDiffuseMapFileName = relativePath.generic_string();
-				renderObject.diffuseMapId = mTextureManager->LoadTexture(mDiffuseMapFileName);
-			}
-		}
-
+		TextureDebugUI("Diffuse Map", renderObject.diffuseMapId, mDiffuseMapFileName);
+		TextureDebugUI("Specular Map", renderObject.specularMapId, mSpecularMapFileName);
+		TextureDebugUI("Bump Map", renderObject.bumpMapId, mBumpMapFileName);
+		TextureDebugUI("Normal Map", renderObject.normalMapId, mNormalMapFileName);
 
 		// renderObject.material
 		//ImGui::ColorEdit4("Ambient##MeshRendererComponent", &materialData.material.ambient.r);
@@ -360,6 +325,46 @@ void MeshRendererComponent::SetTileToZScale(bool tileToZScale)
 
 	mTileToZScale = tileToZScale;
 	UpdateScaleSizeDelegateHandle();
+}
+
+void MeshRendererComponent::TextureDebugUI(const char* mapName, TextureId& textureId, std::string& filePath)
+{
+	ImGui::Text(mapName);
+	Texture* texture = mTextureManager->GetTexture(textureId);
+	if (texture == nullptr)
+	{
+		texture = mTextureManager->GetTexture(mMissingTextureID);
+	}
+
+	const float width = static_cast<float>(texture->GetWidth());
+	const float height = static_cast<float>(texture->GetHeight());
+	const float scale = mMaxPreviewSize / std::max(width, height);
+	const ImVec2 previewSize(width * scale, height * scale);
+
+	if (ImGui::ImageButton(texture->GetRawData(), previewSize))
+	{
+		std::string newPath = OpenFileDialog();
+
+		if (!newPath.empty())
+		{
+			const auto relativePath =
+				std::filesystem::relative(
+					newPath,
+					mTextureManager->GetRootDirectory());
+
+			filePath = relativePath.generic_string();
+			textureId = mTextureManager->LoadTexture(filePath);
+		}
+	}
+	else if (textureId != 0)
+	{
+		ImGui::SameLine();
+		if (ImGui::Button(("Clear##" + std::string(mapName)).c_str()))
+		{
+			filePath = "";
+			textureId = 0;
+		}
+	}
 }
 
 void MeshRendererComponent::UpdateScaleSizeDelegateHandle()

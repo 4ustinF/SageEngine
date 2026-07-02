@@ -1,13 +1,1 @@
-{
-  "Components": {
-    "Transform Component": {
-    },
-    "Mesh Filter Component": {
-      "MeshType": "Custom",
-      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/c1a0_CustomMesh_003.mesh"
-    },
-    "Mesh Renderer Component": {
-      "DiffuseMapFileName": "../../Assets/Models/HalfLife/c1a0/FIFTIES_CMP3C.png"
-    }
-  }
-}
+{"Name":"Section 3","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_3.mesh"},"Mesh Renderer Component":{"DiffuseMapFileName":"../Models/HalfLife/c1a0/c1a1_flr1.png"}}}

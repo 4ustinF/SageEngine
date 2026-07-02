@@ -1,0 +1,38 @@
+{
+  "Components": {
+    "Transform Component": {
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_050.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_051.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_052.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_053.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_054.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_055.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_056.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_057.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_058.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_059.json"
+    }
+  ]
+}

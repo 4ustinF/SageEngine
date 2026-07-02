@@ -1,0 +1,1 @@
+{"Name":"Section 89","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_89.mesh"},"Mesh Renderer Component":{"DiffuseMapFileName":"../Models/HalfLife/c1a0/lab1_stair2b.png"}}}

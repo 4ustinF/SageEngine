@@ -4,6 +4,8 @@
 
 namespace SAGE
 {
+	class TransformComponent;
+
 	enum class MeshType
 	{
 		Cube,
@@ -21,7 +23,7 @@ namespace SAGE
 		SET_TYPE_ID(ComponentId::MeshFilter)
 		MEMORY_POOL_DECLARE
 
-		virtual const char* GetCompName() { return "Mesh Filter Component"; }
+		const char* GetCompName() override { return "Mesh Filter Component"; }
 		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
 		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
@@ -54,9 +56,13 @@ namespace SAGE
 		void GenerateSphereMesh();
 		void GenerateCustomMesh();
 
+		TransformComponent* mTransformComponent = nullptr;
+
 		SAGE::Graphics::RenderObject mRenderObject;
 		MeshType mMeshType = MeshType::Cube;
 		std::string mMeshTypeName = "Cube";
+		SAGE::Graphics::Mesh mMesh;
+		bool mEnableWireframe = true;
 
 		std::string mCustomFilePath = ""; // TODO: Convert to std::filesystem::path
 		SAGE::Input::Pivot mPivot = Input::Pivot::Center;

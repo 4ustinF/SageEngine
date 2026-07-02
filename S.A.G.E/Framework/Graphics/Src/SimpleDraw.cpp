@@ -65,7 +65,7 @@ namespace
 		mVertexShader.Terminate();
 	}
 
-	void SimpleDrawImpl::AddLine(const Math::Vector3& v0, const Math::Vector3& v1, Color color)
+	void SimpleDrawImpl::AddLine(const Math::Vector3& v0, const Math::Vector3& v1, const Color color)
 	{
 		if (mLineVertexCount + 2 <= mMaxVertexCount) {
 			mLineVertices[mLineVertexCount++] = VertexPC{v0, color};
@@ -73,7 +73,7 @@ namespace
 		}
 	}
 
-	void SimpleDrawImpl::AddFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, Color color)
+	void SimpleDrawImpl::AddFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, const Color color)
 	{
 		if (mFaceVertexCount + 3 <= mMaxVertexCount) {
 			mFaceVertices[mFaceVertexCount++] = VertexPC{ v0, color };
@@ -124,9 +124,21 @@ void SimpleDraw::StaticTerminate()
 	sInstance.reset();
 }
 
-void SimpleDraw::AddLine(const Math::Vector3& v0, const Math::Vector3& v1, Color color)
+void SimpleDraw::AddLine(const Math::Vector3& v0, const Math::Vector3& v1, const Color color)
 {
 	sInstance->AddLine(v0, v1, color);
+}
+
+void SimpleDraw::AddFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, const Color color)
+{
+	sInstance->AddLine(v0, v1, color);
+	sInstance->AddLine(v1, v2, color);
+	sInstance->AddLine(v2, v0, color);
+}
+
+void SimpleDraw::AddFilledFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, const Color color)
+{
+	sInstance->AddFace(v0, v1, v2, color);
 }
 
 void SimpleDraw::AddAABB(const Math::AABB& aabb, Color color)

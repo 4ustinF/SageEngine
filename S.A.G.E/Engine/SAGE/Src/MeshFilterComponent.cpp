@@ -1,6 +1,9 @@
 #include "Precompiled.h"
 #include "MeshFilterComponent.h"
 
+#include "GameObject.h"
+#include "TransformComponent.h"
+
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Input;
@@ -123,12 +126,15 @@ void MeshFilterComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rap
 
 void MeshFilterComponent::Initialize()
 {
+	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
+
 	GenerateMesh();
 	mMeshTypeName = MeshTypeToString(mMeshType);
 }
 
 void MeshFilterComponent::Terminate()
 {
+	mTransformComponent = nullptr;
 	mRenderObject.Terminate();
 }
 
@@ -166,6 +172,24 @@ void MeshFilterComponent::DebugUI()
 			break;
 		case MeshType::Custom:
 			break;
+		}
+
+		ImGui::Checkbox("Display Wireframe##MeshFilterComponent", &mEnableWireframe);
+	}
+
+	if (mEnableWireframe)
+	{
+		const int indexCount = static_cast<int>(mMesh.indices.size());
+		if (indexCount > 3)
+		{
+			const Vector3& worldPos = mTransformComponent != nullptr ? mTransformComponent->GetPosition() : Vector3::Zero;
+			for (int i = 0; i < indexCount; i += 3)
+			{
+				const Vector3 pos0 = mMesh.vertices[mMesh.indices[i]].position + worldPos;
+				const Vector3 pos1 = mMesh.vertices[mMesh.indices[i + 1]].position + worldPos;
+				const Vector3 pos2 = mMesh.vertices[mMesh.indices[i + 2]].position + worldPos;
+				SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red);
+			}
 		}
 	}
 }
@@ -230,27 +254,32 @@ void MeshFilterComponent::GenerateMesh()
 
 void MeshFilterComponent::GenerateCubeMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreateCube());
+	mMesh = MeshBuilder::CreateCube(); // TODO: Maybe take in some params like extend or spacing to make rectangular?
+	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
 void MeshFilterComponent::GenerateCylinderMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreateCylinder(mDivisions.x, mDivisions.y)); // And radius?
+	mMesh = MeshBuilder::CreateCylinder(mDivisions.x, mDivisions.y); // And radius?
+	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
 void MeshFilterComponent::GeneratePlaneMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mSpacing, mFlipVertices, mPivot));
+	mMesh = MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mSpacing, mFlipVertices, mPivot);
+	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
 void MeshFilterComponent::GenerateQuadMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mSpacing, mFlipVertices, mPivot));
+	mMesh = MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mSpacing, mFlipVertices, mPivot);
+	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
 void MeshFilterComponent::GenerateSphereMesh()
 {
-	mRenderObject.meshBuffer.Initialize(MeshBuilder::CreateSphere(mDivisions.x, mDivisions.y, mRadius));
+	mMesh = MeshBuilder::CreateSphere(mDivisions.x, mDivisions.y, mRadius);
+	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
 void MeshFilterComponent::GenerateCustomMesh()
@@ -265,14 +294,11 @@ void MeshFilterComponent::GenerateCustomMesh()
 	if (file == nullptr)
 		return;
 
-	SAGE::Graphics::Model::MeshData meshData;
-	SAGE::Graphics::Mesh& mesh = meshData.mesh;
-
 	uint32_t vertexCount = 0;
 	fscanf_s(file, "VertexCount: %u\n", &vertexCount);
-	mesh.vertices.resize(vertexCount);
+	mMesh.vertices.resize(vertexCount);
 
-	for (auto& vertex : mesh.vertices)
+	for (auto& vertex : mMesh.vertices)
 	{
 		fscanf_s(file, "%f %f %f %f %f %f %f %f %f %f %f %d %d %d %d %f %f %f %f\n",
 			&vertex.position.x, &vertex.position.y, &vertex.position.z,
@@ -286,17 +312,16 @@ void MeshFilterComponent::GenerateCustomMesh()
 
 	uint32_t indexCount = 0;
 	fscanf_s(file, "IndexCount: %u\n", &indexCount);
-	mesh.indices.resize(indexCount);
+	mMesh.indices.resize(indexCount);
 
 	for (size_t i = 0; i < indexCount; i += 3)
 	{
 		fscanf_s(file, "%d %d %d\n",
-			&mesh.indices[i],
-			&mesh.indices[i + 1u],
-			&mesh.indices[i + 2u]);
+			&mMesh.indices[i],
+			&mMesh.indices[i + 1u],
+			&mMesh.indices[i + 2u]);
 	}
 
 	fclose(file);
-
-	mRenderObject.meshBuffer.Initialize(meshData.mesh);
+	mRenderObject.meshBuffer.Initialize(mMesh);
 }

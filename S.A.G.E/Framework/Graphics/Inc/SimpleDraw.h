@@ -11,7 +11,9 @@ namespace SAGE::Graphics
 		void StaticInitialize(uint32_t maxVertexCount);
 		void StaticTerminate();
 
-		void AddLine(const Math::Vector3& v0, const Math::Vector3& v1, Color color);
+		void AddLine(const Math::Vector3& v0, const Math::Vector3& v1, const Color color);
+		void AddFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, const Color color);
+		void AddFilledFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, const Color color);
 
 		void AddAABB(const Math::AABB& aabb, Color color);
 		void AddAABB(const Math::Vector3& center, const Math::Vector3& extend, Color color);

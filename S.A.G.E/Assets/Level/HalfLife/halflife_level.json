@@ -10,7 +10,6 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/PlayerController.json"
     },
     {
-      "Name": "Custom c1a0",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0.json"
     }
   ]

@@ -54,6 +54,15 @@ void GameObject::DebugUI()
 		SetActive(mIsActive);
 	}
 
+	ImGui::SameLine();
+
+	char buffer[256];
+	strcpy_s(buffer, sizeof(buffer), mName.c_str());
+	if (ImGui::InputText("##GameObject", buffer, sizeof(buffer), ImGuiInputTextFlags_EnterReturnsTrue))
+	{
+		SetName(buffer);
+	}
+
 	for (auto& component : mComponents) {
 		component->DebugUI();
 	}
@@ -103,6 +112,18 @@ void GameObject::SaveComponents()
 
 	rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator = doc.GetAllocator();
 
+	if (mName != "No Name")
+	{
+		if (doc.HasMember("Name"))
+		{
+			doc["Name"].SetString(mName.c_str(), static_cast<rj::SizeType>(mName.length()), allocator);
+		}
+		else
+		{
+			doc.AddMember("Name", rj::Value(mName.c_str(), static_cast<rj::SizeType>(mName.length()), allocator), allocator);
+		}
+	}
+
 	if (!doc.HasMember("Components"))
 	{
 		// Case 1: missing → add it
@@ -147,8 +168,6 @@ void GameObject::SaveComponents()
 	doc.Accept(writer);
 
 	fclose(file);
-
-	// TODO: Also save pathing to children game objects
 }
 
 GameObject* GameObject::GetParentGameObject() const

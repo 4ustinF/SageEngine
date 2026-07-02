@@ -1,1 +1,1 @@
-{"Name":"Section 62","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_62.mesh"},"Mesh Renderer Component":{"DiffuseMapFileName":"../Models/HalfLife/c1a0/_LAB_CRT9B.png"}}}
+{"Name":"CRT 1","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_62.mesh"},"Mesh Renderer Component":{"DiffuseMapFileName":"../Models/HalfLife/c1a0/_LAB_CRT9B.png"}}}

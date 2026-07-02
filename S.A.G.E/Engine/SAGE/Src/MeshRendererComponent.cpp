@@ -305,9 +305,6 @@ void MeshRendererComponent::DebugUI()
 		{
 			mMaterialData.material.power = renderObject.material.power;
 		}
-
-		//RenderObject& renderObject = mMeshFilter->GetRenderObject();
-		//renderObject.material = mMaterialData.material;
 	}
 }
 
@@ -391,6 +388,7 @@ void MeshRendererComponent::TextureDebugUI(const char* mapName, TextureId& textu
 	const float scale = mMaxPreviewSize / std::max(width, height);
 	const ImVec2 previewSize(width * scale, height * scale);
 
+	ImGui::BeginGroup();
 	if (ImGui::ImageButton(texture->GetRawData(), previewSize))
 	{
 		std::string newPath = OpenFileDialog();
@@ -406,15 +404,27 @@ void MeshRendererComponent::TextureDebugUI(const char* mapName, TextureId& textu
 			textureId = mTextureManager->LoadTexture(filePath);
 		}
 	}
-	else if (textureId != 0)
+
+	ImGui::EndGroup();
+	ImGui::SameLine();
+	ImGui::BeginGroup();
+
+	if (!filePath.empty())
 	{
-		ImGui::SameLine();
+		const std::filesystem::path path(filePath);
+		ImGui::Text("%s", path.filename().string().c_str());
+	}
+
+	if (textureId != 0)
+	{
 		if (ImGui::Button(("Clear##" + std::string(mapName)).c_str()))
 		{
 			filePath = "";
 			textureId = 0;
 		}
 	}
+
+	ImGui::EndGroup();
 }
 
 void MeshRendererComponent::UpdateScaleSizeDelegateHandle()

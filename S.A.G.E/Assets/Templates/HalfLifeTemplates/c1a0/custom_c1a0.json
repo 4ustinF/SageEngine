@@ -6,43 +6,33 @@
   },
   "GameObjects": [
     {
-      "Name": "Core 1",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_00.json"
     },
     {
-      "Name": "Core 2",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_01.json"
     },
     {
-      "Name": "Core 3",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_02.json"
     },
     {
-      "Name": "Core 4",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_03.json"
     },
     {
-      "Name": "Core 5",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_04.json"
     },
     {
-      "Name": "Core 6",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_05.json"
     },
     {
-      "Name": "Core 7",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_06.json"
     },
     {
-      "Name": "Core 8",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_07.json"
     },
     {
-      "Name": "Core 9",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_08.json"
     },
     {
-      "Name": "Core 10",
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_core_section_09.json"
     }
   ]

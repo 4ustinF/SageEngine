@@ -405,7 +405,7 @@ void GameWorld::DrawHierarchy()
 	}
 }
 
-void GameWorld::DrawGameObjectNode(GameObject* object)
+void GameWorld::DrawGameObjectNode(GameObject* object) // TODO: Fix indent spacing on grandchildren
 {
 	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow;
 
@@ -419,8 +419,8 @@ void GameWorld::DrawGameObjectNode(GameObject* object)
 		flags |= ImGuiTreeNodeFlags_Selected;
 	}
 
+	ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, 10.0f);
 	const std::string label = object->GetName() + "##GameWorld";
-
 	const bool open = ImGui::TreeNodeEx(label.c_str(), flags);
 
 	// Selection
@@ -430,11 +430,6 @@ void GameWorld::DrawGameObjectNode(GameObject* object)
 		mInspectorGameObject = object;
 		mAddComponentWindowActive = false;
 	}
-
-	//if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0))
-	//{
-	//	// TODO: Start rename
-	//}
 
 	if (open)
 	{
@@ -448,6 +443,8 @@ void GameWorld::DrawGameObjectNode(GameObject* object)
 
 		ImGui::TreePop();
 	}
+
+	ImGui::PopStyleVar();
 }
 
 void GameWorld::DrawInspector()

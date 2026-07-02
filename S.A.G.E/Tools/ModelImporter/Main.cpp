@@ -223,7 +223,7 @@ int TryAddBone(const aiBone* aiBone, Skeleton& skeleton, BoneIndexLookup& boneIn
 	return newBone->index;
 }
 
-// Recursivly 
+// Recursively 
 Bone* BuildSkeleton(const aiNode& sceneNode, Bone* parent, Skeleton& skeleton, BoneIndexLookup& boneIndexLookup)
 {
 	Bone* bone = nullptr;
@@ -278,9 +278,11 @@ int main(int argc, char* argv[])
 
 	const auto& arguments = argOpt.value();
 
-	const uint32_t flags = aiProcessPreset_TargetRealtime_Quality | 
-		/*aiProcess_PreTransformVertices | */
+	const uint32_t flags =
+		aiProcessPreset_TargetRealtime_Quality |
+		aiProcess_PreTransformVertices | // Comment out for models/animations
 		aiProcess_ConvertToLeftHanded;
+
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(arguments.inputFileName.u8string().c_str(), flags);
 	if (scene == nullptr) {

@@ -1,11 +1,6 @@
 {
   "Components": {
     "Transform Component": {
-      "Rotation": [
-        90.0,
-        0.0,
-        0.0
-      ]
     }
   },
   "GameObjects": [

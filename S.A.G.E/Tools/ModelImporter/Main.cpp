@@ -524,6 +524,7 @@ int main(int argc, char* argv[])
 
 	if (!arguments.animOnly)
 	{
+		//ModelIO::SaveMeshes(arguments.outputFileName, model); // Add to args. For when you want to split the model file into mesh files.
 		ModelIO::SaveModel(arguments.outputFileName, model);
 		ModelIO::SaveMaterial(arguments.outputFileName, model);
 		ModelIO::SaveSkeleton(arguments.outputFileName, model);

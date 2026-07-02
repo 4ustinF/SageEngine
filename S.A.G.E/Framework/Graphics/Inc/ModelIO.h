@@ -6,6 +6,7 @@ namespace SAGE::Graphics
 
 	namespace ModelIO
 	{
+		void SaveMeshes(std::filesystem::path filePath, const Model& model);
 		void SaveModel(std::filesystem::path filePath, const Model& model);
 		void LoadModel(std::filesystem::path filePath, Model& model);
 

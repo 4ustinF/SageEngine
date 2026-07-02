@@ -29,6 +29,58 @@ namespace
 	}
 }
 
+void ModelIO::SaveMeshes(std::filesystem::path filePath, const Model& model)
+{
+	if (model.meshData.empty())
+		return;
+
+	std::filesystem::path basePath = filePath;
+	basePath.replace_extension("");
+
+	for (uint32_t meshIndex = 0; meshIndex < model.meshData.size(); ++meshIndex)
+	{
+		std::filesystem::path meshPath = basePath.string() + "_" + std::to_string(meshIndex) + ".mesh";
+		FILE* file = nullptr;
+		fopen_s(&file, meshPath.string().c_str(), "w");
+
+		if (file == nullptr)
+			continue;
+
+		const auto& mesh = model.meshData[meshIndex].mesh;
+		const uint32_t vertexCount = static_cast<uint32_t>(mesh.vertices.size());
+		fprintf_s(file, "VertexCount: %u\n", vertexCount);
+
+		for (const auto& vertex : mesh.vertices)
+		{
+			fprintf_s(file,
+				"%f %f %f %f %f %f %f %f %f %f %f %d %d %d %d %f %f %f %f\n",
+				vertex.position.x, vertex.position.y, vertex.position.z,
+				vertex.normal.x, vertex.normal.y, vertex.normal.z,
+				vertex.tangent.x, vertex.tangent.y, vertex.tangent.z,
+				vertex.uv.x, vertex.uv.y,
+				vertex.boneIndices[0], vertex.boneIndices[1],
+				vertex.boneIndices[2], vertex.boneIndices[3],
+				vertex.boneWeights[0], vertex.boneWeights[1],
+				vertex.boneWeights[2], vertex.boneWeights[3]);
+		}
+
+		const uint32_t indexCount = static_cast<uint32_t>(mesh.indices.size());
+
+		fprintf_s(file, "IndexCount: %u\n", indexCount);
+
+		for (uint32_t i = 0; i < indexCount; i += 3)
+		{
+			fprintf_s(file,
+				"%u %u %u\n",
+				mesh.indices[i],
+				mesh.indices[i + 1],
+				mesh.indices[i + 2]);
+		}
+
+		fclose(file);
+	}
+}
+
 void ModelIO::SaveModel(std::filesystem::path filePath, const Model& model)
 {
 	if (model.meshData.empty())

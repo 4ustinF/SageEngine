@@ -206,7 +206,7 @@ void ModelIO::SaveMaterial(std::filesystem::path filePath, const Model& model)
 		fprintf_s(file, "%s\n", materialData.diffuseMapName.empty() ? "none" : materialData.diffuseMapName.c_str());
 		fprintf_s(file, "%s\n", materialData.specularMapName.empty() ? "none" : materialData.specularMapName.c_str());
 		fprintf_s(file, "%s\n", materialData.bumpMapName.empty() ? "none" : materialData.bumpMapName.c_str());
-		fprintf_s(file, "%s\n", materialData.normalMapName.empty() ? "none" : materialData.normalMapName.c_str());
+		fprintf_s(file, "%s", materialData.normalMapName.empty() ? "none" : materialData.normalMapName.c_str());
 	}
 	fclose(file);
 }

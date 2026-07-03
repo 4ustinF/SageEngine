@@ -53,6 +53,8 @@ namespace SAGE
 		SAGE::Graphics::TextureManager* mTextureManager = nullptr;
 
 		void TextureDebugUI(const char* mapName, SAGE::Graphics::TextureId& textureId, std::string& filePath);
+		void MaterialDebugUI();
+		void MaterialDataDebugUI(const char* label, SAGE::Graphics::Color& renderObjectColor, SAGE::Graphics::Color& materialDataColor);
 		const float mMaxPreviewSize = 64.0f;
 		const std::string mMissingDiffuseMapFileName = "missing.png";
 		SAGE::Graphics::TextureId mMissingTextureID;
@@ -67,6 +69,7 @@ namespace SAGE
 		bool mTileToZScale = false;
 
 		void LoadMaterial(std::filesystem::path filePath);
+		void LoadTextures();
 		SAGE::Graphics::Model::MaterialData mMaterialData; // TODO tidy up in here.
 		std::string mMaterialFilePath = "";
 		bool mIsBasic = false; // TODO: Don't default true

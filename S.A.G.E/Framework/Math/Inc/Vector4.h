@@ -23,6 +23,7 @@ namespace SAGE::Math
 		Vector4& operator+=(const Vector4& v) noexcept { x += v.x; y += v.y; z += v.z; w += v.w; return *this; }
 		Vector4& operator-=(const Vector4& v) noexcept { x -= v.x; y -= v.y; z -= v.z; w -= v.w; return *this; }
 		bool operator==(const Vector4& v) const noexcept { return x == v.x && y == v.y && z == v.z && w == v.w; }
+		bool operator!=(const Vector4& v) const noexcept { return x != v.x || y != v.y || z != v.z || w != v.w; }
 		Vector4& operator*=(float f) noexcept { x *= f; y *= f; z *= f; w *= f; return *this; }
 		Vector4& operator/=(float f) noexcept { x /= f; y /= f; z /= f; w /= f; return *this; }
 	};

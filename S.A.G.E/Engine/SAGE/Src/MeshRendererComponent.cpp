@@ -47,6 +47,52 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 		SetDiffuseMapFileName(normalMapFileName);
 	}
 
+	if (mMaterialData.material.power == 0.0f && value.HasMember("Power"))
+	{
+		const auto& power = value["Power"].GetFloat();
+		mMaterialData.material.power = power;
+	}
+
+	if (mMaterialData.material.ambient == Colors::Black && value.HasMember("Ambient"))
+	{
+		const auto& ambient = value["Ambient"].GetArray();
+		const float x = ambient[0].GetFloat();
+		const float y = ambient[1].GetFloat();
+		const float z = ambient[2].GetFloat();
+		const float w = ambient[3].GetFloat();
+		mMaterialData.material.ambient = Color(x, y, z, w);
+	}
+
+	if (mMaterialData.material.diffuse == Colors::Black && value.HasMember("Diffuse"))
+	{
+		const auto& diffuse = value["Diffuse"].GetArray();
+		const float x = diffuse[0].GetFloat();
+		const float y = diffuse[1].GetFloat();
+		const float z = diffuse[2].GetFloat();
+		const float w = diffuse[3].GetFloat();
+		mMaterialData.material.diffuse = Color(x, y, z, w);
+	}
+
+	if (mMaterialData.material.specular == Colors::Black && value.HasMember("Specular"))
+	{
+		const auto& specular = value["Specular"].GetArray();
+		const float x = specular[0].GetFloat();
+		const float y = specular[1].GetFloat();
+		const float z = specular[2].GetFloat();
+		const float w = specular[3].GetFloat();
+		mMaterialData.material.specular = Color(x, y, z, w);
+	}
+
+	if (mMaterialData.material.emissive == Colors::Black && value.HasMember("Emissive"))
+	{
+		const auto& emissive = value["Emissive"].GetArray();
+		const float x = emissive[0].GetFloat();
+		const float y = emissive[1].GetFloat();
+		const float z = emissive[2].GetFloat();
+		const float w = emissive[3].GetFloat();
+		mMaterialData.material.emissive = Color(x, y, z, w);
+	}
+
 	if (value.HasMember("TilingSize"))
 	{
 		const auto& tilingSize = value["TilingSize"].GetArray();
@@ -81,7 +127,7 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 {
 	if (!mMaterialFilePath.empty())
 	{
-		Model model; //??
+		Model model;
 		model.materialData.push_back(mMaterialData);
 		Model::MaterialData& materialData = model.materialData[0];
 		materialData.diffuseMapName = static_cast<std::filesystem::path>(materialData.diffuseMapName).filename().string();
@@ -138,7 +184,57 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 			);
 		}
 
-		// TODO: Save more material things like amount.
+		// --- Material Power ---
+		if (mMaterialData.material.power != 0.0f)
+		{
+			rj::Value power(rj::kNumberType);
+			power.SetFloat(mMaterialData.material.power);
+			compObj.AddMember("Power", power, allocator);
+		}
+
+		// --- Material Ambient ---
+		if (mMaterialData.material.ambient != Colors::Black)
+		{
+			rj::Value ambient(rj::kArrayType);
+			ambient.PushBack(mMaterialData.material.ambient.x, allocator);
+			ambient.PushBack(mMaterialData.material.ambient.y, allocator);
+			ambient.PushBack(mMaterialData.material.ambient.z, allocator);
+			ambient.PushBack(mMaterialData.material.ambient.w, allocator);
+			compObj.AddMember("Ambient", ambient, allocator);
+		}
+
+		// --- Material Diffuse ---
+		if (mMaterialData.material.diffuse != Colors::Black)
+		{
+			rj::Value diffuse(rj::kArrayType);
+			diffuse.PushBack(mMaterialData.material.diffuse.x, allocator);
+			diffuse.PushBack(mMaterialData.material.diffuse.y, allocator);
+			diffuse.PushBack(mMaterialData.material.diffuse.z, allocator);
+			diffuse.PushBack(mMaterialData.material.diffuse.w, allocator);
+			compObj.AddMember("Diffuse", diffuse, allocator);
+		}
+
+		// --- Material Specular ---
+		if (mMaterialData.material.specular != Colors::Black)
+		{
+			rj::Value specular(rj::kArrayType);
+			specular.PushBack(mMaterialData.material.specular.x, allocator);
+			specular.PushBack(mMaterialData.material.specular.y, allocator);
+			specular.PushBack(mMaterialData.material.specular.z, allocator);
+			specular.PushBack(mMaterialData.material.specular.w, allocator);
+			compObj.AddMember("Specular", specular, allocator);
+		}
+
+		// --- Material Emissive ---
+		if (mMaterialData.material.emissive != Colors::Black)
+		{
+			rj::Value emissive(rj::kArrayType);
+			emissive.PushBack(mMaterialData.material.emissive.x, allocator);
+			emissive.PushBack(mMaterialData.material.emissive.y, allocator);
+			emissive.PushBack(mMaterialData.material.emissive.z, allocator);
+			emissive.PushBack(mMaterialData.material.emissive.w, allocator);
+			compObj.AddMember("Emissive", emissive, allocator);
+		}
 	}
 
 	// --- Tiling Size ---
@@ -186,36 +282,7 @@ void MeshRendererComponent::Initialize()
 	mRenderService = GetOwner().GetWorld().GetService<RenderService>();
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	UpdateScaleSizeDelegateHandle();
-
-	mTextureManager = TextureManager::Get();
-	RenderObject& renderObject = mMeshFilter->GetRenderObject();
-	mMissingTextureID = mTextureManager->LoadTexture(mMissingDiffuseMapFileName);
-
-	if (!mMaterialData.diffuseMapName.empty())
-	{
-		renderObject.diffuseMapId = mTextureManager->LoadTexture(mMaterialData.diffuseMapName);
-	}
-	else
-	{
-		renderObject.diffuseMapId = mMissingTextureID;
-	}
-
-	if (!mMaterialData.specularMapName.empty())
-	{
-		renderObject.specularMapId = mTextureManager->LoadTexture(mMaterialData.specularMapName);
-	}
-
-	if (!mMaterialData.bumpMapName.empty())
-	{
-		renderObject.bumpMapId = mTextureManager->LoadTexture(mMaterialData.bumpMapName);
-	}
-
-	if (!mMaterialData.normalMapName.empty())
-	{
-		renderObject.normalMapId = mTextureManager->LoadTexture(mMaterialData.normalMapName);
-	}
-
-	mMaterialData.material = renderObject.material;
+	LoadTextures();
 }
 
 void MeshRendererComponent::Terminate()
@@ -281,60 +348,12 @@ void MeshRendererComponent::DebugUI()
 		TextureDebugUI("Specular Map", renderObject.specularMapId, mMaterialData.specularMapName);
 		TextureDebugUI("Bump Map", renderObject.bumpMapId, mMaterialData.bumpMapName);
 		TextureDebugUI("Normal Map", renderObject.normalMapId, mMaterialData.normalMapName);
+		MaterialDebugUI();
 
-		if (ImGui::Button(mMaterialFilePath.empty() ? "None (Material)" : std::filesystem::path(mMaterialFilePath)
-			.filename()
-			.string()
-			.c_str(),
-			ImVec2(200.0f, 30.0f)))
-		{
-			std::string newPath = OpenFileDialog("Material Files\0*.material\0");
-
-			if (!newPath.empty())
-			{
-				std::filesystem::path assetsRoot =
-					std::filesystem::absolute("../../Assets");
-
-				std::filesystem::path relativeToAssets =
-					std::filesystem::relative(newPath, assetsRoot);
-
-				std::filesystem::path finalPath =
-					"../../Assets" / relativeToAssets;
-
-					//"../../Assets/Models/HalfLife/c1a0/c1a0_copy.material"
-
-	/*			const auto relativePath =
-					std::filesystem::relative(
-						newPath,
-						mTextureManager->GetRootDirectory());
-
-				mMaterialFilePath = "../" + relativePath.generic_string();*/
-				mMaterialFilePath = finalPath.generic_string();
-				//mMaterialFilePath = newPath;
-				LoadMaterial(mMaterialFilePath);
-			}
-		}
-
-		if (ImGui::ColorEdit4("Ambient##MeshRendererComponent", &renderObject.material.ambient.r))
-		{
-			mMaterialData.material.ambient = renderObject.material.ambient;
-		}
-
-		if (ImGui::ColorEdit4("Diffuse##MeshRendererComponent", &renderObject.material.diffuse.r))
-		{
-			mMaterialData.material.diffuse = renderObject.material.diffuse;
-		}
-
-		if (ImGui::ColorEdit4("Specular##MeshRendererComponent", &renderObject.material.specular.r))
-		{
-			mMaterialData.material.specular = renderObject.material.specular;
-		}
-
-		if (ImGui::ColorEdit4("Emissive##MeshRendererComponent", &renderObject.material.emissive.r))
-		{
-			mMaterialData.material.emissive = renderObject.material.emissive;
-		}
-
+		MaterialDataDebugUI("Ambient##MeshRendererComponent", renderObject.material.ambient, mMaterialData.material.ambient);
+		MaterialDataDebugUI("Diffuse##MeshRendererComponent", renderObject.material.diffuse, mMaterialData.material.diffuse);
+		MaterialDataDebugUI("Specular##MeshRendererComponent", renderObject.material.specular, mMaterialData.material.specular);
+		MaterialDataDebugUI("Emissive##MeshRendererComponent", renderObject.material.emissive, mMaterialData.material.emissive);
 		if (ImGui::DragFloat("Power##MeshRendererComponent", &renderObject.material.power, 1.0f, 1.0f, 100.0f))
 		{
 			mMaterialData.material.power = renderObject.material.power;
@@ -461,6 +480,50 @@ void MeshRendererComponent::TextureDebugUI(const char* mapName, TextureId& textu
 	ImGui::EndGroup();
 }
 
+void MeshRendererComponent::MaterialDebugUI()
+{
+	if (ImGui::Button(mMaterialFilePath.empty() ? "None (Material)" : std::filesystem::path(mMaterialFilePath)
+		.filename()
+		.string()
+		.c_str(),
+		ImVec2(200.0f, 30.0f)))
+	{
+		std::string newPath = OpenFileDialog("Material Files\0*.material\0");
+
+		if (!newPath.empty())
+		{
+			std::filesystem::path assetsRoot =
+				std::filesystem::absolute("../../Assets");
+
+			std::filesystem::path relativeToAssets =
+				std::filesystem::relative(newPath, assetsRoot);
+
+			std::filesystem::path finalPath =
+				"../../Assets" / relativeToAssets;
+
+			mMaterialFilePath = finalPath.generic_string();
+			LoadMaterial(mMaterialFilePath);
+		}
+	}
+
+	if (!mMaterialFilePath.empty())
+	{
+		ImGui::SameLine();
+		if (ImGui::Button("Clear##Material"))
+		{
+			mMaterialFilePath = "";
+		}
+	}
+}
+
+void MeshRendererComponent::MaterialDataDebugUI(const char* label, Color& renderObjectColor, Color& materialDataColor)
+{
+	if (ImGui::ColorEdit4(label, &renderObjectColor.r))
+	{
+		materialDataColor = renderObjectColor;
+	}
+}
+
 void MeshRendererComponent::UpdateScaleSizeDelegateHandle()
 {
 	if (mTransformComponent == nullptr)
@@ -542,10 +605,14 @@ void MeshRendererComponent::LoadMaterial(std::filesystem::path filePath)
 	TryReadTextureName(mMaterialData.normalMapName);
 
 	fclose(file);
+	LoadTextures();
+}
 
+void MeshRendererComponent::LoadTextures()
+{
 	mTextureManager = TextureManager::Get();
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
-	//mMissingTextureID = mTextureManager->LoadTexture(mMissingDiffuseMapFileName);
+	mMissingTextureID = mMissingTextureID != 0 ? mMissingTextureID : mTextureManager->LoadTexture(mMissingDiffuseMapFileName);
 
 	if (!mMaterialData.diffuseMapName.empty())
 	{
@@ -553,7 +620,7 @@ void MeshRendererComponent::LoadMaterial(std::filesystem::path filePath)
 	}
 	else
 	{
-		//renderObject.diffuseMapId = mMissingTextureID;
+		renderObject.diffuseMapId = mMissingTextureID;
 	}
 
 	if (!mMaterialData.specularMapName.empty())

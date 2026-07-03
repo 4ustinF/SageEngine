@@ -1,14 +1,1 @@
-{
-  "Name": "Section 1",
-  "Components": {
-    "Transform Component": {
-    },
-    "Mesh Filter Component": {
-      "MeshType": "Custom",
-      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_1.mesh"
-    },
-    "Mesh Renderer Component": {
-      "DiffuseMapFileName": "../../Assets/Models/HalfLife/c1a0/BABTECH_CEIL01.png"
-    }
-  }
-}
+{"Name":"Section 1","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_1.mesh"},"Mesh Renderer Component":{"MaterialFilePath":"../../Assets/Models/HalfLife/c1a0/Materials/c1a0_1.material"}}}

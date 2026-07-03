@@ -1,5 +1,2 @@
-﻿  RenderService.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Src\RenderService.cpp(60,41): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  (compiling source file '/Src/RenderService.cpp')
-  
+﻿  MeshRendererComponent.cpp
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

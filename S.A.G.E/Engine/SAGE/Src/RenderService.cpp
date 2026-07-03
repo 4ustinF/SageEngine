@@ -57,7 +57,7 @@ void RenderService::Initialize()
 
 	mGaussianBlurEffect.Initialize();
 	mGaussianBlurEffect.SetSourceTexture(mBloomRenderTarget);
-	mGaussianBlurEffect.BlurIterations() = 10.0f;
+	mGaussianBlurEffect.BlurIterations() = 10;
 	mGaussianBlurEffect.BlurSaturation() = 1.0f;
 
 	mScreenQuad.meshBuffer.Initialize(MeshBuilder::CreateScreenQuad());
@@ -171,6 +171,7 @@ void RenderService::Render()
 	// TODO: Add UV support to standard effect
 	// TODO: Add material data to all the models.
 	// TODO: Add mat support on mesh renderer
+	// TODO: Add a way to swap materials on the fly for mesh renderer.
 	mBloomRenderTarget.BeginRender(); //TODO: Clean up
 	{
 		mStandardEffect.Begin();

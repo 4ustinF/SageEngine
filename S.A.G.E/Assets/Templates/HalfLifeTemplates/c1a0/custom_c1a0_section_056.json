@@ -1,1 +1,1 @@
-{"Name":"Section 56","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_56.mesh"},"Mesh Renderer Component":{"DiffuseMapFileName":"../Models/HalfLife/c1a0/PFAB_BKS1A.png"}}}
+{"Name":"Section 56","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_56.mesh"},"Mesh Renderer Component":{"MaterialFilePath":"../../Assets/Models/HalfLife/c1a0/Materials/c1a0_56.material"}}}

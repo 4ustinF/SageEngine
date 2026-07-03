@@ -19,7 +19,7 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 {
 	if (value.HasMember("MaterialFilePath"))
 	{
-		mMaterialFilePath = value["MaterialFilePath"].GetString(); // TODO: Save value.
+		mMaterialFilePath = value["MaterialFilePath"].GetString();
 		LoadMaterial(mMaterialFilePath);
 	}
 
@@ -81,7 +81,7 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 {
 	if (!mMaterialFilePath.empty())
 	{
-		Model model;
+		Model model; //??
 		model.materialData.push_back(mMaterialData);
 		Model::MaterialData& materialData = model.materialData[0];
 		materialData.diffuseMapName = static_cast<std::filesystem::path>(materialData.diffuseMapName).filename().string();
@@ -137,6 +137,8 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 				allocator
 			);
 		}
+
+		// TODO: Save more material things like amount.
 	}
 
 	// --- Tiling Size ---
@@ -213,18 +215,7 @@ void MeshRendererComponent::Initialize()
 		renderObject.normalMapId = mTextureManager->LoadTexture(mMaterialData.normalMapName);
 	}
 
-	// TODO: Remove this is for debugging reasons
-	renderObject.material.ambient = Color(0.2f, 0.2f, 0.2f, 1.0f);
-	renderObject.material.diffuse = Color(0.2f, 0.2f, 0.2f, 1.0f);
-	renderObject.material.specular = Color(0.2f, 0.2f, 0.2f, 1.0f);
-	renderObject.material.emissive = Color(0.2f, 0.2f, 0.2f, 1.0f);
-	renderObject.material.power = 25.0f;
-
-	mMaterialData.material.ambient = renderObject.material.ambient;
-	mMaterialData.material.diffuse = renderObject.material.diffuse;
-	mMaterialData.material.specular = renderObject.material.specular;
-	mMaterialData.material.emissive = renderObject.material.emissive;
-	mMaterialData.material.power = renderObject.material.power;
+	mMaterialData.material = renderObject.material;
 }
 
 void MeshRendererComponent::Terminate()
@@ -255,9 +246,6 @@ void MeshRendererComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Mesh Renderer Component##MeshRendererComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		// TODO: Display map texture names?
-		// TODO: Make it so we can swap out textures at run time.
-
 		if (ImGui::DragFloat2("Tiling Size##MeshRendererComponent", &mTilingSize.x, 0.1f))
 		{
 			SetTilingSize(mTilingSize);
@@ -293,6 +281,39 @@ void MeshRendererComponent::DebugUI()
 		TextureDebugUI("Specular Map", renderObject.specularMapId, mMaterialData.specularMapName);
 		TextureDebugUI("Bump Map", renderObject.bumpMapId, mMaterialData.bumpMapName);
 		TextureDebugUI("Normal Map", renderObject.normalMapId, mMaterialData.normalMapName);
+
+		if (ImGui::Button(mMaterialFilePath.empty() ? "None (Material)" : std::filesystem::path(mMaterialFilePath)
+			.filename()
+			.string()
+			.c_str(),
+			ImVec2(200.0f, 30.0f)))
+		{
+			std::string newPath = OpenFileDialog("Material Files\0*.material\0");
+
+			if (!newPath.empty())
+			{
+				std::filesystem::path assetsRoot =
+					std::filesystem::absolute("../../Assets");
+
+				std::filesystem::path relativeToAssets =
+					std::filesystem::relative(newPath, assetsRoot);
+
+				std::filesystem::path finalPath =
+					"../../Assets" / relativeToAssets;
+
+					//"../../Assets/Models/HalfLife/c1a0/c1a0_copy.material"
+
+	/*			const auto relativePath =
+					std::filesystem::relative(
+						newPath,
+						mTextureManager->GetRootDirectory());
+
+				mMaterialFilePath = "../" + relativePath.generic_string();*/
+				mMaterialFilePath = finalPath.generic_string();
+				//mMaterialFilePath = newPath;
+				LoadMaterial(mMaterialFilePath);
+			}
+		}
 
 		if (ImGui::ColorEdit4("Ambient##MeshRendererComponent", &renderObject.material.ambient.r))
 		{
@@ -404,7 +425,7 @@ void MeshRendererComponent::TextureDebugUI(const char* mapName, TextureId& textu
 	ImGui::BeginGroup();
 	if (ImGui::ImageButton(texture->GetRawData(), previewSize))
 	{
-		std::string newPath = OpenFileDialog();
+		std::string newPath = OpenFileDialog("Image Files\0*.png;*.jpg;*.jpeg;*.dds;*.tga\0");
 
 		if (!newPath.empty())
 		{
@@ -522,7 +543,33 @@ void MeshRendererComponent::LoadMaterial(std::filesystem::path filePath)
 
 	fclose(file);
 
-	// might be good to uncomment this if the function goes public or goes anywhere thats not just in the load from template function?
-	//RenderObject& renderObject = mMeshFilter->GetRenderObject();
-	//renderObject.material = mMaterialData.material;
+	mTextureManager = TextureManager::Get();
+	RenderObject& renderObject = mMeshFilter->GetRenderObject();
+	//mMissingTextureID = mTextureManager->LoadTexture(mMissingDiffuseMapFileName);
+
+	if (!mMaterialData.diffuseMapName.empty())
+	{
+		renderObject.diffuseMapId = mTextureManager->LoadTexture(mMaterialData.diffuseMapName);
+	}
+	else
+	{
+		//renderObject.diffuseMapId = mMissingTextureID;
+	}
+
+	if (!mMaterialData.specularMapName.empty())
+	{
+		renderObject.specularMapId = mTextureManager->LoadTexture(mMaterialData.specularMapName);
+	}
+
+	if (!mMaterialData.bumpMapName.empty())
+	{
+		renderObject.bumpMapId = mTextureManager->LoadTexture(mMaterialData.bumpMapName);
+	}
+
+	if (!mMaterialData.normalMapName.empty())
+	{
+		renderObject.normalMapId = mTextureManager->LoadTexture(mMaterialData.normalMapName);
+	}
+
+	renderObject.material = mMaterialData.material;
 }

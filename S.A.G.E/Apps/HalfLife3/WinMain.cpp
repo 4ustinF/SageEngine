@@ -13,6 +13,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int)
 	appConfig.debugDrawLimit = 10000;
 	appConfig.textureRoot = "../../Assets/Images";
 	appConfig.audioRoot = "../../Assets/Audio";
+	// appConfig.assetRoot = "../../Assets"; // TODO:
 
 	auto& app = MainApp();
 	app.AddState<GameState>("GameState");

@@ -72,7 +72,7 @@ namespace SAGE
 		bool mIsBasic = false; // TODO: Don't default true
 
 		// TODO: Move out
-		std::string OpenFileDialog()
+		std::string OpenFileDialog(const char* fileFilterType)
 		{
 			char fileName[MAX_PATH] = "";
 
@@ -81,7 +81,7 @@ namespace SAGE
 			ofn.lpstrFile = fileName;
 			ofn.nMaxFile = MAX_PATH;
 
-			ofn.lpstrFilter = "Image Files\0*.png;*.jpg;*.jpeg;*.dds;*.tga\0";
+			ofn.lpstrFilter = fileFilterType;
 
 			ofn.Flags =
 				OFN_FILEMUSTEXIST |

@@ -8,7 +8,7 @@
       "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_2.mesh"
     },
     "Mesh Renderer Component": {
-      "DiffuseMapFileName": "../../Assets/Models/HalfLife/c1a0/FIFTIES_CMP3C.png"
+      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_2.material"
     }
   }
 }

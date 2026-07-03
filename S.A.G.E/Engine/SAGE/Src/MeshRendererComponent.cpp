@@ -144,136 +144,36 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 	}
 	else
 	{
-		// --- Diffuse Map File Name ---
-		if (!mMaterialData.diffuseMapName.empty())
-		{
-			compObj.AddMember(
-				rj::Value("DiffuseMapFileName", allocator),
-				rj::Value(mMaterialData.diffuseMapName.c_str(), allocator),
-				allocator
-			);
-		}
-
-		// --- Specular Map File Name ---
-		if (!mMaterialData.specularMapName.empty())
-		{
-			compObj.AddMember(
-				rj::Value("SpecularMapFileName", allocator),
-				rj::Value(mMaterialData.specularMapName.c_str(), allocator),
-				allocator
-			);
-		}
-
-		// --- Bump Map File Name ---
-		if (!mMaterialData.bumpMapName.empty())
-		{
-			compObj.AddMember(
-				rj::Value("BumpMapFileName", allocator),
-				rj::Value(mMaterialData.bumpMapName.c_str(), allocator),
-				allocator
-			);
-		}
-
-		// --- Normal Map File Name ---
-		if (!mMaterialData.normalMapName.empty())
-		{
-			compObj.AddMember(
-				rj::Value("NormalMapFileName", allocator),
-				rj::Value(mMaterialData.normalMapName.c_str(), allocator),
-				allocator
-			);
-		}
-
-		// --- Material Power ---
-		if (mMaterialData.material.power != 0.0f)
-		{
-			rj::Value power(rj::kNumberType);
-			power.SetFloat(mMaterialData.material.power);
-			compObj.AddMember("Power", power, allocator);
-		}
-
-		// --- Material Ambient ---
-		if (mMaterialData.material.ambient != Colors::Black)
-		{
-			rj::Value ambient(rj::kArrayType);
-			ambient.PushBack(mMaterialData.material.ambient.x, allocator);
-			ambient.PushBack(mMaterialData.material.ambient.y, allocator);
-			ambient.PushBack(mMaterialData.material.ambient.z, allocator);
-			ambient.PushBack(mMaterialData.material.ambient.w, allocator);
-			compObj.AddMember("Ambient", ambient, allocator);
-		}
-
-		// --- Material Diffuse ---
-		if (mMaterialData.material.diffuse != Colors::Black)
-		{
-			rj::Value diffuse(rj::kArrayType);
-			diffuse.PushBack(mMaterialData.material.diffuse.x, allocator);
-			diffuse.PushBack(mMaterialData.material.diffuse.y, allocator);
-			diffuse.PushBack(mMaterialData.material.diffuse.z, allocator);
-			diffuse.PushBack(mMaterialData.material.diffuse.w, allocator);
-			compObj.AddMember("Diffuse", diffuse, allocator);
-		}
-
-		// --- Material Specular ---
-		if (mMaterialData.material.specular != Colors::Black)
-		{
-			rj::Value specular(rj::kArrayType);
-			specular.PushBack(mMaterialData.material.specular.x, allocator);
-			specular.PushBack(mMaterialData.material.specular.y, allocator);
-			specular.PushBack(mMaterialData.material.specular.z, allocator);
-			specular.PushBack(mMaterialData.material.specular.w, allocator);
-			compObj.AddMember("Specular", specular, allocator);
-		}
-
-		// --- Material Emissive ---
-		if (mMaterialData.material.emissive != Colors::Black)
-		{
-			rj::Value emissive(rj::kArrayType);
-			emissive.PushBack(mMaterialData.material.emissive.x, allocator);
-			emissive.PushBack(mMaterialData.material.emissive.y, allocator);
-			emissive.PushBack(mMaterialData.material.emissive.z, allocator);
-			emissive.PushBack(mMaterialData.material.emissive.w, allocator);
-			compObj.AddMember("Emissive", emissive, allocator);
-		}
+		SaveStringToTemplate(compObj, allocator, "DiffuseMapFileName", mMaterialData.diffuseMapName); // Diffuse Map File Name
+		SaveStringToTemplate(compObj, allocator, "SpecularMapFileName", mMaterialData.specularMapName); // Specular Map File Name
+		SaveStringToTemplate(compObj, allocator, "BumpMapFileName", mMaterialData.bumpMapName); // Bump Map File Name
+		SaveStringToTemplate(compObj, allocator, "NormalMapFileName", mMaterialData.normalMapName); // Normal Map File Name
+		SaveNumberToTemplate(compObj, allocator, "Power", mMaterialData.material.power); // Material Power
+		SaveVector4ToTemplate(compObj, allocator, "Ambient", mMaterialData.material.ambient); // Material Ambient
+		SaveVector4ToTemplate(compObj, allocator, "Diffuse", mMaterialData.material.diffuse); // Material Diffuse
+		SaveVector4ToTemplate(compObj, allocator, "Specular", mMaterialData.material.specular); // Material Specular
+		SaveVector4ToTemplate(compObj, allocator, "Emissive", mMaterialData.material.emissive); // Material Emissive
 	}
 
 	// --- Tiling Size ---
-	if (mTilingSize != Vector2::One)
-	{
-		rj::Value tilingSize(rj::kArrayType);
-		tilingSize.PushBack(mTilingSize.x, allocator);
-		tilingSize.PushBack(mTilingSize.y, allocator);
-		compObj.AddMember("TilingSize", tilingSize, allocator);
-	}
+	SaveVector2ToTemplate(compObj, allocator, "TilingSize", mTilingSize, Vector2::One);
 
 	// --- Tile To X Scale ---
 	if (mTileToXScale == true)
 	{
-		compObj.AddMember(
-			rj::Value("TileToXScale", allocator),
-			rj::Value(mTileToXScale),
-			allocator
-		);
+		SaveBoolToTemplate(compObj, allocator, "TileToXScale", mTileToXScale);
 	}
 
 	// --- Tile To Y Scale ---
 	if (mTileToYScale == true)
 	{
-		compObj.AddMember(
-			rj::Value("TileToYScale", allocator),
-			rj::Value(mTileToYScale),
-			allocator
-		);
+		SaveBoolToTemplate(compObj, allocator, "TileToYScale", mTileToYScale);
 	}
 
 	// --- Tile To Z Scale ---
 	if (mTileToZScale == true)
 	{
-		compObj.AddMember(
-			rj::Value("TileToZScale", allocator),
-			rj::Value(mTileToZScale),
-			allocator
-		);
+		SaveBoolToTemplate(compObj, allocator, "TileToZScale", mTileToZScale);
 	}
 }
 

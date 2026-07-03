@@ -31,7 +31,7 @@ namespace SAGE::Math
 
 		Vector2Int& operator+=(const Vector2Int& v) { x += v.x, y += v.y; return *this; }
 		Vector2Int& operator-=(const Vector2Int& v) { x -= v.x; y -= v.y; return *this; }
-		bool operator==(const Vector2Int& v) { return x == v.x && y == v.y; }
+		bool operator==(const Vector2Int& v) const noexcept { return x == v.x && y == v.y; }
 		bool operator!=(const Vector2Int& v) { return x != v.x || y != v.y; }
 		Vector2Int& operator*=(int i) { x *= i; y *= i; return *this; }
 		Vector2Int& operator/=(int i) { x /= i; y /= i; return *this; }

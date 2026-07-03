@@ -14,6 +14,10 @@ namespace SAGE::Math
 		explicit constexpr Vector4(float f) noexcept : Vector4(f, f, f, f) {}
 		constexpr Vector4(float x, float y, float z, float w) noexcept : x(x), y(y), z(z), w(w) { }
 
+		//Commonly used vectors
+		const static Vector4 Zero;
+		const static Vector4 One;
+
 		constexpr Vector4 operator-() const noexcept { return { -x, -y, -z, -w }; }
 		constexpr Vector4 operator+(const Vector4& v) const noexcept { return { x + v.x, y + v.y, z + v.z, w + v.w }; }
 		constexpr Vector4 operator-(const Vector4& v) const noexcept { return { x - v.x, y - v.y, z - v.z, w - v.w }; }

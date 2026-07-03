@@ -65,6 +65,7 @@
     <ClCompile Include="Src\CameraService.cpp" />
     <ClCompile Include="Src\CameraUtil.cpp" />
     <ClCompile Include="Src\ColliderComponent.cpp" />
+    <ClCompile Include="Src\Component.cpp" />
     <ClCompile Include="Src\FollowCameraControllerComponent.cpp" />
     <ClCompile Include="Src\FPSCameraControllerComponent.cpp" />
     <ClCompile Include="Src\GameObject.cpp" />

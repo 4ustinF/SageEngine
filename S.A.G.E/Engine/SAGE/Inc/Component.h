@@ -40,6 +40,19 @@ namespace SAGE
 		GameObject& GetOwner() { return *mOwner; }
 		const GameObject& GetOwner() const { return *mOwner; }
 
+	protected:
+		void SaveBoolToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, bool value);
+		void SaveStringToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::string& value);
+		void SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, int value, int defaultValue = 0);
+		void SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, float value, float defaultValue = 0.0f);
+		void SaveColorToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const SAGE::Graphics::Color& value, const SAGE::Graphics::Color& defaultValue = SAGE::Graphics::Colors::Black);
+		void SaveVector2ToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const SAGE::Math::Vector2& value, const SAGE::Math::Vector2& defaultValue = SAGE::Math::Vector2::Zero);
+		void SaveVector2IntToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const SAGE::Math::Vector2Int& value, const SAGE::Math::Vector2Int& defaultValue = SAGE::Math::Vector2Int::Zero);
+		void SaveVector3ToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const SAGE::Math::Vector3& value, const SAGE::Math::Vector3& defaultValue = SAGE::Math::Vector3::Zero);
+		void SaveVector4ToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const SAGE::Math::Vector4& value, const SAGE::Math::Vector4& defaultValue = SAGE::Math::Vector4::Zero);
+
+		// TODO: Add some load functions as well that return a bool and provide an out param of the value.
+
 	private:
 		friend class GameObject;
 		GameObject* mOwner = nullptr;

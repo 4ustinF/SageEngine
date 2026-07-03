@@ -242,5 +242,8 @@
     <ClCompile Include="Src\MeshFilterComponent.cpp">
       <Filter>Src\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Component.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

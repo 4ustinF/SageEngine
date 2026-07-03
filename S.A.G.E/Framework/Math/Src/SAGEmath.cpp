@@ -37,6 +37,12 @@ const Vector3Int Vector3Int::YAxis(0, 1, 0);
 const Vector3Int Vector3Int::ZAxis(0, 0, 0);
 #pragma endregion
 
+//Vector4
+#pragma region ---Vector3---
+const Vector4 Vector4::Zero(0.0f);
+const Vector4 Vector4::One(1.0f);
+#pragma endregion
+
 //Matrix3
 #pragma region ---Matrix3---
 

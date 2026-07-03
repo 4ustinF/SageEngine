@@ -44,7 +44,7 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 	if (mMaterialData.normalMapName.empty() && value.HasMember("NormalMapFileName"))
 	{
 		const auto& normalMapFileName = value["NormalMapFileName"].GetString();
-		SetDiffuseMapFileName(normalMapFileName);
+		SetNormalMapFileName(normalMapFileName);
 	}
 
 	if (mMaterialData.material.power == 0.0f && value.HasMember("Power"))

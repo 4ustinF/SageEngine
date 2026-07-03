@@ -170,6 +170,7 @@ void RenderService::Render()
 
 	// TODO: Add UV support to standard effect
 	// TODO: Add material data to all the models.
+	// TODO: Add mat support on mesh renderer
 	mBloomRenderTarget.BeginRender(); //TODO: Clean up
 	{
 		mStandardEffect.Begin();

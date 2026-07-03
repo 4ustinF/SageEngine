@@ -28,6 +28,7 @@ void GameState::Initialize()
 	renderService->SetSampleFilter(Sampler::Filter::Point);
 	renderService->GetDirectionalLight().direction = Math::Normalize(Vector3(0.0f, -1.0f, 0.0f));
 	renderService->GetDirectionalLight().ambient = Colors::White;
+	renderService->GetDirectionalLight().diffuse = Colors::White;
 
 	// TODO:
 	// Render service:

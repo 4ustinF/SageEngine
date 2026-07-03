@@ -212,6 +212,19 @@ void MeshRendererComponent::Initialize()
 	{
 		renderObject.normalMapId = mTextureManager->LoadTexture(mMaterialData.normalMapName);
 	}
+
+	// TODO: Remove this is for debugging reasons
+	renderObject.material.ambient = Color(0.2f, 0.2f, 0.2f, 1.0f);
+	renderObject.material.diffuse = Color(0.2f, 0.2f, 0.2f, 1.0f);
+	renderObject.material.specular = Color(0.2f, 0.2f, 0.2f, 1.0f);
+	renderObject.material.emissive = Color(0.2f, 0.2f, 0.2f, 1.0f);
+	renderObject.material.power = 25.0f;
+
+	mMaterialData.material.ambient = renderObject.material.ambient;
+	mMaterialData.material.diffuse = renderObject.material.diffuse;
+	mMaterialData.material.specular = renderObject.material.specular;
+	mMaterialData.material.emissive = renderObject.material.emissive;
+	mMaterialData.material.power = renderObject.material.power;
 }
 
 void MeshRendererComponent::Terminate()
@@ -310,12 +323,12 @@ void MeshRendererComponent::DebugUI()
 
 void MeshRendererComponent::OnEnable()
 {
-	mRenderService->RegisterMeshRenderer(this, true); // TODO: Don't default true
+	mRenderService->RegisterMeshRenderer(this, mIsBasic);
 }
 
 void MeshRendererComponent::OnDisable()
 {
-	mRenderService->UnregisterMeshRenderer(this, true); // TODO: Don't default true
+	mRenderService->UnregisterMeshRenderer(this, mIsBasic);
 }
 
 RenderObject& MeshRendererComponent::GetRenderObject()

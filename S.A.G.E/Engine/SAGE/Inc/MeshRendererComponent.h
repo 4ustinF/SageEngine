@@ -69,6 +69,7 @@ namespace SAGE
 		void LoadMaterial(std::filesystem::path filePath);
 		SAGE::Graphics::Model::MaterialData mMaterialData; // TODO tidy up in here.
 		std::string mMaterialFilePath = "";
+		bool mIsBasic = false; // TODO: Don't default true
 
 		// TODO: Move out
 		std::string OpenFileDialog()

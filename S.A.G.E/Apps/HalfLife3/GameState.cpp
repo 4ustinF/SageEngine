@@ -18,11 +18,16 @@ namespace
 void GameState::Initialize()
 {
 	mGameWorld.AddService<CameraService>();
-	mGameWorld.AddService<RenderService>()->SetSampleFilter(Sampler::Filter::Point);
+	RenderService* renderService = mGameWorld.AddService<RenderService>();
 	mGameWorld.Initialize(1000);
 
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/HalfLife/halflife_level.json");
+
+	// TODO: Move over to level asset.
+	renderService->SetSampleFilter(Sampler::Filter::Point);
+	renderService->GetDirectionalLight().direction = Math::Normalize(Vector3(0.0f, -1.0f, 0.0f));
+	renderService->GetDirectionalLight().ambient = Colors::White;
 
 	// TODO:
 	// Render service:

@@ -76,5 +76,13 @@ namespace SAGE
 		SAGE::Graphics::Sampler::Filter mSampleFilter = SAGE::Graphics::Sampler::Filter::Linear;
 
 		int mFPS = 0;
+
+		// TODO: Move out
+		SAGE::Graphics::RenderObject mScreenQuad;
+		SAGE::Graphics::RenderTarget mBaseRenderTarget;
+		SAGE::Graphics::RenderTarget mBloomRenderTarget;
+		SAGE::Graphics::PostProcessingEffect mPostProccessingEffect;
+		SAGE::Graphics::GaussianBlurEffect mGaussianBlurEffect;
+
 	};
 }

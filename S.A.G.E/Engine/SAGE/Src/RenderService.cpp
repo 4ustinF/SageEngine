@@ -48,10 +48,36 @@ void RenderService::Initialize()
 	mShadowEffect.Initialize();
 	mShadowEffect.SetDirectionalLight(mDirectionalLight);
 	//mShadowEffect.SetSize(200);
+
+	mPostProccessingEffect.Initialize();
+	mPostProccessingEffect.SetMode(PostProcessingEffect::Mode::Combine2);
+	mPostProccessingEffect.SetTexture(&mBaseRenderTarget, 0);
+	mPostProccessingEffect.SetTexture(&mGaussianBlurEffect.GetResultTexture(), 1);
+	mPostProccessingEffect.SetIntensity(25.0f);
+
+	mGaussianBlurEffect.Initialize();
+	mGaussianBlurEffect.SetSourceTexture(mBloomRenderTarget);
+	mGaussianBlurEffect.BlurIterations() = 10.0f;
+	mGaussianBlurEffect.BlurSaturation() = 1.0f;
+
+	mScreenQuad.meshBuffer.Initialize(MeshBuilder::CreateScreenQuad());
+
+	auto gs = GraphicsSystem::Get();
+	const auto screenWidth = gs->GetBackBufferWidth();
+	const auto screenHeight = gs->GetBackBufferHeight();
+	mBaseRenderTarget.Initialize(screenWidth, screenHeight, RenderTarget::Format::RGBA_U8);
+	mBloomRenderTarget.Initialize(screenWidth, screenHeight, RenderTarget::Format::RGBA_U8);
 }
 
 void RenderService::Terminate()
 {
+	mGaussianBlurEffect.Terminate();
+	mPostProccessingEffect.Terminate();
+
+	mBloomRenderTarget.Terminate();
+	mBaseRenderTarget.Terminate();
+	mScreenQuad.Terminate();
+
 	mShadowEffect.Terminate();
 	mTerrainEffect.Terminate();
 	mTexturingEffect.Terminate();
@@ -100,43 +126,94 @@ void RenderService::Render()
 		}
 	}
 
-	mTexturingEffect.Begin();
-	if (mSkyDome.diffuseMapId != 0) { mTexturingEffect.Render(mSkyDome); }
-	if (mSkyBox.diffuseMapId != 0) { mTexturingEffect.Render(mSkyBox); }
-	for (auto& entry : mBasicRenderEntries) {
-		mTexturingEffect.Render(entry.renderGroup);
-	}
-	for (auto& entry : mBasicMeshRendererEntrys) {
-		mTexturingEffect.Render(entry->GetRenderObject());
-	}
-	mTexturingEffect.End();
+	mBaseRenderTarget.BeginRender();
+	{
+		mTexturingEffect.Begin();
+		if (mSkyDome.diffuseMapId != 0) { mTexturingEffect.Render(mSkyDome); }
+		if (mSkyBox.diffuseMapId != 0) { mTexturingEffect.Render(mSkyBox); }
+		for (auto& entry : mBasicRenderEntries) {
+			mTexturingEffect.Render(entry.renderGroup);
+		}
+		for (auto& entry : mBasicMeshRendererEntrys) {
+			mTexturingEffect.Render(entry->GetRenderObject());
+		}
+		mTexturingEffect.End();
 
-	mShadowEffect.Begin();
-	for (auto& entry : mRenderEntries) {
-		mShadowEffect.Render(entry.renderGroup);
-	}
-	for (auto& entry : mMeshRendererEntrys) {
-		mShadowEffect.Render(entry->GetRenderObject());
-	}
-	if (mTerrainService) {
-		mShadowEffect.Render(mTerrainService->GetTerrainRenderObject());
-	}
-	mShadowEffect.End();
+		mShadowEffect.Begin();
+		for (auto& entry : mRenderEntries) {
+			mShadowEffect.Render(entry.renderGroup);
+		}
+		for (auto& entry : mMeshRendererEntrys) {
+			mShadowEffect.Render(entry->GetRenderObject());
+		}
+		if (mTerrainService) {
+			mShadowEffect.Render(mTerrainService->GetTerrainRenderObject());
+		}
+		mShadowEffect.End();
 
-	mStandardEffect.Begin();
-	for (auto& entry : mRenderEntries) {
-		mStandardEffect.Render(entry.renderGroup);
-	}
-	for (auto& entry : mMeshRendererEntrys) {
-		mStandardEffect.Render(entry->GetRenderObject());
-	}
-	mStandardEffect.End();
+		mStandardEffect.Begin();
+		for (auto& entry : mRenderEntries) {
+			mStandardEffect.Render(entry.renderGroup);
+		}
+		for (auto& entry : mMeshRendererEntrys) {
+			mStandardEffect.Render(entry->GetRenderObject());
+		}
+		mStandardEffect.End();
 
-	if (mTerrainService) {
-		mTerrainEffect.Begin();
-		mTerrainEffect.Render(mTerrainService->GetTerrainRenderObject());
-		mTerrainEffect.End();
+		if (mTerrainService) {
+			mTerrainEffect.Begin();
+			mTerrainEffect.Render(mTerrainService->GetTerrainRenderObject());
+			mTerrainEffect.End();
+		}
 	}
+	mBaseRenderTarget.EndRender();
+
+	// TODO: Add UV support to standard effect
+	// TODO: Add material data to all the models.
+	mBloomRenderTarget.BeginRender(); //TODO: Clean up
+	{
+		mStandardEffect.Begin();
+		for (auto& entry : mMeshRendererEntrys) 
+		{
+			Material dummyMaterial;
+			dummyMaterial.power = 1.0f;
+			RenderObject& renderObject = entry->GetRenderObject();
+
+			bool swap = false;
+			if (TransformComponent* entryTC = entry->GetOwner().GetComponent<TransformComponent>())
+			{
+				if (entryTC->GetPosition().y <= 0.0f)
+				{
+					std::swap(renderObject.material, dummyMaterial);
+					swap = true;
+				}
+			}
+
+			mStandardEffect.Render(renderObject);
+
+			if (swap)
+			{
+				std::swap(renderObject.material, dummyMaterial);
+			}
+		}
+		mStandardEffect.End();
+	}
+	mBloomRenderTarget.EndRender();
+
+	// ------------------------------------------------------------
+	mGaussianBlurEffect.Begin();
+	{
+		mGaussianBlurEffect.Render(mScreenQuad);
+	}
+	mGaussianBlurEffect.End();
+
+	mPostProccessingEffect.Begin();
+	{
+		mPostProccessingEffect.Render(mScreenQuad);
+	}
+	mPostProccessingEffect.End();
+	// ------------------------------------------------------------
+
 
 	//SimpleDraw::AddTransform(Matrix4::Identity); // TODO: Add settings to display these.
 	//SimpleDraw::AddPlane(20, Colors::White); // TODO: Add settings to display these.
@@ -168,6 +245,30 @@ void RenderService::DebugUI()
 	ImGui::Separator();
 	mTerrainEffect.DebugUI();
 	ImGui::Separator();
+
+	// ---- TODO: Clean up
+	ImGui::Separator();
+	mPostProccessingEffect.DebugUI();
+	ImGui::Separator();
+
+	if (ImGui::CollapsingHeader("Blur Settings", ImGuiTreeNodeFlags_DefaultOpen))
+	{
+		ImGui::DragInt("Blur Iteration", &mGaussianBlurEffect.BlurIterations(), 1, 1, 100);
+		ImGui::DragFloat("Blur Saturation", &mGaussianBlurEffect.BlurSaturation(), 0.001f, 1.0f, 100.0f);
+	}
+
+	ImGui::Separator();
+
+	ImGui::Begin("Render Targets", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+	ImGui::Text("Base");
+	ImGui::Image(mBaseRenderTarget.GetRawData(), { 256, 144 });
+	ImGui::Text("Bloom");
+	ImGui::Image(mBloomRenderTarget.GetRawData(), { 256, 144 });
+	ImGui::Text("Horizontal Blur");
+	ImGui::Image(mGaussianBlurEffect.GetHorizontalBlurTexture().GetRawData(), { 256, 144 });
+	ImGui::Text("Vertical Blur");
+	ImGui::Image(mGaussianBlurEffect.GetVerticalBlurTexture().GetRawData(), { 256, 144 });
+	ImGui::End();
 }
 
 void RenderService::LoadSkyDome(const char* fileName)

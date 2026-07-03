@@ -93,6 +93,11 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 		mMaterialData.material.emissive = Color(x, y, z, w);
 	}
 
+	if (value.HasMember("Bloom"))
+	{
+		mAllowBloom = value["Bloom"].GetBool();
+	}
+
 	if (value.HasMember("TilingSize"))
 	{
 		const auto& tilingSize = value["TilingSize"].GetArray();
@@ -153,6 +158,12 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 		SaveVector4ToTemplate(compObj, allocator, "Diffuse", mMaterialData.material.diffuse); // Material Diffuse
 		SaveVector4ToTemplate(compObj, allocator, "Specular", mMaterialData.material.specular); // Material Specular
 		SaveVector4ToTemplate(compObj, allocator, "Emissive", mMaterialData.material.emissive); // Material Emissive
+	}
+
+	// --- Bloom ---
+	if (mAllowBloom == true)
+	{
+		SaveBoolToTemplate(compObj, allocator, "Bloom", mAllowBloom);
 	}
 
 	// --- Tiling Size ---
@@ -242,6 +253,8 @@ void MeshRendererComponent::DebugUI()
 			SetTileToZScale(tileToZScale);
 		}
 		}
+
+		ImGui::Checkbox("Bloom##MeshRendererComponent", &mAllowBloom);
 
 		RenderObject& renderObject = mMeshFilter->GetRenderObject();
 		TextureDebugUI("Diffuse Map", renderObject.diffuseMapId, mMaterialData.diffuseMapName);

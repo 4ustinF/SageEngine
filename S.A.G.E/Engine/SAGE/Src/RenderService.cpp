@@ -182,13 +182,10 @@ void RenderService::Render()
 			RenderObject& renderObject = entry->GetRenderObject();
 
 			bool swap = false;
-			if (TransformComponent* entryTC = entry->GetOwner().GetComponent<TransformComponent>())
+			if (entry->GetShouldBloom() == false)
 			{
-				if (entryTC->GetPosition().y <= 0.0f)
-				{
-					std::swap(renderObject.material, dummyMaterial);
-					swap = true;
-				}
+				std::swap(renderObject.material, dummyMaterial);
+				swap = true;
 			}
 
 			mStandardEffect.Render(renderObject);

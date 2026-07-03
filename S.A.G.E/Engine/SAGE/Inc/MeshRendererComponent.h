@@ -32,6 +32,7 @@ namespace SAGE
 
 		// Getters
 		SAGE::Graphics::RenderObject& GetRenderObject();
+		bool GetShouldBloom() const { return mAllowBloom; }
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }
@@ -73,6 +74,7 @@ namespace SAGE
 		SAGE::Graphics::Model::MaterialData mMaterialData; // TODO tidy up in here.
 		std::string mMaterialFilePath = "";
 		bool mIsBasic = false; // TODO: Don't default true
+		bool mAllowBloom = false;
 
 		// TODO: Move out
 		std::string OpenFileDialog(const char* fileFilterType)

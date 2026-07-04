@@ -22,8 +22,7 @@ void GaussianBlurEffect::Initialize()
 	mVerticalBlurPixelShader.Initialize("../../Assets/Shaders/GaussianBlur.fx", "VerticalBlurPS");
 
 	mSettingsBuffer.Initialize();
-
-	mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+	mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Clamp);
 }
 
 void GaussianBlurEffect::Terminate()

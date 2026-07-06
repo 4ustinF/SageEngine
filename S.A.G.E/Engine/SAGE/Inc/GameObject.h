@@ -20,8 +20,10 @@ namespace SAGE
 		void Update(float deltaTime);
 		void DebugUI();
 
-		const bool IsActive() const { return mIsActive; }
+		const bool IsActiveInHierarchy() const { return mActiveInHierarchy; }
+		const bool IsSelfActive() const { return mSelfActive; }
 		void SetActive(bool active);
+		void UpdateActiveInHierarchy();
 
 		template<class ComponentType>
 		ComponentType* AddComponent()
@@ -81,7 +83,8 @@ namespace SAGE
 		std::filesystem::path mTemplatePath = "";
 		void SetTemplatePath(const std::filesystem::path& path) { mTemplatePath = path; }
 		bool mInitialize = false;
-		bool mIsActive = true;
+		bool mActiveInHierarchy = true;
+		bool mSelfActive = true;
 
 		Components mComponents;
 		GameWorld* mWorld = nullptr;

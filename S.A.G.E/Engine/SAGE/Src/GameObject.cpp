@@ -30,7 +30,7 @@ void GameObject::Terminate()
 
 void GameObject::Update(float deltaTime)
 {
-	if (!mIsActive)
+	if (!mActiveInHierarchy)
 	{
 		return;
 	}
@@ -49,9 +49,10 @@ void GameObject::Update(float deltaTime)
 
 void GameObject::DebugUI()
 {
-	if (ImGui::Checkbox("IsActive", &mIsActive))
+	bool selfActive = mSelfActive;
+	if (ImGui::Checkbox("Is Self Active", &selfActive))
 	{
-		SetActive(mIsActive);
+		SetActive(selfActive);
 	}
 
 	ImGui::SameLine();
@@ -70,8 +71,35 @@ void GameObject::DebugUI()
 
 void GameObject::SetActive(bool active)
 {
-	mIsActive = active;
-	mIsActive ? OnEnable() : OnDisable();
+	if (mSelfActive == active)
+	{
+		return;
+	}
+
+	mSelfActive = active;
+	UpdateActiveInHierarchy();
+}
+
+void GameObject::UpdateActiveInHierarchy()
+{
+	const GameObject* parentGO = GetParentGameObject();
+	const bool newActiveInHierarchy = mSelfActive && (!parentGO || parentGO->IsActiveInHierarchy());
+
+	if (mActiveInHierarchy == newActiveInHierarchy)
+	{
+		return;
+	}
+
+	mActiveInHierarchy = newActiveInHierarchy;
+	mActiveInHierarchy ? OnEnable() : OnDisable();
+
+	for (const GameObjectHandle& childHandle : GetChildrenHandles())
+	{
+		if (GameObject* childGO = GetWorld().GetGameObject(childHandle))
+		{
+			childGO->UpdateActiveInHierarchy();
+		}
+	}
 }
 
 void GameObject::OnEnable()

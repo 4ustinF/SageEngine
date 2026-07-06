@@ -169,13 +169,10 @@ void RenderService::Render()
 	mBaseRenderTarget.EndRender();
 
 	// TODO: Add UV support to standard effect
-	// TODO: Add material data to all the models.
-	// TODO: Add mat support on mesh renderer
-	// TODO: Add a way to swap materials on the fly for mesh renderer.
 	mBloomRenderTarget.BeginRender(); //TODO: Clean up
 	{
 		mStandardEffect.Begin();
-		for (auto& entry : mMeshRendererEntrys) 
+		for (auto& entry : mMeshRendererEntrys)
 		{
 			Material dummyMaterial;
 			dummyMaterial.power = 1.0f;

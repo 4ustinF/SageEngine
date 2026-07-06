@@ -73,7 +73,7 @@ namespace SAGE
 		void LoadTextures();
 		SAGE::Graphics::Model::MaterialData mMaterialData; // TODO tidy up in here.
 		std::string mMaterialFilePath = "";
-		bool mIsBasic = false; // TODO: Don't default true
+		bool mIsBasic = false;
 		bool mAllowBloom = false;
 
 		// TODO: Move out

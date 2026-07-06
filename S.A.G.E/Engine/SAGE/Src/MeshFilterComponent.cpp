@@ -136,7 +136,7 @@ void MeshFilterComponent::DebugUI()
 				const Vector3 pos0 = mMesh.vertices[mMesh.indices[i]].position + worldPos;
 				const Vector3 pos1 = mMesh.vertices[mMesh.indices[i + 1]].position + worldPos;
 				const Vector3 pos2 = mMesh.vertices[mMesh.indices[i + 2]].position + worldPos;
-				SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red);
+				SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red); // TODO: Add a color option and a filled option.
 			}
 		}
 	}

@@ -12,4 +12,5 @@ public:
 
 private:
 	SAGE::GameWorld mGameWorld;
+	SAGE::CameraService* mCameraService = nullptr;
 };

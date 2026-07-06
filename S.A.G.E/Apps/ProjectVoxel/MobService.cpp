@@ -116,7 +116,7 @@ void MobService::AttackMob(int index, int dmg, const Vector3& dir)
 	for (auto& mobHandle : mPassiveMobHandles)
 	{
 		auto mob = GetWorld().GetGameObject(mobHandle);
-		if (!mob->IsActive())
+		if (!mob->IsActiveInHierarchy())
 		{
 			continue;
 		}

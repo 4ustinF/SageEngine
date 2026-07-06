@@ -36,7 +36,7 @@ void BPhysicsComponent::Terminate()
 
 void BPhysicsComponent::UpdatePhysics(float deltaTime)
 {
-	if (!GetOwner().IsActive())
+	if (!GetOwner().IsActiveInHierarchy())
 	{
 		return;
 	}

@@ -17,7 +17,7 @@ namespace
 
 void GameState::Initialize()
 {
-	mGameWorld.AddService<CameraService>();
+	mCameraService = mGameWorld.AddService<CameraService>();
 	RenderService* renderService = mGameWorld.AddService<RenderService>();
 	mGameWorld.Initialize(1000);
 
@@ -38,6 +38,7 @@ void GameState::Initialize()
 
 void GameState::Terminate()
 {
+	mCameraService = nullptr;
 	mGameWorld.Terminate();
 }
 
@@ -49,7 +50,7 @@ void GameState::Update(float deltaTime)
 void GameState::Render()
 {
 	mGameWorld.Render();
-	SimpleDraw::Render(mGameWorld.GetService<CameraService>()->GetCamera());
+	SimpleDraw::Render(mCameraService->GetCamera());
 }
 
 void GameState::DebugUI()

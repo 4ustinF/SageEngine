@@ -106,6 +106,14 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 		SetTilingSize(Vector2(x, y));
 	}
 
+	if (value.HasMember("TilingOffset"))
+	{
+		const auto& tilingOffset = value["TilingOffset"].GetArray();
+		const float x = tilingOffset[0].GetFloat();
+		const float y = tilingOffset[1].GetFloat();
+		SetTilingOffset(Vector2(x, y));
+	}
+
 	if (value.HasMember("TileToXScale"))
 	{
 		const auto& tileToXScale = value["TileToXScale"].GetBool();
@@ -168,6 +176,7 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 
 	// --- Tiling Size ---
 	SaveVector2ToTemplate(compObj, allocator, "TilingSize", mTilingSize, Vector2::One);
+	SaveVector2ToTemplate(compObj, allocator, "TilingOffset", mTilingOffset);
 
 	// --- Tile To X Scale ---
 	if (mTileToXScale == true)

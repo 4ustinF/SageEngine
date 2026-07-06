@@ -161,6 +161,7 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	}
 
 	settingsData.tiling = renderObject.tilingSize;
+	settingsData.tilingOffset = renderObject.tilingOffset;
 
 	mSettingsBuffer.Update(settingsData);
 

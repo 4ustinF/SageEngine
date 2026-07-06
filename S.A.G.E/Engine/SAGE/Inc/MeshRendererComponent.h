@@ -42,6 +42,8 @@ namespace SAGE
 		void SetNormalMapFileName(const char* fileName) { mMaterialData.normalMapName = fileName; }						// TODO: Might need to update mMaterialData when these update as well.
 		void SetTilingSize(float xTilingSize, float yTilingSize);
 		void SetTilingSize(const SAGE::Math::Vector2& tilingSize);
+		void SetTilingOffset(float xTilingOffset, float yTilingOffset);
+		void SetTilingOffset(const SAGE::Math::Vector2& tilingOffset);
 		void SetTileToScale(bool tileToXScale = false, bool tileToYScale = false, bool tileToZScale = false);
 		void SetTileToXScale(bool tileToXScale);
 		void SetTileToYScale(bool tileToYScale);
@@ -65,6 +67,7 @@ namespace SAGE
 		SAGE::Core::Delegate::FDelegateHandle ScaleChangedHandle;
 
 		SAGE::Math::Vector2 mTilingSize = SAGE::Math::Vector2::One;
+		SAGE::Math::Vector2 mTilingOffset = SAGE::Math::Vector2::Zero; // TODO: Save/Load this.
 		bool mTileToXScale = false;
 		bool mTileToYScale = false;
 		bool mTileToZScale = false;

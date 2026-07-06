@@ -27,6 +27,7 @@ namespace SAGE::Graphics
 
 		MeshBuffer meshBuffer;
 		SAGE::Math::Vector2 tilingSize = SAGE::Math::Vector2::One;
+		SAGE::Math::Vector2 tilingOffset = SAGE::Math::Vector2::One;
 
 		const Skeleton* skeleton = nullptr;
 		const IAnimator* animator = nullptr;

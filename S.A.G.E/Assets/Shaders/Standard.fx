@@ -48,7 +48,7 @@ cbuffer SettingBuffer : register(b4)
     float padding;
 
     float2 tiling;
-    float2 tilingOffset; // TODO: Hook up in shader.
+    float2 tilingOffset;
 }
 
 Texture2D diffuseMap : register(t0);
@@ -128,7 +128,7 @@ VS_OUTPUT VS(VS_INPUT input)
     output.worldTangent = mul(input.tangent, (float3x3) toWorld);
     output.dirToLight = -lightDirection;
     output.dirToView = normalize(viewPosition - mul(float4(localPosition, 1.0f), toWorld).xyz);
-    output.texCoord = input.texCoord * tiling;
+    output.texCoord = (input.texCoord * tiling) + tilingOffset;
     output.lightNDCPosition = mul(float4(localPosition, 1.0f), toLightNDC);
     output.fogFactor = saturate((fogEnd - output.position.w) / (fogEnd - fogStart));
     return output;

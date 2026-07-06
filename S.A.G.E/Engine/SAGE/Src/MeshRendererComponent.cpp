@@ -229,6 +229,11 @@ void MeshRendererComponent::DebugUI()
 			SetTilingSize(mTilingSize);
 		}
 
+		if (ImGui::DragFloat2("Tiling Offset##MeshRendererComponent", &mTilingOffset.x, 0.1f))
+		{
+			SetTilingOffset(mTilingOffset);
+		}
+
 		// Tile To Scale
 		{
 		ImGui::Text("Tile To Scale");
@@ -298,6 +303,17 @@ void MeshRendererComponent::SetTilingSize(const Vector2& tilingSize)
 {
 	mTilingSize = tilingSize;
 	mMeshFilter->GetRenderObject().tilingSize = mTilingSize;
+}
+
+void MeshRendererComponent::SetTilingOffset(float xTilingOffset, float yTilingOffset)
+{
+	SetTilingOffset(Vector2(xTilingOffset, yTilingOffset));
+}
+
+void MeshRendererComponent::SetTilingOffset(const Vector2& tilingOffset)
+{
+	mTilingOffset = tilingOffset;
+	mMeshFilter->GetRenderObject().tilingOffset = mTilingOffset;
 }
 
 void MeshRendererComponent::SetTileToScale(bool tileToXScale, bool tileToYScale, bool tileToZScale)

@@ -81,7 +81,7 @@ namespace SAGE::Graphics
 			float padding = 0;
 
 			SAGE::Math::Vector2 tiling = { 1.0f, 1.0f };
-			SAGE::Math::Vector2 tilingOffset = { 0.0f, 0.0f }; // TODO: Hook up in shader.
+			SAGE::Math::Vector2 tilingOffset = { 0.0f, 0.0f };
 		};
 
 		using TransformBuffer = TypedConstantBuffer<TransformData>;

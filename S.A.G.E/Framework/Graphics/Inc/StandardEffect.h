@@ -79,6 +79,9 @@ namespace SAGE::Graphics
 			float fogStart = 50.0f;
 			float fogEnd = 100.0f;
 			float padding = 0;
+
+			SAGE::Math::Vector2 tiling = { 1.0f, 1.0f };
+			SAGE::Math::Vector2 tilingOffset = { 0.0f, 0.0f }; // TODO: Hook up in shader.
 		};
 
 		using TransformBuffer = TypedConstantBuffer<TransformData>;

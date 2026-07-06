@@ -160,6 +160,8 @@ void StandardEffect::Render(const RenderObject& renderObject)
 		settingsData.useSkinning = 1;
 	}
 
+	settingsData.tiling = renderObject.tilingSize;
+
 	mSettingsBuffer.Update(settingsData);
 
 	auto tm = TextureManager::Get();

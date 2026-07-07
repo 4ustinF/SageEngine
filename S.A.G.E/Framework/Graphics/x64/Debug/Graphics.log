@@ -1,2 +1,17 @@
-﻿  GaussianBlurEffect.cpp
+﻿  CrossHatchEffect.cpp
+  GaussianBlurEffect.cpp
+  HologramEffect.cpp
+  ParticleEffect.cpp
+  PostProccessingEffect.cpp
+  ReflectionEffect.cpp
+  RenderObject.cpp
+  ShadowEffect.cpp
+  StandardEffect.cpp
+  TerrainEffect.cpp
+  TexturingEffect.cpp
+  ToonEffect .cpp
+  VoxelCloudsEffect.cpp
+  VoxelTerrainEffect.cpp
+  VoxelWaterEffect.cpp
+  Generating Code...
   Graphics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Graphics.lib

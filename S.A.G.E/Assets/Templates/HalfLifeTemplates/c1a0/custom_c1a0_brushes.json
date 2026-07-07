@@ -1,0 +1,11 @@
+{
+  "Name": "Section 0",
+  "Components": {
+    "Transform Component": {
+    },
+    "Model Component": {
+      "FileName": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brushes.model",
+      "IsBasicModel": true
+    }
+  }
+}

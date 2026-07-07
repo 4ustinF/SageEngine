@@ -63,7 +63,7 @@ void MeshFilterComponent::LoadComponentFromTemplate(const rapidjson::Value& valu
 
 void MeshFilterComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
-	SaveStringToTemplate(compObj, allocator, "MeshType", mMeshTypeName); // Mesh Type
+	SaveStringToTemplate(compObj, allocator, "MeshType", MeshTypeNames[static_cast<int>(mMeshType)]); // Mesh Type
 	SaveStringToTemplate(compObj, allocator, "Custom Mesh File Path", mCustomFilePath); // Custom Mesh File Path
 	if (mPivot != Pivot::Center) { SaveStringToTemplate(compObj, allocator, "Pivot", PivotToString(mPivot)); } // Pivot 
 	SaveVector2IntToTemplate(compObj, allocator, "Divisions", mDivisions, Vector2Int::One); // Divisions
@@ -75,9 +75,7 @@ void MeshFilterComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rap
 void MeshFilterComponent::Initialize()
 {
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
-
 	GenerateMesh();
-	mMeshTypeName = MeshTypeToString(mMeshType);
 }
 
 void MeshFilterComponent::Terminate()
@@ -90,8 +88,21 @@ void MeshFilterComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Mesh Filter Component##MeshFilterComponent ", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
+		int currentMeshItem = static_cast<int>(mMeshType);
+		ImGui::Text("Mesh: "); ImGui::SameLine();
+		if (ImGui::Combo(" ", &currentMeshItem, MeshTypeNames, IM_ARRAYSIZE(MeshTypeNames)))
+		{
+			MeshType currentMeshType = static_cast<MeshType>(currentMeshItem);
+			if (mMeshType != currentMeshType)
+			{
+				mMeshType = currentMeshType;
+				mRenderObject.meshBuffer.Terminate();
+				GenerateMesh();
+			}
+		}
+
 		// TODO: Make it so we can swap mesh data out.
-		ImGui::Text("Mesh: %s", mMeshTypeName.c_str());
+		// TODO: Make it so we can modify mesh settings here.
 
 		// Display vertices count
 		ImGui::Text("Vertex Count: %s", std::to_string(mRenderObject.meshBuffer.GetVertexCount()).c_str());
@@ -123,54 +134,35 @@ void MeshFilterComponent::DebugUI()
 		}
 
 		ImGui::Checkbox("Display Wireframe##MeshFilterComponent", &mEnableWireframe);
-	}
 
-	if (mEnableWireframe)
-	{
-		const int indexCount = static_cast<int>(mMesh.indices.size());
-		if (indexCount > 3)
+		if (mEnableWireframe)
 		{
-			const Vector3& worldPos = mTransformComponent != nullptr ? mTransformComponent->GetPosition() : Vector3::Zero;
-			for (int i = 0; i < indexCount; i += 3)
+			const int indexCount = static_cast<int>(mMesh.indices.size());
+			if (indexCount > 3)
 			{
-				const Vector3 pos0 = mMesh.vertices[mMesh.indices[i]].position + worldPos;
-				const Vector3 pos1 = mMesh.vertices[mMesh.indices[i + 1]].position + worldPos;
-				const Vector3 pos2 = mMesh.vertices[mMesh.indices[i + 2]].position + worldPos;
-				SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red); // TODO: Add a color option and a filled option.
+				const Vector3& worldPos = mTransformComponent != nullptr ? mTransformComponent->GetPosition() : Vector3::Zero;
+				for (int i = 0; i < indexCount; i += 3)
+				{
+					const Vector3 pos0 = mMesh.vertices[mMesh.indices[i]].position + worldPos;
+					const Vector3 pos1 = mMesh.vertices[mMesh.indices[i + 1]].position + worldPos;
+					const Vector3 pos2 = mMesh.vertices[mMesh.indices[i + 2]].position + worldPos;
+					SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red); // TODO: Add a color option and a filled option.
+				}
 			}
 		}
 	}
 }
 
-std::string MeshFilterComponent::MeshTypeToString(MeshType meshType)
-{
-	switch (meshType)
-	{
-	case MeshType::Cube:
-		return "Cube";
-	case MeshType::Cylinder:
-		return "Cylinder";
-	case MeshType::Plane:
-		return "Plane";
-	case MeshType::Quad:
-		return "Quad";
-	case MeshType::Sphere:
-		return "Sphere";
-	case MeshType::Custom:
-		return "Custom";
-	}
-
-	return "Missing";
-}
-
 MeshType MeshFilterComponent::StringToMeshType(const std::string& meshType)
 {
-	if (meshType == "Cube") { return MeshType::Cube; }
-	if (meshType == "Cylinder") { return MeshType::Cylinder; }
-	if (meshType == "Plane") { return MeshType::Plane; }
-	if (meshType == "Quad") { return MeshType::Quad; }
-	if (meshType == "Sphere") { return MeshType::Sphere; }
-	if (meshType == "Custom") { return MeshType::Custom; }
+	const int meshTypeNamesSize = IM_ARRAYSIZE(MeshTypeNames);
+	for (int meshTypeNamesIndex = 0; meshTypeNamesIndex < meshTypeNamesSize; ++meshTypeNamesIndex)
+	{
+		if (meshType == MeshTypeNames[meshTypeNamesIndex])
+		{
+			return static_cast<MeshType>(meshTypeNamesIndex);
+		}
+	}
 
 	return MeshType::Custom;
 }

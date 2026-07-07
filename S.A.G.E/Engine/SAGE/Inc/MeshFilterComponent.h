@@ -6,7 +6,7 @@ namespace SAGE
 {
 	class TransformComponent;
 
-	enum class MeshType
+	enum class MeshType // TODO: If you modify this list make sure to also modify MeshTypeNames.
 	{
 		Cube,
 		Cylinder,
@@ -44,8 +44,7 @@ namespace SAGE
 		void SetRadius(float radius) { mRadius = radius; }
 
 		// Helpers
-		std::string MeshTypeToString(MeshType meshType); // TODO: Move to a utils class?
-		MeshType StringToMeshType(const std::string& meshType); // TODO: Move to a utils class?
+		MeshType StringToMeshType(const std::string& meshType);
 
 	private:
 		void GenerateMesh();
@@ -60,7 +59,6 @@ namespace SAGE
 
 		SAGE::Graphics::RenderObject mRenderObject;
 		MeshType mMeshType = MeshType::Cube;
-		std::string mMeshTypeName = "Cube";
 		SAGE::Graphics::Mesh mMesh;
 		bool mEnableWireframe = true;
 
@@ -71,6 +69,14 @@ namespace SAGE
 		bool mFlipVertices = false;
 		float mRadius = 1.0f;
 
-		// TODO: Add support to take in and generate custom meshes.
+		const char* MeshTypeNames[6] =
+		{
+			"Cube",
+			"Cylinder",
+			"Plane",
+			"Quad",
+			"Sphere",
+			"Custom"
+		};
 	};
 }

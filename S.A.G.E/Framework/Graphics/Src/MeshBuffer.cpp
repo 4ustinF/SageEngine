@@ -47,6 +47,9 @@ void MeshBuffer::Terminate()
 {
 	SafeRelease(mIndexBuffer);
 	SafeRelease(mVertexBuffer);
+	mVertexSize = 0;
+	mVertexCount = 0;
+	mIndexCount = 0;
 }
 
 void MeshBuffer::SetToplogy(Topology topology)

@@ -2,6 +2,9 @@
 
 #include "Component.h"
 
+#include <Windows.h> // TODO: Move out
+#include <commdlg.h> // TODO: Move out
+
 namespace SAGE
 {
 	class TransformComponent;
@@ -35,13 +38,13 @@ namespace SAGE
 		// Getters
 		SAGE::Graphics::RenderObject& GetRenderObject() { return mRenderObject; };
 
-		// Setters
+		// Setters // TODO: These should should trigger an update on the mesh for when we call them other then the init func.
 		void SetMeshType(MeshType meshType) { mMeshType = meshType; }
-		void SetPivotType(SAGE::Input::Pivot pivot) { mPivot = pivot; }
-		void SetDivisions(SAGE::Math::Vector2Int divisions) { mDivisions = divisions; }
-		void SetSpacing(SAGE::Math::Vector2 spacing) { mSpacing = spacing; }
-		void SetFlipVertices(bool flipVertices) { mFlipVertices = flipVertices; }
-		void SetRadius(float radius) { mRadius = radius; }
+		void SetPivotType(SAGE::Input::Pivot pivot) { mMeshFilterData.pivot = pivot; }
+		void SetDivisions(SAGE::Math::Vector2Int divisions) { mMeshFilterData.divisions = divisions; }
+		void SetSpacing(SAGE::Math::Vector2 spacing) { mMeshFilterData.spacing = spacing; }
+		void SetFlipVertices(bool flipVertices) { mMeshFilterData.flipVertices = flipVertices; }
+		void SetRadius(float radius) { mMeshFilterData.radius = radius; }
 
 		// Helpers
 		MeshType StringToMeshType(const std::string& meshType);
@@ -62,12 +65,18 @@ namespace SAGE
 		SAGE::Graphics::Mesh mMesh;
 		bool mEnableWireframe = true;
 
-		std::string mCustomFilePath = ""; // TODO: Convert to std::filesystem::path
-		SAGE::Input::Pivot mPivot = Input::Pivot::Center;
-		Math::Vector2Int mDivisions = Math::Vector2Int::One;
-		Math::Vector2 mSpacing = Math::Vector2::One;
-		bool mFlipVertices = false;
-		float mRadius = 1.0f;
+		struct MeshFilterData
+		{
+			std::string customFilePath = ""; // TODO: Convert to std::filesystem::path
+			SAGE::Input::Pivot pivot = Input::Pivot::Center;
+			Math::Vector2Int divisions = Math::Vector2Int::One;
+			Math::Vector2 spacing = Math::Vector2::One;
+			bool flipVertices = false;
+			float radius = 1.0f;
+		};
+
+		MeshFilterData mMeshFilterData;
+		MeshFilterData mAdjustedMeshFilterData;
 
 		const char* MeshTypeNames[6] =
 		{
@@ -78,5 +87,30 @@ namespace SAGE
 			"Sphere",
 			"Custom"
 		};
+
+		// TODO: Move out
+		std::string OpenFileDialog(const char* fileFilterType)
+		{
+			char fileName[MAX_PATH] = "";
+
+			OPENFILENAMEA ofn = {};
+			ofn.lStructSize = sizeof(ofn);
+			ofn.lpstrFile = fileName;
+			ofn.nMaxFile = MAX_PATH;
+
+			ofn.lpstrFilter = fileFilterType;
+
+			ofn.Flags =
+				OFN_FILEMUSTEXIST |
+				OFN_PATHMUSTEXIST |
+				OFN_NOCHANGEDIR;
+
+			if (GetOpenFileNameA(&ofn))
+			{
+				return fileName;
+			}
+
+			return "";
+		}
 	};
 }

@@ -23,7 +23,7 @@ void MeshFilterComponent::LoadComponentFromTemplate(const rapidjson::Value& valu
 	if (value.HasMember("Custom Mesh File Path"))
 	{
 		const auto& filePath = value["Custom Mesh File Path"].GetString();
-		mCustomFilePath = filePath;
+		mMeshFilterData.customFilePath = filePath;
 	}
 
 	if (value.HasMember("Pivot"))
@@ -64,18 +64,19 @@ void MeshFilterComponent::LoadComponentFromTemplate(const rapidjson::Value& valu
 void MeshFilterComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
 	SaveStringToTemplate(compObj, allocator, "MeshType", MeshTypeNames[static_cast<int>(mMeshType)]); // Mesh Type
-	SaveStringToTemplate(compObj, allocator, "Custom Mesh File Path", mCustomFilePath); // Custom Mesh File Path
-	if (mPivot != Pivot::Center) { SaveStringToTemplate(compObj, allocator, "Pivot", PivotToString(mPivot)); } // Pivot 
-	SaveVector2IntToTemplate(compObj, allocator, "Divisions", mDivisions, Vector2Int::One); // Divisions
-	SaveVector2ToTemplate(compObj, allocator, "Spacing", mSpacing, Vector2::One); // Spacing
-	if (mFlipVertices == true) { SaveBoolToTemplate(compObj, allocator, "FlipVertices", mFlipVertices); } // Flip Vertices 
-	SaveNumberToTemplate(compObj, allocator, "Radius", mRadius, 1.0f); // Radius
+	SaveStringToTemplate(compObj, allocator, "Custom Mesh File Path", mMeshFilterData.customFilePath); // Custom Mesh File Path
+	if (mMeshFilterData.pivot != Pivot::Center) { SaveStringToTemplate(compObj, allocator, "Pivot", PivotToString(mMeshFilterData.pivot)); } // Pivot 
+	SaveVector2IntToTemplate(compObj, allocator, "Divisions", mMeshFilterData.divisions, Vector2Int::One); // Divisions
+	SaveVector2ToTemplate(compObj, allocator, "Spacing", mMeshFilterData.spacing, Vector2::One); // Spacing
+	if (mMeshFilterData.flipVertices == true) { SaveBoolToTemplate(compObj, allocator, "FlipVertices", mMeshFilterData.flipVertices); } // Flip Vertices 
+	SaveNumberToTemplate(compObj, allocator, "Radius", mMeshFilterData.radius, 1.0f); // Radius
 }
 
 void MeshFilterComponent::Initialize()
 {
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	GenerateMesh();
+	mAdjustedMeshFilterData = mMeshFilterData;
 }
 
 void MeshFilterComponent::Terminate()
@@ -95,6 +96,8 @@ void MeshFilterComponent::DebugUI()
 			MeshType currentMeshType = static_cast<MeshType>(currentMeshItem);
 			if (mMeshType != currentMeshType)
 			{
+				mAdjustedMeshFilterData = MeshFilterData(); // Reset adjustedMeshFilterData.
+				mMeshFilterData = mAdjustedMeshFilterData;
 				mMeshType = currentMeshType;
 				mRenderObject.meshBuffer.Terminate();
 				GenerateMesh();
@@ -113,21 +116,16 @@ void MeshFilterComponent::DebugUI()
 		case MeshType::Cube:
 			break;
 		case MeshType::Cylinder:
-			ImGui::Text("Divisions: %i %i", mDivisions.x, mDivisions.y);
-			ImGui::Text("Radius: %f", mRadius);
+		case MeshType::Sphere:
+			ImGui::Text("Divisions: %i %i", mMeshFilterData.divisions.x, mMeshFilterData.divisions.y);
+			ImGui::Text("Radius: %f", mMeshFilterData.radius);
 			break;
 		case MeshType::Plane:
 		case MeshType::Quad:
-			ImGui::Text("Divisions: %i %i", mDivisions.x, mDivisions.y);
-			ImGui::Text("Spacing: %f %f", mSpacing.x, mSpacing.y);
-			ImGui::Text("Radius: %f", mRadius);
-			ImGui::Text("Flip Vertices: %s", mFlipVertices ? "true" : "false");
-			ImGui::Text("Pivot: %s", PivotToString(mPivot).c_str());
-			break;
-		case MeshType::Sphere:
-			ImGui::Text("Divisions: %i %i", mDivisions.x, mDivisions.y);
-			ImGui::Text("Spacing: %f %f", mSpacing.x, mSpacing.y);
-			ImGui::Text("Radius: %f", mRadius);
+			ImGui::Text("Divisions: %i %i", mMeshFilterData.divisions.x, mMeshFilterData.divisions.y);
+			ImGui::Text("Spacing: %f %f", mMeshFilterData.spacing.x, mMeshFilterData.spacing.y);
+			ImGui::Text("Flip Vertices: %s", mMeshFilterData.flipVertices ? "true" : "false");
+			ImGui::Text("Pivot: %s", PivotToString(mMeshFilterData.pivot).c_str());
 			break;
 		case MeshType::Custom:
 			break;
@@ -148,6 +146,57 @@ void MeshFilterComponent::DebugUI()
 					const Vector3 pos2 = mMesh.vertices[mMesh.indices[i + 2]].position + worldPos;
 					SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red); // TODO: Add a color option and a filled option.
 				}
+			}
+		}
+
+		if (ImGui::CollapsingHeader("Adjust Mesh##MeshFilterComponent ", ImGuiTreeNodeFlags_CollapsingHeader))
+		{
+			switch (mMeshType)
+			{
+			case MeshType::Cube:
+				break;
+			case MeshType::Cylinder:
+			case MeshType::Sphere:
+				ImGui::DragInt2("Divisions##MeshFilterComponent", &mAdjustedMeshFilterData.divisions.x, 0.1f);
+				ImGui::DragFloat("Radius##MeshFilterComponent", &mAdjustedMeshFilterData.radius, 0.1f);
+				break;
+			case MeshType::Plane:
+			case MeshType::Quad:
+				ImGui::DragInt2("Divisions##MeshFilterComponent", &mAdjustedMeshFilterData.divisions.x, 0.1f);
+				ImGui::DragFloat2("Spacing##MeshFilterComponent", &mAdjustedMeshFilterData.spacing.x, 0.1f);
+				ImGui::Checkbox("Flip Vertices", &mAdjustedMeshFilterData.flipVertices);
+				//ImGui::Text("Pivot: %s", PivotToString(mMeshFilterData.pivot).c_str()); // TODO: 
+				break;
+			case MeshType::Custom:
+				if (ImGui::Button(mAdjustedMeshFilterData.customFilePath.empty() ? "None (Material)" : std::filesystem::path(mAdjustedMeshFilterData.customFilePath)
+					.filename()
+					.string()
+					.c_str(),
+					ImVec2(200.0f, 30.0f)))
+				{
+					std::string newPath = OpenFileDialog("Mesh Files\0*.mesh\0");
+
+					if (!newPath.empty())
+					{
+						std::filesystem::path assetsRoot =
+							std::filesystem::absolute("../../Assets");
+
+						std::filesystem::path relativeToAssets =
+							std::filesystem::relative(newPath, assetsRoot);
+
+						std::filesystem::path finalPath =
+							"../../Assets" / relativeToAssets;
+
+						mAdjustedMeshFilterData.customFilePath = finalPath.generic_string();
+					}
+				}
+				break;
+			}
+
+			if (ImGui::Button("Adjust Mesh"))
+			{
+				mMeshFilterData = mAdjustedMeshFilterData;
+				GenerateMesh();
 			}
 		}
 	}
@@ -200,37 +249,37 @@ void MeshFilterComponent::GenerateCubeMesh()
 
 void MeshFilterComponent::GenerateCylinderMesh()
 {
-	mMesh = MeshBuilder::CreateCylinder(mDivisions.x, mDivisions.y); // And radius?
+	mMesh = MeshBuilder::CreateCylinder(mMeshFilterData.divisions.x, mMeshFilterData.divisions.y); // And radius?
 	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
 void MeshFilterComponent::GeneratePlaneMesh()
 {
-	mMesh = MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mSpacing, mFlipVertices, mPivot);
+	mMesh = MeshBuilder::CreatePlane(mMeshFilterData.divisions.x, mMeshFilterData.divisions.y, mMeshFilterData.spacing, mMeshFilterData.flipVertices, mMeshFilterData.pivot);
 	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
 void MeshFilterComponent::GenerateQuadMesh()
 {
-	mMesh = MeshBuilder::CreatePlane(mDivisions.x, mDivisions.y, mSpacing, mFlipVertices, mPivot);
+	mMesh = MeshBuilder::CreatePlane(mMeshFilterData.divisions.x, mMeshFilterData.divisions.y, mMeshFilterData.spacing, mMeshFilterData.flipVertices, mMeshFilterData.pivot);
 	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
 void MeshFilterComponent::GenerateSphereMesh()
 {
-	mMesh = MeshBuilder::CreateSphere(mDivisions.x, mDivisions.y, mRadius);
+	mMesh = MeshBuilder::CreateSphere(mMeshFilterData.divisions.x, mMeshFilterData.divisions.y, mMeshFilterData.radius);
 	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
 void MeshFilterComponent::GenerateCustomMesh()
 {
-	if (mCustomFilePath.empty())
+	if (mMeshFilterData.customFilePath.empty())
 	{
 		return;
 	}
 
 	FILE* file = nullptr;
-	fopen_s(&file, mCustomFilePath.c_str(), "r"); // fopen_s(&file, filePath.u8string().c_str(), "r");
+	fopen_s(&file, mMeshFilterData.customFilePath.c_str(), "r"); // fopen_s(&file, filePath.u8string().c_str(), "r");
 	if (file == nullptr)
 		return;
 

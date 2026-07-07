@@ -71,10 +71,15 @@ void ModelIO::SaveMeshes(std::filesystem::path filePath, const Model& model)
 		for (uint32_t i = 0; i < indexCount; i += 3)
 		{
 			fprintf_s(file,
-				"%u %u %u\n",
+				"%u %u %u",
 				mesh.indices[i],
 				mesh.indices[i + 1],
 				mesh.indices[i + 2]);
+
+			if (i < indexCount - 3)
+			{
+				fprintf_s(file, "\n");
+			}
 		}
 
 		fclose(file);

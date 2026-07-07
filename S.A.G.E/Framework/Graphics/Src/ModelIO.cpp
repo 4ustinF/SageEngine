@@ -194,6 +194,7 @@ void ModelIO::SaveMaterial(std::filesystem::path filePath, const Model& model)
 	}
 
 	fprintf_s(file, "MaterialCount: %d\n", static_cast<uint32_t>(model.materialData.size()));
+	const bool newLineEnd = model.materialData.size() > 1;
 	for (const auto& materialData : model.materialData)
 	{
 		const auto& material = materialData.material;
@@ -207,6 +208,11 @@ void ModelIO::SaveMaterial(std::filesystem::path filePath, const Model& model)
 		fprintf_s(file, "%s\n", materialData.specularMapName.empty() ? "none" : materialData.specularMapName.c_str());
 		fprintf_s(file, "%s\n", materialData.bumpMapName.empty() ? "none" : materialData.bumpMapName.c_str());
 		fprintf_s(file, "%s", materialData.normalMapName.empty() ? "none" : materialData.normalMapName.c_str());
+		
+		if (newLineEnd)
+		{
+			fprintf_s(file, "\n");
+		}
 	}
 	fclose(file);
 }

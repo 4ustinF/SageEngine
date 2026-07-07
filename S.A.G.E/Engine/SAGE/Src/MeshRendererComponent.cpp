@@ -98,6 +98,11 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 		mAllowBloom = value["Bloom"].GetBool();
 	}
 
+	if (value.HasMember("Transparent"))
+	{
+		mIsTransparent = value["Transparent"].GetBool();
+	}
+
 	if (value.HasMember("TilingSize"))
 	{
 		const auto& tilingSize = value["TilingSize"].GetArray();
@@ -172,6 +177,12 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 	if (mAllowBloom == true)
 	{
 		SaveBoolToTemplate(compObj, allocator, "Bloom", mAllowBloom);
+	}
+
+	// --- Transparency ---
+	if (mIsTransparent == true)
+	{
+		SaveBoolToTemplate(compObj, allocator, "Transparent", mIsTransparent);
 	}
 
 	// --- Tiling Size ---
@@ -269,6 +280,7 @@ void MeshRendererComponent::DebugUI()
 		}
 
 		ImGui::Checkbox("Bloom##MeshRendererComponent", &mAllowBloom);
+		ImGui::Checkbox("Is Transparent##MeshRendererComponent", &mIsTransparent);
 
 		RenderObject& renderObject = mMeshFilter->GetRenderObject();
 		TextureDebugUI("Diffuse Map", renderObject.diffuseMapId, mMaterialData.diffuseMapName);

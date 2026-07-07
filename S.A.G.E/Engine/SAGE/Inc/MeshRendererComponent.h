@@ -67,7 +67,7 @@ namespace SAGE
 		SAGE::Core::Delegate::FDelegateHandle ScaleChangedHandle;
 
 		SAGE::Math::Vector2 mTilingSize = SAGE::Math::Vector2::One;
-		SAGE::Math::Vector2 mTilingOffset = SAGE::Math::Vector2::Zero; // TODO: Save/Load this.
+		SAGE::Math::Vector2 mTilingOffset = SAGE::Math::Vector2::Zero;
 		bool mTileToXScale = false;
 		bool mTileToYScale = false;
 		bool mTileToZScale = false;
@@ -78,6 +78,7 @@ namespace SAGE
 		std::string mMaterialFilePath = "";
 		bool mIsBasic = false;
 		bool mAllowBloom = false;
+		bool mIsTransparent = false; // TODO: Hook up functionality.
 
 		// TODO: Move out
 		std::string OpenFileDialog(const char* fileFilterType)

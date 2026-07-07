@@ -29,6 +29,7 @@ void RenderService::Initialize()
 	mDirectionalLight.diffuse = { 0.7f, 0.7f, 0.7f, 1.0f };
 	mDirectionalLight.specular = { 0.7f, 0.7f, 0.7f, 1.0f };
 
+	mStandardEffect.SetBlendState(BlendState::Mode::AlphaBlend);
 	mStandardEffect.Initialize(mSampleFilter);
 	mStandardEffect.SetLightCamera(mShadowEffect.GetLightCamera());
 	mStandardEffect.SetDirectionalLight(mDirectionalLight);
@@ -139,6 +140,19 @@ void RenderService::Render()
 		}
 		mTexturingEffect.End();
 
+		mStandardEffect.Begin();
+		for (auto& entry : mRenderEntries) {
+			mStandardEffect.Render(entry.renderGroup);
+		}
+		for (auto& entry : mMeshRendererEntrys)
+		{
+			if (!entry->GetIsTransparent()) // TODO: This is a hack. Seperate these groupings in 2?
+			{
+				mStandardEffect.Render(entry->GetRenderObject());
+			}
+		}
+		mStandardEffect.End();
+
 		mShadowEffect.Begin();
 		for (auto& entry : mRenderEntries) {
 			mShadowEffect.Render(entry.renderGroup);
@@ -152,11 +166,12 @@ void RenderService::Render()
 		mShadowEffect.End();
 
 		mStandardEffect.Begin();
-		for (auto& entry : mRenderEntries) {
-			mStandardEffect.Render(entry.renderGroup);
-		}
-		for (auto& entry : mMeshRendererEntrys) {
-			mStandardEffect.Render(entry->GetRenderObject());
+		for (auto& entry : mMeshRendererEntrys) 
+		{
+			if (entry->GetIsTransparent())
+			{
+				mStandardEffect.Render(entry->GetRenderObject());
+			}
 		}
 		mStandardEffect.End();
 

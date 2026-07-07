@@ -31,6 +31,7 @@ namespace SAGE
 		// Getters
 		SAGE::Graphics::RenderObject& GetRenderObject();
 		bool GetShouldBloom() const { return mAllowBloom; }
+		bool GetIsTransparent() const { return mIsTransparent; }
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }
@@ -76,6 +77,6 @@ namespace SAGE
 		std::string mMaterialFilePath = "";
 		bool mIsBasic = false;
 		bool mAllowBloom = false;
-		bool mIsTransparent = false; // TODO: Hook up functionality.
+		bool mIsTransparent = false;
 	};
 }

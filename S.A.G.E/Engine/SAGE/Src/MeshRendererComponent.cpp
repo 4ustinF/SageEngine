@@ -13,7 +13,7 @@ using namespace SAGE::Graphics;
 using namespace SAGE::Core::Delegate;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(MeshRendererComponent, 500);
+MEMORY_POOL_DEFINE(MeshRendererComponent, 300);
 
 void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
 {

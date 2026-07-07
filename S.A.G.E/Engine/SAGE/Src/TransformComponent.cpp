@@ -11,7 +11,7 @@ using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(TransformComponent, 500);
+MEMORY_POOL_DEFINE(TransformComponent, 300);
 
 void TransformComponent::LoadComponentFromTemplate(const rj::Value& value)
 {

@@ -2,9 +2,6 @@
 
 #include "Component.h"
 
-#include <Windows.h> // TODO: Move out
-#include <commdlg.h> // TODO: Move out
-
 namespace SAGE
 {
 	class TransformComponent;
@@ -87,30 +84,5 @@ namespace SAGE
 			"Sphere",
 			"Custom"
 		};
-
-		// TODO: Move out
-		std::string OpenFileDialog(const char* fileFilterType)
-		{
-			char fileName[MAX_PATH] = "";
-
-			OPENFILENAMEA ofn = {};
-			ofn.lStructSize = sizeof(ofn);
-			ofn.lpstrFile = fileName;
-			ofn.nMaxFile = MAX_PATH;
-
-			ofn.lpstrFilter = fileFilterType;
-
-			ofn.Flags =
-				OFN_FILEMUSTEXIST |
-				OFN_PATHMUSTEXIST |
-				OFN_NOCHANGEDIR;
-
-			if (GetOpenFileNameA(&ofn))
-			{
-				return fileName;
-			}
-
-			return "";
-		}
 	};
 }

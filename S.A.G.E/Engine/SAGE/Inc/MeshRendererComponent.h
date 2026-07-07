@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Component.h"
-#include <Windows.h> // TODO: Move out
-#include <commdlg.h> // TODO: Move out
 
 namespace SAGE
 {
@@ -79,30 +77,5 @@ namespace SAGE
 		bool mIsBasic = false;
 		bool mAllowBloom = false;
 		bool mIsTransparent = false; // TODO: Hook up functionality.
-
-		// TODO: Move out
-		std::string OpenFileDialog(const char* fileFilterType)
-		{
-			char fileName[MAX_PATH] = "";
-
-			OPENFILENAMEA ofn = {};
-			ofn.lStructSize = sizeof(ofn);
-			ofn.lpstrFile = fileName;
-			ofn.nMaxFile = MAX_PATH;
-
-			ofn.lpstrFilter = fileFilterType;
-
-			ofn.Flags =
-				OFN_FILEMUSTEXIST |
-				OFN_PATHMUSTEXIST |
-				OFN_NOCHANGEDIR;
-
-			if (GetOpenFileNameA(&ofn))
-			{
-				return fileName;
-			}
-
-			return "";
-		}
 	};
 }

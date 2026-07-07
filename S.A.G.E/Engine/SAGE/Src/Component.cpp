@@ -1,10 +1,36 @@
 #include "Precompiled.h"
 #include "Component.h"
 
+#include <commdlg.h>
+
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
+
+std::string Component::OpenFileDialog(const char* fileFilterType)
+{
+	char fileName[MAX_PATH] = "";
+
+	OPENFILENAMEA ofn = {};
+	ofn.lStructSize = sizeof(ofn);
+	ofn.lpstrFile = fileName;
+	ofn.nMaxFile = MAX_PATH;
+
+	ofn.lpstrFilter = fileFilterType;
+
+	ofn.Flags =
+		OFN_FILEMUSTEXIST |
+		OFN_PATHMUSTEXIST |
+		OFN_NOCHANGEDIR;
+
+	if (GetOpenFileNameA(&ofn))
+	{
+		return fileName;
+	}
+
+	return "";
+}
 
 void Component::SaveBoolToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, bool value)
 {

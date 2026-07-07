@@ -1,6 +1,7 @@
-﻿  GameObjectFactory.cpp
-  MeshFilterComponent.cpp
+﻿  AnimatorComponent.cpp
   MeshRendererComponent.cpp
-  SAGE.cpp
+  ModelComponent.cpp
+  RenderService.cpp
+  TransformComponent.cpp
   Generating Code...
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

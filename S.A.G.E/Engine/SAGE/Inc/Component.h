@@ -41,6 +41,8 @@ namespace SAGE
 		const GameObject& GetOwner() const { return *mOwner; }
 
 	protected:
+		std::string OpenFileDialog(const char* fileFilterType);
+
 		void SaveBoolToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, bool value);
 		void SaveStringToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::string& value);
 		void SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, int value, int defaultValue = 0);

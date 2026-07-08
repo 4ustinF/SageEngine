@@ -1,7 +1,2 @@
-﻿  AnimatorComponent.cpp
-  MeshRendererComponent.cpp
-  ModelComponent.cpp
-  RenderService.cpp
-  TransformComponent.cpp
-  Generating Code...
+﻿  GameWorld.cpp
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

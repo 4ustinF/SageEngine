@@ -83,7 +83,7 @@ void GameWorld::Update(float deltaTime)
 		if (const CameraService* camService = GetService<CameraService>())
 		{
 			SAGE::Math::Ray ray;
-			ray.origin = camService->GetCamera().GetPosition();
+			ray.origin = camService->GetCamera().GetPosition(); // TODO: Go off of where we click instead.
 			ray.direction = camService->GetCamera().GetDirection();
 			GameObject* selectedGameObject = nullptr;
 			float distance = 0.0f;

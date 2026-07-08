@@ -2,9 +2,11 @@
 #include "GameWorld.h"
 #include "GameObjectFactory.h"
 
+#include "CameraService.h"
 #include "RenderService.h"
 #include "TerrainService.h"
 
+#include "MeshFilterComponent.h"
 #include "TransformComponent.h"
 #include "RigidBodyComponent.h"
 
@@ -73,6 +75,132 @@ void GameWorld::Update(float deltaTime)
 
 	// Now we can safely destroy objects
 	ProcessDestroyList();
+
+	// ------------------------------------------------------------
+	const auto& inputSystem = Input::InputSystem::Get();
+	if (inputSystem->IsMousePressed(Input::MouseButton::LBUTTON))
+	{
+		if (const CameraService* camService = GetService<CameraService>())
+		{
+			SAGE::Math::Ray ray;
+			ray.origin = camService->GetCamera().GetPosition();
+			ray.direction = camService->GetCamera().GetDirection();
+			GameObject* selectedGameObject = nullptr;
+			float distance = 0.0f;
+
+			for (size_t i = 0; i < mUpdateList.size(); ++i) {
+				GameObject* gameObject = mUpdateList[i];
+				if (IsValid(gameObject->GetHandle()))
+				{
+					if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
+					{
+						RaycastHit outHit;
+						if (IntersectRayMesh(ray, meshFilter->GetMesh(), outHit))
+						{
+							if (selectedGameObject == nullptr || outHit.distance < distance)
+							{
+								selectedGameObject = gameObject;
+								distance = outHit.distance;
+							}
+						}
+					}
+				}
+			}
+
+			if (selectedGameObject != nullptr)
+			{
+				mInspectorService = nullptr;
+				mInspectorGameObject = selectedGameObject;
+				mAddComponentWindowActive = false;
+			}
+		}
+	}
+}
+
+bool GameWorld::IntersectRayMesh(const Math::Ray& ray, const Graphics::Mesh& mesh, RaycastHit& outHit)
+{
+	bool hasHit = false;
+	float closestDistance = FLT_MAX;
+
+	for (uint32_t i = 0; i + 2 < mesh.indices.size(); i += 3)
+	{
+		const uint32_t i0 = mesh.indices[i + 0];
+		const uint32_t i1 = mesh.indices[i + 1];
+		const uint32_t i2 = mesh.indices[i + 2];
+
+		const Math::Vector3& v0 = mesh.vertices[i0].position;
+		const Math::Vector3& v1 = mesh.vertices[i1].position;
+		const Math::Vector3& v2 = mesh.vertices[i2].position;
+
+		float distance = 0.0f;
+		Math::Vector3 normal;
+
+		if (IntersectRayTriangle(ray, v0, v1, v2, distance, normal))
+		{
+			if (distance < closestDistance)
+			{
+				closestDistance = distance;
+
+				outHit.hit = true;
+				outHit.distance = distance;
+				outHit.position = ray.origin + ray.direction * distance;
+				outHit.normal = normal;
+				outHit.triangleIndex = i / 3;
+
+				hasHit = true;
+			}
+		}
+	}
+
+	return hasHit;
+}
+
+bool GameWorld::IntersectRayTriangle(const SAGE::Math::Ray& ray, const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2,float& outDistance, Math::Vector3& outNormal)
+{
+	constexpr float epsilon = 0.000001f;
+
+	const Math::Vector3 edge1 = v1 - v0;
+	const Math::Vector3 edge2 = v2 - v0;
+
+	const Math::Vector3 p = Math::Cross(ray.direction, edge2);
+	const float det = Math::Dot(edge1, p);
+
+	// If det is near 0, ray is parallel to triangle
+	if (std::fabs(det) < epsilon)
+	{
+		return false;
+	}
+
+	const float invDet = 1.0f / det;
+
+	const Math::Vector3 t = ray.origin - v0;
+	const float u = Math::Dot(t, p) * invDet;
+
+	if (u < 0.0f || u > 1.0f)
+	{
+		return false;
+	}
+
+	const Math::Vector3 q = Math::Cross(t, edge1);
+	const float v = Math::Dot(ray.direction, q) * invDet;
+
+	if (v < 0.0f || u + v > 1.0f)
+	{
+		return false;
+	}
+
+	const float distance = Math::Dot(edge2, q) * invDet;
+
+	// Hit is behind ray origin
+	if (distance < epsilon)
+	{
+		return false;
+	}
+
+	outDistance = distance;
+	outNormal = Math::Normalize(Math::Cross(edge1, edge2));
+
+	return true;
 }
 
 void GameWorld::Render()

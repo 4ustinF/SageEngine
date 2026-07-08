@@ -41,8 +41,19 @@ namespace SAGE
 		GameObject* GetGameObject(GameObjectHandle handle);
 		void DestroyGameObject(GameObjectHandle handle);
 
-		// TODO:
 		GameObject* CreateGameObjectRecursive(std::filesystem::path templateFile, GameObject* parentGO, const char* overrideName);
+
+		struct RaycastHit
+		{
+			bool hit = false;
+			float distance = 0.0f;
+			SAGE::Math::Vector3 position;
+			SAGE::Math::Vector3 normal;
+			uint32_t triangleIndex = 0;
+		};
+
+		bool IntersectRayMesh(const SAGE::Math::Ray& ray, const SAGE::Graphics::Mesh& mesh, RaycastHit& outHit);
+		bool IntersectRayTriangle(const SAGE::Math::Ray& ray, const SAGE::Math::Vector3& v0, const SAGE::Math::Vector3& v1, const SAGE::Math::Vector3& v2, float& outDistance, SAGE::Math::Vector3& outNormal);
 
 	private:
 		bool IsValid(GameObjectHandle handle) const;

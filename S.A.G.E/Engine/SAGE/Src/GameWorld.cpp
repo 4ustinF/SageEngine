@@ -11,6 +11,7 @@
 #include "RigidBodyComponent.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 namespace rj = rapidjson;
 
 void GameWorld::Initialize(uint32_t capacity)
@@ -80,6 +81,9 @@ void GameWorld::Update(float deltaTime)
 	const auto& inputSystem = Input::InputSystem::Get();
 	if (inputSystem->IsMousePressed(Input::MouseButton::LBUTTON))
 	{
+		mDebugClickCount1 = 0;
+		mDebugClickCount2 = 0;
+
 		if (const CameraService* camService = GetService<CameraService>())
 		{
 			SAGE::Math::Ray ray;
@@ -92,8 +96,25 @@ void GameWorld::Update(float deltaTime)
 				GameObject* gameObject = mUpdateList[i];
 				if (IsValid(gameObject->GetHandle()))
 				{
+					if (!gameObject->IsActiveInHierarchy())
+					{
+						continue;
+					}
+
 					if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
 					{
+						// 9651
+						// 146
+
+						Vector3 point = Vector3::Zero;
+						Vector3 normal = Vector3::Zero;
+						if (!Intersect(ray, meshFilter->GetBoundingBox(), point, normal))
+						{
+							continue;
+						}
+
+						mDebugClickCount2 += 1;
+
 						RaycastHit outHit;
 						if (IntersectRayMesh(ray, meshFilter->GetMesh(), outHit))
 						{
@@ -157,6 +178,8 @@ bool GameWorld::IntersectRayMesh(const Math::Ray& ray, const Graphics::Mesh& mes
 
 bool GameWorld::IntersectRayTriangle(const SAGE::Math::Ray& ray, const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2,float& outDistance, Math::Vector3& outNormal)
 {
+	mDebugClickCount1 += 1;
+
 	constexpr float epsilon = 0.000001f;
 
 	const Math::Vector3 edge1 = v1 - v0;
@@ -212,6 +235,8 @@ void GameWorld::Render()
 
 void GameWorld::DebugUI()
 {
+	ImGui::SliderInt("Debug Click Count", &mDebugClickCount1, 0, 10000000);
+	ImGui::SliderInt("Debug Click Count", &mDebugClickCount2, 0, 10000000);
 	ImGui::Begin("Hierarchy##GameWorld", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 	DrawHierarchy();
 	ImGui::End();

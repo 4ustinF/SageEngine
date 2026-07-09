@@ -98,5 +98,8 @@ namespace SAGE
 		float mImguiSpacing = 5.0f;
 
 		std::vector<GameObjectHandle> mRootGameObjectHandles;
+
+		int mDebugClickCount1 = 0;
+		int mDebugClickCount2 = 0;
 	};
 }

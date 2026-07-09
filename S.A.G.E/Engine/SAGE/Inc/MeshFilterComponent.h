@@ -36,6 +36,7 @@ namespace SAGE
 		const SAGE::Graphics::RenderObject& GetRenderObject() const { return mRenderObject; };
 		SAGE::Graphics::RenderObject& GetRenderObject() { return mRenderObject; };
 		const SAGE::Graphics::Mesh& GetMesh() const { return mMesh; };
+		const SAGE::Math::OBB& GetBoundingBox() const { return mBoundingBox; };
 
 		// Setters // TODO: These should should trigger an update on the mesh for when we call them other then the init func.
 		void SetMeshType(MeshType meshType) { mMeshType = meshType; }
@@ -56,7 +57,7 @@ namespace SAGE
 		void GenerateQuadMesh();
 		void GenerateSphereMesh();
 		void GenerateCustomMesh();
-		void GenerateAABB(); // TODO: Convert to OBB.
+		void GenerateBoundingBox();
 
 		TransformComponent* mTransformComponent = nullptr;
 
@@ -90,6 +91,6 @@ namespace SAGE
 		// Debug
 		bool mEnableWireframe = true;
 		bool mFillWireframe = false;
-		SAGE::Math::AABB mAABB; // TODO: Convert to OBB. This is to help optimize mesh selection.
+		SAGE::Math::OBB mBoundingBox; // TODO: Capture a tighter obb with rotation. This is to help optimize mesh selection.
 	};
 }

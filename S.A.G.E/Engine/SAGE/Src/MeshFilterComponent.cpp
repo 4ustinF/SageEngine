@@ -202,7 +202,7 @@ void MeshFilterComponent::DebugUI()
 			}
 		}
 
-		SimpleDraw::AddAABB(mAABB, Colors::Blue);
+		SimpleDraw::AddOBB(mBoundingBox, Colors::Blue);
 	}
 }
 
@@ -244,7 +244,7 @@ void MeshFilterComponent::GenerateMesh()
 		break;
 	}
 
-	GenerateAABB();
+	GenerateBoundingBox();
 }
 
 void MeshFilterComponent::GenerateCubeMesh()
@@ -321,9 +321,9 @@ void MeshFilterComponent::GenerateCustomMesh()
 	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
-void MeshFilterComponent::GenerateAABB() // TODO: Make it work if the object moves. Bind to transform comp and update aabb pos when the transform comp pos moves.
+void MeshFilterComponent::GenerateBoundingBox() // TODO: Make it work if the object moves. Bind to transform comp and update aabb pos when the transform comp pos moves.
 {
-	mAABB = Math::AABB();
+	mBoundingBox = Math::OBB(); // TODO: Make this tighter by adding rotation.
 
 	const int vertCount = static_cast<int>(mMesh.vertices.size());
 	if (vertCount == 0)
@@ -347,6 +347,6 @@ void MeshFilterComponent::GenerateAABB() // TODO: Make it work if the object mov
 		maxPos.z = std::max(maxPos.z, pos.z);
 	}
 
-	mAABB.center = (minPos + maxPos) * 0.5f;
-	mAABB.extend = (maxPos - minPos) * 0.5f;
+	mBoundingBox.center = (minPos + maxPos) * 0.5f;
+	mBoundingBox.extend = (maxPos - minPos) * 0.5f;
 }

@@ -71,7 +71,7 @@ namespace SAGE
 		bool mTileToYScale = false;
 		bool mTileToZScale = false;
 
-		void LoadMaterial(std::filesystem::path filePath);
+		void LoadMaterial(std::filesystem::path filePath); // TODO: Make the material an object so if we change it in one place it updates everywhere else.
 		void LoadTextures();
 		SAGE::Graphics::Model::MaterialData mMaterialData; // TODO tidy up in here.
 		std::string mMaterialFilePath = "";

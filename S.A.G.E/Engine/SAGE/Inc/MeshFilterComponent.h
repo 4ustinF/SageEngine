@@ -36,7 +36,7 @@ namespace SAGE
 		const SAGE::Graphics::RenderObject& GetRenderObject() const { return mRenderObject; };
 		SAGE::Graphics::RenderObject& GetRenderObject() { return mRenderObject; };
 		const SAGE::Graphics::Mesh& GetMesh() const { return mMesh; };
-		const SAGE::Math::OBB& GetBoundingBox() const { return mBoundingBox; };
+		const SAGE::Math::OBB GetGlobalBoundingBox() const;
 
 		// Setters // TODO: These should should trigger an update on the mesh for when we call them other then the init func.
 		void SetMeshType(MeshType meshType) { mMeshType = meshType; }

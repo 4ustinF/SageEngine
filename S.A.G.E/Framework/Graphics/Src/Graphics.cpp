@@ -5,7 +5,7 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
-bool SAGE::Graphics::IntersectRayMesh(const Ray& ray, const Mesh& mesh, RayHit& outHit) // TODO: -_-
+bool SAGE::Graphics::IntersectRayMesh(const Ray& ray, const Mesh& mesh, RayHit& outHit, const Matrix4& world) // TODO: -_-
 {
 	bool hasHit = false;
 	float closestDistance = FLT_MAX;
@@ -16,9 +16,9 @@ bool SAGE::Graphics::IntersectRayMesh(const Ray& ray, const Mesh& mesh, RayHit& 
 		const uint32_t i1 = mesh.indices[i + 1];
 		const uint32_t i2 = mesh.indices[i + 2];
 
-		const Math::Vector3& v0 = mesh.vertices[i0].position;
-		const Math::Vector3& v1 = mesh.vertices[i1].position;
-		const Math::Vector3& v2 = mesh.vertices[i2].position;
+		const Vector3 v0 = TransformCoord(mesh.vertices[i0].position, world);
+		const Vector3 v1 = TransformCoord(mesh.vertices[i1].position, world);
+		const Vector3 v2 = TransformCoord(mesh.vertices[i2].position, world);
 
 		float distance = 0.0f;
 		Math::Vector3 normal;

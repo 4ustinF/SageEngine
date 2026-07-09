@@ -191,20 +191,48 @@ void MeshFilterComponent::DebugUI()
 		const int indexCount = static_cast<int>(mMesh.indices.size());
 		if (indexCount > 3)
 		{
-			const Vector3& worldPos = mTransformComponent != nullptr ? mTransformComponent->GetPosition() : Vector3::Zero;
+			const Matrix4 world = mTransformComponent == nullptr ? Matrix4::Identity :
+				Matrix4::Scaling(mTransformComponent->GetScale()) *
+				Matrix4::RotationQuaternion(mTransformComponent->GetRotation()) *
+				Matrix4::Translation(mTransformComponent->GetPosition());
+
 			for (int i = 0; i < indexCount; i += 3)
 			{
-				const Vector3 pos0 = mMesh.vertices[mMesh.indices[i]].position + worldPos;
-				const Vector3 pos1 = mMesh.vertices[mMesh.indices[i + 1]].position + worldPos;
-				const Vector3 pos2 = mMesh.vertices[mMesh.indices[i + 2]].position + worldPos;
+				auto& vert1 = mMesh.vertices[mMesh.indices[i]];
+				auto& vert2 = mMesh.vertices[mMesh.indices[i + 1]];
+				auto& vert3 = mMesh.vertices[mMesh.indices[i + 2]];
 
-				mFillWireframe ? SimpleDraw::AddFilledFace(pos0, pos1, pos2, Colors::Red) : SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red); // TODO: Add a color option.
+				const Vector3 pos0 = TransformCoord(vert1.position, world);
+				const Vector3 pos1 = TransformCoord(vert2.position, world);
+				const Vector3 pos2 = TransformCoord(vert3.position, world);
+
+				if (mFillWireframe)
+				{
+					SimpleDraw::AddFilledFace(pos0, pos1, pos2, Colors::Red);
+				}
+				else
+				{
+					SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red);
+				}
 			}
 		}
 
-		SimpleDraw::AddOBB(mBoundingBox, Colors::Blue);
+		SimpleDraw::AddOBB(GetGlobalBoundingBox(), Colors::Blue);
 	}
 }
+
+const OBB MeshFilterComponent::GetGlobalBoundingBox() const
+{
+	if (mTransformComponent != nullptr)
+	{
+		return std::move(OBB(
+			mBoundingBox.center + mTransformComponent->GetPosition(),
+			mBoundingBox.extend * mTransformComponent->GetScale(),
+			mTransformComponent->GetRotation()));
+	}
+
+	return mBoundingBox;
+};
 
 MeshType MeshFilterComponent::StringToMeshType(const std::string& meshType)
 {
@@ -321,7 +349,7 @@ void MeshFilterComponent::GenerateCustomMesh()
 	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
-void MeshFilterComponent::GenerateBoundingBox() // TODO: Make it work if the object moves. Bind to transform comp and update aabb pos/rot/scale when the transform comp pos/rot/scale moves.
+void MeshFilterComponent::GenerateBoundingBox()
 {
 	mBoundingBox = OBB();
 
@@ -349,5 +377,4 @@ void MeshFilterComponent::GenerateBoundingBox() // TODO: Make it work if the obj
 
 	mBoundingBox.center = (minPos + maxPos) * 0.5f;
 	mBoundingBox.extend = (maxPos - minPos) * 0.5f;
-	mBoundingBox.rotation = mTransformComponent != nullptr ? mTransformComponent->GetRotation() : Math::Quaternion::Identity;
 }

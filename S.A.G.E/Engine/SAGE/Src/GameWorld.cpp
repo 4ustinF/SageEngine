@@ -575,13 +575,19 @@ void GameWorld::UpdateEditSelection()
 
 		if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
 		{
-			if (!Intersect(ray, meshFilter->GetBoundingBox())) // TODO: We need to fix intersections if we are inside the bounding box.
+			if (!Intersect(ray, meshFilter->GetGlobalBoundingBox())) // TODO: We need to fix intersections if we are inside the bounding box.
 			{
 				continue;
 			}
 
 			RayHit outHit;
-			if (IntersectRayMesh(ray, meshFilter->GetMesh(), outHit))
+			const TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>();
+			const Matrix4 world = transformComponent == nullptr ? Matrix4::Identity :
+				Matrix4::Scaling(transformComponent->GetScale()) *
+				Matrix4::RotationQuaternion(transformComponent->GetRotation()) *
+				Matrix4::Translation(transformComponent->GetPosition());
+
+			if (IntersectRayMesh(ray, meshFilter->GetMesh(), outHit, world))
 			{
 				if (selectedGameObject == nullptr || outHit.distance < closestDistance)
 				{

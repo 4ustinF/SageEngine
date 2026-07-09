@@ -86,5 +86,5 @@
 
 namespace SAGE::Graphics
 {
-	bool IntersectRayMesh(const SAGE::Math::Ray& ray, const SAGE::Graphics::Mesh& mesh, SAGE::Math::RayHit& outHit);
+	bool IntersectRayMesh(const SAGE::Math::Ray& ray, const SAGE::Graphics::Mesh& mesh, SAGE::Math::RayHit& outHit, const SAGE::Math::Matrix4& world = SAGE::Math::Matrix4::Identity);
 }

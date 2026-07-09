@@ -225,7 +225,7 @@ void RenderService::Render()
 	// ------------------------------------------------------------
 
 
-	//SimpleDraw::AddTransform(Matrix4::Identity); // TODO: Add settings to display these.
+	SimpleDraw::AddTransform(Matrix4::Identity); // TODO: Add settings to display these.
 	//SimpleDraw::AddPlane(20, Colors::White); // TODO: Add settings to display these.
 	SimpleDraw::Render(camera);
 }

@@ -165,13 +165,50 @@ void RenderService::Render()
 		}
 		mShadowEffect.End();
 
-		mStandardEffect.Begin();
-		for (auto& entry : mMeshRendererEntrys) 
+		std::vector<MeshRendererComponent*> transparentObjects;
+
+		for (auto& entry : mMeshRendererEntrys)
 		{
 			if (entry->GetIsTransparent())
 			{
-				mStandardEffect.Render(entry->GetRenderObject());
+				transparentObjects.push_back(entry);
 			}
+		}
+
+		const Vector3& cameraPos = camera.GetPosition();
+
+		// Hack to sort transparent stuff from back to front. 
+		std::sort(
+			transparentObjects.begin(),
+			transparentObjects.end(),
+			[&cameraPos](const auto* a, const auto* b)
+			{
+				const TransformComponent* transformA = a->GetOwner().GetComponent<TransformComponent>();
+				const TransformComponent* transformB = b->GetOwner().GetComponent<TransformComponent>();
+
+				const Vector3 posA =
+					transformA != nullptr
+					? transformA->GetPosition()
+					: Vector3::Zero;
+
+				const Vector3 posB =
+					transformB != nullptr
+					? transformB->GetPosition()
+					: Vector3::Zero;
+
+				const float distSqA =
+					MagnitudeSqr(posA - cameraPos);
+
+				const float distSqB =
+					MagnitudeSqr(posB - cameraPos);
+
+				return distSqA > distSqB;
+			});
+
+		mStandardEffect.Begin();
+		for (auto* entry : transparentObjects)
+		{
+			mStandardEffect.Render(entry->GetRenderObject());
 		}
 		mStandardEffect.End();
 

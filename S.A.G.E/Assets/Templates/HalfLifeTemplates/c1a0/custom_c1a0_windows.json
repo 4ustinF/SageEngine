@@ -1,8 +1,6 @@
 {
   "Name": "Windows",
   "Components": {
-    "Transform Component": {
-    }
   },
   "GameObjects": [
     {

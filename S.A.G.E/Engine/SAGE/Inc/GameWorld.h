@@ -5,6 +5,8 @@
 
 namespace SAGE
 {
+	class CameraService;
+
 	class GameWorld final
 	{
 	public:
@@ -48,6 +50,8 @@ namespace SAGE
 	private:
 		bool IsValid(GameObjectHandle handle) const;
 		void ProcessDestroyList();
+		SAGE::Input::InputSystem* mInputSystem = nullptr;
+		CameraService* mCameraService = nullptr;
 
 		struct Slot
 		{
@@ -83,9 +87,11 @@ namespace SAGE
 		void DrawAddComponentWindow();
 		bool mAddComponentWindowActive = false;
 
+		void UpdateEditSelection();
+		bool mEditMode = false;
+
 		bool mInitialized = false;
 		bool mUpdating = false;
-		bool mEditMode = false;
 		float mImguiSpacing = 5.0f;
 
 		std::vector<GameObjectHandle> mRootGameObjectHandles;

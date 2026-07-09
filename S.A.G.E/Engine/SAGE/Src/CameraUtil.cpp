@@ -6,7 +6,6 @@ using namespace SAGE::Input;
 void SAGE::CameraUtil::UpdateFPSCamera(SAGE::Graphics::Camera& camera, float normSpeed, float fastSpeed, float turnSpeed, float deltaTime, bool useDebugMode)
 {
 	auto inputSystem = InputSystem::Get();
-
 	const float moveSpeed = inputSystem->IsKeyDown(KeyCode::LSHIFT) ? fastSpeed : normSpeed;
 
 	if (inputSystem->IsKeyDown(KeyCode::W))
@@ -38,8 +37,8 @@ void SAGE::CameraUtil::UpdateFPSCamera(SAGE::Graphics::Camera& camera, float nor
 		const int screenCenterY = GetSystemMetrics(SM_CYSCREEN) / 2; // 540
 		SetCursorPos(screenCenterX, screenCenterY);
 
-		inputSystem->GetMouseScreenX() = 640; // Half of 1280
-		inputSystem->GetMouseScreenY() = 349; // Kinda half of 720
+		inputSystem->GetMouseScreenX() = 640; // Half of 1280		// TODO: Fix these magic numbers.
+		inputSystem->GetMouseScreenY() = 349; // Kinda half of 720	// TODO: Fix these magic numbers.
 		inputSystem->GetPrevMouseScreenX() = inputSystem->GetMouseScreenX();
 		inputSystem->GetPrevMouseScreenY() = inputSystem->GetMouseScreenY();
 	}

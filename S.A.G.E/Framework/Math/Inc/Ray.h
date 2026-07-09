@@ -4,6 +4,10 @@ namespace SAGE::Math
 {
 	struct Ray
 	{
+		Ray() = default;
+		Ray(const Vector3& origin, const Vector3& direction)
+			: origin(origin), direction(direction) {}
+
 		Vector3 origin = Vector3::Zero;
 		Vector3 direction = Vector3::ZAxis;
 

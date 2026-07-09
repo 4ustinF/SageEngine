@@ -156,11 +156,25 @@ namespace SAGE::Math
 	#pragma region ---Matrix4---
 
 	inline Vector3 TransformCoord(const Vector3& v, const Matrix4& m) {
-		return Vector3 (
-			v.x * m._11 + v.y * m._21 + v.z * m._31 + m._41,
-			v.x * m._12 + v.y * m._22 + v.z * m._32 + m._42,
-			v.x * m._13 + v.y * m._23 + v.z * m._33 + m._43
-		);
+		//return Vector3 (
+		//	v.x * m._11 + v.y * m._21 + v.z * m._31 + m._41,
+		//	v.x * m._12 + v.y * m._22 + v.z * m._32 + m._42,
+		//	v.x * m._13 + v.y * m._23 + v.z * m._33 + m._43
+		//);
+
+		float x = v.x * m._11 + v.y * m._21 + v.z * m._31 + m._41;
+		float y = v.x * m._12 + v.y * m._22 + v.z * m._32 + m._42;
+		float z = v.x * m._13 + v.y * m._23 + v.z * m._33 + m._43;
+		float w = v.x * m._14 + v.y * m._24 + v.z * m._34 + m._44;
+
+		if (fabsf(w) > Constants::Epsilon)
+		{
+			x /= w;
+			y /= w;
+			z /= w;
+		}
+
+		return Vector3(x, y, z);
 	}
 
 	inline Vector3 TransformNormal(const Vector3& v, const Matrix4& m) {

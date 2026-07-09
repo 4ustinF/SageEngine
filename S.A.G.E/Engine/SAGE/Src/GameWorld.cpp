@@ -12,6 +12,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
 void GameWorld::Initialize(uint32_t capacity)
@@ -25,6 +26,9 @@ void GameWorld::Initialize(uint32_t capacity)
 	mGameObjectSlots.resize(capacity);
 	mFreeSlots.resize(capacity);
 	std::iota(mFreeSlots.rbegin(), mFreeSlots.rend(), 0);
+
+	mInputSystem = Input::InputSystem::Get();
+	mCameraService = GetService<CameraService>();
 
 	mInitialized = true;
 }
@@ -47,8 +51,9 @@ void GameWorld::Terminate()
 		it->get()->Terminate();
 	}
 
+	mInputSystem = nullptr;
+	mCameraService = nullptr;
 	mInitialized = false;
-
 	mInspectorGameObject = nullptr;
 	mInspectorService = nullptr;
 }
@@ -80,51 +85,7 @@ void GameWorld::Update(float deltaTime)
 	// ------------------------------------------------------------
 	if (mEditMode)
 	{
-		const auto& inputSystem = Input::InputSystem::Get();
-		if (inputSystem->IsMousePressed(Input::MouseButton::LBUTTON))
-		{
-			if (const CameraService* camService = GetService<CameraService>())
-			{
-				SAGE::Math::Ray ray;
-				ray.origin = camService->GetCamera().GetPosition(); // TODO: Go off of where we click instead.
-				ray.direction = camService->GetCamera().GetDirection();
-				GameObject* selectedGameObject = nullptr;
-				float distance = 0.0f;
-
-				for(GameObject* gameObject : mUpdateList)
-				{
-					if (!IsValid(gameObject->GetHandle()) || !gameObject->IsActiveInHierarchy())
-					{
-						continue;
-					}
-
-					if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
-					{
-						if (!Intersect(ray, meshFilter->GetBoundingBox())) // TODO: We need to fix intersections if we are inside the bounding box.
-						{
-							continue;
-						}
-
-						RayHit outHit;
-						if (IntersectRayMesh(ray, meshFilter->GetMesh(), outHit))
-						{
-							if (selectedGameObject == nullptr || outHit.distance < distance)
-							{
-								selectedGameObject = gameObject;
-								distance = outHit.distance;
-							}
-						}
-					}
-				}
-
-				if (selectedGameObject != nullptr) // TODO: Convert to func?
-				{
-					mInspectorService = nullptr;
-					mInspectorGameObject = selectedGameObject;
-					mAddComponentWindowActive = false;
-				}
-			}
-		}
+		UpdateEditSelection();
 	}
 }
 
@@ -409,6 +370,8 @@ void GameWorld::ProcessDestroyList()
 	mToBeDestroyed.clear();
 }
 
+#pragma region ---Hierarchy & Inspector---
+
 void GameWorld::RebuildHierarchy()
 {
 	mRootGameObjectHandles.clear();
@@ -548,3 +511,93 @@ void GameWorld::DrawAddComponentWindow()
 {
 	ImGui::Text("TODO: Setup Add Comp Window"); // TODO: Remove this.
 }
+
+#pragma endregion
+
+#pragma region ---Edit Mode---
+
+void GameWorld::UpdateEditSelection()
+{
+	if (!mInputSystem->IsMousePressed(Input::MouseButton::LBUTTON))
+	{
+		return;
+	}
+
+	if (mCameraService == nullptr)
+	{
+		return;
+	}
+
+	const Camera& camera = mCameraService->GetCamera();
+	GameObject* selectedGameObject = nullptr;
+	float closestDistance = FLT_MAX;
+
+	const auto& graphicsSystem = GraphicsSystem::Get();
+	const auto screenWidth = graphicsSystem->GetBackBufferWidth();
+	const auto screenHeight = graphicsSystem->GetBackBufferHeight();
+
+	// 0. Get mouse position
+	const float mouseX = Math::Max(static_cast<float>(mInputSystem->GetMouseScreenX()), Constants::Epsilon);
+	const float mouseY = Math::Max(static_cast<float>(mInputSystem->GetMouseScreenY()), Constants::Epsilon);
+
+	// 1. Convert to NDC space [-1, 1]
+	float ndcX = (2.0f * mouseX) / screenWidth - 1.0f;
+	float ndcY = -(2.0f * mouseY) / screenHeight + 1.0f; // flip Y (screen Y is top-down)
+
+	// 2. Build inverse matrices
+	const Matrix4 invProj = Inverse(camera.GetProjectionMatrix());
+	const Matrix4 invView = Inverse(camera.GetViewMatrix());
+
+	// 3. Unproject a point on the near plane (z=0) and far plane (z=1) in clip space
+	const Vector3 nearPointNDC = Vector3(ndcX, ndcY, 0.0f);
+	const Vector3 farPointNDC = Vector3(ndcX, ndcY, 1.0f);
+
+	// Clip -> View space
+	const Vector3 nearPointView = TransformCoord(nearPointNDC, invProj);
+	const Vector3 farPointView = TransformCoord(farPointNDC, invProj);
+
+	// View -> World space
+	const Vector3 nearPointWorld = TransformCoord(nearPointView, invView);
+	const Vector3 farPointWorld = TransformCoord(farPointView, invView);
+
+	// 4. Direction = far - near, normalized
+	const Vector3 rayDir = Normalize(farPointWorld - nearPointWorld);
+
+	// 5. Create a ray from the camera position in the direction of the rayDir
+	const Ray ray = Ray(camera.GetPosition(), rayDir);
+
+	for (GameObject* gameObject : mUpdateList)
+	{
+		if (!IsValid(gameObject->GetHandle()) || !gameObject->IsActiveInHierarchy())
+		{
+			continue;
+		}
+
+		if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
+		{
+			if (!Intersect(ray, meshFilter->GetBoundingBox())) // TODO: We need to fix intersections if we are inside the bounding box.
+			{
+				continue;
+			}
+
+			RayHit outHit;
+			if (IntersectRayMesh(ray, meshFilter->GetMesh(), outHit))
+			{
+				if (selectedGameObject == nullptr || outHit.distance < closestDistance)
+				{
+					selectedGameObject = gameObject;
+					closestDistance = outHit.distance;
+				}
+			}
+		}
+	}
+
+	if (selectedGameObject != nullptr)
+	{
+		mInspectorService = nullptr;
+		mInspectorGameObject = selectedGameObject;
+		mAddComponentWindowActive = false;
+	}
+}
+
+#pragma endregion

@@ -1,7 +1,2 @@
-﻿  GameObjectFactory.cpp
-  GameWorld.cpp
-  MeshFilterComponent.cpp
-  MeshRendererComponent.cpp
-  SAGE.cpp
-  Generating Code...
+﻿  MeshFilterComponent.cpp
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

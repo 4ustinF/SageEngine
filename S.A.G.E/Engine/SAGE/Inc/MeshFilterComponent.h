@@ -56,6 +56,7 @@ namespace SAGE
 		void GenerateQuadMesh();
 		void GenerateSphereMesh();
 		void GenerateCustomMesh();
+		void GenerateAABB(); // TODO: Convert to OBB.
 
 		TransformComponent* mTransformComponent = nullptr;
 
@@ -89,5 +90,6 @@ namespace SAGE
 		// Debug
 		bool mEnableWireframe = true;
 		bool mFillWireframe = false;
+		SAGE::Math::AABB mAABB; // TODO: Convert to OBB. This is to help optimize mesh selection.
 	};
 }

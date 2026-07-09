@@ -201,6 +201,8 @@ void MeshFilterComponent::DebugUI()
 				mFillWireframe ? SimpleDraw::AddFilledFace(pos0, pos1, pos2, Colors::Red) : SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red); // TODO: Add a color option.
 			}
 		}
+
+		SimpleDraw::AddAABB(mAABB, Colors::Blue);
 	}
 }
 
@@ -241,6 +243,8 @@ void MeshFilterComponent::GenerateMesh()
 		GenerateCustomMesh();
 		break;
 	}
+
+	GenerateAABB();
 }
 
 void MeshFilterComponent::GenerateCubeMesh()
@@ -315,4 +319,34 @@ void MeshFilterComponent::GenerateCustomMesh()
 
 	fclose(file);
 	mRenderObject.meshBuffer.Initialize(mMesh);
+}
+
+void MeshFilterComponent::GenerateAABB() // TODO: Make it work if the object moves. Bind to transform comp and update aabb pos when the transform comp pos moves.
+{
+	mAABB = Math::AABB();
+
+	const int vertCount = static_cast<int>(mMesh.vertices.size());
+	if (vertCount == 0)
+	{
+		return;
+	}
+
+	Math::Vector3 minPos = mMesh.vertices[0].position;
+	Math::Vector3 maxPos = minPos;
+
+	for (int vertIndex = 1; vertIndex < vertCount; ++vertIndex)
+	{
+		const auto& pos = mMesh.vertices[vertIndex].position;
+
+		minPos.x = std::min(minPos.x, pos.x);
+		minPos.y = std::min(minPos.y, pos.y);
+		minPos.z = std::min(minPos.z, pos.z);
+
+		maxPos.x = std::max(maxPos.x, pos.x);
+		maxPos.y = std::max(maxPos.y, pos.y);
+		maxPos.z = std::max(maxPos.z, pos.z);
+	}
+
+	mAABB.center = (minPos + maxPos) * 0.5f;
+	mAABB.extend = (maxPos - minPos) * 0.5f;
 }

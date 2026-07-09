@@ -321,9 +321,9 @@ void MeshFilterComponent::GenerateCustomMesh()
 	mRenderObject.meshBuffer.Initialize(mMesh);
 }
 
-void MeshFilterComponent::GenerateBoundingBox() // TODO: Make it work if the object moves. Bind to transform comp and update aabb pos when the transform comp pos moves.
+void MeshFilterComponent::GenerateBoundingBox() // TODO: Make it work if the object moves. Bind to transform comp and update aabb pos/rot/scale when the transform comp pos/rot/scale moves.
 {
-	mBoundingBox = Math::OBB(); // TODO: Make this tighter by adding rotation.
+	mBoundingBox = OBB();
 
 	const int vertCount = static_cast<int>(mMesh.vertices.size());
 	if (vertCount == 0)
@@ -334,19 +334,20 @@ void MeshFilterComponent::GenerateBoundingBox() // TODO: Make it work if the obj
 	Math::Vector3 minPos = mMesh.vertices[0].position;
 	Math::Vector3 maxPos = minPos;
 
-	for (int vertIndex = 1; vertIndex < vertCount; ++vertIndex)
+	for (size_t i = 1; i < mMesh.vertices.size(); ++i)
 	{
-		const auto& pos = mMesh.vertices[vertIndex].position;
+		const auto& p = mMesh.vertices[i].position;
 
-		minPos.x = std::min(minPos.x, pos.x);
-		minPos.y = std::min(minPos.y, pos.y);
-		minPos.z = std::min(minPos.z, pos.z);
+		minPos.x = std::min(minPos.x, p.x);
+		minPos.y = std::min(minPos.y, p.y);
+		minPos.z = std::min(minPos.z, p.z);
 
-		maxPos.x = std::max(maxPos.x, pos.x);
-		maxPos.y = std::max(maxPos.y, pos.y);
-		maxPos.z = std::max(maxPos.z, pos.z);
+		maxPos.x = std::max(maxPos.x, p.x);
+		maxPos.y = std::max(maxPos.y, p.y);
+		maxPos.z = std::max(maxPos.z, p.z);
 	}
 
 	mBoundingBox.center = (minPos + maxPos) * 0.5f;
 	mBoundingBox.extend = (maxPos - minPos) * 0.5f;
+	mBoundingBox.rotation = mTransformComponent != nullptr ? mTransformComponent->GetRotation() : Math::Quaternion::Identity;
 }

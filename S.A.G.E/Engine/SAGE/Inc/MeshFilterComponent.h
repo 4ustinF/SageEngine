@@ -57,7 +57,7 @@ namespace SAGE
 		void GenerateQuadMesh();
 		void GenerateSphereMesh();
 		void GenerateCustomMesh();
-		void GenerateBoundingBox();
+		void GenerateBoundingBox(); // We need to update the bounding box when the transform comp updates.
 
 		TransformComponent* mTransformComponent = nullptr;
 
@@ -91,6 +91,6 @@ namespace SAGE
 		// Debug
 		bool mEnableWireframe = true;
 		bool mFillWireframe = false;
-		SAGE::Math::OBB mBoundingBox; // TODO: Capture a tighter obb with rotation. This is to help optimize mesh selection.
+		SAGE::Math::OBB mBoundingBox;
 	};
 }

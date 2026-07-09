@@ -336,6 +336,52 @@ bool SAGE::Math::Intersect(const Ray& ray, const Plane& plane, float& distance)
 	return true;
 }
 
+bool SAGE::Math::Intersect(const Ray& ray, const OBB& obb)
+{
+	// Compute the local to world / world to local matrices
+	const Matrix4 matTrans = Matrix4::Translation(obb.center);
+	const Matrix4 matRot = Matrix4::RotationQuaternion(obb.rotation);
+	const Matrix4 matWorld = matRot * matTrans;
+	const Matrix4 matWorldinv = Inverse(matWorld);
+
+	// Transform the ray into the OBBS local space
+	const Vector3 org = TransformCoord(ray.origin, matWorldinv);
+	const Vector3 dir = TransformNormal(ray.direction, matWorldinv);
+	const Ray localRay{ org, dir };
+
+	const Plane planes[] =
+	{
+		{{ 0.0f,  0.0f, -1.0f}, obb.extend.z},
+		{{ 0.0f,  0.0f,  1.0f}, obb.extend.z},
+		{{ 0.0f, -1.0f,  0.0f}, obb.extend.y},
+		{{ 0.0f,  1.0f,  0.0f}, obb.extend.y},
+		{{-1.0f,  0.0f,  0.0f}, obb.extend.x},
+		{{ 1.0f,  0.0f,  0.0f}, obb.extend.x}
+	};
+
+	uint32_t numIntersection = 0;
+	for (auto& plane : planes)
+	{
+		const float d = Dot(org, plane.normal);
+		if (d > plane.distance)
+		{
+			float distance = 0.0f;
+			if (Intersect(localRay, plane, distance) && distance >= 0.0f)
+			{
+				Vector3 pt = org + (dir * distance);
+				if (abs(pt.x) <= obb.extend.x + 0.01f &&
+					abs(pt.y) <= obb.extend.y + 0.01f &&
+					abs(pt.z) <= obb.extend.z + 0.01f)
+				{
+					++numIntersection;
+				}
+			}
+		}
+	}
+
+	return numIntersection != 0;
+}
+
 bool SAGE::Math::Intersect(const Ray& ray, const OBB& obb, Vector3& point, Vector3& normal)
 {
 	// Compute the local to world / world to local matrices

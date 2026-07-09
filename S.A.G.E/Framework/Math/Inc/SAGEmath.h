@@ -309,6 +309,7 @@ namespace SAGE::Math
 	//}
 
 	bool Intersect(const Ray& ray, const Plane& plane, float& distance);
+	bool Intersect(const Ray& ray, const OBB& obb);
 	bool Intersect(const Ray& ray, const OBB& obb, Vector3& point, Vector3& normal);
 
 	bool Intersect(const Vector3& point, const AABB& aabb);

@@ -106,9 +106,7 @@ void GameWorld::Update(float deltaTime)
 						// 9651
 						// 146
 
-						Vector3 point = Vector3::Zero;
-						Vector3 normal = Vector3::Zero;
-						if (!Intersect(ray, meshFilter->GetBoundingBox(), point, normal))
+						if (!Intersect(ray, meshFilter->GetBoundingBox())) // TODO: We need to fix intersections if we are inside the bounding box.
 						{
 							continue;
 						}

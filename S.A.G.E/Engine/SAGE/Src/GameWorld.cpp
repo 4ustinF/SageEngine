@@ -66,7 +66,7 @@ void GameWorld::Update(float deltaTime)
 
 	for (size_t i = 0; i < mUpdateList.size(); ++i) {
 		GameObject* gameObject = mUpdateList[i];
-		if (IsValid(gameObject->GetHandle())) {
+		if (IsValid(gameObject->GetHandle()) && gameObject->IsActiveInHierarchy()) {
 			gameObject->Update(deltaTime);
 		}
 	}
@@ -81,9 +81,6 @@ void GameWorld::Update(float deltaTime)
 	const auto& inputSystem = Input::InputSystem::Get();
 	if (inputSystem->IsMousePressed(Input::MouseButton::LBUTTON))
 	{
-		mDebugClickCount1 = 0;
-		mDebugClickCount2 = 0;
-
 		if (const CameraService* camService = GetService<CameraService>())
 		{
 			SAGE::Math::Ray ray;
@@ -103,15 +100,10 @@ void GameWorld::Update(float deltaTime)
 
 					if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
 					{
-						// 9651
-						// 146
-
 						if (!Intersect(ray, meshFilter->GetBoundingBox())) // TODO: We need to fix intersections if we are inside the bounding box.
 						{
 							continue;
 						}
-
-						mDebugClickCount2 += 1;
 
 						RaycastHit outHit;
 						if (IntersectRayMesh(ray, meshFilter->GetMesh(), outHit))
@@ -233,8 +225,6 @@ void GameWorld::Render()
 
 void GameWorld::DebugUI()
 {
-	ImGui::SliderInt("Debug Click Count", &mDebugClickCount1, 0, 10000000);
-	ImGui::SliderInt("Debug Click Count", &mDebugClickCount2, 0, 10000000);
 	ImGui::Begin("Hierarchy##GameWorld", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 	DrawHierarchy();
 	ImGui::End();

@@ -30,11 +30,6 @@ void GameObject::Terminate()
 
 void GameObject::Update(float deltaTime)
 {
-	if (!mActiveInHierarchy)
-	{
-		return;
-	}
-
 	for (auto& component : mComponents)
 	{
 		component->Update(deltaTime);

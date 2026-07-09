@@ -127,7 +127,7 @@ void RenderService::Render()
 		}
 	}
 
-	mBaseRenderTarget.BeginRender();
+	//mBaseRenderTarget.BeginRender();
 	{
 		mTexturingEffect.Begin();
 		if (mSkyDome.diffuseMapId != 0) { mTexturingEffect.Render(mSkyDome); }
@@ -146,7 +146,7 @@ void RenderService::Render()
 		}
 		for (auto& entry : mMeshRendererEntrys)
 		{
-			if (!entry->GetIsTransparent()) // TODO: This is a hack. Seperate these groupings in 2?
+			if (!entry->GetIsTransparent()) // TODO: This is a hack. Separate these groupings in 2? We should also sort the transparent objects so they are sorted back to front.
 			{
 				mStandardEffect.Render(entry->GetRenderObject());
 			}
@@ -181,53 +181,52 @@ void RenderService::Render()
 			mTerrainEffect.End();
 		}
 	}
-	mBaseRenderTarget.EndRender();
+	//mBaseRenderTarget.EndRender();
 
-	// TODO: Add UV support to standard effect
-	mBloomRenderTarget.BeginRender(); //TODO: Clean up
-	{
-		mStandardEffect.Begin();
-		for (auto& entry : mMeshRendererEntrys)
-		{
-			Material dummyMaterial;
-			dummyMaterial.power = 1.0f;
-			RenderObject& renderObject = entry->GetRenderObject();
+	//mBloomRenderTarget.BeginRender(); //TODO: Clean up
+	//{
+	//	mStandardEffect.Begin();
+	//	for (auto& entry : mMeshRendererEntrys)
+	//	{
+	//		Material dummyMaterial;
+	//		dummyMaterial.power = 1.0f;
+	//		RenderObject& renderObject = entry->GetRenderObject();
 
-			bool swap = false;
-			if (entry->GetShouldBloom() == false)
-			{
-				std::swap(renderObject.material, dummyMaterial);
-				swap = true;
-			}
+	//		bool swap = false;
+	//		if (entry->GetShouldBloom() == false)
+	//		{
+	//			std::swap(renderObject.material, dummyMaterial);
+	//			swap = true;
+	//		}
 
-			mStandardEffect.Render(renderObject);
+	//		mStandardEffect.Render(renderObject);
 
-			if (swap)
-			{
-				std::swap(renderObject.material, dummyMaterial);
-			}
-		}
-		mStandardEffect.End();
-	}
-	mBloomRenderTarget.EndRender();
+	//		if (swap)
+	//		{
+	//			std::swap(renderObject.material, dummyMaterial);
+	//		}
+	//	}
+	//	mStandardEffect.End();
+	//}
+	//mBloomRenderTarget.EndRender();
 
 	// ------------------------------------------------------------
-	mGaussianBlurEffect.Begin();
-	{
-		mGaussianBlurEffect.Render(mScreenQuad);
-	}
-	mGaussianBlurEffect.End();
+	//mGaussianBlurEffect.Begin();
+	//{
+	//	mGaussianBlurEffect.Render(mScreenQuad);
+	//}
+	//mGaussianBlurEffect.End();
 
-	mPostProccessingEffect.Begin();
-	{
-		mPostProccessingEffect.Render(mScreenQuad);
-	}
-	mPostProccessingEffect.End();
+	//mPostProccessingEffect.Begin();
+	//{
+	//	mPostProccessingEffect.Render(mScreenQuad);
+	//}
+	//mPostProccessingEffect.End();
 	// ------------------------------------------------------------
 
 
-	SimpleDraw::AddTransform(Matrix4::Identity); // TODO: Add settings to display these.
-	SimpleDraw::AddPlane(20, Colors::White); // TODO: Add settings to display these.
+	//SimpleDraw::AddTransform(Matrix4::Identity); // TODO: Add settings to display these.
+	//SimpleDraw::AddPlane(20, Colors::White); // TODO: Add settings to display these.
 	SimpleDraw::Render(camera);
 }
 

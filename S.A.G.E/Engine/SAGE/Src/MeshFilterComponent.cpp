@@ -132,22 +132,7 @@ void MeshFilterComponent::DebugUI()
 		}
 
 		ImGui::Checkbox("Display Wireframe##MeshFilterComponent", &mEnableWireframe);
-
-		if (mEnableWireframe)
-		{
-			const int indexCount = static_cast<int>(mMesh.indices.size());
-			if (indexCount > 3)
-			{
-				const Vector3& worldPos = mTransformComponent != nullptr ? mTransformComponent->GetPosition() : Vector3::Zero;
-				for (int i = 0; i < indexCount; i += 3)
-				{
-					const Vector3 pos0 = mMesh.vertices[mMesh.indices[i]].position + worldPos;
-					const Vector3 pos1 = mMesh.vertices[mMesh.indices[i + 1]].position + worldPos;
-					const Vector3 pos2 = mMesh.vertices[mMesh.indices[i + 2]].position + worldPos;
-					SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red); // TODO: Add a color option and a filled option.
-				}
-			}
-		}
+		ImGui::Checkbox("Fill Wireframe##MeshFilterComponent", &mFillWireframe);
 
 		if (ImGui::CollapsingHeader("Adjust Mesh##MeshFilterComponent ", ImGuiTreeNodeFlags_CollapsingHeader))
 		{
@@ -197,6 +182,23 @@ void MeshFilterComponent::DebugUI()
 			{
 				mMeshFilterData = mAdjustedMeshFilterData;
 				GenerateMesh();
+			}
+		}
+	}
+
+	if (mEnableWireframe)
+	{
+		const int indexCount = static_cast<int>(mMesh.indices.size());
+		if (indexCount > 3)
+		{
+			const Vector3& worldPos = mTransformComponent != nullptr ? mTransformComponent->GetPosition() : Vector3::Zero;
+			for (int i = 0; i < indexCount; i += 3)
+			{
+				const Vector3 pos0 = mMesh.vertices[mMesh.indices[i]].position + worldPos;
+				const Vector3 pos1 = mMesh.vertices[mMesh.indices[i + 1]].position + worldPos;
+				const Vector3 pos2 = mMesh.vertices[mMesh.indices[i + 2]].position + worldPos;
+
+				mFillWireframe ? SimpleDraw::AddFilledFace(pos0, pos1, pos2, Colors::Red) : SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red); // TODO: Add a color option.
 			}
 		}
 	}

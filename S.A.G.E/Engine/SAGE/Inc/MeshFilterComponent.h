@@ -62,7 +62,6 @@ namespace SAGE
 		SAGE::Graphics::RenderObject mRenderObject;
 		MeshType mMeshType = MeshType::Cube;
 		SAGE::Graphics::Mesh mMesh;
-		bool mEnableWireframe = true;
 
 		struct MeshFilterData
 		{
@@ -86,5 +85,9 @@ namespace SAGE
 			"Sphere",
 			"Custom"
 		};
+
+		// Debug
+		bool mEnableWireframe = true;
+		bool mFillWireframe = false;
 	};
 }

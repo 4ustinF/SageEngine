@@ -91,6 +91,7 @@
     <ClCompile Include="Src\DebugUI.cpp" />
     <ClCompile Include="Src\Font.cpp" />
     <ClCompile Include="Src\GaussianBlurEffect.cpp" />
+    <ClCompile Include="Src\Graphics.cpp" />
     <ClCompile Include="Src\GraphicsSystem.cpp" />
     <ClCompile Include="Src\HologramEffect.cpp" />
     <ClCompile Include="Src\MeshBuffer.cpp" />

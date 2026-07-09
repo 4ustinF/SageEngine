@@ -43,17 +43,7 @@ namespace SAGE
 
 		GameObject* CreateGameObjectRecursive(std::filesystem::path templateFile, GameObject* parentGO, const char* overrideName);
 
-		struct RaycastHit
-		{
-			bool hit = false;
-			float distance = 0.0f;
-			SAGE::Math::Vector3 position;
-			SAGE::Math::Vector3 normal;
-			uint32_t triangleIndex = 0;
-		};
-
-		bool IntersectRayMesh(const SAGE::Math::Ray& ray, const SAGE::Graphics::Mesh& mesh, RaycastHit& outHit);
-		bool IntersectRayTriangle(const SAGE::Math::Ray& ray, const SAGE::Math::Vector3& v0, const SAGE::Math::Vector3& v1, const SAGE::Math::Vector3& v2, float& outDistance, SAGE::Math::Vector3& outNormal);
+		void SetEditMode(bool editMode) { mEditMode = editMode; }
 
 	private:
 		bool IsValid(GameObjectHandle handle) const;
@@ -95,6 +85,7 @@ namespace SAGE
 
 		bool mInitialized = false;
 		bool mUpdating = false;
+		bool mEditMode = false;
 		float mImguiSpacing = 5.0f;
 
 		std::vector<GameObjectHandle> mRootGameObjectHandles;

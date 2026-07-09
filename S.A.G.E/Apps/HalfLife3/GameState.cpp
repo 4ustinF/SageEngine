@@ -20,6 +20,7 @@ void GameState::Initialize()
 	mCameraService = mGameWorld.AddService<CameraService>();
 	RenderService* renderService = mGameWorld.AddService<RenderService>();
 	mGameWorld.Initialize(1000);
+	mGameWorld.SetEditMode(true);
 
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/HalfLife/halflife_level.json");

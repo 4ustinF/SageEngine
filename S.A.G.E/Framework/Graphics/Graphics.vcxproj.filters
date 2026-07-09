@@ -395,5 +395,8 @@
     <ClCompile Include="Src\UIButton.cpp">
       <Filter>Src\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Graphics.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -588,4 +588,49 @@ bool SAGE::Math::Intersect(const AABB& aabb, OBB& obb)
 	return false;
 }
 
+bool SAGE::Math::IntersectRayTriangle(const Ray& ray, const Vector3& v0, const Vector3& v1, const Vector3& v2, float& outDistance, Vector3& outNormal)
+{
+	const Math::Vector3 edge1 = v1 - v0;
+	const Math::Vector3 edge2 = v2 - v0;
+
+	const Math::Vector3 p = Math::Cross(ray.direction, edge2);
+	const float det = Math::Dot(edge1, p);
+
+	// If det is near 0, ray is parallel to triangle
+	if (std::fabs(det) < Constants::Epsilon)
+	{
+		return false;
+	}
+	
+	const float invDet = 1.0f / det;
+	const Vector3 t = ray.origin - v0;
+	const float u = Dot(t, p) * invDet;
+
+	if (u < 0.0f || u > 1.0f)
+	{
+		return false;
+	}
+
+	const Vector3 q = Cross(t, edge1);
+	const float v = Dot(ray.direction, q) * invDet;
+
+	if (v < 0.0f || u + v > 1.0f)
+	{
+		return false;
+	}
+
+	const float distance = Dot(edge2, q) * invDet;
+
+	// Hit is behind ray origin
+	if (distance < Constants::Epsilon)
+	{
+		return false;
+	}
+
+	outDistance = distance;
+	outNormal = Normalize(Cross(edge1, edge2));
+
+	return true;
+}
+
 #pragma endregion

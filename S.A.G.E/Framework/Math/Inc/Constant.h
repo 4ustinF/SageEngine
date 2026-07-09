@@ -2,6 +2,7 @@
 
 namespace SAGE::Math::Constants
 {
+	constexpr float Epsilon = 0.000001f;
 	constexpr float Pi = 3.1415926535f;
 	constexpr float HalfPi = Pi * 0.5f;
 	constexpr float TwoPi = Pi * 2.0f;

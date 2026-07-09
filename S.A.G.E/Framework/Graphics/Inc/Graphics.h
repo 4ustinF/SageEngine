@@ -83,3 +83,8 @@
 
 // Other
 #include "GraphicsSystem.h"
+
+namespace SAGE::Graphics
+{
+	bool IntersectRayMesh(const SAGE::Math::Ray& ray, const SAGE::Graphics::Mesh& mesh, SAGE::Math::RayHit& outHit);
+}

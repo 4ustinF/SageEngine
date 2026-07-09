@@ -323,6 +323,8 @@ namespace SAGE::Math
 
 	bool Intersect(const AABB& aabb, OBB& obb);
 
+	bool IntersectRayTriangle(const Ray& ray, const Vector3& v0, const Vector3& v1, const Vector3& v2, float& outDistance, Vector3& outNormal);
+
 #pragma endregion
 
 

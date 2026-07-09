@@ -12,4 +12,12 @@ namespace SAGE::Math
 			return origin + (direction * distance);
 		}
 	};
+
+	struct RayHit
+	{
+		bool hit = false;
+		float distance = 0.0f;
+		Vector3 position;
+		Vector3 normal;
+	};
 }

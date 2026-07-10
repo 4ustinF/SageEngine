@@ -405,7 +405,20 @@ void GameWorld::DrawHierarchy()
 	}
 
 	// --- Game World Settings ---
-	ImGui::Checkbox("Edit Mode##GameWorld", &mEditMode);
+
+	if (ImGui::CollapsingHeader("Editor Settings##GameWorld", ImGuiTreeNodeFlags_CollapsingHeader))
+	{
+		ImGui::Checkbox("Edit Mode##GameWorld", &mEditMode);
+
+		ImGui::Text("Vertex Count: %s", std::to_string(mVertexCount).c_str());
+		ImGui::SameLine();
+		if (ImGui::Button("Update##GameWorld"))
+		{
+			UpdateVertexCount();
+		}
+	}
+
+	ImGui::Separator();
 
 	// --- Services ---
 	for (auto& service : mServices)
@@ -631,6 +644,22 @@ void GameWorld::UpdateEditSelection()
 		mInspectorService = nullptr;
 		mInspectorGameObject = selectedGameObject;
 		mAddComponentWindowActive = false;
+	}
+}
+
+void GameWorld::UpdateVertexCount()
+{
+	mVertexCount = 0;
+	for (const auto& gameObject : mUpdateList)
+	{
+		if (IsValid(gameObject->GetHandle()) && gameObject->IsActiveInHierarchy()) 
+		{
+			if (const MeshFilterComponent* meshFilterComponent = gameObject->GetComponent<MeshFilterComponent>())
+			{
+				mVertexCount += meshFilterComponent->GetRenderObject().meshBuffer.GetVertexCount();
+			}
+			// TODO: Add support for other components that have vertex data, such as ModelComp,SkinnedMeshComponent, etc.
+		}
 	}
 }
 

@@ -89,7 +89,9 @@ namespace SAGE
 		bool mAddComponentWindowActive = false;
 
 		void UpdateEditSelection();
+		void UpdateVertexCount();
 		bool mEditMode = false;
+		uint32_t mVertexCount = 0;
 
 		bool mInitialized = false;
 		bool mUpdating = false;

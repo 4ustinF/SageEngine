@@ -7,32 +7,23 @@
       "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\GameWorld.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GITHUBFILES\\SAGEENGINE\\S.A.G.E\\FRAMEWORK\\GRAPHICS\\INC\\MESHBUFFER.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:FRAMEWORK\\GRAPHICS\\INC\\MESHBUFFER.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.38.33130\\include\\xutility||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameWorld.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\GameWorld.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GITHUBFILES\\SAGEENGINE\\S.A.G.E\\FRAMEWORK\\MATH\\INC\\RAY.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:FRAMEWORK\\MATH\\INC\\RAY.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GITHUBFILES\\SAGEENGINE\\S.A.G.E\\FRAMEWORK\\MATH\\INC\\SAGEMATH.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:FRAMEWORK\\MATH\\INC\\SAGEMATH.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshFilterComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\MeshFilterComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshFilterComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\MeshFilterComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshRendererComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\MeshRendererComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshRendererComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Src\\MeshRendererComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31CF8178-8C13-48E1-9807-4FA6B00243CD}|Engine\\SAGE\\SAGE.vcxproj|solutionrelative:Engine\\SAGE\\Inc\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,27 +38,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Ray.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Math\\Inc\\Ray.h",
-              "RelativeDocumentMoniker": "Framework\\Math\\Inc\\Ray.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Math\\Inc\\Ray.h",
-              "RelativeToolTip": "Framework\\Math\\Inc\\Ray.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-07-09T19:33:39.87Z",
+              "Title": "xutility",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.38.33130\\include\\xutility",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.38.33130\\include\\xutility",
+              "ViewState": "AgIAAOwAAAAAAAAAAAApwP4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-07-10T17:26:36.878Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SAGEmath.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Math\\Inc\\SAGEmath.h",
-              "RelativeDocumentMoniker": "Framework\\Math\\Inc\\SAGEmath.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Math\\Inc\\SAGEmath.h",
-              "RelativeToolTip": "Framework\\Math\\Inc\\SAGEmath.h",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAuwK0AAAAKAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "MeshBuffer.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\MeshBuffer.h",
+              "RelativeDocumentMoniker": "Framework\\Graphics\\Inc\\MeshBuffer.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Framework\\Graphics\\Inc\\MeshBuffer.h",
+              "RelativeToolTip": "Framework\\Graphics\\Inc\\MeshBuffer.h",
+              "ViewState": "AgIAABYAAAAAAAAAAAAYwCgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-07-09T19:03:37.598Z",
+              "WhenOpened": "2026-07-10T17:19:27.037Z",
               "EditorCaption": ""
             },
             {
@@ -78,20 +67,20 @@
               "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameWorld.cpp",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameWorld.cpp",
               "RelativeToolTip": "Engine\\SAGE\\Src\\GameWorld.cpp",
-              "ViewState": "AgIAAC4CAAAAAAAAAAAcwDgCAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAJABAAAAAAAAAAAAAHwCAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-07-08T00:31:15.519Z",
+              "WhenOpened": "2026-07-10T00:43:44.686Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "GameWorld.h",
               "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameWorld.h",
               "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\GameWorld.h",
               "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameWorld.h",
               "RelativeToolTip": "Engine\\SAGE\\Inc\\GameWorld.h",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAAAGEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAYwFoAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-07-08T00:31:14.12Z",
               "EditorCaption": ""
@@ -99,53 +88,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "MeshFilterComponent.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshFilterComponent.cpp",
-              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\MeshFilterComponent.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshFilterComponent.cpp",
-              "RelativeToolTip": "Engine\\SAGE\\Src\\MeshFilterComponent.cpp",
-              "ViewState": "AgIAAL8AAAAAAAAAAAAcwMwAAAAMAAAAAAAAAA==",
+              "Title": "GameObject.cpp",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObject.cpp",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\GameObject.cpp",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\GameObject.cpp",
+              "RelativeToolTip": "Engine\\SAGE\\Src\\GameObject.cpp",
+              "ViewState": "AgIAABMAAAAAAAAAAAAowFEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-07-02T07:04:41.807Z",
+              "WhenOpened": "2026-07-10T00:20:43.277Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "MeshFilterComponent.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshFilterComponent.h",
-              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\MeshFilterComponent.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshFilterComponent.h",
-              "RelativeToolTip": "Engine\\SAGE\\Inc\\MeshFilterComponent.h",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAACYAAABJAAAAAAAAAA==",
+              "Title": "GameObject.h",
+              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameObject.h",
+              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\GameObject.h",
+              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\GameObject.h",
+              "RelativeToolTip": "Engine\\SAGE\\Inc\\GameObject.h",
+              "ViewState": "AgIAADkAAAAAAAAAAAAgwE4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-07-02T07:04:40.071Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MeshRendererComponent.cpp",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshRendererComponent.cpp",
-              "RelativeDocumentMoniker": "Engine\\SAGE\\Src\\MeshRendererComponent.cpp",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Src\\MeshRendererComponent.cpp",
-              "RelativeToolTip": "Engine\\SAGE\\Src\\MeshRendererComponent.cpp",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAmwDABAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-29T06:03:40.416Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MeshRendererComponent.h",
-              "DocumentMoniker": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshRendererComponent.h",
-              "RelativeDocumentMoniker": "Engine\\SAGE\\Inc\\MeshRendererComponent.h",
-              "ToolTip": "D:\\GitHubFiles\\SageEngine\\S.A.G.E\\Engine\\SAGE\\Inc\\MeshRendererComponent.h",
-              "RelativeToolTip": "Engine\\SAGE\\Inc\\MeshRendererComponent.h",
-              "ViewState": "AgIAADsAAAAAAAAAAAAWwE4AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-29T06:03:38.915Z",
+              "WhenOpened": "2026-07-10T00:20:41.498Z",
               "EditorCaption": ""
             }
           ]

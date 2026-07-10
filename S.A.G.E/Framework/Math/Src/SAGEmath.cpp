@@ -338,6 +338,13 @@ bool SAGE::Math::Intersect(const Ray& ray, const Plane& plane, float& distance)
 
 bool SAGE::Math::Intersect(const Ray& ray, const OBB& obb)
 {
+	if (ray.origin.x <= obb.extend.x &&
+		ray.origin.y <= obb.extend.y &&
+		ray.origin.z <= obb.extend.z)
+	{
+		return true;
+	}
+
 	// Compute the local to world / world to local matrices
 	const Matrix4 matTrans = Matrix4::Translation(obb.center);
 	const Matrix4 matRot = Matrix4::RotationQuaternion(obb.rotation);

@@ -552,6 +552,11 @@ void GameWorld::UpdateEditSelection()
 		return;
 	}
 
+	if (mInspectorGameObject != nullptr && mInspectorGameObject->GetIsReparenting())
+	{
+		mInspectorGameObject->SetIsReparenting(false);
+	}
+
 	const Camera& camera = mCameraService->GetCamera();
 	GameObject* selectedGameObject = nullptr;
 	float closestDistance = FLT_MAX;

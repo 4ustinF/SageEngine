@@ -207,6 +207,7 @@ void TransformComponent::SetPosition(const Vector3& inPos)
 	{
 		// Convert world -> local
 		mLocalTransform.position = inPos - parent->GetTransform().position;
+		//UpdateWorldPosition(inPos + Rotate(parent->GetTransform().rotation, mLocalTransform.position));
 	}
 	else
 	{

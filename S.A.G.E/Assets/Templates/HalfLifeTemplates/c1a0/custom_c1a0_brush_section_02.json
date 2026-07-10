@@ -5,10 +5,7 @@
   },
   "GameObjects": [
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_brush_020.json"
-    },
-    {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_brush_021.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/c1a0_medkit_1.json"
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_brush_022.json"

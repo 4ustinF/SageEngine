@@ -195,6 +195,7 @@ void MeshFilterComponent::DebugUI()
 				Matrix4::Scaling(mTransformComponent->GetScale()) *
 				Matrix4::RotationQuaternion(mTransformComponent->GetRotation()) *
 				Matrix4::Translation(mTransformComponent->GetPosition());
+				//Matrix4::Translation(GetTranslation(mTransformComponent->GetMatrix4()));
 
 			for (int i = 0; i < indexCount; i += 3)
 			{

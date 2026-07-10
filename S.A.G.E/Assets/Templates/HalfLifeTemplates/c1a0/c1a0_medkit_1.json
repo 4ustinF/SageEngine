@@ -1,0 +1,20 @@
+{
+  "Name": "Medkit 1",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -6.172200,
+        -2.876547,
+        -18.897600
+      ]
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/medkit_front.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/medkit_side.json"
+    }
+  ]
+}

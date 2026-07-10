@@ -1,0 +1,19 @@
+{
+  "Name": "MedkitFront",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        0.076200,
+        0.0,
+        0.0
+      ]
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/Misc/Meshes/medkit_front.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/Misc/Materials/medkit_front.material"
+    }
+  }
+}

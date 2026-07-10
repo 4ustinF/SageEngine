@@ -26,6 +26,7 @@ namespace SAGE::Math
 		constexpr Vector3 operator+(const Vector3& v) const noexcept { return { x + v.x, y + v.y, z + v.z }; }
 		constexpr Vector3 operator-(const Vector3& v) const noexcept { return { x - v.x, y - v.y, z - v.z }; }
 		constexpr Vector3 operator*(const Vector3& v) const noexcept { return { x * v.x, y * v.y, z * v.z }; }
+		constexpr Vector3 operator/(const Vector3& v) const noexcept { return { x / v.x, y / v.y, z / v.z }; }
 		constexpr Vector3 operator*(float f) const noexcept { return { x * f, y * f, z * f }; }
 		constexpr Vector3 operator/(float f) const noexcept { return { x / f, y / f, z / f }; }
 

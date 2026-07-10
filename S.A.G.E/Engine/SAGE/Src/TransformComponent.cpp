@@ -148,7 +148,7 @@ void TransformComponent::TransformComponent::Initialize()
 	if (const TransformComponent* transformComponent = FindParentTransformComponent())
 	{
 		const Transform& parentTransform = transformComponent->GetTransform();
-		mTransform.position = parentTransform.position + mLocalTransform.position; // parent.pos + (parent.rot * (parent.scale * local.pos)); // Scale and rotation might effect pos?
+		mTransform.position = parentTransform.position + parentTransform.rotation * (mLocalTransform.position * parentTransform.scale);
 		mTransform.rotation = parentTransform.rotation * mLocalTransform.rotation;
 		mTransform.scale = parentTransform.scale * mLocalTransform.scale;
 	}
@@ -205,9 +205,9 @@ void TransformComponent::SetPosition(const Vector3& inPos)
 {
 	if (const TransformComponent* parent = FindParentTransformComponent())
 	{
-		// Convert world -> local
-		mLocalTransform.position = inPos - parent->GetTransform().position;
-		//UpdateWorldPosition(inPos + Rotate(parent->GetTransform().rotation, mLocalTransform.position));
+		const Transform& parentTransform = parent->GetTransform();
+		const Vector3 worldOffset = inPos - parentTransform.position;
+		mLocalTransform.position = (Conjugate(parentTransform.rotation) * worldOffset) / parentTransform.scale; // component-wise divide
 	}
 	else
 	{
@@ -241,8 +241,7 @@ void TransformComponent::SetRotation(const Quaternion& inRotation)
 	if (const TransformComponent* parent = FindParentTransformComponent())
 	{
 		// Convert world -> local
-		mLocalTransform.rotation = parent->GetTransform().rotation * Conjugate(inRotation); // TODO?
-		//mLocalTransform.rotation = parent->GetTransform().rotation * inRotation;
+		mLocalTransform.rotation = Conjugate(parent->GetTransform().rotation) * inRotation;
 	}
 	else
 	{
@@ -258,7 +257,7 @@ void TransformComponent::SetScale(const Vector3& inScale)
 	if (const TransformComponent* parent = FindParentTransformComponent())
 	{
 		// Convert world -> local
-		mLocalTransform.scale = inScale - parent->GetTransform().scale;
+		mLocalTransform.scale = inScale / parent->GetTransform().scale;
 	}
 	else
 	{
@@ -274,7 +273,8 @@ void TransformComponent::SetLocalPosition(const Vector3& inPos)
 
 	if (const TransformComponent* parent = FindParentTransformComponent())
 	{
-		UpdateWorldPosition(parent->GetTransform().position + mLocalTransform.position);
+		const Transform& parentTransform = parent->GetTransform();
+		UpdateWorldPosition(parentTransform.position + parentTransform.rotation * (mLocalTransform.position * parentTransform.scale));
 	}
 	else
 	{

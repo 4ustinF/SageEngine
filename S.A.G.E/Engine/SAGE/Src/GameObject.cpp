@@ -6,7 +6,7 @@
 using namespace SAGE;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(GameObject, 1000);
+MEMORY_POOL_DEFINE(GameObject, 800);
 
 void GameObject::Initialize()
 {
@@ -47,7 +47,10 @@ void GameObject::DebugUI()
 	bool selfActive = mSelfActive;
 	if (ImGui::Checkbox("Is Self Active", &selfActive))
 	{
-		SetActive(selfActive);
+		if (!mIsReparenting)
+		{
+			SetActive(selfActive);
+		}
 	}
 
 	ImGui::SameLine();
@@ -56,11 +59,36 @@ void GameObject::DebugUI()
 	strcpy_s(buffer, sizeof(buffer), mName.c_str());
 	if (ImGui::InputText("##GameObject", buffer, sizeof(buffer), ImGuiInputTextFlags_EnterReturnsTrue))
 	{
-		SetName(buffer);
+		if (!mIsReparenting)
+		{
+			SetName(buffer);
+		}
 	}
 
-	for (auto& component : mComponents) {
-		component->DebugUI();
+	if (ImGui::Button("Reparent"))
+	{
+		mIsReparenting = true;
+	}
+
+	if (mIsReparenting)
+	{	
+		ImGui::SameLine();
+		if (ImGui::Button("Cancel"))
+		{
+			mIsReparenting = false;
+		}
+
+		ImGui::SameLine();
+		if (ImGui::Button("Clear Parent"))
+		{
+			// SetParent(nullptr); // TODO: Implement this function to clear the parent of the GameObject.
+		}
+	}
+	else
+	{
+		for (auto& component : mComponents) {
+			component->DebugUI();
+		}
 	}
 }
 
@@ -88,9 +116,9 @@ void GameObject::UpdateActiveInHierarchy()
 	mActiveInHierarchy = newActiveInHierarchy;
 	mActiveInHierarchy ? OnEnable() : OnDisable();
 
-	for (const GameObjectHandle& childHandle : GetChildrenHandles())
+	for (const GameObjectHandle& childHandle : mChildGameObjectHandles)
 	{
-		if (GameObject* childGO = GetWorld().GetGameObject(childHandle))
+		if (GameObject* childGO = mWorld->GetGameObject(childHandle))
 		{
 			childGO->UpdateActiveInHierarchy();
 		}
@@ -223,6 +251,12 @@ void GameObject::SetParent(GameObject* parentObject)
 
 void GameObject::SetParent(GameObjectHandle parentObjectHandle)
 {
+	GameObject* newParentGameObject = mWorld->GetGameObject(parentObjectHandle);
+	if (newParentGameObject != nullptr && IsGameObjectAChild(newParentGameObject, this))
+	{
+		return; // Prevent circular parenting
+	}
+
 	if (GameObject* oldParentGameObject = mWorld->GetGameObject(mParentGameObjectHandle))
 	{
 		oldParentGameObject->RemoveChild(mHandle);
@@ -230,10 +264,37 @@ void GameObject::SetParent(GameObjectHandle parentObjectHandle)
 
 	mParentGameObjectHandle = parentObjectHandle;
 
-	if (GameObject* newParentGameObject = mWorld->GetGameObject(mParentGameObjectHandle))
+	if (newParentGameObject != nullptr)
 	{
 		newParentGameObject->AddChild(mHandle);
 	}
+
+	mIsReparenting = false;
+}
+
+bool GameObject::IsGameObjectAChild(const GameObject* object, const GameObject* child) const
+{
+	if (object == nullptr || child == nullptr)
+	{
+		return false;
+	}
+
+	for (const GameObjectHandle& childHandle : mChildGameObjectHandles)
+	{
+		if (const GameObject* childGO = mWorld->GetGameObject(childHandle)) // TODO: For some reason crashes instead.
+		{
+			if (childGO == object)
+			{
+				return true;
+			}
+			else if (IsGameObjectAChild(object, childGO))
+			{
+				return true;
+			}
+		}
+	}
+	
+	return false;
 }
 
 void GameObject::AddChild(GameObjectHandle childObjectHandle)

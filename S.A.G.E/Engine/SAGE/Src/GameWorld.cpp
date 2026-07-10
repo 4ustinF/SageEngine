@@ -322,6 +322,14 @@ GameObject* GameWorld::GetGameObject(GameObjectHandle handle)
 	return nullptr;
 }
 
+const GameObject* GameWorld::GetGameObject(GameObjectHandle handle) const
+{
+	if (IsValid(handle)) {
+		return mGameObjectSlots[handle.mIndex].gameObject.get();
+	}
+	return nullptr;
+}
+
 void GameWorld::DestroyGameObject(GameObjectHandle handle)
 {
 	if (!IsValid(handle)) { return; }
@@ -406,6 +414,11 @@ void GameWorld::DrawHierarchy()
 
 		if (ImGui::Button(name.c_str()))
 		{
+			if(mInspectorGameObject != nullptr && mInspectorGameObject->GetIsReparenting())
+			{
+				mInspectorGameObject->SetIsReparenting(false);
+			}
+
 			mInspectorService = service.get();
 			mInspectorGameObject = nullptr;
 			mAddComponentWindowActive = false;
@@ -445,9 +458,17 @@ void GameWorld::DrawGameObjectNode(GameObject* object) // TODO: Fix indent spaci
 	// Selection
 	if (ImGui::IsItemClicked())
 	{
-		mInspectorService = nullptr;
-		mInspectorGameObject = object;
-		mAddComponentWindowActive = false;
+		if (mInspectorGameObject != nullptr && mInspectorGameObject->GetIsReparenting())
+		{
+			mInspectorGameObject->SetParent(object);
+			mHierarchyDirty = true;
+		}
+		else
+		{
+			mInspectorService = nullptr;
+			mInspectorGameObject = object;
+			mAddComponentWindowActive = false;
+		}
 	}
 
 	if (open)
@@ -477,18 +498,21 @@ void GameWorld::DrawInspector()
 	if (mInspectorGameObject != nullptr) 
 	{ 
 		mInspectorGameObject->DebugUI();
-		ImGui::Separator();
-
-		if (ImGui::Button("Add Component"))
+		if (!mInspectorGameObject->GetIsReparenting())
 		{
-			mAddComponentWindowActive = !mAddComponentWindowActive;
-		}
+			ImGui::Separator();
 
-		ImGui::SameLine(0.0f, mImguiSpacing);
+			if (ImGui::Button("Add Component"))
+			{
+				mAddComponentWindowActive = !mAddComponentWindowActive;
+			}
 
-		if (ImGui::Button("Save Game Object"))
-		{
-			mInspectorGameObject->SaveComponents();
+			ImGui::SameLine(0.0f, mImguiSpacing);
+
+			if (ImGui::Button("Save Game Object"))
+			{
+				mInspectorGameObject->SaveComponents();
+			}
 		}
 	}
 

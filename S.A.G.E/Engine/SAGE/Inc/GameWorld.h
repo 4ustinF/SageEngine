@@ -41,6 +41,7 @@ namespace SAGE
 		GameObject* CreateGameObject(std::filesystem::path templateFile);
 		GameObject* FindGameObject(const std::string& name);
 		GameObject* GetGameObject(GameObjectHandle handle);
+		const GameObject* GetGameObject(GameObjectHandle handle) const;
 		void DestroyGameObject(GameObjectHandle handle);
 
 		GameObject* CreateGameObjectRecursive(std::filesystem::path templateFile, GameObject* parentGO, const char* overrideName);

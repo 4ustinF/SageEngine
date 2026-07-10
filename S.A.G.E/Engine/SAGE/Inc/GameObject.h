@@ -71,6 +71,11 @@ namespace SAGE
 		void RemoveChild(GameObjectHandle childObjectHandle);
 		const std::vector<GameObjectHandle>& GetChildrenHandles() const { return mChildGameObjectHandles; }
 
+	protected:
+		bool GetIsReparenting() const { return mIsReparenting; }
+		void SetIsReparenting(bool isReparenting) { mIsReparenting = isReparenting; }
+		bool IsGameObjectAChild(const GameObject* object, const GameObject* child) const;
+
 	private:
 		friend class GameWorld;
 		using Components = std::vector<std::unique_ptr<Component>>;
@@ -85,6 +90,7 @@ namespace SAGE
 		bool mInitialize = false;
 		bool mActiveInHierarchy = true;
 		bool mSelfActive = true;
+		bool mIsReparenting = false;
 
 		Components mComponents;
 		GameWorld* mWorld = nullptr;

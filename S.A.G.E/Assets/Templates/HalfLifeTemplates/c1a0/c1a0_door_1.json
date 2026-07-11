@@ -1,0 +1,20 @@
+{
+  "Name": "Door 1",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -8.686800003051758,
+        -3.0479979515075684,
+        -9.144000053405762
+      ]
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/door_front.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/door_trim.json"
+    }
+  ]
+}

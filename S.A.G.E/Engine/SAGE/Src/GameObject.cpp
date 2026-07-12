@@ -191,6 +191,11 @@ void GameObject::SaveComponents()
 
 	for (auto& component : mComponents)
 	{
+		component->PreSaveComponentToTemplate();
+	}
+
+	for (auto& component : mComponents)
+	{
 		const char* const compName = component->GetCompName();
 		if (!compName || *compName == '\0')
 		{
@@ -208,6 +213,11 @@ void GameObject::SaveComponents()
 		{
 			components.AddMember(rj::Value(compName, allocator), compObj, allocator);
 		}
+	}
+
+	for (auto& component : mComponents)
+	{
+		component->PostSaveComponentToTemplate();
 	}
 
 	fopen_s(&file, mTemplatePath.u8string().c_str(), "w");

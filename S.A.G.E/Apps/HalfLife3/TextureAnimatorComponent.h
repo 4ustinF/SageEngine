@@ -12,6 +12,7 @@ public:
 
 	const char* GetCompName() override { return "Texture Animator Component"; }
 	void LoadComponentFromTemplate(const rapidjson::Value& value) override;
+	void PreSaveComponentToTemplate() override;
 	void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
 	void Initialize() override;

@@ -1,1 +1,23 @@
-{"Name":"Brush 30","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_brushes_30.mesh"},"Mesh Renderer Component":{"MaterialFilePath":"../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brush_30.material"}}}
+{
+  "Name": "Brush 30",
+  "Components": {
+    "Transform Component": {
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_brushes_30.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brush_30.material"
+    },
+    "Texture Animator Component": {
+      "TextureId File Paths": [
+        "../Sprites/HalfLife/Tech/_0_lab_crt2.png",
+        "../Sprites/HalfLife/Tech/_1_lab_crt2.png",
+        "../Sprites/HalfLife/Tech/_2_lab_crt2.png",
+        "../Sprites/HalfLife/Tech/_3_lab_crt2.png"
+      ],
+      "Animation Time": 0.3
+    }
+  }
+}

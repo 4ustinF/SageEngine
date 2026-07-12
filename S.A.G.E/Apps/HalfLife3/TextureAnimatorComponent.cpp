@@ -38,6 +38,11 @@ void TextureAnimatorComponent::LoadComponentFromTemplate(const rapidjson::Value&
 	}
 }
 
+void TextureAnimatorComponent::PreSaveComponentToTemplate()
+{
+	RestoreOriginalTexture(); // To not override the save of mesh renderer component's texture id.
+}
+
 void TextureAnimatorComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
 	SaveStringsToTemplate(compObj, allocator, "TextureId File Paths", mAnimationFrameFilePaths);

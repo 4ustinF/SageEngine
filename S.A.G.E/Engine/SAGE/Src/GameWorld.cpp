@@ -696,7 +696,6 @@ bool GameWorld::IsInHierarchyRevealPath(GameObjectHandle handle) const
 		handle) != mHierarchyRevealPath.end();
 }
 
-
 void GameWorld::UpdateVertexCount()
 {
 	mVertexCount = 0;

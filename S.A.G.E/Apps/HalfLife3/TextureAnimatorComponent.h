@@ -31,10 +31,11 @@ private:
 	SAGE::MeshRendererComponent* mMeshRendererComponent = nullptr;
 	float mElapsedTime = 0.0f;
 	float mAnimationTime = 1.0f;
-	bool mIsPlaying = true;
+	bool mIsPlaying = false;
 	bool mPlayImmediately = true;
 
 	SAGE::Graphics::TextureId mRenderObjectDiffuseMapId = 0;
 	std::vector<SAGE::Graphics::TextureId> mAnimationFrames;
+	std::vector<std::string> mAnimationFrameFilePaths;
 	int mCurrentFrameIndex = 0;
 };

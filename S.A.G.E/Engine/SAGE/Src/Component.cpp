@@ -52,6 +52,21 @@ void Component::SaveStringToTemplate(rapidjson::Value& compObj, rapidjson::Memor
 	compObj.AddMember(rj::Value(title.c_str(), allocator), rj::Value(value.c_str(), allocator), allocator);
 }
 
+void Component::SaveStringsToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::vector<std::string>& values)
+{
+	if (title.empty() || values.empty())
+	{
+		return;
+	}
+
+	rj::Value array(rj::kArrayType);
+	for (const auto& value : values)
+	{
+		array.PushBack(rj::Value(value.c_str(), allocator), allocator);
+	}
+	compObj.AddMember(rj::Value(title.c_str(), allocator), array, allocator);
+}
+
 void Component::SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, int value, int defaultValue)
 {
 	if (title.empty() || value == defaultValue)

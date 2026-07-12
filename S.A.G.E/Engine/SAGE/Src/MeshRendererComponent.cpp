@@ -522,6 +522,7 @@ void MeshRendererComponent::LoadMaterial(std::filesystem::path filePath)
 		return;
 	}
 
+	mMaterialFilePath = filePath.u8string();
 	uint32_t numMaterials = 0;
 	fscanf_s(file, "MaterialCount: %d\n", &numMaterials);
 

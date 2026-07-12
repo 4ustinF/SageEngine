@@ -13,11 +13,15 @@ void TextureAnimatorComponent::LoadComponentFromTemplate(const rapidjson::Value&
 	if (value.HasMember("TextureId File Paths"))
 	{
 		const auto& filePaths = value["TextureId File Paths"].GetArray();
+		mAnimationFrameFilePaths.clear();
+		mAnimationFrames.clear();
+		auto tm = TextureManager::Get();
 
 		for(const auto& filePath : filePaths)
 		{
 			const std::string textureFilePath = filePath.GetString();
-			auto tm = TextureManager::Get();
+			mAnimationFrameFilePaths.push_back(textureFilePath);
+
 			const Graphics::TextureId textureId = tm->LoadTexture(textureFilePath);
 			mAnimationFrames.push_back(textureId);
 		}
@@ -27,11 +31,21 @@ void TextureAnimatorComponent::LoadComponentFromTemplate(const rapidjson::Value&
 	{
 		mAnimationTime = value["Animation Time"].GetFloat();
 	}
+
+	if (value.HasMember("Play Immediately"))
+	{
+		mPlayImmediately = value["Play Immediately"].GetBool();
+	}
 }
 
 void TextureAnimatorComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
-	// TODO:
+	SaveStringsToTemplate(compObj, allocator, "TextureId File Paths", mAnimationFrameFilePaths);
+	SaveNumberToTemplate(compObj, allocator, "Animation Time", mAnimationTime);
+	if (mPlayImmediately == false)
+	{
+		SaveBoolToTemplate(compObj, allocator, "Play Immediately", mPlayImmediately);
+	}
 }
 
 void TextureAnimatorComponent::Initialize()
@@ -46,6 +60,8 @@ void TextureAnimatorComponent::Initialize()
 void TextureAnimatorComponent::Terminate()
 {
 	mMeshRendererComponent = nullptr;
+	mAnimationFrameFilePaths.clear();
+	mAnimationFrames.clear();
 }
 
 void TextureAnimatorComponent::OnQueueUpdate(float deltaTime)
@@ -57,7 +73,10 @@ void TextureAnimatorComponent::OnQueueUpdate(float deltaTime)
 		CycleTexture();
 	}
 
-	mQueueUpdate = mIsPlaying;
+	if(mIsPlaying)
+	{
+		EnqueueUpdate();
+	}
 }
 
 void TextureAnimatorComponent::DebugUI()

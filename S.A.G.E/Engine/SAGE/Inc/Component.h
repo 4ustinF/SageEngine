@@ -45,6 +45,7 @@ namespace SAGE
 
 		void SaveBoolToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, bool value);
 		void SaveStringToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::string& value);
+		void SaveStringsToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::vector<std::string>& values);
 		void SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, int value, int defaultValue = 0);
 		void SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, float value, float defaultValue = 0.0f);
 		void SaveColorToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const SAGE::Graphics::Color& value, const SAGE::Graphics::Color& defaultValue = SAGE::Graphics::Colors::Black);
@@ -55,11 +56,10 @@ namespace SAGE
 
 		// TODO: Add some load functions as well that return a bool and provide an out param of the value.
 
-		bool mQueueUpdate = false;
-
 	private:
 		friend class GameObject;
 		GameObject* mOwner = nullptr;
 
+		bool mQueueUpdate = false;
 	};
 }

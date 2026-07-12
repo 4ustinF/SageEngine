@@ -89,8 +89,12 @@ namespace SAGE
 		bool mAddComponentWindowActive = false;
 
 		void UpdateEditSelection();
+		void RequestRevealInHierarchy(GameObject* object);
+		bool IsInHierarchyRevealPath(GameObjectHandle handle) const;
 		void UpdateVertexCount();
 		bool mEditMode = false;
+		std::vector<GameObjectHandle> mHierarchyRevealPath;
+		bool mRevealHierarchyPending = false;
 		uint32_t mVertexCount = 0;
 
 		bool mInitialized = false;

@@ -405,7 +405,6 @@ void GameWorld::DrawHierarchy()
 	}
 
 	// --- Game World Settings ---
-
 	if (ImGui::CollapsingHeader("Editor Settings##GameWorld", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		ImGui::Checkbox("Edit Mode##GameWorld", &mEditMode);
@@ -448,9 +447,15 @@ void GameWorld::DrawHierarchy()
 			DrawGameObjectNode(GetGameObject(rootHandle));
 		}
 	}
+
+	if (mRevealHierarchyPending)
+	{
+		mRevealHierarchyPending = false;
+		mHierarchyRevealPath.clear();
+	}
 }
 
-void GameWorld::DrawGameObjectNode(GameObject* object) // TODO: Fix indent spacing on grandchildren
+void GameWorld::DrawGameObjectNode(GameObject* object)
 {
 	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow;
 
@@ -459,14 +464,28 @@ void GameWorld::DrawGameObjectNode(GameObject* object) // TODO: Fix indent spaci
 		flags |= ImGuiTreeNodeFlags_Leaf;
 	}
 
-	if (mInspectorGameObject == object)
+	const bool isSelected = mInspectorGameObject == object;
+	if (isSelected)
 	{
 		flags |= ImGuiTreeNodeFlags_Selected;
 	}
 
+	const GameObjectHandle objectHandle = object->GetHandle();
+
+	if (mRevealHierarchyPending && IsInHierarchyRevealPath(objectHandle))
+	{
+		ImGui::SetNextItemOpen(true, ImGuiCond_Always);
+	}
+
 	ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, 10.0f);
-	const std::string label = object->GetName() + "##GameWorld";
+
+	const std::string label = object->GetName() + "###GameObject_" + std::to_string(reinterpret_cast<uintptr_t>(object));
 	const bool open = ImGui::TreeNodeEx(label.c_str(), flags);
+
+	if (mRevealHierarchyPending && isSelected)
+	{
+		ImGui::SetScrollHereY(0.5f);
+	}
 
 	// Selection
 	if (ImGui::IsItemClicked())
@@ -644,8 +663,39 @@ void GameWorld::UpdateEditSelection()
 		mInspectorService = nullptr;
 		mInspectorGameObject = selectedGameObject;
 		mAddComponentWindowActive = false;
+
+		RequestRevealInHierarchy(selectedGameObject);
 	}
 }
+
+void GameWorld::RequestRevealInHierarchy(GameObject* object)
+{
+	mHierarchyRevealPath.clear();
+	GameObject* current = object;
+	while (current != nullptr && IsValid(current->GetHandle()))
+	{
+		mHierarchyRevealPath.push_back(current->GetHandle());
+
+		const GameObjectHandle parentHandle = current->GetParentHandle();
+		if (!IsValid(parentHandle))
+		{
+			break;
+		}
+
+		current = GetGameObject(parentHandle);
+	}
+
+	mRevealHierarchyPending = true;
+}
+
+bool GameWorld::IsInHierarchyRevealPath(GameObjectHandle handle) const
+{
+	return std::find(
+		mHierarchyRevealPath.begin(),
+		mHierarchyRevealPath.end(),
+		handle) != mHierarchyRevealPath.end();
+}
+
 
 void GameWorld::UpdateVertexCount()
 {

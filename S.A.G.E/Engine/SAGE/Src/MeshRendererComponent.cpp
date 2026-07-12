@@ -19,38 +19,32 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 {
 	if (value.HasMember("MaterialFilePath"))
 	{
-		mMaterialFilePath = value["MaterialFilePath"].GetString();
-		LoadMaterial(mMaterialFilePath);
+		LoadMaterial(value["MaterialFilePath"].GetString());
 	}
 
 	if (mMaterialData.diffuseMapName.empty() && value.HasMember("DiffuseMapFileName"))
 	{
-		const auto& diffuseMapFileName = value["DiffuseMapFileName"].GetString();
-		SetDiffuseMapFileName(diffuseMapFileName);
+		SetDiffuseMapFileName(value["DiffuseMapFileName"].GetString());
 	}
 
 	if (mMaterialData.specularMapName.empty() && value.HasMember("SpecularMapFileName"))
 	{
-		const auto& specularMapFileName = value["SpecularMapFileName"].GetString();
-		SetSpecularMapFileName(specularMapFileName);
+		SetSpecularMapFileName(value["SpecularMapFileName"].GetString());
 	}
 
 	if (mMaterialData.bumpMapName.empty() && value.HasMember("BumpMapFileName"))
 	{
-		const auto& bumpMapFileName = value["BumpMapFileName"].GetString();
-		SetBumpMapFileName(bumpMapFileName);
+		SetBumpMapFileName(value["BumpMapFileName"].GetString());
 	}
 
 	if (mMaterialData.normalMapName.empty() && value.HasMember("NormalMapFileName"))
 	{
-		const auto& normalMapFileName = value["NormalMapFileName"].GetString();
-		SetNormalMapFileName(normalMapFileName);
+		SetNormalMapFileName(value["NormalMapFileName"].GetString());
 	}
 
 	if (mMaterialData.material.power == 0.0f && value.HasMember("Power"))
 	{
-		const auto& power = value["Power"].GetFloat();
-		mMaterialData.material.power = power;
+		mMaterialData.material.power = value["Power"].GetFloat();;
 	}
 
 	if (mMaterialData.material.ambient == Colors::Black && value.HasMember("Ambient"))
@@ -121,20 +115,17 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 
 	if (value.HasMember("TileToXScale"))
 	{
-		const auto& tileToXScale = value["TileToXScale"].GetBool();
-		SetTileToXScale(tileToXScale);
+		SetTileToXScale(value["TileToXScale"].GetBool());
 	}
 
 	if (value.HasMember("TileToYScale"))
 	{
-		const auto& tileToYScale = value["TileToYScale"].GetBool();
-		SetTileToYScale(tileToYScale);
+		SetTileToYScale(value["TileToYScale"].GetBool());
 	}
 
 	if (value.HasMember("TileToZScale"))
 	{
-		const auto& tileToZScale = value["TileToZScale"].GetBool();
-		SetTileToZScale(tileToZScale);
+		SetTileToZScale(value["TileToZScale"].GetBool());
 	}
 
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();

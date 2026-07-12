@@ -55,10 +55,11 @@ namespace SAGE
 
 		// TODO: Add some load functions as well that return a bool and provide an out param of the value.
 
+		bool mQueueUpdate = false;
+
 	private:
 		friend class GameObject;
 		GameObject* mOwner = nullptr;
 
-		bool mQueueUpdate = false;
 	};
 }

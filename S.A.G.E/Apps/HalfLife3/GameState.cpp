@@ -1,4 +1,5 @@
 #include "GameState.h"
+#include "TextureAnimatorComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Physics;
@@ -11,6 +12,12 @@ namespace
 	// Check for custom components
 	bool OnMake(const char* componentName, const rapidjson::Value& value, GameObject& gameObject)
 	{
+		if (strcmp(componentName, "Texture Animator Component") == 0)
+		{
+			TextureAnimatorComponent* textureAnimatorComponent = gameObject.AddComponent<TextureAnimatorComponent>();
+			textureAnimatorComponent->LoadComponentFromTemplate(value);
+			return true;
+		}
 		return false;
 	}
 }

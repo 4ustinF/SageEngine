@@ -10,6 +10,9 @@
     <Filter Include="Other">
       <UniqueIdentifier>{c31f13ba-95c8-4974-8f72-d19672537d2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\WorldBuilding">
+      <UniqueIdentifier>{3e12c041-a09b-40da-b013-8f4a4d933f61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp">
@@ -18,10 +21,19 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="TextureAnimatorComponent.cpp">
+      <Filter>Components\WorldBuilding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureAnimatorComponent.h">
+      <Filter>Components\WorldBuilding</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeIds.h">
+      <Filter>Other</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

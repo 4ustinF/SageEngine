@@ -1,1 +1,27 @@
-{"Name":"Section 49","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_49.mesh"},"Mesh Renderer Component":{"MaterialFilePath":"../../Assets/Models/HalfLife/c1a0/Materials/c1a0_49.material"}}}
+{
+  "Name": "Section 49",
+  "Components": {
+    "Transform Component": {
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_49.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_49.material"
+    },
+    "Texture Animator Component": {
+      "TextureId File Paths": [
+        "../Sprites/HalfLife/Tech/_0_lab1_cmp1.png",
+        "../Sprites/HalfLife/Tech/_1_lab1_cmp1.png",
+        "../Sprites/HalfLife/Tech/_2_lab1_cmp1.png",
+        "../Sprites/HalfLife/Tech/_3_lab1_cmp1.png",
+        "../Sprites/HalfLife/Tech/_4_lab1_cmp1.png",
+        "../Sprites/HalfLife/Tech/_5_lab1_cmp1.png",
+        "../Sprites/HalfLife/Tech/_6_lab1_cmp1.png",
+        "../Sprites/HalfLife/Tech/_7_lab1_cmp1.png"
+      ],
+      "Animation Time": 0.3
+    }
+  }
+}

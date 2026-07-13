@@ -1,1 +1,22 @@
-{"Name":"Section 68","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_68.mesh"},"Mesh Renderer Component":{"MaterialFilePath":"../../Assets/Models/HalfLife/c1a0/Materials/c1a0_68.material"}}}
+{
+  "Name": "Section 68",
+  "Components": {
+    "Transform Component": {
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_68.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_68.material"
+    },
+    "Texture Animator Component": {
+      "TextureId File Paths": [
+        "../Sprites/HalfLife/Tech/_0lab1_comp10c.png",
+        "../Sprites/HalfLife/Tech/_1lab1_comp10c.png",
+        "../Sprites/HalfLife/Tech/_2lab1_comp10c.png"
+      ],
+      "Animation Time": 0.5
+    }
+  }
+}

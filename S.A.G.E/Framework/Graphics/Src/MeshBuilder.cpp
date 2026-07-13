@@ -126,12 +126,14 @@ MeshPC MeshBuilder::CreateCylinderPC(int slices, int rings)
 	mesh.vertices.push_back({ {0.0f, rings * 0.5f * spacing - 2 * yOffSet, 0.0f}, GetNextColor(colorIndex) }); //BotMiddle
 
 	//Does the top and bot circles
-	for (int i = 0; i < slices; ++i) {
-		mesh.indices.push_back(mesh.vertices.size() - 2); //TopMiddle
-		mesh.indices.push_back(mesh.vertices.size() - (3 + i));
-		mesh.indices.push_back(mesh.vertices.size() - (4 + i));
+	const int meshVerticesSize = static_cast<int>(mesh.vertices.size());
+	for (int i = 0; i < slices; ++i) 
+	{
+		mesh.indices.push_back(meshVerticesSize - 2); //TopMiddle
+		mesh.indices.push_back(meshVerticesSize - (3 + i));
+		mesh.indices.push_back(meshVerticesSize - (4 + i));
 
-		mesh.indices.push_back(mesh.vertices.size() - 1); //BotMiddle
+		mesh.indices.push_back(meshVerticesSize - 1); //BotMiddle
 		mesh.indices.push_back(i);
 		mesh.indices.push_back(i + 1);
 	}

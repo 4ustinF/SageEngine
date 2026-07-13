@@ -324,6 +324,9 @@ void MeshRendererComponent::SetTilingOffset(float xTilingOffset, float yTilingOf
 
 void MeshRendererComponent::SetTilingOffset(const Vector2& tilingOffset)
 {
+	mTilingOffset.x = mTilingOffset.x - std::floorf(mTilingOffset.x);
+	mTilingOffset.y = mTilingOffset.y - std::floorf(mTilingOffset.y);
+
 	mTilingOffset = tilingOffset;
 	mMeshFilter->GetRenderObject().tilingOffset = mTilingOffset;
 }

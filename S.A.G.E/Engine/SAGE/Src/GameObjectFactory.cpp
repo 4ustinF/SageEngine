@@ -14,6 +14,7 @@
 #include "ModelComponent.h"
 #include "ParticleComponent.h"
 #include "RigidBodyComponent.h"
+#include "SelectionBoxComponent.h"
 #include "SpawnerComponent.h"
 #include "TransformComponent.h"
 
@@ -303,6 +304,11 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 
 			rigidBodyComponent->SetConstraints(Vector3Int(posX, posY, posZ), Vector3Int(rotX, rotY, rotZ));
 		}
+	}
+	else if (strcmp(componentName, "Selection Box Component") == 0)
+	{
+		auto selectionBoxComponent = gameObject.AddComponent<SelectionBoxComponent>();
+		selectionBoxComponent->LoadComponentFromTemplate(value);
 	}
 	else if (strcmp(componentName, "SpawnerComponent") == 0)
 	{

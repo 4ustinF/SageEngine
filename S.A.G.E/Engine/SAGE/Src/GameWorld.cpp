@@ -7,8 +7,9 @@
 #include "TerrainService.h"
 
 #include "MeshFilterComponent.h"
-#include "TransformComponent.h"
 #include "RigidBodyComponent.h"
+#include "SelectionBoxComponent.h"
+#include "TransformComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -627,6 +628,7 @@ void GameWorld::UpdateEditSelection()
 	// 5. Create a ray from the camera position in the direction of the rayDir
 	const Ray ray = Ray(camera.GetPosition(), rayDir);
 
+	// TODO: Iterate over objects as via hierarchy starting parent down. So if the parent has a selection box we use that first.
 	for (GameObject* gameObject : mUpdateList)
 	{
 		if (!IsValid(gameObject->GetHandle()) || !gameObject->IsActiveInHierarchy())
@@ -634,7 +636,24 @@ void GameWorld::UpdateEditSelection()
 			continue;
 		}
 
-		if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
+		if(SelectionBoxComponent* selectionBox = gameObject->GetComponent<SelectionBoxComponent>()) 
+		{
+			// TODO: Dont scour children as selection box parent captured it already.
+			// Unless our currently selected object is == to this selectionBox object then bypass and dig further as user wants to click on something deeper.
+
+			Vector3 point;
+			Vector3 normal;
+			if (Intersect(ray, selectionBox->GetGlobalBoundingBox(), point, normal))
+			{
+				const float distance = Magnitude(point - ray.origin);
+				if (selectedGameObject == nullptr || distance < closestDistance)
+				{
+					selectedGameObject = gameObject;
+					closestDistance = distance;
+				}
+			}
+		}
+		else if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
 		{
 			if (!Intersect(ray, meshFilter->GetGlobalBoundingBox()))
 			{

@@ -18,6 +18,7 @@
 #include "ModelComponent.h"
 #include "ParticleComponent.h"
 #include "RigidBodyComponent.h"
+#include "SelectionBoxComponent.h"
 #include "SpawnerComponent.h"
 #include "TransformComponent.h"
 

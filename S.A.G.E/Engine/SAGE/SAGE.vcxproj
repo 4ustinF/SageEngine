@@ -48,6 +48,7 @@
     <ClInclude Include="Inc\RenderService.h" />
     <ClInclude Include="Inc\RigidBodyComponent.h" />
     <ClInclude Include="Inc\SAGE.h" />
+    <ClInclude Include="Inc\SelectionBoxComponent.h" />
     <ClInclude Include="Inc\Service.h" />
     <ClInclude Include="Inc\SpawnerComponent.h" />
     <ClInclude Include="Inc\TerrainService.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="Src\RenderService.cpp" />
     <ClCompile Include="Src\RigidBodyComponent.cpp" />
     <ClCompile Include="Src\SAGE.cpp" />
+    <ClCompile Include="Src\SelectionBoxComponent.cpp" />
     <ClCompile Include="Src\SpawnerComponent.cpp" />
     <ClCompile Include="Src\TerrainService.cpp" />
     <ClCompile Include="Src\TransformComponent.cpp" />

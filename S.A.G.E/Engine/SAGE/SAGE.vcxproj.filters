@@ -150,6 +150,9 @@
     <ClInclude Include="Inc\MeshFilterComponent.h">
       <Filter>Inc\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\SelectionBoxComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\App.cpp">
@@ -244,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="Src\Component.cpp">
       <Filter>Src\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SelectionBoxComponent.cpp">
+      <Filter>Src\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -65,8 +65,8 @@ void SelectionBoxComponent::GenerateGlobalBoundingBox()
 
 	for (const Vector3& p : points)
 	{
-		min = Vector3(Min(min.x, p.x), Min(min.y, p.y), Min(min.z, p.z)); // TODO: Min/Max support for vector3 and such might be good?
-		max = Vector3(Max(max.x, p.x), Max(max.y, p.y), Max(max.z, p.z)); // TODO: Min/Max support for vector3 and such might be good?
+		min = Vector3(Min(min.x, p.x), Min(min.y, p.y), Min(min.z, p.z));
+		max = Vector3(Max(max.x, p.x), Max(max.y, p.y), Max(max.z, p.z));
 	}
 
 	mBoundingBox.center = (min + max) * 0.5f;
@@ -90,9 +90,10 @@ void SelectionBoxComponent::GatherOBBCorners(const GameObject* gameObject, std::
 	}
 	// TODO: Support other cases to get bounding shapes from for edit selection. 
 
+	const GameWorld& gameWorld = GetOwner().GetWorld();
 	for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
 	{
-		if (const GameObject* childGO = GetOwner().GetWorld().GetGameObject(childHandle))
+		if (const GameObject* childGO = gameWorld.GetGameObject(childHandle))
 		{
 			GatherOBBCorners(childGO, points);
 		}

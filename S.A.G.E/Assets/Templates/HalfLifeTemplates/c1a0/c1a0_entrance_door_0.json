@@ -1,11 +1,11 @@
 {
-  "Name": "Entrance Door 1",
+  "Name": "Entrance Door 0",
   "Components": {
     "Transform Component": {
       "Local Position": [
-        5.943600,
+        15.278100,
         -3.351200,
-        6.019800
+        6.019999
       ]
     },
     "Selection Box Component": {

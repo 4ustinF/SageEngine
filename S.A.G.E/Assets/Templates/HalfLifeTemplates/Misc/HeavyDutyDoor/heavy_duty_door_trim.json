@@ -1,11 +1,11 @@
 {
-  "Name": "Brush 3",
+  "Name": "Door Trim",
   "Components": {
     "Transform Component": {
     },
     "Mesh Filter Component": {
       "MeshType": "Custom",
-      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_brushes_3.mesh"
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/Misc/Meshes/HeavyDutyDoor/heavy_duty_door_side.mesh"
     },
     "Mesh Renderer Component": {
       "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brush_3.material"

@@ -1,0 +1,14 @@
+{
+  "Name": "Door Rods",
+  "Components": {
+    "Transform Component": {
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/Misc/Meshes/HeavyDutyDoor/heavy_duty_door_rods.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brush_0.material"
+    }
+  }
+}

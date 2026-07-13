@@ -1,0 +1,10 @@
+{
+  "Name": "Entrance Doors",
+  "Components": {
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/c1a0_entrance_door_1.json"
+    }
+  ]
+}

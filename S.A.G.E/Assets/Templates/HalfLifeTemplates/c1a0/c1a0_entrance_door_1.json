@@ -1,0 +1,17 @@
+{
+  "Name": "Entrance Door 1",
+  "Components": {
+    "Transform Component": {
+    },
+    "Selection Box Component": {
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/heavy_duty_door_front_bottom.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/heavy_duty_door_front_top.json"
+    }
+  ]
+}

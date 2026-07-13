@@ -89,7 +89,8 @@ namespace SAGE
 		bool mAddComponentWindowActive = false;
 
 		void UpdateEditSelection();
-		void RequestRevealInHierarchy(GameObject* object);
+		void UpdateEditSelectionRecursive(GameObject* gameObject, const SAGE::Math::Ray& ray, float& closestDistance, GameObject*& selectedGameObject);
+		void RequestRevealInHierarchy(GameObject* gameObject);
 		bool IsInHierarchyRevealPath(GameObjectHandle handle) const;
 		void UpdateVertexCount();
 		bool mEditMode = false;

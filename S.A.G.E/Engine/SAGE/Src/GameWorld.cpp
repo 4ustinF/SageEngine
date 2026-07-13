@@ -629,51 +629,16 @@ void GameWorld::UpdateEditSelection()
 	const Ray ray = Ray(camera.GetPosition(), rayDir);
 
 	// TODO: Iterate over objects as via hierarchy starting parent down. So if the parent has a selection box we use that first.
-	for (GameObject* gameObject : mUpdateList)
+	for (const GameObjectHandle& rootHandle : mRootGameObjectHandles)
 	{
-		if (!IsValid(gameObject->GetHandle()) || !gameObject->IsActiveInHierarchy())
+		if (!IsValid(rootHandle))
 		{
 			continue;
 		}
 
-		if(SelectionBoxComponent* selectionBox = gameObject->GetComponent<SelectionBoxComponent>()) 
+		if (GameObject* go = GetGameObject(rootHandle))
 		{
-			// TODO: Dont scour children as selection box parent captured it already.
-			// Unless our currently selected object is == to this selectionBox object then bypass and dig further as user wants to click on something deeper.
-
-			Vector3 point;
-			Vector3 normal;
-			if (Intersect(ray, selectionBox->GetGlobalBoundingBox(), point, normal))
-			{
-				const float distance = Magnitude(point - ray.origin);
-				if (selectedGameObject == nullptr || distance < closestDistance)
-				{
-					selectedGameObject = gameObject;
-					closestDistance = distance;
-				}
-			}
-		}
-		else if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
-		{
-			if (!Intersect(ray, meshFilter->GetGlobalBoundingBox()))
-			{
-				continue;
-			}
-
-			RayHit outHit;
-			const TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>();
-			const Matrix4 world = transformComponent == nullptr ? Matrix4::Identity :
-				Matrix4::Scaling(transformComponent->GetScale()) *
-				Matrix4::RotationQuaternion(transformComponent->GetRotation()) *
-				Matrix4::Translation(transformComponent->GetPosition());
-			if (IntersectRayMesh(ray, meshFilter->GetMesh(), outHit, world))
-			{
-				if (selectedGameObject == nullptr || outHit.distance < closestDistance)
-				{
-					selectedGameObject = gameObject;
-					closestDistance = outHit.distance;
-				}
-			}
+			UpdateEditSelectionRecursive(go, ray, closestDistance, selectedGameObject);
 		}
 	}
 
@@ -687,10 +652,74 @@ void GameWorld::UpdateEditSelection()
 	}
 }
 
-void GameWorld::RequestRevealInHierarchy(GameObject* object)
+void GameWorld::UpdateEditSelectionRecursive(GameObject* gameObject, const Ray& ray, float& closestDistance, GameObject*& selectedGameObject)
+{
+	if (!gameObject->IsActiveInHierarchy())
+	{
+		return;
+	}
+
+	bool iterateOverChildren = true;
+
+	if (SelectionBoxComponent* selectionBox = gameObject->GetComponent<SelectionBoxComponent>())
+	{
+		const bool isAlreadySelected = mInspectorGameObject != nullptr && gameObject == mInspectorGameObject;
+		if (!isAlreadySelected)
+		{
+			Vector3 point;
+			Vector3 normal;
+			if (Intersect(ray, selectionBox->GetGlobalBoundingBox(), point, normal))
+			{
+				const float distance = Magnitude(point - ray.origin);
+				if (distance < closestDistance)
+				{
+					selectedGameObject = gameObject;
+					closestDistance = distance;
+				}
+
+				iterateOverChildren = false;
+			}
+		}
+	}
+	else if (const MeshFilterComponent* meshFilter = gameObject->GetComponent<MeshFilterComponent>())
+	{
+		if (!Intersect(ray, meshFilter->GetGlobalBoundingBox()))
+		{
+			return;
+		}
+
+		RayHit outHit;
+		const TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>();
+		const Matrix4 world = transformComponent == nullptr ? Matrix4::Identity :
+			Matrix4::Scaling(transformComponent->GetScale()) *
+			Matrix4::RotationQuaternion(transformComponent->GetRotation()) *
+			Matrix4::Translation(transformComponent->GetPosition());
+		if (IntersectRayMesh(ray, meshFilter->GetMesh(), outHit, world))
+		{
+			if (outHit.distance < closestDistance)
+			{
+				selectedGameObject = gameObject;
+				closestDistance = outHit.distance;
+			}
+		}
+	}
+
+	if (iterateOverChildren)
+	{
+		for (const GameObjectHandle& handle : gameObject->GetChildrenHandles())
+		{
+			if (GameObject* go = GetGameObject(handle))
+			{
+				UpdateEditSelectionRecursive(go, ray, closestDistance, selectedGameObject);
+			}
+		}
+	}
+}
+
+void GameWorld::RequestRevealInHierarchy(GameObject* gameObject)
 {
 	mHierarchyRevealPath.clear();
-	GameObject* current = object;
+	GameObject* current = gameObject;
 	while (current != nullptr && IsValid(current->GetHandle()))
 	{
 		mHierarchyRevealPath.push_back(current->GetHandle());

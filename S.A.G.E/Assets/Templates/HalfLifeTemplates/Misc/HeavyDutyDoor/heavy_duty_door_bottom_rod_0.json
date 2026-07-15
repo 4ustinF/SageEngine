@@ -1,0 +1,19 @@
+{
+  "Name": "Door Bot Rod 0",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        0.419000,
+        -0.800099,
+        0.0
+      ]
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/Misc/Meshes/HeavyDutyDoor/heavy_duty_door_spare_rod_2.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brush_0.material"
+    }
+  }
+}

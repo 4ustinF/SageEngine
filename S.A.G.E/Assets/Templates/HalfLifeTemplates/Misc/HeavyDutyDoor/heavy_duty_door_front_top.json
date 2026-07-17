@@ -13,7 +13,7 @@
       "Custom Mesh File Path": "../../Assets/Models/HalfLife/Misc/Meshes/HeavyDutyDoor/heavy_duty_door_front.mesh"
     },
     "Mesh Renderer Component": {
-      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brush_4.material",
+      "MaterialFilePath": "../../Assets/Models/HalfLife/Misc/Materials/HeavyDutyDoor/heavy_duty_door_side.material",
       "TilingOffset": [
         0.0,
         0.5

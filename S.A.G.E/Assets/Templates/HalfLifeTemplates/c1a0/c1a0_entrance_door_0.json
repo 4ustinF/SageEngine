@@ -19,10 +19,10 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HeavyDutyDoor/heavy_duty_door_front_top.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HeavyDutyDoor/heavy_duty_door_bottom_rods.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HeavyDutyDoor/heavy_duty_door_rods.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HeavyDutyDoor/heavy_duty_door_top_rods.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HeavyDutyDoor/heavy_duty_door_wheels.json"
     }
   ]
 }

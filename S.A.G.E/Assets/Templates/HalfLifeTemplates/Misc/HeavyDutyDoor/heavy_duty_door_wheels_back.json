@@ -1,0 +1,15 @@
+{
+  "Name": "Back Wheels",
+  "Components": {
+    "Transform Component": {
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HeavyDutyDoor/heavy_duty_door_clockwise_wheel_0.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HeavyDutyDoor/heavy_duty_door_clockwise_wheel_1.json"
+    }
+  ]
+}

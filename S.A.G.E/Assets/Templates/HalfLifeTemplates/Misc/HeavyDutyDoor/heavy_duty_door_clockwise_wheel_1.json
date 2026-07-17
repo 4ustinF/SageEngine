@@ -1,0 +1,22 @@
+{
+  "Name": "Clockwise Wheel 1",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -0.418500,
+        1.104900,
+        1.409700
+      ]
+    },
+    "Selection Box Component": {
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HeavyDutyDoor/heavy_duty_door_wheel_side.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HeavyDutyDoor/heavy_duty_door_wheel_edge.json"
+    }
+  ]
+}

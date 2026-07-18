@@ -74,7 +74,7 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 		return;
 	}
 
-	if (strcmp(componentName, "AnimatorComponent") == 0)
+	if (strcmp(componentName, "Animator Component") == 0)
 	{
 		auto animator = gameObject.AddComponent<AnimatorComponent>();
 

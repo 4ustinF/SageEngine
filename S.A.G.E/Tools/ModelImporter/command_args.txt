@@ -29,3 +29,10 @@
 -scale 1.00 -animOnly ../../Assets/Models/Mutant/mutant_muscle_flex.fbx ../../Assets/Models/Mutant/mutant_muscle_flex.model
 
 -scale 0.03 ../../Assets/Models/Pig/pig.fbx ../../Assets/Models/Pig/pig.model
+
+-scale 0.01 ../../Assets/Models/HalfLife/c1a0/c1a0_brushes.fbx ../../Assets/Models/HalfLife/c1a0/c1a0_brushes.model
+
+-scale 0.01 ../../Assets/Models/HalfLife/Characters/Barney/Barney_Standing_Idle.fbx ../../Assets/Models/HalfLife/Characters/Barney/Barney.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Characters/Barney/Barney_Laying_On_Stomach.fbx ../../Assets/Models/HalfLife/Characters/Barney/barney_laying_on_stomach.model
+
+-scale 0.01 ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.fbx ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.model

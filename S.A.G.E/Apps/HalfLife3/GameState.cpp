@@ -32,6 +32,10 @@ void GameState::Initialize()
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/HalfLife/halflife_level.json");
 
+	GameObject* barneyGO = mGameWorld.CreateGameObject("../../Assets/Templates/HalfLifeTemplates/Characters/barney.json");
+	barneyGO->SetName("Barney");
+	barneyGO->GetComponent<AnimatorComponent>()->GetAnimator().PlayAnimation(1, false);
+
 	// TODO: Move over to level asset.
 	renderService->SetSampleFilter(Sampler::Filter::Point);
 	renderService->GetDirectionalLight().direction = Math::Normalize(Vector3(0.0f, -1.0f, 0.0f));

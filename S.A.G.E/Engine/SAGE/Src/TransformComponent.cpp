@@ -88,7 +88,7 @@ void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 	}
 
 	// --- Local Position ---
-	if (mLocalTransform.position != Vector3::Zero)
+	if (mLocalTransform.position != Vector3::Zero && hasParentTransformComponent)
 	{
 		rj::Value localPosition(rj::kArrayType);
 		localPosition.PushBack(mLocalTransform.position.x, allocator);
@@ -110,7 +110,7 @@ void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 	}
 
 	// --- Local Rotation ---
-	if (mLocalDegreeAngles != Vector3::Zero)
+	if (mLocalDegreeAngles != Vector3::Zero && hasParentTransformComponent)
 	{
 		rj::Value localRotation(rj::kArrayType);
 		localRotation.PushBack(mLocalDegreeAngles.x, allocator);
@@ -132,7 +132,7 @@ void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 	}
 
 	// --- Local Scale ---
-	if (mLocalTransform.scale != Vector3::One)
+	if (mLocalTransform.scale != Vector3::One && hasParentTransformComponent)
 	{
 		rj::Value localScale(rj::kArrayType);
 		localScale.PushBack(mLocalTransform.scale.x, allocator);

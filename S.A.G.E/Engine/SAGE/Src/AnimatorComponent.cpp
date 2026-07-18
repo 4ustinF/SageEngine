@@ -32,7 +32,11 @@ void AnimatorComponent::Update(float deltaTime)
 
 void AnimatorComponent::DebugUI()
 {
-	// TODO
+	// TODO:
+	if (ImGui::CollapsingHeader("Animator Component##AnimatorComponent", ImGuiTreeNodeFlags_CollapsingHeader))
+	{
+
+	}
 }
 
 void AnimatorComponent::AddAnimation(std::string animationFileName)

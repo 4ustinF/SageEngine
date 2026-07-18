@@ -1,0 +1,25 @@
+{
+  "Components": {
+    "Transform Component": {
+      "Position": [
+        2.0,
+        -4.572000,
+        6.0
+      ],
+      "Scale": [
+        0.020000,
+        0.020000,
+        0.020000
+      ]
+    },
+    "Model Component": {
+      "FileName": "../../Assets/Models/HalfLife/Characters/Barney/Barney.model"
+    },
+    "Animator Component": {
+      "AnimSets": [
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_laying_on_stomach.animset"
+      ]
+    }
+  },
+  "Name": "Barney"
+}

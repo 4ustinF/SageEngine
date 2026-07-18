@@ -280,7 +280,7 @@ int main(int argc, char* argv[])
 
 	const uint32_t flags =
 		aiProcessPreset_TargetRealtime_Quality |
-		aiProcess_PreTransformVertices | // Comment out for models/animations
+		//aiProcess_PreTransformVertices | // Comment out for models/animations
 		aiProcess_ConvertToLeftHanded;
 
 	Assimp::Importer importer;

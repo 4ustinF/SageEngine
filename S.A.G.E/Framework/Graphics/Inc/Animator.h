@@ -27,7 +27,7 @@ namespace SAGE::Graphics
 
 	//private:
 		const Model* mModel = nullptr;
-		size_t mClipIndex = 0;
+		size_t mClipIndex = -1; // TODO: Default 0?
 		float mAnimationTick = 0.0f;
 		bool mLooping = false;
 	};

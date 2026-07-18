@@ -391,7 +391,8 @@ void SimpleDraw::AddCylinder(Math::Vector3 center, int slices, int rings, float 
 
 	//Draws Lid
 	v0 = topCent;
-	for (int i = vertices.size() - slices; i < vertices.size(); ++i) {
+	for (int i = static_cast<int>(vertices.size()) - slices; i < vertices.size(); ++i) 
+	{
 		v1 = vertices[i];
 		AddLine(v0, v1, color);
 	}

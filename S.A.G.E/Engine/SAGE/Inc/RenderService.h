@@ -38,7 +38,7 @@ namespace SAGE
 
 	private:
 		friend class ModelComponent;
-		void Register(const ModelComponent* modelComponent, bool isBasic = false);
+		Graphics::RenderGroup* Register(const ModelComponent* modelComponent, bool isBasic = false);
 		void Unregister(const ModelComponent* modelComponent, bool isBasic = false);
 
 		friend class MeshRendererComponent;

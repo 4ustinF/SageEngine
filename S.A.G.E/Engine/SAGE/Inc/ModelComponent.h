@@ -13,6 +13,8 @@ namespace SAGE
 		const char* GetCompName() override { return "Model Component"; }
 		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
+		void Terminate() override;
+
 		void DebugUI() override;
 		void OnEnable() override;
 		void OnDisable() override;
@@ -36,6 +38,7 @@ namespace SAGE
 	private:
 		std::string mFileName;
 		Graphics::ModelId mModelId;
+		Graphics::RenderGroup* mRenderGroup = nullptr;
 		Math::Vector3 mRotation = Math::Vector3::Zero;
 
 		bool mIsBasicModel = false;

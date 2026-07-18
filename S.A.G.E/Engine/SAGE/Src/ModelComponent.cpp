@@ -43,6 +43,11 @@ void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjso
 
 }
 
+void ModelComponent::Terminate()
+{
+	mRenderGroup = nullptr;
+}
+
 void ModelComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Model Component##ModelComponent", ImGuiTreeNodeFlags_CollapsingHeader))
@@ -50,18 +55,22 @@ void ModelComponent::DebugUI()
 		ImGui::Indent(mIdentSize);
 
 		Model& model = GetModel();
-		const int materialSize = static_cast<int>(model.materialData.size());
-		for (int materialIndex = 0; materialIndex < materialSize; ++materialIndex)
+		if (mRenderGroup != nullptr)
 		{
-			const std::string headerText = "Material Data " + std::to_string(materialIndex) + "##ModelComponent";
-			if (ImGui::CollapsingHeader(headerText.c_str(), ImGuiTreeNodeFlags_CollapsingHeader))
+			int materialIndex = 0;
+			for (RenderObject& renderObject : *mRenderGroup)
 			{
-				auto& materialData = model.materialData[materialIndex]; // TODO: Figure out why we cannot modify these values. Maybe needs to be a CreateRenderGroup?
-				ImGui::ColorEdit4("Ambient##ModelComponent", &materialData.material.ambient.r);
-				ImGui::ColorEdit4("Diffuse##ModelComponent", &materialData.material.diffuse.r);
-				ImGui::ColorEdit4("Specular##ModelComponent", &materialData.material.specular.r);
-				ImGui::ColorEdit4("Emissive##ModelComponent", &materialData.material.emissive.r);
-				ImGui::DragFloat("Power##ModelComponent", &materialData.material.power, 1.0f, 1.0f, 100.0f);
+				ImGui::PushID(materialIndex);
+				const std::string headerText = "Material Data " + std::to_string(materialIndex++) + "##ModelComponent";
+				if (ImGui::CollapsingHeader(headerText.c_str(), ImGuiTreeNodeFlags_CollapsingHeader))
+				{
+					ImGui::ColorEdit4("Ambient##ModelComponent", &renderObject.material.ambient.r);
+					ImGui::ColorEdit4("Diffuse##ModelComponent", &renderObject.material.diffuse.r);
+					ImGui::ColorEdit4("Specular##ModelComponent", &renderObject.material.specular.r);
+					ImGui::ColorEdit4("Emissive##ModelComponent", &renderObject.material.emissive.r);
+					ImGui::DragFloat("Power##ModelComponent", &renderObject.material.power, 1.0f, 1.0f, 100.0f);
+				}
+				ImGui::PopID();
 			}
 		}
 	}
@@ -73,11 +82,12 @@ void ModelComponent::OnEnable()
 	mModelId = ModelManager::Get()->LoadModel(modelFileName);
 
 	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
-	renderService->Register(this, mIsBasicModel);
+	mRenderGroup = renderService->Register(this, mIsBasicModel);
 }
 
 void ModelComponent::OnDisable()
 {
 	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
 	renderService->Unregister(this, mIsBasicModel);
+	mRenderGroup = nullptr;
 }

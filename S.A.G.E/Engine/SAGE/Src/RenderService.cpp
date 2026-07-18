@@ -348,7 +348,7 @@ void RenderService::SetShadowFocus(const Math::Vector3& focusPosition)
 	mShadowEffect.SetFocus(focusPosition);
 }
 
-void RenderService::Register(const ModelComponent* modelComponent, bool isBasic)
+RenderGroup* RenderService::Register(const ModelComponent* modelComponent, bool isBasic)
 {
 	Entry& entry = isBasic ? mBasicRenderEntries.emplace_back() : mRenderEntries.emplace_back();
 	auto& gameObject = modelComponent->GetOwner();
@@ -363,6 +363,7 @@ void RenderService::Register(const ModelComponent* modelComponent, bool isBasic)
 	}
 
 	entry.renderGroup = CreateRenderGroup(modelComponent->GetModel(), animator);
+	return &entry.renderGroup;
 }
 
 void RenderService::Unregister(const ModelComponent* modelComponent, bool isBasic)

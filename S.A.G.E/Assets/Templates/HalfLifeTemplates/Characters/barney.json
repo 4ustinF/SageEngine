@@ -33,7 +33,15 @@
         "../../Assets/Models/HalfLife/Characters/Barney/barney_beat_gruntidle.animset",
         "../../Assets/Models/HalfLife/Characters/Barney/barney_buttonpush.animset",
         "../../Assets/Models/HalfLife/Characters/Barney/barney_c1a3_bidle.animset",
-        "../../Assets/Models/HalfLife/Characters/Barney/barney_c1a3_emerge.animset"
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_c1a3_emerge.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_c1a3_emergeidle.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_c1a3_ventb.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_c3a2_draw.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_cower_stand.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_cprbarney.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_cprbarneyrevive.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_diebackward.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_diecrump.animset"
       ]
     }
   },

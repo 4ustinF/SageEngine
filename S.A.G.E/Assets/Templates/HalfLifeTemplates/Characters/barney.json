@@ -18,7 +18,22 @@
     "Animator Component": {
       "AnimSets": [
         "../../Assets/Models/HalfLife/Characters/Barney/barney_laying_on_stomach.animset",
-        "../../Assets/Models/HalfLife/Characters/Barney/barney_almost.animset"
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_almost.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_almostidle.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_assassinated.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_barn_wave.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_barnaclechew.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_barnaclecrunch.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_barnaclehit.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_barnaclepull.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_dragvent.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_barneyfall.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_barneyfallidle.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_beat_grunt.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_beat_gruntidle.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_buttonpush.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_c1a3_bidle.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_c1a3_emerge.animset"
       ]
     }
   },

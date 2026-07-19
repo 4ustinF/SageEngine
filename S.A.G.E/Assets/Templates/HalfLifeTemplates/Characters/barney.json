@@ -75,7 +75,22 @@
         "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_raflinch.animset",
         "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_reload.animset",
         "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_retina.animset",
-        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_rlflinch.animset"
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_rlflinch.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_run.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_shootgun2_blend01.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_shootgun2_blend02.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_shootgun_blend01.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_shootgun_blend02.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_sit1.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_smlflinch.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_standing_idle.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_stuffed_in_vent.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_trackswitch.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_turnleft.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_turnright.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_unlatch.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_walk.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_relaxstand.animset"
       ]
     }
   },

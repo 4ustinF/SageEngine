@@ -35,7 +35,7 @@ void AnimatorComponent::DebugUI()
 	// TODO:
 	if (ImGui::CollapsingHeader("Animator Component##AnimatorComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-
+		//mAnimator.
 	}
 }
 

@@ -17,7 +17,8 @@
     },
     "Animator Component": {
       "AnimSets": [
-        "../../Assets/Models/HalfLife/Characters/Barney/barney_laying_on_stomach.animset"
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_laying_on_stomach.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/barney_almost.animset"
       ]
     }
   },

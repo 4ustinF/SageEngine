@@ -128,17 +128,37 @@ void GameWorld::LoadLevel(std::filesystem::path levelFile)
 		const char* serviceName = service.name.GetString();
 		if (strcmp(serviceName, "Render Service") == 0)
 		{
-			if (service.value.HasMember("SkyDomeTexture"))
+			RenderService* renderService = GetService<RenderService>();
+			float skyBoxSize = -1.0f;
+			if (service.value.HasMember("SkyBoxSize"))
 			{
-				auto renderService = GetService<RenderService>();
-				auto skyDomeTexture = service.value["SkyDomeTexture"].GetString();
-				renderService->LoadSkyDome(skyDomeTexture);
+				skyBoxSize = service.value["SkyBoxTexture"].GetFloat();
 			}
+
 			if (service.value.HasMember("SkyBoxTexture"))
 			{
-				auto renderService = GetService<RenderService>();
 				auto skyBoxTexture = service.value["SkyBoxTexture"].GetString();
-				renderService->LoadSkyBox(skyBoxTexture);
+				renderService->LoadCrossCubeMapSkyBox(skyBoxTexture, skyBoxSize);
+			}
+			else if (service.value.HasMember("SkyBoxTextures"))
+			{
+				auto skyBoxTextures = service.value["SkyBoxTextures"].GetArray();
+
+				std::vector<const char*> fileNames;
+				fileNames.reserve(6);
+				fileNames.push_back(skyBoxTextures[0].GetString());
+				fileNames.push_back(skyBoxTextures[1].GetString());
+				fileNames.push_back(skyBoxTextures[2].GetString());
+				fileNames.push_back(skyBoxTextures[3].GetString());
+				fileNames.push_back(skyBoxTextures[4].GetString());
+				fileNames.push_back(skyBoxTextures[5].GetString());
+
+				renderService->LoadCubeMapSkyBox(fileNames, skyBoxSize);
+			}
+			else if (service.value.HasMember("SkyDomeTexture"))
+			{
+				auto skyDomeTexture = service.value["SkyDomeTexture"].GetString();
+				renderService->LoadSkyDome(skyDomeTexture, 256, skyBoxSize); // TODO: Support divisions.
 			}
 		}
 		else if (strcmp(serviceName, "Terrain Service") == 0)

@@ -34,5 +34,8 @@
 
 -scale 0.01 ../../Assets/Models/HalfLife/Characters/Barney/Barney_Standing_Idle.fbx ../../Assets/Models/HalfLife/Characters/Barney/Barney.model
 -scale 0.01 -animOnly ../../Assets/Models/HalfLife/Characters/Barney/Barney_Laying_On_Stomach.fbx ../../Assets/Models/HalfLife/Characters/Barney/barney_laying_on_stomach.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Characters/Barney/Barney_Almost.fbx ../../Assets/Models/HalfLife/Characters/Barney/barney_almost.model
 
--scale 0.01 ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.fbx ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Characters/Barney/barney_relaxstand.fbx ../../Assets/Models/HalfLife/Characters/Barney/barney_relaxstand.model
+
+-scale 0.01 ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.fbx ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.model // This was for ripping textures from model

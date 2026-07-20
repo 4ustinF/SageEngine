@@ -43,7 +43,7 @@ Sampler::~Sampler()
 	ASSERT(mSampler == nullptr, "Sampler -- Sampler not released!");
 }
 
-void Sampler::Initialize(Filter filter, AddressMode addressMode)
+void Sampler::Initialize(Sampler::Filter filter, Sampler::AddressMode addressMode)
 {
 	auto d3dFilter = GetFilter(filter);
 	auto d3dAddressMode = GetAddressMode(addressMode);

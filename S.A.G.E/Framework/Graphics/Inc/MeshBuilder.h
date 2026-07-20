@@ -20,7 +20,8 @@ namespace SAGE::Graphics
 		static MeshPX CreateScreenQuad();
 
 		static Mesh CreateCube();
-		static Mesh CreateSkyBox();
+		static Mesh CreateCrossCubeSkyBox();
+		static std::vector<Mesh> CreateCubeSkyBox();
 		static Mesh CreateCylinder(const Math::Cylinder& cylinder);
 		static Mesh CreateCylinder(int slices, int rings);
 		static Mesh CreateSphere(const Math::Sphere& sphere);

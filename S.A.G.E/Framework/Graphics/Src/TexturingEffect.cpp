@@ -8,14 +8,14 @@
 using namespace SAGE;
 using namespace SAGE::Graphics;
 
-void TexturingEffect::Initialize()
+void TexturingEffect::Initialize(Sampler::Filter filter, Sampler::AddressMode addressMode)
 {
 	mVertexShader.Initialize<OldVertex>(L"../../Assets/Shaders/Texturing.fx");
 	mPixelShader.Initialize(L"../../Assets/Shaders/Texturing.fx");
 
 	mTransformBuffer.Initialize();
 
-	mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+	mSampler.Initialize(filter, addressMode);
 }
 
 void TexturingEffect::Terminate()

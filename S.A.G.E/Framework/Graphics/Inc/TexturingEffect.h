@@ -15,7 +15,7 @@ namespace SAGE::Graphics
 	class TexturingEffect
 	{
 	public:
-		void Initialize();
+		void Initialize(Sampler::Filter filter = Sampler::Filter::Linear, Sampler::AddressMode addressMode = Sampler::AddressMode::Wrap);
 		void Terminate();
 
 		void Begin();

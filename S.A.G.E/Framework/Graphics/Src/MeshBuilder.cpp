@@ -455,7 +455,7 @@ Mesh MeshBuilder::CreateCube()
 	return mesh;
 }
 
-Mesh MeshBuilder::CreateSkyBox()
+Mesh MeshBuilder::CreateCrossCubeSkyBox()
 {
 	//24 unique vertices
 	Mesh mesh;
@@ -476,16 +476,16 @@ Mesh MeshBuilder::CreateSkyBox()
 	mesh.vertices.push_back({ {+size, -size, -size}, Math::Vector3::ZAxis, Math::Vector3::XAxis, Math::Vector2{1.00f, twoThird } });	//7 - BackBotRight
 
 	//Left
-	mesh.vertices.push_back({ {+size, -size, -size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.00f, twoThird} });	//8  - LeftBotLeft
-	mesh.vertices.push_back({ {+size, +size, -size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.00f, third} });		//9  - LeftTopLeft
-	mesh.vertices.push_back({ {+size, +size, +size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.25f, third} });		//10 - LeftTopRight
-	mesh.vertices.push_back({ {+size, -size, +size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.25f, twoThird} });	//11 - LeftBotRight
+	mesh.vertices.push_back({ {-size, -size, -size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.00f, twoThird} });	//8  - LeftBotLeft
+	mesh.vertices.push_back({ {-size, +size, -size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.00f, third} });		//9  - LeftTopLeft
+	mesh.vertices.push_back({ {-size, +size, +size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.25f, third} });		//10 - LeftTopRight
+	mesh.vertices.push_back({ {-size, -size, +size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.25f, twoThird} });	//11 - LeftBotRight
 
 	//Right
-	mesh.vertices.push_back({ {-size, -size, -size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.75f, twoThird} });		//12 - RightBotLeft
-	mesh.vertices.push_back({ {-size, +size, -size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.75f, third} });		//13 - RightTopLeft
-	mesh.vertices.push_back({ {-size, +size, +size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.50f, third} });		//14 - RightTopRight
-	mesh.vertices.push_back({ {-size, -size, +size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.50f, twoThird} });		//15 - RightBotRight
+	mesh.vertices.push_back({ {+size, -size, -size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.75f, twoThird} });		//12 - RightBotLeft
+	mesh.vertices.push_back({ {+size, +size, -size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.75f, third} });		//13 - RightTopLeft
+	mesh.vertices.push_back({ {+size, +size, +size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.50f, third} });		//14 - RightTopRight
+	mesh.vertices.push_back({ {+size, -size, +size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.50f, twoThird} });		//15 - RightBotRight
 
 	//Top
 	mesh.vertices.push_back({ {+size, +size, +size}, -Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{0.25f, third} });	//16 - TopBotLeft
@@ -508,6 +508,68 @@ Mesh MeshBuilder::CreateSkyBox()
 	};
 
 	return mesh;
+}
+
+std::vector<Mesh> MeshBuilder::CreateCubeSkyBox()
+{
+	std::vector<Mesh> meshes;
+	meshes.reserve(6);
+
+	//24 unique vertices
+	Mesh mesh1, mesh2, mesh3, mesh4, mesh5, mesh6;
+	const float size = 0.5f;
+
+	//Front
+	mesh1.vertices.push_back({ {-size, -size, +size}, -Math::Vector3::ZAxis, Math::Vector3::XAxis, Math::Vector2{0.0f, 1.0f} });	//0 - FrontBotLeft
+	mesh1.vertices.push_back({ {-size, +size, +size}, -Math::Vector3::ZAxis, Math::Vector3::XAxis, Math::Vector2{0.0f, 0.0f} });	//1 - FrontTopLeft
+	mesh1.vertices.push_back({ {+size, +size, +size}, -Math::Vector3::ZAxis, Math::Vector3::XAxis, Math::Vector2{1.0f, 0.0f} });	//2 - FrontTopRight
+	mesh1.vertices.push_back({ {+size, -size, +size}, -Math::Vector3::ZAxis, Math::Vector3::XAxis, Math::Vector2{1.0f, 1.0f} });	//3 - FrontBotRight
+
+	//Back
+	mesh2.vertices.push_back({ {-size, -size, -size}, Math::Vector3::ZAxis, Math::Vector3::XAxis, Math::Vector2{1.0f, 1.0f } });	//0 - BackBotLeft
+	mesh2.vertices.push_back({ {-size, +size, -size}, Math::Vector3::ZAxis, Math::Vector3::XAxis, Math::Vector2{1.0f, 0.0f} });		//1 - BackTopLeft
+	mesh2.vertices.push_back({ {+size, +size, -size}, Math::Vector3::ZAxis, Math::Vector3::XAxis, Math::Vector2{0.0f, 0.0f} });		//2 - BackTopRight
+	mesh2.vertices.push_back({ {+size, -size, -size}, Math::Vector3::ZAxis, Math::Vector3::XAxis, Math::Vector2{0.0f, 1.0f } });	//3 - BackBotRight
+
+	//Left
+	mesh3.vertices.push_back({ {-size, -size, -size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.0f, 1.0f} });	//0 - LeftBotLeft
+	mesh3.vertices.push_back({ {-size, +size, -size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.0f, 0.0f} });	//1 - LeftTopLeft
+	mesh3.vertices.push_back({ {-size, +size, +size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{1.0f, 0.0f} });	//2 - LeftTopRight
+	mesh3.vertices.push_back({ {-size, -size, +size}, -Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{1.0f, 1.0f} });	//3 - LeftBotRight
+
+	//Right
+	mesh4.vertices.push_back({ {+size, -size, -size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{1.0f, 1.0f} });		//0 - RightBotLeft
+	mesh4.vertices.push_back({ {+size, +size, -size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{1.0f, 0.0f} });		//1 - RightTopLeft
+	mesh4.vertices.push_back({ {+size, +size, +size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.0f, 0.0f} });		//2 - RightTopRight
+	mesh4.vertices.push_back({ {+size, -size, +size}, Math::Vector3::XAxis, Math::Vector3::ZAxis, Math::Vector2{0.0f, 1.0f} });		//3 - RightBotRight
+
+	//Top
+	mesh5.vertices.push_back({ {+size, +size, +size}, -Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{1.0f, 1.0f} });	//0 - TopBotLeft
+	mesh5.vertices.push_back({ {+size, +size, -size}, -Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{1.0f, 0.0f} });	//1 - TopTopLeft
+	mesh5.vertices.push_back({ {-size, +size, -size}, -Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{0.0f, 0.0f} });	//2 - TopTopRight
+	mesh5.vertices.push_back({ {-size, +size, +size}, -Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{0.0f, 1.0f} });	//3 - TopBotRight
+
+	//Bot
+	mesh6.vertices.push_back({ {+size, -size, +size}, Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{1.0f, 0.0f} });		//0 - BotBotLeft
+	mesh6.vertices.push_back({ {+size, -size, -size}, Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{1.0f, 1.0f} });		//1 - BotTopLeft
+	mesh6.vertices.push_back({ {-size, -size, -size}, Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{0.0f, 1.0f} });		//2 - BotTopRight
+	mesh6.vertices.push_back({ {-size, -size, +size}, Math::Vector3::YAxis, Math::Vector3::XAxis, Math::Vector2{0.0f, 0.0f} });		//3 - BotBotRight
+
+	mesh1.indices = { 0, 1, 2,	 3, 0, 2 };
+	mesh2.indices = { 2, 1, 0,	 2, 0, 3 };
+	mesh3.indices = { 0, 1, 2,	 3, 0, 2 };
+	mesh4.indices = { 2, 1, 0,	 2, 0, 3 };
+	mesh5.indices = { 2, 1, 0,	 2, 0, 3 };
+	mesh6.indices = { 0, 1, 2,	 3, 0, 2 };
+
+	meshes.push_back(mesh1);
+	meshes.push_back(mesh2);
+	meshes.push_back(mesh3);
+	meshes.push_back(mesh4);
+	meshes.push_back(mesh5);
+	meshes.push_back(mesh6);
+
+	return meshes;
 }
 
 Mesh MeshBuilder::CreateCylinder(const Math::Cylinder& cylinder)

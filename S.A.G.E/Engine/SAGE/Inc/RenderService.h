@@ -24,11 +24,12 @@ namespace SAGE
 		void Render() override;
 		void DebugUI() override;
 
-		void LoadSkyDome(const char* fileName); // TODO: Pass size as parameter, default it at 500.0f
-		void LoadSkyBox(const char* fileName); // TODO: Pass size as parameter, default it at 500.0f
+		void LoadCubeMapSkyBox(const std::vector<const char*>& fileNames, float size = 1000.0f);
+		void LoadCrossCubeMapSkyBox(const char* fileName, float size = 1000.0f);
+		void LoadSkyDome(const char* fileName, int divisions = 256, float radius = 1000.0f);
 
-		void SetSkyDomePos(SAGE::Math::Vector3 position);
 		void SetSkyBoxPos(SAGE::Math::Vector3 position);
+		void SetSkyDomePos(SAGE::Math::Vector3 position);
 
 		void SetShadowFocus(const Math::Vector3& focusPosition);
 		void SetSampleFilter(SAGE::Graphics::Sampler::Filter sampleFilter) { mSampleFilter = sampleFilter; }
@@ -66,12 +67,15 @@ namespace SAGE
 		SAGE::Graphics::DirectionalLight mDirectionalLight;
 
 		SAGE::Graphics::StandardEffect mStandardEffect;
+		SAGE::Graphics::TexturingEffect mSkyBoxEffect;
 		SAGE::Graphics::TexturingEffect mTexturingEffect;
 		SAGE::Graphics::TerrainEffect mTerrainEffect;
 		SAGE::Graphics::ShadowEffect mShadowEffect;
 
 		SAGE::Graphics::RenderObject mSkyDome;
 		SAGE::Graphics::RenderObject mSkyBox;
+		SAGE::Graphics::RenderGroup mNewSkyBox;
+		const float mSkyBoxDefaultSize = 1000.0f;
 
 		SAGE::Graphics::Sampler::Filter mSampleFilter = SAGE::Graphics::Sampler::Filter::Linear;
 

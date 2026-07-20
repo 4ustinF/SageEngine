@@ -4,7 +4,14 @@
     "Camera Service": {
     },
     "Render Service": {
-      "SkyDomeTexture": "../Sprites/HalfLife/SkyBoxes/Xen/Alien2/XenAlien2SkyDome.png"
+      "SkyBoxTextures": [
+        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffft.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffbk.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffrt.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/clifflf.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffup.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffdn.png"
+      ]
     }
   },
   "GameObjects": [

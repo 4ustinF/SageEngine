@@ -39,6 +39,7 @@ void RenderService::Initialize()
 	mStandardEffect.SetSampleSize(0);
 
 	mTexturingEffect.Initialize();
+	mSkyBoxEffect.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Clamp);
 
 	mTerrainEffect.Initialize();
 	mTerrainEffect.SetLightCamera(mShadowEffect.GetLightCamera());
@@ -72,6 +73,8 @@ void RenderService::Initialize()
 
 void RenderService::Terminate()
 {
+	mNewSkyBox.clear();
+
 	mGaussianBlurEffect.Terminate();
 	mPostProccessingEffect.Terminate();
 
@@ -81,6 +84,7 @@ void RenderService::Terminate()
 
 	mShadowEffect.Terminate();
 	mTerrainEffect.Terminate();
+	mSkyBoxEffect.Terminate();
 	mTexturingEffect.Terminate();
 	mStandardEffect.Terminate();
 }
@@ -105,6 +109,7 @@ void RenderService::Render()
 	auto& camera = mCameraService->GetCamera();
 	mStandardEffect.SetCamera(camera);
 	mTexturingEffect.SetCamera(camera);
+	mSkyBoxEffect.SetCamera(camera);
 	mTerrainEffect.SetCamera(camera);
 
 	for (auto& entry : mRenderEntries) 
@@ -128,15 +133,19 @@ void RenderService::Render()
 	}
 
 	//mBaseRenderTarget.BeginRender();
-	{
+	{	
+		mSkyBoxEffect.Begin();
+		if (mSkyDome.diffuseMapId != 0) { mSkyBoxEffect.Render(mSkyDome); }
+		if (mSkyBox.diffuseMapId != 0) { mSkyBoxEffect.Render(mSkyBox); }
+		mSkyBoxEffect.Render(mNewSkyBox); // TODO:
+		mSkyBoxEffect.End();
+
 		mTexturingEffect.Begin();
-		if (mSkyDome.diffuseMapId != 0) { mTexturingEffect.Render(mSkyDome); }
-		if (mSkyBox.diffuseMapId != 0) { mTexturingEffect.Render(mSkyBox); }
-		for (auto& entry : mBasicRenderEntries) {
-			mTexturingEffect.Render(entry.renderGroup);
-		}
 		for (auto& entry : mBasicMeshRendererEntrys) {
 			mTexturingEffect.Render(entry->GetRenderObject());
+		}
+		for (auto& entry : mBasicRenderEntries) {
+			mTexturingEffect.Render(entry.renderGroup);
 		}
 		mTexturingEffect.End();
 
@@ -288,6 +297,8 @@ void RenderService::DebugUI()
 	ImGui::Separator();
 	mTexturingEffect.DebugUI();
 	ImGui::Separator();
+	mSkyBoxEffect.DebugUI();
+	ImGui::Separator();
 	mShadowEffect.DebugUI();
 	ImGui::Separator();
 	mTerrainEffect.DebugUI();
@@ -316,31 +327,68 @@ void RenderService::DebugUI()
 	ImGui::Text("Vertical Blur");
 	ImGui::Image(mGaussianBlurEffect.GetVerticalBlurTexture().GetRawData(), { 256, 144 });
 	ImGui::End();
+
+	if (ImGui::CollapsingHeader("Sky Box Settings", ImGuiTreeNodeFlags_DefaultOpen))
+	{	
+		int index = 0;
+		for (RenderObject& ro : mNewSkyBox)
+		{
+			ImGui::PushID(index++);
+			ImGui::DragFloat3("Position##RenderService", &ro.transform.position.x, 0.1f);
+			ImGui::DragFloat4("Rotation##RenderService", &ro.transform.rotation.w, 0.1f);
+			ImGui::DragFloat3("Scale##RenderService", &ro.transform.scale.x, 0.1f);
+			ImGui::PopID();
+			ImGui::Separator();
+		}
+	}
 }
 
-void RenderService::LoadSkyDome(const char* fileName)
+void RenderService::LoadCubeMapSkyBox(const std::vector<const char*>& fileNames, float size)
 {
+	if (size < 0.0f) { size = mSkyBoxDefaultSize; }
+
+	mNewSkyBox.clear(); // TODO: Need better clear logic
+	const std::vector<Mesh> meshes = MeshBuilder::CreateCubeSkyBox();
+	for (auto& mesh : meshes)
+	{
+		RenderObject ro;
+		ro.meshBuffer.Initialize(mesh);
+		ro.transform.scale *= size;
+		mNewSkyBox.push_back(ro);
+	}
+
 	auto tm = TextureManager::Get();
-	mSkyDome.diffuseMapId = tm->LoadTexture(fileName);
-	mSkyDome.meshBuffer.Initialize(MeshBuilder::CreateSkyDome(256, 256, 500.0f));
+	mNewSkyBox[0].diffuseMapId = tm->LoadTexture(fileNames[0]);
+	mNewSkyBox[1].diffuseMapId = tm->LoadTexture(fileNames[1]);
+	mNewSkyBox[2].diffuseMapId = tm->LoadTexture(fileNames[2]);
+	mNewSkyBox[3].diffuseMapId = tm->LoadTexture(fileNames[3]);
+	mNewSkyBox[4].diffuseMapId = tm->LoadTexture(fileNames[4]);
+	mNewSkyBox[5].diffuseMapId = tm->LoadTexture(fileNames[5]);
 }
 
-void RenderService::LoadSkyBox(const char* fileName)
+void RenderService::LoadCrossCubeMapSkyBox(const char* fileName, float size)
 {
-	auto tm = TextureManager::Get();
-	mSkyBox.diffuseMapId = tm->LoadTexture(fileName);
-	mSkyBox.meshBuffer.Initialize(MeshBuilder::CreateSkyBox());
-	mSkyBox.transform.scale *= 1000.0f;
+	if (size < 0.0f) { size = mSkyBoxDefaultSize; }
+	mSkyBox.diffuseMapId = TextureManager::Get()->LoadTexture(fileName);
+	mSkyBox.meshBuffer.Initialize(MeshBuilder::CreateCrossCubeSkyBox());
+	mSkyBox.transform.scale *= size;
+}
+
+void RenderService::LoadSkyDome(const char* fileName, int divisions, float radius)
+{
+	if (radius < 0.0f) { radius = mSkyBoxDefaultSize; }
+	mSkyDome.diffuseMapId = TextureManager::Get()->LoadTexture(fileName);
+	mSkyDome.meshBuffer.Initialize(MeshBuilder::CreateSkyDome(divisions, divisions, radius));
+}
+
+void RenderService::SetSkyBoxPos(SAGE::Math::Vector3 position)
+{
+	//mSkyBox.transform.position = position;
 }
 
 void RenderService::SetSkyDomePos(SAGE::Math::Vector3 position)
 {
 	mSkyDome.transform.position = position;
-}
-
-void RenderService::SetSkyBoxPos(SAGE::Math::Vector3 position)
-{
-	mSkyBox.transform.position = position;
 }
 
 void RenderService::SetShadowFocus(const Math::Vector3& focusPosition)

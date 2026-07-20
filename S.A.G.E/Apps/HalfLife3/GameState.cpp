@@ -44,11 +44,6 @@ void GameState::Initialize()
 	renderService->GetDirectionalLight().direction = Math::Normalize(Vector3(0.0f, -1.0f, 0.0f));
 	renderService->GetDirectionalLight().ambient = Colors::White;
 	renderService->GetDirectionalLight().diffuse = Colors::White;
-
-	// TODO:
-	// Render service:
-	// Update FPS less frequently
-	// Grid settings like size, on/off, and y value?
 }
 
 void GameState::Terminate()
@@ -65,7 +60,6 @@ void GameState::Update(float deltaTime)
 void GameState::Render()
 {
 	mGameWorld.Render();
-	SimpleDraw::Render(mCameraService->GetCamera());
 }
 
 void GameState::DebugUI()

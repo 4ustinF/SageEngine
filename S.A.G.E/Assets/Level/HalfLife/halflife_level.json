@@ -1,7 +1,10 @@
 {
   "Capacity":  1000,
   "Services": {
-    "CameraService": {
+    "Camera Service": {
+    },
+    "Render Service": {
+      "SkyDomeTexture": "../Sprites/HalfLife/SkyBoxes/Xen/10/Xen10SkyDome.png"
     }
   },
   "GameObjects": [

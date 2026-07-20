@@ -1,0 +1,4 @@
+To convert from OG textures to skydome using the convert tool
+We use left and right and vice versa.
+Rotate up clockwise once.
+Rotate down clockwise three times.

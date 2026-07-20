@@ -126,7 +126,7 @@ void GameWorld::LoadLevel(std::filesystem::path levelFile)
 	for (auto& service : services)
 	{
 		const char* serviceName = service.name.GetString();
-		if (strcmp(serviceName, "RenderService") == 0)
+		if (strcmp(serviceName, "Render Service") == 0)
 		{
 			if (service.value.HasMember("SkyDomeTexture"))
 			{
@@ -141,7 +141,7 @@ void GameWorld::LoadLevel(std::filesystem::path levelFile)
 				renderService->LoadSkyBox(skyBoxTexture);
 			}
 		}
-		else if (strcmp(serviceName, "TerrainService") == 0)
+		else if (strcmp(serviceName, "Terrain Service") == 0)
 		{
 			auto terrainService = GetService<TerrainService>();
 

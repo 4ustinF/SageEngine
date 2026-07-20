@@ -87,7 +87,7 @@ void RenderService::Terminate()
 
 void RenderService::Update(float deltaTime)
 {
-	mFPS = static_cast<int>((1.0f / deltaTime) + 0.5f);
+	mFPS = static_cast<int>((1.0f / deltaTime) + 0.5f); // TODO: Update FPS less frequently? At least display? Also only when we request it and not just do this math every frame for no reason.
 
 	if (mSkyDome.diffuseMapId != 0)
 	{
@@ -261,7 +261,7 @@ void RenderService::Render()
 	//mPostProccessingEffect.End();
 	// ------------------------------------------------------------
 
-
+	// TODO: Grid settings like size, on/off, and y value?
 	SimpleDraw::AddTransform(Matrix4::Identity); // TODO: Add settings to display these.
 	//SimpleDraw::AddPlane(20, Colors::White); // TODO: Add settings to display these.
 	SimpleDraw::Render(camera);
@@ -330,7 +330,7 @@ void RenderService::LoadSkyBox(const char* fileName)
 	auto tm = TextureManager::Get();
 	mSkyBox.diffuseMapId = tm->LoadTexture(fileName);
 	mSkyBox.meshBuffer.Initialize(MeshBuilder::CreateSkyBox());
-	mSkyBox.transform.scale *= 500.0f;
+	mSkyBox.transform.scale *= 1000.0f;
 }
 
 void RenderService::SetSkyDomePos(SAGE::Math::Vector3 position)

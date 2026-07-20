@@ -1,10 +1,10 @@
 {
   "Capacity":  1000,
   "Services": {
-    "CameraService": {
+    "Camera Service": {
 
     },
-    "RenderService": {
+    "Render Service": {
       "SkyDomeTexture": "Neptune.jpg"
     }
   },

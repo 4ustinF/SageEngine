@@ -4,7 +4,7 @@
     "Camera Service": {
     },
     "Render Service": {
-      "SkyDomeTexture": "../Sprites/HalfLife/SkyBoxes/Xen/10/Xen10SkyDome.png"
+      "SkyDomeTexture": "../Sprites/HalfLife/SkyBoxes/Xen/Alien2/XenAlien2SkyDome.png"
     }
   },
   "GameObjects": [

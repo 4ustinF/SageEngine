@@ -11,6 +11,14 @@ namespace SAGE
 	class CameraService;
 	class TerrainService;
 
+	enum SkyBoxType
+	{
+		None,
+		CubeMap,
+		CrossCubeMap,
+		Dome
+	};
+
 	class RenderService final : public Service
 	{
 	public:
@@ -29,7 +37,6 @@ namespace SAGE
 		void LoadSkyDome(const char* fileName, int divisions = 256, float radius = 1000.0f);
 
 		void SetSkyBoxPos(SAGE::Math::Vector3 position);
-		void SetSkyDomePos(SAGE::Math::Vector3 position);
 
 		void SetShadowFocus(const Math::Vector3& focusPosition);
 		void SetSampleFilter(SAGE::Graphics::Sampler::Filter sampleFilter) { mSampleFilter = sampleFilter; }
@@ -72,9 +79,10 @@ namespace SAGE
 		SAGE::Graphics::TerrainEffect mTerrainEffect;
 		SAGE::Graphics::ShadowEffect mShadowEffect;
 
-		SAGE::Graphics::RenderObject mSkyDome;
+		void RenderSkyBox();
 		SAGE::Graphics::RenderObject mSkyBox;
 		SAGE::Graphics::RenderGroup mNewSkyBox;
+		SkyBoxType mSkyBoxType = SkyBoxType::None;
 		const float mSkyBoxDefaultSize = 1000.0f;
 
 		SAGE::Graphics::Sampler::Filter mSampleFilter = SAGE::Graphics::Sampler::Filter::Linear;

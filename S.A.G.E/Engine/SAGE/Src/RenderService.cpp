@@ -93,12 +93,7 @@ void RenderService::Update(float deltaTime)
 {
 	mFPS = static_cast<int>((1.0f / deltaTime) + 0.5f); // TODO: Update FPS less frequently? At least display? Also only when we request it and not just do this math every frame for no reason.
 
-	if (mSkyDome.diffuseMapId != 0)
-	{
-		SetSkyDomePos(mCameraService->GetCamera().GetPosition());
-	}
-
-	if (mSkyBox.diffuseMapId != 0)
+	if (mSkyBoxType != None)
 	{
 		SetSkyBoxPos(mCameraService->GetCamera().GetPosition());
 	}
@@ -135,9 +130,7 @@ void RenderService::Render()
 	//mBaseRenderTarget.BeginRender();
 	{	
 		mSkyBoxEffect.Begin();
-		if (mSkyDome.diffuseMapId != 0) { mSkyBoxEffect.Render(mSkyDome); }
-		if (mSkyBox.diffuseMapId != 0) { mSkyBoxEffect.Render(mSkyBox); }
-		mSkyBoxEffect.Render(mNewSkyBox); // TODO:
+		RenderSkyBox();
 		mSkyBoxEffect.End();
 
 		mTexturingEffect.Begin();
@@ -327,20 +320,6 @@ void RenderService::DebugUI()
 	ImGui::Text("Vertical Blur");
 	ImGui::Image(mGaussianBlurEffect.GetVerticalBlurTexture().GetRawData(), { 256, 144 });
 	ImGui::End();
-
-	if (ImGui::CollapsingHeader("Sky Box Settings", ImGuiTreeNodeFlags_DefaultOpen))
-	{	
-		int index = 0;
-		for (RenderObject& ro : mNewSkyBox)
-		{
-			ImGui::PushID(index++);
-			ImGui::DragFloat3("Position##RenderService", &ro.transform.position.x, 0.1f);
-			ImGui::DragFloat4("Rotation##RenderService", &ro.transform.rotation.w, 0.1f);
-			ImGui::DragFloat3("Scale##RenderService", &ro.transform.scale.x, 0.1f);
-			ImGui::PopID();
-			ImGui::Separator();
-		}
-	}
 }
 
 void RenderService::LoadCubeMapSkyBox(const std::vector<const char*>& fileNames, float size)
@@ -364,6 +343,7 @@ void RenderService::LoadCubeMapSkyBox(const std::vector<const char*>& fileNames,
 	mNewSkyBox[3].diffuseMapId = tm->LoadTexture(fileNames[3]);
 	mNewSkyBox[4].diffuseMapId = tm->LoadTexture(fileNames[4]);
 	mNewSkyBox[5].diffuseMapId = tm->LoadTexture(fileNames[5]);
+	mSkyBoxType = SkyBoxType::CubeMap;
 }
 
 void RenderService::LoadCrossCubeMapSkyBox(const char* fileName, float size)
@@ -372,23 +352,32 @@ void RenderService::LoadCrossCubeMapSkyBox(const char* fileName, float size)
 	mSkyBox.diffuseMapId = TextureManager::Get()->LoadTexture(fileName);
 	mSkyBox.meshBuffer.Initialize(MeshBuilder::CreateCrossCubeSkyBox());
 	mSkyBox.transform.scale *= size;
+	mSkyBoxType = SkyBoxType::CrossCubeMap;
 }
 
 void RenderService::LoadSkyDome(const char* fileName, int divisions, float radius)
 {
 	if (radius < 0.0f) { radius = mSkyBoxDefaultSize; }
-	mSkyDome.diffuseMapId = TextureManager::Get()->LoadTexture(fileName);
-	mSkyDome.meshBuffer.Initialize(MeshBuilder::CreateSkyDome(divisions, divisions, radius));
+	mSkyBox.diffuseMapId = TextureManager::Get()->LoadTexture(fileName);
+	mSkyBox.meshBuffer.Initialize(MeshBuilder::CreateSkyDome(divisions, divisions, radius));
+	mSkyBoxType = SkyBoxType::Dome;
 }
 
 void RenderService::SetSkyBoxPos(SAGE::Math::Vector3 position)
 {
-	//mSkyBox.transform.position = position;
-}
-
-void RenderService::SetSkyDomePos(SAGE::Math::Vector3 position)
-{
-	mSkyDome.transform.position = position;
+	switch (mSkyBoxType)
+	{
+	case CubeMap:
+		for (RenderObject& ro : mNewSkyBox)
+		{
+			ro.transform.position = position;
+		}
+		break;
+	case CrossCubeMap:
+	case Dome:
+		mSkyBox.transform.position = position;
+		break;
+	}
 }
 
 void RenderService::SetShadowFocus(const Math::Vector3& focusPosition)
@@ -444,5 +433,19 @@ void RenderService::UnregisterMeshRenderer(MeshRendererComponent* meshRendererCo
 		const MeshRendererComponent* entry = *iter;
 		renderEntrys.erase(iter);
 		return;
+	}
+}
+
+void RenderService::RenderSkyBox()
+{
+	switch (mSkyBoxType)
+	{
+	case CubeMap:
+		mSkyBoxEffect.Render(mNewSkyBox);
+		break;
+	case CrossCubeMap:
+	case Dome:
+		mSkyBoxEffect.Render(mSkyBox);
+		break;
 	}
 }

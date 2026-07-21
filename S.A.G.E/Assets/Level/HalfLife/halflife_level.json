@@ -5,12 +5,12 @@
     },
     "Render Service": {
       "SkyBoxTextures": [
-        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffft.png",
-        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffbk.png",
-        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffrt.png",
-        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/clifflf.png",
-        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffup.png",
-        "../Sprites/HalfLife/SkyBoxes/Earth/Cliff/cliffdn.png"
+        "../Sprites/HalfLife/SkyBoxes/Earth/Desert/desertft.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Desert/desertbk.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Desert/desertrt.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Desert/desertlf.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Desert/desertup.png",
+        "../Sprites/HalfLife/SkyBoxes/Earth/Desert/desertdn.png"
       ]
     }
   },

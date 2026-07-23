@@ -44,10 +44,32 @@ void GameState::Initialize()
 	renderService->GetDirectionalLight().direction = Math::Normalize(Vector3(0.0f, -1.0f, 0.0f));
 	renderService->GetDirectionalLight().ambient = Colors::White;
 	renderService->GetDirectionalLight().diffuse = Colors::White;
+
+	auto tm = TextureManager::Get();
+	mGlassEffect.SetBlendState(BlendState::Mode::AlphaBlend);
+	mGlassEffect.Initialize(Sampler::Filter::Linear);
+	mGlassEffect.SetLightCamera(renderService->GetShadowEffect().GetLightCamera());
+	mGlassEffect.SetDirectionalLight(renderService->GetDirectionalLight());
+	mGlassEffect.SetShadowMap(&renderService->GetShadowEffect().GetDepthMap());
+	mGlassEffect.SetDepthBias(0.000021f);
+	mGlassEffect.SetBumpWeight(0.25f);
+	mGlassEffect.SetSampleSize(0);
+	mGlassEffect.SetShatterMapId(tm->LoadTexture("CrackedGlass.png"));
+	mGlassEffect.SetShatterIntensity(2.0f);
+	//mGlassEffect.SetShatterNormalMapId();
+
+	mGlassRenderObject.material.ambient = { 0.8f, 0.8f, 0.8f, 0.5f };
+	mGlassRenderObject.material.diffuse = { 0.8f, 0.8f, 0.8f, 1.0f };
+	mGlassRenderObject.material.specular = { 0.8f, 0.8f, 0.8f, 1.0f };
+	mGlassRenderObject.material.emissive = { 1.0f, 1.0f, 1.0f, 0.0f };
+	mGlassRenderObject.material.power = 10.0f;
+	mGlassRenderObject.diffuseMapId = tm->LoadTexture("Glass.png");
+	mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateQuad(5.0f, 5.0f));
 }
 
 void GameState::Terminate()
 {
+	mGlassEffect.Terminate();
 	mCameraService = nullptr;
 	mGameWorld.Terminate();
 }
@@ -60,6 +82,12 @@ void GameState::Update(float deltaTime)
 void GameState::Render()
 {
 	mGameWorld.Render();
+
+	mGlassEffect.SetCamera(mCameraService->GetCamera());
+
+	mGlassEffect.Begin();
+	mGlassEffect.Render(mGlassRenderObject);
+	mGlassEffect.End();
 }
 
 void GameState::DebugUI()
@@ -67,5 +95,13 @@ void GameState::DebugUI()
 	mGameWorld.DebugUI();
 
 	ImGui::Begin("Debug Control", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+	mGlassEffect.DebugUI();
+
+	ImGui::ColorEdit4("Ambient##Floor", &mGlassRenderObject.material.ambient.r);
+	ImGui::ColorEdit4("Diffuse##Floor", &mGlassRenderObject.material.diffuse.r);
+	ImGui::ColorEdit4("Specular##Floor", &mGlassRenderObject.material.specular.r);
+	ImGui::ColorEdit4("Emissive##Floor", &mGlassRenderObject.material.emissive.r);
+	ImGui::DragFloat("Power##Floor", &mGlassRenderObject.material.power, 1.0f, 1.0f, 100.0f);
+
 	ImGui::End();
 }

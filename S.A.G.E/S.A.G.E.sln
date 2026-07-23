@@ -40,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{A64B
 		Assets\Shaders\DoTransform.fx = Assets\Shaders\DoTransform.fx
 		Assets\Shaders\EarthShader.fx = Assets\Shaders\EarthShader.fx
 		Assets\Shaders\GaussianBlur.fx = Assets\Shaders\GaussianBlur.fx
+		Assets\Shaders\Glass.fx = Assets\Shaders\Glass.fx
 		Assets\Shaders\HologramShader.fx = Assets\Shaders\HologramShader.fx
 		Assets\Shaders\Particles.fx = Assets\Shaders\Particles.fx
 		Assets\Shaders\PostProcess.fx = Assets\Shaders\PostProcess.fx

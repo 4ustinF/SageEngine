@@ -44,6 +44,9 @@ namespace SAGE
 		SAGE::Graphics::DirectionalLight& GetDirectionalLight() { return mDirectionalLight; }
 		const SAGE::Graphics::DirectionalLight& GetDirectionalLight() const { return mDirectionalLight; }
 
+		// TODO: Remove
+		SAGE::Graphics::ShadowEffect& GetShadowEffect() { return mShadowEffect; }
+
 	private:
 		friend class ModelComponent;
 		Graphics::RenderGroup* Register(const ModelComponent* modelComponent, bool isBasic = false);

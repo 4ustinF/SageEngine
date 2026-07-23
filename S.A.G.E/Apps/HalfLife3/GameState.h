@@ -13,4 +13,7 @@ public:
 private:
 	SAGE::GameWorld mGameWorld;
 	SAGE::CameraService* mCameraService = nullptr;
+
+	SAGE::Graphics::RenderObject mGlassRenderObject;
+	SAGE::Graphics::GlassEffect mGlassEffect;
 };

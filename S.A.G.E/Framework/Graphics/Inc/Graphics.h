@@ -19,6 +19,7 @@
 // Effect Headers
 #include "CrossHatchEffect.h"
 #include "GaussianBlurEffect.h"
+#include "GlassEffect.h"
 #include "HologramEffect.h"
 #include "ParticleEffect.h"
 #include "PostProccessingEffect.h"

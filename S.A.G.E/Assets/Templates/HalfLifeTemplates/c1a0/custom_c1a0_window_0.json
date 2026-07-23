@@ -1,1 +1,24 @@
-{"Name":"Window 0","Components":{"Transform Component":{"Local Position":[-8.686800003051758,-2.5146000385284424,-4.991099834442139]},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_brushes_7.mesh"},"Mesh Renderer Component":{"MaterialFilePath":"../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brush_7.material","Transparent":true,"TilingOffset":[0.4000000059604645,0.30000001192092896]}}}
+{
+  "Name": "Window 0",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -8.686800,
+        -2.514600,
+        -4.991099
+      ]
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_brushes_7.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brush_7.material",
+      "Transparent": true,
+      "TilingOffset": [
+        0.400000,
+        0.300000
+      ]
+    }
+  }
+}

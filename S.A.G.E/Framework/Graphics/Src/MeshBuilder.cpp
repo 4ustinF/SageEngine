@@ -764,7 +764,7 @@ Mesh MeshBuilder::CreatePlane(int columns, int rows, const Vector2& spacing, boo
 			mesh.vertices.push_back(
 				{
 					pos,
-					Vector3::YAxis,
+					flipVertices ? -Vector3::YAxis : Vector3::YAxis,
 					Vector3::XAxis,
 					Vector2{ u, v }
 				});
@@ -802,6 +802,43 @@ Mesh MeshBuilder::CreatePlane(int columns, int rows, const Vector2& spacing, boo
 
 	return mesh;
 }
+
+Mesh MeshBuilder::CreateQuad(float width, float height)
+{
+	Mesh mesh;
+
+	const float halfWidth = width * 0.5f;
+	const float halfHeight = height * 0.5f;
+
+	mesh.vertices =
+	{
+		// Front Face
+		{ { -halfWidth,  halfHeight, 0.0f }, Vector3::ZAxis,  Vector3::XAxis, { 0.0f, 0.0f } },
+		{ {  halfWidth,  halfHeight, 0.0f }, Vector3::ZAxis,  Vector3::XAxis, { 1.0f, 0.0f } },
+		{ {  halfWidth, -halfHeight, 0.0f }, Vector3::ZAxis,  Vector3::XAxis, { 1.0f, 1.0f } },
+		{ { -halfWidth, -halfHeight, 0.0f }, Vector3::ZAxis,  Vector3::XAxis, { 0.0f, 1.0f } },
+
+		// Back Face
+		{ { -halfWidth,  halfHeight, 0.0f }, -Vector3::ZAxis, -Vector3::XAxis, { 0.0f, 0.0f } },
+		{ {  halfWidth,  halfHeight, 0.0f }, -Vector3::ZAxis, -Vector3::XAxis, { 1.0f, 0.0f } },
+		{ {  halfWidth, -halfHeight, 0.0f }, -Vector3::ZAxis, -Vector3::XAxis, { 1.0f, 1.0f } },
+		{ { -halfWidth, -halfHeight, 0.0f }, -Vector3::ZAxis, -Vector3::XAxis, { 0.0f, 1.0f } }
+	};
+
+	mesh.indices =
+	{
+		// Front
+		0, 1, 2,
+		0, 2, 3,
+
+		// Back
+		6, 5, 4,
+		7, 6, 4
+	};
+
+	return mesh;
+}
+
 
 //Mesh MeshBuilder::CreatePlane(int columns, int rows, const Vector2& spacing, bool flipVertices)
 //{

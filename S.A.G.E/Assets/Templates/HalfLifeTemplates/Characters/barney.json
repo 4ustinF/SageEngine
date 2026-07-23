@@ -2,9 +2,14 @@
   "Components": {
     "Transform Component": {
       "Position": [
-        2.0,
-        -4.572000,
-        6.0
+        -0.600000,
+        -3.850000,
+        6.100000
+      ],
+      "Rotation": [
+        0.0,
+        270.0,
+        0.0
       ],
       "Scale": [
         0.020000,
@@ -17,7 +22,8 @@
     },
     "Animator Component": {
       "AnimSets": [
-        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_lying_on_stomach.animset"
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_lying_on_stomach.animset",
+        "../../Assets/Models/HalfLife/Characters/Barney/Animsets/barney_sit1.animset"
       ]
     }
   },

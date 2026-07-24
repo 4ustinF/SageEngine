@@ -54,7 +54,7 @@ void GameState::Initialize()
 	mGlassEffect.SetDepthBias(0.000021f);
 	mGlassEffect.SetBumpWeight(0.25f);
 	mGlassEffect.SetSampleSize(0);
-	mGlassEffect.SetShatterMapId(tm->LoadTexture("CrackedGlass.png"));
+	mGlassEffect.SetShatterNormalMapId(tm->LoadTexture("RadialCracks2.jpg"));
 	mGlassEffect.SetShatterIntensity(2.0f);
 	//mGlassEffect.SetShatterNormalMapId();
 
@@ -64,7 +64,7 @@ void GameState::Initialize()
 	mGlassRenderObject.material.emissive = { 1.0f, 1.0f, 1.0f, 0.0f };
 	mGlassRenderObject.material.power = 10.0f;
 	mGlassRenderObject.diffuseMapId = tm->LoadTexture("Glass.png");
-	mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateQuad(5.0f, 5.0f));
+	mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateQuad(1.0f, 1.0f));
 }
 
 void GameState::Terminate()

@@ -61,12 +61,10 @@ struct GlassImpact
 
 cbuffer GlassBuffer : register(b4)
 {
-    bool useShatterMap;
     bool useShatterNormalMap;
     float shatterIntensity;
     int impactCount;
-
-    float4 shatterColor;
+    float glassPadding;
 
     GlassImpact impacts[MAX_GLASS_IMPACTS];
 }
@@ -76,8 +74,7 @@ Texture2D specularMap : register(t1);
 Texture2D bumpMap : register(t2);
 Texture2D normalMap : register(t3);
 Texture2D shadowMap : register(t4);
-Texture2D shatterMap : register(t5);
-Texture2D shatterNormalMap : register(t6);
+Texture2D shatterNormalMap : register(t5);
 
 SamplerState textureSampler : register(s0);
 
@@ -127,6 +124,8 @@ float ComputeImpactMask(float2 uv, float2 impactUV, float radius)
 
     // 1 near impact, 0 outside radius
     float mask = saturate(1.0f - dist / radius);
+    
+    //mask = pow(mask, 2.0f);
 
     // Smooth falloff so it does not look too harsh
     mask = smoothstep(0.0f, 1.0f, mask);
@@ -170,7 +169,7 @@ float4 PS(VS_OUTPUT input) : SV_Target
     float3 L = normalize(input.dirToLight);
     float3 V = normalize(input.dirToView);
     
-    if (useNormalMap) 
+    if (useNormalMap)
     {
         float4 normalMapColor = normalMap.Sample(textureSampler, input.texCoord);
         float3 unpackedNormal = normalize(float3((normalMapColor.xy * 2.0f) - 1.0f, normalMapColor.z));
@@ -178,10 +177,11 @@ float4 PS(VS_OUTPUT input) : SV_Target
     }
     
     float finalShatterMask = 0.0f;
-    float3 finalShatterNormal = float3(0.0f, 0.0f, 1.0f);
 
-    // Impact cracks
-    if (useShatterMap || useShatterNormalMap)
+    float3 accumulatedShatterNormal = float3(0.0f, 0.0f, 0.0f);
+    float accumulatedNormalWeight = 0.0f;
+
+    if (useShatterNormalMap)
     {
         for (int i = 0; i < impactCount && i < MAX_GLASS_IMPACTS; ++i)
         {
@@ -190,55 +190,32 @@ float4 PS(VS_OUTPUT input) : SV_Target
             float strength = impacts[i].strength;
             float rotation = impacts[i].rotation;
 
-            float impactMask =
-        ComputeImpactMask(input.texCoord, impactUV, radius)
-        * strength;
+            float impactMask = ComputeImpactMask(input.texCoord, impactUV, radius) * strength;
 
             if (impactMask > 0.001f)
             {
-                float2 shatterUV =
-            ComputeShatterUV(input.texCoord, impactUV, radius);
-
+                float2 shatterUV = ComputeShatterUV(input.texCoord, impactUV, radius);
                 shatterUV = RotateUV(shatterUV, rotation);
 
                 if (IsInsideUV(shatterUV))
                 {
-                    float textureMask = 1.0f;
+                    float3 shatterNormalColor = shatterNormalMap.Sample(textureSampler, shatterUV).xyz;
+                    float3 unpackedShatterNormal = normalize(float3(shatterNormalColor.xy * 2.0f - 1.0f, shatterNormalColor.z));
 
-                    if (useShatterMap)
-                    {
-                        textureMask =
-                    shatterMap.Sample(textureSampler, shatterUV).r;
-                    }
-
-                    float crackAmount =
-                impactMask * textureMask;
-
-                    finalShatterMask =
-                max(finalShatterMask, crackAmount);
-
-                    if (useShatterNormalMap)
-                    {
-                        float3 shatterNormalColor =
-                    shatterNormalMap.Sample(
-                        textureSampler,
-                        shatterUV).xyz;
-
-                        float3 unpackedShatterNormal =
-                    normalize(float3(
-                        shatterNormalColor.xy * 2.0f - 1.0f,
-                        shatterNormalColor.z));
-
-                        finalShatterNormal =
-                    lerp(
-                        finalShatterNormal,
-                        unpackedShatterNormal,
-                        crackAmount);
-                    }
+                    // Additive accumulation
+                    finalShatterMask += impactMask;
+                    accumulatedShatterNormal += unpackedShatterNormal * impactMask;
+                    accumulatedNormalWeight += impactMask;
                 }
             }
         }
+    }
 
+    finalShatterMask = saturate(finalShatterMask);
+    float3 finalShatterNormal = float3(0.0f, 0.0f, 1.0f);
+    if (accumulatedNormalWeight > 0.001f)
+    {
+        finalShatterNormal = normalize(accumulatedShatterNormal / accumulatedNormalWeight);
     }
 
     // Blend crack normal into current normal
@@ -261,13 +238,6 @@ float4 PS(VS_OUTPUT input) : SV_Target
     float4 diffuseMapColor = useDiffuseMap ? diffuseMap.Sample(textureSampler, input.texCoord) : 1.0f;
     float specularMapColor = useSpecularMap ? specularMap.Sample(textureSampler, input.texCoord).r : 1.0f;
     float4 finalColor = (ambient + diffuse + materialEmissive) * diffuseMapColor + (specular * specularMapColor);
-    
-    // Add visible white-ish crack lines
-    if (useShatterMap)
-    {
-        float crackBlend = saturate(finalShatterMask * shatterIntensity);
-        finalColor.rgb = lerp(finalColor.rgb, shatterColor.rgb, crackBlend * shatterColor.a);
-    }
     
     if (useShadowMap)
     {

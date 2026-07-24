@@ -139,16 +139,10 @@ void GlassEffect::Render(const RenderObject& renderObject)
 	tm->BindPS(renderObject.specularMapId, 1);
 	tm->BindVS(renderObject.bumpMapId, 2);
 	tm->BindPS(renderObject.normalMapId, 3);
-
-	tm->BindPS(mShatterMapId, 5);
-	tm->BindPS(mShatterNormalMapId, 6);
+	// 4 is for shadow map
+	tm->BindPS(mShatterNormalMapId, 5);
 
 	GlassData glassData = mGlassData;
-
-	if (mShatterMapId == 0)
-	{
-		glassData.useShatterMap = 0;
-	}
 
 	if (mShatterNormalMapId == 0)
 	{
@@ -220,16 +214,9 @@ void GlassEffect::DebugUI()
 		ImGui::DragFloat("Depth Bias##GlassEffect", &mDepthBias, 0.000001f, 0.0f, 1.0f, "%.6f");
 		ImGui::DragInt("Sample Size##GlassEffect", &mSampleSize, 0.1f, 0, 5);
 
-		bool useShatterMap = (mGlassData.useShatterMap == 1);
-		ImGui::Checkbox("Use Shatter Map##GlassEffect", &useShatterMap);
-		mGlassData.useShatterMap = useShatterMap ? 1 : 0;
-
 		bool useShatterNormalMap = (mGlassData.useShatterNormalMap == 1);
 		ImGui::Checkbox("Use Shatter Normal Map##GlassEffect", &useShatterNormalMap);
 		mGlassData.useShatterNormalMap = useShatterNormalMap ? 1 : 0;
-
-		ImGui::DragFloat("Shatter Intensity##GlassEffect", &mGlassData.shatterIntensity, 0.01f, 0.0f, 5.0f);
-		ImGui::ColorEdit4("Shatter Color##GlassEffect", &mGlassData.shatterColor.r);
 
 		ImGui::Text("Impact Count: %d", mGlassData.impactCount);
 

@@ -45,11 +45,9 @@ namespace SAGE::Graphics
 		void UseShadowMap(bool use) { mSettingsData.useShadowMap = use ? 1 : 0; }
 		void UseFog(bool use) { mSettingsData.useFog = use ? 1 : 0; }
 
-		void UseShatterMap(bool use) { mGlassData.useShatterMap = use ? 1 : 0; }
 		void UseShatterNormalMap(bool use) { mGlassData.useShatterNormalMap = use ? 1 : 0; }
 
 		void SetShatterIntensity(float intensity) { mGlassData.shatterIntensity = intensity; }
-		void SetShatterColor(Color color) { mGlassData.shatterColor = color; }
 
 		void SetShatterMapId(Graphics::TextureId textureId) { mShatterMapId = textureId; }
 		void SetShatterNormalMapId(Graphics::TextureId textureId) { mShatterNormalMapId = textureId; }
@@ -104,12 +102,10 @@ namespace SAGE::Graphics
 
 		struct GlassData
 		{
-			int useShatterMap = 1;
 			int useShatterNormalMap = 1;
 			float shatterIntensity = 1.0f;
 			int impactCount = 0;
-
-			SAGE::Graphics::Color shatterColor = Colors::White;
+			float glassPadding = 0.0f;
 
 			GlassImpactData impacts[MaxGlassImpacts];
 		};

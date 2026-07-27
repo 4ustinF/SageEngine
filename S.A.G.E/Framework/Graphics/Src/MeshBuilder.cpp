@@ -806,23 +806,15 @@ Mesh MeshBuilder::CreatePlane(int columns, int rows, const Vector2& spacing, boo
 Mesh MeshBuilder::CreateQuad(float width, float height)
 {
 	Mesh mesh;
-
 	const float halfWidth = width * 0.5f;
 	const float halfHeight = height * 0.5f;
 
 	mesh.vertices =
 	{
-		// Front Face
 		{ { -halfWidth,  halfHeight, 0.0f }, Vector3::ZAxis,  Vector3::XAxis, { 0.0f, 0.0f } },
 		{ {  halfWidth,  halfHeight, 0.0f }, Vector3::ZAxis,  Vector3::XAxis, { 1.0f, 0.0f } },
 		{ {  halfWidth, -halfHeight, 0.0f }, Vector3::ZAxis,  Vector3::XAxis, { 1.0f, 1.0f } },
 		{ { -halfWidth, -halfHeight, 0.0f }, Vector3::ZAxis,  Vector3::XAxis, { 0.0f, 1.0f } },
-
-		// Back Face
-		{ { -halfWidth,  halfHeight, 0.0f }, -Vector3::ZAxis, -Vector3::XAxis, { 0.0f, 0.0f } },
-		{ {  halfWidth,  halfHeight, 0.0f }, -Vector3::ZAxis, -Vector3::XAxis, { 1.0f, 0.0f } },
-		{ {  halfWidth, -halfHeight, 0.0f }, -Vector3::ZAxis, -Vector3::XAxis, { 1.0f, 1.0f } },
-		{ { -halfWidth, -halfHeight, 0.0f }, -Vector3::ZAxis, -Vector3::XAxis, { 0.0f, 1.0f } }
 	};
 
 	mesh.indices =
@@ -832,8 +824,118 @@ Mesh MeshBuilder::CreateQuad(float width, float height)
 		0, 2, 3,
 
 		// Back
-		6, 5, 4,
-		7, 6, 4
+		2, 1, 0,
+		3, 2, 0
+	};
+
+	return mesh;
+}
+
+Mesh MeshBuilder::CreateGlass(float width, float height)
+{
+	Mesh mesh;
+	const float halfWidth = width * 0.5f;
+	const float halfHeight = height * 0.5f;
+
+	// -halfWidth = left
+	// halfWidth = right
+	// -halfHeight = down
+	// halfHeight = up
+
+	mesh.vertices =
+	{
+		{ { -halfWidth,  halfHeight, 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.0f, 0.0f } },														// 0  = 0.00, 0.00
+		{ {  Lerp(-halfWidth, halfWidth, 0.21f),  halfHeight, 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.21f, 0.00f } },							// 1  = 0.21, 0.00
+		{ {  Lerp(-halfWidth, halfWidth, 0.27f), Lerp(halfHeight, -halfHeight, 0.14f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.27f, 0.14f } },	// 2  = 0.27, 0.14
+		{ {  -halfWidth, Lerp(halfHeight, -halfHeight, 0.20f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.00f, 0.20f } },							// 3  = 0.00, 0.20
+		{ {  Lerp(-halfWidth, halfWidth, 0.26f), Lerp(halfHeight, -halfHeight, 0.28f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.26f, 0.28f } },	// 4  = 0.26, 0.28
+		{ {  Lerp(-halfWidth, halfWidth, 0.32f), Lerp(halfHeight, -halfHeight, 0.27f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.32f, 0.27f } },	// 5  = 0.32, 0.27
+																																						  
+		{ {  Lerp(-halfWidth, halfWidth, 0.55f),  halfHeight, 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.55f, 0.00f } },							// 6  = 0.55, 0.00
+		{ {  Lerp(-halfWidth, halfWidth, 0.52f), Lerp(halfHeight, -halfHeight, 0.10f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.52f, 0.10f } },	// 7  = 0.52, 0.10
+		{ {  Lerp(-halfWidth, halfWidth, 0.47f), Lerp(halfHeight, -halfHeight, 0.22f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.47f, 0.22f } },	// 8  = 0.47, 0.22
+
+		{ {  Lerp(-halfWidth, halfWidth, 0.82f),  halfHeight, 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.82f, 0.00f } },							// 9  = 0.82, 0.00
+		{ {  Lerp(-halfWidth, halfWidth, 0.74f), Lerp(halfHeight, -halfHeight, 0.21f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.74f, 0.21f } },	// 10 = 0.74, 0.21
+		{ {  Lerp(-halfWidth, halfWidth, 0.64f), Lerp(halfHeight, -halfHeight, 0.31f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.64f, 0.31f } },	// 11 = 0.64, 0.31
+		{ {  Lerp(-halfWidth, halfWidth, 0.62f), Lerp(halfHeight, -halfHeight, 0.32f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.62f, 0.32f } },	// 12 = 0.62, 0.32
+
+		{ {  halfWidth, halfHeight, 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 1.00f, 0.00f } },														// 13 = 1.00, 0.00
+		{ {  halfWidth, Lerp(halfHeight, -halfHeight, 0.12f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 1.00f, 0.12f } },							// 14 = 1.00, 0.12
+		{ {  Lerp(-halfWidth, halfWidth, 0.77f), Lerp(halfHeight, -halfHeight, 0.21f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.77f, 0.21f } },	// 15 = 0.77, 0.21
+		
+		{ { -halfWidth, Lerp(halfHeight, -halfHeight, 0.54f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.00f, 0.54f } },							// 16 = 0.00, 0.54
+		{ {  Lerp(-halfWidth, halfWidth, 0.22f), Lerp(halfHeight, -halfHeight, 0.49f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.22f, 0.49f } },	// 17 = 0.22, 0.49
+
+		{ {  Lerp(-halfWidth, halfWidth, 0.37f), Lerp(halfHeight, -halfHeight, 0.43f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.37f, 0.43f } },	// 18 = 0.37, 0.43
+		{ {  Lerp(-halfWidth, halfWidth, 0.44f), Lerp(halfHeight, -halfHeight, 0.54f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.44f, 0.54f } },	// 19 = 0.44, 0.54
+		{ {  Lerp(-halfWidth, halfWidth, 0.38f), Lerp(halfHeight, -halfHeight, 0.62f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.38f, 0.62f } },	// 20 = 0.38, 0.62
+
+		{ {  Lerp(-halfWidth, halfWidth, 0.46f), Lerp(halfHeight, -halfHeight, 0.39f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.46f, 0.39f } },	// 21 = 0.46, 0.39
+
+		{ {  Lerp(-halfWidth, halfWidth, 0.52f), Lerp(halfHeight, -halfHeight, 0.38f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.52f, 0.38f } },	// 22 = 0.53, 0.38
+
+		{ {  Lerp(-halfWidth, halfWidth, 0.56f), Lerp(halfHeight, -halfHeight, 0.53f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.56f, 0.53f } },	// 23 = 0.56, 0.53
+
+		{ {  Lerp(-halfWidth, halfWidth, 0.49f), Lerp(halfHeight, -halfHeight, 0.64f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.49f, 0.64f } },	// 24 = 0.49, 0.64
+
+		{ {  Lerp(-halfWidth, halfWidth, 0.62f), Lerp(halfHeight, -halfHeight, 0.55f), 0.0f }, Vector3::ZAxis, Vector3::XAxis, { 0.62f, 0.55f } },	// 25 = 0.62, 0.55
+	};
+
+	mesh.indices =
+	{
+		// 1
+		0, 1, 2,
+		0, 2, 3,
+		3, 2, 4,
+		4, 2, 5,
+
+		// 2
+		1, 6, 2,
+		2, 6, 7,
+		2, 7, 8,
+
+		// 3
+		6, 9, 7,
+		7, 9, 10,
+		7, 10, 11,
+		7, 11, 12,
+
+		// 4
+		9, 13, 14,
+		9, 14, 15,
+		9, 15, 10,
+
+		//5
+		3, 4, 16,
+		16, 4, 17,
+
+		//6
+		17, 4, 5,
+		17, 5, 18,
+		17, 18, 19,
+		17, 19, 20,
+
+		// 7
+		5, 2, 8,
+		5, 8, 21, 
+		5, 21, 18,
+
+		// 8
+		8, 7, 12,
+		8, 12, 22,
+		8, 22, 21,
+
+		// 9
+		18, 21, 22,
+		18, 22, 23,
+		18, 23, 19,
+		19, 23, 24,
+
+		// 10
+		22, 12, 23,
+		23, 12, 11,
+		23, 11, 25,
 	};
 
 	return mesh;

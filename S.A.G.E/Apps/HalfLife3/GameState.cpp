@@ -64,7 +64,11 @@ void GameState::Initialize()
 	mGlassRenderObject.material.emissive = { 1.0f, 1.0f, 1.0f, 0.0f };
 	mGlassRenderObject.material.power = 10.0f;
 	mGlassRenderObject.diffuseMapId = tm->LoadTexture("Glass.png");
-	mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateQuad(1.0f, 1.0f));
+	//mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateQuad(1.0f, 1.0f));
+	mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateGlass(1.0f, 1.0f));
+
+	//GameObject* barneyGO = mGameWorld.CreateGameObject("../../Assets/Templates/HalfLifeTemplates/Characters/barney.json");
+	//barneyGO->SetName("Barney");
 }
 
 void GameState::Terminate()
@@ -97,6 +101,8 @@ void GameState::DebugUI()
 	ImGui::Begin("Debug Control", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 	mGlassEffect.DebugUI();
 
+	ImGui::DragFloat3("Position##", &mGlassRenderObject.transform.position.x, 0.1f);
+	ImGui::DragFloat3("Scale##", &mGlassRenderObject.transform.scale.x, 0.1f);
 	ImGui::ColorEdit4("Ambient##Floor", &mGlassRenderObject.material.ambient.r);
 	ImGui::ColorEdit4("Diffuse##Floor", &mGlassRenderObject.material.diffuse.r);
 	ImGui::ColorEdit4("Specular##Floor", &mGlassRenderObject.material.specular.r);

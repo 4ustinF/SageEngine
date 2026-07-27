@@ -31,5 +31,6 @@ namespace SAGE::Graphics
 		static Mesh CreatePlane(int columns, int rows, float spacing, bool flipVertices = false);
 		static Mesh CreatePlane(int columns, int rows, const Math::Vector2& spacing, bool flipVertices = false, Input::Pivot pivot = Input::Pivot::Center);
 		static Mesh CreateQuad(float width, float height); // TODO: Remove
+		static Mesh CreateGlass(float width, float height); // TODO: Remove
 	};
 }

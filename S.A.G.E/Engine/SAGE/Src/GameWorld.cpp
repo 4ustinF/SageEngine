@@ -7,6 +7,7 @@
 #include "TerrainService.h"
 
 #include "MeshFilterComponent.h"
+#include "ModelComponent.h"
 #include "RigidBodyComponent.h"
 #include "SelectionBoxComponent.h"
 #include "TransformComponent.h"
@@ -723,6 +724,32 @@ void GameWorld::UpdateEditSelectionRecursive(GameObject* gameObject, const Ray& 
 			}
 		}
 	}
+	//else if (const ModelComponent* modelComponent = gameObject->GetComponent<ModelComponent>()) // TODO:
+	//{
+	//	//if (!Intersect(ray, meshFilter->GetGlobalBoundingBox())) // TODO:
+	//	//{
+	//	//	return;
+	//	//}
+
+	//	RayHit outHit;
+	//	const TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>();
+	//	const Matrix4 world = transformComponent == nullptr ? Matrix4::Identity :
+	//		Matrix4::Scaling(transformComponent->GetScale()) *
+	//		Matrix4::RotationQuaternion(transformComponent->GetRotation()) *
+	//		Matrix4::Translation(transformComponent->GetPosition());
+
+	//	for (const Model::MeshData& meshData : modelComponent->GetModel().meshData)
+	//	{
+	//		if (IntersectRayMesh(ray, meshData.mesh, outHit, world))
+	//		{
+	//			if (outHit.distance < closestDistance)
+	//			{
+	//				selectedGameObject = gameObject;
+	//				closestDistance = outHit.distance;
+	//			}
+	//		}
+	//	}
+	//}
 
 	if (iterateOverChildren)
 	{

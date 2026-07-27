@@ -53,9 +53,9 @@ void GameState::Initialize()
 	mPhysicsWorld.Initialize(settings);
 
 	mPhysicsWorld.AddPlane({Vector3::YAxis, 0.0f});
-	////mPhysicsWorld.AddOBB({ {3.0f, 3.0f, 0.0f}, {3.0f, 0.2f, 2.0f}, Quaternion::RotationEuler({0.0f, 0.0f, -0.5f}) });
-	//////mPhysicsWorld.AddOBB({ {5.5f, 1.5f, 0.0f}, {1.5f, 1.5f, 6.0f}, Quaternion::Identity });
-	////mPhysicsWorld.AddAABB({ {5.5f, 1.5f, 0.0f}, {1.5f, 1.5f, 6.0f} });
+	mPhysicsWorld.AddOBB({ {3.0f, 3.0f, 0.0f}, {3.0f, 0.2f, 2.0f}, Quaternion::RotationEuler({0.0f, 0.0f, -0.5f}) });
+	//mPhysicsWorld.AddOBB({ {5.5f, 1.5f, 0.0f}, {1.5f, 1.5f, 6.0f}, Quaternion::Identity });
+	mPhysicsWorld.AddAABB({ {5.5f, 1.5f, 0.0f}, {1.5f, 1.5f, 6.0f} });
 
 	// Cloth
 	mClothRenderObject.material.ambient = { 0.5f, 0.5f, 0.5f, 1.0f };
@@ -350,6 +350,8 @@ void GameState::DebugUI()
 				mClothParticles.emplace_back(p);
 			}
 		}
+		mClothParticles[0]->invMass = 1000.0f;
+
 		mClothRenderObject.meshBuffer.Initialize(mMesh);
 
 		mPhysicsWorld.AddConstraint<Physics::Fixed>(mClothParticles[mClothParticles.size() - 1]);

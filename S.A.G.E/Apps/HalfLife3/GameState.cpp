@@ -69,6 +69,11 @@ void GameState::Initialize()
 
 	//GameObject* barneyGO = mGameWorld.CreateGameObject("../../Assets/Templates/HalfLifeTemplates/Characters/barney.json");
 	//barneyGO->SetName("Barney");
+
+	PhysicsWorld::Settings settings;
+	settings.iterations = 10;
+	settings.drag = 0.1f;
+	mPhysicsWorld.Initialize(settings);
 }
 
 void GameState::Terminate()
@@ -80,6 +85,7 @@ void GameState::Terminate()
 
 void GameState::Update(float deltaTime)
 {
+	mPhysicsWorld.Update(deltaTime);
 	mGameWorld.Update(deltaTime);
 }
 
@@ -96,6 +102,8 @@ void GameState::Render()
 
 void GameState::DebugUI()
 {
+	mPhysicsWorld.DebugDraw();
+
 	mGameWorld.DebugUI();
 
 	ImGui::Begin("Debug Control", nullptr, ImGuiWindowFlags_AlwaysAutoResize);

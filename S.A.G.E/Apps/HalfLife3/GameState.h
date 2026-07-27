@@ -16,4 +16,6 @@ private:
 
 	SAGE::Graphics::RenderObject mGlassRenderObject;
 	SAGE::Graphics::GlassEffect mGlassEffect;
+
+	SAGE::Physics::PhysicsWorld mPhysicsWorld;
 };

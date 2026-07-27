@@ -1,31 +1,19 @@
 ﻿  GameState.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
-  (compiling source file '../../VGP334/16_HelloPhysics/GameState.cpp')
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(3465,56): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(3465,56): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(3465,56): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(3465,56): warning C4244:             _Ty=double
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(3465,56): warning C4244:         ]
+  (compiling source file 'GameState.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(3465,56):
+      the template instantiation context (the oldest one first) is
+          D:\GitHubFiles\SageEngine\S.A.G.E\VGP334\16_HelloPhysics\GameState.cpp(85,25):
+          see reference to function template instantiation 'SAGE::Physics::Particle *SAGE::Physics::PhysicsWorld::AddParticle<double,float>(double &&,float &&)' being compiled
+          D:\GitHubFiles\SageEngine\S.A.G.E\Framework\Physics\Inc\PhysicsWorld.h(50,40):
+          see reference to function template instantiation 'std::unique_ptr<SAGE::Physics::Particle,std::default_delete<SAGE::Physics::Particle>> std::make_unique<SAGE::Physics::Particle,_Ty,float,0>(_Ty &&,float &&)' being compiled
+          with
+          [
+              _Ty=double
+          ]
   
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
-  (compiling source file '../../VGP334/16_HelloPhysics/GameState.cpp')
-      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
-      see declaration of 'SAGE'
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
-  (compiling source file '../../VGP334/16_HelloPhysics/GameState.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file '../../VGP334/16_HelloPhysics/GameState.cpp')
-  
-  WinMain.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
-  (compiling source file '../../VGP334/16_HelloPhysics/WinMain.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
-  (compiling source file '../../VGP334/16_HelloPhysics/WinMain.cpp')
-      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
-      see declaration of 'SAGE'
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
-  (compiling source file '../../VGP334/16_HelloPhysics/WinMain.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file '../../VGP334/16_HelloPhysics/WinMain.cpp')
-  
-  Generating Code...
+  16_HelloPhysics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\16_HelloPhysics.exe

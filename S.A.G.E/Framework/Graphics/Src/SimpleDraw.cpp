@@ -321,6 +321,119 @@ void SimpleDraw::AddFilledOBB(const Math::Vector3& center, const Math::Vector3& 
 	AddFilledOBB({center, extend, rotation }, color);
 }
 
+void SimpleDraw::AddCapsule(const Math::Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Math::Quaternion& rotation, const Color& color)
+{
+	ringSegments = Max(4, ringSegments);
+	arcSegments = Max(4, arcSegments);
+	const float halfHeight = Max(0.05f, height * 0.5f - radius);
+
+	// Local-space capsule oriented along +Y, caps at +halfHeight / -halfHeight
+	std::vector<Vector3> topRing(ringSegments);
+	std::vector<Vector3> bottomRing(ringSegments);
+	for (int i = 0; i < ringSegments; ++i)
+	{
+		const float theta = (float)i / (float)ringSegments * Constants::TwoPi;
+		const float x = radius * cosf(theta);
+		const float z = radius * sinf(theta);
+		topRing[i] = { x, halfHeight, z };
+		bottomRing[i] = { x, -halfHeight, z };
+	}
+
+	// 4 arcs per cap: +X/-X in the XY plane, +Z/-Z in the ZY plane, each a
+	// half-circle (0..pi) from the ring out to the pole and back down.
+	std::vector<Vector3> topArcXY(arcSegments + 1);
+	std::vector<Vector3> topArcNegXY(arcSegments + 1);
+	std::vector<Vector3> topArcZY(arcSegments + 1);
+	std::vector<Vector3> topArcNegZY(arcSegments + 1);
+	std::vector<Vector3> botArcXY(arcSegments + 1);
+	std::vector<Vector3> botArcNegXY(arcSegments + 1);
+	std::vector<Vector3> botArcZY(arcSegments + 1);
+	std::vector<Vector3> botArcNegZY(arcSegments + 1);
+	for (int i = 0; i <= arcSegments; ++i)
+	{
+		const float theta = (float)i / (float)arcSegments * Constants::HalfPi; // 0..90 deg
+		const float c = radius * cosf(theta);
+		const float s = radius * sinf(theta);
+
+		topArcXY[i] = { c,  halfHeight + s, 0.0f };
+		topArcNegXY[i] = { -c,  halfHeight + s, 0.0f };
+		topArcZY[i] = { 0.0f,  halfHeight + s,  c };
+		topArcNegZY[i] = { 0.0f,  halfHeight + s, -c };
+
+		botArcXY[i] = { c, -halfHeight - s, 0.0f };
+		botArcNegXY[i] = { -c, -halfHeight - s, 0.0f };
+		botArcZY[i] = { 0.0f, -halfHeight - s,  c };
+		botArcNegZY[i] = { 0.0f, -halfHeight - s, -c };
+	}
+
+	// Transform everything into world space
+	const Matrix4 transform = Transform(center, rotation, Vector3::One).GetMatrix4();
+	auto xformArray = [&transform](std::vector<Vector3>& arr, int count)
+		{
+			for (int i = 0; i < count; ++i)
+			{
+				arr[i] = TransformCoord(arr[i], transform);
+			}
+		};
+	xformArray(topRing, ringSegments);
+	xformArray(bottomRing, ringSegments);
+	xformArray(topArcXY, arcSegments + 1);
+	xformArray(topArcNegXY, arcSegments + 1);
+	xformArray(topArcZY, arcSegments + 1);
+	xformArray(topArcNegZY, arcSegments + 1);
+	xformArray(botArcXY, arcSegments + 1);
+	xformArray(botArcNegXY, arcSegments + 1);
+	xformArray(botArcZY, arcSegments + 1);
+	xformArray(botArcNegZY, arcSegments + 1);
+
+	// Rings
+	for (int i = 0; i < ringSegments; ++i)
+	{
+		const int next = (i + 1) % ringSegments;
+		AddLine(topRing[i], topRing[next], color);
+		AddLine(bottomRing[i], bottomRing[next], color);
+	}
+
+	// 4 side lines connecting the rings (cardinal directions)
+	const int step = ringSegments / 4;
+	for (int i = 0; i < ringSegments; i += step)
+	{
+		AddLine(topRing[i], bottomRing[i], color);
+	}
+
+	// Hemisphere arcs
+	auto drawArc = [color](std::vector<Vector3>& arc, int count)
+		{
+			for (int i = 0; i < count; ++i)
+			{
+				AddLine(arc[i], arc[i + 1], color);
+			}
+		};
+	drawArc(topArcXY, arcSegments);
+	drawArc(topArcNegXY, arcSegments);
+	drawArc(topArcZY, arcSegments);
+	drawArc(topArcNegZY, arcSegments);
+	drawArc(botArcXY, arcSegments);
+	drawArc(botArcNegXY, arcSegments);
+	drawArc(botArcZY, arcSegments);
+	drawArc(botArcNegZY, arcSegments);
+}
+
+//void SimpleDraw::AddCapsule(const Math::Vector3& pointA, const Math::Vector3& pointB, float radius, const Color& color)
+//{
+//	// Convenience overload: capsule defined by its two segment endpoints (like Unity's).
+//	const Vector3 axis = pointB - pointA;
+//	const float height = Magnitude(axis);
+//	const Vector3 center = (pointA + pointB) * 0.5f;
+//	const float halfHeight = height * 0.5f;
+//
+//	// Build a rotation that maps local +Y to the capsule's axis direction.
+//	const Vector3 up = (height > 0.0001f) ? (axis / height) : Vector3::YAxis;
+//	const Quaternion rotation = Quaternion::RotationFromTo(Vector3::YAxis, up);
+//
+//	AddCapsule(center, radius, halfHeight, rotation, color);
+//}
+
 void SimpleDraw::AddCylinder(const Math::Cylinder& cylinder, Color color, bool hasLid)
 {
 	AddCylinder(cylinder.center, cylinder.slices, cylinder.rings, cylinder.radius, cylinder.height, color, hasLid ? cylinder.hasLid : hasLid);

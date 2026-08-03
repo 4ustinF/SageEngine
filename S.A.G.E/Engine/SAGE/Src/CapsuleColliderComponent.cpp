@@ -22,7 +22,7 @@ void CapsuleColliderComponent::LoadComponentFromTemplate(const rj::Value& value)
 
 	if (value.HasMember("Height"))
 	{
-		SetRadius(value["Height"].GetFloat());
+		SetHeight(value["Height"].GetFloat());
 	}
 }
 
@@ -30,7 +30,7 @@ void CapsuleColliderComponent::SaveComponentToTemplate(rj::Value& compObj, rj::M
 {
 	BaseColliderComponent::SaveComponentToTemplate(compObj, allocator);
 	SaveNumberToTemplate(compObj, allocator, "Radius", mRadius, 0.5f);
-	SaveNumberToTemplate(compObj, allocator, "Height", mHeight, 1.0f);
+	SaveNumberToTemplate(compObj, allocator, "Height", mHeight, 2.0f);
 }
 
 void CapsuleColliderComponent ::Initialize()
@@ -56,11 +56,11 @@ void CapsuleColliderComponent ::DebugUI()
 
 	if (mDebugFill) // TODO: 
 	{
-		SimpleDraw::AddCylinder(GetCenter(), 16, 16, mRadius, mHeight, mDebugColor, true);
+		SimpleDraw::AddCapsule(GetCenter(), 32, 16, mRadius, mHeight, mTransformComponent->GetRotation(), mDebugColor);
 	}
 	else
 	{
-		SimpleDraw::AddCylinder(GetCenter(), 16, 16, mRadius, mHeight, mDebugColor, true);
+		SimpleDraw::AddCapsule(GetCenter(), 32, 16, mRadius, mHeight, mTransformComponent->GetRotation(), mDebugColor);
 	}
 }
 

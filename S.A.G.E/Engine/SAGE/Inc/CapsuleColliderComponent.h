@@ -29,7 +29,7 @@ namespace SAGE
 
 	private:
 		float mRadius = 0.5f;
-		float mHeight = 1.0f;
+		float mHeight = 2.0f;
 		// TODO: Direction?
 	};
 }

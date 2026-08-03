@@ -4,16 +4,17 @@
     "Transform Component": {
       "Position": [
         2.0,
-        -4.0,
+        -4.5,
         6.0
       ]
     },
     "Capsule Collider Component": {
       "Center": [
         0.0,
-        0.5,
+        0.8128,
         0.0
-      ]
+      ],
+      "Height": 1.625600
     }
   }
 }

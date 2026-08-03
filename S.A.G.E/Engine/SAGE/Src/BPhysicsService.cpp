@@ -3,7 +3,7 @@
 #include "TransformComponent.h"
 #include "BPhysicsComponent.h"
 #include "ColliderComponent.h"
-#include "RigidBodyComponent.h"
+#include "RigidBodyComponentOld.h"
 #include "PhysicsDebugDraw.h"
 
 #include "GameObject.h"
@@ -108,7 +108,7 @@ void BPhysicsService::Register(BPhysicsComponent* physicsComponent)
 	entry.bPhysicsComponent = physicsComponent;
 	entry.transformComponent = gameObject.GetComponent<TransformComponent>();
 	entry.colliderComponent = gameObject.GetComponent<ColliderComponent>();
-	entry.rigidBodyComponent = gameObject.GetComponent<RigidBodyComponent>();
+	entry.rigidBodyComponent = gameObject.GetComponent<RigidBodyComponentOld>();
 }
 
 void BPhysicsService::Unregister(BPhysicsComponent* physicsComponent)
@@ -125,7 +125,7 @@ void BPhysicsService::Unregister(BPhysicsComponent* physicsComponent)
 	}
 }
 
-void BPhysicsService::AddRigidBody(RigidBodyComponent* rigidBodyComponent)
+void BPhysicsService::AddRigidBody(RigidBodyComponentOld* rigidBodyComponent)
 {
 	if (rigidBodyComponent->GetRigidBody() != nullptr)
 	{
@@ -133,7 +133,7 @@ void BPhysicsService::AddRigidBody(RigidBodyComponent* rigidBodyComponent)
 	}
 }
 
-void BPhysicsService::RemoveRigidBody(RigidBodyComponent* rigidBodyComponent)
+void BPhysicsService::RemoveRigidBody(RigidBodyComponentOld* rigidBodyComponent)
 {
 	if (rigidBodyComponent->GetRigidBody() != nullptr)
 	{

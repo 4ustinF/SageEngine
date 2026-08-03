@@ -63,7 +63,7 @@ void AnimalComponent::DebugUI()
 
 void AnimalComponent::OnEnable()
 {
-	mAnimalRB = GetOwner().GetComponent<RigidBodyComponent>()->GetRigidBody();
+	mAnimalRB = GetOwner().GetComponent<RigidBodyComponentOld>()->GetRigidBody();
 	mAnimalRB->setActivationState(DISABLE_DEACTIVATION);
 }
 

@@ -121,7 +121,7 @@ void MobService::AttackMob(int index, int dmg, const Vector3& dir)
 			continue;
 		}
 
-		auto mobRB = mob->GetComponent<RigidBodyComponent>()->GetRigidBody();
+		auto mobRB = mob->GetComponent<RigidBodyComponentOld>()->GetRigidBody();
 		if (mobRB->getUserIndex() == index)
 		{
 			mob->GetComponent<AnimalComponent>()->TakeDamage(dmg, dir);

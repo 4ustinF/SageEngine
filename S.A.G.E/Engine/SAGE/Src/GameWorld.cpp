@@ -9,6 +9,7 @@
 #include "MeshFilterComponent.h"
 #include "ModelComponent.h"
 #include "RigidBodyComponent.h"
+#include "RigidBodyComponentOld.h"
 #include "SelectionBoxComponent.h"
 #include "TransformComponent.h"
 

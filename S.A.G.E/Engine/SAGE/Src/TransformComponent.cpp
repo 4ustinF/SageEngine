@@ -5,6 +5,7 @@
 #include "GameObjectHandle.h"
 #include "GameWorld.h"
 #include "RigidBodyComponent.h"
+#include "RigidBodyComponentOld.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -217,7 +218,7 @@ void TransformComponent::SetPosition(const Vector3& inPos)
 	UpdateWorldPosition(inPos);
 
 	// TODO: Remove this block.
-	if (RigidBodyComponent* rbc = GetOwner().GetComponent<RigidBodyComponent>()) 
+	if (RigidBodyComponentOld* rbc = GetOwner().GetComponent<RigidBodyComponentOld>()) 
 	{
 		SAGE::Graphics::Transform transform;
 		transform.position = mTransform.position;

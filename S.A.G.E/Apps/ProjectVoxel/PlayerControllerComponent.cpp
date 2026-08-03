@@ -168,7 +168,7 @@ void PlayerControllerComponent::DebugUI()
 
 void PlayerControllerComponent::OnEnable()
 {
-	mPlayerRB = GetOwner().GetComponent<RigidBodyComponent>()->GetRigidBody();
+	mPlayerRB = GetOwner().GetComponent<RigidBodyComponentOld>()->GetRigidBody();
 	mPlayerRB->setActivationState(DISABLE_DEACTIVATION);
 	mPlayerRB->setGravity(mSurvivalMode ? btVector3(0.0f, mGravity, 0.0f) : btVector3(0.0f, 0.0f, 0.0f));
 	//playerRBC->AddCollisionMask(CollisionGroups::Group1);

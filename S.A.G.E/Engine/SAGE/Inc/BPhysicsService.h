@@ -7,7 +7,7 @@ namespace SAGE
 	class BPhysicsComponent;
 	class TransformComponent;
 	class ColliderComponent;
-	class RigidBodyComponent;
+	class RigidBodyComponentOld;
 	class PhysicsDebugDraw;
 
 	class BPhysicsService final : public Service
@@ -26,8 +26,8 @@ namespace SAGE
 		void SetMaxSubSteps(int steps) { mMaxSubSteps = steps; }
 
 		friend class BPhysicsComponent;
-		void AddRigidBody(RigidBodyComponent* rigidBodyComponent);
-		void RemoveRigidBody(RigidBodyComponent* rigidBodyComponent);
+		void AddRigidBody(RigidBodyComponentOld* rigidBodyComponent);
+		void RemoveRigidBody(RigidBodyComponentOld* rigidBodyComponent);
 
 	private:
 		friend class BPhysicsComponent;
@@ -37,7 +37,7 @@ namespace SAGE
 		struct Entry
 		{
 			ColliderComponent* colliderComponent = nullptr;
-			RigidBodyComponent* rigidBodyComponent = nullptr;
+			RigidBodyComponentOld* rigidBodyComponent = nullptr;
 			BPhysicsComponent* bPhysicsComponent = nullptr;
 			TransformComponent* transformComponent = nullptr;
 		};

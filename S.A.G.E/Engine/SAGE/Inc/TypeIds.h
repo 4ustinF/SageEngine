@@ -19,6 +19,7 @@ namespace SAGE
 		Model,
 		Particle,
 		RigidBody,
+		RigidBodyOld,
 		SelectionBox,
 		Spawner,
 		Transform,

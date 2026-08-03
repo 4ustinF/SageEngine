@@ -5,7 +5,7 @@
 namespace SAGE
 {
 	class TransformComponent;
-	class RigidBodyComponent;
+	class RigidBodyComponentOld;
 	class ColliderComponent;
 	class ModelComponent;
 
@@ -22,7 +22,7 @@ namespace SAGE
 
 	private:
 		TransformComponent* mTransformComponent = nullptr;
-		RigidBodyComponent* mRigidBodyComponent = nullptr;
+		RigidBodyComponentOld* mRigidBodyComponent = nullptr;
 		ColliderComponent* mColliderComponent = nullptr;
 		ModelComponent* mModelComponent = nullptr;
 	};

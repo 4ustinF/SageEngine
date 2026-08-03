@@ -16,6 +16,7 @@
 #include "ModelComponent.h"
 #include "ParticleComponent.h"
 #include "RigidBodyComponent.h"
+#include "RigidBodyComponentOld.h"
 #include "SelectionBoxComponent.h"
 #include "SpawnerComponent.h"
 #include "TransformComponent.h"
@@ -292,9 +293,9 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 	{
 		auto modelComponent = gameObject.AddComponent<ParticleComponent>();
 	}
-	else if (strcmp(componentName, "RigidBodyComponent") == 0)
+	else if (strcmp(componentName, "RigidBodyComponent") == 0) // Old
 	{
-		auto rigidBodyComponent = gameObject.AddComponent<RigidBodyComponent>();
+		auto rigidBodyComponent = gameObject.AddComponent<RigidBodyComponentOld>();
 		auto physicsComponent = gameObject.AddComponent<BPhysicsComponent>();
 
 		if (value.HasMember("Mass"))
@@ -316,6 +317,11 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 
 			rigidBodyComponent->SetConstraints(Vector3Int(posX, posY, posZ), Vector3Int(rotX, rotY, rotZ));
 		}
+	}
+	else if (strcmp(componentName, "Rigid Body Component") == 0) // New
+	{
+		RigidBodyComponent* rigidBodyComponent = gameObject.AddComponent<RigidBodyComponent>();
+		rigidBodyComponent->LoadComponentFromTemplate(value);
 	}
 	else if (strcmp(componentName, "Selection Box Component") == 0)
 	{

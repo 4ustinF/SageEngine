@@ -4,8 +4,6 @@
 #include "GameObject.h"
 #include "GameWorld.h"
 #include "TransformComponent.h"
-#include "ColliderComponent.h"
-#include "BPhysicsService.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -15,13 +13,36 @@ MEMORY_POOL_DEFINE(RigidBodyComponent, 100);
 
 void RigidBodyComponent::DebugUI()
 {
-	if (ImGui::CollapsingHeader("Rigid Body Component ##RigidBodyComponent", ImGuiTreeNodeFlags_CollapsingHeader))
+	if (ImGui::CollapsingHeader("Rigid Body Component##RigidBodyComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		ImGui::Text("Mass");
-		ImGui::SameLine();
-		if (ImGui::InputFloat("##RigidBodyComponent", &mMass))
+		float mass = mMass;
+		if (ImGui::DragFloat("Mass##RigidBodyComponent", &mass, 0.1f, 0.0f, 1000.0f))
 		{
-			SetMass(mMass);
+			SetMass(mass);
+		}
+
+		float drag = mDrag;
+		if (ImGui::DragFloat("Drag##RigidBodyComponent", &drag, 0.1f, 0.0f, 1000.0f))
+		{
+			SetDrag(drag);
+		}
+
+		float angularDrag = mAngularDrag;
+		if (ImGui::DragFloat("Angular Drag##RigidBodyComponent", &angularDrag, 0.1f, 0.0f, 1000.0f))
+		{
+			SetAngularDrag(angularDrag);
+		}
+
+		bool useGravity = mUseGravity;
+		if (ImGui::Checkbox("Use Gravity##RigidBodyComponent", &useGravity))
+		{
+			SetUseGravity(useGravity);
+		}
+
+		bool isKinematic = mIsKinematic;
+		if (ImGui::Checkbox("Is Kinematic##RigidBodyComponent", &isKinematic))
+		{
+			SetIsKinematic(isKinematic);
 		}
 
 		ImGui::Separator();
@@ -29,112 +50,71 @@ void RigidBodyComponent::DebugUI()
 		ImGui::Text("Constraints");
 		ImGui::Text("Freeze Position");
 		ImGui::SameLine();
-		if (ImGui::Checkbox("X##RBComponentFreezePos", &mFreezePositionX))
+		if (ImGui::Checkbox("X##RBCompFreezePos", &mFreezePositionX))
 		{
-			UpdateConstraint();
 		}
 		ImGui::SameLine();
-		if (ImGui::Checkbox("Y##RBComponentFreezePos", &mFreezePositionY))
+		if (ImGui::Checkbox("Y##RBCompFreezePos", &mFreezePositionY))
 		{
-			UpdateConstraint();
 		}
 		ImGui::SameLine();
-		if (ImGui::Checkbox("Z##RBComponentFreezePos", &mFreezePositionZ))
+		if (ImGui::Checkbox("Z##RBCompFreezePos", &mFreezePositionZ))
 		{
-			UpdateConstraint();
 		}
 
 		ImGui::Text("Freeze Rotation");
 		ImGui::SameLine();
-		if (ImGui::Checkbox("X##RBComponentFreezeRot", &mFreezeRotationX))
+		if (ImGui::Checkbox("X##RBCompFreezeRot", &mFreezeRotationX))
 		{
-			UpdateConstraint();
 		}
 		ImGui::SameLine();
-		if (ImGui::Checkbox("Y##RBComponentFreezeRot", &mFreezeRotationY))
+		if (ImGui::Checkbox("Y##RBCompFreezeRot", &mFreezeRotationY))
 		{
-			UpdateConstraint();
 		}
 		ImGui::SameLine();
-		if (ImGui::Checkbox("Z##RBComponentFreezeRot", &mFreezeRotationZ))
+		if (ImGui::Checkbox("Z##RBCompFreezeRot", &mFreezeRotationZ))
 		{
-			UpdateConstraint();
 		}
 	}
 }
 
 void RigidBodyComponent::OnEnable()
 {
-	const auto& colliderComponent = GetOwner().GetComponent<ColliderComponent>();
-	const auto& transformComponent = GetOwner().GetComponent<TransformComponent>();
-
-	auto collisionShape = colliderComponent->GetCollisionShape();
-	btVector3 localIntertia(0.0f, 0.0f, 0.0f);
-	if (IsDynamic())
-	{
-		collisionShape->calculateLocalInertia(mMass, localIntertia);
-	}
-
-	Transform origin;
-	origin.position = colliderComponent->GetCenter();
-
-	btDefaultMotionState* motionState = new btDefaultMotionState(ConvertToBtTransform(transformComponent->GetTransform()), ConvertToBtTransform(origin));
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(mMass, motionState, collisionShape, localIntertia);
-	mRigidBody = new btRigidBody(rbInfo);
-
-	// CollisionGroups
-	mRigidBody->setUserIndex(CollisionGroups::Default);
-
-	// Constraints
-	mIsInitialized = true;
-	if (mFreezePositionX || mFreezePositionY || mFreezePositionZ || mFreezeRotationX || mFreezeRotationY || mFreezeRotationZ)
-	{
-		UpdateConstraint();
-	}
-
-	auto physicsService = GetOwner().GetWorld().GetService<BPhysicsService>();
-	physicsService->AddRigidBody(this);
 }
 
 void RigidBodyComponent::OnDisable()
 {
-	auto physicsService = GetOwner().GetWorld().GetService<BPhysicsService>();
-	physicsService->RemoveRigidBody(this);
+}
 
-	if (mConstraint != nullptr)
-	{
-		physicsService->GetDynamicsWorld()->removeConstraint(mConstraint);
-	}
-
-	if (mRigidBody != nullptr && mRigidBody->getMotionState())
-	{
-		delete mRigidBody->getMotionState();
-	}
-
-	SafeDelete(mRigidBody);
-	SafeDelete(mConstraint);
+bool RigidBodyComponent::IsKinematic() const
+{
+	// return mMass > 0.0f; Is Dynamic check. Might be useful elsewhere?
+	return mIsKinematic;
 }
 
 void RigidBodyComponent::SetMass(float mass)
 {
 	mMass = mass;
-
-	if (mRigidBody != nullptr)
-	{
-		btVector3 inertia(0.0f, 0.0f, 0.0f);
-		mRigidBody->getCollisionShape()->calculateLocalInertia(mMass, inertia);
-		mRigidBody->setMassProps(mMass, inertia);
-	}
 }
 
-bool RigidBodyComponent::IsDynamic() const
+void RigidBodyComponent::SetDrag(float drag)
 {
-	return mMass > 0.0f;
+	mDrag = Max(0.0f, drag);
 }
 
-btRigidBody* RigidBodyComponent::GetRigidBody()
+void RigidBodyComponent::SetAngularDrag(float angularDrag)
 {
-	return mRigidBody;
+	mAngularDrag = Max(0.0f, angularDrag);
+}
+
+void RigidBodyComponent::SetUseGravity(bool useGravity)
+{
+	mUseGravity = useGravity;
+}
+
+void RigidBodyComponent::SetIsKinematic(bool isKinematic)
+{
+	mIsKinematic = isKinematic;
 }
 
 void RigidBodyComponent::SetConstraints(const Vector3Int& pos, const Vector3Int& rot)
@@ -146,84 +126,8 @@ void RigidBodyComponent::SetConstraints(const Vector3Int& pos, const Vector3Int&
 	mFreezeRotationY = rot.y == 1;
 	mFreezeRotationZ = rot.z == 1;
 
-	if (!mIsInitialized)
-	{
-		return;
-	}
-
 	if (mFreezePositionX || mFreezePositionY || mFreezePositionZ || mFreezeRotationX || mFreezeRotationY || mFreezeRotationZ)
 	{
-		UpdateConstraint();
+		// UpdateConstraints();
 	}
-}
-
-void RigidBodyComponent::AddCollisionMask(CollisionGroups collisionGroup)
-{
-	if (!mRigidBody)
-	{
-		return;
-	}
-
-	// Add a mask
-	int currentMask = mRigidBody->getBroadphaseHandle()->m_collisionFilterMask;
-	int newMask = currentMask | collisionGroup;
-	mRigidBody->getBroadphaseHandle()->m_collisionFilterMask = newMask;
-}
-
-void RigidBodyComponent::RemoveCollisionMask(CollisionGroups collisionGroup)
-{
-	if (!mRigidBody)
-	{
-		return;
-	}
-
-	// Remove a mask
-	int currentMask = mRigidBody->getBroadphaseHandle()->m_collisionFilterMask;
-	int newMask = currentMask & ~collisionGroup;
-	mRigidBody->getBroadphaseHandle()->m_collisionFilterMask = newMask;
-}
-
-void RigidBodyComponent::UpdateConstraint()
-{
-	auto dynamicsWolrd = GetOwner().GetWorld().GetService<BPhysicsService>()->GetDynamicsWorld();
-
-	// Remove the constraint to the world
-	if (mConstraint != nullptr)
-	{
-		dynamicsWolrd->removeConstraint(mConstraint);
-	}
-
-	//mConstraint = new btGeneric6DofSpringConstraint(*mRigidBody, btTransform::getIdentity(), false);
-	const btScalar freezePosX = mFreezePositionX ? static_cast<btScalar>(0.0f) : static_cast<btScalar>(1.0f);
-	const btScalar freezePosY = mFreezePositionY ? static_cast<btScalar>(0.0f) : static_cast<btScalar>(1.0f);
-	const btScalar freezePosZ = mFreezePositionZ ? static_cast<btScalar>(0.0f) : static_cast<btScalar>(1.0f);
-	const btScalar freezeRotX = mFreezeRotationX ? static_cast<btScalar>(0.0f) : static_cast<btScalar>(1.0f);
-	const btScalar freezeRotY = mFreezeRotationY ? static_cast<btScalar>(0.0f) : static_cast<btScalar>(1.0f);
-	const btScalar freezeRotZ = mFreezeRotationZ ? static_cast<btScalar>(0.0f) : static_cast<btScalar>(1.0f);
-
-	//// Set the limits for linear motion to zero, to disable translation
-	//mConstraint->setLinearLowerLimit(btVector3(freezePosX, freezePosY, freezePosZ));
-	//mConstraint->setLinearUpperLimit(btVector3(-freezePosX, -freezePosY, -freezePosZ));
-
-	//// Set the limits for Angular motion to zero, to disable rotation
-	//mConstraint->setAngularLowerLimit(btVector3(freezeRotX, freezeRotY, freezeRotZ));
-	//mConstraint->setAngularUpperLimit(btVector3(-freezeRotX, -freezeRotY, -freezeRotZ));
-
-	mRigidBody->setLinearFactor(btVector3(freezePosX, freezePosY, freezePosZ));
-	mRigidBody->setAngularFactor(btVector3(freezeRotX, freezeRotY, freezeRotZ));
-
-	// Add the constraint to the world
-	//dynamicsWolrd->addConstraint(mConstraint);;
-}
-
-void RigidBodyComponent::SetCollisionGroup(CollisionGroups collisionGroup)
-{
-	if (!mRigidBody)
-	{
-		return;
-	}
-
-	int currentFlags = mRigidBody->getBroadphaseHandle()->m_collisionFilterGroup;
-	int newFlags = (currentFlags & ~btBroadphaseProxy::DefaultFilter) | collisionGroup;
-	mRigidBody->getBroadphaseHandle()->m_collisionFilterGroup = newFlags;
 }

@@ -32,14 +32,14 @@ void GameState::Initialize()
 	mGameWorld.CreateGameObject("../../Assets/Templates/cube2.json")->SetName("Cube");
 	
 	// Player
-	auto playerRBC = mGameWorld.FindGameObject("Player")->GetComponent<RigidBodyComponent>();
+	auto playerRBC = mGameWorld.FindGameObject("Player")->GetComponent<RigidBodyComponentOld>();
 	playerRBC->AddCollisionMask(CollisionGroups::Group1);
 	//playerRBC->RemoveCollisionMask(CollisionGroups::Default);
 	mPlayerRB = playerRBC->GetRigidBody();
 	mPlayerRB->setActivationState(DISABLE_DEACTIVATION);
 
 	// Ground
-	auto groundRBC = mGameWorld.FindGameObject("Ground")->GetComponent<RigidBodyComponent>();
+	auto groundRBC = mGameWorld.FindGameObject("Ground")->GetComponent<RigidBodyComponentOld>();
 	groundRBC->SetCollisionGroup(CollisionGroups::Group1);
 	mGroundRB = groundRBC->GetRigidBody();
 

@@ -2,7 +2,7 @@
 #include "BPhysicsComponent.h"
 #include "BPhysicsService.h"
 #include "TransformComponent.h"
-#include "RigidBodyComponent.h"
+#include "RigidBodyComponentOld.h"
 #include "GameWorld.h"
 #include "ColliderComponent.h"
 
@@ -15,7 +15,7 @@ MEMORY_POOL_DEFINE(BPhysicsComponent, 100);
 void BPhysicsComponent::Initialize()
 {
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
-	mRigidBodyComponent = GetOwner().GetComponent<RigidBodyComponent>();
+	mRigidBodyComponent = GetOwner().GetComponent<RigidBodyComponentOld>();
 	mColliderComponent = GetOwner().GetComponent<ColliderComponent>();
 	mModelComponent = GetOwner().GetComponent<ModelComponent>();
 

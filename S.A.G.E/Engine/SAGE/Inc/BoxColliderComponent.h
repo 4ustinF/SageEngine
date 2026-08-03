@@ -12,6 +12,8 @@ namespace SAGE
 		MEMORY_POOL_DECLARE
 
 		const char* GetCompName() override { return "Box Collider Component"; }
+		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
+		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
 		void Initialize() override;
 		void Terminate() override;
@@ -25,5 +27,6 @@ namespace SAGE
 
 	private:
 		Math::Vector3 mSize = Math::Vector3::One;
+		Math::Vector3 mExtend = Math::Vector3::Half;
 	};
 }

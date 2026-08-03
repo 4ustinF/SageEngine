@@ -1,1 +1,31 @@
-{"Name":"Section 14","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_14.mesh"},"Mesh Renderer Component":{"MaterialFilePath":"../../Assets/Models/HalfLife/c1a0/Materials/c1a0_14.material"}}}
+{
+  "Name": "Floor 14",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        0.152400,
+        -4.572000,
+        6.096000
+      ]
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_14.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_14.material"
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.0,
+        -0.050000,
+        0.0
+      ],
+      "Size": [
+        10.800000,
+        0.1000000,
+        11.0
+      ]
+    }
+  }
+}

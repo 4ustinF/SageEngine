@@ -17,6 +17,7 @@ namespace SAGE::Math
 
 		//Commonly used vectors
 		const static Vector3 Zero;
+		const static Vector3 Half;
 		const static Vector3 One;
 		const static Vector3 XAxis;
 		const static Vector3 YAxis;

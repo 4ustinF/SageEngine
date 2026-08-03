@@ -22,6 +22,7 @@ const Vector2Int Vector2Int::YAxis(0, 1);
 //Vector3
 #pragma region ---Vector3---
 const Vector3 Vector3::Zero(0.0f);
+const Vector3 Vector3::Half(0.5f);
 const Vector3 Vector3::One(1.0f);
 const Vector3 Vector3::XAxis(1.0f, 0.0f, 0.0f);
 const Vector3 Vector3::YAxis(0.0f, 1.0f, 0.0f);

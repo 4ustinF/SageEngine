@@ -8,6 +8,9 @@ namespace SAGE
 	class BaseColliderComponent : public Component
 	{
 	public:
+		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
+		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
+
 		void Initialize() override;
 		void Terminate() override;
 
@@ -25,5 +28,8 @@ namespace SAGE
 		bool mIsTrigger = false;
 		// TODO: Physics Material
 		Math::Vector3 mCenter = Math::Vector3::Zero;
+
+		bool mDebugFill = false;
+		Graphics::Color mDebugColor = Graphics::Colors::Green;
 	};
 }

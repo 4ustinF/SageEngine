@@ -51,7 +51,7 @@ namespace
 			case Easing::InOutSine: easeTime = -(cos(t * Math::Constants::Pi) - 1.0f) * 0.5f; break;
 			case Easing::InQuad: easeTime = t * t; break;
 			case Easing::OutQuad: easeTime = 1.0f - (1.0f - t) * (1.0f - t); break;
-			case Easing::InOutQuad: easeTime = t < 0.5f ? 2.0 * t * t : 1.0f - pow(-2.0f * t + 2.0f, 2) * 0.5f; break;
+			case Easing::InOutQuad: easeTime = t < 0.5f ? 2.0f * t * t : 1.0f - pow(-2.0f * t + 2.0f, 2) * 0.5f; break;
 		}
 
 		return Interpolate(endKey.key, frontKey.key, easeTime);

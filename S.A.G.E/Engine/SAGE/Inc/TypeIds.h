@@ -7,8 +7,10 @@ namespace SAGE
 	enum class ComponentId
 	{
 		Animator,
+		BoxCollider,
 		BPhysics,
 		Camera,
+		CapsuleCollider,
 		Collider,
 		FollowCameraController,
 		FPSCameraController,

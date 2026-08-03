@@ -4,8 +4,10 @@
 #include "GameObject.h"
 
 #include "AnimatorComponent.h"
+#include "BoxColliderComponent.h"
 #include "BPhysicsComponent.h"
 #include "CameraComponent.h"
+#include "CapsuleColliderComponent.h"
 #include "ColliderComponent.h"
 #include "FollowCameraControllerComponent.h"
 #include "FPSCameraControllerComponent.h"
@@ -87,6 +89,11 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			}
 		}
 	}
+	else if (strcmp(componentName, "Box Collider Component") == 0)
+	{
+		BoxColliderComponent* boxColliderComp = gameObject.AddComponent<BoxColliderComponent>();
+		boxColliderComp->LoadComponentFromTemplate(value);
+	}
 	else if (strcmp(componentName, "CameraComponent") == 0)
 	{
 		auto cameraComponent = gameObject.AddComponent<CameraComponent>();
@@ -154,6 +161,11 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 		// if ortohographic, read size
 		// near / far plane
 		// zoom
+	}
+	else if (strcmp(componentName, "Capsule Collider Component") == 0)
+	{
+		CapsuleColliderComponent* capsuleColliderComponent = gameObject.AddComponent<CapsuleColliderComponent>();
+		capsuleColliderComponent->LoadComponentFromTemplate(value);
 	}
 	else if (strcmp(componentName, "ColliderComponent") == 0)
 	{

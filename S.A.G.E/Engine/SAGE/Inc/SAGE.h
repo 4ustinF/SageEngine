@@ -8,8 +8,10 @@
 
 // Component Headers
 #include "AnimatorComponent.h"
+#include "BoxColliderComponent.h"
 #include "BPhysicsComponent.h"
 #include "CameraComponent.h"
+#include "CapsuleColliderComponent.h"
 #include "ColliderComponent.h"
 #include "FollowCameraControllerComponent.h"
 #include "FPSCameraControllerComponent.h"

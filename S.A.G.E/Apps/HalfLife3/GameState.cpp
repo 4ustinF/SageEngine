@@ -45,30 +45,28 @@ void GameState::Initialize()
 	renderService->GetDirectionalLight().ambient = Colors::White;
 	renderService->GetDirectionalLight().diffuse = Colors::White;
 
-	auto tm = TextureManager::Get();
-	mGlassEffect.SetBlendState(BlendState::Mode::AlphaBlend);
-	mGlassEffect.Initialize(Sampler::Filter::Linear);
-	mGlassEffect.SetLightCamera(renderService->GetShadowEffect().GetLightCamera());
-	mGlassEffect.SetDirectionalLight(renderService->GetDirectionalLight());
-	mGlassEffect.SetShadowMap(&renderService->GetShadowEffect().GetDepthMap());
-	mGlassEffect.SetDepthBias(0.000021f);
-	mGlassEffect.SetBumpWeight(0.25f);
-	mGlassEffect.SetSampleSize(0);
-	mGlassEffect.SetShatterNormalMapId(tm->LoadTexture("RadialCracks2.jpg"));
-	mGlassEffect.SetShatterIntensity(2.0f);
-	//mGlassEffect.SetShatterNormalMapId();
+	//auto tm = TextureManager::Get();
+	//mGlassEffect.SetBlendState(BlendState::Mode::AlphaBlend);
+	//mGlassEffect.Initialize(Sampler::Filter::Linear);
+	//mGlassEffect.SetLightCamera(renderService->GetShadowEffect().GetLightCamera());
+	//mGlassEffect.SetDirectionalLight(renderService->GetDirectionalLight());
+	//mGlassEffect.SetShadowMap(&renderService->GetShadowEffect().GetDepthMap());
+	//mGlassEffect.SetDepthBias(0.000021f);
+	//mGlassEffect.SetBumpWeight(0.25f);
+	//mGlassEffect.SetSampleSize(0);
+	//mGlassEffect.SetShatterNormalMapId(tm->LoadTexture("RadialCracks2.jpg"));
+	//mGlassEffect.SetShatterIntensity(2.0f);
+	////mGlassEffect.SetShatterNormalMapId();
+	//mGlassEffect.SetCamera(mCameraService->GetCamera());
 
-	mGlassRenderObject.material.ambient = { 0.8f, 0.8f, 0.8f, 0.5f };
-	mGlassRenderObject.material.diffuse = { 0.8f, 0.8f, 0.8f, 1.0f };
-	mGlassRenderObject.material.specular = { 0.8f, 0.8f, 0.8f, 1.0f };
-	mGlassRenderObject.material.emissive = { 1.0f, 1.0f, 1.0f, 0.0f };
-	mGlassRenderObject.material.power = 10.0f;
-	mGlassRenderObject.diffuseMapId = tm->LoadTexture("Glass.png");
-	//mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateQuad(1.0f, 1.0f));
-	mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateGlass(1.0f, 1.0f));
-
-	//GameObject* barneyGO = mGameWorld.CreateGameObject("../../Assets/Templates/HalfLifeTemplates/Characters/barney.json");
-	//barneyGO->SetName("Barney");
+	//mGlassRenderObject.material.ambient = { 0.8f, 0.8f, 0.8f, 0.5f };
+	//mGlassRenderObject.material.diffuse = { 0.8f, 0.8f, 0.8f, 1.0f };
+	//mGlassRenderObject.material.specular = { 0.8f, 0.8f, 0.8f, 1.0f };
+	//mGlassRenderObject.material.emissive = { 1.0f, 1.0f, 1.0f, 0.0f };
+	//mGlassRenderObject.material.power = 10.0f;
+	//mGlassRenderObject.diffuseMapId = tm->LoadTexture("Glass.png");
+	////mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateQuad(1.0f, 1.0f));
+	//mGlassRenderObject.meshBuffer.Initialize(MeshBuilder::CreateGlass(1.0f, 1.0f));
 
 	PhysicsWorld::Settings settings;
 	settings.iterations = 10;
@@ -93,29 +91,26 @@ void GameState::Render()
 {
 	mGameWorld.Render();
 
-	mGlassEffect.SetCamera(mCameraService->GetCamera());
-
-	mGlassEffect.Begin();
-	mGlassEffect.Render(mGlassRenderObject);
-	mGlassEffect.End();
+	//mGlassEffect.Begin();
+	//mGlassEffect.Render(mGlassRenderObject);
+	//mGlassEffect.End();
 }
 
 void GameState::DebugUI()
 {
 	mPhysicsWorld.DebugDraw();
-
 	mGameWorld.DebugUI();
 
 	ImGui::Begin("Debug Control", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-	mGlassEffect.DebugUI();
+	//mGlassEffect.DebugUI();
 
-	ImGui::DragFloat3("Position##", &mGlassRenderObject.transform.position.x, 0.1f);
-	ImGui::DragFloat3("Scale##", &mGlassRenderObject.transform.scale.x, 0.1f);
-	ImGui::ColorEdit4("Ambient##Floor", &mGlassRenderObject.material.ambient.r);
-	ImGui::ColorEdit4("Diffuse##Floor", &mGlassRenderObject.material.diffuse.r);
-	ImGui::ColorEdit4("Specular##Floor", &mGlassRenderObject.material.specular.r);
-	ImGui::ColorEdit4("Emissive##Floor", &mGlassRenderObject.material.emissive.r);
-	ImGui::DragFloat("Power##Floor", &mGlassRenderObject.material.power, 1.0f, 1.0f, 100.0f);
+	//ImGui::DragFloat3("Position##", &mGlassRenderObject.transform.position.x, 0.1f);
+	//ImGui::DragFloat3("Scale##", &mGlassRenderObject.transform.scale.x, 0.1f);
+	//ImGui::ColorEdit4("Ambient##Floor", &mGlassRenderObject.material.ambient.r);
+	//ImGui::ColorEdit4("Diffuse##Floor", &mGlassRenderObject.material.diffuse.r);
+	//ImGui::ColorEdit4("Specular##Floor", &mGlassRenderObject.material.specular.r);
+	//ImGui::ColorEdit4("Emissive##Floor", &mGlassRenderObject.material.emissive.r);
+	//ImGui::DragFloat("Power##Floor", &mGlassRenderObject.material.power, 1.0f, 1.0f, 100.0f);
 
 	ImGui::End();
 }

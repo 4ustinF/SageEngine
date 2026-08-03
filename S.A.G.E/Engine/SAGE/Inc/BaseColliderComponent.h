@@ -16,7 +16,7 @@ namespace SAGE
 
 		// Getters
 		bool IsTrigger() const { return mIsTrigger; }
-		const Math::Vector3& GetCenter() const { return mCenter; } 
+		const Math::Vector3 GetCenter() const;
 
 		// Setters
 		void SetIsTrigger(bool isTrigger) { mIsTrigger = isTrigger; }

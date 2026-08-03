@@ -723,7 +723,6 @@ void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float ra
 	}
 }
 
-
 void SimpleDraw::AddFilledSphere(const Math::Sphere& sphere, Color color)
 {
 	AddFilledSphere(sphere.center, sphere.slices, sphere.rings, sphere.radius, color);

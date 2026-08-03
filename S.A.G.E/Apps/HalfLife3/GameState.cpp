@@ -30,7 +30,7 @@ void GameState::Initialize()
 	mGameWorld.SetEditMode(true);
 
 	GameObjectFactory::SetMakeOverride(OnMake);
-	mGameWorld.LoadLevel("../../Assets/Level/HalfLife/halflife_level.json");
+	mGameWorld.LoadLevel("../../Assets/Level/HalfLife/c1a0_level.json");
 
 	GameObject* barneyGO = mGameWorld.CreateGameObject("../../Assets/Templates/HalfLifeTemplates/Characters/barney.json");
 	barneyGO->SetName("Barney");

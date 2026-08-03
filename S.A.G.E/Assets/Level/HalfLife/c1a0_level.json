@@ -21,6 +21,9 @@
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempPlayer.json"
     }
   ]
 }

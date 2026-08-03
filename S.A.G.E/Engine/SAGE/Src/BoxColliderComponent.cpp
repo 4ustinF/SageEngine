@@ -53,11 +53,11 @@ void BoxColliderComponent ::DebugUI()
 
 	if (mDebugFill)
 	{
-		SimpleDraw::AddFilledOBB(mTransformComponent->GetPosition() + mCenter, mExtend, mTransformComponent->GetRotation(), mDebugColor);
+		SimpleDraw::AddFilledOBB(GetCenter(), mExtend, mTransformComponent->GetRotation(), mDebugColor);
 	}
 	else
 	{
-		SimpleDraw::AddOBB(mTransformComponent->GetPosition() + mCenter, mExtend, mTransformComponent->GetRotation(), mDebugColor);
+		SimpleDraw::AddOBB(GetCenter(), mExtend, mTransformComponent->GetRotation(), mDebugColor);
 	}
 }
 

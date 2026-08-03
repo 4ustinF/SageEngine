@@ -44,3 +44,13 @@ void BaseColliderComponent ::Terminate()
 {
 	mTransformComponent = nullptr;
 }
+
+const Math::Vector3 BaseColliderComponent::GetCenter() const 
+{ 
+	if (mTransformComponent)
+	{
+		return mTransformComponent->GetPosition() + mCenter;
+	}
+
+	return mCenter; 
+}

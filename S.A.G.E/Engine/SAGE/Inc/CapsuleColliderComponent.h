@@ -12,6 +12,8 @@ namespace SAGE
 		MEMORY_POOL_DECLARE
 
 		const char* GetCompName() override { return "Capsule Collider Component"; }
+		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
+		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
 		void Initialize() override;
 		void Terminate() override;
@@ -26,7 +28,7 @@ namespace SAGE
 		void SetHeight(float height);
 
 	private:
-		float mRadius = 1.0f;
+		float mRadius = 0.5f;
 		float mHeight = 1.0f;
 		// TODO: Direction?
 	};

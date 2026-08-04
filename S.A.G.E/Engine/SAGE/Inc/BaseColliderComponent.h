@@ -3,6 +3,8 @@
 
 namespace SAGE
 {
+	class RBPhysicsService;
+	class RigidBodyComponent;
 	class TransformComponent;
 
 	class BaseColliderComponent : public Component
@@ -14,6 +16,9 @@ namespace SAGE
 		void Initialize() override;
 		void Terminate() override;
 
+		void OnEnable() override;
+		void OnDisable() override;
+
 		// Getters
 		bool IsTrigger() const { return mIsTrigger; }
 		const Math::Vector3 GetCenter() const;
@@ -23,7 +28,11 @@ namespace SAGE
 		void SetCenter(const Math::Vector3& center) { mCenter = center; }
 
 	protected:
+		void UpdatePhysicsObjectPropertys();
+
+		RBPhysicsService* mPhysicsService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
+		RigidBodyComponent* mRigidBodyComponent = nullptr;
 		SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject = nullptr;
 		
 		bool mIsTrigger = false;

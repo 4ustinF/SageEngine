@@ -15,7 +15,8 @@ void RBPhysicsWorld::Initialize(Settings settings)
 
 void RBPhysicsWorld::Clear()
 {
-	mObjects.clear();
+	mDynamicObjects.clear();
+	mStaticObjects.clear();
 }
 
 void RBPhysicsWorld::Update(float deltaTime)
@@ -26,59 +27,81 @@ void RBPhysicsWorld::Update(float deltaTime)
 	DetectCollisionWithDome(deltaTime);
 }
 
-void RBPhysicsWorld::DebugDraw()
+void RBPhysicsWorld::DrawPhysicsObjects(bool fillShapes)
 {
-	//if (!mShowDebugLines) { return; }
-
-	for (RBPhysicsObject& object : mObjects)
+	for (RBPhysicsObject& object : mDynamicObjects)
 	{
-		object.DebugDraw(mFillDebugShapes);
+		object.DebugDraw(fillShapes);
 	}
 
 	for (RBPhysicsObject& object : mStaticObjects)
 	{
-		object.DebugDraw(mFillDebugShapes);
+		object.DebugDraw(fillShapes);
 	}
 }
 
-void RBPhysicsWorld::DebugUI()
+//void RBPhysicsWorld::DebugUI()
+//{
+//	if (mDynamicObjects.empty())
+//		return;
+//
+//	ImGui::Begin("Physics", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+//	ImGui::DragFloat3("Gravity", &mSettings.gravity.x, 0.1f, -10.0f, 10.0f);
+//
+//	if (!mDynamicObjects.empty())
+//	{
+//		auto& o = mDynamicObjects[0];
+//		ImGui::Text("Obj0 Pos: %.2f, %.2f, %.2f", o.GetPosition().x, o.GetPosition().y, o.GetPosition().z);
+//		ImGui::Text("Obj0 Vel: %.2f, %.2f, %.2f", o.GetVelocity().x, o.GetVelocity().y, o.GetVelocity().z);
+//		ImGui::Text("Obj0 Acc: %.3f, %.3f, %.3f", o.GetAcceleration().x, o.GetAcceleration().y, o.GetAcceleration().z);
+//		Quaternion orientation = o.GetOrientation();
+//		ImGui::DragFloat4("Orientation", &orientation.x, 0.01f, -10000.0f, 10000.0f); // TODO: Remove
+//	}
+//
+//	ImGui::End();
+//}
+
+int RBPhysicsWorld::AddObject(const RBPhysicsObject& object, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
 {
-	if (mObjects.empty())
-		return;
-
-	ImGui::Begin("Physics", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-	ImGui::DragFloat3("Gravity", &mSettings.gravity.x, 0.1f, -10.0f, 10.0f);
-
-	if (!mObjects.empty())
+	switch (type)
 	{
-		auto& o = mObjects[0];
-		ImGui::Text("Obj0 Pos: %.2f, %.2f, %.2f", o.GetPosition().x, o.GetPosition().y, o.GetPosition().z);
-		ImGui::Text("Obj0 Vel: %.2f, %.2f, %.2f", o.GetVelocity().x, o.GetVelocity().y, o.GetVelocity().z);
-		ImGui::Text("Obj0 Acc: %.3f, %.3f, %.3f", o.GetAcceleration().x, o.GetAcceleration().y, o.GetAcceleration().z);
-		Quaternion orientation = o.GetOrientation();
-		ImGui::DragFloat4("Orientation", &orientation.x, 0.01f, -10000.0f, 10000.0f); // TODO: Remove
+	case PhysicsObjectType::Dynamic:
+	case PhysicsObjectType::Kinematic: // TODO: 
+		mDynamicObjects.push_back(object);
+		return static_cast<int>(mDynamicObjects.size()) - 1;
+		break;
+	case PhysicsObjectType::Static:
+		mStaticObjects.push_back(object);
+		return static_cast<int>(mStaticObjects.size()) - 1;
 	}
 
-	ImGui::Checkbox("Show Debug Lines", &mShowDebugLines);
-	ImGui::Checkbox("Fill Debug Shapes", &mFillDebugShapes);
-	ImGui::End();
+	return -1; // TODO: This func does not need to return an index. Remove this. 
+	// TODO: Maybe return the object pointer instead. Or return a bool for success/failure. Or return nothing.
 }
 
-int RBPhysicsWorld::AddObject(const RBPhysicsObject& object)
+bool  RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
 {
-	if (object.GetMass() > 0.0f)
-	{
-		mObjects.push_back(object);
-		return static_cast<int>(mObjects.size()) - 1;
-	}
+	// TODO: 
+	//auto it = std::find(mDynamicObjects.begin(), mDynamicObjects.end(), object);
+	//if (it != mDynamicObjects.end())
+	//{
+	//	mDynamicObjects.erase(it);
+	//	return true;
+	//}
 
-	mStaticObjects.push_back(object);
-	return static_cast<int>(mStaticObjects.size()) - 1;
+	//it = std::find(mStaticObjects.begin(), mStaticObjects.end(), object);
+	//if (it != mStaticObjects.end())
+	//{
+	//	mStaticObjects.erase(it);
+	//	return true;
+	//}
+
+	return false;
 }
 
 void RBPhysicsWorld::Simulate(float deltaTime)
 {
-	for (RBPhysicsObject& object : mObjects)
+	for (RBPhysicsObject& object : mDynamicObjects)
 	{
 		if (object.GetIsStatic())
 		{
@@ -115,10 +138,10 @@ void RBPhysicsWorld::HandleCollisions()
 	const int objectsCount = GetObjectsCount();
 	for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
 	{
-		RBPhysicsObject& primaryObject = mObjects[primaryIndex];
+		RBPhysicsObject& primaryObject = mDynamicObjects[primaryIndex];
 		for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
 		{
-			RBPhysicsObject& secondaryObject = mObjects[secondaryIndex];
+			RBPhysicsObject& secondaryObject = mDynamicObjects[secondaryIndex];
 			IntersectData intersectData = primaryObject.GetCollider().Intersect(secondaryObject.GetCollider());
 
 			if (intersectData.GetDoesIntersect())
@@ -169,7 +192,7 @@ void RBPhysicsWorld::HandleCollisions()
 	}
 
 	// Static collision
-	for (RBPhysicsObject& primaryObject : mObjects)
+	for (RBPhysicsObject& primaryObject : mDynamicObjects)
 	{
 		for (RBPhysicsObject& staticObject : mStaticObjects)
 		{
@@ -209,7 +232,7 @@ void RBPhysicsWorld::DetectCollisionWithDome(float deltaTime)
 	const float domeRadius = 8.0f;
 	const Vector3 domeCenter = Vector3(0.0f, domeRadius, 0.0f);
 
-	for (RBPhysicsObject& object : mObjects)
+	for (RBPhysicsObject& object : mDynamicObjects)
 	{
 		// Get ball radius from its collider (uses existing BoundingSphere)
 		auto& collider = (BoundingSphere&)object.GetCollider();

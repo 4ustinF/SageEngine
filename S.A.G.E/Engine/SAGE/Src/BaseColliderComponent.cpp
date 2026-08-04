@@ -1,11 +1,15 @@
 #include "Precompiled.h"
 #include "BaseColliderComponent.h"
 
+#include "GameWorld.h"
 #include "GameObject.h"
+#include "RBPhysicsService.h"
 #include "TransformComponent.h"
+#include "RigidBodyComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
 void BaseColliderComponent::LoadComponentFromTemplate(const rj::Value& value)
@@ -37,16 +41,44 @@ void BaseColliderComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memo
 
 void BaseColliderComponent ::Initialize()
 {
-	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
+	GameObject& ownerGO = GetOwner();
+	mTransformComponent = ownerGO.GetComponent<TransformComponent>();
+	mRigidBodyComponent = ownerGO.GetComponent<RigidBodyComponent>();
+	mPhysicsService = ownerGO.GetWorld().GetService<RBPhysicsService>();
 }
 
 void BaseColliderComponent ::Terminate()
 {
-	mTransformComponent = nullptr;
 	mPhysicsObject = nullptr;
+	mTransformComponent = nullptr;
+	mRigidBodyComponent = nullptr;
+	mPhysicsService = nullptr;
 }
 
-const Math::Vector3 BaseColliderComponent::GetCenter() const 
+void BaseColliderComponent::OnEnable()
+{
+	if(mRigidBodyComponent == nullptr)
+	{
+		mRigidBodyComponent = GetOwner().GetComponent<RigidBodyComponent>();
+	}
+
+	if(mPhysicsObject != nullptr)
+	{
+		UpdatePhysicsObjectPropertys();
+		mPhysicsService->GetPhysicsWorld().AddObject(*mPhysicsObject, mRigidBodyComponent ? 
+			(mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static);
+	}
+}
+
+void BaseColliderComponent::OnDisable()
+{
+	if (mPhysicsObject != nullptr)
+	{
+		mPhysicsService->GetPhysicsWorld().RemoveObject(*mPhysicsObject);
+	}
+}
+
+const Vector3 BaseColliderComponent::GetCenter() const 
 { 
 	if (mTransformComponent)
 	{
@@ -54,4 +86,22 @@ const Math::Vector3 BaseColliderComponent::GetCenter() const
 	}
 
 	return mCenter; 
+}
+
+void BaseColliderComponent::UpdatePhysicsObjectPropertys()
+{
+	if (mRigidBodyComponent != nullptr)
+	{
+		mPhysicsObject->SetMass(mRigidBodyComponent->GetMass());
+		mPhysicsObject->SetDrag(mRigidBodyComponent->GetDrag());
+		mPhysicsObject->SetAngularDrag(mRigidBodyComponent->GetAngularDrag());
+		mPhysicsObject->SetUseGravity(mRigidBodyComponent->GetUseGravity());
+	}
+	else
+	{
+		mPhysicsObject->SetMass(0.0f);
+		mPhysicsObject->SetDrag(0.0f);
+		mPhysicsObject->SetAngularDrag(0.05f);
+		mPhysicsObject->SetUseGravity(true);
+	}
 }

@@ -46,6 +46,9 @@ void GameState::Initialize()
 	renderService->GetDirectionalLight().ambient = Colors::White;
 	renderService->GetDirectionalLight().diffuse = Colors::White;
 
+	// TODO: Move over to level asset.
+	physicsService->SetRenderDebugUI(true);
+
 	//auto tm = TextureManager::Get();
 	//mGlassEffect.SetBlendState(BlendState::Mode::AlphaBlend);
 	//mGlassEffect.Initialize(Sampler::Filter::Linear);

@@ -2,11 +2,13 @@
 #include "BoxColliderComponent.h"
 
 #include "GameObject.h"
+#include "RBPhysicsService.h"
 #include "TransformComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
+using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(BoxColliderComponent , 200);
@@ -59,6 +61,17 @@ void BoxColliderComponent ::DebugUI()
 	{
 		SimpleDraw::AddOBB(GetCenter(), mExtend, mTransformComponent->GetRotation(), mDebugColor);
 	}
+}
+
+void BoxColliderComponent::OnEnable()
+{
+	mPhysicsObject = new RBPhysicsObject(new BoundingBox(GetCenter(), mExtend));
+	BaseColliderComponent::OnEnable();
+}
+
+void BoxColliderComponent::OnDisable()
+{
+	BaseColliderComponent::OnDisable();
 }
 
 void BoxColliderComponent::SetSize(const Math::Vector3& size)

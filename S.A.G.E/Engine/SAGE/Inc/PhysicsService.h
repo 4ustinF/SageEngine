@@ -16,10 +16,10 @@ namespace SAGE
 		void Render() override;
 		void DebugUI() override;
 
-		SAGE::Physics::PhysicsWorld& GetPhysicsWorld() { return mPhysicsWorld; }
-		const SAGE::Physics::PhysicsWorld& GetPhysicsWorld() const { return mPhysicsWorld; }
+		Physics::PhysicsWorld& GetPhysicsWorld() { return mPhysicsWorld; }
+		const Physics::PhysicsWorld& GetPhysicsWorld() const { return mPhysicsWorld; }
 
 	private:
-		SAGE::Physics::PhysicsWorld mPhysicsWorld;
+		Physics::PhysicsWorld mPhysicsWorld;
 	};
 }

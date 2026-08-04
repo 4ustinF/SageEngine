@@ -8,7 +8,7 @@ namespace SAGE::RBPhysics
 	class RBPhysicsObject
 	{
 	public:
-		RBPhysicsObject(Collider* collider, float mass) :
+		RBPhysicsObject(Collider* collider, float mass = 0) :
 			mPosition(collider->GetCenter()),
 			mOldPosition(collider->GetCenter()),
 			mCollider(collider),
@@ -34,7 +34,11 @@ namespace SAGE::RBPhysics
 		void Integrate(float deltaTime);
 		void ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData);
 
+		// Getters
 		float GetMass() const { return mMass; }
+		float GetDrag() const { return mDrag; }
+		float GetAngularDrag() const { return mAngularDrag; }
+		bool GetUseGravity() const { return mUseGravity; }
 		bool GetIsStatic() const { return mMass <= 0.0f; }
 		const Math::Vector3& GetPosition() const { return mPosition; }
 		Math::Vector3 GetLocalPosition(const Math::Vector3& worldPos);
@@ -49,7 +53,11 @@ namespace SAGE::RBPhysics
 		float GetTangentialStiffness() const { return mTangentialStiffness; }
 		float GetTangentialDampening() const { return mTangentialDampening; }
 
-		void SetMass(float mass) { mMass = mass; } // TODO: Remove?
+		// Setters
+		void SetMass(float mass) { mMass = mass; }
+		void SetDrag(float drag) { mDrag = drag; }
+		void SetAngularDrag(float angularDrag) { mAngularDrag = angularDrag; }
+		void SetUseGravity(bool useGravity) { mUseGravity = useGravity; }
 		void SetAcceleration(const Math::Vector3& acceleration) { mAcceleration = acceleration; } // TODO: Remove?
 		void SetPosition(const Math::Vector3& position) { mPosition = position; }
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
@@ -73,6 +81,9 @@ namespace SAGE::RBPhysics
 	private:
 		float mMass = 1.0f;
 		float mInverseMass = 0.0f;
+		float mDrag = 0.0f;
+		float mAngularDrag = 0.05f;
+		bool mUseGravity = true;
 
 		Math::Vector3 mPosition = Math::Vector3::Zero;
 		Math::Vector3 mOldPosition = Math::Vector3::Zero;
@@ -92,7 +103,6 @@ namespace SAGE::RBPhysics
 		float mTangentialDampening = 0.85f;
 
 		Collider* mCollider;
-
 		Math::Vector3 QuatMulVec3(const Math::Vector3& vec, const Math::Matrix3& m); // Remove;
 	};
 }

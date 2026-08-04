@@ -111,7 +111,8 @@ void RigidBodyComponent::SetUseGravity(bool useGravity)
 
 void RigidBodyComponent::SetIsKinematic(bool isKinematic)
 {
-	mIsKinematic = isKinematic;
+	//mIsKinematic = isKinematic; // TODO: Implement kinematic behavior in physics engine. For now, just set to false.
+	mIsKinematic = false;
 }
 
 void RigidBodyComponent::SetConstraints(const Vector3Int& pos, const Vector3Int& rot)

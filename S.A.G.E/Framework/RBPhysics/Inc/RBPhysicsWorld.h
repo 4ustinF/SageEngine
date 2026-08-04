@@ -4,6 +4,13 @@
 
 namespace SAGE::RBPhysics
 {
+	enum class PhysicsObjectType
+	{
+		Dynamic,
+		Kinematic,
+		Static
+	};
+
 	class RBPhysicsWorld
 	{
 	public:
@@ -22,23 +29,22 @@ namespace SAGE::RBPhysics
 		void Clear();
 
 		void Update(float deltaTime);
-		void DebugDraw();
-		void DebugUI();
+		void DrawPhysicsObjects(bool fillShapes);
+		//void DebugUI();
 
-		void ShowDebugLines(bool showDebug) { mShowDebugLines = showDebug; }
-
-		int AddObject(const RBPhysicsObject& object);
+		int AddObject(const RBPhysicsObject& object, PhysicsObjectType type = PhysicsObjectType::Static);
+		bool RemoveObject(const RBPhysicsObject& object);
 
 		// TODO: These are temp please remove.
 		RBPhysicsObject& GetPhysicsObject(int index)
 		{
-			return mObjects[index];
+			return mDynamicObjects[index];
 		}
 
 		// TODO: These are temp please remove.
 		int GetObjectsCount() const
 		{
-			return static_cast<int>(mObjects.size());
+			return static_cast<int>(mDynamicObjects.size());
 		}
 
 		// TODO: These are temp please remove.
@@ -57,12 +63,12 @@ namespace SAGE::RBPhysics
 		void Simulate(float deltaTime);
 		void HandleCollisions();
 
-		std::vector<RBPhysicsObject> mObjects;
-		std::vector<RBPhysicsObject> mStaticObjects;
-
 		Settings mSettings;
-		bool mShowDebugLines = true;
-		bool mFillDebugShapes = false;
+
+		// TODO: Convert to map of PhysicsObjectType
+		std::vector<RBPhysicsObject> mDynamicObjects;	// Physics can affect the object.
+		//std::vector<RBPhysicsObject> mKinematicObjects; // Physics cannot affect the object. Like static but can move.
+		std::vector<RBPhysicsObject> mStaticObjects;	// Can't move.
 
 		void DetectCollisionWithDome(float deltaTime);
 		void ResolveCollisionWithDome(RBPhysicsObject& object, float deltaTime);

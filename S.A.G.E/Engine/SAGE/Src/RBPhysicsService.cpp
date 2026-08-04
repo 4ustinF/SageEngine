@@ -13,7 +13,6 @@ using namespace SAGE::RBPhysics;
 void RBPhysicsService::Initialize()
 {
 	SetServiceName("RBPhysics Service");
-	
 	mPhysicsWorld.Initialize();
 
 	////const Vector3 ballPos = Vector3(1.75f, 10.0f, 0.0f);
@@ -37,56 +36,20 @@ void RBPhysicsService::Terminate()
 void RBPhysicsService::Update(float deltaTime)
 {
 	mPhysicsWorld.Update(deltaTime);
-	//DebugInput();
 }
 
 void RBPhysicsService::Render()
 {
 	//SimpleDraw::AddSphere(Vector3(0.0f, 8.0f, 0.0f), 32, 32, 8, Colors::Blue); // Render Dome
 
-	mPhysicsWorld.DebugDraw(); // TODO: Move back to DebugUI
+	if (mRenderDebugUI)
+	{
+		mPhysicsWorld.DrawPhysicsObjects(mFillDebugShapes);
+	}
 }
 
 void RBPhysicsService::DebugUI()
 {
 	ImGui::Checkbox("Render Physics##RBPhysics", &mRenderDebugUI);
-	mPhysicsWorld.DebugUI();
-}
-
-void RBPhysicsService::DebugInput() // TODO: Remove.
-{
-	//RBPhysicsObject& physicsObject = mPhysicsWorld.GetPhysicsObject(0);
-
-	float force = 50.0f;
-	float torque = 1.0f;
-	auto inputSystem = Input::InputSystem::Get();
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD1)) // Torque in x axis
-	{
-		mPhysicsWorld.GetPhysicsObject(0).ApplyTorque(Vector3(torque, 0.0f, 0.0f));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD2)) // Torque in y axis
-	{
-		mPhysicsWorld.GetPhysicsObject(0).ApplyTorque(Vector3(0.0f, torque, 0.0f));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD3)) // Torque in z axis
-	{
-		mPhysicsWorld.GetPhysicsObject(0).ApplyTorque(Vector3(0.0f, 0.0f, torque));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD4)) // Force in x axis
-	{
-		mPhysicsWorld.GetPhysicsObject(0).ApplyForce(Vector3(force, 0.0f, 0.0f));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD5)) // Force in y axis
-	{
-		mPhysicsWorld.GetPhysicsObject(0).ApplyForce(Vector3(0.0f, force, 0.0f));
-	}
-
-	if (inputSystem->IsKeyDown(Input::KeyCode::NUMPAD6)) // Force in z axis
-	{
-		mPhysicsWorld.GetPhysicsObject(0).ApplyForce(Vector3(0.0f, 0.0f, force));
-	}
+	ImGui::Checkbox("Fill Debug Shapes##RBPhysics", &mFillDebugShapes);
 }

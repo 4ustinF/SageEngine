@@ -15,22 +15,14 @@ namespace SAGE
 		void Render() override;
 		void DebugUI() override;
 
-		void DebugInput(); // TODO: Remove
+		RBPhysics::RBPhysicsWorld& GetPhysicsWorld() { return mPhysicsWorld; } // TODO: Turn this service more into a wrapper for the physics world and not expose it directly.
 
-		// TODO: Game Objects will need to sub to this service and pass on there PhysicsObjectComp
-		// This comp will contain a physics object and do what it needs to accordingly.
-
-		// For now lets create a physics object here and just do a debug draw of its location.
-		// TODO: Remove
-		// TODO: When this is in the comp it should be a ptr
-		//SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject1;
-		//SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject2;
-
-		SAGE::RBPhysics::RBPhysicsWorld& GetPhysicsWorld() { return mPhysicsWorld; }
+		void SetRenderDebugUI(bool renderDebugUI) { mRenderDebugUI = renderDebugUI; }
+		void SetFillDebugShapes(bool fillDebugShapes) { mFillDebugShapes = fillDebugShapes; }
 
 	private:
-
-		SAGE::RBPhysics::RBPhysicsWorld mPhysicsWorld;
+		RBPhysics::RBPhysicsWorld mPhysicsWorld;
 		bool mRenderDebugUI = false;
+		bool mFillDebugShapes = false;
 	};
 }

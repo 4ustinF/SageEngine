@@ -39,7 +39,6 @@ namespace SAGE::RBPhysics
 		float GetDrag() const { return mDrag; }
 		float GetAngularDrag() const { return mAngularDrag; }
 		bool GetUseGravity() const { return mUseGravity; }
-		bool GetIsStatic() const { return mMass <= 0.0f; }
 		const Math::Vector3& GetPosition() const { return mPosition; }
 		Math::Vector3 GetLocalPosition(const Math::Vector3& worldPos);
 		Math::Vector3 GetWorldPosition(const Math::Vector3& localPos);

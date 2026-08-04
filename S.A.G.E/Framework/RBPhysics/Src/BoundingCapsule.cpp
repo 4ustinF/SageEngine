@@ -22,8 +22,3 @@ void BoundingCapsule::Transform(const Math::Vector3& translation)
 {
 	mCenter += translation;
 }
-
-Vector3 BoundingCapsule::GetClosestPoint(const Collider& otherCollider) const
-{
-	return mCenter - (Normalize(mCenter - otherCollider.GetCenter()) * mRadius);
-}

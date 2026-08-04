@@ -8,8 +8,42 @@
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
+namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(RigidBodyComponent, 100);
+
+void RigidBodyComponent::LoadComponentFromTemplate(const rj::Value& value)
+{
+	if (value.HasMember("Mass"))
+	{
+		SetMass(value["Mass"].GetFloat());
+	}
+
+	if (value.HasMember("Drag"))
+	{
+		SetDrag(value["Drag"].GetFloat());
+	}
+
+	if (value.HasMember("AngularDrag"))
+	{
+		SetAngularDrag(value["AngularDrag"].GetFloat());
+	}
+
+	if (value.HasMember("UseGravity"))
+	{
+		SetUseGravity(value["UseGravity"].GetBool());
+	}
+
+	if (value.HasMember("IsKinematic"))
+	{
+		SetIsKinematic(value["IsKinematic"].GetBool());
+	}
+}
+
+void RigidBodyComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
+{
+	// TODO:
+}
 
 void RigidBodyComponent::DebugUI()
 {

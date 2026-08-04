@@ -10,6 +10,10 @@ namespace SAGE
 		SET_TYPE_ID(ComponentId::RigidBody)
 		MEMORY_POOL_DECLARE
 
+		const char* GetCompName() override { return "Rigid Body Component"; }
+		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
+		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
+
 		void DebugUI() override;
 		void OnEnable() override;
 		void OnDisable() override;

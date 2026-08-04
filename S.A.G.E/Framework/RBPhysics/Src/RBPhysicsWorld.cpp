@@ -24,7 +24,7 @@ void RBPhysicsWorld::Update(float deltaTime)
 	Simulate(deltaTime);
 	HandleCollisions();
 
-	DetectCollisionWithDome(deltaTime);
+	//DetectCollisionWithDome(deltaTime);
 }
 
 void RBPhysicsWorld::DrawPhysicsObjects(bool fillShapes)
@@ -103,11 +103,6 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 {
 	for (RBPhysicsObject& object : mDynamicObjects)
 	{
-		if (object.GetIsStatic())
-		{
-			continue;
-		}
-
 		// Apply gravity to acceleration accumulator
 		Vector3 acceleration = object.GetAcceleration() + mSettings.gravity;
 		object.SetAcceleration(acceleration);

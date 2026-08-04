@@ -26,6 +26,7 @@ void GameState::Initialize()
 {
 	mCameraService = mGameWorld.AddService<CameraService>();
 	RenderService* renderService = mGameWorld.AddService<RenderService>();
+	RBPhysicsService* physicsService = mGameWorld.AddService<RBPhysicsService>();
 	mGameWorld.Initialize(1000);
 	mGameWorld.SetEditMode(true);
 

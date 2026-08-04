@@ -45,9 +45,6 @@ void RigidBodyComponent::DebugUI()
 			SetIsKinematic(isKinematic);
 		}
 
-		ImGui::Separator();
-
-		ImGui::Text("Constraints");
 		ImGui::Text("Freeze Position");
 		ImGui::SameLine();
 		if (ImGui::Checkbox("X##RBCompFreezePos", &mFreezePositionX))

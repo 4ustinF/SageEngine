@@ -24,6 +24,7 @@ namespace SAGE
 
 	protected:
 		TransformComponent* mTransformComponent = nullptr;
+		SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject = nullptr;
 		
 		bool mIsTrigger = false;
 		// TODO: Physics Material

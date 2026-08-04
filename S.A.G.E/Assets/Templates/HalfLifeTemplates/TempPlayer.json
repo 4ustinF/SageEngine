@@ -14,7 +14,8 @@
         0.8128,
         0.0
       ],
-      "Height": 1.625600
+      "Radius": 0.4,
+      "Height": 1.6256
     },
     "Rigid Body Component": {
     }

@@ -43,6 +43,7 @@ void BaseColliderComponent ::Initialize()
 void BaseColliderComponent ::Terminate()
 {
 	mTransformComponent = nullptr;
+	mPhysicsObject = nullptr;
 }
 
 const Math::Vector3 BaseColliderComponent::GetCenter() const 

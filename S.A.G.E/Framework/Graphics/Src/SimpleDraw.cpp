@@ -324,7 +324,7 @@ void SimpleDraw::AddFilledOBB(const Math::Vector3& center, const Math::Vector3& 
 void SimpleDraw::AddCapsule(const Math::Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Math::Quaternion& rotation, const Color& color)
 {
 	ringSegments = Max(4, ringSegments);
-	arcSegments = Max(4, arcSegments);
+	arcSegments = Max(2, arcSegments);
 	const float halfHeight = Max(0.05f, height * 0.5f - radius);
 
 	// Local-space capsule oriented along +Y, caps at +halfHeight / -halfHeight
@@ -417,6 +417,82 @@ void SimpleDraw::AddCapsule(const Math::Vector3& center, int ringSegments, int a
 	drawArc(botArcNegXY, arcSegments);
 	drawArc(botArcZY, arcSegments);
 	drawArc(botArcNegZY, arcSegments);
+}
+
+void SimpleDraw::AddFilledCapsule(const Math::Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Math::Quaternion& rotation, const Color& color)
+{
+	ringSegments = Max(4, ringSegments);
+	arcSegments = Max(2, arcSegments);
+
+	const float halfHeight = Max(0.05f, height * 0.5f - radius);
+	const Math::Matrix4 transform = Transform(center, rotation, Math::Vector3::One).GetMatrix4();
+
+	// Each ring runs around the capsule's local Y axis.
+	// Rings are stored from bottom to top.
+	std::vector<std::vector<Math::Vector3>> rings;
+	rings.reserve(arcSegments * 2);
+
+	auto createRing = [&rings, ringSegments, transform](float y, float ringRadius)
+	{
+		std::vector<Math::Vector3> ring(ringSegments);
+		for (int i = 0; i < ringSegments; ++i)
+		{
+			const float theta = static_cast<float>(i) / static_cast<float>(ringSegments) * Constants::TwoPi;
+			Math::Vector3 point(ringRadius * cosf(theta), y, ringRadius * sinf(theta));
+			ring[i] = Math::TransformCoord(point, transform);
+		}
+
+		rings.emplace_back(std::move(ring));
+	};
+
+	// Bottom hemisphere, starting near the bottom pole and ending
+	// at the bottom cylinder ring.
+	for (int arc = arcSegments - 1; arc >= 0; --arc)
+	{
+		const float angle = static_cast<float>(arc) / static_cast<float>(arcSegments) * Constants::HalfPi;
+		const float ringRadius = radius * cosf(angle);
+		const float y = -halfHeight - radius * sinf(angle);
+		createRing(y, ringRadius);
+	}
+
+	// Top hemisphere, starting at the top cylinder ring and ending
+	// near the top pole.
+	for (int arc = 0; arc < arcSegments; ++arc)
+	{
+		const float angle = static_cast<float>(arc) / static_cast<float>(arcSegments) * Constants::HalfPi;
+		const float ringRadius = radius * cosf(angle);
+		const float y = halfHeight + radius * sinf(angle);
+		createRing(y, ringRadius);
+	}
+
+	// Connect adjacent rings.
+	for (size_t ringIndex = 0; ringIndex + 1 < rings.size(); ++ringIndex)
+	{
+		const auto& lowerRing = rings[ringIndex];
+		const auto& upperRing = rings[ringIndex + 1];
+
+		for (int i = 0; i < ringSegments; ++i)
+		{
+			const int next = (i + 1) % ringSegments;
+			sInstance->AddFace(lowerRing[i], upperRing[i], upperRing[next], color);
+			sInstance->AddFace(lowerRing[i], upperRing[next], lowerRing[next], color);
+		}
+	}
+
+	// Transform the two capsule poles.
+	Vector3 bottomPole = TransformCoord({ 0.0f, -halfHeight - radius, 0.0f }, transform);
+	Vector3 topPole = TransformCoord({ 0.0f, halfHeight + radius, 0.0f }, transform);
+
+	const auto& bottomRing = rings.front();
+	const auto& topRing = rings.back();
+
+	// Close the hemisphere poles using triangle fans.
+	for (int i = 0; i < ringSegments; ++i)
+	{
+		const int next = (i + 1) % ringSegments;
+		sInstance->AddFace(bottomPole, bottomRing[i], bottomRing[next], color);
+		sInstance->AddFace(topPole, topRing[next], topRing[i], color);
+	}
 }
 
 //void SimpleDraw::AddCapsule(const Math::Vector3& pointA, const Math::Vector3& pointB, float radius, const Color& color)

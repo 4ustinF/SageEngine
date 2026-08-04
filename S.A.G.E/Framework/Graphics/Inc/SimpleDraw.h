@@ -28,7 +28,7 @@ namespace SAGE::Graphics
 		void AddFilledOBB(const Math::Vector3& center, const Math::Vector3& extend, const Math::Quaternion& rotation, const Color color);
 
 		void AddCapsule(const Math::Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Math::Quaternion& rotation, const Color& color);
-		//void AddFilledCapsule(); // TODO: 
+		void AddFilledCapsule(const Math::Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Math::Quaternion& rotation, const Color& color);
 
 		void AddCylinder(const Math::Cylinder& cylinder, Color color, bool hasLid = true);
 		void AddCylinder(Math::Vector3 center, int slices, int rings, float radius, float height, Color color, bool hasLid = true);

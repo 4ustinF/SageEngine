@@ -56,9 +56,9 @@ void CapsuleColliderComponent ::DebugUI()
 		if (ImGui::DragFloat("Height##BoxColliderComponent", &mHeight, 0.1f)) { SetHeight(mHeight); }
 	}
 
-	if (mDebugFill) // TODO: 
+	if (mDebugFill)
 	{
-		SimpleDraw::AddCapsule(GetCenter(), 32, 16, mRadius, mHeight, mTransformComponent->GetRotation(), mDebugColor);
+		SimpleDraw::AddFilledCapsule(GetCenter(), 32, 16, mRadius, mHeight, mTransformComponent->GetRotation(), mDebugColor);
 	}
 	else
 	{

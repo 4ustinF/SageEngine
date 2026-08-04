@@ -10,7 +10,7 @@ void BoundingCapsule::DebugDraw(SAGE::Math::Quaternion orientation, bool fillDeb
 {
 	if (fillDebugShapes)
 	{
-		SimpleDraw::AddCapsule(mCenter, 32, 16, mRadius, mHeight, mOrientation, mDebugColor); // TODO:
+		SimpleDraw::AddFilledCapsule(mCenter, 32, 16, mRadius, mHeight, mOrientation, mDebugColor);
 	}
 	else
 	{

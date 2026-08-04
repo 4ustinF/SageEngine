@@ -2,6 +2,7 @@
 #include "Collider.h"
 
 #include "BoundingBox.h"
+#include "BoundingCapsule.h"
 #include "BoundingSphere.h"
 #include "IntersectData.h"
 
@@ -18,6 +19,10 @@ IntersectData Collider::Intersect(const Collider& other) const
 		if (other.GetType() == TYPE_SPHERE)
 		{
 			return self->IntersectBoundingSphere((BoundingSphere&)other); // TODO: Better cast?
+		}
+		else if (other.GetType() == TYPE_CAPSULE)
+		{
+			//return self->IntersectBoundingSphere((BoundingCapsule&)other); // TODO: Better cast?
 		}
 		else if (other.GetType() == TYPE_BOX)
 		{

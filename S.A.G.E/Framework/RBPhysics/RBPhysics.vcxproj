@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\BoundingBox.h" />
+    <ClInclude Include="Inc\BoundingCapsule.h" />
     <ClInclude Include="Inc\BoundingSphere.h" />
     <ClInclude Include="Inc\Collider.h" />
     <ClInclude Include="Inc\Common.h" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\BoundingBox.cpp" />
+    <ClCompile Include="Src\BoundingCapsule.cpp" />
     <ClCompile Include="Src\BoundingSphere.cpp" />
     <ClCompile Include="Src\Collider.cpp" />
     <ClCompile Include="Src\RBPhysicsObject.cpp" />

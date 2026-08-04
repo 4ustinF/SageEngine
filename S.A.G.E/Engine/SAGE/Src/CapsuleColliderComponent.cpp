@@ -2,11 +2,13 @@
 #include "CapsuleColliderComponent.h"
 
 #include "GameObject.h"
+#include "RBPhysicsService.h"
 #include "TransformComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
+using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(CapsuleColliderComponent, 200);
@@ -62,6 +64,12 @@ void CapsuleColliderComponent ::DebugUI()
 	{
 		SimpleDraw::AddCapsule(GetCenter(), 32, 16, mRadius, mHeight, mTransformComponent->GetRotation(), mDebugColor);
 	}
+}
+
+void CapsuleColliderComponent::OnEnable()
+{
+	mPhysicsObject = new RBPhysicsObject(new BoundingCapsule(GetCenter(), mRadius, mHeight));
+	BaseColliderComponent::OnEnable();
 }
 
 void CapsuleColliderComponent::SetRadius(float radius) 

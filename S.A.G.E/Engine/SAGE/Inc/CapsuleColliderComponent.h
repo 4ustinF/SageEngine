@@ -19,6 +19,8 @@ namespace SAGE
 		void Terminate() override;
 		void DebugUI() override;
 
+		void OnEnable() override;
+
 		// Getters
 		float GetRadius() const { return mRadius; }
 		float GetHeight() const { return mHeight; }

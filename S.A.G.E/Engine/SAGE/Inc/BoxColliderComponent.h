@@ -20,7 +20,6 @@ namespace SAGE
 		void DebugUI() override;
 
 		void OnEnable() override;
-		void OnDisable() override;
 
 		// Getters
 		const Math::Vector3& GetSize() const { return mSize; }

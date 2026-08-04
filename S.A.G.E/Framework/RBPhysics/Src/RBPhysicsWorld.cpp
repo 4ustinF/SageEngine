@@ -75,7 +75,7 @@ int RBPhysicsWorld::AddObject(const RBPhysicsObject& object, PhysicsObjectType t
 		return static_cast<int>(mStaticObjects.size()) - 1;
 	}
 
-	return -1; // TODO: This func does not need to return an index. Remove this. 
+	return -1; // TODO: This function does not need to return an index. Remove this. 
 	// TODO: Maybe return the object pointer instead. Or return a bool for success/failure. Or return nothing.
 }
 

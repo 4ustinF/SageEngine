@@ -12,6 +12,7 @@ namespace SAGE::RBPhysics
 		enum
 		{
 			TYPE_BOX,
+			TYPE_CAPSULE,
 			TYPE_SPHERE,
 
 			TYPE_SIZE,

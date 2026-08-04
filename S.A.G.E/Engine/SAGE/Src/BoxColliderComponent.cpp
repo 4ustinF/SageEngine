@@ -69,11 +69,6 @@ void BoxColliderComponent::OnEnable()
 	BaseColliderComponent::OnEnable();
 }
 
-void BoxColliderComponent::OnDisable()
-{
-	BaseColliderComponent::OnDisable();
-}
-
 void BoxColliderComponent::SetSize(const Math::Vector3& size)
 { 
 	mSize.x = Max(0.1f, size.x);

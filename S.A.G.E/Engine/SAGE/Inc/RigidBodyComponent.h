@@ -15,6 +15,10 @@ namespace SAGE
 		void OnDisable() override;
 
 		// Getters
+		float GetMass() const { return mMass; }
+		float GetDrag() const { return mDrag; }
+		float GetAngularDrag() const { return mAngularDrag; }
+		bool GetUseGravity() const { return mUseGravity; }
 		bool IsKinematic() const;
 
 		// Setters

@@ -2,3 +2,7 @@ D:\AzureDevOps\S.A.G.E\External\DirectXTK\Audio\Bin\Desktop_2019\x64\Debug\Direc
 C:\Users\LCV2032588\Documents\GitHub\SageEngine\S.A.G.E\External\DirectXTK\Audio\Bin\Desktop_2019\x64\Debug\DirectXTKAudioWin8.lib
 D:\GitHub\SageEngine\S.A.G.E\External\DirectXTK\Audio\Bin\Desktop_2019\x64\Debug\DirectXTKAudioWin8.lib
 D:\GitHubFiles\SageEngine\S.A.G.E\External\DirectXTK\Audio\Bin\Desktop_2019\x64\Debug\DirectXTKAudioWin8.lib
+D:\GitHubFiles\SageEngine\S.A.G.E\External\DirectXTK\Audio\Bin\Desktop_2019\x64\Debug\DirectXT.CBFB017C.Up2Date
+D:\GitHubFiles\SageEngine\S.A.G.E\External\DirectXTK\Audio\Bin\Desktop_2019\x64\Debug\xapobaseredist.pdb
+D:\GitHubFiles\SageEngine\S.A.G.E\External\DirectXTK\Audio\Bin\Desktop_2019\x64\Debug\xaudio2_9redist.pdb
+D:\GitHubFiles\SageEngine\S.A.G.E\External\DirectXTK\Audio\Bin\Desktop_2019\x64\Debug\xaudio2_9redist.dll

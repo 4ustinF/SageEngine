@@ -1,2 +1,2 @@
 ﻿  Main.cpp
-  ModelImporter.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ModelImporter.exe
+LINK : fatal error LNK1104: cannot open file 'D:\GitHubFiles\SageEngine\S.A.G.E\Tools\ModelImporter\..\..\External\assimp-5.0.1\Lib\assimp-vc143-mtd.lib'

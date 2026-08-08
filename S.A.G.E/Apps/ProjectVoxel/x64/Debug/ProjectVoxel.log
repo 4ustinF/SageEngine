@@ -1,13 +1,39 @@
 ﻿  AnimalComponent.cpp
   CameraControllerComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Apps\ProjectVoxel\AnimalComponent.cpp(58,43): error C2039: 'position': is not a member of 'SAGE::TransformComponent'
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\TransformComponent.h(13,8):
+      see declaration of 'SAGE::TransformComponent'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Apps\ProjectVoxel\AnimalComponent.cpp(83,44): error C2039: 'position': is not a member of 'SAGE::TransformComponent'
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\TransformComponent.h(13,8):
+      see declaration of 'SAGE::TransformComponent'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Apps\ProjectVoxel\AnimalComponent.cpp(92,68): error C2039: 'position': is not a member of 'SAGE::TransformComponent'
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\TransformComponent.h(13,8):
+      see declaration of 'SAGE::TransformComponent'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Apps\ProjectVoxel\AnimalComponent.cpp(103,69): error C2039: 'position': is not a member of 'SAGE::TransformComponent'
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\TransformComponent.h(13,8):
+      see declaration of 'SAGE::TransformComponent'
+  
   ChunkMeshCreator.cpp
   CloudService.cpp
   GameState.cpp
   MobService.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Apps\ProjectVoxel\MobService.cpp(30,67): error C2039: 'position': is not a member of 'SAGE::TransformComponent'
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\TransformComponent.h(13,8):
+      see declaration of 'SAGE::TransformComponent'
+  
   PlayerControllerComponent.cpp
+D:\GitHubFiles\SageEngine\S.A.G.E\Apps\ProjectVoxel\PlayerControllerComponent.cpp(177,22): error C2039: 'position': is not a member of 'SAGE::TransformComponent'
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\TransformComponent.h(13,8):
+      see declaration of 'SAGE::TransformComponent'
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Apps\ProjectVoxel\PlayerControllerComponent.cpp(285,65): error C2039: 'position': is not a member of 'SAGE::TransformComponent'
+      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\TransformComponent.h(13,8):
+      see declaration of 'SAGE::TransformComponent'
+  
   PlayerUIService.cpp
   WinMain.cpp
   WorldService.cpp
   Generating Code...
-     Creating library D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.lib and object D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exp
-  ProjectVoxel.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\ProjectVoxel.exe

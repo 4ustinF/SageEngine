@@ -7,7 +7,7 @@ using namespace SAGE;
 using namespace SAGE::Core;
 using namespace SAGE::Graphics;
 using namespace SAGE::Input;
-using namespace SAGE::Coroutine;
+//using namespace SAGE::Coroutine;
 
 void App::ChangeState(const std::string& stateName)
 {
@@ -38,7 +38,7 @@ void App::Run(AppConfig appConfig)
 	AudioSystem::StaticInitialize();
 	SoundEffectManager::StaticInitialize(appConfig.audioRoot.relative_path().string().c_str());
 	Font::StaticInitialize();
-	CoroutineSystem::StaticInitialize();
+	//CoroutineSystem::StaticInitialize();
 
 	LOG("App -- Initializing app state...");
 	ASSERT(mCurrentState, "App -- No app state found");
@@ -76,7 +76,7 @@ void App::Run(AppConfig appConfig)
 		mCurrentState->Update(deltaTime);
 
 		// Coroutine
-		CoroutineSystem::Get()->Update();
+		//CoroutineSystem::Get()->Update();
 
 		// Other
 		auto graphicsSystem = GraphicsSystem::Get();
@@ -97,7 +97,7 @@ void App::Run(AppConfig appConfig)
 	mCurrentState->Terminate();
 
 	LOG("App -- Shutting down engine systems...");
-	CoroutineSystem::StaticTerminate();
+	//CoroutineSystem::StaticTerminate();
 	Font::StaticTerminate();
 	SoundEffectManager::StaticTerminate();
 	AudioSystem::StaticTerminate();

@@ -22,11 +22,14 @@
     <ClInclude Include="Inc\AnimatorComponent.h" />
     <ClInclude Include="Inc\App.h" />
     <ClInclude Include="Inc\AppState.h" />
+    <ClInclude Include="Inc\BaseColliderComponent.h" />
+    <ClInclude Include="Inc\BoxColliderComponent.h" />
     <ClInclude Include="Inc\BPhysicsComponent.h" />
     <ClInclude Include="Inc\BPhysicsService.h" />
     <ClInclude Include="Inc\CameraComponent.h" />
     <ClInclude Include="Inc\CameraService.h" />
     <ClInclude Include="Inc\CameraUtil.h" />
+    <ClInclude Include="Inc\CapsuleColliderComponent.h" />
     <ClInclude Include="Inc\ColliderComponent.h" />
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\Component.h" />
@@ -47,6 +50,7 @@
     <ClInclude Include="Inc\RBPhysicsService.h" />
     <ClInclude Include="Inc\RenderService.h" />
     <ClInclude Include="Inc\RigidBodyComponent.h" />
+    <ClInclude Include="Inc\RigidBodyComponentOld.h" />
     <ClInclude Include="Inc\SAGE.h" />
     <ClInclude Include="Inc\SelectionBoxComponent.h" />
     <ClInclude Include="Inc\Service.h" />
@@ -60,11 +64,14 @@
   <ItemGroup>
     <ClCompile Include="Src\AnimatorComponent.cpp" />
     <ClCompile Include="Src\App.cpp" />
+    <ClCompile Include="Src\BaseColliderComponent.cpp" />
+    <ClCompile Include="Src\BoxColliderComponent.cpp" />
     <ClCompile Include="Src\BPhysicsComponent.cpp" />
     <ClCompile Include="Src\BPhysicsService.cpp" />
     <ClCompile Include="Src\CameraComponent.cpp" />
     <ClCompile Include="Src\CameraService.cpp" />
     <ClCompile Include="Src\CameraUtil.cpp" />
+    <ClCompile Include="Src\CapsuleColliderComponent.cpp" />
     <ClCompile Include="Src\ColliderComponent.cpp" />
     <ClCompile Include="Src\Component.cpp" />
     <ClCompile Include="Src\FollowCameraControllerComponent.cpp" />
@@ -89,6 +96,7 @@
     <ClCompile Include="Src\RBPhysicsService.cpp" />
     <ClCompile Include="Src\RenderService.cpp" />
     <ClCompile Include="Src\RigidBodyComponent.cpp" />
+    <ClCompile Include="Src\RigidBodyComponentOld.cpp" />
     <ClCompile Include="Src\SAGE.cpp" />
     <ClCompile Include="Src\SelectionBoxComponent.cpp" />
     <ClCompile Include="Src\SpawnerComponent.cpp" />
@@ -105,9 +113,6 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Core\Core.vcxproj">
       <Project>{8729acc6-dac0-4d68-9c96-3b9fe71611c9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Coroutine\Coroutine.vcxproj">
-      <Project>{90e08840-2b93-4c43-b366-f0ec8836a8f9}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Graphics\Graphics.vcxproj">
       <Project>{6d757bdd-5d81-4af5-b761-67c06ff33880}</Project>
@@ -139,26 +144,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

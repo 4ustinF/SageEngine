@@ -1,7 +1,1 @@
-﻿  pch.cpp
-  Matrix4Test.cpp
-  QuaternionTest.cpp
-  Vector3Test.cpp
-  Generating Code...
-     Creating library D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\MathTest.lib and object D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\MathTest.exp
-  MathTest.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\MathTest.dll
+﻿  MathTest.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\MathTest.dll

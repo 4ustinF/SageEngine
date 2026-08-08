@@ -18,7 +18,6 @@ D:\GitHubFiles\SageEngine\S.A.G.E\Tools\OfflineConverter\bin\Debug\OfflineConver
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\OfflineConverter\bin\Debug\OfflineConverter.exe
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\OfflineConverter\bin\Debug\OfflineConverter.pdb
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\OfflineConverter\obj\Debug\OfflineConverter.csproj.AssemblyReference.cache
-D:\GitHubFiles\SageEngine\S.A.G.E\Tools\OfflineConverter\obj\Debug\OfflineConverter.exe.config
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\OfflineConverter\obj\Debug\MainWindow.g.cs
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\OfflineConverter\obj\Debug\App.g.cs
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\OfflineConverter\obj\Debug\OfflineConverter_MarkupCompile.cache

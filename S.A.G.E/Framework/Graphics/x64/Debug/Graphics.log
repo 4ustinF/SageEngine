@@ -1,6 +1,2 @@
-﻿  Animator.cpp
-  Graphics.cpp
-  ShadowEffect.cpp
-  StandardEffect.cpp
-  Generating Code...
+﻿  GlassEffect.cpp
   Graphics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\Graphics.lib

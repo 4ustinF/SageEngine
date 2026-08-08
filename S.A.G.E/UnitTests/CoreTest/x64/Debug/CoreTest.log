@@ -1,6 +1,1 @@
-﻿  pch.cpp
-  BlockAllocatorTest.cpp
-  TypedAllocatorTest.cpp
-  Generating Code...
-     Creating library D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\CoreTest.lib and object D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\CoreTest.exp
-  CoreTest.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\CoreTest.dll
+﻿  CoreTest.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\CoreTest.dll

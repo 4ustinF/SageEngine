@@ -1,18 +1,4 @@
 ﻿  GameState.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
-  (compiling source file 'GameState.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
-  (compiling source file 'GameState.cpp')
-      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
-      see declaration of 'SAGE'
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
-  (compiling source file 'GameState.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'GameState.cpp')
-  
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(30,26): error C2061: syntax error: identifier 'TypedConstantBuffer'
   (compiling source file 'GameState.cpp')
   
@@ -28,31 +14,31 @@ D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(33,25): error
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,18): error C3646: 'mTransformBuffer': unknown override specifier
   (compiling source file 'GameState.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,34): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'GameState.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,17): error C3646: 'mMaterialBuffer': unknown override specifier
   (compiling source file 'GameState.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'GameState.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,14): error C3646: 'mLightBuffer': unknown override specifier
   (compiling source file 'GameState.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'GameState.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,17): error C3646: 'mSettingsBuffer': unknown override specifier
   (compiling source file 'GameState.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'GameState.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,19): error C3646: 'mDirectionalLight': unknown override specifier
   (compiling source file 'GameState.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'GameState.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(13,2): error C2065: 'mDirectionalLight': undeclared identifier
@@ -107,60 +93,46 @@ D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.cpp(118,10): er
       while trying to match the argument list '(const char [16])'
   
   WinMain.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,9): error C3083: 'RBPhysics': the symbol to the left of a '::' must be a type
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,20): error C2039: 'PhysicsWorld': is not a member of 'SAGE'
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
-      D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(5,11):
-      see declaration of 'SAGE'
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,33): error C3646: 'mPhysicsWorld': unknown override specifier
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Engine\SAGE\Inc\RBPhysicsService.h(19,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
-  
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(30,26): error C2061: syntax error: identifier 'TypedConstantBuffer'
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+  (compiling source file 'WinMain.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(31,25): error C2061: syntax error: identifier 'TypedConstantBuffer'
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+  (compiling source file 'WinMain.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(32,22): error C2061: syntax error: identifier 'TypedConstantBuffer'
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+  (compiling source file 'WinMain.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(33,25): error C2061: syntax error: identifier 'TypedConstantBuffer'
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+  (compiling source file 'WinMain.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,18): error C3646: 'mTransformBuffer': unknown override specifier
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+  (compiling source file 'WinMain.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,34): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(35,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'WinMain.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,17): error C3646: 'mMaterialBuffer': unknown override specifier
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+  (compiling source file 'WinMain.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(36,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'WinMain.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,14): error C3646: 'mLightBuffer': unknown override specifier
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+  (compiling source file 'WinMain.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(37,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'WinMain.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,17): error C3646: 'mSettingsBuffer': unknown override specifier
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+  (compiling source file 'WinMain.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(38,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'WinMain.cpp')
   
 D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,19): error C3646: 'mDirectionalLight': unknown override specifier
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+  (compiling source file 'WinMain.cpp')
   
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file '../../VGP330/08_HelloEarth/WinMain.cpp')
+D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\08_HelloEarth\GameState.h(50,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'WinMain.cpp')
   
   Generating Code...

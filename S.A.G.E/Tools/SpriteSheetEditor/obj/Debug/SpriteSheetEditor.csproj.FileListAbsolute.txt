@@ -47,7 +47,6 @@ D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\bin\Debug\SpriteSheetE
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\bin\Debug\SpriteSheetEditor.exe
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\bin\Debug\SpriteSheetEditor.pdb
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\obj\Debug\SpriteSheetEditor.csproj.AssemblyReference.cache
-D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\obj\Debug\SpriteSheetEditor.exe.config
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\obj\Debug\Animation.g.cs
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\obj\Debug\CreateWindow.g.cs
 D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\obj\Debug\MainWindow.g.cs

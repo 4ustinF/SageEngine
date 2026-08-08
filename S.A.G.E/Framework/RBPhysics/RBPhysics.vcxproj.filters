@@ -36,6 +36,7 @@
     <ClInclude Include="Inc\BoundingBox.h">
       <Filter>Inc</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\BoundingCapsule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -56,5 +57,6 @@
     <ClCompile Include="Src\BoundingBox.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="Src\BoundingCapsule.cpp" />
   </ItemGroup>
 </Project>

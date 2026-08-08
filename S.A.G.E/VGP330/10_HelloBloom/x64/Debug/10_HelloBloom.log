@@ -1,5 +1,1 @@
-﻿  GameState.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\VGP330\10_HelloBloom\GameState.cpp(31,41): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  WinMain.cpp
-  Generating Code...
-  10_HelloBloom.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\10_HelloBloom.exe
+﻿  10_HelloBloom.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\10_HelloBloom.exe

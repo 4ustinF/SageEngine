@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\AzureDevOps\S.A.G.E\Tools\SpriteSheetEditor\obj\Debug\
+D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\obj\Debug\
 SpriteSheetEditor
 none
 false
 DEBUG;TRACE
-D:\AzureDevOps\S.A.G.E\Tools\SpriteSheetEditor\App.xaml
+D:\GitHubFiles\SageEngine\S.A.G.E\Tools\SpriteSheetEditor\App.xaml
 41165853355
 
 101967378863
-16-1561083770
+151937372271
 Animation.xaml;CreateWindow.xaml;MainWindow.xaml;StripWindow.xaml;
 
 False

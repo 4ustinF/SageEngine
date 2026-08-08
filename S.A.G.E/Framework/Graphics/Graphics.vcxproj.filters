@@ -261,6 +261,9 @@
     <ClInclude Include="Inc\UIButton.h">
       <Filter>Inc\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\GlassEffect.h">
+      <Filter>Inc\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\GraphicsSystem.cpp">
@@ -397,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="Src\Graphics.cpp">
       <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GlassEffect.cpp">
+      <Filter>Src\Effect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

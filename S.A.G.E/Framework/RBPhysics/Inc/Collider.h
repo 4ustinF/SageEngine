@@ -9,7 +9,7 @@ namespace SAGE::RBPhysics
 	class Collider
 	{
 	public:
-		enum
+		enum ColliderType
 		{
 			TYPE_BOX,
 			TYPE_CAPSULE,
@@ -18,7 +18,7 @@ namespace SAGE::RBPhysics
 			TYPE_SIZE,
 		};
 
-		Collider(int type)
+		Collider(ColliderType type)
 			: mType(type)
 		{
 		}
@@ -30,7 +30,7 @@ namespace SAGE::RBPhysics
 		Math::Vector3 GetCenter() const { return mCenter; }
 		const SAGE::Math::Quaternion& GetOrientation() const { return mOrientation; }
 
-		int GetType() const { return mType; }
+		ColliderType GetType() const { return mType; }
 		
 		// Reference Counter
 		int GetReferenceCount() { return mRefCount; }
@@ -45,7 +45,7 @@ namespace SAGE::RBPhysics
 		SAGE::Math::Quaternion mOrientation = SAGE::Math::Quaternion::Identity;
 
 	private:
-		int mType;
+		ColliderType mType;
 		int mRefCount = 0;
 
 	};

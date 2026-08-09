@@ -20,7 +20,7 @@ namespace SAGE::RBPhysics
 			float drag = 0.0f;
 			float maxAirdrag = 1.0f;
 			float airDragCoeficient = 0.05f;
-			float bounceCoeficient = 0.5f; // 0 = no bounce, 1 = perfect bounce
+			float bounceCoeficient = 0.0f; // 0 = no bounce, 1 = perfect bounce = restitution
 		};
 
 		RBPhysicsWorld() = default;

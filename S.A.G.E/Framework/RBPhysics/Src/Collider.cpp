@@ -16,22 +16,30 @@ IntersectData Collider::Intersect(const Collider& other) const
 	{
 		BoundingSphere* self = (BoundingSphere*)this; // TODO: Safer cast?
 
-		if (other.GetType() == TYPE_SPHERE)
-		{
-			return self->IntersectBoundingSphere((BoundingSphere&)other); // TODO: Better cast?
-		}
-		else if (other.GetType() == TYPE_CAPSULE)
-		{
-			//return self->IntersectBoundingSphere((BoundingCapsule&)other); // TODO: Better cast?
-		}
-		else if (other.GetType() == TYPE_BOX)
+		if (other.GetType() == ColliderType::TYPE_BOX)
 		{
 			return self->IntersectBoundingSphere((BoundingBox&)other); // TODO: Better cast?
 		}
+		else if (other.GetType() == ColliderType::TYPE_CAPSULE)
+		{
+			//return self->IntersectBoundingSphere((BoundingCapsule&)other); // TODO: Better cast?
+		}
+		else if (other.GetType() == ColliderType::TYPE_SPHERE)
+		{
+			return self->IntersectBoundingSphere((BoundingSphere&)other); // TODO: Better cast?
+		}
 	}
-	else if (mType == TYPE_BOX)
+	else if (mType == ColliderType::TYPE_BOX)
 	{
 		// TODO: 
+	}
+	else if (mType == ColliderType::TYPE_CAPSULE)
+	{
+		BoundingCapsule* self = (BoundingCapsule*)this; // TODO: Safer cast?
+		if (other.GetType() == ColliderType::TYPE_BOX)
+		{
+			return self->IntersectBoundingCapsule((BoundingBox&)other); // TODO: Better cast?
+		}
 	}
 
 	return IntersectData(); // TODO: Should never reach this add error logs if we do.

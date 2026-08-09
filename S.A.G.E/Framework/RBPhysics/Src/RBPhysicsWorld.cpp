@@ -101,29 +101,36 @@ bool  RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
 
 void RBPhysicsWorld::Simulate(float deltaTime)
 {
+	//for (RBPhysicsObject& object : mDynamicObjects)
+	//{
+	//	// Apply gravity to acceleration accumulator
+	//	Vector3 acceleration = object.GetAcceleration() + mSettings.gravity;
+	//	object.SetAcceleration(acceleration);
+
+	//	// Compute simple air drag (force)
+	//	Vector3 dragForce = -object.GetVelocity() * mSettings.airDragCoeficient * 0.5f;
+	//	float magnitude = Magnitude(dragForce);
+
+	//	if (magnitude > 0.0f)
+	//	{
+	//		if (magnitude > mSettings.maxAirdrag)
+	//		{
+	//			dragForce /= magnitude;
+	//			dragForce *= mSettings.maxAirdrag;
+	//		}
+
+	//		// Apply drag as a force (Integrate will use acceleration)
+	//		object.ApplyDrag(object.GetVelocity(), dragForce);
+	//	}
+
+	//	// Integrate linear and angular motion (RBPhysicsObject::Integrate clears accumulators)
+	//	object.Integrate(deltaTime);
+	//}
+
 	for (RBPhysicsObject& object : mDynamicObjects)
 	{
-		// Apply gravity to acceleration accumulator
-		Vector3 acceleration = object.GetAcceleration() + mSettings.gravity;
-		object.SetAcceleration(acceleration);
-
-		// Compute simple air drag (force)
-		Vector3 dragForce = -object.GetVelocity() * mSettings.airDragCoeficient * 0.5f;
-		float magnitude = Magnitude(dragForce);
-
-		if (magnitude > 0.0f)
-		{
-			if (magnitude > mSettings.maxAirdrag)
-			{
-				dragForce /= magnitude;
-				dragForce *= mSettings.maxAirdrag;
-			}
-
-			// Apply drag as a force (Integrate will use acceleration)
-			object.ApplyDrag(object.GetVelocity(), dragForce);
-		}
-
-		// Integrate linear and angular motion (RBPhysicsObject::Integrate clears accumulators)
+		object.SetVelocity(object.GetVelocity() + (mSettings.gravity * deltaTime));
+		object.SetAcceleration(Vector3::Zero);
 		object.Integrate(deltaTime);
 	}
 }
@@ -187,6 +194,40 @@ void RBPhysicsWorld::HandleCollisions()
 	}
 
 	// Static collision
+	//for (RBPhysicsObject& primaryObject : mDynamicObjects)
+	//{
+	//	for (RBPhysicsObject& staticObject : mStaticObjects)
+	//	{
+	//		IntersectData intersectData = primaryObject.GetCollider().Intersect(staticObject.GetCollider());
+	//		if (intersectData.GetDoesIntersect())
+	//		{
+	//			//primaryObject.ResolveCollision(staticObject, intersectData);
+
+	//			const Vector3 normal = intersectData.GetNormal();
+	//			primaryObject.SetPosition(primaryObject.GetPosition() + normal * intersectData.GetPenetration());
+
+	//			// If they both can move - Heavier objects move less
+	//			const float invMass = 1.0f / primaryObject.GetMass();
+
+	//			// Velocity
+	//			const float velAlongNormal = Dot(primaryObject.GetVelocity(), normal); // Velocity along the collision normal
+	//			if (velAlongNormal > 0.0f) // If they're already separating:
+	//			{
+	//				continue;
+	//			}
+
+	//			// Impulse magnitude:
+	//			const float ImpulseMagnitude = -(1.0f + mSettings.bounceCoeficient) * velAlongNormal / invMass;
+
+	//			// Impulse vector:
+	//			const Vector3 impulse = ImpulseMagnitude * normal;
+
+	//			//Apply:
+	//			primaryObject.SetVelocity(primaryObject.GetVelocity() + impulse * invMass);
+	//		}
+	//	}
+	//}
+
 	for (RBPhysicsObject& primaryObject : mDynamicObjects)
 	{
 		for (RBPhysicsObject& staticObject : mStaticObjects)
@@ -194,29 +235,24 @@ void RBPhysicsWorld::HandleCollisions()
 			IntersectData intersectData = primaryObject.GetCollider().Intersect(staticObject.GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				//primaryObject.ResolveCollision(staticObject, intersectData);
+				//Math::Vector3 mNormal = Math::Vector3::Zero;
+				//Math::Vector3 mContactPoint = Math::Vector3::Zero;
+				//float mPenetration = 0.0f;
 
-				const Vector3 normal = intersectData.GetNormal();
-				primaryObject.SetPosition(primaryObject.GetPosition() + normal * intersectData.GetPenetration());
+				const Vector3 newPos = primaryObject.GetPosition() + intersectData.GetNormal() * (intersectData.GetPenetration()); // * 0.8f); = Baumgarte stabilization
+				primaryObject.SetPosition(newPos);
 
-				// If they both can move - Heavier objects move less
-				const float invMass = 1.0f / primaryObject.GetMass();
+				// 2. Velocity response
+				Vector3 velocity = primaryObject.GetVelocity();
+				float vn = Dot(velocity, intersectData.GetNormal());
 
-				// Velocity
-				const float velAlongNormal = Dot(primaryObject.GetVelocity(), normal); // Velocity along the collision normal
-				if (velAlongNormal > 0.0f) // If they're already separating:
+				if (vn < 0.0f)
 				{
-					continue;
+					Vector3 newVelocity = velocity - (1.0f + mSettings.bounceCoeficient) * vn * intersectData.GetNormal();
+					primaryObject.SetVelocity(newVelocity);
 				}
 
-				// Impulse magnitude:
-				const float ImpulseMagnitude = -(1.0f + mSettings.bounceCoeficient) * velAlongNormal / invMass;
-
-				// Impulse vector:
-				const Vector3 impulse = ImpulseMagnitude * normal;
-
-				//Apply:
-				primaryObject.SetVelocity(primaryObject.GetVelocity() + impulse * invMass);
+				//primaryObject.SetVelocity(Vector3::Zero);
 			}
 		}
 	}

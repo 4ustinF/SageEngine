@@ -106,4 +106,3 @@ IntersectData BoundingSphere::IntersectBoundingSphere(const BoundingBox& other)/
 	const Vector3 normal = delta / dist;
 	return IntersectData(true, normal, {}, penetration);
 }
-

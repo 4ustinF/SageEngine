@@ -49,6 +49,9 @@ namespace SAGE::Math
 	template <class T>
 	constexpr T Sqr(T value) { return value * value; }
 
+	template <class T>
+	constexpr T Sqrt(T value) { return std::sqrt(value); }
+
 	//Vector2
 	#pragma region ---Vector2---
 	inline float Dot(const Vector2& a, const Vector2& b) { return (a.x * b.x) + (a.y * b.y); }

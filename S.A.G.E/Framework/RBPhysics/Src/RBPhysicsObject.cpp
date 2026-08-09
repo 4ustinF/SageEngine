@@ -69,14 +69,15 @@ void RBPhysicsObject::Integrate(float deltaTime)
 	mVelocity += mAcceleration * deltaTime;
 	mPosition += mVelocity * deltaTime;
 
-	// Angular integration
-	mAngularVelocity += mAngularAcceleration * deltaTime;
+	// TODO:
+	//// Angular integration
+	//mAngularVelocity += mAngularAcceleration * deltaTime;
 
-	// Update orientation via quaternion derivative: q' = 0.5 * q * w (w = [0, ω])
-	Quaternion w(0.0f, mAngularVelocity.x, mAngularVelocity.y, mAngularVelocity.z);
-	Quaternion deltaOrientation = mOrientation * w * 0.5f;// * deltaTime;
+	//// Update orientation via quaternion derivative: q' = 0.5 * q * w (w = [0, ω])
+	//Quaternion w(0.0f, mAngularVelocity.x, mAngularVelocity.y, mAngularVelocity.z);
+	//Quaternion deltaOrientation = mOrientation * w * 0.5f;// * deltaTime;
 
-	mOrientation = Normalize(mOrientation + deltaOrientation);
+	//mOrientation = Normalize(mOrientation + deltaOrientation);
 
 	// Clear accumulators (forces/torques should be reapplied each frame)
 	mAcceleration = Vector3::Zero;

@@ -83,41 +83,130 @@ void RBPhysicsObject::Integrate(float deltaTime)
 	mAngularAcceleration = Vector3::Zero;
 }
 
+//void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData)
+//{
+//	const Vector3 normal = intersectData.GetNormal();
+//	mPosition += normal * intersectData.GetPenetration(); // If other is static...
+//
+//	// If they both can move - Heavier objects move less
+//	float invMassSphere = 1.0f / mMass;
+//	float invMassBox = 1.0f / otherObject.GetMass();
+//
+//	//float totalInvMass = invMassSphere + invMassBox;
+//	//mPosition += normal * intersectData.GetPenetration() * (invMassSphere / totalInvMass); // If other is not static
+//	//otherPos -= normal * penetration * (invMassBox / totalInvMass);
+//
+//	// Velocity
+//	Vector3 relativeVelocity = mVelocity - otherObject.GetVelocity(); // Relative velocity:
+//
+//	float velAlongNormal = Dot(relativeVelocity, normal); // Velocity along the collision normal
+//	if (velAlongNormal > 0.0f) // If they're already separating:
+//	{
+//		return;
+//	}
+//
+//	float e = 0.5f; // 0 = no bounce, 1 = perfect bounce // TODO: Adjust 
+//
+//	// Impulse magnitude:
+//	float j = -(1.0f + e) * velAlongNormal / (invMassSphere + otherObject.GetMass());
+//
+//	// Impulse vector:
+//	Vector3 impulse = j * normal;
+//
+//	////Apply:
+//	//sphereVelocity += impulse * invMassSphere;
+//	//boxVelocity -= impulse * invMassBox;
+//
+//	ApplyForce(-impulse * invMassSphere);
+//}
+
 void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData)
 {
 	const Vector3 normal = intersectData.GetNormal();
-	mPosition += normal * intersectData.GetPenetration(); // If other is static...
+	const float penetration = intersectData.GetPenetration();
 
-	// If they both can move - Heavier objects move less
-	float invMassSphere = 1.0f / mMass;
-	float invMassBox = 1.0f / otherObject.GetMass();
+	const float totalInvMass = mInverseMass + otherObject.GetInverseMass();
+	//if (totalInvMass <= 0.0f)
+	//	return; // TODO: both static/infinite mass, nothing to resolve
 
-	//float totalInvMass = invMassSphere + invMassBox;
-	//mPosition += normal * intersectData.GetPenetration() * (invMassSphere / totalInvMass); // If other is not static
-	//otherPos -= normal * penetration * (invMassBox / totalInvMass);
+	// 1. Positional correction
+	const float myShare = mInverseMass / totalInvMass;
+	const const Vector3 newPos = mPosition + normal * (penetration * myShare); // * 0.8f); = Baumgarte stabilization
+	SetPosition(newPos);
 
-	// Velocity
-	Vector3 relativeVelocity = mVelocity - otherObject.GetVelocity(); // Relative velocity:
+	// 2. Velocity response
+	const Vector3 relativeVelocity = GetVelocity() - otherObject.GetVelocity();
+	const float vn = Dot(relativeVelocity, normal);
 
-	float velAlongNormal = Dot(relativeVelocity, normal); // Velocity along the collision normal
-	if (velAlongNormal > 0.0f) // If they're already separating:
+	if (vn < 0.0f)
 	{
-		return;
+		const float restitution = 0.0f; // Bouncieness
+		const float j = -(1.0f + restitution) * vn / totalInvMass;
+		const Vector3 impulse = normal * j;
+
+		// Only apply my share of the impulse to myself
+		ApplyImpulse(impulse);
 	}
 
-	float e = 0.5f; // 0 = no bounce, 1 = perfect bounce // TODO: Adjust 
+	// 3. Ground friction (tangential direction)
+	const Vector3 vNormalPart = vn * normal;
+	const Vector3 relativeTangent = relativeVelocity - vNormalPart;
 
-	// Impulse magnitude:
-	float j = -(1.0f + e) * velAlongNormal / (invMassSphere + otherObject.GetMass());
+	const float tangentSpeed = Magnitude(relativeTangent);
+	if (tangentSpeed > 0.0001f)
+	{
+		Vector3 tangentDir = relativeTangent / tangentSpeed;
+		float groundFriction = 0.1f; // tune this, 0 = ice, 1 = very grippy
 
-	// Impulse vector:
-	Vector3 impulse = j * normal;
+		float jt = -tangentSpeed * groundFriction / totalInvMass;
+		Vector3 frictionImpulse = tangentDir * jt;
 
-	////Apply:
-	//sphereVelocity += impulse * invMassSphere;
-	//boxVelocity -= impulse * invMassBox;
+		ApplyImpulse(frictionImpulse);
+	}
+}
 
-	ApplyForce(-impulse * invMassSphere);
+void RBPhysicsObject::ResolveCollision(const IntersectData& intersectData)
+{
+	const Vector3& normal = intersectData.GetNormal();
+	const float penetration = intersectData.GetPenetration();
+	const Vector3& velocity = GetVelocity();
+
+	// 1. Positional correction
+	const const Vector3 newPos = mPosition + normal * penetration; // * 0.8f); = Baumgarte stabilization
+	SetPosition(newPos);
+
+	// 2. Velocity response
+	const float vn = Dot(velocity, normal);
+
+	if (vn < 0.0f)
+	{
+		const float restitution = 0.0f; // Bouncieness
+		const float j = -(1.0f + restitution) * vn / mInverseMass;
+		const Vector3 impulse = normal * j;
+
+		// Only apply my share of the impulse to myself
+		ApplyImpulse(impulse);
+	}
+
+	// 3. Ground friction (tangential direction)
+	const Vector3 vNormalPart = vn * normal;
+	const Vector3 vTangent = velocity - vNormalPart;
+
+	const float tangentSpeed = Magnitude(vTangent);
+	if (tangentSpeed > 0.0001f)
+	{
+		//float groundFriction = 0.1f; // tune this, 0 = ice, 1 = very grippy
+		//Vector3 frictionForce = -vTangent * groundFriction;
+		//ApplyForce(frictionForce);
+
+		Vector3 tangentDir = vTangent / tangentSpeed;
+		float groundFriction = 0.1f; // tune this, 0 = ice, 1 = very grippy
+
+		float jt = -tangentSpeed * groundFriction / mInverseMass;
+		Vector3 frictionImpulse = tangentDir * jt;
+
+		ApplyImpulse(frictionImpulse);
+	}
 }
 
 // Force applies acceleration directly (existing behavior kept)

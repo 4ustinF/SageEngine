@@ -253,32 +253,8 @@ void RBPhysicsWorld::HandleCollisions()
 			IntersectData intersectData = primaryObject.GetCollider().Intersect(staticObject.GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				// 1. Positional correction
-				const Vector3 newPos = primaryObject.GetPosition() + intersectData.GetNormal() * (intersectData.GetPenetration()); // * 0.8f); = Baumgarte stabilization
-				primaryObject.SetPosition(newPos);
-
-				// 2. Velocity response
-				Vector3 velocity = primaryObject.GetVelocity();
-				float vn = Dot(velocity, intersectData.GetNormal());
-
-				if (vn < 0.0f)
-				{
-					//Vector3 newVelocity = velocity - (1.0f + mSettings.bounceCoeficient) * vn * intersectData.GetNormal();
-					Vector3 oppForce = vn * -intersectData.GetNormal();
-					primaryObject.ApplyForce(oppForce);
-				}
-
-				// 3. Ground friction (tangential direction)
-				Vector3 vNormalPart = vn * intersectData.GetNormal();
-				Vector3 vTangent = velocity - vNormalPart;
-
-				float tangentSpeed = Magnitude(vTangent);
-				if (tangentSpeed > 0.0001f)
-				{
-					float groundFriction = 0.1f; // tune this, 0 = ice, 1 = very grippy
-					Vector3 frictionForce = -vTangent * groundFriction;
-					primaryObject.ApplyForce(frictionForce);
-				}
+				//primaryObject.ResolveCollision(staticObject, intersectData);
+				primaryObject.ResolveCollision(intersectData);
 			}
 		}
 	}

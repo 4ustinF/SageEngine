@@ -55,6 +55,9 @@
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/TempRoof.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempPlayer2.json"
     }
   ]
 }

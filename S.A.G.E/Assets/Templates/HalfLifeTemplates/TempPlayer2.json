@@ -3,7 +3,7 @@
   "Components": {
     "Transform Component": {
       "Position": [
-        2.0,
+        4.0,
         -4.0,
         6.0
       ]
@@ -18,7 +18,7 @@
       "Height": 1.6256
     },
     "Rigid Body Component": {
-      "Mass": 5.0
+      "Mass": 1.0
     }
   }
 }

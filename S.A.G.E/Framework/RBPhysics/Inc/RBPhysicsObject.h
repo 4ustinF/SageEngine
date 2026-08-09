@@ -32,10 +32,12 @@ namespace SAGE::RBPhysics
 		void DebugDraw(bool fillDebugShapes);
 
 		void Integrate(float deltaTime);
-		void ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData);
+		void ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData); // Resolving with non static objects.
+		void ResolveCollision(const IntersectData& intersectData); // Resolving with static objects.
 
 		// Getters
 		float GetMass() const { return mMass; }
+		float GetInverseMass() const { return mInverseMass; }
 		float GetDrag() const { return mDrag; }
 		float GetAngularDrag() const { return mAngularDrag; }
 		bool GetUseGravity() const { return mUseGravity; }

@@ -34,5 +34,8 @@ namespace SAGE
 		float mRadius = 0.5f;
 		float mHeight = 2.0f;
 		// TODO: Direction?
+
+		// Debug
+		bool mCanMove = false;
 	};
 }

@@ -51,6 +51,11 @@ void CapsuleColliderComponent ::Terminate()
 
 void CapsuleColliderComponent::Update(float deltaTime)
 {
+	if (mCanMove == false)
+	{
+		return;
+	}
+
 	auto inputSystem = InputSystem::Get();
 	const float moveSpeed = (inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 100.0f : 50.0f) * deltaTime;
 
@@ -93,6 +98,7 @@ void CapsuleColliderComponent::DebugUI()
 		ImGui::DragFloat3("Center##CapsuleColliderComponent ", &mCenter.x, 0.1f);
 		if (ImGui::DragFloat("Radius##BoxColliderComponent", &mRadius, 0.1f)) { SetRadius(mRadius); }
 		if (ImGui::DragFloat("Height##BoxColliderComponent", &mHeight, 0.1f)) { SetHeight(mHeight); }
+		ImGui::Checkbox("Can Move", &mCanMove);
 	}
 
 	if (mDebugFill)

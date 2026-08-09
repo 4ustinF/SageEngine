@@ -126,6 +126,11 @@ void RBPhysicsObject::ApplyForce(const Vector3& force)
 	mVelocity += force;
 }
 
+void RBPhysicsObject::ApplyImpulse(const Vector3& impulse)
+{
+	mVelocity += impulse * mInverseMass;
+}
+
 void RBPhysicsObject::ApplyForceAtPoint(const Vector3& force, const Vector3& localPoint)
 {
 	const Vector3 localForce = Conjugate(mOrientation) * force;

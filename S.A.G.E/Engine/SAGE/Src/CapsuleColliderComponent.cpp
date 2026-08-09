@@ -77,10 +77,11 @@ void CapsuleColliderComponent::Update(float deltaTime)
 	if (inputSystem->IsKeyDown(KeyCode::LEFT))
 		mPhysicsObject->ApplyForce(-right * moveSpeed);
 
-	if (inputSystem->IsKeyDown(KeyCode::SPACE))
-		mPhysicsObject->ApplyForce(Vector3::YAxis * moveSpeed * 0.5f);
+	if (inputSystem->IsKeyPressed(KeyCode::NUMPAD0))
+		mPhysicsObject->ApplyForce(Vector3::YAxis * 500.0f * deltaTime);
 
-	camera.SetPosition(mPhysicsObject->GetPosition() + Vector3(0.0f, 0.5f, 0.0f));
+	//const Vector3 camPos = ((BoundingCapsule&)mPhysicsObject->GetCollider()).GetInnerTopCenter();
+	//camera.SetPosition(camPos + Vector3(0.0f, 0.5f, 0.0f));
 }
 
 void CapsuleColliderComponent::DebugUI()

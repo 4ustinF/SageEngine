@@ -62,6 +62,7 @@ namespace SAGE::RBPhysics
 		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
 		void ApplyForce(const Math::Vector3& force);
+		void ApplyImpulse(const Math::Vector3& impulse);
 		void ApplyForceAtPoint(const Math::Vector3& force, const Math::Vector3& localPoint);
 		void ApplyTorque(const Math::Vector3& torque);
 		void ApplyDrag(const Math::Vector3& velocity, const Math::Vector3& dragForce);
@@ -77,7 +78,7 @@ namespace SAGE::RBPhysics
 
 	private:
 		float mMass = 1.0f;
-		float mInverseMass = 0.0f;
+		float mInverseMass = 1.0f;
 		float mDrag = 0.0f;
 		float mAngularDrag = 0.05f;
 		bool mUseGravity = true;

@@ -45,6 +45,14 @@ void RigidBodyComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 	// TODO:
 }
 
+void RigidBodyComponent::Initialize()
+{
+}
+
+void RigidBodyComponent::Terminate()
+{
+}
+
 void RigidBodyComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Rigid Body Component##RigidBodyComponent", ImGuiTreeNodeFlags_CollapsingHeader))

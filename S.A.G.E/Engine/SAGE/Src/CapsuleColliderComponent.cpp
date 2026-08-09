@@ -7,6 +7,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Input;
 using namespace SAGE::Graphics;
 using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
@@ -45,7 +46,25 @@ void CapsuleColliderComponent ::Terminate()
 	BaseColliderComponent::Terminate();
 }
 
-void CapsuleColliderComponent ::DebugUI()
+void CapsuleColliderComponent::Update(float deltaTime)
+{
+	auto inputSystem = InputSystem::Get();
+	const float moveSpeed = inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 11.0f : 10.0f * deltaTime;
+
+	if (inputSystem->IsKeyDown(KeyCode::UP))
+		mPhysicsObject->ApplyForce(Vector3::ZAxis * moveSpeed);
+	if (inputSystem->IsKeyDown(KeyCode::DOWN))
+		mPhysicsObject->ApplyForce(-Vector3::ZAxis * moveSpeed);
+	if (inputSystem->IsKeyDown(KeyCode::RIGHT))
+		mPhysicsObject->ApplyForce(Vector3::XAxis * moveSpeed);
+	if (inputSystem->IsKeyDown(KeyCode::LEFT))
+		mPhysicsObject->ApplyForce(-Vector3::XAxis * moveSpeed);
+
+	if (inputSystem->IsKeyDown(KeyCode::SPACE))
+		mPhysicsObject->ApplyForce(Vector3::YAxis * moveSpeed);
+}
+
+void CapsuleColliderComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Capsule Collider Component##CapsuleColliderComponent ", ImGuiTreeNodeFlags_CollapsingHeader))
 	{

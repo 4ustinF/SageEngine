@@ -14,16 +14,16 @@ namespace SAGE::RBPhysics
 			mCollider(collider),
 			mMass(mass)
 		{
-			mInverseMass = 1.0f / mMass;
+			//mInverseMass = 1.0f / mMass;
 
-			// This is for sphere body 
-			float I = 2.0f / 5.0f * mMass * mMass * 1.0f; // Radius
-			mInertia = Math::Matrix3(
-				I, 0.0f, 0.0f,
-				0.0f, I, 0.0f,
-				0.0f, 0.0f, I);
+			//// This is for sphere body 
+			//float I = 2.0f / 5.0f * mMass * mMass * 1.0f; // Radius
+			//mInertia = Math::Matrix3(
+			//	I, 0.0f, 0.0f,
+			//	0.0f, I, 0.0f,
+			//	0.0f, 0.0f, I);
 
-			mInverseInertia = Math::Inverse(mInertia);
+			//mInverseInertia = Math::Inverse(mInertia);
 		}
 		RBPhysicsObject(const RBPhysicsObject& other);
 		void operator=(RBPhysicsObject other);
@@ -45,7 +45,6 @@ namespace SAGE::RBPhysics
 		const Math::Vector3& GetVelocity() const { return mVelocity; }
 		const Math::Vector3& GetAngularVelocity() const { return mAngularVelocity; }
 		const Math::Quaternion& GetOrientation() const { return mOrientation; }
-		const Math::Vector3& GetAcceleration() const { return mAcceleration; }
 		const Math::Vector3& GetAngularAcceleration() const { return mAngularAcceleration; }
 		float GetNormalStiffness() const { return mNormalStiffness; }
 		float GetNormalDampening() const { return mNormalDampening; }
@@ -57,7 +56,6 @@ namespace SAGE::RBPhysics
 		void SetDrag(float drag) { mDrag = drag; }
 		void SetAngularDrag(float angularDrag) { mAngularDrag = angularDrag; }
 		void SetUseGravity(bool useGravity) { mUseGravity = useGravity; }
-		void SetAcceleration(const Math::Vector3& acceleration) { mAcceleration = acceleration; } // TODO: Remove?
 		void SetPosition(const Math::Vector3& position) { mPosition = position; }
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
 		void SetAngularVelocity(const Math::Vector3& velocity) { mAngularVelocity = velocity; }
@@ -90,7 +88,6 @@ namespace SAGE::RBPhysics
 		Math::Vector3 mAngularVelocity = Math::Vector3::Zero;
 
 		Math::Quaternion mOrientation = Math::Quaternion::Identity;
-		Math::Vector3 mAcceleration = Math::Vector3::Zero;
 		Math::Vector3 mAngularAcceleration = Math::Vector3::Zero;
 
 		Math::Matrix3 mInertia = Math::Matrix3::Identity;

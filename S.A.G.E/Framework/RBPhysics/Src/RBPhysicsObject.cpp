@@ -5,6 +5,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Input;
 using namespace SAGE::Graphics;
 using namespace SAGE::RBPhysics;
 
@@ -13,20 +14,19 @@ RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
 	mOldPosition(other.mOldPosition),
 	mVelocity(other.mVelocity),
 	mCollider(other.mCollider),
-	mAcceleration(other.mAcceleration),
 	mMass(other.mMass)
 {
 	mCollider->AddReference();
-	mInverseMass = 1.0f / mMass;
+	//mInverseMass = 1.0f / mMass;
 
-	// This is for sphere body 
-	float I = 2.0f / 5.0f * mMass * mMass * 1.0f; // Radius
-	mInertia = Matrix3(
-	I, 0.0f, 0.0f, 
-	0.0f, I, 0.0f,
-	0.0f, 0.0f, I);
+	//// This is for sphere body 
+	//float I = 2.0f / 5.0f * mMass * mMass * 1.0f; // Radius
+	//mInertia = Matrix3(
+	//I, 0.0f, 0.0f, 
+	//0.0f, I, 0.0f,
+	//0.0f, 0.0f, I);
 
-	mInverseInertia = Inverse(mInertia);
+	//mInverseInertia = Inverse(mInertia);
 }
 
 void RBPhysicsObject::operator=(RBPhysicsObject other) // TODO: Do this in a better fashion.
@@ -66,7 +66,7 @@ Vector3 RBPhysicsObject::GetWorldPosition(const Math::Vector3& localPos)
 void RBPhysicsObject::Integrate(float deltaTime)
 {
 	// Linear integration
-	mVelocity += mAcceleration * deltaTime;
+	//mVelocity += mAcceleration * deltaTime;
 	mPosition += mVelocity * deltaTime;
 
 	// TODO:
@@ -80,7 +80,6 @@ void RBPhysicsObject::Integrate(float deltaTime)
 	//mOrientation = Normalize(mOrientation + deltaOrientation);
 
 	// Clear accumulators (forces/torques should be reapplied each frame)
-	mAcceleration = Vector3::Zero;
 	mAngularAcceleration = Vector3::Zero;
 }
 
@@ -124,7 +123,7 @@ void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const
 // Force applies acceleration directly (existing behavior kept)
 void RBPhysicsObject::ApplyForce(const Vector3& force)
 {
-	mAcceleration += force * mInverseMass;
+	mVelocity += force;
 }
 
 void RBPhysicsObject::ApplyForceAtPoint(const Vector3& force, const Vector3& localPoint)

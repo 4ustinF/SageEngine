@@ -32,7 +32,7 @@ namespace SAGE::RBPhysics
 		void DrawPhysicsObjects(bool fillShapes);
 		//void DebugUI();
 
-		int AddObject(const RBPhysicsObject& object, PhysicsObjectType type = PhysicsObjectType::Static);
+		RBPhysicsObject* AddObject(const RBPhysicsObject& object, PhysicsObjectType type = PhysicsObjectType::Static);
 		bool RemoveObject(const RBPhysicsObject& object);
 
 		// TODO: These are temp please remove.

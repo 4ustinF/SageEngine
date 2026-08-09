@@ -64,8 +64,8 @@ void BaseColliderComponent::OnEnable()
 
 	if(mPhysicsObject != nullptr)
 	{
-		UpdatePhysicsObjectPropertys();
-		mPhysicsService->GetPhysicsWorld().AddObject(*mPhysicsObject, mRigidBodyComponent ? 
+		UpdatePhysicsObjectPropertys(); 
+		mPhysicsObject = mPhysicsService->GetPhysicsWorld().AddObject(*mPhysicsObject, mRigidBodyComponent ? 
 			(mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static);
 	}
 }

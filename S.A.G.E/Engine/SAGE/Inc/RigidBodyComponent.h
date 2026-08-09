@@ -4,6 +4,8 @@
 
 namespace SAGE
 {
+	class BaseColliderComponent;
+
 	class RigidBodyComponent final : public Component // https://docs.unity3d.com/6000.5/Documentation/ScriptReference/Rigidbody.html
 	{
 	public:
@@ -13,6 +15,9 @@ namespace SAGE
 		const char* GetCompName() override { return "Rigid Body Component"; }
 		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
 		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
+
+		void Initialize() override;
+		void Terminate() override;
 
 		void DebugUI() override;
 		void OnEnable() override;
@@ -35,6 +40,8 @@ namespace SAGE
 		void SetConstraints(const SAGE::Math::Vector3Int& pos, const SAGE::Math::Vector3Int& rot);
 
 	private:
+		//BaseColliderComponent* mColliderComponent = nullptr;
+
 		float mMass = 0.0f;
 		float mDrag = 0.0f;
 		float mAngularDrag = 0.05f;

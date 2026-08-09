@@ -61,21 +61,21 @@ void RBPhysicsWorld::DrawPhysicsObjects(bool fillShapes)
 //	ImGui::End();
 //}
 
-int RBPhysicsWorld::AddObject(const RBPhysicsObject& object, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
+RBPhysicsObject* RBPhysicsWorld::AddObject(const RBPhysicsObject& object, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
 {
 	switch (type)
 	{
 	case PhysicsObjectType::Dynamic:
 	case PhysicsObjectType::Kinematic: // TODO: 
 		mDynamicObjects.push_back(object);
-		return static_cast<int>(mDynamicObjects.size()) - 1;
+		return &mDynamicObjects.back();
 		break;
 	case PhysicsObjectType::Static:
 		mStaticObjects.push_back(object);
-		return static_cast<int>(mStaticObjects.size()) - 1;
+		return &mStaticObjects.back();
 	}
 
-	return -1; // TODO: This function does not need to return an index. Remove this. 
+	return nullptr; // TODO: This function does not need to return an index. Remove this. 
 	// TODO: Maybe return the object pointer instead. Or return a bool for success/failure. Or return nothing.
 }
 
@@ -129,8 +129,7 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 
 	for (RBPhysicsObject& object : mDynamicObjects)
 	{
-		object.SetVelocity(object.GetVelocity() + (mSettings.gravity * deltaTime));
-		object.SetAcceleration(Vector3::Zero);
+		object.ApplyForce(mSettings.gravity * deltaTime);
 		object.Integrate(deltaTime);
 	}
 }
@@ -235,11 +234,9 @@ void RBPhysicsWorld::HandleCollisions()
 			IntersectData intersectData = primaryObject.GetCollider().Intersect(staticObject.GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				//Math::Vector3 mNormal = Math::Vector3::Zero;
-				//Math::Vector3 mContactPoint = Math::Vector3::Zero;
-				//float mPenetration = 0.0f;
-
+				// 1. Positional correction
 				const Vector3 newPos = primaryObject.GetPosition() + intersectData.GetNormal() * (intersectData.GetPenetration()); // * 0.8f); = Baumgarte stabilization
+				//const Vector3 newPos = primaryObject.GetPosition() + intersectData.GetNormal() * (intersectData.GetPenetration() * 1.1f);
 				primaryObject.SetPosition(newPos);
 
 				// 2. Velocity response
@@ -248,11 +245,11 @@ void RBPhysicsWorld::HandleCollisions()
 
 				if (vn < 0.0f)
 				{
-					Vector3 newVelocity = velocity - (1.0f + mSettings.bounceCoeficient) * vn * intersectData.GetNormal();
-					primaryObject.SetVelocity(newVelocity);
+					//Vector3 newVelocity = velocity - (1.0f + mSettings.bounceCoeficient) * vn * intersectData.GetNormal();
+					//primaryObject.SetVelocity(newVelocity);
+					Vector3 oppForce = vn * -intersectData.GetNormal();
+					primaryObject.ApplyForce(oppForce);
 				}
-
-				//primaryObject.SetVelocity(Vector3::Zero);
 			}
 		}
 	}
@@ -280,90 +277,90 @@ void RBPhysicsWorld::DetectCollisionWithDome(float deltaTime)
 
 void RBPhysicsWorld::ResolveCollisionWithDome(RBPhysicsObject& object, float /*deltaTime*/)
 {
-	const Vector3 domeCenter = Vector3(0.0f, 8.0f, 0.0f);
-	const float domeRadius = 8.0f;
+	//const Vector3 domeCenter = Vector3(0.0f, 8.0f, 0.0f);
+	//const float domeRadius = 8.0f;
 
-	// Ball radius from collider
-	auto& collider = (BoundingSphere&)object.GetCollider();
-	const float ballRadius = collider.GetRadius();
+	//// Ball radius from collider
+	//auto& collider = (BoundingSphere&)object.GetCollider();
+	//const float ballRadius = collider.GetRadius();
 
-	Vector3 relativePos = object.GetPosition() - domeCenter;
-	const float dist = Magnitude(relativePos);
+	//Vector3 relativePos = object.GetPosition() - domeCenter;
+	//const float dist = Magnitude(relativePos);
 
-	// Guard: if degenerate, skip
-	if (dist <= 0.0f)
-		return;
+	//// Guard: if degenerate, skip
+	//if (dist <= 0.0f)
+	//	return;
 
-	// Normal pointing from dome center to ball (outward)
-	Vector3 normal = Normalize(relativePos);
+	//// Normal pointing from dome center to ball (outward)
+	//Vector3 normal = Normalize(relativePos);
 
-	// penetration amount (positive if ball is outside the dome surface)
-	float penetration = (dist + ballRadius) - domeRadius;
-	if (penetration <= 0.0f)
-		return;
+	//// penetration amount (positive if ball is outside the dome surface)
+	//float penetration = (dist + ballRadius) - domeRadius;
+	//if (penetration <= 0.0f)
+	//	return;
 
-	// Positional correction: move ball back just inside the dome (small slop to avoid jitter)
-	const float k_slop = 0.001f;
-	const float correction = penetration + k_slop;
-	object.SetPosition(object.GetPosition() - normal * correction);
+	//// Positional correction: move ball back just inside the dome (small slop to avoid jitter)
+	//const float k_slop = 0.001f;
+	//const float correction = penetration + k_slop;
+	//object.SetPosition(object.GetPosition() - normal * correction);
 
-	// Contact point in world space (on the sphere surface)
-	Vector3 contactPointWorld = object.GetPosition() - normal * ballRadius;
-	// Convert to local point for ApplyForceAtPoint (expects local point)
-	Vector3 localContactPoint = object.GetLocalPosition(contactPointWorld);
+	//// Contact point in world space (on the sphere surface)
+	//Vector3 contactPointWorld = object.GetPosition() - normal * ballRadius;
+	//// Convert to local point for ApplyForceAtPoint (expects local point)
+	//Vector3 localContactPoint = object.GetLocalPosition(contactPointWorld);
 
-	// Relative velocity at contact
-	Vector3 relativeVel = GetVelocityAtPoint(object, localContactPoint);
-	Vector3 velNormal = normal * Dot(relativeVel, normal);
-	Vector3 velTangent = relativeVel - velNormal;
+	//// Relative velocity at contact
+	//Vector3 relativeVel = GetVelocityAtPoint(object, localContactPoint);
+	//Vector3 velNormal = normal * Dot(relativeVel, normal);
+	//Vector3 velTangent = relativeVel - velNormal;
 
-	// --- Normal response (velocity correction) ---
-	const float restitution = 0.3f; // bounce, tune as needed
-	// If there is outward normal velocity, reflect it (inelastic)
-	float vNormalScalar = Dot(relativeVel, normal);
-	if (vNormalScalar > 0.0f)
-	{
-		// Remove outgoing normal component with restitution
-		Vector3 v = object.GetVelocity();
-		v -= velNormal * (1.0f + restitution); // reflect outward component
-		object.SetVelocity(v);
-	}
+	//// --- Normal response (velocity correction) ---
+	//const float restitution = 0.3f; // bounce, tune as needed
+	//// If there is outward normal velocity, reflect it (inelastic)
+	//float vNormalScalar = Dot(relativeVel, normal);
+	//if (vNormalScalar > 0.0f)
+	//{
+	//	// Remove outgoing normal component with restitution
+	//	Vector3 v = object.GetVelocity();
+	//	v -= velNormal * (1.0f + restitution); // reflect outward component
+	//	object.SetVelocity(v);
+	//}
 
-	// --- Tangential friction handled as a force at contact (produces torque) ---
-	// Estimate a tangential damping force (N) that tends to remove sliding
-	float effectiveMass = object.GetMass();
-	float tangentialDampening = object.GetTangentialDampening();
-	Vector3 tangentialForce = -velTangent * effectiveMass * tangentialDampening;
+	//// --- Tangential friction handled as a force at contact (produces torque) ---
+	//// Estimate a tangential damping force (N) that tends to remove sliding
+	//float effectiveMass = object.GetMass();
+	//float tangentialDampening = object.GetTangentialDampening();
+	//Vector3 tangentialForce = -velTangent * effectiveMass * tangentialDampening;
 
-	// Normal contact force magnitude estimate (simple)
-	float normalStiffness = object.GetNormalStiffness();
-	float normalDampening = object.GetNormalDampening();
-	Vector3 normalVel = velNormal;
-	Vector3 normalDisplacement = normal * penetration;
-	Vector3 normalForce = normalDisplacement * normalStiffness - normalVel * effectiveMass * normalDampening;
+	//// Normal contact force magnitude estimate (simple)
+	//float normalStiffness = object.GetNormalStiffness();
+	//float normalDampening = object.GetNormalDampening();
+	//Vector3 normalVel = velNormal;
+	//Vector3 normalDisplacement = normal * penetration;
+	//Vector3 normalForce = normalDisplacement * normalStiffness - normalVel * effectiveMass * normalDampening;
 
-	// Coulomb friction clamp
-	float mu = 0.5f;
-	float maxTangential = mu * Magnitude(normalForce);
-	if (Magnitude(tangentialForce) > maxTangential && maxTangential > 0.0f)
-	{
-		tangentialForce = Normalize(tangentialForce) * maxTangential;
-	}
+	//// Coulomb friction clamp
+	//float mu = 0.5f;
+	//float maxTangential = mu * Magnitude(normalForce);
+	//if (Magnitude(tangentialForce) > maxTangential && maxTangential > 0.0f)
+	//{
+	//	tangentialForce = Normalize(tangentialForce) * maxTangential;
+	//}
 
-	// Apply normal support (linear)
-	object.ApplyForce(normalForce);
+	//// Apply normal support (linear)
+	//object.ApplyForce(normalForce);
 
-	// Apply tangential friction at contact point to create torque / rolling
-	object.ApplyForceAtPoint(tangentialForce, localContactPoint);
+	//// Apply tangential friction at contact point to create torque / rolling
+	//object.ApplyForceAtPoint(tangentialForce, localContactPoint);
 
-	// Remove any outward acceleration component to avoid immediate re-penetration
-	Vector3 acc = object.GetAcceleration();
-	float accOut = Dot(acc, normal);
-	if (accOut > 0.0f)
-	{
-		acc -= normal * accOut;
-		object.SetAcceleration(acc);
-	}
+	//// Remove any outward acceleration component to avoid immediate re-penetration
+	//Vector3 acc = object.GetAcceleration();
+	//float accOut = Dot(acc, normal);
+	//if (accOut > 0.0f)
+	//{
+	//	acc -= normal * accOut;
+	//	object.SetAcceleration(acc);
+	//}
 }
 
 Vector3 RBPhysicsWorld::GetVelocityAtPoint(const RBPhysicsObject& object, const Math::Vector3& localPoint)

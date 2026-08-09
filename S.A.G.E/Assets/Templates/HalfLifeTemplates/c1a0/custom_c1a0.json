@@ -49,6 +49,9 @@
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_brush_section_04.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/TempDesk.json"
     }
   ]
 }

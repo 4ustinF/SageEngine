@@ -129,7 +129,26 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 
 	for (RBPhysicsObject& object : mDynamicObjects)
 	{
+		// Gravity
 		object.ApplyForce(mSettings.gravity * deltaTime);
+
+		// Air Drag
+		Vector3 velocity = object.GetVelocity();
+		float speed = Magnitude(velocity);
+
+		if (speed > 0.0001f)
+		{
+			// Simple linear drag: force opposes velocity, proportional to speed
+			float dragCoefficient = 0.01f; // tune this
+			Vector3 dragForce = -velocity * dragCoefficient;
+
+			// Or quadratic drag (more realistic, stronger at high speed):
+			// Vector3 dragForce = -Normalize(velocity) * (dragCoefficient * speed * speed);
+
+			dragForce.y = 0.0f; // Optional: ignore vertical drag if desired
+			object.ApplyForce(dragForce);
+		}
+
 		object.Integrate(deltaTime);
 	}
 }
@@ -236,7 +255,6 @@ void RBPhysicsWorld::HandleCollisions()
 			{
 				// 1. Positional correction
 				const Vector3 newPos = primaryObject.GetPosition() + intersectData.GetNormal() * (intersectData.GetPenetration()); // * 0.8f); = Baumgarte stabilization
-				//const Vector3 newPos = primaryObject.GetPosition() + intersectData.GetNormal() * (intersectData.GetPenetration() * 1.1f);
 				primaryObject.SetPosition(newPos);
 
 				// 2. Velocity response
@@ -246,9 +264,20 @@ void RBPhysicsWorld::HandleCollisions()
 				if (vn < 0.0f)
 				{
 					//Vector3 newVelocity = velocity - (1.0f + mSettings.bounceCoeficient) * vn * intersectData.GetNormal();
-					//primaryObject.SetVelocity(newVelocity);
 					Vector3 oppForce = vn * -intersectData.GetNormal();
 					primaryObject.ApplyForce(oppForce);
+				}
+
+				// 3. Ground friction (tangential direction)
+				Vector3 vNormalPart = vn * intersectData.GetNormal();
+				Vector3 vTangent = velocity - vNormalPart;
+
+				float tangentSpeed = Magnitude(vTangent);
+				if (tangentSpeed > 0.0001f)
+				{
+					float groundFriction = 0.1f; // tune this, 0 = ice, 1 = very grippy
+					Vector3 frictionForce = -vTangent * groundFriction;
+					primaryObject.ApplyForce(frictionForce);
 				}
 			}
 		}

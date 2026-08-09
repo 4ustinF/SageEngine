@@ -1,6 +1,9 @@
 #include "Precompiled.h"
 #include "CapsuleColliderComponent.h"
 
+#include "CameraService.h"
+#include "GameWorld.h"
+
 #include "GameObject.h"
 #include "RBPhysicsService.h"
 #include "TransformComponent.h"
@@ -49,19 +52,35 @@ void CapsuleColliderComponent ::Terminate()
 void CapsuleColliderComponent::Update(float deltaTime)
 {
 	auto inputSystem = InputSystem::Get();
-	const float moveSpeed = inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 11.0f : 10.0f * deltaTime;
+	const float moveSpeed = (inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 100.0f : 50.0f) * deltaTime;
 
+	CameraService* cameraService = GetOwner().GetWorld().GetService<CameraService>();
+	Camera& camera = cameraService->GetCamera();
+
+	// 1. Get camera forward, flatten to XZ plane (ignore pitch)
+	Vector3 forward = camera.GetDirection();
+	forward.y = 0.0f;
+	forward = Normalize(forward);
+
+	// 2. Right vector = forward rotated 90 degrees around Y
+	//    (cross of world-up and forward gives you a perpendicular horizontal vector)
+	Vector3 right = Cross(Vector3::YAxis, forward);
+	right = Normalize(right);
+
+	// 3. Apply forces relative to camera orientation
 	if (inputSystem->IsKeyDown(KeyCode::UP))
-		mPhysicsObject->ApplyForce(Vector3::ZAxis * moveSpeed);
+		mPhysicsObject->ApplyForce(forward * moveSpeed);
 	if (inputSystem->IsKeyDown(KeyCode::DOWN))
-		mPhysicsObject->ApplyForce(-Vector3::ZAxis * moveSpeed);
+		mPhysicsObject->ApplyForce(-forward * moveSpeed);
 	if (inputSystem->IsKeyDown(KeyCode::RIGHT))
-		mPhysicsObject->ApplyForce(Vector3::XAxis * moveSpeed);
+		mPhysicsObject->ApplyForce(right * moveSpeed);
 	if (inputSystem->IsKeyDown(KeyCode::LEFT))
-		mPhysicsObject->ApplyForce(-Vector3::XAxis * moveSpeed);
+		mPhysicsObject->ApplyForce(-right * moveSpeed);
 
 	if (inputSystem->IsKeyDown(KeyCode::SPACE))
-		mPhysicsObject->ApplyForce(Vector3::YAxis * moveSpeed);
+		mPhysicsObject->ApplyForce(Vector3::YAxis * moveSpeed * 0.5f);
+
+	camera.SetPosition(mPhysicsObject->GetPosition() + Vector3(0.0f, 0.5f, 0.0f));
 }
 
 void CapsuleColliderComponent::DebugUI()

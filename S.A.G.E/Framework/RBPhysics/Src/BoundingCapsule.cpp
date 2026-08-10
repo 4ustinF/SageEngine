@@ -103,9 +103,6 @@ IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other
     const Vector3 topWorld = GetInnerTopCenter();
     const Vector3 bottomWorld = GetInnerBottomCenter();
 
-    //const Vector3 topLocal = boxRotInv * (topWorld - boxCenter);
-    //const Vector3 bottomLocal = boxRotInv * (bottomWorld - boxCenter);
-
     const Vector3 topLocal = (topWorld - boxCenter) * boxRotInv;
     const Vector3 bottomLocal = (bottomWorld - boxCenter) * boxRotInv;
 

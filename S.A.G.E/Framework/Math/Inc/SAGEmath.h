@@ -89,6 +89,43 @@ namespace SAGE::Math
 
 		return v + (uv * q.w + uuv) * 2.0f;
 	}
+
+	//inline Vector3 operator*(const Matrix3& m, const Vector3& v) // Do not use this, it is not mathematically correct for transforming a vector by a matrix. Use the other version below.
+	//{
+	//	return Vector3{
+	//		m._11 * v.x + m._12 * v.y + m._13 * v.z,
+	//		m._21 * v.x + m._22 * v.y + m._23 * v.z,
+	//		m._31 * v.x + m._32 * v.y + m._33 * v.z
+	//	};
+	//}
+
+	inline Vector3 operator*(const Vector3& v, const Matrix3& m)
+	{
+		return Vector3{
+			m._11 * v.x + m._21 * v.y + m._31 * v.z,
+			m._12 * v.x + m._22 * v.y + m._32 * v.z,
+			m._13 * v.x + m._23 * v.y + m._33 * v.z
+		};
+	}
+
+	//inline Vector3 operator*(const Matrix4& m, const Vector3& v) // Do not use this, it is not mathematically correct for transforming a vector by a matrix. Use the other version below.
+	//{
+	//	return Vector3{
+	//		m._11 * v.x + m._12 * v.y + m._13 * v.z,
+	//		m._21 * v.x + m._22 * v.y + m._23 * v.z,
+	//		m._31 * v.x + m._32 * v.y + m._33 * v.z
+	//	}; // Same as the Matrix3 version, just drop the _14/_24/_34 translation terms.
+	//}
+
+	inline Vector3 operator*(const Vector3& v, const Matrix4& m)
+	{
+		return Vector3{
+			m._11 * v.x + m._21 * v.y + m._31 * v.z,
+			m._12 * v.x + m._22 * v.y + m._32 * v.z,
+			m._13 * v.x + m._23 * v.y + m._33 * v.z
+		}; // Same as the Matrix3 version, just drop the _14/_24/_34 translation terms.
+	}
+
 #pragma endregion
 
 	//Matrix3

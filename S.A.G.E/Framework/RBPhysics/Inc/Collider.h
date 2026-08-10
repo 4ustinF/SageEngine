@@ -30,6 +30,24 @@ namespace SAGE::RBPhysics
 		Math::Vector3 GetCenter() const { return mCenter; }
 		const SAGE::Math::Quaternion& GetOrientation() const { return mOrientation; } // TODO: Does collider need to hold this info?
 
+		Math::Matrix4 GetMatrix4() const
+		{
+			return
+			{
+				Math::Matrix4::Scaling(Math::Vector3::One) *
+				Math::Matrix4::RotationQuaternion(mOrientation) *
+				Math::Matrix4::Translation(mCenter)
+			};
+		}
+
+		Math::Matrix4 GetRotationMatrix4() const
+		{
+			return
+			{
+				Math::Matrix4::RotationQuaternion(mOrientation)
+			};
+		}
+
 		ColliderType GetType() const { return mType; }
 		
 		// Reference Counter

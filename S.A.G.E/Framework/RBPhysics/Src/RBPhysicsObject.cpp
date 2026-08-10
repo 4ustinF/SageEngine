@@ -173,6 +173,8 @@ void RBPhysicsObject::ResolveCollision(const IntersectData& intersectData)
 	const Vector3& velocity = GetVelocity();
 
 	// 1. Positional correction
+	//const float correctionAmount = std::max(penetration - 0.01f, 0.0f) * 0.2f;
+	//const Vector3 newPos = mPosition + normal * correctionAmount; // * 0.8f); = Baumgarte stabilization
 	const Vector3 newPos = mPosition + normal * penetration; // * 0.8f); = Baumgarte stabilization
 	SetPosition(newPos);
 

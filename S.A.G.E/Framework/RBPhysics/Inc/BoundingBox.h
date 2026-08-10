@@ -21,7 +21,6 @@ namespace SAGE::RBPhysics
 		void Transform(const Math::Vector3& translation) override;
 
 		Math::Vector3 GetExtend() const { return mExtend; }
-		Math::Vector3 GetHalfExtents() const { return mExtend * 0.5f; }
 		Math::Vector3 GetMinExtend() const { return mCenter - mExtend; }
 		Math::Vector3 GetMaxExtend() const { return mCenter + mExtend; }
 

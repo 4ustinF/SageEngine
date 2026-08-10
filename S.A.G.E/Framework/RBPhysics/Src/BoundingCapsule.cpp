@@ -26,44 +26,123 @@ void BoundingCapsule::Transform(const Math::Vector3& translation)
 	mCenter += translation;
 }
 
-IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other)// const
+//IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other)// const
+//{
+//    const Vector3 min = other.GetMinExtend();
+//    const Vector3 max = other.GetMaxExtend();
+//
+//    // 1. Closest point on capsule's inner segment to the box
+//    const Vector3 center = ClosestPointSegmentToBox(GetInnerTopCenter(), GetInnerBottomCenter(), min, max);
+//
+//    // 2. Closest point on AABB to that point (same as your sphere code)
+//    Vector3 closest;
+//    closest.x = std::max(min.x, std::min(center.x, max.x));
+//    closest.y = std::max(min.y, std::min(center.y, max.y));
+//    closest.z = std::max(min.z, std::min(center.z, max.z));
+//
+//    // 3. Vector from box -> capsule segment point
+//    Vector3 delta = center - closest;
+//
+//	const float distSq = MagnitudeSqr(delta);
+//	const float radiusSq = mRadius * mRadius;
+//	if (distSq > radiusSq) // No intersection
+//	{
+//		return IntersectData();
+//	}
+//
+//    Vector3 normal;
+//    float penetration = 0.0f;
+//
+//    if (distSq > 0.0f)
+//    {
+//        // Center is outside the box (but within radius) - normal case
+//        float dist = std::sqrt(distSq);
+//        normal = delta / dist;
+//        penetration = mRadius - dist;
+//    }
+//    else
+//    {
+//        // Sphere center is inside the box.
+//        // Push out along the axis of least penetration.
+//        Vector3 dMin = center - min;
+//        Vector3 dMax = max - center;
+//
+//        float px = std::min(dMin.x, dMax.x);
+//        float py = std::min(dMin.y, dMax.y);
+//        float pz = std::min(dMin.z, dMax.z);
+//
+//        if (px <= py && px <= pz)
+//        {
+//            normal = Vector3((dMin.x < dMax.x) ? -1.0f : 1.0f, 0.0f, 0.0f);
+//            penetration = mRadius + px;
+//        }
+//        else if (py <= px && py <= pz)
+//        {
+//            normal = Vector3(0.0f, (dMin.y < dMax.y) ? -1.0f : 1.0f, 0.0f);
+//            penetration = mRadius + py;
+//        }
+//        else
+//        {
+//            normal = Vector3(0.0f, 0.0f, (dMin.z < dMax.z) ? -1.0f : 1.0f);
+//            penetration = mRadius + pz;
+//        }
+//    }
+//
+//    return IntersectData(true, normal, {}, penetration);
+//}
+
+IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other) //const
 {
-    const Vector3 min = other.GetMinExtend();
-    const Vector3 max = other.GetMaxExtend();
+    // Box's world transform
+    const Vector3 boxCenter = other.GetCenter();
+    const Matrix4 boxRot = other.GetRotationMatrix4();     // columns = box local axes in world space
+    const Matrix4 boxRotInv = Transpose(boxRot);           // inverse of a rotation matrix = its transpose
+    const Vector3 halfExtents = other.GetExtend();         // local-space half extents
 
-    // 1. Closest point on capsule's inner segment to the box
-    const Vector3 center = ClosestPointSegmentToBox(GetInnerTopCenter(), GetInnerBottomCenter(), min, max);
+    // Transform capsule segment endpoints into box-local space
+    const Vector3 topWorld = GetInnerTopCenter();
+    const Vector3 bottomWorld = GetInnerBottomCenter();
 
-    // 2. Closest point on AABB to that point (same as your sphere code)
+    //const Vector3 topLocal = boxRotInv * (topWorld - boxCenter);
+    //const Vector3 bottomLocal = boxRotInv * (bottomWorld - boxCenter);
+
+    const Vector3 topLocal = (topWorld - boxCenter) * boxRotInv;
+    const Vector3 bottomLocal = (bottomWorld - boxCenter) * boxRotInv;
+
+    // Local-space box is now a simple AABB: [-halfExtents, +halfExtents]
+    const Vector3 min = -halfExtents;
+    const Vector3 max = halfExtents;
+
+    // 1. Closest point on capsule's inner segment to the box (in LOCAL space)
+    const Vector3 center = ClosestPointSegmentToBox(topLocal, bottomLocal, min, max);
+
+    // 2. Closest point on AABB to that point (in LOCAL space)
     Vector3 closest;
     closest.x = std::max(min.x, std::min(center.x, max.x));
     closest.y = std::max(min.y, std::min(center.y, max.y));
     closest.z = std::max(min.z, std::min(center.z, max.z));
 
-    // 3. Vector from box -> capsule segment point
+    // 3. Vector from box -> capsule segment point (still LOCAL space)
     Vector3 delta = center - closest;
 
-	const float distSq = MagnitudeSqr(delta);
-	const float radiusSq = mRadius * mRadius;
-	if (distSq > radiusSq) // No intersection
-	{
-		return IntersectData();
-	}
+    const float distSq = MagnitudeSqr(delta);
+    const float radiusSq = mRadius * mRadius;
+    if (distSq > radiusSq) // No intersection
+    {
+        return IntersectData();
+    }
 
-    Vector3 normal;
+    Vector3 normalLocal;
     float penetration = 0.0f;
 
     if (distSq > 0.0f)
     {
-        // Center is outside the box (but within radius) - normal case
         float dist = std::sqrt(distSq);
-        normal = delta / dist;
+        normalLocal = delta / dist;
         penetration = mRadius - dist;
     }
     else
     {
-        // Sphere center is inside the box.
-        // Push out along the axis of least penetration.
         Vector3 dMin = center - min;
         Vector3 dMax = max - center;
 
@@ -73,103 +152,26 @@ IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other
 
         if (px <= py && px <= pz)
         {
-            normal = Vector3((dMin.x < dMax.x) ? -1.0f : 1.0f, 0.0f, 0.0f);
+            normalLocal = Vector3((dMin.x < dMax.x) ? -1.0f : 1.0f, 0.0f, 0.0f);
             penetration = mRadius + px;
         }
         else if (py <= px && py <= pz)
         {
-            normal = Vector3(0.0f, (dMin.y < dMax.y) ? -1.0f : 1.0f, 0.0f);
+            normalLocal = Vector3(0.0f, (dMin.y < dMax.y) ? -1.0f : 1.0f, 0.0f);
             penetration = mRadius + py;
         }
         else
         {
-            normal = Vector3(0.0f, 0.0f, (dMin.z < dMax.z) ? -1.0f : 1.0f);
+            normalLocal = Vector3(0.0f, 0.0f, (dMin.z < dMax.z) ? -1.0f : 1.0f);
             penetration = mRadius + pz;
         }
     }
 
-    return IntersectData(true, normal, {}, penetration);
-}
+    // 4. Transform the normal back into WORLD space before returning it
+    const Vector3 normalWorld = normalLocal * boxRot; // rotation only, no translation needed for a direction
 
-//IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other) //const
-//{
-//    // Box's world transform
-//    const Vector3 boxCenter = other.GetCenter();
-//    //const Matrix3 boxRot = other.GetRotationMatrix();      // columns = box local axes in world space
-//    const Matrix3 boxRotInv = {};//Transpose(boxRot);           // inverse of a rotation matrix = its transpose
-//    //const Vector3 halfExtents = other.GetHalfExtents();    // local-space half extents
-//
-//    // Transform capsule segment endpoints into box-local space
-//    const Vector3 topWorld = GetInnerTopCenter();
-//    const Vector3 bottomWorld = GetInnerBottomCenter();
-//
-//    //const Vector3 topLocal = boxRotInv * (topWorld - boxCenter);
-//    //const Vector3 bottomLocal = boxRotInv * (bottomWorld - boxCenter);
-//
-//    //// Local-space box is now a simple AABB: [-halfExtents, +halfExtents]
-//    //const Vector3 min = -halfExtents;
-//    //const Vector3 max = halfExtents;
-//
-//    //// 1. Closest point on capsule's inner segment to the box (in LOCAL space)
-//    //const Vector3 center = ClosestPointSegmentToBox(topLocal, bottomLocal, min, max);
-//
-//    //// 2. Closest point on AABB to that point (in LOCAL space)
-//    //Vector3 closest;
-//    //closest.x = std::max(min.x, std::min(center.x, max.x));
-//    //closest.y = std::max(min.y, std::min(center.y, max.y));
-//    //closest.z = std::max(min.z, std::min(center.z, max.z));
-//
-//    //// 3. Vector from box -> capsule segment point (still LOCAL space)
-//    //Vector3 delta = center - closest;
-//
-//    //const float distSq = MagnitudeSqr(delta);
-//    //const float radiusSq = mRadius * mRadius;
-//    //if (distSq > radiusSq) // No intersection
-//    //{
-//    //    return IntersectData();
-//    //}
-//
-//    //Vector3 normalLocal;
-//    //float penetration = 0.0f;
-//
-//    //if (distSq > 0.0f)
-//    //{
-//    //    float dist = std::sqrt(distSq);
-//    //    normalLocal = delta / dist;
-//    //    penetration = mRadius - dist;
-//    //}
-//    //else
-//    //{
-//    //    Vector3 dMin = center - min;
-//    //    Vector3 dMax = max - center;
-//
-//    //    float px = std::min(dMin.x, dMax.x);
-//    //    float py = std::min(dMin.y, dMax.y);
-//    //    float pz = std::min(dMin.z, dMax.z);
-//
-//    //    if (px <= py && px <= pz)
-//    //    {
-//    //        normalLocal = Vector3((dMin.x < dMax.x) ? -1.0f : 1.0f, 0.0f, 0.0f);
-//    //        penetration = mRadius + px;
-//    //    }
-//    //    else if (py <= px && py <= pz)
-//    //    {
-//    //        normalLocal = Vector3(0.0f, (dMin.y < dMax.y) ? -1.0f : 1.0f, 0.0f);
-//    //        penetration = mRadius + py;
-//    //    }
-//    //    else
-//    //    {
-//    //        normalLocal = Vector3(0.0f, 0.0f, (dMin.z < dMax.z) ? -1.0f : 1.0f);
-//    //        penetration = mRadius + pz;
-//    //    }
-//    //}
-//
-//    //// 4. Transform the normal back into WORLD space before returning it
-//    //const Vector3 normalWorld = boxRot * normalLocal; // rotation only, no translation needed for a direction
-//
-//    //return IntersectData(true, normalWorld, {}, penetration);
-//    return IntersectData(true, {}, {}, 0.0f);
-//}
+    return IntersectData(true, normalWorld, {}, penetration);
+}
 
 IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingCapsule& other)
 {

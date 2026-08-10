@@ -8,9 +8,6 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/TempRoof.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempPlayer2.json"
-    },
-    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/floor_01.json"
     },
     {
@@ -18,6 +15,9 @@
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/ramp_02.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempPlayer2.json"
     }
   ]
 }

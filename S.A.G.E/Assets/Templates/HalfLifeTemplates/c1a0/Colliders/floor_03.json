@@ -1,0 +1,24 @@
+{
+  "Name": "Floor 3",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -2.130000,
+        -4.115000,
+        -13.0
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.0,
+        -0.2,
+        0.0
+      ],
+      "Size": [
+        25.0,
+        0.4,
+        24.0
+      ]
+    }
+  }
+}

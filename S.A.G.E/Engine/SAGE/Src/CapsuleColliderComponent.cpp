@@ -85,8 +85,11 @@ void CapsuleColliderComponent::Update(float deltaTime)
 	if (inputSystem->IsKeyPressed(KeyCode::NUMPAD0))
 		mPhysicsObject->ApplyForce(Vector3::YAxis * 500.0f * deltaTime);
 
-	//const Vector3 camPos = ((BoundingCapsule&)mPhysicsObject->GetCollider()).GetInnerTopCenter();
-	//camera.SetPosition(camPos + Vector3(0.0f, 0.5f, 0.0f));
+	if (mIsFPS)
+	{
+		const Vector3 camPos = ((BoundingCapsule&)mPhysicsObject->GetCollider()).GetInnerTopCenter();
+		camera.SetPosition(camPos + Vector3(0.0f, 0.5f, 0.0f));
+	}
 }
 
 void CapsuleColliderComponent::DebugUI()
@@ -99,8 +102,10 @@ void CapsuleColliderComponent::DebugUI()
 		if (ImGui::DragFloat("Radius##BoxColliderComponent", &mRadius, 0.1f)) { SetRadius(mRadius); }
 		if (ImGui::DragFloat("Height##BoxColliderComponent", &mHeight, 0.1f)) { SetHeight(mHeight); }
 		ImGui::Checkbox("Can Move", &mCanMove);
+		ImGui::Checkbox("Is FPS", &mIsFPS);
 	}
 
+	// TODO: Should use physics object pos/rot instead.
 	if (mDebugFill)
 	{
 		SimpleDraw::AddFilledCapsule(GetCenter(), 32, 16, mRadius, mHeight, mTransformComponent->GetRotation(), mDebugColor);

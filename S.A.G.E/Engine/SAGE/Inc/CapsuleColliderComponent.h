@@ -37,5 +37,6 @@ namespace SAGE
 
 		// Debug
 		bool mCanMove = false;
+		bool mIsFPS = false;
 	};
 }

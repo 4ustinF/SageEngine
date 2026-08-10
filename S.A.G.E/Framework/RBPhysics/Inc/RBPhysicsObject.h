@@ -12,7 +12,8 @@ namespace SAGE::RBPhysics
 			mPosition(collider->GetCenter()),
 			mOldPosition(collider->GetCenter()),
 			mCollider(collider),
-			mMass(mass)
+			mMass(mass),
+			mOrientation(collider->GetOrientation())
 		{
 			mInverseMass = 1.0f / mMass;
 

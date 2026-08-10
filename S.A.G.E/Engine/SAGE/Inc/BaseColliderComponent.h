@@ -22,10 +22,12 @@ namespace SAGE
 		// Getters
 		bool IsTrigger() const { return mIsTrigger; }
 		const Math::Vector3 GetCenter() const;
+		const Math::Quaternion GetOrientation() const;
 
 		// Setters
 		void SetIsTrigger(bool isTrigger) { mIsTrigger = isTrigger; }
 		void SetCenter(const Math::Vector3& center) { mCenter = center; }
+		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
 	protected:
 		void UpdatePhysicsObjectPropertys();
@@ -38,6 +40,7 @@ namespace SAGE
 		bool mIsTrigger = false;
 		// TODO: Physics Material
 		Math::Vector3 mCenter = Math::Vector3::Zero;
+		Math::Quaternion mOrientation = Math::Quaternion::Identity;
 
 		bool mDebugFill = false;
 		Graphics::Color mDebugColor = Graphics::Colors::Green;

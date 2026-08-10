@@ -18,6 +18,8 @@ namespace SAGE::RBPhysics
 		const Math::Vector3& GetNormal() const { return mNormal; }
 		float GetPenetration() const { return mPenetration; }
 
+		void InverseNormal() { mNormal = -mNormal; } // Inverse the normal vector
+
 	private:
 		bool mDoesIntersect = false;
 		Math::Vector3 mNormal = Math::Vector3::Zero;

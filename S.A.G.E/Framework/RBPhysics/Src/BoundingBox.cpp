@@ -8,7 +8,7 @@ using namespace SAGE::Math;
 using namespace SAGE::RBPhysics;
 using namespace SAGE::Graphics;
 
-void BoundingBox::DebugDraw(SAGE::Math::Quaternion orientation, bool fillDebugShapes)
+void BoundingBox::DebugDraw(Math::Quaternion orientation, bool fillDebugShapes)
 {
 	if (fillDebugShapes)
 	{

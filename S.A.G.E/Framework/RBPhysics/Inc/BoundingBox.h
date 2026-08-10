@@ -8,10 +8,11 @@ namespace SAGE::RBPhysics
 	class BoundingBox : public Collider
 	{
 	public:
-		BoundingBox(const Math::Vector3& center, const Math::Vector3& extend)
+		BoundingBox(const Math::Vector3& center, const Math::Vector3& extend, const Math::Quaternion& orientation)
 			: Collider(Collider::TYPE_BOX), mExtend(extend)
 		{
 			mCenter = center;
+			mOrientation = orientation;
 		}
 
 		void DebugDraw(SAGE::Math::Quaternion orientation, bool fillDebugShapes) override;
@@ -20,6 +21,7 @@ namespace SAGE::RBPhysics
 		void Transform(const Math::Vector3& translation) override;
 
 		Math::Vector3 GetExtend() const { return mExtend; }
+		Math::Vector3 GetHalfExtents() const { return mExtend * 0.5f; }
 		Math::Vector3 GetMinExtend() const { return mCenter - mExtend; }
 		Math::Vector3 GetMaxExtend() const { return mCenter + mExtend; }
 

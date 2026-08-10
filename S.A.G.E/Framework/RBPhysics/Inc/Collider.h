@@ -28,7 +28,7 @@ namespace SAGE::RBPhysics
 		IntersectData Intersect(const Collider& other) const;
 		virtual void Transform(const Math::Vector3& translation) {}
 		Math::Vector3 GetCenter() const { return mCenter; }
-		const SAGE::Math::Quaternion& GetOrientation() const { return mOrientation; }
+		const SAGE::Math::Quaternion& GetOrientation() const { return mOrientation; } // TODO: Does collider need to hold this info?
 
 		ColliderType GetType() const { return mType; }
 		

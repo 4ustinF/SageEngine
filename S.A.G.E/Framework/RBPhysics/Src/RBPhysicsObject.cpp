@@ -14,7 +14,8 @@ RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
 	mOldPosition(other.mOldPosition),
 	mVelocity(other.mVelocity),
 	mCollider(other.mCollider),
-	mMass(other.mMass)
+	mMass(other.mMass),
+	mOrientation(other.mOrientation)
 {
 	mCollider->AddReference();
 	mInverseMass = 1.0f / mMass;
@@ -131,7 +132,7 @@ void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const
 
 	// 1. Positional correction
 	const float myShare = mInverseMass / totalInvMass;
-	const const Vector3 newPos = mPosition + normal * (penetration * myShare); // * 0.8f); = Baumgarte stabilization
+	const Vector3 newPos = mPosition + normal * (penetration * myShare); // * 0.8f); = Baumgarte stabilization
 	SetPosition(newPos);
 
 	// 2. Velocity response
@@ -172,7 +173,7 @@ void RBPhysicsObject::ResolveCollision(const IntersectData& intersectData)
 	const Vector3& velocity = GetVelocity();
 
 	// 1. Positional correction
-	const const Vector3 newPos = mPosition + normal * penetration; // * 0.8f); = Baumgarte stabilization
+	const Vector3 newPos = mPosition + normal * penetration; // * 0.8f); = Baumgarte stabilization
 	SetPosition(newPos);
 
 	// 2. Velocity response

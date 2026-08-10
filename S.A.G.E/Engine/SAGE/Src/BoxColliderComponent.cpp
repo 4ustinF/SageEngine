@@ -65,7 +65,7 @@ void BoxColliderComponent ::DebugUI()
 
 void BoxColliderComponent::OnEnable()
 {
-	mPhysicsObject = new RBPhysicsObject(new BoundingBox(GetCenter(), mExtend));
+	mPhysicsObject = new RBPhysicsObject(new BoundingBox(GetCenter(), mExtend, GetOrientation()));
 	BaseColliderComponent::OnEnable();
 }
 

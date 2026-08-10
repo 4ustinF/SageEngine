@@ -88,6 +88,16 @@ const Vector3 BaseColliderComponent::GetCenter() const
 	return mCenter; 
 }
 
+const Quaternion BaseColliderComponent::GetOrientation() const
+{
+	if (mTransformComponent)
+	{
+		return mTransformComponent->GetRotation();// *mOrientation;
+	}
+
+	return mOrientation;
+}
+
 void BaseColliderComponent::UpdatePhysicsObjectPropertys()
 {
 	if (mRigidBodyComponent != nullptr)

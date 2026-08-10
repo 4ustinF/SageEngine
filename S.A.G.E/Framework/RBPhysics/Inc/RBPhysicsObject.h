@@ -14,7 +14,7 @@ namespace SAGE::RBPhysics
 			mCollider(collider),
 			mMass(mass)
 		{
-			//mInverseMass = 1.0f / mMass;
+			mInverseMass = 1.0f / mMass;
 
 			//// This is for sphere body 
 			//float I = 2.0f / 5.0f * mMass * mMass * 1.0f; // Radius

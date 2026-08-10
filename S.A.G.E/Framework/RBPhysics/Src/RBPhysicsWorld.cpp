@@ -155,61 +155,61 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 
 void RBPhysicsWorld::HandleCollisions()
 {
-	const int objectsCount = GetObjectsCount();
-	for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
-	{
-		RBPhysicsObject& primaryObject = mDynamicObjects[primaryIndex];
-		for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
-		{
-			RBPhysicsObject& secondaryObject = mDynamicObjects[secondaryIndex];
-			IntersectData intersectData = primaryObject.GetCollider().Intersect(secondaryObject.GetCollider());
+	//const int objectsCount = GetObjectsCount();
+	//for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
+	//{
+	//	RBPhysicsObject& primaryObject = mDynamicObjects[primaryIndex];
+	//	for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
+	//	{
+	//		RBPhysicsObject& secondaryObject = mDynamicObjects[secondaryIndex];
+	//		IntersectData intersectData = primaryObject.GetCollider().Intersect(secondaryObject.GetCollider());
 
-			if (intersectData.GetDoesIntersect())
-			{
-				// Old sphere vs sphere logic
-				//const Vector3 direction = Normalize(intersectData.GetDirection());
-				//const Vector3 primVel = primaryObject.GetVelocity();
-				//const Vector3 otherDirection = Reflect(direction, Normalize(primVel));
-				//
-				//primaryObject.SetVelocity(Reflect(primVel, otherDirection));
-				//secondaryObject.SetVelocity(Reflect(secondaryObject.GetVelocity(), direction));
+	//		if (intersectData.GetDoesIntersect())
+	//		{
+	//			// Old sphere vs sphere logic
+	//			//const Vector3 direction = Normalize(intersectData.GetDirection());
+	//			//const Vector3 primVel = primaryObject.GetVelocity();
+	//			//const Vector3 otherDirection = Reflect(direction, Normalize(primVel));
+	//			//
+	//			//primaryObject.SetVelocity(Reflect(primVel, otherDirection));
+	//			//secondaryObject.SetVelocity(Reflect(secondaryObject.GetVelocity(), direction));
 
-				//const Vector3 normal = intersectData.GetNormal();
-				//mPosition += normal * intersectData.GetPenetration(); // If other is static...
+	//			//const Vector3 normal = intersectData.GetNormal();
+	//			//mPosition += normal * intersectData.GetPenetration(); // If other is static...
 
-				//// If they both can move - Heavier objects move less
-				//float invMassSphere = 1.0f / mMass;
-				//float invMassBox = 1.0f / otherObject.GetMass();
+	//			//// If they both can move - Heavier objects move less
+	//			//float invMassSphere = 1.0f / mMass;
+	//			//float invMassBox = 1.0f / otherObject.GetMass();
 
-				////float totalInvMass = invMassSphere + invMassBox;
-				////mPosition += normal * intersectData.GetPenetration() * (invMassSphere / totalInvMass); // If other is not static
-				////otherPos -= normal * penetration * (invMassBox / totalInvMass);
+	//			////float totalInvMass = invMassSphere + invMassBox;
+	//			////mPosition += normal * intersectData.GetPenetration() * (invMassSphere / totalInvMass); // If other is not static
+	//			////otherPos -= normal * penetration * (invMassBox / totalInvMass);
 
-				//// Velocity
-				//Vector3 relativeVelocity = mVelocity - otherObject.GetVelocity(); // Relative velocity:
+	//			//// Velocity
+	//			//Vector3 relativeVelocity = mVelocity - otherObject.GetVelocity(); // Relative velocity:
 
-				//float velAlongNormal = Dot(relativeVelocity, normal); // Velocity along the collision normal
-				//if (velAlongNormal > 0.0f) // If they're already separating:
-				//{
-				//	return;
-				//}
+	//			//float velAlongNormal = Dot(relativeVelocity, normal); // Velocity along the collision normal
+	//			//if (velAlongNormal > 0.0f) // If they're already separating:
+	//			//{
+	//			//	return;
+	//			//}
 
-				//float e = 0.5f; // 0 = no bounce, 1 = perfect bounce // TODO: Adjust 
+	//			//float e = 0.5f; // 0 = no bounce, 1 = perfect bounce // TODO: Adjust 
 
-				//// Impulse magnitude:
-				//float j = -(1.0f + e) * velAlongNormal / (invMassSphere + otherObject.GetMass());
+	//			//// Impulse magnitude:
+	//			//float j = -(1.0f + e) * velAlongNormal / (invMassSphere + otherObject.GetMass());
 
-				//// Impulse vector:
-				//Vector3 impulse = j * normal;
+	//			//// Impulse vector:
+	//			//Vector3 impulse = j * normal;
 
-				//////Apply:
-				////sphereVelocity += impulse * invMassSphere;
-				////boxVelocity -= impulse * invMassBox;
+	//			//////Apply:
+	//			////sphereVelocity += impulse * invMassSphere;
+	//			////boxVelocity -= impulse * invMassBox;
 
-				//mVelocity += impulse * invMassSphere;
-			}
-		}
-	}
+	//			//mVelocity += impulse * invMassSphere;
+	//		}
+	//	}
+	//}
 
 	// Static collision
 	//for (RBPhysicsObject& primaryObject : mDynamicObjects)
@@ -245,6 +245,23 @@ void RBPhysicsWorld::HandleCollisions()
 	//		}
 	//	}
 	//}
+
+	const int objectsCount = GetObjectsCount();
+	for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
+	{
+		RBPhysicsObject& primaryObject = mDynamicObjects[primaryIndex];
+		for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
+		{
+			RBPhysicsObject& secondaryObject = mDynamicObjects[secondaryIndex];
+			IntersectData intersectData = primaryObject.GetCollider().Intersect(secondaryObject.GetCollider());
+			if (intersectData.GetDoesIntersect())
+			{
+				primaryObject.ResolveCollision(secondaryObject, intersectData);
+				intersectData.InverseNormal(); // Inverse the normal vector for the second object
+				secondaryObject.ResolveCollision(primaryObject, intersectData);
+			}
+		}
+	}
 
 	for (RBPhysicsObject& primaryObject : mDynamicObjects)
 	{

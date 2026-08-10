@@ -40,6 +40,10 @@ IntersectData Collider::Intersect(const Collider& other) const
 		{
 			return self->IntersectBoundingCapsule((BoundingBox&)other); // TODO: Better cast?
 		}
+		else if (other.GetType() == ColliderType::TYPE_CAPSULE)
+		{
+			return self->IntersectBoundingCapsule((BoundingCapsule&)other); // TODO: Better cast?
+		}
 	}
 
 	return IntersectData(); // TODO: Should never reach this add error logs if we do.

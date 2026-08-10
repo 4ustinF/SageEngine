@@ -17,7 +17,7 @@ RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
 	mMass(other.mMass)
 {
 	mCollider->AddReference();
-	//mInverseMass = 1.0f / mMass;
+	mInverseMass = 1.0f / mMass;
 
 	//// This is for sphere body 
 	//float I = 2.0f / 5.0f * mMass * mMass * 1.0f; // Radius

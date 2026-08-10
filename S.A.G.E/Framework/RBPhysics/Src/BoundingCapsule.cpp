@@ -91,6 +91,43 @@ IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other
     return IntersectData(true, normal, {}, penetration);
 }
 
+IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingCapsule& other)
+{
+    Vector3 c1, c2;
+    const float distSq = ClosestPointSegmentSegment(
+        GetInnerTopCenter(), GetInnerBottomCenter(),
+        other.GetInnerTopCenter(), other.GetInnerBottomCenter(),
+        c1, c2);
+
+    const float radiusSum = mRadius + other.mRadius;
+    const float radiusSumSq = radiusSum * radiusSum;
+
+    if (distSq > radiusSumSq) // No intersection
+    {
+        return IntersectData();
+    }
+
+    Vector3 normal;
+    float penetration = 0.0f;
+
+    if (distSq > 0.0f)
+    {
+        const float dist = std::sqrt(distSq);
+        normal = (c1 - c2) / dist; // points from B's segment toward A's segment
+        penetration = radiusSum - dist;
+    }
+    else
+    {
+        // Segments intersect exactly (distSq == 0) — pick a fallback normal.
+        // This is rare in practice (would need coplanar crossing segments),
+        // but must be handled to avoid a zero-length normal.
+        normal = Vector3(0.0f, 1.0f, 0.0f); // arbitrary fallback, see note below
+        penetration = radiusSum;
+    }
+
+    return IntersectData(true, normal, {}, penetration);
+}
+
 Vector3 BoundingCapsule::ClosestPointOnSegment(const Vector3& a, const Vector3& b, const Vector3& point)
 {
     Vector3 ab = b - a;
@@ -126,4 +163,79 @@ Vector3 BoundingCapsule::ClosestPointSegmentToBox(const Vector3& segA, const Vec
     }
 
     return segPoint; // this is your sphere center
+}
+
+// Computes closest points between segment (p1,q1) and (p2,q2)
+// Returns closest point on each segment via out params, and the squared distance
+float BoundingCapsule::ClosestPointSegmentSegment(const Vector3& p1, const Vector3& q1, const Vector3& p2, const Vector3& q2, Vector3& c1, Vector3& c2)
+{
+    const Vector3 d1 = q1 - p1; // direction of segment 1
+    const Vector3 d2 = q2 - p2; // direction of segment 2
+    const Vector3 r = p1 - p2;
+
+    const float a = Dot(d1, d1); // squared length of segment 1
+    const float e = Dot(d2, d2); // squared length of segment 2
+    const float f = Dot(d2, r);
+
+    float s, t;
+    const float EPSILON = 1e-6f;
+
+    if (a <= EPSILON && e <= EPSILON)
+    {
+        // Both segments degenerate into points
+        c1 = p1;
+        c2 = p2;
+        return MagnitudeSqr(c1 - c2);
+    }
+
+    if (a <= EPSILON)
+    {
+        // Segment 1 is a point
+        s = 0.0f;
+        t = std::clamp(f / e, 0.0f, 1.0f);
+    }
+    else
+    {
+        const float c = Dot(d1, r);
+
+        if (e <= EPSILON)
+        {
+            // Segment 2 is a point
+            t = 0.0f;
+            s = std::clamp(-c / a, 0.0f, 1.0f);
+        }
+        else
+        {
+            const float b = Dot(d1, d2);
+            const float denom = a * e - b * b;
+
+            if (denom != 0.0f)
+            {
+                s = std::clamp((b * f - c * e) / denom, 0.0f, 1.0f);
+            }
+            else
+            {
+                // Segments are parallel — pick arbitrary s
+                s = 0.0f;
+            }
+
+            t = (b * s + f) / e;
+
+            // If t is out of range, clamp and recompute s
+            if (t < 0.0f)
+            {
+                t = 0.0f;
+                s = std::clamp(-c / a, 0.0f, 1.0f);
+            }
+            else if (t > 1.0f)
+            {
+                t = 1.0f;
+                s = std::clamp((b - c) / a, 0.0f, 1.0f);
+            }
+        }
+    }
+
+    c1 = p1 + d1 * s;
+    c2 = p2 + d2 * t;
+    return MagnitudeSqr(c1 - c2);
 }

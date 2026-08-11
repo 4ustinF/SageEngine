@@ -27,6 +27,9 @@ namespace SAGE
 		// Setters
 		void SetSize(const Math::Vector3& size);
 
+	protected:
+		void ResizeToMesh() override;
+
 	private:
 		Math::Vector3 mSize = Math::Vector3::One;
 		Math::Vector3 mExtend = Math::Vector3::Half;

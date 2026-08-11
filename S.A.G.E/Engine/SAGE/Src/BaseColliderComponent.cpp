@@ -6,6 +6,7 @@
 #include "RBPhysicsService.h"
 #include "TransformComponent.h"
 #include "RigidBodyComponent.h"
+#include "MeshFilterComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -44,6 +45,7 @@ void BaseColliderComponent ::Initialize()
 	GameObject& ownerGO = GetOwner();
 	mTransformComponent = ownerGO.GetComponent<TransformComponent>();
 	mRigidBodyComponent = ownerGO.GetComponent<RigidBodyComponent>();
+	mMeshFilterComponent = ownerGO.GetComponent<MeshFilterComponent>();
 	mPhysicsService = ownerGO.GetWorld().GetService<RBPhysicsService>();
 }
 

@@ -4,6 +4,7 @@
 namespace SAGE
 {
 	class RBPhysicsService;
+	class MeshFilterComponent;
 	class RigidBodyComponent;
 	class TransformComponent;
 
@@ -31,10 +32,12 @@ namespace SAGE
 
 	protected:
 		void UpdatePhysicsObjectPropertys();
+		virtual void ResizeToMesh() {};
 
 		RBPhysicsService* mPhysicsService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
 		RigidBodyComponent* mRigidBodyComponent = nullptr;
+		MeshFilterComponent* mMeshFilterComponent = nullptr;
 		SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject = nullptr;
 		
 		bool mIsTrigger = false;

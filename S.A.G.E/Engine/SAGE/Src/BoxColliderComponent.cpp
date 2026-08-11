@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "RBPhysicsService.h"
 #include "TransformComponent.h"
+#include "MeshFilterComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -51,6 +52,7 @@ void BoxColliderComponent ::DebugUI()
 		ImGui::Checkbox("Is Trigger##BoxColliderComponent", &mIsTrigger);
 		ImGui::DragFloat3("Center##BoxColliderComponent", &mCenter.x, 0.1f);
 		if (ImGui::DragFloat3("Size##BoxColliderComponent", &mSize.x, 0.1f)) { SetSize(mSize); }
+		if (mMeshFilterComponent != nullptr && ImGui::Button("Resize to Mesh##BoxColliderComponent")) { ResizeToMesh(); }
 	}
 
 	if (mDebugFill)
@@ -76,4 +78,23 @@ void BoxColliderComponent::SetSize(const Math::Vector3& size)
 	mSize.z = Max(0.1f, size.z);
 
 	mExtend = mSize * 0.5f;
+}
+
+void BoxColliderComponent::ResizeToMesh()
+{
+	if (mMeshFilterComponent == nullptr)
+	{
+		return;
+	}
+
+	const OBB BoundingBox = mMeshFilterComponent->GetGlobalBoundingBox();
+	SetSize(BoundingBox.extend * 2.0f);
+	if (mTransformComponent != nullptr)
+	{
+		mCenter = BoundingBox.center - mTransformComponent->GetPosition();
+	}
+	else
+	{
+		mCenter = BoundingBox.center;
+	}
 }

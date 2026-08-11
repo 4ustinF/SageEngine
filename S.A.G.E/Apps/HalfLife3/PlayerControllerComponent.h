@@ -28,12 +28,16 @@ private:
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 	SAGE::CapsuleColliderComponent* mCapsuleColliderComponent = nullptr;
 
+	void IsGroundedCheck();
 	void CheckForPlayerMovementInput(SAGE::Graphics::Camera& camera, float deltaTime);
 	void UpdateCameraPosition(SAGE::Graphics::Camera& camera);
 
-	float mWalkSpeed = 50.0f;
-	float mSprintSpeed = 100.0f;
+	float GetMovementSpeed(float deltaTime) const;
+
+	SAGE::Math::Vector2 mGroundSpeed = SAGE::Math::Vector2(50.0f, 100.0f);
+	SAGE::Math::Vector2 mAirSpeed = SAGE::Math::Vector2(25.0f, 50.0f);
 	float mJumpForce = 500.0f;
+	bool mIsGrounded = true;
 
 	// Debug
 	bool mCanMove = true;

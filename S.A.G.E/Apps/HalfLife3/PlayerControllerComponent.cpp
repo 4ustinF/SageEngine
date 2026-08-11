@@ -43,6 +43,7 @@ void PlayerControllerComponent::Terminate()
 void PlayerControllerComponent::Update(float deltaTime)
 {
 	Camera& camera = mCameraService->GetCamera();
+	IsGroundedCheck();
 	CheckForPlayerMovementInput(camera, deltaTime);
 	UpdateCameraPosition(camera);
 }
@@ -51,9 +52,19 @@ void PlayerControllerComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Player Controller Component##PlayerControllerComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		ImGui::Checkbox("Can Move", &mCanMove);
-		ImGui::Checkbox("Is FPS", &mIsInFPSMode);
+		ImGui::Checkbox("Can Move##PlayerControllerComponent", &mCanMove);
+		ImGui::Checkbox("Is FPS##PlayerControllerComponent", &mIsInFPSMode);
+		ImGui::Checkbox("Is Grounded##PlayerControllerComponent", &mIsGrounded);
+		ImGui::DragFloat2("Ground Speed##PlayerControllerComponent", &mGroundSpeed.x, 0.1f);
+		ImGui::DragFloat2("Air Speed##PlayerControllerComponent", &mAirSpeed.x, 0.1f);
+		ImGui::DragFloat("Jump Force##PlayerControllerComponent", &mJumpForce, 0.1f);
 	}
+}
+
+void PlayerControllerComponent::IsGroundedCheck()
+{
+	// TODO: Implement grounded check using raycast or collision detection with the ground.
+	mIsGrounded = true; // Placeholder for actual grounded check logic.
 }
 
 void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, float deltaTime)
@@ -69,7 +80,7 @@ void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, floa
 		return;
 	}
 
-	const float moveSpeed = (mInputSystem->IsKeyDown(KeyCode::LSHIFT) ? mSprintSpeed : mWalkSpeed) * deltaTime;
+	const float moveSpeed = GetMovementSpeed(deltaTime);
 
 	// 1. Get camera forward, flatten to XZ plane (ignore pitch)
 	const Vector3 forward = camera.GetDirectionWithoutPitch();
@@ -118,4 +129,14 @@ void PlayerControllerComponent::UpdateCameraPosition(Camera& camera)
 
 	const Vector3 camNewPos = ((BoundingCapsule&)physicsObject->GetCollider()).GetInnerTopCenter();
 	camera.SetPosition(camNewPos + Vector3(0.0f, 0.5f, 0.0f));
+}
+
+float PlayerControllerComponent::GetMovementSpeed(float deltaTime) const
+{
+	if (mInputSystem->IsKeyDown(KeyCode::LSHIFT))
+	{
+		return (mIsGrounded ? mGroundSpeed.y : mAirSpeed.y) * deltaTime;
+	}
+
+	return (mIsGrounded ? mGroundSpeed.x : mAirSpeed.x) * deltaTime;
 }

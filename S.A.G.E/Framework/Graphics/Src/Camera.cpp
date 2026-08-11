@@ -4,6 +4,7 @@
 #include "GraphicsSystem.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
 void Camera::SetMode(ProjectionMode mode)
@@ -11,29 +12,29 @@ void Camera::SetMode(ProjectionMode mode)
 	mProjectionMode = mode;
 }
 
-void Camera::SetPosition(const Math::Vector3& position)
+void Camera::SetPosition(const Vector3& position)
 {
 	mPosition = position;
 }
 
-void Camera::SetDirection(const Math::Vector3& direction)
+void Camera::SetDirection(const Vector3& direction)
 {
 	// Prevent setting direction straight up or down
-	auto dir = Math::Normalize(direction);
-	if (Math::Abs(Math::Dot(dir, Math::Vector3::YAxis)) < 0.995f)
+	auto dir = Normalize(direction);
+	if (Abs(Dot(dir, Vector3::YAxis)) < 0.995f)
 		mDirection = dir;
 }
 
-void Camera::SetLookAt(const Math::Vector3& target)
+void Camera::SetLookAt(const Vector3& target)
 {
 	SetDirection(target - mPosition);
 }
 
 void Camera::SetFov(float fov)
 {
-	constexpr float kMinFov = 10.0f * Math::Constants::DegToRad;
-	constexpr float kMaxFov = 170.0f * Math::Constants::DegToRad;
-	mFov = Math::Clamp(fov, kMinFov, kMaxFov);
+	constexpr float kMinFov = 10.0f * Constants::DegToRad;
+	constexpr float kMaxFov = 170.0f * Constants::DegToRad;
+	mFov = Clamp(fov, kMinFov, kMaxFov);
 }
 
 void Camera::SetAspectRatio(float ratio)
@@ -64,51 +65,58 @@ void Camera::Walk(float distance)
 
 void Camera::Strafe(float distance)
 {
-	const Math::Vector3 right = Math::Normalize(Cross(Math::Vector3::YAxis, mDirection));
+	const Vector3 right = Normalize(Cross(Vector3::YAxis, mDirection));
 	mPosition += right * distance;
 }
 
 void Camera::Rise(float distance)
 {
-	mPosition += Math::Vector3::YAxis * distance;
+	mPosition += Vector3::YAxis * distance;
 }
 
 void Camera::Yaw(float radian)
 {
-	Math::Matrix4 matRotate = Math::Matrix4::RotationY(radian);
-	mDirection = Math::TransformNormal(mDirection, matRotate);
+	Matrix4 matRotate = Matrix4::RotationY(radian);
+	mDirection = TransformNormal(mDirection, matRotate);
 }
 
 void Camera::Pitch(float radian)
 {
-	const Math::Vector3 right = Math::Normalize(Cross(Math::Vector3::YAxis, mDirection));
-	const Math::Matrix4 matRot = Math::Matrix4::RotationAxis(right, radian);
-	const Math::Vector3 newLook = Math::TransformNormal(mDirection, matRot);
+	const Vector3 right = Normalize(Cross(Vector3::YAxis, mDirection));
+	const Matrix4 matRot = Matrix4::RotationAxis(right, radian);
+	const Vector3 newLook = TransformNormal(mDirection, matRot);
 	SetDirection(newLook);
 }
 
 void Camera::Zoom(float amount)
 {
-	constexpr float minZoom = 170.0f * Math::Constants::DegToRad;
-	constexpr float maxZoom = 10.0f * Math::Constants::DegToRad;
-	mFov = Math::Clamp(mFov - amount, maxZoom, minZoom);
+	constexpr float minZoom = 170.0f * Constants::DegToRad;
+	constexpr float maxZoom = 10.0f * Constants::DegToRad;
+	mFov = Clamp(mFov - amount, maxZoom, minZoom);
 }
 
-const Math::Vector3& Camera::GetPosition() const
+const Vector3& Camera::GetPosition() const
 {
 	return mPosition;
 }
 
-const Math::Vector3& Camera::GetDirection() const
+const Vector3& Camera::GetDirection() const
 {
 	return mDirection;
 }
 
-Math::Matrix4 Camera::GetWorldMatrix() const
+const Vector3 Camera::GetDirectionWithoutPitch() const
 {
-	const Math::Vector3 l = mDirection;
-	const Math::Vector3 r = Math::Normalize(Math::Cross(Math::Vector3::YAxis, l));
-	const Math::Vector3 u = Math::Normalize(Math::Cross(l, r));
+	Vector3 dir = mDirection;
+	dir.y = 0.0f;
+	return Normalize(dir);
+}
+
+Matrix4 Camera::GetWorldMatrix() const
+{
+	const Vector3 l = mDirection;
+	const Vector3 r = Normalize(Cross(Vector3::YAxis, l));
+	const Vector3 u = Normalize(Cross(l, r));
 	return {
 		r.x, r.y, r.z, 0.0f,
 		u.x, u.y, u.z, 0.0f,
@@ -117,14 +125,14 @@ Math::Matrix4 Camera::GetWorldMatrix() const
 	};
 }
 
-Math::Matrix4 Camera::GetViewMatrix() const
+Matrix4 Camera::GetViewMatrix() const
 {
-	const Math::Vector3 l = mDirection;
-	const Math::Vector3 r = Math::Normalize(Math::Cross(Math::Vector3::YAxis, l));
-	const Math::Vector3 u = Math::Normalize(Math::Cross(l, r));
-	const float x = -Math::Dot(r, mPosition);
-	const float y = -Math::Dot(u, mPosition);
-	const float z = -Math::Dot(l, mPosition);
+	const Vector3 l = mDirection;
+	const Vector3 r = Normalize(Cross(Vector3::YAxis, l));
+	const Vector3 u = Normalize(Cross(l, r));
+	const float x = -Dot(r, mPosition);
+	const float y = -Dot(u, mPosition);
+	const float z = -Dot(l, mPosition);
 	return {
 		r.x, u.x, l.x, 0.0f,
 		r.y, u.y, l.y, 0.0f,
@@ -133,12 +141,12 @@ Math::Matrix4 Camera::GetViewMatrix() const
 	};
 }
 
-Math::Matrix4 Camera::GetProjectionMatrix() const
+Matrix4 Camera::GetProjectionMatrix() const
 {
 	return (mProjectionMode == ProjectionMode::Perspective) ? GetPerspectiveMatrix() : GetOrthographicMatrix();
 }
 
-Math::Matrix4 Camera::GetPerspectiveMatrix() const
+Matrix4 Camera::GetPerspectiveMatrix() const
 {
 	const float a = (mAspectRatio == 0.0f) ? GraphicsSystem::Get()->GetBackBufferAspectRatio() : mAspectRatio;
 	const float h = 1.0f / tan(mFov * 0.5f);
@@ -154,7 +162,7 @@ Math::Matrix4 Camera::GetPerspectiveMatrix() const
 	};
 }
 
-Math::Matrix4 Camera::GetOrthographicMatrix() const
+Matrix4 Camera::GetOrthographicMatrix() const
 {
 	const float w = (mWidth == 0.0f) ? GraphicsSystem::Get()->GetBackBufferWidth() : mWidth;
 	const float h = (mHeight == 0.0f) ? GraphicsSystem::Get()->GetBackBufferHeight() : mHeight;

@@ -1,5 +1,5 @@
 {
-  "Name": "Fake Player",
+  "Name": "Player",
   "Components": {
     "Transform Component": {
       "Position": [
@@ -19,6 +19,8 @@
     },
     "Rigid Body Component": {
       "Mass": 5.0
+    },
+    "Player Controller Component": {
     }
   }
 }

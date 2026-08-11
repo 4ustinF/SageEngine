@@ -1,4 +1,6 @@
 #include "GameState.h"
+
+#include "PlayerControllerComponent.h"
 #include "TextureAnimatorComponent.h"
 
 using namespace SAGE;
@@ -16,6 +18,12 @@ namespace
 		{
 			TextureAnimatorComponent* textureAnimatorComponent = gameObject.AddComponent<TextureAnimatorComponent>();
 			textureAnimatorComponent->LoadComponentFromTemplate(value);
+			return true;
+		}
+		else if (strcmp(componentName, "Player Controller Component") == 0)
+		{
+			PlayerControllerComponent* playerControllerComponent = gameObject.AddComponent<PlayerControllerComponent>();
+			playerControllerComponent->LoadComponentFromTemplate(value);
 			return true;
 		}
 		return false;

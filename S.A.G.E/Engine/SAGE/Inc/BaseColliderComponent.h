@@ -24,6 +24,7 @@ namespace SAGE
 		bool IsTrigger() const { return mIsTrigger; }
 		const Math::Vector3 GetCenter() const;
 		const Math::Quaternion GetOrientation() const;
+		SAGE::RBPhysics::RBPhysicsObject* GetPhysicsObject() const { return mPhysicsObject; }
 
 		// Setters
 		void SetIsTrigger(bool isTrigger) { mIsTrigger = isTrigger; }

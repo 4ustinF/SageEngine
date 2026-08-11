@@ -17,7 +17,7 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/ramp_02.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempPlayer2.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/TempPlayer2.json"
     }
   ]
 }

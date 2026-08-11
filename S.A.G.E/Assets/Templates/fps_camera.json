@@ -1,7 +1,8 @@
 {
+  "Name": "FPS Cam Controller",
   "Components": {
     "CameraComponent": {
-      "Position": [0, 3, -7]
+      "Position": [ 0, 3, -7 ]
     },
     "FPSCameraControllerComponent": {
       "NormSpeed": 2.5,

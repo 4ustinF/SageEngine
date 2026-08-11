@@ -46,6 +46,7 @@ namespace SAGE::Graphics
 
 		const Math::Vector3& GetPosition() const;
 		const Math::Vector3& GetDirection() const;
+		const Math::Vector3 GetDirectionWithoutPitch() const;
 
 		Math::Matrix4 GetWorldMatrix() const;
 		Math::Matrix4 GetViewMatrix() const;

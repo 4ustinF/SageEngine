@@ -16,14 +16,13 @@
   },
   "GameObjects": [
     {
-      "Name": "Player",
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/PlayerController.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/fps_cam_controller.json"
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/TempPlayer.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/player.json"
     }
   ]
 }

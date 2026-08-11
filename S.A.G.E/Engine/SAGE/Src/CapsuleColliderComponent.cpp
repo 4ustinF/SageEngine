@@ -10,7 +10,6 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
-using namespace SAGE::Input;
 using namespace SAGE::Graphics;
 using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
@@ -49,49 +48,6 @@ void CapsuleColliderComponent ::Terminate()
 	BaseColliderComponent::Terminate();
 }
 
-void CapsuleColliderComponent::Update(float deltaTime)
-{
-	if (mCanMove == false)
-	{
-		return;
-	}
-
-	auto inputSystem = InputSystem::Get();
-	const float moveSpeed = (inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 100.0f : 50.0f) * deltaTime;
-
-	CameraService* cameraService = GetOwner().GetWorld().GetService<CameraService>();
-	Camera& camera = cameraService->GetCamera();
-
-	// 1. Get camera forward, flatten to XZ plane (ignore pitch)
-	Vector3 forward = camera.GetDirection();
-	forward.y = 0.0f;
-	forward = Normalize(forward);
-
-	// 2. Right vector = forward rotated 90 degrees around Y
-	//    (cross of world-up and forward gives you a perpendicular horizontal vector)
-	Vector3 right = Cross(Vector3::YAxis, forward);
-	right = Normalize(right);
-
-	// 3. Apply forces relative to camera orientation
-	if (inputSystem->IsKeyDown(KeyCode::UP))
-		mPhysicsObject->ApplyForce(forward * moveSpeed);
-	if (inputSystem->IsKeyDown(KeyCode::DOWN))
-		mPhysicsObject->ApplyForce(-forward * moveSpeed);
-	if (inputSystem->IsKeyDown(KeyCode::RIGHT))
-		mPhysicsObject->ApplyForce(right * moveSpeed);
-	if (inputSystem->IsKeyDown(KeyCode::LEFT))
-		mPhysicsObject->ApplyForce(-right * moveSpeed);
-
-	if (inputSystem->IsKeyPressed(KeyCode::NUMPAD0))
-		mPhysicsObject->ApplyForce(Vector3::YAxis * 500.0f * deltaTime);
-
-	if (mIsFPS)
-	{
-		const Vector3 camPos = ((BoundingCapsule&)mPhysicsObject->GetCollider()).GetInnerTopCenter();
-		camera.SetPosition(camPos + Vector3(0.0f, 0.5f, 0.0f));
-	}
-}
-
 void CapsuleColliderComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Capsule Collider Component##CapsuleColliderComponent ", ImGuiTreeNodeFlags_CollapsingHeader))
@@ -101,8 +57,6 @@ void CapsuleColliderComponent::DebugUI()
 		ImGui::DragFloat3("Center##CapsuleColliderComponent ", &mCenter.x, 0.1f);
 		if (ImGui::DragFloat("Radius##BoxColliderComponent", &mRadius, 0.1f)) { SetRadius(mRadius); }
 		if (ImGui::DragFloat("Height##BoxColliderComponent", &mHeight, 0.1f)) { SetHeight(mHeight); }
-		ImGui::Checkbox("Can Move", &mCanMove);
-		ImGui::Checkbox("Is FPS", &mIsFPS);
 	}
 
 	// TODO: Should use physics object pos/rot instead.

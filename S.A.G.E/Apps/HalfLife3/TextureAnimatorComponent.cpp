@@ -5,10 +5,11 @@
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
+namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(TextureAnimatorComponent, 100);
 
-void TextureAnimatorComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
+void TextureAnimatorComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
 	if (value.HasMember("TextureId File Paths"))
 	{
@@ -43,7 +44,7 @@ void TextureAnimatorComponent::PreSaveComponentToTemplate()
 	RestoreOriginalTexture(); // To not override the save of mesh renderer component's texture id.
 }
 
-void TextureAnimatorComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
+void TextureAnimatorComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
 	SaveStringsToTemplate(compObj, allocator, "TextureId File Paths", mAnimationFrameFilePaths);
 	SaveNumberToTemplate(compObj, allocator, "Animation Time", mAnimationTime);

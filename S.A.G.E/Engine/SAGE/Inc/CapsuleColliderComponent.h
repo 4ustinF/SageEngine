@@ -17,7 +17,6 @@ namespace SAGE
 
 		void Initialize() override;
 		void Terminate() override;
-		void Update(float deltaTime) override;
 		void DebugUI() override;
 
 		void OnEnable() override;
@@ -34,9 +33,5 @@ namespace SAGE
 		float mRadius = 0.5f;
 		float mHeight = 2.0f;
 		// TODO: Direction?
-
-		// Debug
-		bool mCanMove = false;
-		bool mIsFPS = false;
 	};
 }

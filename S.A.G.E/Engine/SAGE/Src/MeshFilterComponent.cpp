@@ -212,7 +212,7 @@ void MeshFilterComponent::DebugUI()
 				}
 				else
 				{
-					SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Red);
+					SimpleDraw::AddFace(pos0, pos1, pos2, Colors::Orange);
 				}
 			}
 		}

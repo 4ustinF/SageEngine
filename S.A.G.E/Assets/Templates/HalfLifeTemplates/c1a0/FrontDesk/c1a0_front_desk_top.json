@@ -1,11 +1,11 @@
 {
-  "Name": "Brush 39",
+  "Name": "Desk Top",
   "Components": {
     "Transform Component": {
     },
     "Mesh Filter Component": {
       "MeshType": "Custom",
-      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_brushes_39.mesh"
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/FrontDesk/c1a0_front_desk_top.mesh"
     },
     "Mesh Renderer Component": {
       "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_brush_39.material"

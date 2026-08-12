@@ -13,6 +13,9 @@
     <Filter Include="Components\WorldBuilding">
       <UniqueIdentifier>{3e12c041-a09b-40da-b013-8f4a4d933f61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Player">
+      <UniqueIdentifier>{9cf49dba-efe4-49ed-882c-ee86df049d71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp">
@@ -24,6 +27,9 @@
     <ClCompile Include="TextureAnimatorComponent.cpp">
       <Filter>Components\WorldBuilding</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerControllerComponent.cpp">
+      <Filter>Components\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -34,6 +40,9 @@
     </ClInclude>
     <ClInclude Include="TypeIds.h">
       <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControllerComponent.h">
+      <Filter>Components\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

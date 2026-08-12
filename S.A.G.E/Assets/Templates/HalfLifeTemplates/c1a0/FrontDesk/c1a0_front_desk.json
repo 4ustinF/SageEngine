@@ -1,12 +1,17 @@
 {
   "Name": "Front Desk",
   "Components": {
+    "Transform Component": {
+    },
     "Selection Box Component": {
     }
   },
   "GameObjects": [
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/c1a0_front_desk_side.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/c1a0_front_desk_side.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/c1a0_front_desk_top.json"
     }
   ]
 }

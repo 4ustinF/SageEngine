@@ -9,18 +9,6 @@
       ]
     },
     "Selection Box Component": {
-    },
-    "Box Collider Component": {
-      "Center": [
-        0.0,
-        -0.30479979515075684,
-        0.0
-      ],
-      "Size": [
-        1.5240029096603394,
-        0.6858018636703491,
-        3.8100013732910156
-      ]
     }
   },
   "GameObjects": [
@@ -29,6 +17,9 @@
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/c1a0_front_desk_top.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_colliders.json"
     }
   ]
 }

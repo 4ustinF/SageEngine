@@ -1,0 +1,19 @@
+{
+  "Name": "Collider 0",
+  "Components": {
+    "Transform Component": {
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.41,
+        -0.3048,
+        0.0
+      ],
+      "Size": [
+        0.71,
+        0.6858,
+        0.2
+      ]
+    }
+  }
+}

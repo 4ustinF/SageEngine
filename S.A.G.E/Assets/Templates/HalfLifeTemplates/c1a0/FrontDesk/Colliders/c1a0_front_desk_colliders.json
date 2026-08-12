@@ -1,0 +1,13 @@
+{
+  "Name": "Colliders",
+  "Components": {
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_00.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_01.json"
+    }
+  ]
+}

@@ -157,6 +157,7 @@
     <ClInclude Include="Inc\Collider.h" />
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\IntersectData.h" />
+    <ClInclude Include="Inc\PhysicsRay.h" />
     <ClInclude Include="Inc\RBPhysicsWorld.h" />
     <ClInclude Include="Inc\RBPhysics.h" />
     <ClInclude Include="Inc\RBPhysicsObject.h" />

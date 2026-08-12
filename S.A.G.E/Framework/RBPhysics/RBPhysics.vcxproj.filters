@@ -45,6 +45,9 @@
     <ClInclude Include="Inc\BoundingCapsule.h">
       <Filter>Inc\BoundingColliders</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\PhysicsRay.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">

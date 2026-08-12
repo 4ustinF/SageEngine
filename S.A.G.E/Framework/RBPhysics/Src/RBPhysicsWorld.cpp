@@ -3,6 +3,7 @@
 
 #include "IntersectData.h"
 #include "BoundingBox.h"
+#include "PhysicsRay.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -100,36 +101,22 @@ bool  RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
 
 bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance)
 {
-	// Implementation for basic raycast
-	// TODO: Create a ray
+	return Raycast(PhysicsRay(origin, direction, maxDistance));
+}
 
-	Ray ray = Ray(origin, direction);
-
+bool RBPhysicsWorld::Raycast(const PhysicsRay& ray)
+{
+	PhysicsRayHit closestHit;
 	for (RBPhysicsObject& staticObject : mStaticObjects)
 	{
-		const Collider& baseCollider = staticObject.GetCollider();
-		switch (baseCollider.GetType())
+		PhysicsRayHit rayHit = RaycastAgainstCollider(ray, staticObject.GetCollider());
+		if (rayHit.hit == true && (rayHit.distance < closestHit.distance))
 		{
-		case Collider::ColliderType::TYPE_BOX:
-
-			const BoundingBox& boundingBox = ((BoundingBox&)baseCollider);
-			const OBB obb = OBB(boundingBox.GetCenter(), boundingBox.GetExtend(), boundingBox.GetOrientation());
-
-			if (Intersect(ray, obb))
-			{
-				return true;
-			}
-			break;
+			closestHit = rayHit;
 		}
 	}
 
-	return false;
-}
-
-bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance, RBPhysicsObject*& hitObject)
-{
-	// Implementation for raycast with hit object
-	return false;
+	return closestHit.hit; // TODO: Return the closest hit information instead of just a bool. Maybe out with the hit info.
 }
 
 void RBPhysicsWorld::Simulate(float deltaTime)
@@ -431,4 +418,21 @@ Vector3 RBPhysicsWorld::GetVelocityAtPoint(const RBPhysicsObject& object, const 
 void RBPhysicsWorld::ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData)
 {
 
+}
+
+PhysicsRayHit RBPhysicsWorld::RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider)
+{
+	switch (collider.GetType()) // TODO: Other cases.
+	{
+	case Collider::ColliderType::TYPE_BOX:
+		return RaycastAgainstBoundingBox(ray, (BoundingBox&)collider);
+	}
+
+	return PhysicsRayHit();
+}
+
+PhysicsRayHit RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox)
+{
+	// TODO: 
+	return PhysicsRayHit();
 }

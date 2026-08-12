@@ -4,6 +4,12 @@
 
 namespace SAGE::RBPhysics
 {
+	class RBPhysicsObject;
+	class Collider;
+	class IntersectData;
+	struct PhysicsRay;
+	struct PhysicsRayHit;
+
 	enum class PhysicsObjectType
 	{
 		Dynamic,
@@ -60,7 +66,7 @@ namespace SAGE::RBPhysics
 		}
 
 		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance); //, Math::Vector3& hitPoint, Math::Vector3& hitNormal);
-		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance, RBPhysicsObject*& hitObject);//, Math::Vector3& hitPoint, Math::Vector3& hitNormal);
+		bool Raycast(const PhysicsRay& ray);
 
 	private:
 		void Simulate(float deltaTime);
@@ -78,5 +84,8 @@ namespace SAGE::RBPhysics
 		Math::Vector3 GetVelocityAtPoint(const RBPhysicsObject& object, const Math::Vector3& localPoint);
 
 		void ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData);
+
+		PhysicsRayHit RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider);
+		PhysicsRayHit RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox);
 	};
 }

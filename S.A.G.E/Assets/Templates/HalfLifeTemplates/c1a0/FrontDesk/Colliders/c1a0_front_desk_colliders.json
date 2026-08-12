@@ -8,6 +8,30 @@
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_01.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_02.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_03.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_04.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_05.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_06.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_07.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_08.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/FrontDesk/Colliders/c1a0_front_desk_collider_09.json"
     }
   ]
 }

@@ -2,8 +2,25 @@
   "Name": "Front Desk",
   "Components": {
     "Transform Component": {
+      "Local Position": [
+        -0.990600,
+        -3.924301,
+        6.038849
+      ]
     },
     "Selection Box Component": {
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.0,
+        -0.30479979515075684,
+        0.0
+      ],
+      "Size": [
+        1.5240029096603394,
+        0.6858018636703491,
+        3.8100013732910156
+      ]
     }
   },
   "GameObjects": [

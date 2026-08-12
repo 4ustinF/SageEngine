@@ -3,6 +3,7 @@
 
 namespace SAGE
 {
+	class SelectionBoxComponent;
 	class TransformComponent;
 
 	class BoxColliderComponent final : public BaseColliderComponent
@@ -29,6 +30,8 @@ namespace SAGE
 
 	protected:
 		void ResizeToMesh() override;
+
+		SelectionBoxComponent* mSelectionBoxComponent = nullptr;
 
 	private:
 		Math::Vector3 mSize = Math::Vector3::One;

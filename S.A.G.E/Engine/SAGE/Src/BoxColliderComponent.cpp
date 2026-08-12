@@ -5,6 +5,7 @@
 #include "RBPhysicsService.h"
 #include "TransformComponent.h"
 #include "MeshFilterComponent.h"
+#include "SelectionBoxComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -37,6 +38,7 @@ void BoxColliderComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memor
 void BoxColliderComponent ::Initialize()
 {
 	BaseColliderComponent::Initialize();
+	mSelectionBoxComponent = GetOwner().GetComponent<SelectionBoxComponent>();
 }
 
 void BoxColliderComponent ::Terminate()
@@ -52,7 +54,7 @@ void BoxColliderComponent ::DebugUI()
 		ImGui::Checkbox("Is Trigger##BoxColliderComponent", &mIsTrigger);
 		ImGui::DragFloat3("Center##BoxColliderComponent", &mCenter.x, 0.1f);
 		if (ImGui::DragFloat3("Size##BoxColliderComponent", &mSize.x, 0.1f)) { SetSize(mSize); }
-		if (mMeshFilterComponent != nullptr && ImGui::Button("Resize to Mesh##BoxColliderComponent")) { ResizeToMesh(); }
+		if ((mMeshFilterComponent != nullptr || mSelectionBoxComponent != nullptr) && ImGui::Button("Resize to Mesh##BoxColliderComponent")) { ResizeToMesh(); }
 	}
 
 	if (mDebugFill)
@@ -82,19 +84,30 @@ void BoxColliderComponent::SetSize(const Math::Vector3& size)
 
 void BoxColliderComponent::ResizeToMesh()
 {
-	if (mMeshFilterComponent == nullptr)
+	if (mMeshFilterComponent != nullptr)
 	{
-		return;
+		const OBB BoundingBox = mMeshFilterComponent->GetGlobalBoundingBox();
+		SetSize(BoundingBox.extend * 2.0f);
+		if (mTransformComponent != nullptr)
+		{
+			mCenter = BoundingBox.center - mTransformComponent->GetPosition();
+		}
+		else
+		{
+			mCenter = BoundingBox.center;
+		}
 	}
-
-	const OBB BoundingBox = mMeshFilterComponent->GetGlobalBoundingBox();
-	SetSize(BoundingBox.extend * 2.0f);
-	if (mTransformComponent != nullptr)
+	else if (mSelectionBoxComponent != nullptr)
 	{
-		mCenter = BoundingBox.center - mTransformComponent->GetPosition();
-	}
-	else
-	{
-		mCenter = BoundingBox.center;
+		const OBB BoundingBox = mSelectionBoxComponent->GetGlobalBoundingBox();
+		SetSize(BoundingBox.extend * 2.0f);
+		if (mTransformComponent != nullptr)
+		{
+			mCenter = BoundingBox.center - mTransformComponent->GetPosition();
+		}
+		else
+		{
+			mCenter = BoundingBox.center;
+		}
 	}
 }

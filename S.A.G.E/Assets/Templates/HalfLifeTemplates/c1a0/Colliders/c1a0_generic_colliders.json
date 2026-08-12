@@ -2,9 +2,6 @@
   "Name": "Generic Colliders",
   "GameObjects": [
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/TempDesk.json"
-    },
-    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/TempRoof.json"
     },
     {

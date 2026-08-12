@@ -7,6 +7,12 @@
     <Filter Include="Src">
       <UniqueIdentifier>{cdf9a865-8ece-471a-b5a7-3d91a06d1713}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\BoundingColliders">
+      <UniqueIdentifier>{4b6a993a-086a-43e6-b856-b6c85bdf0688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\BoundingColliders">
+      <UniqueIdentifier>{4cb69714-a46f-424c-b927-e31be5aaf51e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\RBPhysics.h">
@@ -24,19 +30,21 @@
     <ClInclude Include="Inc\RBPhysicsObject.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\BoundingSphere.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\IntersectData.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\Collider.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\BoundingBox.h">
-      <Filter>Inc</Filter>
+      <Filter>Inc\BoundingColliders</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\BoundingCapsule.h" />
+    <ClInclude Include="Inc\BoundingSphere.h">
+      <Filter>Inc\BoundingColliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Collider.h">
+      <Filter>Inc\BoundingColliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\BoundingCapsule.h">
+      <Filter>Inc\BoundingColliders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -48,15 +56,17 @@
     <ClCompile Include="Src\RBPhysicsObject.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="Src\BoundingBox.cpp">
+      <Filter>Src\BoundingColliders</Filter>
+    </ClCompile>
     <ClCompile Include="Src\BoundingSphere.cpp">
-      <Filter>Src</Filter>
+      <Filter>Src\BoundingColliders</Filter>
     </ClCompile>
     <ClCompile Include="Src\Collider.cpp">
-      <Filter>Src</Filter>
+      <Filter>Src\BoundingColliders</Filter>
     </ClCompile>
-    <ClCompile Include="Src\BoundingBox.cpp">
-      <Filter>Src</Filter>
+    <ClCompile Include="Src\BoundingCapsule.cpp">
+      <Filter>Src\BoundingColliders</Filter>
     </ClCompile>
-    <ClCompile Include="Src\BoundingCapsule.cpp" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include "RBPhysicsWorld.h"
 
 #include "IntersectData.h"
+#include "BoundingBox.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -23,8 +24,6 @@ void RBPhysicsWorld::Update(float deltaTime)
 {
 	Simulate(deltaTime);
 	HandleCollisions();
-
-	//DetectCollisionWithDome(deltaTime);
 }
 
 void RBPhysicsWorld::DrawPhysicsObjects(bool fillShapes)
@@ -99,41 +98,49 @@ bool  RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
 	return false;
 }
 
+bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance)
+{
+	// Implementation for basic raycast
+	// TODO: Create a ray
+
+	Ray ray = Ray(origin, direction);
+
+	for (RBPhysicsObject& staticObject : mStaticObjects)
+	{
+		const Collider& baseCollider = staticObject.GetCollider();
+		switch (baseCollider.GetType())
+		{
+		case Collider::ColliderType::TYPE_BOX:
+
+			const BoundingBox& boundingBox = ((BoundingBox&)baseCollider);
+			const OBB obb = OBB(boundingBox.GetCenter(), boundingBox.GetExtend(), boundingBox.GetOrientation());
+
+			if (Intersect(ray, obb))
+			{
+				return true;
+			}
+			break;
+		}
+	}
+
+	return false;
+}
+
+bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance, RBPhysicsObject*& hitObject)
+{
+	// Implementation for raycast with hit object
+	return false;
+}
+
 void RBPhysicsWorld::Simulate(float deltaTime)
 {
-	//for (RBPhysicsObject& object : mDynamicObjects)
-	//{
-	//	// Apply gravity to acceleration accumulator
-	//	Vector3 acceleration = object.GetAcceleration() + mSettings.gravity;
-	//	object.SetAcceleration(acceleration);
-
-	//	// Compute simple air drag (force)
-	//	Vector3 dragForce = -object.GetVelocity() * mSettings.airDragCoeficient * 0.5f;
-	//	float magnitude = Magnitude(dragForce);
-
-	//	if (magnitude > 0.0f)
-	//	{
-	//		if (magnitude > mSettings.maxAirdrag)
-	//		{
-	//			dragForce /= magnitude;
-	//			dragForce *= mSettings.maxAirdrag;
-	//		}
-
-	//		// Apply drag as a force (Integrate will use acceleration)
-	//		object.ApplyDrag(object.GetVelocity(), dragForce);
-	//	}
-
-	//	// Integrate linear and angular motion (RBPhysicsObject::Integrate clears accumulators)
-	//	object.Integrate(deltaTime);
-	//}
-
-	for (RBPhysicsObject& object : mDynamicObjects)
+	for (RBPhysicsObject& dynamicObject : mDynamicObjects)
 	{
 		// Gravity
-		object.ApplyForce(mSettings.gravity * deltaTime);
+		dynamicObject.ApplyForce(mSettings.gravity * deltaTime);
 
 		// Air Drag
-		Vector3 velocity = object.GetVelocity();
+		Vector3 velocity = dynamicObject.GetVelocity();
 		float speed = Magnitude(velocity);
 
 		if (speed > 0.0001f)
@@ -146,106 +153,15 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 			// Vector3 dragForce = -Normalize(velocity) * (dragCoefficient * speed * speed);
 
 			dragForce.y = 0.0f; // Optional: ignore vertical drag if desired
-			object.ApplyForce(dragForce);
+			dynamicObject.ApplyForce(dragForce);
 		}
 
-		object.Integrate(deltaTime);
+		dynamicObject.Integrate(deltaTime);
 	}
 }
 
 void RBPhysicsWorld::HandleCollisions()
 {
-	//const int objectsCount = GetObjectsCount();
-	//for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
-	//{
-	//	RBPhysicsObject& primaryObject = mDynamicObjects[primaryIndex];
-	//	for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
-	//	{
-	//		RBPhysicsObject& secondaryObject = mDynamicObjects[secondaryIndex];
-	//		IntersectData intersectData = primaryObject.GetCollider().Intersect(secondaryObject.GetCollider());
-
-	//		if (intersectData.GetDoesIntersect())
-	//		{
-	//			// Old sphere vs sphere logic
-	//			//const Vector3 direction = Normalize(intersectData.GetDirection());
-	//			//const Vector3 primVel = primaryObject.GetVelocity();
-	//			//const Vector3 otherDirection = Reflect(direction, Normalize(primVel));
-	//			//
-	//			//primaryObject.SetVelocity(Reflect(primVel, otherDirection));
-	//			//secondaryObject.SetVelocity(Reflect(secondaryObject.GetVelocity(), direction));
-
-	//			//const Vector3 normal = intersectData.GetNormal();
-	//			//mPosition += normal * intersectData.GetPenetration(); // If other is static...
-
-	//			//// If they both can move - Heavier objects move less
-	//			//float invMassSphere = 1.0f / mMass;
-	//			//float invMassBox = 1.0f / otherObject.GetMass();
-
-	//			////float totalInvMass = invMassSphere + invMassBox;
-	//			////mPosition += normal * intersectData.GetPenetration() * (invMassSphere / totalInvMass); // If other is not static
-	//			////otherPos -= normal * penetration * (invMassBox / totalInvMass);
-
-	//			//// Velocity
-	//			//Vector3 relativeVelocity = mVelocity - otherObject.GetVelocity(); // Relative velocity:
-
-	//			//float velAlongNormal = Dot(relativeVelocity, normal); // Velocity along the collision normal
-	//			//if (velAlongNormal > 0.0f) // If they're already separating:
-	//			//{
-	//			//	return;
-	//			//}
-
-	//			//float e = 0.5f; // 0 = no bounce, 1 = perfect bounce // TODO: Adjust 
-
-	//			//// Impulse magnitude:
-	//			//float j = -(1.0f + e) * velAlongNormal / (invMassSphere + otherObject.GetMass());
-
-	//			//// Impulse vector:
-	//			//Vector3 impulse = j * normal;
-
-	//			//////Apply:
-	//			////sphereVelocity += impulse * invMassSphere;
-	//			////boxVelocity -= impulse * invMassBox;
-
-	//			//mVelocity += impulse * invMassSphere;
-	//		}
-	//	}
-	//}
-
-	// Static collision
-	//for (RBPhysicsObject& primaryObject : mDynamicObjects)
-	//{
-	//	for (RBPhysicsObject& staticObject : mStaticObjects)
-	//	{
-	//		IntersectData intersectData = primaryObject.GetCollider().Intersect(staticObject.GetCollider());
-	//		if (intersectData.GetDoesIntersect())
-	//		{
-	//			//primaryObject.ResolveCollision(staticObject, intersectData);
-
-	//			const Vector3 normal = intersectData.GetNormal();
-	//			primaryObject.SetPosition(primaryObject.GetPosition() + normal * intersectData.GetPenetration());
-
-	//			// If they both can move - Heavier objects move less
-	//			const float invMass = 1.0f / primaryObject.GetMass();
-
-	//			// Velocity
-	//			const float velAlongNormal = Dot(primaryObject.GetVelocity(), normal); // Velocity along the collision normal
-	//			if (velAlongNormal > 0.0f) // If they're already separating:
-	//			{
-	//				continue;
-	//			}
-
-	//			// Impulse magnitude:
-	//			const float ImpulseMagnitude = -(1.0f + mSettings.bounceCoeficient) * velAlongNormal / invMass;
-
-	//			// Impulse vector:
-	//			const Vector3 impulse = ImpulseMagnitude * normal;
-
-	//			//Apply:
-	//			primaryObject.SetVelocity(primaryObject.GetVelocity() + impulse * invMass);
-	//		}
-	//	}
-	//}
-
 	const int objectsCount = GetObjectsCount();
 	for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
 	{
@@ -270,7 +186,6 @@ void RBPhysicsWorld::HandleCollisions()
 			IntersectData intersectData = primaryObject.GetCollider().Intersect(staticObject.GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				//primaryObject.ResolveCollision(staticObject, intersectData);
 				primaryObject.ResolveCollision(intersectData);
 			}
 		}
@@ -389,6 +304,129 @@ Vector3 RBPhysicsWorld::GetVelocityAtPoint(const RBPhysicsObject& object, const 
 {
 	return object.GetVelocity() + object.GetOrientation() * Cross(object.GetAngularVelocity(), localPoint);
 }
+
+//void RBPhysicsWorld::Simulate(float deltaTime)
+//{
+//	//for (RBPhysicsObject& object : mDynamicObjects)
+//	//{
+//	//	// Apply gravity to acceleration accumulator
+//	//	Vector3 acceleration = object.GetAcceleration() + mSettings.gravity;
+//	//	object.SetAcceleration(acceleration);
+//
+//	//	// Compute simple air drag (force)
+//	//	Vector3 dragForce = -object.GetVelocity() * mSettings.airDragCoeficient * 0.5f;
+//	//	float magnitude = Magnitude(dragForce);
+//
+//	//	if (magnitude > 0.0f)
+//	//	{
+//	//		if (magnitude > mSettings.maxAirdrag)
+//	//		{
+//	//			dragForce /= magnitude;
+//	//			dragForce *= mSettings.maxAirdrag;
+//	//		}
+//
+//	//		// Apply drag as a force (Integrate will use acceleration)
+//	//		object.ApplyDrag(object.GetVelocity(), dragForce);
+//	//	}
+//
+//	//	// Integrate linear and angular motion (RBPhysicsObject::Integrate clears accumulators)
+//	//	object.Integrate(deltaTime);
+//	//}
+//}
+
+//void RBPhysicsWorld::HandleCollisions()
+//{
+//	//const int objectsCount = GetObjectsCount();
+//	//for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
+//	//{
+//	//	RBPhysicsObject& primaryObject = mDynamicObjects[primaryIndex];
+//	//	for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
+//	//	{
+//	//		RBPhysicsObject& secondaryObject = mDynamicObjects[secondaryIndex];
+//	//		IntersectData intersectData = primaryObject.GetCollider().Intersect(secondaryObject.GetCollider());
+//
+//	//		if (intersectData.GetDoesIntersect())
+//	//		{
+//	//			// Old sphere vs sphere logic
+//	//			//const Vector3 direction = Normalize(intersectData.GetDirection());
+//	//			//const Vector3 primVel = primaryObject.GetVelocity();
+//	//			//const Vector3 otherDirection = Reflect(direction, Normalize(primVel));
+//	//			//
+//	//			//primaryObject.SetVelocity(Reflect(primVel, otherDirection));
+//	//			//secondaryObject.SetVelocity(Reflect(secondaryObject.GetVelocity(), direction));
+//
+//	//			//const Vector3 normal = intersectData.GetNormal();
+//	//			//mPosition += normal * intersectData.GetPenetration(); // If other is static...
+//
+//	//			//// If they both can move - Heavier objects move less
+//	//			//float invMassSphere = 1.0f / mMass;
+//	//			//float invMassBox = 1.0f / otherObject.GetMass();
+//
+//	//			////float totalInvMass = invMassSphere + invMassBox;
+//	//			////mPosition += normal * intersectData.GetPenetration() * (invMassSphere / totalInvMass); // If other is not static
+//	//			////otherPos -= normal * penetration * (invMassBox / totalInvMass);
+//
+//	//			//// Velocity
+//	//			//Vector3 relativeVelocity = mVelocity - otherObject.GetVelocity(); // Relative velocity:
+//
+//	//			//float velAlongNormal = Dot(relativeVelocity, normal); // Velocity along the collision normal
+//	//			//if (velAlongNormal > 0.0f) // If they're already separating:
+//	//			//{
+//	//			//	return;
+//	//			//}
+//
+//	//			//float e = 0.5f; // 0 = no bounce, 1 = perfect bounce // TODO: Adjust 
+//
+//	//			//// Impulse magnitude:
+//	//			//float j = -(1.0f + e) * velAlongNormal / (invMassSphere + otherObject.GetMass());
+//
+//	//			//// Impulse vector:
+//	//			//Vector3 impulse = j * normal;
+//
+//	//			//////Apply:
+//	//			////sphereVelocity += impulse * invMassSphere;
+//	//			////boxVelocity -= impulse * invMassBox;
+//
+//	//			//mVelocity += impulse * invMassSphere;
+//	//		}
+//	//	}
+//	//}
+//
+//	// Static collision
+//	//for (RBPhysicsObject& primaryObject : mDynamicObjects)
+//	//{
+//	//	for (RBPhysicsObject& staticObject : mStaticObjects)
+//	//	{
+//	//		IntersectData intersectData = primaryObject.GetCollider().Intersect(staticObject.GetCollider());
+//	//		if (intersectData.GetDoesIntersect())
+//	//		{
+//	//			//primaryObject.ResolveCollision(staticObject, intersectData);
+//
+//	//			const Vector3 normal = intersectData.GetNormal();
+//	//			primaryObject.SetPosition(primaryObject.GetPosition() + normal * intersectData.GetPenetration());
+//
+//	//			// If they both can move - Heavier objects move less
+//	//			const float invMass = 1.0f / primaryObject.GetMass();
+//
+//	//			// Velocity
+//	//			const float velAlongNormal = Dot(primaryObject.GetVelocity(), normal); // Velocity along the collision normal
+//	//			if (velAlongNormal > 0.0f) // If they're already separating:
+//	//			{
+//	//				continue;
+//	//			}
+//
+//	//			// Impulse magnitude:
+//	//			const float ImpulseMagnitude = -(1.0f + mSettings.bounceCoeficient) * velAlongNormal / invMass;
+//
+//	//			// Impulse vector:
+//	//			const Vector3 impulse = ImpulseMagnitude * normal;
+//
+//	//			//Apply:
+//	//			primaryObject.SetVelocity(primaryObject.GetVelocity() + impulse * invMass);
+//	//		}
+//	//	}
+//	//}
+//}
 
 void RBPhysicsWorld::ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData)
 {

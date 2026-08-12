@@ -1,6 +1,7 @@
 #include "PlayerControllerComponent.h"
 
 #include "SAGE/Inc/CameraService.h"
+#include "SAGE/Inc/RBPhysicsService.h"
 #include "SAGE/Inc/GameWorld.h"
 #include "SAGE/Inc/GameObject.h"
 #include "SAGE/Inc/CapsuleColliderComponent.h"
@@ -29,13 +30,16 @@ void PlayerControllerComponent::Initialize()
 	mInputSystem = InputSystem::Get();
 
 	GameObject& owner = GetOwner();
-	mCameraService = owner.GetWorld().GetService<CameraService>();
+	GameWorld& world = GetOwner().GetWorld();
+	mCameraService = world.GetService<CameraService>();
+	mRBPhysicsService = world.GetService<RBPhysicsService>();
 	mCapsuleColliderComponent = owner.GetComponent<CapsuleColliderComponent>();
 }
 
 void PlayerControllerComponent::Terminate()
 {
 	mCameraService = nullptr;
+	mRBPhysicsService = nullptr;
 	mInputSystem = nullptr;
 	mCapsuleColliderComponent = nullptr;
 }
@@ -63,8 +67,13 @@ void PlayerControllerComponent::DebugUI()
 
 void PlayerControllerComponent::IsGroundedCheck()
 {
+	//(const Math::Vector3 & origin, const Math::Vector3 & direction, float maxDistance)
+
+	const Vector3 rayOrigin = ((BoundingCapsule&)mCapsuleColliderComponent->GetPhysicsObject()->GetCollider()).GetBottomCenter() - (Vector3::YAxis * 0.01f);
+	mIsGrounded = mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, -Vector3::YAxis, 0.1f);
+
 	// TODO: Implement grounded check using raycast or collision detection with the ground.
-	mIsGrounded = true; // Placeholder for actual grounded check logic.
+	//mIsGrounded = true; // Placeholder for actual grounded check logic.
 }
 
 void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, float deltaTime)

@@ -25,6 +25,7 @@ public:
 
 private:
 	SAGE::CameraService* mCameraService = nullptr;
+	SAGE::RBPhysicsService* mRBPhysicsService = nullptr;
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 	SAGE::CapsuleColliderComponent* mCapsuleColliderComponent = nullptr;
 

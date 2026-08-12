@@ -59,6 +59,9 @@ namespace SAGE::RBPhysics
 			return static_cast<int>(mStaticObjects.size());
 		}
 
+		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance); //, Math::Vector3& hitPoint, Math::Vector3& hitNormal);
+		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance, RBPhysicsObject*& hitObject);//, Math::Vector3& hitPoint, Math::Vector3& hitNormal);
+
 	private:
 		void Simulate(float deltaTime);
 		void HandleCollisions();

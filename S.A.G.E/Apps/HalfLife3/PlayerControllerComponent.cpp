@@ -69,7 +69,7 @@ void PlayerControllerComponent::IsGroundedCheck()
 {
 	const Vector3 rayOrigin = ((BoundingCapsule&)mCapsuleColliderComponent->GetPhysicsObject()->GetCollider()).GetBottomCenter() - (Vector3::YAxis * Constants::Epsilon);
 	PhysicsRayHit hit;
-	mIsGrounded = mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, -Vector3::YAxis, 0.1f, hit);
+	mIsGrounded = mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, -Vector3::YAxis, 0.01f, hit);
 
 	if (mIsGrounded)
 	{

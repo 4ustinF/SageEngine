@@ -65,8 +65,10 @@ namespace SAGE::RBPhysics
 			return static_cast<int>(mStaticObjects.size());
 		}
 
-		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance); //, Math::Vector3& hitPoint, Math::Vector3& hitNormal);
+		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance);
 		bool Raycast(const PhysicsRay& ray);
+		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance, PhysicsRayHit& rayHit);
+		bool Raycast(const PhysicsRay& ray, PhysicsRayHit& rayHit);
 
 	private:
 		void Simulate(float deltaTime);
@@ -85,7 +87,7 @@ namespace SAGE::RBPhysics
 
 		void ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData);
 
-		PhysicsRayHit RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider);
-		PhysicsRayHit RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox);
+		bool RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider, PhysicsRayHit& rayHit);
+		bool RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox, PhysicsRayHit& rayHit);
 	};
 }

@@ -68,7 +68,13 @@ void PlayerControllerComponent::DebugUI()
 void PlayerControllerComponent::IsGroundedCheck()
 {
 	const Vector3 rayOrigin = ((BoundingCapsule&)mCapsuleColliderComponent->GetPhysicsObject()->GetCollider()).GetBottomCenter() - (Vector3::YAxis * Constants::Epsilon);
-	mIsGrounded = mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, -Vector3::YAxis, 0.1f);
+	PhysicsRayHit hit;
+	mIsGrounded = mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, -Vector3::YAxis, 0.1f, hit);
+
+	if (mIsGrounded)
+	{
+		mGroundNormal = hit.normal;
+	}
 }
 
 void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, float deltaTime)
@@ -87,10 +93,17 @@ void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, floa
 	const float moveSpeed = GetMovementSpeed(deltaTime);
 
 	// 1. Get camera forward, flatten to XZ plane (ignore pitch)
-	const Vector3 forward = camera.GetDirectionWithoutPitch();
+	Vector3 forward = camera.GetDirectionWithoutPitch();
 
 	// 2. Right vector = forward rotated 90 degrees around Y (cross of world-up and forward gives you a perpendicular horizontal vector)
-	const Vector3 right = Normalize(Cross(Vector3::YAxis, forward));
+	Vector3 right = Normalize(Cross(Vector3::YAxis, forward));
+
+	// 3. If grounded, bend forward/right to follow the surface instead of staying purely horizontal
+	if (mIsGrounded)
+	{
+		forward = Normalize(ProjectOnPlane(forward, mGroundNormal));
+		right = Normalize(ProjectOnPlane(right, mGroundNormal));
+	}
 
 	if (mInputSystem->IsKeyDown(KeyCode::UP))
 	{

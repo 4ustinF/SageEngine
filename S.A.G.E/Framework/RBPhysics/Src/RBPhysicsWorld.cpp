@@ -104,21 +104,34 @@ bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& d
 	return Raycast(PhysicsRay(origin, direction, maxDistance));
 }
 
-bool RBPhysicsWorld::Raycast(const PhysicsRay& ray)
+bool RBPhysicsWorld::Raycast(const PhysicsRay& ray) // TODO: Instead should do a check that doesn't need to calculate hit data to save on perf?
+{
+	PhysicsRayHit hit;
+	return Raycast(ray, hit);
+}
+
+bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance, PhysicsRayHit& rayHit)
+{
+	return Raycast(PhysicsRay(origin, direction, maxDistance), rayHit);
+}
+
+bool RBPhysicsWorld::Raycast(const PhysicsRay& ray, PhysicsRayHit& rayHit)
 {
 	SimpleDraw::AddLine(ray.origin, ray.GetEndPoint(), Colors::Cyan);
+	PhysicsRayHit newHit;
 
-	PhysicsRayHit closestHit;
 	for (RBPhysicsObject& staticObject : mStaticObjects)
 	{
-		PhysicsRayHit rayHit = RaycastAgainstCollider(ray, staticObject.GetCollider());
-		if (rayHit.hit == true && (rayHit.distance < closestHit.distance))
+		if (RaycastAgainstCollider(ray, staticObject.GetCollider(), newHit))
 		{
-			closestHit = rayHit;
+			if (newHit.distance < rayHit.distance)
+			{
+				rayHit = newHit;
+			}
 		}
 	}
 
-	return closestHit.hit; // TODO: Return the closest hit information instead of just a bool. Maybe out with the hit info.
+	return rayHit.hit; // TODO: Return the closest hit information instead of just a bool. Maybe out with the hit info.
 }
 
 void RBPhysicsWorld::Simulate(float deltaTime)
@@ -422,21 +435,19 @@ void RBPhysicsWorld::ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject&
 
 }
 
-PhysicsRayHit RBPhysicsWorld::RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider)
+bool RBPhysicsWorld::RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider, PhysicsRayHit& rayHit)
 {
 	switch (collider.GetType()) // TODO: Other cases.
 	{
 	case Collider::ColliderType::TYPE_BOX:
-		return RaycastAgainstBoundingBox(ray, (BoundingBox&)collider);
+		return RaycastAgainstBoundingBox(ray, (BoundingBox&)collider, rayHit);
 	}
 
-	return PhysicsRayHit();
+	return false;
 }
 
-PhysicsRayHit RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox)
+bool RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox, PhysicsRayHit& rayHit)
 {
-	PhysicsRayHit result;
-
 	// Compute the local to world / world to local matrices
 	const Matrix4 matTrans = Matrix4::Translation(boundingBox.GetCenter());
 	const Matrix4 matRot = Matrix4::RotationQuaternion(boundingBox.GetOrientation());
@@ -466,7 +477,7 @@ PhysicsRayHit RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, c
 			// Ray is parallel to this pair of slabs -- it only misses if the origin isn't between them.
 			if (origin[axis] < -extent[axis] || origin[axis] > extent[axis])
 			{
-				return result; // hit == false
+				return false;
 			}
 			continue;
 		}
@@ -493,13 +504,13 @@ PhysicsRayHit RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, c
 
 		if (tMin > tMax)
 		{
-			return result; // slabs don't overlap -- no hit
+			return false; // slabs don't overlap -- no hit
 		}
 	}
 
-	result.hit = true;
-	result.distance = tMin;
-	result.impactPoint = ray.origin + ray.direction * tMin;
+	rayHit.hit = true;
+	rayHit.distance = tMin;
+	rayHit.impactPoint = ray.origin + ray.direction * tMin;
 
 	// hitAxis stays -1 only when the ray origin started inside the box
 	// (tMin was never pushed forward by an entry plane). In that case
@@ -513,8 +524,8 @@ PhysicsRayHit RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, c
 
 		// matWorld is rotation + translation only (no scale), so it's
 		// safe to transform the normal directly -- no inverse-transpose needed.
-		result.normal = TransformNormal(localNormal, matWorld);
+		rayHit.normal = TransformNormal(localNormal, matWorld);
 	}
 
-	return result;
+	return true;
 }

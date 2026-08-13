@@ -66,18 +66,19 @@ namespace SAGE::Math
 
 	//Vector3
 	#pragma region ---Vector3---
-	constexpr Vector3 GetRight(const Matrix4& m)					{ return { m._11, m._12 , m._13 }; }
-	constexpr Vector3 GetUp(const Matrix4& m)						{ return { m._21, m._22 , m._23 }; }
-	constexpr Vector3 GetLook(const Matrix4& m)						{ return { m._31, m._32 , m._33 }; }
-	constexpr Vector3 GetTranslation(const Matrix4& m)				{ return { m._41, m._42 , m._43 }; }
-	inline float Dot(const Vector3& a, const Vector3& b)			{ return (a.x * b.x) + (a.y * b.y) + (a.z * b.z); }
-	inline float MagnitudeSqr(const Vector3& v)						{ return (v.x * v.x) + (v.y * v.y) + (v.z * v.z); }
-	inline float Magnitude(const Vector3& v)						{ return sqrt(MagnitudeSqr(v)); } // Length
-	inline float DistanceSqr(const Vector3& a, const Vector3& b)	{ return MagnitudeSqr(a - b);  }
-	inline float Distance(const Vector3& a, const Vector3& b)		{ return sqrt(DistanceSqr(a, b)); }
-	inline Vector3 Normalize(const Vector3& v)						{ return v / Magnitude(v); }
-	inline Vector3 Cross(const Vector3& a, const Vector3& b)		{ return Vector3((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x)); }
-	inline Vector3 Reflect(const Vector3& a, const Vector3& b)		{ return a - (b * (2.0f * Dot(a, b))); }
+	constexpr Vector3 GetRight(const Matrix4& m)								{ return { m._11, m._12 , m._13 }; }
+	constexpr Vector3 GetUp(const Matrix4& m)									{ return { m._21, m._22 , m._23 }; }
+	constexpr Vector3 GetLook(const Matrix4& m)									{ return { m._31, m._32 , m._33 }; }
+	constexpr Vector3 GetTranslation(const Matrix4& m)							{ return { m._41, m._42 , m._43 }; }
+	inline float Dot(const Vector3& a, const Vector3& b)						{ return (a.x * b.x) + (a.y * b.y) + (a.z * b.z); }
+	inline float MagnitudeSqr(const Vector3& v)									{ return (v.x * v.x) + (v.y * v.y) + (v.z * v.z); }
+	inline float Magnitude(const Vector3& v)									{ return sqrt(MagnitudeSqr(v)); } // Length
+	inline float DistanceSqr(const Vector3& a, const Vector3& b)				{ return MagnitudeSqr(a - b);  }
+	inline float Distance(const Vector3& a, const Vector3& b)					{ return sqrt(DistanceSqr(a, b)); }
+	inline Vector3 Normalize(const Vector3& v)									{ return v / Magnitude(v); }
+	inline Vector3 Cross(const Vector3& a, const Vector3& b)					{ return Vector3((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x)); }
+	inline Vector3 Reflect(const Vector3& a, const Vector3& b)					{ return a - (b * (2.0f * Dot(a, b))); }
+	inline Vector3 ProjectOnPlane(const Vector3& vec, const Vector3& normal)	{ return vec - normal * Dot(vec, normal); }
 
 	// Rotate a Vector3 by a Quaternion
 	inline Vector3 operator*(const Quaternion& q, const Vector3& v)

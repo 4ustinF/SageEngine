@@ -39,6 +39,7 @@ private:
 	SAGE::Math::Vector2 mAirSpeed = SAGE::Math::Vector2(5.0f, 10.0f);
 	float mJumpForce = 500.0f;
 	bool mIsGrounded = true;
+	SAGE::Math::Vector3 mGroundNormal = SAGE::Math::Vector3::YAxis;
 
 	// Debug
 	bool mCanMove = true;

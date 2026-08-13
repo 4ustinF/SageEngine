@@ -29,7 +29,7 @@ namespace SAGE::RBPhysics
 	struct PhysicsRayHit
 	{
 		bool hit = false;
-		float distance = 0.0f;
+		float distance = std::numeric_limits<float>::max();
 		Math::Vector3 impactPoint;
 		Math::Vector3 normal;
 		// GameObject?

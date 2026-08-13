@@ -20,7 +20,8 @@ namespace SAGE::RBPhysics
 		//IntersectData IntersectBoundingSphere(const BoundingSphere& other) const;
 		void Transform(const Math::Vector3& translation) override;
 
-		Math::Vector3 GetExtend() const { return mExtend; }
+		const Math::Vector3& GetExtend() const { return mExtend; }
+		Math::Vector3 GetExtend() { return mExtend; }
 		Math::Vector3 GetMinExtend() const { return mCenter - mExtend; }
 		Math::Vector3 GetMaxExtend() const { return mCenter + mExtend; }
 

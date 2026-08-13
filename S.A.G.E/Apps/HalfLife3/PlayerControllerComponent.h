@@ -36,7 +36,7 @@ private:
 	float GetMovementSpeed(float deltaTime) const;
 
 	SAGE::Math::Vector2 mGroundSpeed = SAGE::Math::Vector2(50.0f, 100.0f);
-	SAGE::Math::Vector2 mAirSpeed = SAGE::Math::Vector2(25.0f, 50.0f);
+	SAGE::Math::Vector2 mAirSpeed = SAGE::Math::Vector2(5.0f, 10.0f);
 	float mJumpForce = 500.0f;
 	bool mIsGrounded = true;
 

@@ -106,6 +106,8 @@ bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& d
 
 bool RBPhysicsWorld::Raycast(const PhysicsRay& ray)
 {
+	SimpleDraw::AddLine(ray.origin, ray.GetEndPoint(), Colors::Cyan);
+
 	PhysicsRayHit closestHit;
 	for (RBPhysicsObject& staticObject : mStaticObjects)
 	{
@@ -433,6 +435,86 @@ PhysicsRayHit RBPhysicsWorld::RaycastAgainstCollider(const PhysicsRay& ray, cons
 
 PhysicsRayHit RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox)
 {
-	// TODO: 
-	return PhysicsRayHit();
+	PhysicsRayHit result;
+
+	// Compute the local to world / world to local matrices
+	const Matrix4 matTrans = Matrix4::Translation(boundingBox.GetCenter());
+	const Matrix4 matRot = Matrix4::RotationQuaternion(boundingBox.GetOrientation());
+	const Matrix4 matWorld = matRot * matTrans;
+	const Matrix4 matWorldInv = Inverse(matWorld);
+
+	// Transform the ray into the OBB's local space -- now it's just
+	// a ray vs. an axis-aligned box centered at the origin with
+	// half-extents obb.extend.
+	const Vector3 org = TransformCoord(ray.origin, matWorldInv);
+	const Vector3 dir = TransformNormal(ray.direction, matWorldInv);
+
+	const float origin[3] = { org.x, org.y, org.z };
+	const float direction[3] = { dir.x, dir.y, dir.z };
+	const Vector3& extend = boundingBox.GetExtend();
+	const float extent[3] = { extend.x, extend.y, extend.z };
+
+	float tMin = 0.0f;
+	float tMax = ray.maxDistance;
+	int hitAxis = -1;
+	float hitSign = 0.0f;
+
+	for (int axis = 0; axis < 3; ++axis)
+	{
+		if (fabs(direction[axis]) < Constants::Epsilon)
+		{
+			// Ray is parallel to this pair of slabs -- it only misses if the origin isn't between them.
+			if (origin[axis] < -extent[axis] || origin[axis] > extent[axis])
+			{
+				return result; // hit == false
+			}
+			continue;
+		}
+
+		const float invD = 1.0f / direction[axis];
+		float t1 = (-extent[axis] - origin[axis]) * invD;
+		float t2 = (extent[axis] - origin[axis]) * invD;
+		float sign = -1.0f;
+
+		if (t1 > t2)
+		{
+			std::swap(t1, t2);
+			sign = 1.0f;
+		}
+
+		if (t1 > tMin)
+		{
+			tMin = t1;
+			hitAxis = axis;
+			hitSign = sign;
+		}
+
+		tMax = std::min(tMax, t2);
+
+		if (tMin > tMax)
+		{
+			return result; // slabs don't overlap -- no hit
+		}
+	}
+
+	result.hit = true;
+	result.distance = tMin;
+	result.impactPoint = ray.origin + ray.direction * tMin;
+
+	// hitAxis stays -1 only when the ray origin started inside the box
+	// (tMin was never pushed forward by an entry plane). In that case
+	// there's no meaningful "entry" normal -- position is just ray.origin.
+	if (hitAxis != -1)
+	{
+		Vector3 localNormal{ 0.0f, 0.0f, 0.0f };
+		if (hitAxis == 0) localNormal.x = hitSign;
+		else if (hitAxis == 1) localNormal.y = hitSign;
+		else localNormal.z = hitSign;
+
+		// matWorld is rotation + translation only (no scale), so it's
+		// safe to transform the normal directly -- no inverse-transpose needed.
+		result.normal = TransformNormal(localNormal, matWorld);
+	}
+
+	return result;
 }

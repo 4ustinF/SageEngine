@@ -67,13 +67,8 @@ void PlayerControllerComponent::DebugUI()
 
 void PlayerControllerComponent::IsGroundedCheck()
 {
-	//(const Math::Vector3 & origin, const Math::Vector3 & direction, float maxDistance)
-
-	const Vector3 rayOrigin = ((BoundingCapsule&)mCapsuleColliderComponent->GetPhysicsObject()->GetCollider()).GetBottomCenter() - (Vector3::YAxis * 0.01f);
+	const Vector3 rayOrigin = ((BoundingCapsule&)mCapsuleColliderComponent->GetPhysicsObject()->GetCollider()).GetBottomCenter() - (Vector3::YAxis * Constants::Epsilon);
 	mIsGrounded = mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, -Vector3::YAxis, 0.1f);
-
-	// TODO: Implement grounded check using raycast or collision detection with the ground.
-	//mIsGrounded = true; // Placeholder for actual grounded check logic.
 }
 
 void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, float deltaTime)
@@ -117,9 +112,13 @@ void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, floa
 		physicsObject->ApplyForce(-right * moveSpeed);
 	}
 
-	if (mInputSystem->IsKeyPressed(KeyCode::NUMPAD0))
+	if (mIsGrounded)
 	{
-		physicsObject->ApplyForce(Vector3::YAxis * mJumpForce * deltaTime);
+		if (mInputSystem->IsKeyPressed(KeyCode::NUMPAD0))
+		{
+			physicsObject->ApplyForce(Vector3::YAxis * mJumpForce * deltaTime);
+			mIsGrounded = false;
+		}
 	}
 }
 

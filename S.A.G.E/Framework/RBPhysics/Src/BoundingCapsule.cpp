@@ -93,18 +93,31 @@ void BoundingCapsule::Transform(const Math::Vector3& translation)
 
 IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other) //const
 {
-    // Box's world transform
     const Vector3 boxCenter = other.GetCenter();
-    const Matrix4 boxRot = other.GetRotationMatrix4();     // columns = box local axes in world space
-    const Matrix4 boxRotInv = Transpose(boxRot);           // inverse of a rotation matrix = its transpose
-    const Vector3 halfExtents = other.GetExtend();         // local-space half extents
+    const Vector3 halfExtents = other.GetExtend();          // local-space half extents
+    const bool axisAligned = other.IsAxisAligned();
 
-    // Transform capsule segment endpoints into box-local space
     const Vector3 topWorld = GetInnerTopCenter();
     const Vector3 bottomWorld = GetInnerBottomCenter();
 
-    const Vector3 topLocal = (topWorld - boxCenter) * boxRotInv;
-    const Vector3 bottomLocal = (bottomWorld - boxCenter) * boxRotInv;
+    Matrix4 boxRot;
+    Vector3 topLocal = Vector3::Zero;
+    Vector3 bottomLocal = Vector3::Zero;
+
+    if (axisAligned)
+    {
+        topLocal = topWorld - boxCenter;
+        bottomLocal = bottomWorld - boxCenter;
+    }
+    else
+    {
+        boxRot = other.GetRotationMatrix4();            // columns = box local axes in world space
+        const Matrix4 boxRotInv = Transpose(boxRot);    // inverse of a rotation matrix = its transpose
+
+        // Transform capsule segment endpoints into box-local space
+        topLocal = (topWorld - boxCenter) * boxRotInv;
+        bottomLocal = (bottomWorld - boxCenter) * boxRotInv;
+    }
 
     // Local-space box is now a simple AABB: [-halfExtents, +halfExtents]
     const Vector3 min = -halfExtents;
@@ -129,23 +142,23 @@ IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other
         return IntersectData();
     }
 
-    Vector3 normalLocal;
+    Vector3 normalLocal = Vector3::Zero;
     float penetration = 0.0f;
 
     if (distSq > 0.0f)
     {
-        float dist = std::sqrt(distSq);
+        const float dist = std::sqrt(distSq);
         normalLocal = delta / dist;
         penetration = mRadius - dist;
     }
     else
     {
-        Vector3 dMin = center - min;
-        Vector3 dMax = max - center;
+        const Vector3 dMin = center - min;
+        const Vector3 dMax = max - center;
 
-        float px = std::min(dMin.x, dMax.x);
-        float py = std::min(dMin.y, dMax.y);
-        float pz = std::min(dMin.z, dMax.z);
+        const float px = std::min(dMin.x, dMax.x);
+        const float py = std::min(dMin.y, dMax.y);
+        const float pz = std::min(dMin.z, dMax.z);
 
         if (px <= py && px <= pz)
         {
@@ -164,9 +177,8 @@ IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other
         }
     }
 
-    // 4. Transform the normal back into WORLD space before returning it
-    const Vector3 normalWorld = normalLocal * boxRot; // rotation only, no translation needed for a direction
-
+    // 4. If not axisAligned Transform the normal back into WORLD space before returning it
+    const Vector3 normalWorld = axisAligned ? normalLocal : (normalLocal * boxRot);
     return IntersectData(true, normalWorld, {}, penetration);
 }
 

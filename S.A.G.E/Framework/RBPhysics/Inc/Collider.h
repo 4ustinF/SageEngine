@@ -60,7 +60,7 @@ namespace SAGE::RBPhysics
 	protected:
 		SAGE::Graphics::Color mDebugColor = SAGE::Graphics::Colors::Red;
 		SAGE::Math::Vector3 mCenter = SAGE::Math::Vector3::Zero;
-		SAGE::Math::Quaternion mOrientation = SAGE::Math::Quaternion::Identity;
+		SAGE::Math::Quaternion mOrientation = SAGE::Math::Quaternion::Identity; // TODO: When we add orientation we need a way for box collider to know the changes and update is axis alligned.
 
 	private:
 		ColliderType mType;

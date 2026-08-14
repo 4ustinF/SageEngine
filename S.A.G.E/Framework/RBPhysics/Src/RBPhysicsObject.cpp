@@ -121,7 +121,7 @@ void RBPhysicsObject::Integrate(float deltaTime)
 //	ApplyForce(-impulse * invMassSphere);
 //}
 
-void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData)
+void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData) // TODO:
 {
 	const Vector3 normal = intersectData.GetNormal();
 	const float penetration = intersectData.GetPenetration();

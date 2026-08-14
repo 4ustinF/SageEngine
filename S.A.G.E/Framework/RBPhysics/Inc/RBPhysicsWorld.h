@@ -6,6 +6,9 @@ namespace SAGE::RBPhysics
 {
 	class RBPhysicsObject;
 	class Collider;
+	class BoundingBox;
+	class BoundingCapsule;
+	class BoundingSphere;
 	class IntersectData;
 	struct PhysicsRay;
 	struct PhysicsRayHit;
@@ -89,7 +92,7 @@ namespace SAGE::RBPhysics
 
 		bool RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider, PhysicsRayHit& rayHit);
 		bool RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox, PhysicsRayHit& rayHit);
-		//bool RaycastAgainstBoundingCapsule(const PhysicsRay& ray, const BoundingCapsule& boundingCapsule, PhysicsRayHit& rayHit);
+		bool RaycastAgainstBoundingCapsule(const PhysicsRay& ray, const BoundingCapsule& boundingCapsule, PhysicsRayHit& rayHit);
 		bool RaycastAgainstBoundingSphere(const PhysicsRay& ray, const BoundingSphere& boundingSphere, PhysicsRayHit& rayHit);
 	};
 }

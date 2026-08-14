@@ -6,6 +6,9 @@
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/FrontDeskRoom/fdr_collider_leftwall.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/FrontDeskRoom/fdr_collider_rightwall.json"
     }
   ]
 }

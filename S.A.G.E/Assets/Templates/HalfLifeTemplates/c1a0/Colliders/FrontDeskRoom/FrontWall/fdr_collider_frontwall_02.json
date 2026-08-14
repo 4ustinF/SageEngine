@@ -1,0 +1,24 @@
+{
+  "Name": "Front Wall 2",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        3.658,
+        -4.572,
+        8.001
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.9905,
+        2.743,
+        0.0
+      ],
+      "Size": [
+        1.981,
+        5.486,
+        0.914
+      ]
+    }
+  }
+}

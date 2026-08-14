@@ -5,6 +5,9 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/FrontDeskRoom/BackWall/c1a0_fdr_bw_colliders.json"
     },
     {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/FrontDeskRoom/FrontWall/c1a0_fdr_fw_colliders.json"
+    },
+    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/FrontDeskRoom/fdr_collider_leftwall.json"
     },
     {

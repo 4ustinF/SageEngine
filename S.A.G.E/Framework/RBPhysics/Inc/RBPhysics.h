@@ -2,6 +2,7 @@
 
 #include "Common.h"
 
+#include "PhysicsRay.h"
 //#include "Collider.h"
 #include "BoundingBox.h"
 #include "BoundingCapsule.h"

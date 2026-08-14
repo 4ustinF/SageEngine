@@ -195,20 +195,28 @@ void RBPhysicsObject::ResolveCollision(const IntersectData& intersectData)
 	const Vector3 vNormalPart = vn * normal;
 	const Vector3 vTangent = velocity - vNormalPart;
 
-	const float tangentSpeed = Magnitude(vTangent);
-	if (tangentSpeed > 0.0001f)
+	// Cosine of maximum walkable slope angle.
+	// 0.7071 ~= cos(45 degrees)
+	const float maxSlopeDot = 0.7071f; // TODO: Allow user to adjust.
+	const float surfaceUpDot = Dot(normal, Vector3::YAxis);
+
+	if (surfaceUpDot >= maxSlopeDot)
 	{
-		//float groundFriction = 0.1f; // tune this, 0 = ice, 1 = very grippy
-		//Vector3 frictionForce = -vTangent * groundFriction;
-		//ApplyForce(frictionForce);
+		// Tangential velocity relative to the surface
+		const Vector3 vNormalPart = vn * normal;
+		const Vector3 vTangent = velocity - vNormalPart;
 
-		Vector3 tangentDir = vTangent / tangentSpeed;
-		float groundFriction = 0.1f; // tune this, 0 = ice, 1 = very grippy
+		const float tangentSpeed = Magnitude(vTangent);
 
-		float jt = -tangentSpeed * groundFriction / mInverseMass;
-		Vector3 frictionImpulse = tangentDir * jt;
+		if (tangentSpeed > 0.0001f)
+		{
+			const Vector3 tangentDir = vTangent / tangentSpeed;
+			const float groundFriction = 0.1f; // TODO: Tune this, 0 = ice, 1 = very grippy
+			const float jt = -tangentSpeed * groundFriction / mInverseMass;
+			const Vector3 frictionImpulse = tangentDir * jt;
 
-		ApplyImpulse(frictionImpulse);
+			ApplyImpulse(frictionImpulse);
+		}
 	}
 }
 

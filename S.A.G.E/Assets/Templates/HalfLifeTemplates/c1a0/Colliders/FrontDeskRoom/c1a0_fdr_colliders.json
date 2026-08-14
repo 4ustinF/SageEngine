@@ -2,7 +2,7 @@
   "Name": "Front Desk Room Colliders",
   "GameObjects": [
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/FrontDeskRoom/fdr_collider_00.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/FrontDeskRoom/BackWall/c1a0_fdr_bw_colliders.json"
     }
   ]
 }

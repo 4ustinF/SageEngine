@@ -1,0 +1,24 @@
+{
+  "Name": "Back Wall 4",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -5.029,
+        -3.658,
+        6.02
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        -0.0765,
+        1.372,
+        0.0
+      ],
+      "Size": [
+        0.153,
+        2.744,
+        4.877
+      ]
+    }
+  }
+}

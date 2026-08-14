@@ -3,6 +3,8 @@
 
 #include "IntersectData.h"
 #include "BoundingBox.h"
+#include "BoundingCapsule.h"
+#include "BoundingSphere.h"
 #include "PhysicsRay.h"
 
 using namespace SAGE;
@@ -79,7 +81,7 @@ RBPhysicsObject* RBPhysicsWorld::AddObject(const RBPhysicsObject& object, Physic
 	// TODO: Maybe return the object pointer instead. Or return a bool for success/failure. Or return nothing.
 }
 
-bool  RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
+bool RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
 {
 	// TODO: 
 	//auto it = std::find(mDynamicObjects.begin(), mDynamicObjects.end(), object);
@@ -441,6 +443,10 @@ bool RBPhysicsWorld::RaycastAgainstCollider(const PhysicsRay& ray, const Collide
 	{
 	case Collider::ColliderType::TYPE_BOX:
 		return RaycastAgainstBoundingBox(ray, (BoundingBox&)collider, rayHit);
+	//case Collider::ColliderType::TYPE_CAPSULE:
+	//	return RaycastAgainstBoundingSphere(ray, (BoundingCapsule&)collider, rayHit);
+	case Collider::ColliderType::TYPE_SPHERE:
+		return RaycastAgainstBoundingSphere(ray, (BoundingSphere&)collider, rayHit);
 	}
 
 	return false;
@@ -528,4 +534,14 @@ bool RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, const Boun
 	}
 
 	return true;
+}
+
+//bool RBPhysicsWorld::RaycastAgainstBoundingCapsule(const PhysicsRay& ray, const BoundingCapsule& boundingCapsule, PhysicsRayHit& rayHit)
+//{
+//	return false; // TODO:
+//}
+
+bool RBPhysicsWorld::RaycastAgainstBoundingSphere(const PhysicsRay& ray, const BoundingSphere& boundingSphere, PhysicsRayHit& rayHit)
+{
+	return false; // TODO:
 }

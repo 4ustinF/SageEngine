@@ -104,9 +104,7 @@ void MeshFilterComponent::DebugUI()
 			}
 		}
 
-		// TODO: Make it so we can swap mesh data out.
 		// TODO: Make it so we can modify mesh settings here.
-
 		// Display vertices count
 		ImGui::Text("Vertex Count: %s", std::to_string(mRenderObject.meshBuffer.GetVertexCount()).c_str());
 
@@ -133,6 +131,20 @@ void MeshFilterComponent::DebugUI()
 
 		ImGui::Checkbox("Display Wireframe##MeshFilterComponent", &mEnableWireframe);
 		ImGui::Checkbox("Fill Wireframe##MeshFilterComponent", &mFillWireframe);
+
+		ImGui::DragInt("Debug Vert Index##MeshFilterComponent", &mDebugVertIndex, 0.1f, -1, static_cast<int>(mMesh.vertices.size()) - 1);
+		if (mDebugVertIndex >= 0)
+		{
+			const Matrix4 world = mTransformComponent == nullptr ? Matrix4::Identity :
+				Matrix4::Scaling(mTransformComponent->GetScale()) *
+				Matrix4::RotationQuaternion(mTransformComponent->GetRotation()) *
+				Matrix4::Translation(mTransformComponent->GetPosition());
+
+			const Vector3& vertLocalPos = mMesh.vertices[mDebugVertIndex].position;
+			Vector3 vertWorldPos = TransformCoord(vertLocalPos, world);
+			ImGui::DragFloat3("Debug Vert Pos##MeshFilterComponent", &vertWorldPos.x, 0.1f);
+			SimpleDraw::AddSphere(vertWorldPos, 32, 0.1f, Colors::Green);
+		}
 
 		if (ImGui::CollapsingHeader("Adjust Mesh##MeshFilterComponent ", ImGuiTreeNodeFlags_CollapsingHeader))
 		{
@@ -273,6 +285,7 @@ void MeshFilterComponent::GenerateMesh()
 	}
 
 	GenerateBoundingBox();
+	mDebugVertIndex = -1;
 }
 
 void MeshFilterComponent::GenerateCubeMesh()

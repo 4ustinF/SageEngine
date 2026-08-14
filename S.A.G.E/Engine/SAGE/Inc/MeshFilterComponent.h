@@ -33,16 +33,16 @@ namespace SAGE
 		void DebugUI() override;
 
 		// Getters
-		const SAGE::Graphics::RenderObject& GetRenderObject() const { return mRenderObject; };
-		SAGE::Graphics::RenderObject& GetRenderObject() { return mRenderObject; };
-		const SAGE::Graphics::Mesh& GetMesh() const { return mMesh; };
-		const SAGE::Math::OBB GetGlobalBoundingBox() const;
+		const Graphics::RenderObject& GetRenderObject() const { return mRenderObject; };
+		Graphics::RenderObject& GetRenderObject() { return mRenderObject; };
+		const Graphics::Mesh& GetMesh() const { return mMesh; };
+		const Math::OBB GetGlobalBoundingBox() const;
 
 		// Setters // TODO: These should should trigger an update on the mesh for when we call them other then the init func.
 		void SetMeshType(MeshType meshType) { mMeshType = meshType; }
-		void SetPivotType(SAGE::Input::Pivot pivot) { mMeshFilterData.pivot = pivot; }
-		void SetDivisions(SAGE::Math::Vector2Int divisions) { mMeshFilterData.divisions = divisions; }
-		void SetSpacing(SAGE::Math::Vector2 spacing) { mMeshFilterData.spacing = spacing; }
+		void SetPivotType(Input::Pivot pivot) { mMeshFilterData.pivot = pivot; }
+		void SetDivisions(Math::Vector2Int divisions) { mMeshFilterData.divisions = divisions; }
+		void SetSpacing(Math::Vector2 spacing) { mMeshFilterData.spacing = spacing; }
 		void SetFlipVertices(bool flipVertices) { mMeshFilterData.flipVertices = flipVertices; }
 		void SetRadius(float radius) { mMeshFilterData.radius = radius; }
 
@@ -61,14 +61,14 @@ namespace SAGE
 
 		TransformComponent* mTransformComponent = nullptr;
 
-		SAGE::Graphics::RenderObject mRenderObject;
+		Graphics::RenderObject mRenderObject;
 		MeshType mMeshType = MeshType::Cube;
-		SAGE::Graphics::Mesh mMesh;
+		Graphics::Mesh mMesh;
 
 		struct MeshFilterData
 		{
 			std::string customFilePath = ""; // TODO: Convert to std::filesystem::path
-			SAGE::Input::Pivot pivot = Input::Pivot::Center;
+			Input::Pivot pivot = Input::Pivot::Center;
 			Math::Vector2Int divisions = Math::Vector2Int::One;
 			Math::Vector2 spacing = Math::Vector2::One;
 			bool flipVertices = false;
@@ -91,6 +91,7 @@ namespace SAGE
 		// Debug
 		bool mEnableWireframe = true;
 		bool mFillWireframe = false;
-		SAGE::Math::OBB mBoundingBox;
+		Math::OBB mBoundingBox;
+		int mDebugVertIndex = -1;
 	};
 }

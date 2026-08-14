@@ -127,13 +127,14 @@ IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other
     const Vector3 center = ClosestPointSegmentToBox(topLocal, bottomLocal, min, max);
 
     // 2. Closest point on AABB to that point (in LOCAL space)
-    Vector3 closest;
-    closest.x = std::max(min.x, std::min(center.x, max.x));
-    closest.y = std::max(min.y, std::min(center.y, max.y));
-    closest.z = std::max(min.z, std::min(center.z, max.z));
+    const Vector3 closest = {
+        std::max(min.x, std::min(center.x, max.x)),
+        std::max(min.y, std::min(center.y, max.y)),
+        std::max(min.z, std::min(center.z, max.z))
+    };
 
     // 3. Vector from box -> capsule segment point (still LOCAL space)
-    Vector3 delta = center - closest;
+    const Vector3 delta = center - closest;
 
     const float distSq = MagnitudeSqr(delta);
     const float radiusSq = mRadius * mRadius;

@@ -40,9 +40,6 @@ namespace SAGE::RBPhysics
 		const Math::Vector3& GetAngularVelocity() const { return mAngularVelocity; }
 		const Math::Quaternion& GetOrientation() const { return mOrientation; }
 		const Math::Vector3& GetAngularAcceleration() const { return mAngularAcceleration; }
-		float GetNormalDampening() const { return mNormalDampening; }
-		float GetTangentialStiffness() const { return mTangentialStiffness; }
-		float GetTangentialDampening() const { return mTangentialDampening; }
 
 		// Setters
 		void SetMass(float mass) { mMass = mass; }
@@ -81,10 +78,6 @@ namespace SAGE::RBPhysics
 
 		Math::Matrix3 mInertia = Math::Matrix3::Identity;
 		Math::Matrix3 mInverseInertia = Math::Matrix3::Identity;
-
-		float mNormalDampening = 0.85f;
-		float mTangentialStiffness = 0.8f;
-		float mTangentialDampening = 0.85f;
 
 		std::unique_ptr<Collider> mCollider = nullptr; // object owns its collider's lifetime
 	};

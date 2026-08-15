@@ -11,6 +11,7 @@ namespace SAGE::RBPhysics
 	public:
 		enum ColliderType
 		{
+			TYPE_NONE = -1,
 			TYPE_BOX,
 			TYPE_CAPSULE,
 			TYPE_SPHERE,
@@ -63,7 +64,7 @@ namespace SAGE::RBPhysics
 		SAGE::Math::Quaternion mOrientation = SAGE::Math::Quaternion::Identity; // TODO: When we add orientation we need a way for box collider to know the changes and update is axis alligned.
 
 	private:
-		ColliderType mType;
+		ColliderType mType = ColliderType::TYPE_NONE;
 		int mRefCount = 0;
 
 	};

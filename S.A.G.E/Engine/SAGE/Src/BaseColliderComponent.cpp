@@ -77,7 +77,7 @@ void BaseColliderComponent::OnDisable()
 {
 	if (mPhysicsObject != nullptr)
 	{
-		mPhysicsService->GetPhysicsWorld().RemoveObject(*mPhysicsObject);
+		mPhysicsService->GetPhysicsWorld().RemoveObject(mPhysicsObject);
 	}
 }
 

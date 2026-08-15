@@ -66,23 +66,6 @@ void RBPhysicsWorld::DebugUI()
 	ImGui::End();
 }
 
-//RBPhysicsObject* RBPhysicsWorld::AddObject(RBPhysicsObject& object, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
-//{
-//	switch (type)
-//	{
-//	case PhysicsObjectType::Dynamic:
-//	case PhysicsObjectType::Kinematic: // TODO: 
-//		mDynamicObjects.push_back(object);
-//		return &mDynamicObjects.back();
-//		break;
-//	case PhysicsObjectType::Static:
-//		mStaticObjects.push_back(object);
-//		return &mStaticObjects.back();
-//	}
-//
-//	return nullptr;
-//}
-
 RBPhysicsObject* RBPhysicsWorld::CreatePhysicsObject(std::unique_ptr<Collider> collider, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
 {
 	auto obj = std::make_unique<RBPhysicsObject>(std::move(collider));
@@ -104,23 +87,32 @@ RBPhysicsObject* RBPhysicsWorld::CreatePhysicsObject(std::unique_ptr<Collider> c
 	return nullptr;
 }
 
-
-bool RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
+bool RBPhysicsWorld::RemoveObject(const RBPhysicsObject* object)
 {
-	// TODO: 
-	//auto it = std::find(mDynamicObjects.begin(), mDynamicObjects.end(), object);
-	//if (it != mDynamicObjects.end())
-	//{
-	//	mDynamicObjects.erase(it);
-	//	return true;
-	//}
+	if (object == nullptr)
+	{
+		return false;
+	}
 
-	//it = std::find(mStaticObjects.begin(), mStaticObjects.end(), object);
-	//if (it != mStaticObjects.end())
-	//{
-	//	mStaticObjects.erase(it);
-	//	return true;
-	//}
+	auto it = std::find_if(mStaticObjects.begin(), mStaticObjects.end(),
+		[object](const std::unique_ptr<RBPhysicsObject>& obj) {
+			return obj.get() == object;
+		});
+
+	if (it != mStaticObjects.end()) {
+		mStaticObjects.erase(it); // unique_ptr goes out of scope here -> deletes the object
+		return true;
+	}
+
+	it = std::find_if(mDynamicObjects.begin(), mDynamicObjects.end(),
+		[object](const std::unique_ptr<RBPhysicsObject>& obj) {
+			return obj.get() == object;
+		});
+
+	if (it != mDynamicObjects.end()) {
+		mDynamicObjects.erase(it); // unique_ptr goes out of scope here -> deletes the object
+		return true;
+	}
 
 	return false;
 }

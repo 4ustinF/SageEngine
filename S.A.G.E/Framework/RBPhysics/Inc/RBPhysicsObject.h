@@ -76,9 +76,6 @@ namespace SAGE::RBPhysics
 		Math::Quaternion mOrientation = Math::Quaternion::Identity;
 		Math::Vector3 mAngularAcceleration = Math::Vector3::Zero;
 
-		Math::Matrix3 mInertia = Math::Matrix3::Identity;
-		Math::Matrix3 mInverseInertia = Math::Matrix3::Identity;
-
 		std::unique_ptr<Collider> mCollider = nullptr; // object owns its collider's lifetime
 	};
 }

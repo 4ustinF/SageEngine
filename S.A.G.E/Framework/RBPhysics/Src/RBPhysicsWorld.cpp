@@ -42,26 +42,38 @@ void RBPhysicsWorld::DrawPhysicsObjects(bool fillShapes)
 	}
 }
 
-//void RBPhysicsWorld::DebugUI()
-//{
-//	if (mDynamicObjects.empty())
-//		return;
-//
-//	ImGui::Begin("Physics", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-//	ImGui::DragFloat3("Gravity", &mSettings.gravity.x, 0.1f, -10.0f, 10.0f);
-//
-//	if (!mDynamicObjects.empty())
-//	{
-//		auto& o = mDynamicObjects[0];
-//		ImGui::Text("Obj0 Pos: %.2f, %.2f, %.2f", o.GetPosition().x, o.GetPosition().y, o.GetPosition().z);
-//		ImGui::Text("Obj0 Vel: %.2f, %.2f, %.2f", o.GetVelocity().x, o.GetVelocity().y, o.GetVelocity().z);
-//		ImGui::Text("Obj0 Acc: %.3f, %.3f, %.3f", o.GetAcceleration().x, o.GetAcceleration().y, o.GetAcceleration().z);
-//		Quaternion orientation = o.GetOrientation();
-//		ImGui::DragFloat4("Orientation", &orientation.x, 0.01f, -10000.0f, 10000.0f); // TODO: Remove
-//	}
-//
-//	ImGui::End();
-//}
+void RBPhysicsWorld::DebugUI()
+{
+	if (mDynamicObjects.empty())
+		return;
+
+	ImGui::Begin("Physics", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+	//ImGui::DragFloat3("Gravity", &mSettings.gravity.x, 0.1f, -10.0f, 10.0f);
+
+	//if (!mDynamicObjects.empty())
+	//{
+	//	auto& o = mDynamicObjects[0];
+	//	ImGui::Text("Obj0 Pos: %.2f, %.2f, %.2f", o.GetPosition().x, o.GetPosition().y, o.GetPosition().z);
+	//	ImGui::Text("Obj0 Vel: %.2f, %.2f, %.2f", o.GetVelocity().x, o.GetVelocity().y, o.GetVelocity().z);
+	//	ImGui::Text("Obj0 Acc: %.3f, %.3f, %.3f", o.GetAcceleration().x, o.GetAcceleration().y, o.GetAcceleration().z);
+	//	Quaternion orientation = o.GetOrientation();
+	//	ImGui::DragFloat4("Orientation", &orientation.x, 0.01f, -10000.0f, 10000.0f); // TODO: Remove
+	//}
+
+	for (const auto& object : mDynamicObjects)
+	{
+		Vector3 pos = object.GetPosition();
+		ImGui::DragFloat3("Object", &pos.x, 0.1f);
+	}
+
+	for (const auto& object : mStaticObjects)
+	{
+		Vector3 pos = object.GetPosition();
+		ImGui::DragFloat3("Object", &pos.x, 0.1f);
+	}
+
+	ImGui::End();
+}
 
 RBPhysicsObject* RBPhysicsWorld::AddObject(const RBPhysicsObject& object, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
 {

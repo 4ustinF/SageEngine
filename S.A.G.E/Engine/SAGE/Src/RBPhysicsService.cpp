@@ -52,4 +52,5 @@ void RBPhysicsService::DebugUI()
 {
 	ImGui::Checkbox("Render Physics##RBPhysics", &mRenderDebugUI);
 	ImGui::Checkbox("Fill Debug Shapes##RBPhysics", &mFillDebugShapes);
+	mPhysicsWorld.DebugUI();
 }

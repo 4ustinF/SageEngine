@@ -70,14 +70,7 @@ namespace SAGE::RBPhysics
 		void ApplyTorque(const Math::Vector3& torque);
 		void ApplyDrag(const Math::Vector3& velocity, const Math::Vector3& dragForce);
 
-		const Collider& GetCollider() // TODO: This is temp.
-		{
-			Math::Vector3 translation = mPosition - mOldPosition;
-			mOldPosition = mPosition;
-			mCollider->Transform(translation);
-
-			return *mCollider;
-		}
+		const Collider& GetCollider() { return *mCollider; } // TODO: This is temp. 
 
 	private:
 		float mMass = 1.0f;

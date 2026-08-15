@@ -82,6 +82,10 @@ void RBPhysicsObject::Integrate(float deltaTime)
 
 	// Clear accumulators (forces/torques should be reapplied each frame)
 	mAngularAcceleration = Vector3::Zero;
+
+	const Vector3 translation = mPosition - mOldPosition;
+	mOldPosition = mPosition;
+	mCollider->Transform(translation);
 }
 
 //void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData)

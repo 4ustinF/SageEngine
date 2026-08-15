@@ -30,6 +30,7 @@ namespace SAGE::RBPhysics
 			float maxAirdrag = 1.0f;
 			float airDragCoeficient = 0.05f;
 			float bounceCoeficient = 0.0f; // 0 = no bounce, 1 = perfect bounce = restitution
+			float maxSlopeDot = 0.7071f; // 0.7071 ~= cos(45 degrees)
 		};
 
 		RBPhysicsWorld() = default;
@@ -59,10 +60,6 @@ namespace SAGE::RBPhysics
 		std::vector<RBPhysicsObject> mDynamicObjects;	// Physics can affect the object.
 		//std::vector<RBPhysicsObject> mKinematicObjects; // Physics cannot affect the object. Like static but can move.
 		std::vector<RBPhysicsObject> mStaticObjects;	// Can't move.
-
-		void DetectCollisionWithDome(float deltaTime);
-		void ResolveCollisionWithDome(RBPhysicsObject& object, float deltaTime);
-		Math::Vector3 GetVelocityAtPoint(const RBPhysicsObject& object, const Math::Vector3& localPoint);
 
 		void ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData);
 

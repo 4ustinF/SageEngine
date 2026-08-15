@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common.h"
-#include "BoundingSphere.h" // TODO: Move out.
+#include "Collider.h"
 
 namespace SAGE::RBPhysics
 {
@@ -15,16 +15,7 @@ namespace SAGE::RBPhysics
 			mMass(mass),
 			mOrientation(collider->GetOrientation())
 		{
-			mInverseMass = 1.0f / mMass;
-
-			//// This is for sphere body 
-			//float I = 2.0f / 5.0f * mMass * mMass * 1.0f; // Radius
-			//mInertia = Math::Matrix3(
-			//	I, 0.0f, 0.0f,
-			//	0.0f, I, 0.0f,
-			//	0.0f, 0.0f, I);
-
-			//mInverseInertia = Math::Inverse(mInertia);
+			mInverseMass = mMass != 0.0f ? 1.0f / mMass : 0.0f; // static objects often have mass 0
 		}
 		RBPhysicsObject(const RBPhysicsObject& other);
 		void operator=(RBPhysicsObject other);
@@ -66,13 +57,12 @@ namespace SAGE::RBPhysics
 
 		void ApplyForce(const Math::Vector3& force);
 		void ApplyImpulse(const Math::Vector3& impulse);
-		void ApplyForceAtPoint(const Math::Vector3& force, const Math::Vector3& localPoint);
-		void ApplyTorque(const Math::Vector3& torque);
-		void ApplyDrag(const Math::Vector3& velocity, const Math::Vector3& dragForce);
 
 		const Collider& GetCollider() { return *mCollider; } // TODO: This is temp. 
 
 	private:
+		void ResolveCollisionInternal(const Math::Vector3& otherVelocity, float otherInverseMass, const IntersectData& intersectData);
+
 		float mMass = 1.0f;
 		float mInverseMass = 1.0f;
 		float mDrag = 0.0f;
@@ -96,6 +86,5 @@ namespace SAGE::RBPhysics
 		float mTangentialDampening = 0.85f;
 
 		Collider* mCollider;
-		Math::Vector3 QuatMulVec3(const Math::Vector3& vec, const Math::Matrix3& m); // Remove;
 	};
 }

@@ -74,17 +74,14 @@ void CapsuleColliderComponent::DebugUI()
 
 void CapsuleColliderComponent::OnEnable()
 {
-	//mPhysicsObject = new RBPhysicsObject(new BoundingCapsule(GetCenter(), mRadius, mHeight));
+	BaseColliderComponent::OnEnable();
 
 	auto collider = std::make_unique<BoundingCapsule>(GetCenter(), mRadius, mHeight);
-
 	mPhysicsObject = mPhysicsService->GetPhysicsWorld().CreatePhysicsObject(
 		std::move(collider),
 		mRigidBodyComponent ? (mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static);
 
 	UpdatePhysicsObjectPropertys();
-
-	BaseColliderComponent::OnEnable();
 }
 
 void CapsuleColliderComponent::SetRadius(float radius) 

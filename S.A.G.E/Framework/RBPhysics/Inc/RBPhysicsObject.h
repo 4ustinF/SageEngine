@@ -18,7 +18,7 @@ namespace SAGE::RBPhysics
 			mInverseMass = mMass != 0.0f ? 1.0f / mMass : 0.0f; // static objects often have mass 0
 		}
 		RBPhysicsObject(const RBPhysicsObject& other);
-		void operator=(RBPhysicsObject other);
+		RBPhysicsObject& operator=(const RBPhysicsObject& other) = default;
 		virtual ~RBPhysicsObject();
 
 		void DebugDraw(bool fillDebugShapes);

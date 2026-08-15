@@ -20,14 +20,6 @@ RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
 	mInverseMass = mMass != 0.0f ? 1.0f / mMass : 0.0f; // static objects often have mass 0
 }
 
-void RBPhysicsObject::operator=(RBPhysicsObject other) // TODO: Do this in a better fashion.
-{
-	char* temp[sizeof(RBPhysicsObject) / sizeof(char)];
-	memcpy(temp, this, sizeof(RBPhysicsObject));
-	memcpy(this, &other, sizeof(RBPhysicsObject));
-	memcpy(&other, temp, sizeof(RBPhysicsObject));
-}
-
 RBPhysicsObject::~RBPhysicsObject()
 {
 	mCollider = nullptr;

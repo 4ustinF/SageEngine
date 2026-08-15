@@ -44,30 +44,6 @@ namespace SAGE::RBPhysics
 		RBPhysicsObject* AddObject(const RBPhysicsObject& object, PhysicsObjectType type = PhysicsObjectType::Static);
 		bool RemoveObject(const RBPhysicsObject& object);
 
-		// TODO: These are temp please remove.
-		RBPhysicsObject& GetPhysicsObject(int index)
-		{
-			return mDynamicObjects[index];
-		}
-
-		// TODO: These are temp please remove.
-		int GetObjectsCount() const
-		{
-			return static_cast<int>(mDynamicObjects.size());
-		}
-
-		// TODO: These are temp please remove.
-		RBPhysicsObject& GetStaticPhysicsObject(int index)
-		{
-			return mStaticObjects[index];
-		}
-
-		// TODO: These are temp please remove.
-		int GetStaticObjectsCount() const
-		{
-			return static_cast<int>(mStaticObjects.size());
-		}
-
 		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance);
 		bool Raycast(const PhysicsRay& ray);
 		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance, PhysicsRayHit& rayHit);

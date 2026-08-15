@@ -101,41 +101,6 @@ bool RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
 	return false;
 }
 
-bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance)
-{
-	return Raycast(PhysicsRay(origin, direction, maxDistance));
-}
-
-bool RBPhysicsWorld::Raycast(const PhysicsRay& ray) // TODO: Instead should do a check that doesn't need to calculate hit data to save on perf?
-{
-	PhysicsRayHit hit;
-	return Raycast(ray, hit);
-}
-
-bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance, PhysicsRayHit& rayHit)
-{
-	return Raycast(PhysicsRay(origin, direction, maxDistance), rayHit);
-}
-
-bool RBPhysicsWorld::Raycast(const PhysicsRay& ray, PhysicsRayHit& rayHit)
-{
-	SimpleDraw::AddLine(ray.origin, ray.GetEndPoint(), Colors::Cyan);
-	PhysicsRayHit newHit;
-
-	for (RBPhysicsObject& staticObject : mStaticObjects)
-	{
-		if (RaycastAgainstCollider(ray, staticObject.GetCollider(), newHit))
-		{
-			if (newHit.distance < rayHit.distance)
-			{
-				rayHit = newHit;
-			}
-		}
-	}
-
-	return rayHit.hit; // TODO: Return the closest hit information instead of just a bool. Maybe out with the hit info.
-}
-
 void RBPhysicsWorld::Simulate(float deltaTime)
 {
 	for (RBPhysicsObject& dynamicObject : mDynamicObjects)
@@ -166,7 +131,7 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 
 void RBPhysicsWorld::HandleCollisions()
 {
-	const int objectsCount = GetObjectsCount();
+	const int objectsCount = static_cast<int>(mDynamicObjects.size());
 	for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
 	{
 		RBPhysicsObject& primaryObject = mDynamicObjects[primaryIndex];
@@ -437,6 +402,43 @@ void RBPhysicsWorld::ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject&
 
 }
 
+#pragma region ---RayCast---
+
+bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance)
+{
+	return Raycast(PhysicsRay(origin, direction, maxDistance));
+}
+
+bool RBPhysicsWorld::Raycast(const PhysicsRay& ray) // TODO: Instead should do a check that doesn't need to calculate hit data to save on perf?
+{
+	PhysicsRayHit hit;
+	return Raycast(ray, hit);
+}
+
+bool RBPhysicsWorld::Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance, PhysicsRayHit& rayHit)
+{
+	return Raycast(PhysicsRay(origin, direction, maxDistance), rayHit);
+}
+
+bool RBPhysicsWorld::Raycast(const PhysicsRay& ray, PhysicsRayHit& rayHit)
+{
+	SimpleDraw::AddLine(ray.origin, ray.GetEndPoint(), Colors::Cyan);
+	PhysicsRayHit newHit;
+
+	for (RBPhysicsObject& staticObject : mStaticObjects)
+	{
+		if (RaycastAgainstCollider(ray, staticObject.GetCollider(), newHit))
+		{
+			if (newHit.distance < rayHit.distance)
+			{
+				rayHit = newHit;
+			}
+		}
+	}
+
+	return rayHit.hit; // TODO: Return the closest hit information instead of just a bool. Maybe out with the hit info.
+}
+
 bool RBPhysicsWorld::RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider, PhysicsRayHit& rayHit)
 {
 	switch (collider.GetType()) // TODO: Other cases.
@@ -545,3 +547,5 @@ bool RBPhysicsWorld::RaycastAgainstBoundingSphere(const PhysicsRay& ray, const B
 {
 	return false; // TODO:
 }
+
+#pragma endregion

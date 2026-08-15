@@ -42,7 +42,7 @@ namespace SAGE::RBPhysics
 		void DrawPhysicsObjects(bool fillShapes);
 		void DebugUI();
 
-		RBPhysicsObject* AddObject(const RBPhysicsObject& object, PhysicsObjectType type = PhysicsObjectType::Static);
+		RBPhysicsObject* AddObject(RBPhysicsObject& object, PhysicsObjectType type = PhysicsObjectType::Static);
 		bool RemoveObject(const RBPhysicsObject& object);
 
 		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance);

@@ -66,29 +66,28 @@ void RBPhysicsObject::Integrate(float deltaTime)
 
 void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData)
 {
-	ResolveCollisionInternal(otherObject.GetVelocity(), otherObject.GetInverseMass(), intersectData);
+	const float totalInvMass = mInverseMass + otherObject.GetInverseMass();
+	if (totalInvMass > 0.0f)
+	{
+		const float myShare = mInverseMass / totalInvMass;
+		ResolveCollisionInternal(otherObject.GetVelocity(), totalInvMass, myShare, intersectData);
+	}
 }
 
-void RBPhysicsObject::ResolveCollision(const IntersectData& intersectData)
+void RBPhysicsObject::ResolveCollision(const IntersectData& intersectData) // Treat as colliding with an immovable, stationary object (infinite mass).
 {
-	// Treat as colliding with an immovable, stationary object (infinite mass).
-	ResolveCollisionInternal(Vector3::Zero, 0.0f, intersectData);
+	if (mInverseMass > 0.0f)
+	{
+		ResolveCollisionInternal(Vector3::Zero, mInverseMass, 1.0f, intersectData);
+	}
 }
 
-void RBPhysicsObject::ResolveCollisionInternal(const Vector3& otherVelocity, float otherInverseMass, const IntersectData& intersectData)
+void RBPhysicsObject::ResolveCollisionInternal(const Vector3& otherVelocity, float totalInvMass, float myShare, const IntersectData& intersectData)
 {
 	const Vector3 normal = intersectData.GetNormal();
 	const float penetration = intersectData.GetPenetration();
-	const float totalInvMass = mInverseMass + otherInverseMass;
-
-	if (totalInvMass <= 0.0f)
-	{
-		// Both objects infinite mass - nothing to resolve.
-		return;
-	}
 
 	// 1. Positional correction
-	const float myShare = mInverseMass / totalInvMass;
 	const Vector3 newPos = mPosition + normal * (penetration * myShare); // * 0.8f); = Baumgarte stabilization
 	SetPosition(newPos);
 

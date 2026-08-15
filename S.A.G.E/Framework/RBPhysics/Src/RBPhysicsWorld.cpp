@@ -48,7 +48,8 @@ void RBPhysicsWorld::DebugUI()
 		return;
 
 	ImGui::Begin("Physics", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-	//ImGui::DragFloat3("Gravity", &mSettings.gravity.x, 0.1f, -10.0f, 10.0f);
+	ImGui::DragFloat3("Gravity", &mSettings.gravity.x, 0.1f);
+	ImGui::Separator();
 
 	for (const auto& object : mDynamicObjects)
 	{
@@ -65,7 +66,7 @@ void RBPhysicsWorld::DebugUI()
 	ImGui::End();
 }
 
-RBPhysicsObject* RBPhysicsWorld::AddObject(const RBPhysicsObject& object, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
+RBPhysicsObject* RBPhysicsWorld::AddObject(RBPhysicsObject& object, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
 {
 	switch (type)
 	{

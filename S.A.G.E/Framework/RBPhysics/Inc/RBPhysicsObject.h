@@ -59,9 +59,10 @@ namespace SAGE::RBPhysics
 		void ApplyImpulse(const Math::Vector3& impulse);
 
 		const Collider& GetCollider() { return *mCollider; } // TODO: This is temp. 
+		Collider* GetRawCollider() { return mCollider; } // TODO: This is temp. 
 
 	private:
-		void ResolveCollisionInternal(const Math::Vector3& otherVelocity, float otherInverseMass, const IntersectData& intersectData);
+		void ResolveCollisionInternal(const Math::Vector3& otherVelocity, float totalInvMass, float myShare, const IntersectData& intersectData);
 
 		float mMass = 1.0f;
 		float mInverseMass = 1.0f;

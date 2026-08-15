@@ -51,11 +51,6 @@ namespace SAGE::RBPhysics
 
 		ColliderType GetType() const { return mType; }
 		
-		// Reference Counter
-		int GetReferenceCount() { return mRefCount; }
-		void AddReference() { mRefCount++; }
-		bool RemoveReference() { return --mRefCount == 0; }
-
 		void SetDebugColor(SAGE::Graphics::Color debugColor) { mDebugColor = debugColor; }
 
 	protected:
@@ -65,7 +60,6 @@ namespace SAGE::RBPhysics
 
 	private:
 		ColliderType mType = ColliderType::TYPE_NONE;
-		int mRefCount = 0;
 
 	};
 }

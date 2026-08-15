@@ -17,7 +17,6 @@ RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
 	mMass(other.mMass),
 	mOrientation(other.mOrientation)
 {
-	mCollider->AddReference();
 	mInverseMass = mMass != 0.0f ? 1.0f / mMass : 0.0f; // static objects often have mass 0
 }
 
@@ -31,10 +30,7 @@ void RBPhysicsObject::operator=(RBPhysicsObject other) // TODO: Do this in a bet
 
 RBPhysicsObject::~RBPhysicsObject()
 {
-	if (mCollider && mCollider->RemoveReference())
-	{
-		delete mCollider;
-	}
+	mCollider = nullptr;
 }
 
 void RBPhysicsObject::DebugDraw(bool fillDebugShapes)

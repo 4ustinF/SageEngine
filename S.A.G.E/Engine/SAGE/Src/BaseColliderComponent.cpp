@@ -54,6 +54,7 @@ void BaseColliderComponent ::Terminate()
 	mPhysicsObject = nullptr;
 	mTransformComponent = nullptr;
 	mRigidBodyComponent = nullptr;
+	mMeshFilterComponent = nullptr;
 	mPhysicsService = nullptr;
 }
 

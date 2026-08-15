@@ -1,5 +1,4 @@
-﻿  GameState.cpp
-  PlayerControllerComponent.cpp
+﻿  PlayerControllerComponent.cpp
   TextureAnimatorComponent.cpp
   WinMain.cpp
   Generating Code...

@@ -37,9 +37,7 @@ namespace SAGE::RBPhysics
 		Math::Vector3 GetLocalPosition(const Math::Vector3& worldPos);
 		Math::Vector3 GetWorldPosition(const Math::Vector3& localPos);
 		const Math::Vector3& GetVelocity() const { return mVelocity; }
-		const Math::Vector3& GetAngularVelocity() const { return mAngularVelocity; }
 		const Math::Quaternion& GetOrientation() const { return mOrientation; }
-		const Math::Vector3& GetAngularAcceleration() const { return mAngularAcceleration; }
 
 		// Setters
 		void SetMass(float mass) { mMass = mass; }
@@ -48,7 +46,6 @@ namespace SAGE::RBPhysics
 		void SetUseGravity(bool useGravity) { mUseGravity = useGravity; }
 		void SetPosition(const Math::Vector3& position) { mPosition = position; }
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
-		void SetAngularVelocity(const Math::Vector3& velocity) { mAngularVelocity = velocity; }
 		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
 		void ApplyForce(const Math::Vector3& force);
@@ -71,10 +68,7 @@ namespace SAGE::RBPhysics
 		Math::Vector3 mPosition = Math::Vector3::Zero;
 		Math::Vector3 mOldPosition = Math::Vector3::Zero;
 		Math::Vector3 mVelocity = Math::Vector3::Zero;
-		Math::Vector3 mAngularVelocity = Math::Vector3::Zero;
-
 		Math::Quaternion mOrientation = Math::Quaternion::Identity;
-		Math::Vector3 mAngularAcceleration = Math::Vector3::Zero;
 
 		std::unique_ptr<Collider> mCollider = nullptr; // object owns its collider's lifetime
 	};

@@ -49,7 +49,6 @@ void RBPhysicsObject::Integrate(float deltaTime)
 	mPosition += mVelocity * deltaTime;
 
 	// Clear accumulators (forces/torques should be reapplied each frame)
-	mAngularAcceleration = Vector3::Zero;
 
 	const Vector3 translation = mPosition - mOldPosition;
 	mOldPosition = mPosition;

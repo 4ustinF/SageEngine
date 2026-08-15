@@ -9,15 +9,15 @@ using namespace SAGE::Input;
 using namespace SAGE::Graphics;
 using namespace SAGE::RBPhysics;
 
-RBPhysicsObject::RBPhysicsObject(const RBPhysicsObject& other) :
+RBPhysicsObject::RBPhysicsObject(RBPhysicsObject& other) :
 	mPosition(other.mPosition),
 	mOldPosition(other.mOldPosition),
 	mVelocity(other.mVelocity),
-	mCollider(other.mCollider),
+	mCollider(std::move(other.mCollider)),
 	mMass(other.mMass),
 	mOrientation(other.mOrientation)
 {
-	mInverseMass = mMass != 0.0f ? 1.0f / mMass : 0.0f; // static objects often have mass 0
+	UpdateInverseMass();
 }
 
 RBPhysicsObject::~RBPhysicsObject()
@@ -56,13 +56,13 @@ void RBPhysicsObject::Integrate(float deltaTime)
 	mCollider->Transform(translation);
 }
 
-void RBPhysicsObject::ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData)
+void RBPhysicsObject::ResolveCollision(const std::unique_ptr<RBPhysicsObject>& otherObject, const IntersectData& intersectData)
 {
-	const float totalInvMass = mInverseMass + otherObject.GetInverseMass();
+	const float totalInvMass = mInverseMass + otherObject->GetInverseMass();
 	if (totalInvMass > 0.0f)
 	{
 		const float myShare = mInverseMass / totalInvMass;
-		ResolveCollisionInternal(otherObject.GetVelocity(), totalInvMass, myShare, intersectData);
+		ResolveCollisionInternal(otherObject->GetVelocity(), totalInvMass, myShare, intersectData);
 	}
 }
 

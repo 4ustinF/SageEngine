@@ -26,7 +26,7 @@ namespace SAGE::RBPhysics
 
 		virtual void DebugDraw(SAGE::Math::Quaternion orientation, bool fillDebugShapes) {}
 
-		IntersectData Intersect(const Collider& other) const;
+		IntersectData Intersect(const Collider* other) const;
 		virtual void Transform(const Math::Vector3& translation) {}
 		Math::Vector3 GetCenter() const { return mCenter; }
 		const SAGE::Math::Quaternion& GetOrientation() const { return mOrientation; } // TODO: Does collider need to hold this info?

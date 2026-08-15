@@ -31,14 +31,14 @@ void RBPhysicsWorld::Update(float deltaTime)
 
 void RBPhysicsWorld::DrawPhysicsObjects(bool fillShapes)
 {
-	for (RBPhysicsObject& object : mDynamicObjects)
+	for (std::unique_ptr<RBPhysicsObject>& object : mDynamicObjects)
 	{
-		object.DebugDraw(fillShapes);
+		object->DebugDraw(fillShapes);
 	}
 
-	for (RBPhysicsObject& object : mStaticObjects)
+	for (std::unique_ptr<RBPhysicsObject>& object : mStaticObjects)
 	{
-		object.DebugDraw(fillShapes);
+		object->DebugDraw(fillShapes);
 	}
 }
 
@@ -53,35 +53,57 @@ void RBPhysicsWorld::DebugUI()
 
 	for (const auto& object : mDynamicObjects)
 	{
-		Vector3 pos = object.GetPosition();
+		Vector3 pos = object->GetPosition();
 		ImGui::DragFloat3("Object", &pos.x, 0.1f);
 	}
 
 	for (const auto& object : mStaticObjects)
 	{
-		Vector3 pos = object.GetPosition();
+		Vector3 pos = object->GetPosition();
 		ImGui::DragFloat3("Object", &pos.x, 0.1f);
 	}
 
 	ImGui::End();
 }
 
-RBPhysicsObject* RBPhysicsWorld::AddObject(RBPhysicsObject& object, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
+//RBPhysicsObject* RBPhysicsWorld::AddObject(RBPhysicsObject& object, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
+//{
+//	switch (type)
+//	{
+//	case PhysicsObjectType::Dynamic:
+//	case PhysicsObjectType::Kinematic: // TODO: 
+//		mDynamicObjects.push_back(object);
+//		return &mDynamicObjects.back();
+//		break;
+//	case PhysicsObjectType::Static:
+//		mStaticObjects.push_back(object);
+//		return &mStaticObjects.back();
+//	}
+//
+//	return nullptr;
+//}
+
+RBPhysicsObject* RBPhysicsWorld::CreatePhysicsObject(std::unique_ptr<Collider> collider, PhysicsObjectType type /*= PhysicsObjectType::Static*/)
 {
+	auto obj = std::make_unique<RBPhysicsObject>(std::move(collider));
+	RBPhysicsObject* rawPtr = obj.get();
+
 	switch (type)
 	{
 	case PhysicsObjectType::Dynamic:
 	case PhysicsObjectType::Kinematic: // TODO: 
-		mDynamicObjects.push_back(object);
-		return &mDynamicObjects.back();
+		mDynamicObjects.push_back(std::move(obj)); // world owns it now
+		return rawPtr; // non-owning pointer back to caller
 		break;
 	case PhysicsObjectType::Static:
-		mStaticObjects.push_back(object);
-		return &mStaticObjects.back();
+
+		mStaticObjects.push_back(std::move(obj)); // world owns it now
+		return rawPtr; // non-owning pointer back to caller
 	}
 
 	return nullptr;
 }
+
 
 bool RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
 {
@@ -105,13 +127,13 @@ bool RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)
 
 void RBPhysicsWorld::Simulate(float deltaTime)
 {
-	for (RBPhysicsObject& dynamicObject : mDynamicObjects)
+	for (std::unique_ptr<RBPhysicsObject>& dynamicObject : mDynamicObjects)
 	{
 		// Gravity
-		dynamicObject.ApplyForce(mSettings.gravity * deltaTime);
+		dynamicObject->ApplyForce(mSettings.gravity * deltaTime);
 
 		// Air Drag
-		Vector3 velocity = dynamicObject.GetVelocity();
+		Vector3 velocity = dynamicObject->GetVelocity();
 		float speed = Magnitude(velocity);
 
 		if (speed > 0.0001f)
@@ -124,10 +146,10 @@ void RBPhysicsWorld::Simulate(float deltaTime)
 			// Vector3 dragForce = -Normalize(velocity) * (dragCoefficient * speed * speed);
 
 			dragForce.y = 0.0f; // Optional: ignore vertical drag if desired
-			dynamicObject.ApplyForce(dragForce);
+			dynamicObject->ApplyForce(dragForce);
 		}
 
-		dynamicObject.Integrate(deltaTime);
+		dynamicObject->Integrate(deltaTime);
 	}
 }
 
@@ -136,28 +158,28 @@ void RBPhysicsWorld::HandleCollisions()
 	const int objectsCount = static_cast<int>(mDynamicObjects.size());
 	for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
 	{
-		RBPhysicsObject& primaryObject = mDynamicObjects[primaryIndex];
+		std::unique_ptr<RBPhysicsObject>& primaryObject = mDynamicObjects[primaryIndex];
 		for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
 		{
-			RBPhysicsObject& secondaryObject = mDynamicObjects[secondaryIndex];
-			IntersectData intersectData = primaryObject.GetCollider().Intersect(secondaryObject.GetCollider());
+			std::unique_ptr<RBPhysicsObject>& secondaryObject = mDynamicObjects[secondaryIndex];
+			IntersectData intersectData = primaryObject->GetCollider()->Intersect(secondaryObject->GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				primaryObject.ResolveCollision(secondaryObject, intersectData);
+				primaryObject->ResolveCollision(secondaryObject, intersectData);
 				intersectData.InverseNormal(); // Inverse the normal vector for the second object
-				secondaryObject.ResolveCollision(primaryObject, intersectData);
+				secondaryObject->ResolveCollision(primaryObject, intersectData);
 			}
 		}
 	}
 
-	for (RBPhysicsObject& primaryObject : mDynamicObjects)
+	for (std::unique_ptr<RBPhysicsObject>& primaryObject : mDynamicObjects)
 	{
-		for (RBPhysicsObject& staticObject : mStaticObjects)
+		for (std::unique_ptr<RBPhysicsObject>& staticObject : mStaticObjects)
 		{
-			IntersectData intersectData = primaryObject.GetCollider().Intersect(staticObject.GetCollider());
+			IntersectData intersectData = primaryObject->GetCollider()->Intersect(staticObject->GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				primaryObject.ResolveCollision(intersectData);
+				primaryObject->ResolveCollision(intersectData);
 			}
 		}
 	}
@@ -190,9 +212,9 @@ bool RBPhysicsWorld::Raycast(const PhysicsRay& ray, PhysicsRayHit& rayHit)
 	SimpleDraw::AddLine(ray.origin, ray.GetEndPoint(), Colors::Cyan);
 	PhysicsRayHit newHit;
 
-	for (RBPhysicsObject& staticObject : mStaticObjects)
+	for (std::unique_ptr<RBPhysicsObject>& staticObject : mStaticObjects)
 	{
-		if (RaycastAgainstCollider(ray, staticObject.GetCollider(), newHit))
+		if (RaycastAgainstCollider(ray, staticObject->GetCollider(), newHit))
 		{
 			if (newHit.distance < rayHit.distance)
 			{
@@ -204,26 +226,31 @@ bool RBPhysicsWorld::Raycast(const PhysicsRay& ray, PhysicsRayHit& rayHit)
 	return rayHit.hit; // TODO: Return the closest hit information instead of just a bool. Maybe out with the hit info.
 }
 
-bool RBPhysicsWorld::RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider, PhysicsRayHit& rayHit)
+bool RBPhysicsWorld::RaycastAgainstCollider(const PhysicsRay& ray, const Collider* collider, PhysicsRayHit& rayHit) // TODO: Can we just remove this casting into Raycast()
 {
-	switch (collider.GetType()) // TODO: Other cases.
+	if (collider == nullptr)
+	{
+		return false;
+	}
+
+	switch (collider->GetType()) // TODO: Other cases.
 	{
 	case Collider::ColliderType::TYPE_BOX:
-		return RaycastAgainstBoundingBox(ray, (BoundingBox&)collider, rayHit);
+		return RaycastAgainstBoundingBox(ray, dynamic_cast<const BoundingBox*>(collider), rayHit);
 	case Collider::ColliderType::TYPE_CAPSULE:
-		return RaycastAgainstBoundingCapsule(ray, (BoundingCapsule&)collider, rayHit);
+		return RaycastAgainstBoundingCapsule(ray, dynamic_cast<const BoundingCapsule*>(collider), rayHit);
 	case Collider::ColliderType::TYPE_SPHERE:
-		return RaycastAgainstBoundingSphere(ray, (BoundingSphere&)collider, rayHit);
+		return RaycastAgainstBoundingSphere(ray, dynamic_cast<const BoundingSphere*>(collider), rayHit);
 	}
 
 	return false;
 }
 
-bool RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox, PhysicsRayHit& rayHit)
+bool RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox* boundingBox, PhysicsRayHit& rayHit)
 {
 	// Compute the local to world / world to local matrices
-	const Matrix4 matTrans = Matrix4::Translation(boundingBox.GetCenter());
-	const Matrix4 matRot = Matrix4::RotationQuaternion(boundingBox.GetOrientation());
+	const Matrix4 matTrans = Matrix4::Translation(boundingBox->GetCenter());
+	const Matrix4 matRot = Matrix4::RotationQuaternion(boundingBox->GetOrientation());
 	const Matrix4 matWorld = matRot * matTrans;
 	const Matrix4 matWorldInv = Inverse(matWorld);
 
@@ -235,7 +262,7 @@ bool RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, const Boun
 
 	const float origin[3] = { org.x, org.y, org.z };
 	const float direction[3] = { dir.x, dir.y, dir.z };
-	const Vector3& extend = boundingBox.GetExtend();
+	const Vector3& extend = boundingBox->GetExtend();
 	const float extent[3] = { extend.x, extend.y, extend.z };
 
 	float tMin = 0.0f;
@@ -303,12 +330,12 @@ bool RBPhysicsWorld::RaycastAgainstBoundingBox(const PhysicsRay& ray, const Boun
 	return true;
 }
 
-bool RBPhysicsWorld::RaycastAgainstBoundingCapsule(const PhysicsRay& ray, const BoundingCapsule& boundingCapsule, PhysicsRayHit& rayHit)
+bool RBPhysicsWorld::RaycastAgainstBoundingCapsule(const PhysicsRay& ray, const BoundingCapsule* boundingCapsule, PhysicsRayHit& rayHit)
 {
 	return false; // TODO:
 }
 
-bool RBPhysicsWorld::RaycastAgainstBoundingSphere(const PhysicsRay& ray, const BoundingSphere& boundingSphere, PhysicsRayHit& rayHit)
+bool RBPhysicsWorld::RaycastAgainstBoundingSphere(const PhysicsRay& ray, const BoundingSphere* boundingSphere, PhysicsRayHit& rayHit)
 {
 	return false; // TODO:
 }

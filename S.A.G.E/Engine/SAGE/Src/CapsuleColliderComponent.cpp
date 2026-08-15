@@ -8,6 +8,8 @@
 #include "RBPhysicsService.h"
 #include "TransformComponent.h"
 
+#include "RigidBodyComponent.h"
+
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
@@ -72,7 +74,16 @@ void CapsuleColliderComponent::DebugUI()
 
 void CapsuleColliderComponent::OnEnable()
 {
-	mPhysicsObject = new RBPhysicsObject(new BoundingCapsule(GetCenter(), mRadius, mHeight));
+	//mPhysicsObject = new RBPhysicsObject(new BoundingCapsule(GetCenter(), mRadius, mHeight));
+
+	auto collider = std::make_unique<BoundingCapsule>(GetCenter(), mRadius, mHeight);
+
+	mPhysicsObject = mPhysicsService->GetPhysicsWorld().CreatePhysicsObject(
+		std::move(collider),
+		mRigidBodyComponent ? (mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static);
+
+	UpdatePhysicsObjectPropertys();
+
 	BaseColliderComponent::OnEnable();
 }
 

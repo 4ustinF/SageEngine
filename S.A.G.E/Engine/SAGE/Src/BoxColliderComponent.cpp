@@ -7,6 +7,9 @@
 #include "MeshFilterComponent.h"
 #include "SelectionBoxComponent.h"
 
+#include "GameWorld.h"
+#include "RigidBodyComponent.h"
+
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
@@ -69,7 +72,18 @@ void BoxColliderComponent ::DebugUI()
 
 void BoxColliderComponent::OnEnable()
 {
-	mPhysicsObject = new RBPhysicsObject(new BoundingBox(GetCenter(), mExtend, GetOrientation()));
+	//mPhysicsObject = new RBPhysicsObject(new BoundingBox(GetCenter(), mExtend, GetOrientation()));
+
+	auto collider = std::make_unique<BoundingBox>(GetCenter(), mExtend, GetOrientation());
+
+	mPhysicsObject = mPhysicsService->GetPhysicsWorld().CreatePhysicsObject(
+		std::move(collider),
+		mRigidBodyComponent ? (mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static);
+
+	UpdatePhysicsObjectPropertys();
+	//mPhysicsObject = mPhysicsService->GetPhysicsWorld().AddObject(*mPhysicsObject, mRigidBodyComponent ? 
+	//
+
 	BaseColliderComponent::OnEnable();
 }
 

@@ -68,8 +68,8 @@ void BaseColliderComponent::OnEnable()
 	if(mPhysicsObject != nullptr)
 	{
 		UpdatePhysicsObjectPropertys(); 
-		mPhysicsObject = mPhysicsService->GetPhysicsWorld().AddObject(*mPhysicsObject, mRigidBodyComponent ? 
-			(mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static);
+		//mPhysicsObject = mPhysicsService->GetPhysicsWorld().AddObject(*mPhysicsObject, mRigidBodyComponent ? 
+		//	(mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static);
 	}
 }
 
@@ -117,4 +117,6 @@ void BaseColliderComponent::UpdatePhysicsObjectPropertys()
 		mPhysicsObject->SetAngularDrag(0.05f);
 		mPhysicsObject->SetUseGravity(true);
 	}
+
+	mPhysicsObject->UpdateInverseMass();
 }

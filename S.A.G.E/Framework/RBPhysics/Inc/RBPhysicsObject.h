@@ -8,23 +8,23 @@ namespace SAGE::RBPhysics
 	class RBPhysicsObject
 	{
 	public:
-		RBPhysicsObject(Collider* collider, float mass = 0) :
+		explicit RBPhysicsObject(std::unique_ptr<Collider> collider, float mass = 0) :
 			mPosition(collider->GetCenter()),
 			mOldPosition(collider->GetCenter()),
-			mCollider(collider),
+			mCollider(std::move(collider)),
 			mMass(mass),
 			mOrientation(collider->GetOrientation())
 		{
-			mInverseMass = mMass != 0.0f ? 1.0f / mMass : 0.0f; // static objects often have mass 0
+			UpdateInverseMass();
 		}
-		RBPhysicsObject(const RBPhysicsObject& other);
+		RBPhysicsObject(RBPhysicsObject& other);
 		RBPhysicsObject& operator=(const RBPhysicsObject& other) = default;
 		virtual ~RBPhysicsObject();
 
 		void DebugDraw(bool fillDebugShapes);
 
 		void Integrate(float deltaTime);
-		void ResolveCollision(const RBPhysicsObject& otherObject, const IntersectData& intersectData); // Resolving with non static objects.
+		void ResolveCollision(const std::unique_ptr<RBPhysicsObject>& otherObject, const IntersectData& intersectData); // Resolving with non static objects.
 		void ResolveCollision(const IntersectData& intersectData); // Resolving with static objects.
 
 		// Getters
@@ -57,8 +57,10 @@ namespace SAGE::RBPhysics
 		void ApplyForce(const Math::Vector3& force);
 		void ApplyImpulse(const Math::Vector3& impulse);
 
-		const Collider& GetCollider() { return *mCollider; } // TODO: This is temp. 
-		Collider* GetRawCollider() { return mCollider; } // TODO: This is temp. 
+		Collider* GetCollider() { return mCollider.get(); }
+		const Collider* GetCollider() const { return mCollider.get(); }
+
+		void UpdateInverseMass() { mInverseMass = mMass != 0.0f ? 1.0f / mMass : 0.0f; } // static objects often have mass 0
 
 	private:
 		void ResolveCollisionInternal(const Math::Vector3& otherVelocity, float totalInvMass, float myShare, const IntersectData& intersectData);
@@ -84,6 +86,6 @@ namespace SAGE::RBPhysics
 		float mTangentialStiffness = 0.8f;
 		float mTangentialDampening = 0.85f;
 
-		Collider* mCollider;
+		std::unique_ptr<Collider> mCollider = nullptr; // object owns its collider's lifetime
 	};
 }

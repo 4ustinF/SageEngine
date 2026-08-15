@@ -67,14 +67,23 @@ void PlayerControllerComponent::DebugUI()
 
 void PlayerControllerComponent::IsGroundedCheck()
 {
-	const Vector3 rayOrigin = ((BoundingCapsule&)mCapsuleColliderComponent->GetPhysicsObject()->GetCollider()).GetBottomCenter() - (Vector3::YAxis * Constants::Epsilon);
-	PhysicsRayHit hit;
-	mIsGrounded = mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, -Vector3::YAxis, 0.01f, hit);
-
-	if (mIsGrounded)
+	if (const RBPhysicsObject* physicsObject = mCapsuleColliderComponent->GetPhysicsObject())
 	{
-		mGroundNormal = hit.normal;
+		if (const BoundingCapsule* boundingCapsule = dynamic_cast<const BoundingCapsule*>(physicsObject->GetCollider()))
+		{
+			const Vector3 rayOrigin = boundingCapsule->GetBottomCenter() - (Vector3::YAxis * Constants::Epsilon);
+			PhysicsRayHit hit;
+			mIsGrounded = mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, -Vector3::YAxis, 0.01f, hit);
+
+			if (mIsGrounded)
+			{
+				mGroundNormal = hit.normal;
+			}
+			return;
+		}
 	}
+
+	mIsGrounded = false;
 }
 
 void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, float deltaTime)
@@ -148,8 +157,11 @@ void PlayerControllerComponent::UpdateCameraPosition(Camera& camera)
 		return;
 	}
 
-	const Vector3 camNewPos = ((BoundingCapsule&)physicsObject->GetCollider()).GetInnerTopCenter();
-	camera.SetPosition(camNewPos + Vector3(0.0f, 0.5f, 0.0f));
+	if (const BoundingCapsule* boundingCapsule = dynamic_cast<BoundingCapsule*>(physicsObject->GetCollider()))
+	{
+		const Vector3 camNewPos = boundingCapsule->GetInnerTopCenter();
+		camera.SetPosition(camNewPos + Vector3(0.0f, 0.5f, 0.0f));
+	}
 }
 
 float PlayerControllerComponent::GetMovementSpeed(float deltaTime) const

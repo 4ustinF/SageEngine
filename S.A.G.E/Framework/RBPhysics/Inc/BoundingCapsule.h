@@ -27,8 +27,8 @@ namespace SAGE::RBPhysics
 		Math::Vector3 GetInnerTopCenter() const { return mCenter + Math::Vector3(0.0f, mHeight * 0.5f - mRadius, 0.0f); }
 		Math::Vector3 GetInnerBottomCenter() const { return mCenter - Math::Vector3(0.0f, mHeight * 0.5f - mRadius, 0.0f); }
 
-		IntersectData IntersectBoundingCapsule(const BoundingBox& other); // TODO: Remove
-		IntersectData IntersectBoundingCapsule(const BoundingCapsule& other); // TODO: Remove
+		IntersectData IntersectBoundingCapsule(const BoundingBox* other); // TODO: Remove
+		IntersectData IntersectBoundingCapsule(const BoundingCapsule* other); // TODO: Remove
 		Math::Vector3 ClosestPointOnSegment(const Math::Vector3& a, const Math::Vector3& b, const Math::Vector3& point);
 		Math::Vector3 ClosestPointSegmentToBox(const Math::Vector3& segA, const Math::Vector3& segB, const Math::Vector3& min, const Math::Vector3& max);
 

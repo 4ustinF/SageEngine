@@ -91,11 +91,11 @@ void BoundingCapsule::Transform(const Math::Vector3& translation)
 //    return IntersectData(true, normal, {}, penetration);
 //}
 
-IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other) //const
+IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox* other) //const
 {
-    const Vector3 boxCenter = other.GetCenter();
-    const Vector3 halfExtents = other.GetExtend();          // local-space half extents
-    const bool axisAligned = other.IsAxisAligned();
+    const Vector3 boxCenter = other->GetCenter();
+    const Vector3 halfExtents = other->GetExtend();          // local-space half extents
+    const bool axisAligned = other->IsAxisAligned();
 
     const Vector3 topWorld = GetInnerTopCenter();
     const Vector3 bottomWorld = GetInnerBottomCenter();
@@ -111,7 +111,7 @@ IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other
     }
     else
     {
-        boxRot = other.GetRotationMatrix4();            // columns = box local axes in world space
+        boxRot = other->GetRotationMatrix4();            // columns = box local axes in world space
         const Matrix4 boxRotInv = Transpose(boxRot);    // inverse of a rotation matrix = its transpose
 
         // Transform capsule segment endpoints into box-local space
@@ -183,15 +183,15 @@ IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingBox& other
     return IntersectData(true, normalWorld, {}, penetration);
 }
 
-IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingCapsule& other)
+IntersectData BoundingCapsule::IntersectBoundingCapsule(const BoundingCapsule* other)
 {
     Vector3 c1, c2;
     const float distSq = ClosestPointSegmentSegment(
         GetInnerTopCenter(), GetInnerBottomCenter(),
-        other.GetInnerTopCenter(), other.GetInnerBottomCenter(),
+        other->GetInnerTopCenter(), other->GetInnerBottomCenter(),
         c1, c2);
 
-    const float radiusSum = mRadius + other.mRadius;
+    const float radiusSum = mRadius + other->mRadius;
     const float radiusSumSq = radiusSum * radiusSum;
 
     if (distSq > radiusSumSq) // No intersection

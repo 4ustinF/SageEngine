@@ -42,7 +42,9 @@ namespace SAGE::RBPhysics
 		void DrawPhysicsObjects(bool fillShapes);
 		void DebugUI();
 
-		RBPhysicsObject* AddObject(RBPhysicsObject& object, PhysicsObjectType type = PhysicsObjectType::Static);
+		//RBPhysicsObject* AddObject(RBPhysicsObject& object, PhysicsObjectType type = PhysicsObjectType::Static);
+		RBPhysicsObject* CreatePhysicsObject(std::unique_ptr<Collider> collider, PhysicsObjectType type = PhysicsObjectType::Static);
+
 		bool RemoveObject(const RBPhysicsObject& object);
 
 		bool Raycast(const Math::Vector3& origin, const Math::Vector3& direction, float maxDistance);
@@ -57,15 +59,18 @@ namespace SAGE::RBPhysics
 		Settings mSettings;
 
 		// TODO: Convert to map of PhysicsObjectType
-		std::vector<RBPhysicsObject> mDynamicObjects;	// Physics can affect the object.
-		//std::vector<RBPhysicsObject> mKinematicObjects; // Physics cannot affect the object. Like static but can move.
-		std::vector<RBPhysicsObject> mStaticObjects;	// Can't move.
+		//std::vector<RBPhysicsObject> mDynamicObjects;	// Physics can affect the object.
+		////std::vector<RBPhysicsObject> mKinematicObjects; // Physics cannot affect the object. Like static but can move.
+		//std::vector<RBPhysicsObject> mStaticObjects;	// Can't move.
+
+		std::vector<std::unique_ptr<RBPhysicsObject>> mDynamicObjects;	// Physics can affect the object.
+		std::vector<std::unique_ptr<RBPhysicsObject>> mStaticObjects;		// Can't move.
 
 		void ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData);
 
-		bool RaycastAgainstCollider(const PhysicsRay& ray, const Collider& collider, PhysicsRayHit& rayHit);
-		bool RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox& boundingBox, PhysicsRayHit& rayHit);
-		bool RaycastAgainstBoundingCapsule(const PhysicsRay& ray, const BoundingCapsule& boundingCapsule, PhysicsRayHit& rayHit);
-		bool RaycastAgainstBoundingSphere(const PhysicsRay& ray, const BoundingSphere& boundingSphere, PhysicsRayHit& rayHit);
+		bool RaycastAgainstCollider(const PhysicsRay& ray, const Collider* collider, PhysicsRayHit& rayHit);
+		bool RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox* boundingBox, PhysicsRayHit& rayHit);
+		bool RaycastAgainstBoundingCapsule(const PhysicsRay& ray, const BoundingCapsule* boundingCapsule, PhysicsRayHit& rayHit);
+		bool RaycastAgainstBoundingSphere(const PhysicsRay& ray, const BoundingSphere* boundingSphere, PhysicsRayHit& rayHit);
 	};
 }

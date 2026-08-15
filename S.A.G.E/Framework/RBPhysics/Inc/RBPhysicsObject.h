@@ -40,7 +40,6 @@ namespace SAGE::RBPhysics
 		const Math::Vector3& GetAngularVelocity() const { return mAngularVelocity; }
 		const Math::Quaternion& GetOrientation() const { return mOrientation; }
 		const Math::Vector3& GetAngularAcceleration() const { return mAngularAcceleration; }
-		float GetNormalStiffness() const { return mNormalStiffness; }
 		float GetNormalDampening() const { return mNormalDampening; }
 		float GetTangentialStiffness() const { return mTangentialStiffness; }
 		float GetTangentialDampening() const { return mTangentialDampening; }
@@ -81,7 +80,6 @@ namespace SAGE::RBPhysics
 		Math::Matrix3 mInertia = Math::Matrix3::Identity;
 		Math::Matrix3 mInverseInertia = Math::Matrix3::Identity;
 
-		float mNormalStiffness = 0.8f;
 		float mNormalDampening = 0.85f;
 		float mTangentialStiffness = 0.8f;
 		float mTangentialDampening = 0.85f;

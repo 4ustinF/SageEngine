@@ -80,8 +80,7 @@ RBPhysicsObject* RBPhysicsWorld::AddObject(RBPhysicsObject& object, PhysicsObjec
 		return &mStaticObjects.back();
 	}
 
-	return nullptr; // TODO: This function does not need to return an index. Remove this. 
-	// TODO: Maybe return the object pointer instead. Or return a bool for success/failure. Or return nothing.
+	return nullptr;
 }
 
 bool RBPhysicsWorld::RemoveObject(const RBPhysicsObject& object)

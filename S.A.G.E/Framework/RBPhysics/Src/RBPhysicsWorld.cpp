@@ -151,27 +151,67 @@ void RBPhysicsWorld::HandleCollisions()
 	for (int primaryIndex = 0; primaryIndex < objectsCount; ++primaryIndex)
 	{
 		std::unique_ptr<RBPhysicsObject>& primaryObject = mDynamicObjects[primaryIndex];
+		const bool isPrimaryObjectATrigger = primaryObject->GetIsTrigger();
+
 		for (int secondaryIndex = primaryIndex + 1; secondaryIndex < objectsCount; ++secondaryIndex)
 		{
 			std::unique_ptr<RBPhysicsObject>& secondaryObject = mDynamicObjects[secondaryIndex];
+			const bool isSecondaryObjectATrigger = secondaryObject->GetIsTrigger();
+			if (isPrimaryObjectATrigger && isSecondaryObjectATrigger)
+			{
+				continue;
+			}
+
 			IntersectData intersectData = primaryObject->GetCollider()->Intersect(secondaryObject->GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				primaryObject->ResolveCollision(secondaryObject, intersectData);
-				intersectData.InverseNormal(); // Inverse the normal vector for the second object
-				secondaryObject->ResolveCollision(primaryObject, intersectData);
+				if (isPrimaryObjectATrigger) // Is A Trigger Interaction
+				{
+					//primaryObject->OnTriggerEnter(secondaryObject);
+					// OnTriggerEnter
+					// OnTriggerStay
+					// OnTriggerExit
+				}
+				else if (isSecondaryObjectATrigger)	// Is A Trigger Interaction
+				{
+					//secondaryObject->OnTriggerEnter(primaryObject);
+				}
+				else
+				{
+					primaryObject->ResolveCollision(secondaryObject, intersectData);
+					intersectData.InverseNormal(); // Inverse the normal vector for the second object
+					secondaryObject->ResolveCollision(primaryObject, intersectData);
+				}
 			}
 		}
 	}
 
 	for (std::unique_ptr<RBPhysicsObject>& primaryObject : mDynamicObjects)
 	{
+		const bool isPrimaryObjectATrigger = primaryObject->GetIsTrigger();
 		for (std::unique_ptr<RBPhysicsObject>& staticObject : mStaticObjects)
 		{
+			const bool isSecondaryObjectATrigger = staticObject->GetIsTrigger();
+			if (isPrimaryObjectATrigger && isSecondaryObjectATrigger)
+			{
+				continue;
+			}
+
 			IntersectData intersectData = primaryObject->GetCollider()->Intersect(staticObject->GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				primaryObject->ResolveCollision(intersectData);
+				if (isPrimaryObjectATrigger) // Is A Trigger Interaction
+				{
+					//primaryObject->OnTriggerEnter(secondaryObject);
+				}
+				else if (isSecondaryObjectATrigger)	// Is A Trigger Interaction
+				{
+					//secondaryObject->OnTriggerEnter(primaryObject);
+				}
+				else
+				{
+					primaryObject->ResolveCollision(intersectData);
+				}
 			}
 		}
 	}

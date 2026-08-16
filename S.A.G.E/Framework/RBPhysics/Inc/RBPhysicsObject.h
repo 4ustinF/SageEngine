@@ -33,6 +33,7 @@ namespace SAGE::RBPhysics
 		float GetDrag() const { return mDrag; }
 		float GetAngularDrag() const { return mAngularDrag; }
 		bool GetUseGravity() const { return mUseGravity; }
+		bool GetIsTrigger() const { return mIsTrigger; }
 		const Math::Vector3& GetPosition() const { return mPosition; }
 		Math::Vector3 GetLocalPosition(const Math::Vector3& worldPos);
 		Math::Vector3 GetWorldPosition(const Math::Vector3& localPos);
@@ -44,6 +45,7 @@ namespace SAGE::RBPhysics
 		void SetDrag(float drag) { mDrag = drag; }
 		void SetAngularDrag(float angularDrag) { mAngularDrag = angularDrag; }
 		void SetUseGravity(bool useGravity) { mUseGravity = useGravity; }
+		void SetIsTrigger(bool isTrigger) { mIsTrigger = isTrigger; }
 		void SetPosition(const Math::Vector3& position) { mPosition = position; }
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
 		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
@@ -64,6 +66,7 @@ namespace SAGE::RBPhysics
 		float mDrag = 0.0f;
 		float mAngularDrag = 0.05f;
 		bool mUseGravity = true;
+		bool mIsTrigger = false;
 
 		Math::Vector3 mPosition = Math::Vector3::Zero;
 		Math::Vector3 mOldPosition = Math::Vector3::Zero;

@@ -111,5 +111,6 @@ void BaseColliderComponent::UpdatePhysicsObjectPropertys()
 		mPhysicsObject->SetUseGravity(true);
 	}
 
+	mPhysicsObject->SetIsTrigger(mIsTrigger);
 	mPhysicsObject->UpdateInverseMass();
 }

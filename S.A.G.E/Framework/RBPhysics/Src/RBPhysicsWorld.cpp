@@ -165,16 +165,9 @@ void RBPhysicsWorld::HandleCollisions()
 			IntersectData intersectData = primaryObject->GetCollider()->Intersect(secondaryObject->GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				if (isPrimaryObjectATrigger) // Is A Trigger Interaction
+				if (isPrimaryObjectATrigger || isSecondaryObjectATrigger)
 				{
-					//primaryObject->OnTriggerEnter(secondaryObject);
-					// OnTriggerEnter
-					// OnTriggerStay
-					// OnTriggerExit
-				}
-				else if (isSecondaryObjectATrigger)	// Is A Trigger Interaction
-				{
-					//secondaryObject->OnTriggerEnter(primaryObject);
+					mCurrentTriggerPairs.emplace(primaryObject.get(), secondaryObject.get());
 				}
 				else
 				{
@@ -200,13 +193,9 @@ void RBPhysicsWorld::HandleCollisions()
 			IntersectData intersectData = primaryObject->GetCollider()->Intersect(staticObject->GetCollider());
 			if (intersectData.GetDoesIntersect())
 			{
-				if (isPrimaryObjectATrigger) // Is A Trigger Interaction
+				if (isPrimaryObjectATrigger || isSecondaryObjectATrigger)
 				{
-					//primaryObject->OnTriggerEnter(secondaryObject);
-				}
-				else if (isSecondaryObjectATrigger)	// Is A Trigger Interaction
-				{
-					//secondaryObject->OnTriggerEnter(primaryObject);
+					mCurrentTriggerPairs.emplace(primaryObject.get(), staticObject.get());
 				}
 				else
 				{
@@ -215,6 +204,40 @@ void RBPhysicsWorld::HandleCollisions()
 			}
 		}
 	}
+
+	ProcessTriggerEvents();
+}
+
+void RBPhysicsWorld::ProcessTriggerEvents()
+{
+	// Enter: in current, not in previous
+	for (const TriggerPairKey& pair : mCurrentTriggerPairs)
+	{
+		bool wasOverlappingLastFrame = mPreviousTriggerPairs.find(pair) != mPreviousTriggerPairs.end();
+
+		if (!wasOverlappingLastFrame)
+		{
+			//pair.first->OnTriggerEnter(pair.second);
+			//pair.second->OnTriggerEnter(pair.first);
+		}
+		else
+		{
+			//pair.first->OnTriggerStay(pair.second);
+			//pair.second->OnTriggerStay(pair.first);
+		}
+	}
+
+	// Exit: was in previous, not in current
+	for (const TriggerPairKey& pair : mPreviousTriggerPairs)
+	{
+		if (mCurrentTriggerPairs.find(pair) == mCurrentTriggerPairs.end())
+		{
+			//pair.first->OnTriggerExit(pair.second);
+			//pair.second->OnTriggerExit(pair.first);
+		}
+	}
+
+	mPreviousTriggerPairs = mCurrentTriggerPairs; // This frame becomes "previous" for next frame
 }
 
 void RBPhysicsWorld::ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData)

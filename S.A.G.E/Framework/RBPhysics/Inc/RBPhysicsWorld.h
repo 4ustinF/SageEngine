@@ -20,6 +20,34 @@ namespace SAGE::RBPhysics
 		Static
 	};
 
+	struct TriggerPairKey
+	{
+		RBPhysicsObject* first;
+		RBPhysicsObject* second;
+
+		TriggerPairKey(RBPhysicsObject* a, RBPhysicsObject* b)
+		{
+			// Normalize order so (A,B) and (B,A) hash/compare the same
+			if (a < b) { first = a; second = b; }
+			else { first = b; second = a; }
+		}
+
+		bool operator==(const TriggerPairKey& other) const
+		{
+			return first == other.first && second == other.second;
+		}
+	};
+
+	struct TriggerPairKeyHash
+	{
+		size_t operator()(const TriggerPairKey& key) const
+		{
+			size_t h1 = std::hash<RBPhysicsObject*>()(key.first);
+			size_t h2 = std::hash<RBPhysicsObject*>()(key.second);
+			return h1 ^ (h2 << 1);
+		}
+	};
+
 	class RBPhysicsWorld
 	{
 	public:
@@ -54,6 +82,13 @@ namespace SAGE::RBPhysics
 	private:
 		void Simulate(float deltaTime);
 		void HandleCollisions();
+		void ProcessTriggerEvents();
+
+		void ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData);
+		bool RaycastAgainstCollider(const PhysicsRay& ray, const Collider* collider, PhysicsRayHit& rayHit);
+		bool RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox* boundingBox, PhysicsRayHit& rayHit);
+		bool RaycastAgainstBoundingCapsule(const PhysicsRay& ray, const BoundingCapsule* boundingCapsule, PhysicsRayHit& rayHit);
+		bool RaycastAgainstBoundingSphere(const PhysicsRay& ray, const BoundingSphere* boundingSphere, PhysicsRayHit& rayHit);
 
 		Settings mSettings;
 
@@ -61,11 +96,7 @@ namespace SAGE::RBPhysics
 		std::vector<std::unique_ptr<RBPhysicsObject>> mDynamicObjects;	// Physics can affect the object.
 		std::vector<std::unique_ptr<RBPhysicsObject>> mStaticObjects;	// Can't move.
 
-		void ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData);
-
-		bool RaycastAgainstCollider(const PhysicsRay& ray, const Collider* collider, PhysicsRayHit& rayHit);
-		bool RaycastAgainstBoundingBox(const PhysicsRay& ray, const BoundingBox* boundingBox, PhysicsRayHit& rayHit);
-		bool RaycastAgainstBoundingCapsule(const PhysicsRay& ray, const BoundingCapsule* boundingCapsule, PhysicsRayHit& rayHit);
-		bool RaycastAgainstBoundingSphere(const PhysicsRay& ray, const BoundingSphere* boundingSphere, PhysicsRayHit& rayHit);
+		std::unordered_set<TriggerPairKey, TriggerPairKeyHash> mCurrentTriggerPairs;
+		std::unordered_set<TriggerPairKey, TriggerPairKeyHash> mPreviousTriggerPairs;
 	};
 }

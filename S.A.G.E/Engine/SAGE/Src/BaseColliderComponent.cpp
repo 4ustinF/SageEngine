@@ -94,6 +94,28 @@ const Quaternion BaseColliderComponent::GetOrientation() const
 	return mOrientation;
 }
 
+void BaseColliderComponent::SetIsTrigger(bool isTrigger)
+{
+	if (mIsTrigger == isTrigger)
+	{
+		return;
+	}
+
+	if (mPhysicsObject)
+	{
+		if (mIsTrigger) // Was trigger
+		{
+			// TODO: Unsubscribe
+		}
+		else
+		{
+			// TODO: Subscribe
+		}
+	}
+
+	mIsTrigger = isTrigger;
+}
+
 void BaseColliderComponent::UpdatePhysicsObjectPropertys()
 {
 	if (mRigidBodyComponent != nullptr)

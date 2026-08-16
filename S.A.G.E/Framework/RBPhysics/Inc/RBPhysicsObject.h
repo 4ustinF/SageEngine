@@ -5,6 +5,10 @@
 
 namespace SAGE::RBPhysics
 {
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerEnter, Collider*);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerStay, Collider*);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerExit, Collider*);
+
 	class RBPhysicsObject
 	{
 	public:
@@ -50,6 +54,14 @@ namespace SAGE::RBPhysics
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
 		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
+		// Delegates
+		void BraodcastTriggerEnterDelegate(Collider* collider) { mOnTriggerEnter.Broadcast(collider); };
+		void BraodcastTriggerStayDelegate(Collider* collider) { mOnTriggerStay.Broadcast(collider); };
+		void BraodcastTriggerExitDelegate(Collider* collider) { mOnTriggerExit.Broadcast(collider); };
+		FOnTriggerEnter& GetOnTriggerEnterDelegate() { return mOnTriggerEnter; }
+		FOnTriggerStay& GetOnTriggerStayDelegate() { return mOnTriggerStay; }
+		FOnTriggerExit& GetOnTriggerExitDelegate() { return mOnTriggerExit; }
+
 		void ApplyForce(const Math::Vector3& force);
 		void ApplyImpulse(const Math::Vector3& impulse);
 
@@ -74,5 +86,8 @@ namespace SAGE::RBPhysics
 		Math::Quaternion mOrientation = Math::Quaternion::Identity;
 
 		std::unique_ptr<Collider> mCollider = nullptr; // object owns its collider's lifetime
+		FOnTriggerEnter mOnTriggerEnter;
+		FOnTriggerStay mOnTriggerStay;
+		FOnTriggerExit mOnTriggerExit;
 	};
 }

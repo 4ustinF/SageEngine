@@ -27,7 +27,7 @@ namespace SAGE
 		SAGE::RBPhysics::RBPhysicsObject* GetPhysicsObject() const { return mPhysicsObject; }
 
 		// Setters
-		void SetIsTrigger(bool isTrigger) { mIsTrigger = isTrigger; }
+		void SetIsTrigger(bool isTrigger);
 		void SetCenter(const Math::Vector3& center) { mCenter = center; }
 		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 

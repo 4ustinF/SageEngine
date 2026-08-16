@@ -219,13 +219,13 @@ void RBPhysicsWorld::ProcessTriggerEvents()
 
 		if (!wasOverlappingLastFrame)
 		{
-			//pair.first->OnTriggerEnter(pair.second);
-			//pair.second->OnTriggerEnter(pair.first);
+			pair.first->BraodcastTriggerEnterDelegate(pair.second->GetCollider());
+			pair.second->BraodcastTriggerEnterDelegate(pair.first->GetCollider());
 		}
 		else
 		{
-			//pair.first->OnTriggerStay(pair.second);
-			//pair.second->OnTriggerStay(pair.first);
+			pair.first->BraodcastTriggerStayDelegate(pair.second->GetCollider());
+			pair.second->BraodcastTriggerStayDelegate(pair.first->GetCollider());
 		}
 	}
 
@@ -234,8 +234,8 @@ void RBPhysicsWorld::ProcessTriggerEvents()
 	{
 		if (mCurrentTriggerPairs.find(pair) == mCurrentTriggerPairs.end())
 		{
-			//pair.first->OnTriggerExit(pair.second);
-			//pair.second->OnTriggerExit(pair.first);
+			pair.first->BraodcastTriggerExitDelegate(pair.second->GetCollider());
+			pair.second->BraodcastTriggerExitDelegate(pair.first->GetCollider());
 		}
 	}
 

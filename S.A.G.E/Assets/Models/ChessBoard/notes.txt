@@ -1,0 +1,10 @@
+front under handle
+handle
+handle backing
+top
+trim
+
+diffuseMapId
+specularMapId
+bumpMapId
+normalMapId

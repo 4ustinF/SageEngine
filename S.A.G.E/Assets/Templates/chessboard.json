@@ -1,0 +1,10 @@
+{
+  "Components": {
+    "Transform Component": {
+      "Position": [ 0, 0, 0 ]
+    },
+    "Model Component": {
+      "FileName": "../../Assets/Models/ChessBoard/chess_board.model"
+    }
+  }
+}

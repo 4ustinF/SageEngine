@@ -39,3 +39,6 @@
 -scale 0.01 -animOnly ../../Assets/Models/HalfLife/Characters/Barney/barney_relaxstand.fbx ../../Assets/Models/HalfLife/Characters/Barney/barney_relaxstand.model
 
 -scale 0.01 ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.fbx ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.model // This was for ripping textures from model
+-scale 0.01 ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.fbx ../../Assets/Models/HalfLife/Characters/NewBarney/Barney.model
+
+-scale 0.01 ../../Assets/Models/ChessBoard/chess_board.fbx ../../Assets/Models/ChessBoard/chess_board.model 

@@ -94,6 +94,8 @@ bool RBPhysicsWorld::RemoveObject(const RBPhysicsObject* object)
 		return false;
 	}
 
+	PurgeTriggerPairs(object);
+
 	auto it = std::find_if(mStaticObjects.begin(), mStaticObjects.end(),
 		[object](const std::unique_ptr<RBPhysicsObject>& obj) {
 			return obj.get() == object;
@@ -238,6 +240,22 @@ void RBPhysicsWorld::ProcessTriggerEvents()
 	}
 
 	mPreviousTriggerPairs = mCurrentTriggerPairs; // This frame becomes "previous" for next frame
+}
+
+void RBPhysicsWorld::PurgeTriggerPairs(const RBPhysicsObject* object)
+{
+	auto purge = [object](std::unordered_set<TriggerPairKey, TriggerPairKeyHash>& set) {
+		for (auto it = set.begin(); it != set.end();)
+		{
+			if (it->first == object || it->second == object)
+				it = set.erase(it);
+			else
+				++it;
+		}
+	};
+
+	purge(mCurrentTriggerPairs);
+	purge(mPreviousTriggerPairs);
 }
 
 void RBPhysicsWorld::ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData)

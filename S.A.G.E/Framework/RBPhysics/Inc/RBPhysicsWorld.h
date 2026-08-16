@@ -83,6 +83,7 @@ namespace SAGE::RBPhysics
 		void Simulate(float deltaTime);
 		void HandleCollisions();
 		void ProcessTriggerEvents();
+		void PurgeTriggerPairs(const RBPhysicsObject* object);
 
 		void ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData);
 		bool RaycastAgainstCollider(const PhysicsRay& ray, const Collider* collider, PhysicsRayHit& rayHit);

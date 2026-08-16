@@ -8,3 +8,5 @@ diffuseMapId
 specularMapId
 bumpMapId
 normalMapId
+
+spec maps need to be inverted

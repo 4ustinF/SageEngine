@@ -4,6 +4,7 @@
 #include "GameWorld.h"
 
 using namespace SAGE;
+using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(GameObject, 800);
@@ -89,6 +90,30 @@ void GameObject::DebugUI()
 		for (auto& component : mComponents) {
 			component->DebugUI();
 		}
+	}
+}
+
+void GameObject::OnTriggerEnter(Collider* collider)
+{
+	for (auto& component : mComponents)
+	{
+		component->OnTriggerEnter(collider);
+	}
+}
+
+void GameObject::OnTriggerStay(Collider* collider)
+{
+	for (auto& component : mComponents)
+	{
+		component->OnTriggerStay(collider);
+	}
+}
+
+void GameObject::OnTriggerExit(Collider* collider)
+{
+	for (auto& component : mComponents)
+	{
+		component->OnTriggerExit(collider);
 	}
 }
 

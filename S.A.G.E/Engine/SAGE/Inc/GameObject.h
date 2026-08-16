@@ -6,6 +6,7 @@
 namespace SAGE
 {
 	class GameWorld;
+	class RBPhysics::Collider;
 
 	class GameObject final
 	{
@@ -19,6 +20,10 @@ namespace SAGE
 
 		void Update(float deltaTime);
 		void DebugUI();
+
+		void OnTriggerEnter(RBPhysics::Collider* collider);
+		void OnTriggerStay(RBPhysics::Collider* collider);
+		void OnTriggerExit(RBPhysics::Collider* collider);
 
 		const bool IsActiveInHierarchy() const { return mActiveInHierarchy; }
 		const bool IsSelfActive() const { return mSelfActive; }

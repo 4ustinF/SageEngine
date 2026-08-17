@@ -1,0 +1,20 @@
+{
+  "Name": "BW Colliders",
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/BackWall/fdr_collider_backwall_00.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/BackWall/fdr_collider_backwall_01.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/BackWall/fdr_collider_backwall_02.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/BackWall/fdr_collider_backwall_03.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/BackWall/fdr_collider_backwall_04.json"
+    }
+  ]
+}

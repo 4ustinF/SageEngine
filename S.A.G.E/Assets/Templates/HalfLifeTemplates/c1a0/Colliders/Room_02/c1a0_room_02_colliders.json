@@ -3,6 +3,12 @@
   "GameObjects": [
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_02/room_02_collider_leftwall.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_02/room_02_collider_rightwall.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_02/BackWall/c1a0_room_02_bw_colliders.json"
     }
   ]
 }

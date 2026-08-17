@@ -1,0 +1,17 @@
+{
+  "Name": "Room 1 Colliders",
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/BackWall/c1a0_fdr_bw_colliders.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/FrontWall/c1a0_fdr_fw_colliders.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/RightWall/c1a0_room_01_rw_colliders.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/fdr_collider_leftwall.json"
+    }
+  ]
+}

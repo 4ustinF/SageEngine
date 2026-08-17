@@ -1,23 +1,23 @@
 {
-  "Name": "Right Wall",
+  "Name": "Back Wall 0",
   "Components": {
     "Transform Component": {
       "Local Position": [
-        1.981,
+        -5.182,
         -4.572,
-        11.582
+        4.915
       ]
     },
     "Box Collider Component": {
       "Center": [
-        0.0,
+        -0.3045,
         2.743,
-        0.2
+        0.0
       ],
       "Size": [
-        4.572,
+        0.609,
         5.486,
-        0.4
+        8.61
       ]
     }
   }

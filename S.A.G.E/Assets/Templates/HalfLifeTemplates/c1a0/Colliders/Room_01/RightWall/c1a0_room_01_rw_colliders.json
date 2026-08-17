@@ -1,0 +1,11 @@
+{
+  "Name": "RW Colliders",
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/RightWall/room_01_collider_rw_00.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_01/RightWall/room_01_collider_rw_01.json"
+    }
+  ]
+}

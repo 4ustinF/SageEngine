@@ -3,21 +3,21 @@
   "Components": {
     "Transform Component": {
       "Local Position": [
-        -5.182,
+        -17.374,
         -4.572,
-        4.915
+        2.8965
       ]
     },
     "Box Collider Component": {
       "Center": [
-        -0.2,
-        2.743,
+        -0.152,
+        1.981,
         0.0
       ],
       "Size": [
-        0.4,
-        5.486,
-        8.61
+        0.304,
+        3.962,
+        4.572
       ]
     }
   }

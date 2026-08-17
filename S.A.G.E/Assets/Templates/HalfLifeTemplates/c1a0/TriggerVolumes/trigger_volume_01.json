@@ -24,6 +24,9 @@
     "Toggle Trigger Volume Component": {
       "Disable Name List": [
         "Room 1 Colliders"
+      ],
+      "Enable Name List": [
+        "Room 2 Colliders"
       ]
     }
   }

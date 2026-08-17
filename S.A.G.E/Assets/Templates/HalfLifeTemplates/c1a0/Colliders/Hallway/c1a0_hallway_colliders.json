@@ -1,0 +1,14 @@
+{
+  "Name": "Hallway Colliders",
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/c1a0_hallway_left_colliders.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Right/c1a0_hallway_right_colliders.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Roof/c1a0_hallway_roof_colliders.json"
+    }
+  ]
+}

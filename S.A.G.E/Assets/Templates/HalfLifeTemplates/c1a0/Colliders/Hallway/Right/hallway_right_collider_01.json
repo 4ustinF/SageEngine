@@ -1,0 +1,24 @@
+{
+  "Name": "Right Wall 1",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -11.735,
+        -4.572,
+        17.374
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.0,
+        1.524,
+        0.2
+      ],
+      "Size": [
+        22.86,
+        3.048,
+        0.4
+      ]
+    }
+  }
+}

@@ -2,6 +2,9 @@
   "Name": "Colliders",
   "GameObjects": [
     {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/c1a0_hallway_colliders.json"
+    },
+    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Generic/c1a0_generic_colliders.json"
     },
     {

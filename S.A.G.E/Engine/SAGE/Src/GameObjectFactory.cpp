@@ -59,11 +59,28 @@ void GameObjectFactory::Make(const rj::Document& document, GameObject& gameObjec
 		gameObject.SetName(document["Name"].GetString());
 	}
 
+	//// Preseed activity
+	//{ 
+	//bool isSelfActive = true;
+	//bool isActiveInHierarchy = true;
+	//if (document.HasMember("Self Active") && document["Self Active"].IsBool())
+	//{
+	//	isSelfActive = document["Self Active"].GetBool();
+	//}
+
+	//if (document.HasMember("Active In Hierarchy") && document["Active In Hierarchy"].IsBool())
+	//{
+	//	isActiveInHierarchy = document["Active In Hierarchy"].GetBool();
+	//}
+
+	//gameObject.PreSeedSetActive(isSelfActive, isActiveInHierarchy);
+	//}
+
 	if (document.HasMember("Components") && document["Components"].IsObject())
 	{
 		auto components = document["Components"].GetObj();
 
-		for (auto& component : components)
+		for (const auto& component : components)
 		{
 			const char* componentName = component.name.GetString();
 			TryMakeComponent(componentName, component.value, gameObject);

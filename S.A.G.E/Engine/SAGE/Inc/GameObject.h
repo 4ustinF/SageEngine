@@ -27,6 +27,7 @@ namespace SAGE
 
 		const bool IsActiveInHierarchy() const { return mActiveInHierarchy; }
 		const bool IsSelfActive() const { return mSelfActive; }
+		void PreSeedSetActive(bool isSelfActive, bool isActiveInHierarchy);
 		void SetActive(bool active);
 		void UpdateActiveInHierarchy();
 

@@ -1,9 +1,9 @@
 {
-  "Name": "Trigger Volume 0",
+  "Name": "Trigger Volume 1",
   "Components": {
     "Transform Component": {
       "Local Position": [
-        -7.5,
+        -17.0,
         -4.572,
         15.62
       ]
@@ -22,7 +22,7 @@
       ]
     },
     "Toggle Trigger Volume Component": {
-      "Enable Name List": [
+      "Disable Name List": [
         "Front Desk Room Colliders"
       ]
     }

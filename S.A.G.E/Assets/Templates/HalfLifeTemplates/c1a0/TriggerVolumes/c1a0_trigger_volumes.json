@@ -3,6 +3,9 @@
   "GameObjects": [
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/TriggerVolumes/trigger_volume_00.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/TriggerVolumes/trigger_volume_01.json"
     }
   ]
 }

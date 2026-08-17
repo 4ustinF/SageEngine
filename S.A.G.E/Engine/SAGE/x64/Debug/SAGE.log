@@ -1,6 +1,2 @@
-﻿  BoxColliderComponent.cpp
-  CapsuleColliderComponent.cpp
-  GameObjectFactory.cpp
-  SAGE.cpp
-  Generating Code...
+﻿  TransformComponent.cpp
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

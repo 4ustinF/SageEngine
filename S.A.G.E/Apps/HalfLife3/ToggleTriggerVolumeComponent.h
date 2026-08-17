@@ -12,16 +12,13 @@ public:
 	void LoadComponentFromTemplate(const rapidjson::Value& value) override;
 	void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
-	void Initialize() override;
 	void Terminate() override;
 
-	void Update(float deltaTime) override;
 	void DebugUI() override;
 
 	void OnTriggerEnter(SAGE::RBPhysics::Collider* collider) override;
-	void OnTriggerStay(SAGE::RBPhysics::Collider* collider) override;
-	void OnTriggerExit(SAGE::RBPhysics::Collider* collider) override;
 
 private:
-
+	std::vector<std::string> mObjectsToDisableList;
+	std::vector<std::string> mObjectsToEnableList;
 };

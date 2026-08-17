@@ -1,14 +1,11 @@
 #include "Precompiled.h"
 #include "CapsuleColliderComponent.h"
 
-#include "CameraService.h"
 #include "GameWorld.h"
-
 #include "GameObject.h"
+#include "CameraService.h"
 #include "RBPhysicsService.h"
 #include "TransformComponent.h"
-
-#include "RigidBodyComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -72,18 +69,6 @@ void CapsuleColliderComponent::DebugUI()
 	}
 }
 
-void CapsuleColliderComponent::OnEnable()
-{
-	BaseColliderComponent::OnEnable();
-
-	auto collider = std::make_unique<BoundingCapsule>(GetCenter(), mRadius, mHeight);
-	mPhysicsObject = mPhysicsService->GetPhysicsWorld().CreatePhysicsObject(
-		std::move(collider),
-		mRigidBodyComponent ? (mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static);
-
-	UpdatePhysicsObjectPropertys();
-}
-
 void CapsuleColliderComponent::SetRadius(float radius) 
 { 
 	mRadius = Max(0.1f, radius);
@@ -92,4 +77,9 @@ void CapsuleColliderComponent::SetRadius(float radius)
 void CapsuleColliderComponent::SetHeight(float height) 
 { 
 	mHeight = Max(0.1f, height);
+}
+
+std::unique_ptr<Collider> CapsuleColliderComponent::CreateCollider()
+{
+	return std::make_unique<BoundingCapsule>(GetCenter(), mRadius, mHeight);
 }

@@ -47,6 +47,7 @@
     <ClInclude Include="Inc\PhysicsDebugDraw.h" />
     <ClInclude Include="Inc\PhysicsService.h" />
     <ClInclude Include="Inc\PostProcessingService.h" />
+    <ClInclude Include="Inc\Precompiled.h" />
     <ClInclude Include="Inc\RBPhysicsService.h" />
     <ClInclude Include="Inc\RenderService.h" />
     <ClInclude Include="Inc\RigidBodyComponent.h" />
@@ -59,7 +60,6 @@
     <ClInclude Include="Inc\TransformComponent.h" />
     <ClInclude Include="Inc\TypeIds.h" />
     <ClInclude Include="Inc\UIService.h" />
-    <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\AnimatorComponent.cpp" />

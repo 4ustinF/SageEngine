@@ -19,8 +19,6 @@ namespace SAGE
 		void Terminate() override;
 		void DebugUI() override;
 
-		void OnEnable() override;
-
 		// Getters
 		float GetRadius() const { return mRadius; }
 		float GetHeight() const { return mHeight; }
@@ -28,6 +26,9 @@ namespace SAGE
 		// Setters
 		void SetRadius(float radius);
 		void SetHeight(float height);
+
+	protected:
+		std::unique_ptr<RBPhysics::Collider> CreateCollider() override;
 
 	private:
 		float mRadius = 0.5f;

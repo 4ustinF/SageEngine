@@ -1,3 +1,4 @@
+#include "SAGE/Inc/Precompiled.h"
 #include "PlayerControllerComponent.h"
 
 #include "SAGE/Inc/CameraService.h"
@@ -62,7 +63,26 @@ void PlayerControllerComponent::DebugUI()
 		ImGui::DragFloat2("Ground Speed##PlayerControllerComponent", &mGroundSpeed.x, 0.1f);
 		ImGui::DragFloat2("Air Speed##PlayerControllerComponent", &mAirSpeed.x, 0.1f);
 		ImGui::DragFloat("Jump Force##PlayerControllerComponent", &mJumpForce, 0.1f);
+
+		ImGui::Checkbox("Entered##PlayerControllerComponent", &mHasEntered);
+		ImGui::Checkbox("Staying##PlayerControllerComponent", &mIsStaying);
 	}
+}
+
+void PlayerControllerComponent::OnTriggerEnter(Collider* collider)
+{
+	mHasEntered = true;
+}
+
+void PlayerControllerComponent::OnTriggerStay(Collider* collider)
+{
+	mIsStaying = true;
+}
+
+void PlayerControllerComponent::OnTriggerExit(Collider* collider)
+{
+	mHasEntered = false;
+	mIsStaying = false;
 }
 
 void PlayerControllerComponent::IsGroundedCheck()

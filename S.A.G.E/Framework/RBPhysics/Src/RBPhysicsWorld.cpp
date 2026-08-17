@@ -219,13 +219,13 @@ void RBPhysicsWorld::ProcessTriggerEvents()
 
 		if (!wasOverlappingLastFrame)
 		{
-			pair.first->BraodcastTriggerEnterDelegate(pair.second->GetCollider());
-			pair.second->BraodcastTriggerEnterDelegate(pair.first->GetCollider());
+			pair.first->BroadcastTriggerEnterDelegate(pair.second->GetCollider());
+			pair.second->BroadcastTriggerEnterDelegate(pair.first->GetCollider());
 		}
 		else
 		{
-			pair.first->BraodcastTriggerStayDelegate(pair.second->GetCollider());
-			pair.second->BraodcastTriggerStayDelegate(pair.first->GetCollider());
+			pair.first->BroadcastTriggerStayDelegate(pair.second->GetCollider());
+			pair.second->BroadcastTriggerStayDelegate(pair.first->GetCollider());
 		}
 	}
 
@@ -234,12 +234,13 @@ void RBPhysicsWorld::ProcessTriggerEvents()
 	{
 		if (mCurrentTriggerPairs.find(pair) == mCurrentTriggerPairs.end())
 		{
-			pair.first->BraodcastTriggerExitDelegate(pair.second->GetCollider());
-			pair.second->BraodcastTriggerExitDelegate(pair.first->GetCollider());
+			pair.first->BroadcastTriggerExitDelegate(pair.second->GetCollider());
+			pair.second->BroadcastTriggerExitDelegate(pair.first->GetCollider());
 		}
 	}
 
 	mPreviousTriggerPairs = mCurrentTriggerPairs; // This frame becomes "previous" for next frame
+	mCurrentTriggerPairs.clear();
 }
 
 void RBPhysicsWorld::PurgeTriggerPairs(const RBPhysicsObject* object)

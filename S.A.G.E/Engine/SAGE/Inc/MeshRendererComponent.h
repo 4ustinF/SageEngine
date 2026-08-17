@@ -29,7 +29,7 @@ namespace SAGE
 		void OnDisable() override;
 
 		// Getters
-		SAGE::Graphics::RenderObject& GetRenderObject();
+		Graphics::RenderObject& GetRenderObject();
 		bool GetShouldBloom() const { return mAllowBloom; }
 		bool GetIsTransparent() const { return mIsTransparent; }
 
@@ -40,9 +40,9 @@ namespace SAGE
 		void SetBumpMapFileName(const char* fileName) { mMaterialData.bumpMapName = fileName; }							// TODO: Might need to update mMaterialData when these update as well.
 		void SetNormalMapFileName(const char* fileName) { mMaterialData.normalMapName = fileName; }						// TODO: Might need to update mMaterialData when these update as well.
 		void SetTilingSize(float xTilingSize, float yTilingSize);
-		void SetTilingSize(const SAGE::Math::Vector2& tilingSize);
+		void SetTilingSize(const Math::Vector2& tilingSize);
 		void SetTilingOffset(float xTilingOffset, float yTilingOffset);
-		void SetTilingOffset(const SAGE::Math::Vector2& tilingOffset);
+		void SetTilingOffset(const Math::Vector2& tilingOffset);
 		void SetTileToScale(bool tileToXScale = false, bool tileToYScale = false, bool tileToZScale = false);
 		void SetTileToXScale(bool tileToXScale);
 		void SetTileToYScale(bool tileToYScale);
@@ -52,28 +52,28 @@ namespace SAGE
 		MeshFilterComponent* mMeshFilter = nullptr;
 		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
-		SAGE::Graphics::TextureManager* mTextureManager = nullptr;
+		Graphics::TextureManager* mTextureManager = nullptr;
 
-		void TextureDebugUI(const char* mapName, SAGE::Graphics::TextureId& textureId, std::string& filePath);
+		void TextureDebugUI(const char* mapName, Graphics::TextureId& textureId, std::string& filePath);
 		void MaterialDebugUI();
-		void MaterialDataDebugUI(const char* label, SAGE::Graphics::Color& renderObjectColor, SAGE::Graphics::Color& materialDataColor);
+		void MaterialDataDebugUI(const char* label, Graphics::Color& renderObjectColor, Graphics::Color& materialDataColor);
 		const float mMaxPreviewSize = 64.0f;
 		const std::string mMissingDiffuseMapFileName = "missing.png";
-		SAGE::Graphics::TextureId mMissingTextureID;
+		Graphics::TextureId mMissingTextureID;
 
 		void UpdateScaleSizeDelegateHandle();
-		void OnScaleSizeChanged(const SAGE::Math::Vector3& scale);
-		SAGE::Core::Delegate::FDelegateHandle ScaleChangedHandle;
+		void OnScaleSizeChanged(const Math::Vector3& scale);
+		Core::Delegate::FDelegateHandle ScaleChangedHandle;
 
-		SAGE::Math::Vector2 mTilingSize = SAGE::Math::Vector2::One;
-		SAGE::Math::Vector2 mTilingOffset = SAGE::Math::Vector2::Zero;
+		Math::Vector2 mTilingSize = Math::Vector2::One;
+		Math::Vector2 mTilingOffset = Math::Vector2::Zero;
 		bool mTileToXScale = false;
 		bool mTileToYScale = false;
 		bool mTileToZScale = false;
 
 		void LoadMaterial(std::filesystem::path filePath); // TODO: Make the material an object so if we change it in one place it updates everywhere else.
 		void LoadTextures();
-		SAGE::Graphics::Model::MaterialData mMaterialData; // TODO tidy up in here.
+		Graphics::Model::MaterialData mMaterialData; // TODO tidy up in here.
 		std::string mMaterialFilePath = "";
 		bool mIsBasic = false;
 		bool mAllowBloom = false;

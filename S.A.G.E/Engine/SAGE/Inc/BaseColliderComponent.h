@@ -24,7 +24,7 @@ namespace SAGE
 		bool IsTrigger() const { return mIsTrigger; }
 		const Math::Vector3 GetCenter() const;
 		const Math::Quaternion GetOrientation() const;
-		SAGE::RBPhysics::RBPhysicsObject* GetPhysicsObject() const { return mPhysicsObject; }
+		RBPhysics::RBPhysicsObject* GetPhysicsObject() const { return mPhysicsObject; }
 
 		// Setters
 		void SetIsTrigger(bool isTrigger);
@@ -33,13 +33,18 @@ namespace SAGE
 
 	protected:
 		void UpdatePhysicsObjectPropertys();
+		virtual std::unique_ptr<RBPhysics::Collider> CreateCollider() = 0;
 		virtual void ResizeToMesh() {};
+
+		void NotifyParentOnTriggerEnter(RBPhysics::Collider* collider);
+		void NotifyParentOnTriggerStay(RBPhysics::Collider* collider);
+		void NotifyParentOnTriggerExit(RBPhysics::Collider* collider);
 
 		RBPhysicsService* mPhysicsService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
 		RigidBodyComponent* mRigidBodyComponent = nullptr;
 		MeshFilterComponent* mMeshFilterComponent = nullptr;
-		SAGE::RBPhysics::RBPhysicsObject* mPhysicsObject = nullptr;
+		RBPhysics::RBPhysicsObject* mPhysicsObject = nullptr;
 		
 		bool mIsTrigger = false;
 		// TODO: Physics Material
@@ -48,5 +53,9 @@ namespace SAGE
 
 		bool mDebugFill = false;
 		Graphics::Color mDebugColor = Graphics::Colors::Green;
+
+		Core::Delegate::FDelegateHandle OnTriggerEnterHandle;
+		Core::Delegate::FDelegateHandle OnTriggerStayHandle;
+		Core::Delegate::FDelegateHandle OnTriggerExitHandle;
 	};
 }

@@ -51,6 +51,13 @@ void BaseColliderComponent ::Initialize()
 
 void BaseColliderComponent ::Terminate()
 {
+	if (mPhysicsObject)
+	{
+		mPhysicsObject->GetOnTriggerEnterDelegate().Remove(OnTriggerEnterHandle);
+		mPhysicsObject->GetOnTriggerStayDelegate().Remove(OnTriggerStayHandle);
+		mPhysicsObject->GetOnTriggerExitDelegate().Remove(OnTriggerExitHandle);
+	}
+
 	mPhysicsObject = nullptr;
 	mTransformComponent = nullptr;
 	mRigidBodyComponent = nullptr;
@@ -64,13 +71,31 @@ void BaseColliderComponent::OnEnable()
 	{
 		mRigidBodyComponent = GetOwner().GetComponent<RigidBodyComponent>();
 	}
+
+	std::unique_ptr<Collider> collider = CreateCollider();
+	const PhysicsObjectType objectType = mRigidBodyComponent ? (mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static;
+	mPhysicsObject = mPhysicsService->GetPhysicsWorld().CreatePhysicsObject(std::move(collider), objectType);
+
+	UpdatePhysicsObjectPropertys();
+
+	if (mPhysicsObject != nullptr) // TODO: Is there a time we should not bind?
+	{
+		OnTriggerEnterHandle = mPhysicsObject->GetOnTriggerEnterDelegate().AddRaw(this, &BaseColliderComponent::NotifyParentOnTriggerEnter);
+		OnTriggerStayHandle = mPhysicsObject->GetOnTriggerStayDelegate().AddRaw(this, &BaseColliderComponent::NotifyParentOnTriggerStay);
+		OnTriggerExitHandle = mPhysicsObject->GetOnTriggerExitDelegate().AddRaw(this, &BaseColliderComponent::NotifyParentOnTriggerExit);
+	}
 }
 
 void BaseColliderComponent::OnDisable()
 {
 	if (mPhysicsObject != nullptr)
 	{
+		mPhysicsObject->GetOnTriggerEnterDelegate().Remove(OnTriggerEnterHandle);
+		mPhysicsObject->GetOnTriggerStayDelegate().Remove(OnTriggerStayHandle);
+		mPhysicsObject->GetOnTriggerExitDelegate().Remove(OnTriggerExitHandle);
+
 		mPhysicsService->GetPhysicsWorld().RemoveObject(mPhysicsObject);
+		mPhysicsObject = nullptr;
 	}
 }
 
@@ -96,23 +121,6 @@ const Quaternion BaseColliderComponent::GetOrientation() const
 
 void BaseColliderComponent::SetIsTrigger(bool isTrigger)
 {
-	if (mIsTrigger == isTrigger)
-	{
-		return;
-	}
-
-	if (mPhysicsObject)
-	{
-		if (mIsTrigger) // Was trigger
-		{
-			// TODO: Unsubscribe
-		}
-		else
-		{
-			// TODO: Subscribe
-		}
-	}
-
 	mIsTrigger = isTrigger;
 }
 
@@ -135,4 +143,19 @@ void BaseColliderComponent::UpdatePhysicsObjectPropertys()
 
 	mPhysicsObject->SetIsTrigger(mIsTrigger);
 	mPhysicsObject->UpdateInverseMass();
+}
+
+void BaseColliderComponent::NotifyParentOnTriggerEnter(Collider* collider)
+{
+	GetOwner().OnTriggerEnter(collider);
+}
+
+void BaseColliderComponent::NotifyParentOnTriggerStay(Collider* collider)
+{
+	GetOwner().OnTriggerStay(collider);
+}
+
+void BaseColliderComponent::NotifyParentOnTriggerExit(Collider* collider)
+{
+	GetOwner().OnTriggerExit(collider);
 }

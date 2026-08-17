@@ -54,9 +54,6 @@
     <ClInclude Include="Inc\App.h">
       <Filter>Inc\App</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Precompiled.h">
-      <Filter>Src\Pch</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\CameraUtil.h">
       <Filter>Inc</Filter>
     </ClInclude>
@@ -164,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="Inc\CapsuleColliderComponent.h">
       <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Precompiled.h">
+      <Filter>Inc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

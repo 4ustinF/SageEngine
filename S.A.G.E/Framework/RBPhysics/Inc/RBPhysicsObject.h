@@ -55,9 +55,9 @@ namespace SAGE::RBPhysics
 		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
 		// Delegates
-		void BraodcastTriggerEnterDelegate(Collider* collider) { mOnTriggerEnter.Broadcast(collider); };
-		void BraodcastTriggerStayDelegate(Collider* collider) { mOnTriggerStay.Broadcast(collider); };
-		void BraodcastTriggerExitDelegate(Collider* collider) { mOnTriggerExit.Broadcast(collider); };
+		void BroadcastTriggerEnterDelegate(Collider* collider) { mOnTriggerEnter.Broadcast(collider); };
+		void BroadcastTriggerStayDelegate(Collider* collider) { mOnTriggerStay.Broadcast(collider); };
+		void BroadcastTriggerExitDelegate(Collider* collider) { mOnTriggerExit.Broadcast(collider); };
 		FOnTriggerEnter& GetOnTriggerEnterDelegate() { return mOnTriggerEnter; }
 		FOnTriggerStay& GetOnTriggerStayDelegate() { return mOnTriggerStay; }
 		FOnTriggerExit& GetOnTriggerExitDelegate() { return mOnTriggerExit; }

@@ -1,14 +1,11 @@
 #include "Precompiled.h"
 #include "BoxColliderComponent.h"
 
+#include "GameWorld.h"
 #include "GameObject.h"
-#include "RBPhysicsService.h"
 #include "TransformComponent.h"
 #include "MeshFilterComponent.h"
 #include "SelectionBoxComponent.h"
-
-#include "GameWorld.h"
-#include "RigidBodyComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -70,18 +67,6 @@ void BoxColliderComponent ::DebugUI()
 	}
 }
 
-void BoxColliderComponent::OnEnable()
-{
-	BaseColliderComponent::OnEnable();
-
-	auto collider = std::make_unique<BoundingBox>(GetCenter(), mExtend, GetOrientation());
-	mPhysicsObject = mPhysicsService->GetPhysicsWorld().CreatePhysicsObject(
-		std::move(collider),
-		mRigidBodyComponent ? (mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static);
-
-	UpdatePhysicsObjectPropertys();
-}
-
 void BoxColliderComponent::SetSize(const Math::Vector3& size)
 { 
 	mSize.x = Max(0.1f, size.x);
@@ -89,6 +74,11 @@ void BoxColliderComponent::SetSize(const Math::Vector3& size)
 	mSize.z = Max(0.1f, size.z);
 
 	mExtend = mSize * 0.5f;
+}
+
+std::unique_ptr<Collider> BoxColliderComponent::CreateCollider()
+{
+	return std::make_unique<BoundingBox>(GetCenter(), mExtend, GetOrientation());
 }
 
 void BoxColliderComponent::ResizeToMesh()

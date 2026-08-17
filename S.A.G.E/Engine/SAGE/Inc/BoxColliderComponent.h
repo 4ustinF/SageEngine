@@ -20,8 +20,6 @@ namespace SAGE
 		void Terminate() override;
 		void DebugUI() override;
 
-		void OnEnable() override;
-
 		// Getters
 		const Math::Vector3& GetSize() const { return mSize; }
 
@@ -29,6 +27,7 @@ namespace SAGE
 		void SetSize(const Math::Vector3& size);
 
 	protected:
+		std::unique_ptr<RBPhysics::Collider> CreateCollider() override;
 		void ResizeToMesh() override;
 
 		SelectionBoxComponent* mSelectionBoxComponent = nullptr;

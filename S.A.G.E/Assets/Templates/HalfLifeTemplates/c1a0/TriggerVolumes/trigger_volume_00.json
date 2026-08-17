@@ -1,0 +1,27 @@
+{
+  "Name": "Trigger Volume 0",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -7.5,
+        -4.572,
+        15.62
+      ]
+    },
+    "Box Collider Component": {
+      "Is Trigger": true,
+      "Center": [
+        0.0,
+        1.524,
+        0.0
+      ],
+      "Size": [
+        0.4,
+        3.048,
+        3.508
+      ]
+    },
+    "Toggle Trigger Volume Component": {
+    }
+  }
+}

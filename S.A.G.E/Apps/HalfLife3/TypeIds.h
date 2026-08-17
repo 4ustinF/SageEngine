@@ -6,6 +6,7 @@ enum class ComponentId
 {
 	PlayerController = static_cast<uint32_t>(SAGE::ComponentId::Count),
 	TextureAnimator,
+	ToggleTriggerVolume,
 };
 
 //enum class ServiceId

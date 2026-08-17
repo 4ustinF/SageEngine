@@ -1,0 +1,8 @@
+{
+  "Name": "Trigger Volumes",
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/TriggerVolumes/trigger_volume_00.json"
+    }
+  ]
+}

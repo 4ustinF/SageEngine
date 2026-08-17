@@ -52,6 +52,9 @@
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/c1a0_colliders.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/TriggerVolumes/c1a0_trigger_volumes.json"
     }
   ]
 }

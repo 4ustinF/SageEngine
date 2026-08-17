@@ -2,6 +2,7 @@
 
 #include "PlayerControllerComponent.h"
 #include "TextureAnimatorComponent.h"
+#include "ToggleTriggerVolumeComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Physics;
@@ -18,6 +19,12 @@ namespace
 		{
 			TextureAnimatorComponent* textureAnimatorComponent = gameObject.AddComponent<TextureAnimatorComponent>();
 			textureAnimatorComponent->LoadComponentFromTemplate(value);
+			return true;
+		}
+		else if (strcmp(componentName, "Toggle Trigger Volume Component") == 0)
+		{
+			ToggleTriggerVolumeComponent* toggleTriggerVolumeComponent = gameObject.AddComponent<ToggleTriggerVolumeComponent>();
+			toggleTriggerVolumeComponent->LoadComponentFromTemplate(value);
 			return true;
 		}
 		else if (strcmp(componentName, "Player Controller Component") == 0)

@@ -1,5 +1,6 @@
 {
   "Name": "Room 2 Colliders",
+  "Is Active": false,
   "GameObjects": [
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_02/room_02_collider_leftwall.json"

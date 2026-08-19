@@ -249,15 +249,6 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	// Attach components
 	GameObjectFactory::Make(templateFile, *newObject);
 
-	// Initialize game object
-	newObject->Initialize();
-
-	// Add game object to update list
-	mUpdateList.push_back(newObject.get());
-
-	// Dirty Hierarchy
-	mHierarchyDirty = true;
-
 	FILE* file = nullptr;
 	auto err = fopen_s(&file, templateFile.u8string().c_str(), "r"); // TODO: This is a double read because of GameObjectFactory::Make(templateFile, *newObject); lets fix this
 	ASSERT(err == 0 && file != nullptr, "GameWorld --- Failed to open level file '%s'", templateFile.u8string().c_str());
@@ -270,6 +261,29 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	document.ParseStream(readStream);
 
 	fclose(file);
+
+	bool isSelfActive = true;
+	bool isActiveInHiearchy = false;
+	if (document.HasMember("Is Active") && document["Is Active"].IsBool())
+	{
+		isSelfActive = document["Is Active"].GetBool();
+	}
+
+	if (isSelfActive == true)
+	{
+		isActiveInHiearchy = parentGO != nullptr ? parentGO->IsActiveInHierarchy() : true;
+	}
+
+	newObject->PreSeedSetActive(isSelfActive, isActiveInHiearchy);
+
+	// Initialize game object
+	newObject->Initialize();
+
+	// Add game object to update list
+	mUpdateList.push_back(newObject.get());
+
+	// Dirty Hierarchy
+	mHierarchyDirty = true;
 
 	if (document.HasMember("GameObjects") && document["GameObjects"].IsArray())
 	{

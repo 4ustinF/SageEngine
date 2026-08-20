@@ -3,15 +3,30 @@
   "Components": {
     "Transform Component": {
       "Local Position": [
-        -17.830799102783203,
-        -3.5052011013031006,
-        6.0960001945495605
+        -17.830799,
+        -3.505201,
+        6.096000
       ],
       "Local Rotation": [
         180.000000,
         0.0,
         180.000000
       ]
+    },
+    "Box Collider Component": {
+      "Is Trigger": true,
+      "Center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "Door Interact Toggle Volume Component": {
     },
     "Selection Box Component": {
     }

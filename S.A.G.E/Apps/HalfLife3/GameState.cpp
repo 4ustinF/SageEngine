@@ -1,5 +1,6 @@
 #include "GameState.h"
 
+//#include "DoorITVComponent.h"
 #include "PlayerControllerComponent.h"
 #include "TextureAnimatorComponent.h"
 #include "ToggleTriggerVolumeComponent.h"
@@ -15,7 +16,13 @@ namespace
 	// Check for custom components
 	bool OnMake(const char* componentName, const rapidjson::Value& value, GameObject& gameObject)
 	{
-		if (strcmp(componentName, "Texture Animator Component") == 0)
+/*		if (strcmp(componentName, "Door Interact Toggle Volume Component") == 0)
+		{
+			DoorITVComponent* doorITVComponent = gameObject.AddComponent<DoorITVComponent>();
+			doorITVComponent->LoadComponentFromTemplate(value);
+			return true;
+		}
+		else */if (strcmp(componentName, "Texture Animator Component") == 0)
 		{
 			TextureAnimatorComponent* textureAnimatorComponent = gameObject.AddComponent<TextureAnimatorComponent>();
 			textureAnimatorComponent->LoadComponentFromTemplate(value);

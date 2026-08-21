@@ -1,1 +1,29 @@
-{"Name":"Left Wall 2","Components":{"Transform Component":{"Local Position":[-6.133999824523926,-4.572000026702881,13.621000289916992],"Local Rotation":[0.0,285.625,0.0]},"Box Collider Component":{"Center":[-0.20000000298023224,1.5240000486373901,0.45480799674987793],"Size":[0.4000000059604645,3.0480000972747803,0.9096159934997559]}}}
+{
+  "Name": "Left Wall 2",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -6.134,
+        -4.572,
+        13.621
+      ],
+      "Local Rotation": [
+        0.0,
+        285.625,
+        0.0
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        -0.2,
+        1.524,
+        0.454808
+      ],
+      "Size": [
+        0.4,
+        3.048,
+        0.909616
+      ]
+    }
+  }
+}

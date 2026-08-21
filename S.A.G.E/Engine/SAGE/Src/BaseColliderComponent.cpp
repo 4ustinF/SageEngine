@@ -103,7 +103,8 @@ const Vector3 BaseColliderComponent::GetCenter() const
 { 
 	if (mTransformComponent)
 	{
-		return mTransformComponent->GetPosition() + mCenter;
+		Vector3 rotatedOffset = mTransformComponent->GetRotation() * mCenter;
+		return mTransformComponent->GetPosition() + rotatedOffset;
 	}
 
 	return mCenter; 

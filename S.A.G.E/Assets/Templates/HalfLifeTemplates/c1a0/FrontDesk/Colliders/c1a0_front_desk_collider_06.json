@@ -2,6 +2,11 @@
   "Name": "Collider 6",
   "Components": {
     "Transform Component": {
+      "Local Position": [
+        0.3236,
+        -0.648,
+        1.352150
+      ],
       "Local Rotation": [
         0.0,
         309.5,
@@ -10,14 +15,14 @@
     },
     "Box Collider Component": {
       "Center": [
-        0.025,
-        -0.3048,
-        1.5
+        -0.075,
+        0.343,
+        0.315
       ],
       "Size": [
         0.15,
         0.686,
-        0.65
+        0.63
       ]
     }
   }

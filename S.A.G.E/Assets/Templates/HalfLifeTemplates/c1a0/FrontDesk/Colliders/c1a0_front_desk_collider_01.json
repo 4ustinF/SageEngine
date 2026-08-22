@@ -2,22 +2,27 @@
   "Name": "Collider 1",
   "Components": {
     "Transform Component": {
+      "Local Position": [
+        0.7616,
+        -0.647699,
+        0.095150
+      ],
       "Local Rotation": [
         0.0,
-        349.5,
+        349.7,
         0.0
       ]
     },
     "Box Collider Component": {
       "Center": [
-        0.41,
-        -0.3048,
-        0.36
+        -0.3,
+        0.343,
+        0.319625
       ],
       "Size": [
         0.6,
         0.686,
-        0.64
+        0.639247
       ]
     }
   }

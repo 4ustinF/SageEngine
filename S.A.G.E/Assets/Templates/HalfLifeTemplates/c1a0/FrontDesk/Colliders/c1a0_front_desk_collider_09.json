@@ -2,17 +2,22 @@
   "Name": "Collider 9",
   "Components": {
     "Transform Component": {
+      "Local Position": [
+        -0.1714,
+        -0.648,
+        -1.752849
+      ],
       "Local Rotation": [
         0.0,
-        76.0,
+        75.5,
         0.0
       ]
     },
     "Box Collider Component": {
       "Center": [
-        -0.48,
-        -0.3048,
-        -1.76
+        -0.0725,
+        0.343,
+        -0.3
       ],
       "Size": [
         0.145,

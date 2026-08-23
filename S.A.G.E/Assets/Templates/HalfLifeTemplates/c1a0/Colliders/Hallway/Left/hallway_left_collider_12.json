@@ -1,0 +1,29 @@
+{
+  "Name": "Left Wall 12",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -18.574,
+        -4.572,
+        5.01
+      ],
+      "Local Rotation": [
+        0.0,
+        73.5,
+        0.0
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.2,
+        1.524,
+        0.308
+      ],
+      "Size": [
+        0.4,
+        3.048,
+        0.616082
+      ]
+    }
+  }
+}

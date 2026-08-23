@@ -38,6 +38,18 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_11.json"
     },
     {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_12.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_13.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_14.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_15.json"
+    },
+    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_19.json"
     }
   ]

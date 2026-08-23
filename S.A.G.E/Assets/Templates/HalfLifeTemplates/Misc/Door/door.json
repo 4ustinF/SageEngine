@@ -1,0 +1,24 @@
+{
+  "Name": "Door",
+  "Components": {
+    "Transform Component": {
+    },
+    "Selection Box Component": {
+    },
+    "Box Collider Component": {
+      "Size": [
+        0.152402,
+        2.133602,
+        1.219203
+      ]
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_front.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_trim.json"
+    }
+  ]
+}

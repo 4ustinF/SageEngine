@@ -1,0 +1,18 @@
+{
+  "Name": "Door Frame",
+  "Components": {
+    "Transform Component": {
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_frame_outer.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_frame_inner_00.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_frame_colliders.json"
+    }
+  ]
+}

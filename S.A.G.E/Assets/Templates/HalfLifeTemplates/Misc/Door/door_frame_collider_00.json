@@ -1,0 +1,9 @@
+{
+  "Name": "Door Frame Collider 0",
+  "Components": {
+    "Transform Component": {
+    },
+    "Box Collider Component": {
+    }
+  }
+}

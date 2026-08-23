@@ -23,7 +23,7 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_brush_015.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/c1a0_doors.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Doors/c1a0_doors.json"
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/c1a0_medkit_0.json"

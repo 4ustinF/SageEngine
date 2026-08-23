@@ -1,1 +1,14 @@
-{"Name":"Section 84","Components":{"Transform Component":{},"Mesh Filter Component":{"MeshType":"Custom","Custom Mesh File Path":"../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_84.mesh"},"Mesh Renderer Component":{"MaterialFilePath":"../../Assets/Models/HalfLife/c1a0/Materials/c1a0_84.material"}}}
+{
+  "Name": "Section 84",
+  "Components": {
+    "Transform Component": {
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/c1a0/Mesh/c1a0_84.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/c1a0/Materials/c1a0_84.material"
+    }
+  }
+}

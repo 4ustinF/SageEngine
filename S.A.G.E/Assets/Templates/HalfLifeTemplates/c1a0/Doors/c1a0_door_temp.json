@@ -1,17 +1,18 @@
 {
-  "Name": "Door 1",
+  "Name": "Door Temp",
   "Components": {
     "Transform Component": {
-      "Local Position": [
-        -8.686800003051758,
-        -3.0479979515075684,
-        -9.144000053405762
-      ]
     },
     "Selection Box Component": {
     }
   },
   "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_frame_outer.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_frame_inner.json"
+    },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_front.json"
     },

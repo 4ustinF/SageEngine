@@ -1,11 +1,11 @@
 {
-  "Name": "Door Trim A",
+  "Name": "Door Trim",
   "Components": {
     "Transform Component": {
     },
     "Mesh Filter Component": {
       "MeshType": "Custom",
-      "Custom Mesh File Path": "../../Assets/Models/HalfLife/Misc/Meshes/door_trim.mesh"
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/Misc/Meshes/Door/door_trim.mesh"
     },
     "Mesh Renderer Component": {
       "MaterialFilePath": "../../Assets/Models/HalfLife/Misc/Materials/door_trim.material"

@@ -33,10 +33,10 @@
   },
   "GameObjects": [
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/door_front.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_front.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/door_trim.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_trim.json"
     }
   ]
 }

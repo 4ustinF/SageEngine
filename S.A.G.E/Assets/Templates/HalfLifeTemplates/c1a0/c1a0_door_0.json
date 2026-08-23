@@ -5,12 +5,12 @@
       "Local Position": [
         -17.830799,
         -3.505201,
-        6.096000
+        6.096
       ],
       "Local Rotation": [
-        180.000000,
+        180.0,
         0.0,
-        180.000000
+        180.0
       ]
     },
     "Box Collider Component": {
@@ -21,14 +21,14 @@
         0.0
       ],
       "Size": [
-        1.0,
-        1.0,
-        1.0
+        1.5,
+        2.133602,
+        1.219203
       ]
     },
-    "Door Interact Toggle Volume Component": {
-    },
     "Selection Box Component": {
+    },
+    "Door Interact Toggle Volume Component": {
     }
   },
   "GameObjects": [

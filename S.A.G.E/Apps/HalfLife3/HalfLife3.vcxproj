@@ -134,15 +134,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DoorITVComponent.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="InteractTriggerVolumeComponent.cpp" />
     <ClCompile Include="PlayerControllerComponent.cpp" />
     <ClCompile Include="TextureAnimatorComponent.cpp" />
+    <ClCompile Include="ToggleTriggerVolumeComponent.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DoorITVComponent.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="InteractTriggerVolumeComponent.h" />
     <ClInclude Include="PlayerControllerComponent.h" />
     <ClInclude Include="TextureAnimatorComponent.h" />
+    <ClInclude Include="ToggleTriggerVolumeComponent.h" />
     <ClInclude Include="TypeIds.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

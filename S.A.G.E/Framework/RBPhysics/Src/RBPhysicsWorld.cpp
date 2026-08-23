@@ -19,6 +19,7 @@ void RBPhysicsWorld::Initialize(Settings settings)
 
 void RBPhysicsWorld::Clear()
 {
+	ProcessDestroyList();
 	mDynamicObjects.clear();
 	mStaticObjects.clear();
 }
@@ -27,6 +28,10 @@ void RBPhysicsWorld::Update(float deltaTime)
 {
 	Simulate(deltaTime);
 	HandleCollisions();
+	ProcessTriggerEvents();
+
+	// Now we can safely destroy objects
+	ProcessDestroyList();
 }
 
 void RBPhysicsWorld::DrawPhysicsObjects(bool fillShapes)
@@ -94,29 +99,8 @@ bool RBPhysicsWorld::RemoveObject(const RBPhysicsObject* object)
 		return false;
 	}
 
-	PurgeTriggerPairs(object);
-
-	auto it = std::find_if(mStaticObjects.begin(), mStaticObjects.end(),
-		[object](const std::unique_ptr<RBPhysicsObject>& obj) {
-			return obj.get() == object;
-		});
-
-	if (it != mStaticObjects.end()) {
-		mStaticObjects.erase(it); // unique_ptr goes out of scope here -> deletes the object
-		return true;
-	}
-
-	it = std::find_if(mDynamicObjects.begin(), mDynamicObjects.end(),
-		[object](const std::unique_ptr<RBPhysicsObject>& obj) {
-			return obj.get() == object;
-		});
-
-	if (it != mDynamicObjects.end()) {
-		mDynamicObjects.erase(it); // unique_ptr goes out of scope here -> deletes the object
-		return true;
-	}
-
-	return false;
+	mDestroyList.push_back(object);
+	return true;
 }
 
 void RBPhysicsWorld::Simulate(float deltaTime)
@@ -206,8 +190,6 @@ void RBPhysicsWorld::HandleCollisions()
 			}
 		}
 	}
-
-	ProcessTriggerEvents();
 }
 
 void RBPhysicsWorld::ProcessTriggerEvents()
@@ -241,6 +223,41 @@ void RBPhysicsWorld::ProcessTriggerEvents()
 
 	mPreviousTriggerPairs = mCurrentTriggerPairs; // This frame becomes "previous" for next frame
 	mCurrentTriggerPairs.clear();
+}
+
+void RBPhysicsWorld::ProcessDestroyList()
+{
+	for (const RBPhysicsObject* object : mDestroyList)
+	{
+		if (object == nullptr)
+		{
+			continue;
+		}
+
+		PurgeTriggerPairs(object);
+
+		auto it = std::find_if(mStaticObjects.begin(), mStaticObjects.end(),
+			[object](const std::unique_ptr<RBPhysicsObject>& obj) {
+				return obj.get() == object;
+			});
+
+		if (it != mStaticObjects.end()) {
+			mStaticObjects.erase(it); // unique_ptr goes out of scope here -> deletes the object
+		}
+		else
+		{
+			it = std::find_if(mDynamicObjects.begin(), mDynamicObjects.end(),
+				[object](const std::unique_ptr<RBPhysicsObject>& obj) {
+					return obj.get() == object;
+				});
+
+			if (it != mDynamicObjects.end()) {
+				mDynamicObjects.erase(it); // unique_ptr goes out of scope here -> deletes the object
+			}
+		}
+	}
+
+	mDestroyList.clear();
 }
 
 void RBPhysicsWorld::PurgeTriggerPairs(const RBPhysicsObject* object)

@@ -16,6 +16,12 @@
     <Filter Include="Components\Player">
       <UniqueIdentifier>{9cf49dba-efe4-49ed-882c-ee86df049d71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\TriggerVolumes">
+      <UniqueIdentifier>{b332a57c-95d8-4b26-8630-c8422c79cb75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\TriggerVolumes\Interact">
+      <UniqueIdentifier>{f0e16af3-0666-4fad-8ee4-23c90c2eb431}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp">
@@ -30,6 +36,15 @@
     <ClCompile Include="PlayerControllerComponent.cpp">
       <Filter>Components\Player</Filter>
     </ClCompile>
+    <ClCompile Include="ToggleTriggerVolumeComponent.cpp">
+      <Filter>Components\TriggerVolumes</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractTriggerVolumeComponent.cpp">
+      <Filter>Components\TriggerVolumes\Interact</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorITVComponent.cpp">
+      <Filter>Components\TriggerVolumes\Interact</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -43,6 +58,15 @@
     </ClInclude>
     <ClInclude Include="PlayerControllerComponent.h">
       <Filter>Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ToggleTriggerVolumeComponent.h">
+      <Filter>Components\TriggerVolumes</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractTriggerVolumeComponent.h">
+      <Filter>Components\TriggerVolumes\Interact</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorITVComponent.h">
+      <Filter>Components\TriggerVolumes\Interact</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

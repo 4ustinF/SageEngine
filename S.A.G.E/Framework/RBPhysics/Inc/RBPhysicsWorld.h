@@ -83,6 +83,7 @@ namespace SAGE::RBPhysics
 		void Simulate(float deltaTime);
 		void HandleCollisions();
 		void ProcessTriggerEvents();
+		void ProcessDestroyList();
 		void PurgeTriggerPairs(const RBPhysicsObject* object);
 
 		void ResolveCollision(RBPhysicsObject& object1, RBPhysicsObject& object2, IntersectData& intersectData);
@@ -99,5 +100,7 @@ namespace SAGE::RBPhysics
 
 		std::unordered_set<TriggerPairKey, TriggerPairKeyHash> mCurrentTriggerPairs;
 		std::unordered_set<TriggerPairKey, TriggerPairKeyHash> mPreviousTriggerPairs;
+
+		std::vector<const RBPhysicsObject*> mDestroyList;
 	};
 }

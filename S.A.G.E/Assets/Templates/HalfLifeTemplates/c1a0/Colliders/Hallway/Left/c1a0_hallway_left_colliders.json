@@ -50,6 +50,15 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_15.json"
     },
     {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_16.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_17.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_18.json"
+    },
+    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_19.json"
     }
   ]

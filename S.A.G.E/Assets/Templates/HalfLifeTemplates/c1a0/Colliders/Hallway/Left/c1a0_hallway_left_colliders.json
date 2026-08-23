@@ -32,6 +32,12 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_09.json"
     },
     {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_10.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_11.json"
+    },
+    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Hallway/Left/hallway_left_collider_19.json"
     }
   ]

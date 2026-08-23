@@ -1,23 +1,23 @@
 {
-  "Name": "Back Wall 2",
+  "Name": "Left Wall 11",
   "Components": {
     "Transform Component": {
       "Local Position": [
-        -17.374,
-        -1.524,
+        -17.983,
+        -2.134,
         6.096
       ]
     },
     "Box Collider Component": {
       "Center": [
-        -0.152,
-        0.457,
+        0.1525,
+        0.305,
         0.0
       ],
       "Size": [
-        0.304,
-        0.914,
-        1.828
+        0.305,
+        0.61,
+        1.824
       ]
     }
   }

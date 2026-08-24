@@ -3,20 +3,37 @@
   "Components": {
     "Transform Component": {
       "Local Position": [
-        -8.686800003051758,
-        -3.0479979515075684,
-        -9.144000053405762
+        -8.6868,
+        -3.048,
+        -9.144
       ]
     },
     "Selection Box Component": {
+    },
+    "Box Collider Component": {
+      "Is Trigger": true,
+      "Center": [
+        0.0,
+        0.1524,
+        0.0
+      ],
+      "Size": [
+        2.0,
+        2.438402,
+        1.828802
+      ]
+    },
+    "Door Interact Toggle Volume Component": {
+    },
+    "Door ITV Component": {
     }
   },
   "GameObjects": [
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_front.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_frame_00.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door_trim.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/Door/door.json"
     }
   ]
 }

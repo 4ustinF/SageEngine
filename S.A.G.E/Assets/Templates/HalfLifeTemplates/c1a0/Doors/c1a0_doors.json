@@ -4,9 +4,6 @@
   },
   "GameObjects": [
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Doors/c1a0_door_temp.json"
-    },
-    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Doors/c1a0_door_0.json"
     },
     {

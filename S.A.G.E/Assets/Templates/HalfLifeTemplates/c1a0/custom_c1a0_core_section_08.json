@@ -1,1 +1,36 @@
-{"Components":{"Transform Component":{}},"GameObjects":[{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_080.json"},{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_081.json"},{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_082.json"},{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_083.json"},{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_084.json"},{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_085.json"},{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_086.json"},{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_087.json"},{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_088.json"},{"TemplateFile":"../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_089.json"}],"Name":"Part 9"}
+{
+  "Components": {
+    "Transform Component": {
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_080.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_081.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_082.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_083.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_085.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_086.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_087.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_088.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_section_089.json"
+    }
+  ],
+  "Name": "Part 9"
+}

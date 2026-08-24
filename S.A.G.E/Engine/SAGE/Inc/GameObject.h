@@ -38,6 +38,13 @@ namespace SAGE
 			auto& newComponent = mComponents.emplace_back(std::make_unique<ComponentType>());
 			newComponent->mOwner = this;
 			return static_cast<ComponentType*>(newComponent.get());
+
+	/*		ASSERT(!mInitialize, "GameObject - can only add components before object is initialized.");
+			auto newComp = std::make_unique<ComponentType>();
+			ASSERT(newComp != nullptr, "GameObject - AddComponent allocation failed (out of memory in custom allocator?)");
+			auto& stored = mComponents.emplace_back(std::move(newComp));
+			stored->mOwner = this;
+			return static_cast<ComponentType*>(stored.get());*/
 		}
 
 		template <class ComponentType>

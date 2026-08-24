@@ -254,7 +254,6 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	ASSERT(err == 0 && file != nullptr, "GameWorld --- Failed to open level file '%s'", templateFile.u8string().c_str());
 
 	char readBuffer[65536];
-
 	rj::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
 
 	rj::Document document;

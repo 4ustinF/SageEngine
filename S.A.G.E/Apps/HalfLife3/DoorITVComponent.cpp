@@ -7,7 +7,7 @@
 using namespace SAGE;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(DoorITVComponent, 100);
+MEMORY_POOL_DEFINE(DoorITVComponent, 50);
 
 void DoorITVComponent::Initialize()
 {

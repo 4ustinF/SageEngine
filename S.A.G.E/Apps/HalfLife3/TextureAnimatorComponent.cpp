@@ -7,7 +7,7 @@ using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(TextureAnimatorComponent, 100);
+MEMORY_POOL_DEFINE(TextureAnimatorComponent, 50);
 
 void TextureAnimatorComponent::LoadComponentFromTemplate(const rj::Value& value)
 {

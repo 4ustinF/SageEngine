@@ -3,8 +3,10 @@
 
 #include "SAGE/Inc/GameWorld.h"
 #include "SAGE/Inc/GameObject.h"
+#include "SAGE/Inc/TransformComponent.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(DoorITVComponent, 50);
@@ -16,8 +18,31 @@ void DoorITVComponent::Initialize()
 
 void DoorITVComponent::Terminate()
 {
-	mDoorObject = nullptr;
+	mDoorTransformComp = nullptr;
+	mDoorGameObj = nullptr;
 	InteractTriggerVolumeComponent::Terminate();
+}
+
+void DoorITVComponent::OnQueueUpdate(float deltaTime)
+{
+	mElpasedTime += deltaTime;
+	const float percent = Clamp(mElpasedTime / mAnimationTime, 0.0f, 1.0f);
+	Vector3 locPos = mDoorTransformComp->GetLocalPosition();
+	locPos.z = mIsOpening ? Lerp(0.0f, mDoorEndPos, percent) : locPos.z = Lerp(mDoorEndPos, 0.0f, percent);
+	mDoorTransformComp->SetLocalPosition(locPos);
+
+	if (mElpasedTime < mAnimationTime)
+	{
+		EnqueueUpdate();
+		return;
+	}
+
+	if (mIsOpening)
+	{
+		mDoorGameObj->SetActive(false);
+	}
+
+	mIsAnimating = false;
 }
 
 void DoorITVComponent::DebugUI()
@@ -30,19 +55,42 @@ void DoorITVComponent::DebugUI()
 
 void DoorITVComponent::OnInteract()
 {
-	if (GameObject* doorObj = GetDoorObject())
+	if (mIsAnimating)
 	{
-		doorObj->SetActive(!doorObj->IsSelfActive());
+		return;
+	}
+
+	if (TransformComponent* doorTransformComp = GetDoorTransformComp())
+	{
+		mIsOpening = !mIsOpening;
+		mElpasedTime = 0.0f;
+		mIsAnimating = true;
+
+		if (!mIsOpening)
+		{
+			mDoorGameObj->SetActive(true);
+		}
+
+		EnqueueUpdate();
 	}
 }
 
-GameObject* DoorITVComponent::GetDoorObject()
+TransformComponent* DoorITVComponent::GetDoorTransformComp()
 {
-	if (mDoorObject != nullptr)
+	if (mDoorTransformComp != nullptr)
 	{
-		return mDoorObject;
+		return mDoorTransformComp;
 	}
 
-	mDoorObject = GetOwner().FindChildByName("Door");
-	return mDoorObject;
+	if (mDoorGameObj != nullptr)
+	{
+		mDoorTransformComp = mDoorGameObj->GetComponent<TransformComponent>();
+	}
+
+	if (mDoorGameObj = GetOwner().FindChildByName("Door"))
+	{
+		mDoorTransformComp = mDoorGameObj->GetComponent<TransformComponent>();
+	}
+
+	return mDoorTransformComp;
 }

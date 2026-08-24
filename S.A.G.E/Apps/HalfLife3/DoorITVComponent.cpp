@@ -9,18 +9,6 @@ namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(DoorITVComponent, 100);
 
-void DoorITVComponent::LoadComponentFromTemplate(const rj::Value& value)
-{
-	InteractTriggerVolumeComponent::LoadComponentFromTemplate(value);
-	// TODO:
-}
-
-void DoorITVComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
-{
-	InteractTriggerVolumeComponent::SaveComponentToTemplate(compObj, allocator);
-	// TODO:
-}
-
 void DoorITVComponent::Initialize()
 {
 	InteractTriggerVolumeComponent::Initialize();
@@ -55,18 +43,6 @@ GameObject* DoorITVComponent::GetDoorObject()
 		return mDoorObject;
 	}
 
-	GameObject& owner = GetOwner();
-	GameWorld& world = owner.GetWorld();
-	for (const GameObjectHandle& handle : GetOwner().GetChildrenHandles())
-	{
-		if (GameObject* childObj = world.GetGameObject(handle))
-		{
-			if (childObj->GetName() == "Door")
-			{
-				mDoorObject = childObj;
-			}
-		}
-	}
-
+	mDoorObject = GetOwner().FindChildByName("Door");
 	return mDoorObject;
 }

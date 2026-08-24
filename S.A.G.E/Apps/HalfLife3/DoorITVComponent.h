@@ -8,8 +8,6 @@ public:
 	MEMORY_POOL_DECLARE;
 	
 	const char* GetCompName() override { return "Door ITV Component"; }
-	void LoadComponentFromTemplate(const rapidjson::Value& value) override;
-	void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
 	void Initialize() override;
 	void Terminate() override;

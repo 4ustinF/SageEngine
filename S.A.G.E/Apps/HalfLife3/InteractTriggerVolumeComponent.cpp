@@ -6,16 +6,6 @@ using namespace SAGE::Input;
 using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
-void InteractTriggerVolumeComponent::LoadComponentFromTemplate(const rj::Value& value)
-{
-	// TODO:
-}
-
-void InteractTriggerVolumeComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
-{
-	// TODO:
-}
-
 void InteractTriggerVolumeComponent::Initialize()
 {
 	mInputSystem = InputSystem::Get();

@@ -363,3 +363,25 @@ void GameObject::RemoveChild(GameObjectHandle childObjectHandle)
 {
 	mChildGameObjectHandles.erase(std::remove(mChildGameObjectHandles.begin(), mChildGameObjectHandles.end(), childObjectHandle), mChildGameObjectHandles.end()); // Erase-Remove Idiom
 }
+
+GameObject* GameObject::FindChildByName(const std::string& name)
+{
+	GameWorld& world = GetWorld();
+	for (const GameObjectHandle& handle : mChildGameObjectHandles)
+	{
+		if (GameObject* childObj = world.GetGameObject(handle))
+		{
+			if (childObj->GetName() == name)
+			{
+				return childObj;
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+GameObject* GameObject::FindDeepChildByName(const std::string& name)
+{
+	return FindChildByName(name); // TODO: Do a recursive child search instead.
+}

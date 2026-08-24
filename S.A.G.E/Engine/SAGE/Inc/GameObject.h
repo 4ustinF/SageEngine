@@ -76,6 +76,8 @@ namespace SAGE
 		void AddChild(GameObjectHandle childObjectHandle);
 		void RemoveChild(GameObjectHandle childObjectHandle);
 		const std::vector<GameObjectHandle>& GetChildrenHandles() const { return mChildGameObjectHandles; }
+		GameObject* FindChildByName(const std::string& name);
+		GameObject* FindDeepChildByName(const std::string& name);
 
 	protected:
 		bool GetIsReparenting() const { return mIsReparenting; }

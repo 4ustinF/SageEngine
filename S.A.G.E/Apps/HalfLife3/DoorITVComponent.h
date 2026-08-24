@@ -17,4 +17,8 @@ public:
 	
 protected:
 	void OnInteract() override;
+
+private:
+	SAGE::GameObject* GetDoorObject();
+	SAGE::GameObject* mDoorObject = nullptr;
 };

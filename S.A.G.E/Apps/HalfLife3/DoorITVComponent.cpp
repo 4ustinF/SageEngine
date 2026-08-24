@@ -3,13 +3,8 @@
 
 #include "SAGE/Inc/GameWorld.h"
 #include "SAGE/Inc/GameObject.h"
-#include "SAGE/Inc/RBPhysicsService.h"
 
 using namespace SAGE;
-using namespace SAGE::Math;
-using namespace SAGE::Input;
-using namespace SAGE::Graphics;
-using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(DoorITVComponent, 100);
@@ -33,6 +28,7 @@ void DoorITVComponent::Initialize()
 
 void DoorITVComponent::Terminate()
 {
+	mDoorObject = nullptr;
 	InteractTriggerVolumeComponent::Terminate();
 }
 
@@ -46,5 +42,31 @@ void DoorITVComponent::DebugUI()
 
 void DoorITVComponent::OnInteract()
 {
-	GetOwner().SetActive(false);
+	if (GameObject* doorObj = GetDoorObject())
+	{
+		doorObj->SetActive(!doorObj->IsSelfActive());
+	}
+}
+
+GameObject* DoorITVComponent::GetDoorObject()
+{
+	if (mDoorObject != nullptr)
+	{
+		return mDoorObject;
+	}
+
+	GameObject& owner = GetOwner();
+	GameWorld& world = owner.GetWorld();
+	for (const GameObjectHandle& handle : GetOwner().GetChildrenHandles())
+	{
+		if (GameObject* childObj = world.GetGameObject(handle))
+		{
+			if (childObj->GetName() == "Door")
+			{
+				mDoorObject = childObj;
+			}
+		}
+	}
+
+	return mDoorObject;
 }

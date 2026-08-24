@@ -1,18 +1,18 @@
 {
-  "Name": "Door Frame Collider 0",
+  "Name": "Door Frame Collider 1",
   "Components": {
     "Transform Component": {
       "Local Position": [
         0.0,
         0.0,
-        -0.914
+        0.914
       ]
     },
     "Box Collider Component": {
       "Center": [
         0.0,
         0.0,
-        0.152
+        -0.152
       ],
       "Size": [
         0.304,

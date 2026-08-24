@@ -2,6 +2,11 @@
   "Name": "Door Frame Outer",
   "Components": {
     "Transform Component": {
+      "Local Position": [
+        0.0,
+        0.1524,
+        0.0
+      ]
     },
     "Mesh Filter Component": {
       "MeshType": "Custom",

@@ -14,7 +14,7 @@ using namespace SAGE::Graphics;
 using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(PlayerControllerComponent, 100);
+MEMORY_POOL_DEFINE(PlayerControllerComponent, 5);
 
 void PlayerControllerComponent::LoadComponentFromTemplate(const rj::Value& value)
 {

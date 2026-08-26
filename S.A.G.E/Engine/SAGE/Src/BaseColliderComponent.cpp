@@ -70,13 +70,7 @@ void BaseColliderComponent::Update(float deltaTime)
 	// TODO: Get better method then doing this constantly in update. We should only update when a value is changed.
 	if (mPhysicsObject)
 	{
-		if (mPhysicsObject->GetIsStatic()) // Static/Kinematic
-		{
-			mPhysicsObject->SetPosition(GetCenter());
-			mPhysicsObject->SetOrientation(mTransformComponent->GetRotation());
-			mPhysicsObject->Integrate(deltaTime);
-		}
-		else // Dynamic
+		if (!mPhysicsObject->GetIsStatic()) // Dynamic
 		{
 			mTransformComponent->SetPosition(mPhysicsObject->GetPosition());
 			mTransformComponent->SetRotation(mPhysicsObject->GetOrientation());
@@ -105,8 +99,8 @@ void BaseColliderComponent::OnEnable()
 
 		if (mPhysicsObject->GetIsStatic())
 		{
-			//OnPositionChangedHandle = mTransformComponent->GetOnPositionChangeDelegate().AddRaw(this, &BaseColliderComponent::OnPositionChanged);
-			//OnRotationChangedHandle = mTransformComponent->GetOnScaleChangeDelegate().AddRaw(this, &BaseColliderComponent::OnRotationChanged);
+			OnPositionChangedHandle = mTransformComponent->GetOnPositionChangeDelegate().AddRaw(this, &BaseColliderComponent::OnPositionChanged);
+			OnRotationChangedHandle = mTransformComponent->GetOnRotationChangeDelegate().AddRaw(this, &BaseColliderComponent::OnRotationChanged);
 		}
 	}
 }
@@ -193,10 +187,12 @@ void BaseColliderComponent::NotifyParentOnTriggerExit(Collider* collider)
 
 void BaseColliderComponent::OnPositionChanged(const Vector3& position)
 {
-
+	mPhysicsObject->SetPosition(GetCenter());
+	mPhysicsObject->Integrate(0.0f);
 }
 
 void BaseColliderComponent::OnRotationChanged(const Quaternion& rotation)
 {
-
+	mPhysicsObject->SetOrientation(mTransformComponent->GetRotation());
+	mPhysicsObject->Integrate(0.0f);
 }

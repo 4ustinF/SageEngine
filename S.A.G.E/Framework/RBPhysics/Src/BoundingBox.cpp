@@ -8,21 +8,27 @@ using namespace SAGE::Math;
 using namespace SAGE::RBPhysics;
 using namespace SAGE::Graphics;
 
-void BoundingBox::DebugDraw(Math::Quaternion orientation, bool fillDebugShapes)
+void BoundingBox::DebugDraw(bool fillDebugShapes)
 {
 	if (fillDebugShapes)
 	{
-		SimpleDraw::AddFilledOBB(mCenter, mExtend, orientation, mDebugColor);
+		SimpleDraw::AddFilledOBB(mCenter, mExtend, mOrientation, mDebugColor);
 	}
 	else
 	{
-		SimpleDraw::AddOBB(mCenter, mExtend, orientation, mDebugColor);
+		SimpleDraw::AddOBB(mCenter, mExtend, mOrientation, mDebugColor);
 	}
 }
 
-void BoundingBox::Transform(const Math::Vector3& translation)
+void BoundingBox::Transform(const Vector3& translation)
 {
 	mCenter += translation;
+}
+
+void BoundingBox::SetOrientation(const Quaternion& orientation)
+{
+	Collider::SetOrientation(orientation);
+	mIsAxisAligned = mOrientation == Math::Quaternion::Identity; // TODO: Other orientations as well.
 }
 
 //IntersectData BoundingBox::IntersectBoundingSphere(const BoundingSphere& other) const

@@ -24,12 +24,12 @@ namespace SAGE::RBPhysics
 		{
 		}
 
-		virtual void DebugDraw(SAGE::Math::Quaternion orientation, bool fillDebugShapes) {}
+		virtual void DebugDraw(bool fillDebugShapes) {}
 
 		IntersectData Intersect(const Collider* other) const;
 		virtual void Transform(const Math::Vector3& translation) {}
 		Math::Vector3 GetCenter() const { return mCenter; }
-		const SAGE::Math::Quaternion& GetOrientation() const { return mOrientation; } // TODO: Does collider need to hold this info?
+		const SAGE::Math::Quaternion& GetOrientation() const { return mOrientation; }
 
 		Math::Matrix4 GetMatrix4() const
 		{
@@ -51,6 +51,8 @@ namespace SAGE::RBPhysics
 
 		ColliderType GetType() const { return mType; }
 		
+		void SetCenter(Math::Vector3 center) { mCenter = center; }
+		virtual void SetOrientation(const SAGE::Math::Quaternion& orientation) { mOrientation = orientation; }
 		void SetDebugColor(SAGE::Graphics::Color debugColor) { mDebugColor = debugColor; }
 
 	protected:

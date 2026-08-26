@@ -286,11 +286,11 @@ const TransformComponent* TransformComponent::FindParentTransformComponent() con
 void TransformComponent::UpdateWorldPosition(const Vector3& inPos)
 {
 	mTransform.position = inPos;
-	mOnPositionChange.Broadcast(inPos);
+	mOnPositionChange.Broadcast(mTransform.position);
 
 	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
 	{
-		UpdateChildrenPositions(childHandle, inPos);
+		UpdateChildrenPositions(childHandle, mTransform.position);
 	}
 }
 

@@ -29,7 +29,7 @@ void RBPhysicsObject::DebugDraw(bool fillDebugShapes)
 {
 	if (mCollider)
 	{
-		mCollider->DebugDraw(mOrientation, fillDebugShapes);
+		mCollider->DebugDraw(fillDebugShapes);
 	}
 }
 
@@ -53,6 +53,7 @@ void RBPhysicsObject::Integrate(float deltaTime)
 	const Vector3 translation = mPosition - mOldPosition;
 	mOldPosition = mPosition;
 	mCollider->Transform(translation);
+	mCollider->SetOrientation(mOrientation);
 }
 
 void RBPhysicsObject::ResolveCollision(const std::unique_ptr<RBPhysicsObject>& otherObject, const IntersectData& intersectData)

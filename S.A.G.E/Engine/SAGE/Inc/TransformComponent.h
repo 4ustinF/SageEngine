@@ -6,7 +6,7 @@
 
 namespace SAGE
 {
-	DECLARE_MULTICAST_DELEGATE_OneParam(FOnPositionChange, SAGE::Math::Vector3);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnPositionChange, const SAGE::Math::Vector3&);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnRotationChange, const SAGE::Math::Quaternion&);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnScaleChange, const SAGE::Math::Vector3&);
 

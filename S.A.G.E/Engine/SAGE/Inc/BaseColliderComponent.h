@@ -17,6 +17,8 @@ namespace SAGE
 		void Initialize() override;
 		void Terminate() override;
 
+		void Update(float deltaTime) override;
+
 		void OnEnable() override;
 		void OnDisable() override;
 
@@ -29,7 +31,6 @@ namespace SAGE
 		// Setters
 		void SetIsTrigger(bool isTrigger);
 		void SetCenter(const Math::Vector3& center) { mCenter = center; }
-		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
 	protected:
 		void UpdatePhysicsObjectPropertys();
@@ -39,6 +40,8 @@ namespace SAGE
 		void NotifyParentOnTriggerEnter(RBPhysics::Collider* collider);
 		void NotifyParentOnTriggerStay(RBPhysics::Collider* collider);
 		void NotifyParentOnTriggerExit(RBPhysics::Collider* collider);
+		void OnPositionChanged(const Math::Vector3& position);
+		void OnRotationChanged(const Math::Quaternion& rotation);
 
 		RBPhysicsService* mPhysicsService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
@@ -48,8 +51,7 @@ namespace SAGE
 		
 		bool mIsTrigger = false;
 		// TODO: Physics Material
-		Math::Vector3 mCenter = Math::Vector3::Zero;
-		Math::Quaternion mOrientation = Math::Quaternion::Identity;
+		Math::Vector3 mCenter = Math::Vector3::Zero; // TODO: Offset.
 
 		bool mDebugFill = false;
 		Graphics::Color mDebugColor = Graphics::Colors::Green;
@@ -57,5 +59,7 @@ namespace SAGE
 		Core::Delegate::FDelegateHandle OnTriggerEnterHandle;
 		Core::Delegate::FDelegateHandle OnTriggerStayHandle;
 		Core::Delegate::FDelegateHandle OnTriggerExitHandle;
+		Core::Delegate::FDelegateHandle OnPositionChangedHandle;
+		Core::Delegate::FDelegateHandle OnRotationChangedHandle;
 	};
 }

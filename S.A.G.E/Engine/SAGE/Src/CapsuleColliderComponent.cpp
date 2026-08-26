@@ -58,14 +58,15 @@ void CapsuleColliderComponent::DebugUI()
 		if (ImGui::DragFloat("Height##BoxColliderComponent", &mHeight, 0.1f)) { SetHeight(mHeight); }
 	}
 
-	// TODO: Should use physics object pos/rot instead.
+	const Vector3& pos = mPhysicsObject ? mPhysicsObject->GetPosition() : GetCenter();
+	const Quaternion& rotation = mPhysicsObject ? mPhysicsObject->GetOrientation() : mTransformComponent->GetRotation();
 	if (mDebugFill)
 	{
-		SimpleDraw::AddFilledCapsule(GetCenter(), 32, 16, mRadius, mHeight, mTransformComponent->GetRotation(), mDebugColor);
+		SimpleDraw::AddFilledCapsule(pos, 32, 16, mRadius, mHeight, rotation, mDebugColor);
 	}
 	else
 	{
-		SimpleDraw::AddCapsule(GetCenter(), 32, 16, mRadius, mHeight, mTransformComponent->GetRotation(), mDebugColor);
+		SimpleDraw::AddCapsule(pos, 32, 16, mRadius, mHeight, rotation, mDebugColor);
 	}
 }
 

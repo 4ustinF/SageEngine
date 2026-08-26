@@ -40,7 +40,7 @@ void BaseColliderComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memo
 	SaveVector3ToTemplate(compObj, allocator, "Center", mCenter);
 }
 
-void BaseColliderComponent ::Initialize()
+void BaseColliderComponent::Initialize()
 {
 	GameObject& ownerGO = GetOwner();
 	mTransformComponent = ownerGO.GetComponent<TransformComponent>();
@@ -49,7 +49,7 @@ void BaseColliderComponent ::Initialize()
 	mPhysicsService = ownerGO.GetWorld().GetService<RBPhysicsService>();
 }
 
-void BaseColliderComponent ::Terminate()
+void BaseColliderComponent::Terminate()
 {
 	if (mPhysicsObject)
 	{
@@ -65,6 +65,25 @@ void BaseColliderComponent ::Terminate()
 	mPhysicsService = nullptr;
 }
 
+void BaseColliderComponent::Update(float deltaTime)
+{
+	// TODO: Get better method then doing this constantly in update. We should only update when a value is changed.
+	if (mPhysicsObject)
+	{
+		if (mPhysicsObject->GetIsStatic()) // Static/Kinematic
+		{
+			mPhysicsObject->SetPosition(GetCenter());
+			mPhysicsObject->SetOrientation(mTransformComponent->GetRotation());
+			mPhysicsObject->Integrate(deltaTime);
+		}
+		else // Dynamic
+		{
+			mTransformComponent->SetPosition(mPhysicsObject->GetPosition());
+			mTransformComponent->SetRotation(mPhysicsObject->GetOrientation());
+		}
+	}
+}
+
 void BaseColliderComponent::OnEnable()
 {
 	if(mRigidBodyComponent == nullptr)
@@ -78,11 +97,17 @@ void BaseColliderComponent::OnEnable()
 
 	UpdatePhysicsObjectPropertys();
 
-	if (mPhysicsObject != nullptr) // TODO: Is there a time we should not bind?
+	if (mPhysicsObject != nullptr)
 	{
 		OnTriggerEnterHandle = mPhysicsObject->GetOnTriggerEnterDelegate().AddRaw(this, &BaseColliderComponent::NotifyParentOnTriggerEnter);
 		OnTriggerStayHandle = mPhysicsObject->GetOnTriggerStayDelegate().AddRaw(this, &BaseColliderComponent::NotifyParentOnTriggerStay);
 		OnTriggerExitHandle = mPhysicsObject->GetOnTriggerExitDelegate().AddRaw(this, &BaseColliderComponent::NotifyParentOnTriggerExit);
+
+		if (mPhysicsObject->GetIsStatic())
+		{
+			//OnPositionChangedHandle = mTransformComponent->GetOnPositionChangeDelegate().AddRaw(this, &BaseColliderComponent::OnPositionChanged);
+			//OnRotationChangedHandle = mTransformComponent->GetOnScaleChangeDelegate().AddRaw(this, &BaseColliderComponent::OnRotationChanged);
+		}
 	}
 }
 
@@ -97,6 +122,16 @@ void BaseColliderComponent::OnDisable()
 		mPhysicsService->GetPhysicsWorld().RemoveObject(mPhysicsObject);
 		mPhysicsObject = nullptr;
 	}
+
+	if (OnPositionChangedHandle.IsValid())
+	{
+		mTransformComponent->GetOnScaleChangeDelegate().Remove(OnPositionChangedHandle);
+	}
+
+	if (OnRotationChangedHandle.IsValid())
+	{
+		mTransformComponent->GetOnScaleChangeDelegate().Remove(OnRotationChangedHandle);
+	}
 }
 
 const Vector3 BaseColliderComponent::GetCenter() const 
@@ -110,19 +145,14 @@ const Vector3 BaseColliderComponent::GetCenter() const
 	return mCenter; 
 }
 
-const Quaternion BaseColliderComponent::GetOrientation() const
-{
-	if (mTransformComponent)
-	{
-		return mTransformComponent->GetRotation();// *mOrientation;
-	}
-
-	return mOrientation;
-}
-
 void BaseColliderComponent::SetIsTrigger(bool isTrigger)
 {
 	mIsTrigger = isTrigger;
+
+	if (mPhysicsObject)
+	{
+		mPhysicsObject->SetIsTrigger(mIsTrigger);
+	}
 }
 
 void BaseColliderComponent::UpdatePhysicsObjectPropertys()
@@ -159,4 +189,14 @@ void BaseColliderComponent::NotifyParentOnTriggerStay(Collider* collider)
 void BaseColliderComponent::NotifyParentOnTriggerExit(Collider* collider)
 {
 	GetOwner().OnTriggerExit(collider);
+}
+
+void BaseColliderComponent::OnPositionChanged(const Vector3& position)
+{
+
+}
+
+void BaseColliderComponent::OnRotationChanged(const Quaternion& rotation)
+{
+
 }

@@ -9,7 +9,7 @@ using namespace SAGE::Math;
 using namespace SAGE::RBPhysics;
 using namespace SAGE::Graphics;
 
-void BoundingSphere::DebugDraw(SAGE::Math::Quaternion orientation, bool fillDebugShapes)
+void BoundingSphere::DebugDraw(bool fillDebugShapes)
 {
 	if (fillDebugShapes)
 	{
@@ -17,7 +17,7 @@ void BoundingSphere::DebugDraw(SAGE::Math::Quaternion orientation, bool fillDebu
 	}
 	else
 	{
-		SimpleDraw::AddSphere(mCenter, mDebugDivisions, mRadius, mDebugColor, orientation);
+		SimpleDraw::AddSphere(mCenter, mDebugDivisions, mRadius, mDebugColor, mOrientation);
 	}
 }
 

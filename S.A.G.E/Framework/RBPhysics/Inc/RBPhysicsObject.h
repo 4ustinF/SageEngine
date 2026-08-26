@@ -43,6 +43,7 @@ namespace SAGE::RBPhysics
 		Math::Vector3 GetWorldPosition(const Math::Vector3& localPos);
 		const Math::Vector3& GetVelocity() const { return mVelocity; }
 		const Math::Quaternion& GetOrientation() const { return mOrientation; }
+		bool GetIsStatic() const { return mMass <= 0.0f; } // TODO: Replace this with an enum so each object knows what its own typeage is.
 
 		// Setters
 		void SetMass(float mass) { mMass = mass; }

@@ -41,12 +41,12 @@ void BoxColliderComponent ::Initialize()
 	mSelectionBoxComponent = GetOwner().GetComponent<SelectionBoxComponent>();
 }
 
-void BoxColliderComponent ::Terminate()
+void BoxColliderComponent::Terminate()
 {
 	BaseColliderComponent::Terminate();
 }
 
-void BoxColliderComponent ::DebugUI()
+void BoxColliderComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Box Collider Component##BoxColliderComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
@@ -57,13 +57,14 @@ void BoxColliderComponent ::DebugUI()
 		if ((mMeshFilterComponent != nullptr || mSelectionBoxComponent != nullptr) && ImGui::Button("Resize to Mesh##BoxColliderComponent")) { ResizeToMesh(); }
 	}
 
-	if (mDebugFill)
+	const Quaternion& rotation = mPhysicsObject ? mPhysicsObject->GetOrientation() : mTransformComponent->GetRotation();
+	if (mDebugFill) // TODO: Use physics object data instead.
 	{
-		SimpleDraw::AddFilledOBB(GetCenter(), mExtend, mTransformComponent->GetRotation(), mDebugColor);
+		SimpleDraw::AddFilledOBB(GetCenter(), mExtend, rotation, mDebugColor);
 	}
 	else
 	{
-		SimpleDraw::AddOBB(GetCenter(), mExtend, mTransformComponent->GetRotation(), mDebugColor);
+		SimpleDraw::AddOBB(GetCenter(), mExtend, rotation, mDebugColor);
 	}
 }
 
@@ -78,7 +79,7 @@ void BoxColliderComponent::SetSize(const Math::Vector3& size)
 
 std::unique_ptr<Collider> BoxColliderComponent::CreateCollider()
 {
-	return std::make_unique<BoundingBox>(GetCenter(), mExtend, GetOrientation());
+	return std::make_unique<BoundingBox>(GetCenter(), mExtend, mTransformComponent->GetRotation());
 }
 
 void BoxColliderComponent::ResizeToMesh()

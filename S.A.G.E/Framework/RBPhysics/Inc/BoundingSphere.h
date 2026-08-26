@@ -17,7 +17,7 @@ namespace SAGE::RBPhysics
 			mCenter = center;
 		}
 
-		void DebugDraw(SAGE::Math::Quaternion orientation, bool fillDebugShapes) override;
+		void DebugDraw(bool fillDebugShapes) override;
 
 		void Transform(const Math::Vector3& translation) override;
 		float GetRadius() const { return mRadius; }

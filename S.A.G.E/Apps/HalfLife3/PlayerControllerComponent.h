@@ -23,10 +23,6 @@ public:
 	void Update(float deltaTime) override;
 	void DebugUI() override;
 
-	void OnTriggerEnter(SAGE::RBPhysics::Collider* collider) override;
-	void OnTriggerStay(SAGE::RBPhysics::Collider* collider) override;
-	void OnTriggerExit(SAGE::RBPhysics::Collider* collider) override;
-
 private:
 	SAGE::CameraService* mCameraService = nullptr;
 	SAGE::RBPhysicsService* mRBPhysicsService = nullptr;
@@ -48,7 +44,6 @@ private:
 	// Debug
 	bool mCanMove = true;
 	bool mIsInFPSMode = false;
+	SAGE::Math::Vector3 mCameraOffset = SAGE::Math::Vector3(0.0f, -0.1f, 0.0f);
 
-	bool mHasEntered = false;
-	bool mIsStaying = false;
 };

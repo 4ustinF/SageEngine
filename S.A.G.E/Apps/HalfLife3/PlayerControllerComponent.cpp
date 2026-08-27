@@ -63,26 +63,8 @@ void PlayerControllerComponent::DebugUI()
 		ImGui::DragFloat2("Ground Speed##PlayerControllerComponent", &mGroundSpeed.x, 0.1f);
 		ImGui::DragFloat2("Air Speed##PlayerControllerComponent", &mAirSpeed.x, 0.1f);
 		ImGui::DragFloat("Jump Force##PlayerControllerComponent", &mJumpForce, 0.1f);
-
-		ImGui::Checkbox("Entered##PlayerControllerComponent", &mHasEntered);
-		ImGui::Checkbox("Staying##PlayerControllerComponent", &mIsStaying);
+		ImGui::DragFloat3("Camera Offset##PlayerControllerComponent", &mCameraOffset.x, 0.01f);
 	}
-}
-
-void PlayerControllerComponent::OnTriggerEnter(Collider* collider)
-{
-	mHasEntered = true;
-}
-
-void PlayerControllerComponent::OnTriggerStay(Collider* collider)
-{
-	mIsStaying = true;
-}
-
-void PlayerControllerComponent::OnTriggerExit(Collider* collider)
-{
-	mHasEntered = false;
-	mIsStaying = false;
 }
 
 void PlayerControllerComponent::IsGroundedCheck()
@@ -179,8 +161,8 @@ void PlayerControllerComponent::UpdateCameraPosition(Camera& camera)
 
 	if (const BoundingCapsule* boundingCapsule = dynamic_cast<BoundingCapsule*>(physicsObject->GetCollider()))
 	{
-		const Vector3 camNewPos = boundingCapsule->GetInnerTopCenter();
-		camera.SetPosition(camNewPos + Vector3(0.0f, 0.5f, 0.0f));
+		const Vector3 camNewPos = boundingCapsule->GetTopCenter() + mCameraOffset;
+		camera.SetPosition(camNewPos);
 	}
 }
 

@@ -17,8 +17,6 @@ namespace SAGE
 		void Initialize() override;
 		void Terminate() override;
 
-		void Update(float deltaTime) override;
-
 		void OnEnable() override;
 		void OnDisable() override;
 
@@ -40,8 +38,10 @@ namespace SAGE
 		void NotifyParentOnTriggerEnter(RBPhysics::Collider* collider);
 		void NotifyParentOnTriggerStay(RBPhysics::Collider* collider);
 		void NotifyParentOnTriggerExit(RBPhysics::Collider* collider);
-		void OnPositionChanged(const Math::Vector3& position);
-		void OnRotationChanged(const Math::Quaternion& rotation);
+		void OnTransformPositionChanged(const Math::Vector3& position);
+		void OnTransformRotationChanged(const Math::Quaternion& rotation);
+		void OnPhysicsObjectPositionChanged(const Math::Vector3& position);
+		void OnPhysicsObjectRotationChanged(const Math::Quaternion& rotation);
 
 		RBPhysicsService* mPhysicsService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;

@@ -54,6 +54,9 @@ void RBPhysicsObject::Integrate(float deltaTime)
 	mOldPosition = mPosition;
 	mCollider->Transform(translation);
 	mCollider->SetOrientation(mOrientation);
+
+	mOnPositionChange.Broadcast(mPosition);
+	mOnRotationChange.Broadcast(mOrientation);
 }
 
 void RBPhysicsObject::ResolveCollision(const std::unique_ptr<RBPhysicsObject>& otherObject, const IntersectData& intersectData)

@@ -8,6 +8,8 @@ namespace SAGE::RBPhysics
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerEnter, Collider*);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerStay, Collider*);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerExit, Collider*);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnPositionChange, const Math::Vector3&);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnRotationChange, const Math::Quaternion&);
 
 	class RBPhysicsObject
 	{
@@ -51,7 +53,7 @@ namespace SAGE::RBPhysics
 		void SetAngularDrag(float angularDrag) { mAngularDrag = angularDrag; }
 		void SetUseGravity(bool useGravity) { mUseGravity = useGravity; }
 		void SetIsTrigger(bool isTrigger) { mIsTrigger = isTrigger; }
-		void SetPosition(const Math::Vector3& position) { mPosition = position; }
+		void SetPosition(const Math::Vector3& position) { mPosition = position; } 
 		void SetVelocity(const Math::Vector3& velocity) { mVelocity = velocity; }
 		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
@@ -62,6 +64,8 @@ namespace SAGE::RBPhysics
 		FOnTriggerEnter& GetOnTriggerEnterDelegate() { return mOnTriggerEnter; }
 		FOnTriggerStay& GetOnTriggerStayDelegate() { return mOnTriggerStay; }
 		FOnTriggerExit& GetOnTriggerExitDelegate() { return mOnTriggerExit; }
+		FOnPositionChange& GetOnPositionChangeDelegate() { return mOnPositionChange; }
+		FOnRotationChange& GetOnRotationChangeDelegate() { return mOnRotationChange; }
 
 		void ApplyForce(const Math::Vector3& force);
 		void ApplyImpulse(const Math::Vector3& impulse);
@@ -90,5 +94,7 @@ namespace SAGE::RBPhysics
 		FOnTriggerEnter mOnTriggerEnter;
 		FOnTriggerStay mOnTriggerStay;
 		FOnTriggerExit mOnTriggerExit;
+		FOnPositionChange mOnPositionChange;
+		FOnRotationChange mOnRotationChange;
 	};
 }

@@ -65,19 +65,6 @@ void BaseColliderComponent::Terminate()
 	mPhysicsService = nullptr;
 }
 
-void BaseColliderComponent::Update(float deltaTime)
-{
-	// TODO: Get better method then doing this constantly in update. We should only update when a value is changed.
-	if (mPhysicsObject)
-	{
-		if (!mPhysicsObject->GetIsStatic()) // Dynamic
-		{
-			mTransformComponent->SetPosition(mPhysicsObject->GetPosition());
-			mTransformComponent->SetRotation(mPhysicsObject->GetOrientation());
-		}
-	}
-}
-
 void BaseColliderComponent::OnEnable()
 {
 	if(mRigidBodyComponent == nullptr)
@@ -99,8 +86,13 @@ void BaseColliderComponent::OnEnable()
 
 		if (mPhysicsObject->GetIsStatic())
 		{
-			OnPositionChangedHandle = mTransformComponent->GetOnPositionChangeDelegate().AddRaw(this, &BaseColliderComponent::OnPositionChanged);
-			OnRotationChangedHandle = mTransformComponent->GetOnRotationChangeDelegate().AddRaw(this, &BaseColliderComponent::OnRotationChanged);
+			OnPositionChangedHandle = mTransformComponent->GetOnPositionChangeDelegate().AddRaw(this, &BaseColliderComponent::OnTransformPositionChanged);
+			OnRotationChangedHandle = mTransformComponent->GetOnRotationChangeDelegate().AddRaw(this, &BaseColliderComponent::OnTransformRotationChanged);
+		}
+		else
+		{
+			OnPositionChangedHandle = mPhysicsObject->GetOnPositionChangeDelegate().AddRaw(this, &BaseColliderComponent::OnPhysicsObjectPositionChanged);
+			OnRotationChangedHandle = mPhysicsObject->GetOnRotationChangeDelegate().AddRaw(this, &BaseColliderComponent::OnPhysicsObjectRotationChanged);
 		}
 	}
 }
@@ -113,18 +105,19 @@ void BaseColliderComponent::OnDisable()
 		mPhysicsObject->GetOnTriggerStayDelegate().Remove(OnTriggerStayHandle);
 		mPhysicsObject->GetOnTriggerExitDelegate().Remove(OnTriggerExitHandle);
 
+		if (mPhysicsObject->GetIsStatic())
+		{
+			mTransformComponent->GetOnPositionChangeDelegate().Remove(OnPositionChangedHandle);
+			mTransformComponent->GetOnRotationChangeDelegate().Remove(OnRotationChangedHandle);
+		}
+		else
+		{
+			mPhysicsObject->GetOnPositionChangeDelegate().Remove(OnPositionChangedHandle);
+			mPhysicsObject->GetOnRotationChangeDelegate().Remove(OnRotationChangedHandle);
+		}
+
 		mPhysicsService->GetPhysicsWorld().RemoveObject(mPhysicsObject);
 		mPhysicsObject = nullptr;
-	}
-
-	if (OnPositionChangedHandle.IsValid())
-	{
-		mTransformComponent->GetOnScaleChangeDelegate().Remove(OnPositionChangedHandle);
-	}
-
-	if (OnRotationChangedHandle.IsValid())
-	{
-		mTransformComponent->GetOnScaleChangeDelegate().Remove(OnRotationChangedHandle);
 	}
 }
 
@@ -185,14 +178,24 @@ void BaseColliderComponent::NotifyParentOnTriggerExit(Collider* collider)
 	GetOwner().OnTriggerExit(collider);
 }
 
-void BaseColliderComponent::OnPositionChanged(const Vector3& position)
+void BaseColliderComponent::OnTransformPositionChanged(const Vector3& position)
 {
 	mPhysicsObject->SetPosition(GetCenter());
 	mPhysicsObject->Integrate(0.0f);
 }
 
-void BaseColliderComponent::OnRotationChanged(const Quaternion& rotation)
+void BaseColliderComponent::OnTransformRotationChanged(const Quaternion& rotation)
 {
 	mPhysicsObject->SetOrientation(mTransformComponent->GetRotation());
 	mPhysicsObject->Integrate(0.0f);
+}
+
+void BaseColliderComponent::OnPhysicsObjectPositionChanged(const Vector3& position)
+{
+	mTransformComponent->SetPosition(position);
+}
+
+void BaseColliderComponent::OnPhysicsObjectRotationChanged(const Quaternion& rotation)
+{
+	mTransformComponent->SetRotation(rotation);
 }

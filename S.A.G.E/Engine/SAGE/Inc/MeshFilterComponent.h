@@ -91,7 +91,7 @@ namespace SAGE
 		// Debug
 		bool mEnableWireframe = true;
 		bool mFillWireframe = false;
-		Math::OBB mBoundingBox;
+		Math::OBB mLocalBoundingBox;
 		int mDebugVertIndex = -1;
 	};
 }

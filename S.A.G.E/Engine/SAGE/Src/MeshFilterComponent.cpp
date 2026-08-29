@@ -238,12 +238,12 @@ const OBB MeshFilterComponent::GetGlobalBoundingBox() const
 	if (mTransformComponent != nullptr)
 	{
 		return std::move(OBB(
-			mBoundingBox.center + mTransformComponent->GetPosition(),
-			mBoundingBox.extend * mTransformComponent->GetScale(),
-			mTransformComponent->GetRotation()));
+			mLocalBoundingBox.center + mTransformComponent->GetPosition(),
+			mLocalBoundingBox.extend * mTransformComponent->GetScale(),
+			mLocalBoundingBox.rotation * mTransformComponent->GetRotation()));
 	}
 
-	return mBoundingBox;
+	return mLocalBoundingBox;
 };
 
 MeshType MeshFilterComponent::StringToMeshType(const std::string& meshType)
@@ -364,7 +364,7 @@ void MeshFilterComponent::GenerateCustomMesh()
 
 void MeshFilterComponent::GenerateBoundingBox()
 {
-	mBoundingBox = OBB();
+	mLocalBoundingBox = OBB();
 
 	const int vertCount = static_cast<int>(mMesh.vertices.size());
 	if (vertCount == 0)
@@ -388,6 +388,6 @@ void MeshFilterComponent::GenerateBoundingBox()
 		maxPos.z = std::max(maxPos.z, p.z);
 	}
 
-	mBoundingBox.center = (minPos + maxPos) * 0.5f;
-	mBoundingBox.extend = (maxPos - minPos) * 0.5f;
+	mLocalBoundingBox.center = (minPos + maxPos) * 0.5f;
+	mLocalBoundingBox.extend = (maxPos - minPos) * 0.5f;
 }

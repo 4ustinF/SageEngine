@@ -7,6 +7,21 @@
         -2.876547,
         -18.897600
       ]
+    },
+    "Selection Box Component": {
+    },
+    "Box Collider Component": {
+      "Is Trigger": true,
+      "Center": [
+        0.424,
+        0.0,
+        -0.0381
+      ],
+      "Size": [
+        1.0,
+        0.9144,
+        0.6858
+      ]
     }
   },
   "GameObjects": [

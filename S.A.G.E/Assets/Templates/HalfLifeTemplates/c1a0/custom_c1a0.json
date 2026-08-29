@@ -51,6 +51,9 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/custom_c1a0_brush_section_04.json"
     },
     {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/HealthChargers/c1a0_health_chargers.json"
+    },
+    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/c1a0_colliders.json"
     },
     {

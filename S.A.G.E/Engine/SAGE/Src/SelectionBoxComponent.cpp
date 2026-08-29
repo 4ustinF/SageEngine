@@ -99,3 +99,40 @@ void SelectionBoxComponent::GatherOBBCorners(const GameObject* gameObject, std::
 		}
 	}
 }
+
+//void SelectionBoxComponent::GatherOBBCorners(const GameObject* gameObject, std::vector<Vector3>& points)
+//{
+//	if (const MeshFilterComponent* meshFilterComponent = gameObject->GetComponent<MeshFilterComponent>())
+//	{
+//		const OBB& obb = meshFilterComponent->GetGlobalBoundingBox(); // TODO: Create a Gather OBB Corners func.
+//
+//		// Local-space corner offsets (unrotated)
+//		static const float signs[8][3] = {
+//			{  1.0f,  1.0f,  1.0f },
+//			{  1.0f, -1.0f,  1.0f },
+//			{ -1.0f,  1.0f,  1.0f },
+//			{ -1.0f, -1.0f,  1.0f },
+//			{  1.0f,  1.0f, -1.0f },
+//			{  1.0f, -1.0f, -1.0f },
+//			{ -1.0f,  1.0f, -1.0f },
+//			{ -1.0f, -1.0f, -1.0f },
+//		};
+//
+//		for (const auto& s : signs)
+//		{
+//			Vector3 localOffset(s[0] * obb.extend.x, s[1] * obb.extend.y, s[2] * obb.extend.z);
+//			Vector3 rotatedOffset = obb.rotation * localOffset; // rotate offset into world orientation
+//			points.push_back(obb.center + rotatedOffset);
+//		}
+//	}
+//	// TODO: Support other cases to get bounding shapes from for edit selection. 
+//
+//	const GameWorld& gameWorld = GetOwner().GetWorld();
+//	for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
+//	{
+//		if (const GameObject* childGO = gameWorld.GetGameObject(childHandle))
+//		{
+//			GatherOBBCorners(childGO, points);
+//		}
+//	}
+//}

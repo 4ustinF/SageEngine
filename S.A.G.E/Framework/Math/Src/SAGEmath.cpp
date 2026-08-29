@@ -253,6 +253,14 @@ Quaternion Quaternion::RotationFromTo(const Vector3& from, const Vector3& to)
 	return Normalize(quat);
 }
 
+Vector3 Quaternion::Rotate(const Vector3& v) const
+{
+	// v' = q * v * q^-1, optimized (Fabian Giesen's derivation)
+	const Vector3 qv(v.x, v.y, v.z);
+	const Vector3 t = 2.0f * Cross(qv, v);
+	return v + w * t + Cross(qv, t);
+}
+
 Vector3 Quaternion::ToEuler() // TODO: Move to vector3 section
 {
 	Vector3 euler = Vector3::Zero;

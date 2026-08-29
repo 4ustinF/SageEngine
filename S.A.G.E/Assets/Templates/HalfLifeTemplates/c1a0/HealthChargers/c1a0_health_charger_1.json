@@ -1,16 +1,11 @@
 {
-  "Name": "Medkit 0",
+  "Name": "Heatlh Charger 1",
   "Components": {
     "Transform Component": {
       "Local Position": [
-        -8.305800,
-        -3.200402,
-        11.506198
-      ],
-      "Local Rotation": [
-        0.0,
-        90.0,
-        0.0
+        -6.172200,
+        -2.876547,
+        -18.897600
       ]
     }
   },

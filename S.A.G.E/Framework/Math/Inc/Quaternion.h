@@ -17,6 +17,7 @@ namespace SAGE::Math
 		static Quaternion RotationMatrix(const Matrix4& m); // Use the WWW
 		static Quaternion RotationLook(const Vector3& direction, const Vector3& up = Vector3::YAxis); // Use RotationMatrix
 		static Quaternion RotationFromTo(const Vector3& from, const Vector3& to); // Use RotationAxis
+		Vector3 Rotate(const Vector3& v) const;
 		Vector3 ToEuler();
 		Vector3 ToDegree();
 		Vector3 ToClampedDegree();
@@ -69,6 +70,6 @@ namespace SAGE::Math
 			return { w / s, x / s, y / s, z / s };
 		}
 
-		bool operator==(const Quaternion& q) const noexcept { return w== q.w, x == q.x && y == q.y && z == q.z; } // TODO: Floating point precision :/
+		bool operator==(const Quaternion& q) const noexcept { return w == q.w, x == q.x && y == q.y && z == q.z; } // TODO: Floating point precision :/
 	};
 }

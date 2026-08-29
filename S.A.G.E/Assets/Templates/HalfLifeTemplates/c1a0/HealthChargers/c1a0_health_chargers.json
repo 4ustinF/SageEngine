@@ -1,0 +1,11 @@
+{
+  "Name": "Health Chargers",
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/HealthChargers/c1a0_health_charger_0.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/HealthChargers/c1a0_health_charger_1.json"
+    }
+  ]
+}

@@ -59,6 +59,7 @@ namespace SAGE::RBPhysics
 			float airDragCoeficient = 0.05f;
 			float bounceCoeficient = 0.0f; // 0 = no bounce, 1 = perfect bounce = restitution
 			float maxSlopeDot = 0.7071f; // 0.7071 ~= cos(45 degrees)
+			bool pause = false;
 		};
 
 		RBPhysicsWorld() = default;

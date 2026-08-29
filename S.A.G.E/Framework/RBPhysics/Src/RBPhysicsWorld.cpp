@@ -26,6 +26,11 @@ void RBPhysicsWorld::Clear()
 
 void RBPhysicsWorld::Update(float deltaTime)
 {
+	if (mSettings.pause)
+	{
+		return;
+	}
+
 	Simulate(deltaTime);
 	HandleCollisions();
 	ProcessTriggerEvents();
@@ -49,12 +54,10 @@ void RBPhysicsWorld::DrawPhysicsObjects(bool fillShapes)
 
 void RBPhysicsWorld::DebugUI()
 {
-	if (mDynamicObjects.empty())
-		return;
+	ImGui::DragFloat3("Gravity##RBPhysicsWorld", &mSettings.gravity.x, 0.1f);
+	ImGui::Checkbox("Pause##RBPhysicsWorld", &mSettings.pause);
 
-	ImGui::Begin("Physics", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-	ImGui::DragFloat3("Gravity", &mSettings.gravity.x, 0.1f);
-	ImGui::Separator();
+	ImGui::Begin("Physics##RBPhysicsWorld", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 
 	for (const auto& object : mDynamicObjects)
 	{

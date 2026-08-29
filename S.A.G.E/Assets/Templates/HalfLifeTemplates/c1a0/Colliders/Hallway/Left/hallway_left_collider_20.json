@@ -1,0 +1,24 @@
+{
+  "Name": "Left Wall 20",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -13.1065,
+        -4.572,
+        -1.219
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.0,
+        2.972,
+        0.2
+      ],
+      "Size": [
+        8.535,
+        5.944,
+        0.4
+      ]
+    }
+  }
+}

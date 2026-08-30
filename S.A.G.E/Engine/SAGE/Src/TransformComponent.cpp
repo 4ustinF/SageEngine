@@ -287,40 +287,7 @@ void TransformComponent::UpdateWorldPosition(const Vector3& inPos)
 {
 	mTransform.position = inPos;
 	mOnPositionChange.Broadcast(mTransform.position);
-
-	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
-	{
-		UpdateChildrenPositions(childHandle, mTransform.position);
-	}
-}
-
-void TransformComponent::UpdateChildrenPositions(const GameObjectHandle& gameObjectHandle, const Vector3& inWorldPos)
-{
-	GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle);
-	if (gameObject == nullptr)
-	{
-		return;
-	}
-
-	// If this object has a transform comp → update it
-	if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
-	{
-		transformComponent->SetLocalPosition(transformComponent->mLocalTransform.position);
-
-		// Recurse this object's children using this objects world pos.
-		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
-		{
-			transformComponent->UpdateChildrenPositions(childHandle, transformComponent->mTransform.position);
-		}
-	}
-	else
-	{
-		// Recurse this object's children using this the passed in world pos.
-		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
-		{
-			UpdateChildrenPositions(childHandle, inWorldPos);
-		}
-	}
+	PropagateTransformToChildren();
 }
 
 void TransformComponent::UpdateWorldRotation(const Quaternion& inRotation)
@@ -328,54 +295,25 @@ void TransformComponent::UpdateWorldRotation(const Quaternion& inRotation)
 	mTransform.rotation = inRotation;
 	mDegreeAngles = mTransform.rotation.ToClampedDegree();
 	mOnRotationChange.Broadcast(inRotation);
-
-	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
-	{
-		UpdateChildrenRotation(childHandle, inRotation);
-	}
-}
-
-void TransformComponent::UpdateChildrenRotation(const GameObjectHandle& gameObjectHandle, const Quaternion& inWorldRotation)
-{
-	GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle);
-	if (gameObject == nullptr)
-	{
-		return;
-	}
-
-	// If this object has a transform comp → update it
-	if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
-	{
-		transformComponent->SetLocalRotation(transformComponent->mLocalTransform.rotation);
-
-		// Recurse this object's children using this objects world rotation.
-		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
-		{
-			transformComponent->UpdateChildrenRotation(childHandle, transformComponent->mTransform.rotation);
-		}
-	}
-	else
-	{
-		// Recurse this object's children using this the passed in world rotation.
-		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
-		{
-			UpdateChildrenRotation(childHandle, inWorldRotation);
-		}
-	}
+	PropagateTransformToChildren();
 }
 
 void TransformComponent::UpdateWorldScale(const Vector3& inScale)
 {
 	mTransform.scale = inScale;
 	mOnScaleChange.Broadcast(inScale);
+	PropagateTransformToChildren();
+}
 
+void TransformComponent::PropagateTransformToChildren()
+{
 	for (const GameObjectHandle& childHandle : GetOwner().GetChildrenHandles())
 	{
-		UpdateChildrenScales(childHandle, inScale);
+		PropagateTransformToChild(childHandle);
 	}
 }
 
-void TransformComponent::UpdateChildrenScales(const GameObjectHandle& gameObjectHandle, const SAGE::Math::Vector3& inWorldScale)
+void TransformComponent::PropagateTransformToChild(const GameObjectHandle& gameObjectHandle)
 {
 	GameObject* gameObject = GetOwner().GetWorld().GetGameObject(gameObjectHandle);
 	if (gameObject == nullptr)
@@ -383,23 +321,35 @@ void TransformComponent::UpdateChildrenScales(const GameObjectHandle& gameObject
 		return;
 	}
 
-	// If this object has a transform comp → update it
-	if (TransformComponent* transformComponent = gameObject->GetComponent<TransformComponent>())
+	if (TransformComponent* child = gameObject->GetComponent<TransformComponent>())
 	{
-		transformComponent->SetLocalScale(transformComponent->mLocalTransform.scale);
+		// Recompute the child's FULL world transform from this (already up-to-date)
+		// parent transform and the child's own stored local transform.
+		const Vector3 newWorldPos = mTransform.position + mTransform.rotation * (child->mLocalTransform.position * mTransform.scale);
+		const Quaternion newWorldRot = mTransform.rotation * child->mLocalTransform.rotation;
+		const Vector3 newWorldScale = mTransform.scale * child->mLocalTransform.scale;
 
-		// Recurse this object's children using this objects world scale.
-		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
-		{
-			transformComponent->UpdateChildrenScales(childHandle, transformComponent->mTransform.scale);
-		}
+		child->mTransform.position = newWorldPos;
+		child->mOnPositionChange.Broadcast(newWorldPos);
+
+		Quaternion newWorldRotTemp = newWorldRot;
+
+		child->mTransform.rotation = newWorldRot;
+		child->mDegreeAngles = newWorldRotTemp.ToClampedDegree();
+		child->mOnRotationChange.Broadcast(newWorldRot);
+
+		child->mTransform.scale = newWorldScale;
+		child->mOnScaleChange.Broadcast(newWorldScale);
+
+		child->PropagateTransformToChildren();
 	}
 	else
 	{
-		// Recurse this object's children using this the passed in world scale.
-		for (const GameObjectHandle& childHandle : gameObject->GetChildrenHandles())
+		// This object has no TransformComponent — keep walking down through it,
+		// treating this (still) as the nearest ancestor transform.
+		for (const GameObjectHandle& grandChildHandle : gameObject->GetChildrenHandles())
 		{
-			UpdateChildrenScales(childHandle, inWorldScale);
+			PropagateTransformToChild(grandChildHandle);
 		}
 	}
 }

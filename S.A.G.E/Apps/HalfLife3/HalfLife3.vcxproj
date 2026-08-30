@@ -136,6 +136,8 @@
   <ItemGroup>
     <ClCompile Include="DoorITVComponent.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="HealthChargerHITVComponent.cpp" />
+    <ClCompile Include="HoldInteractTriggerVolumeComponent.cpp" />
     <ClCompile Include="InteractTriggerVolumeComponent.cpp" />
     <ClCompile Include="PlayerControllerComponent.cpp" />
     <ClCompile Include="TextureAnimatorComponent.cpp" />
@@ -145,6 +147,8 @@
   <ItemGroup>
     <ClInclude Include="DoorITVComponent.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="HealthChargerHITVComponent.h" />
+    <ClInclude Include="HoldInteractTriggerVolumeComponent.h" />
     <ClInclude Include="InteractTriggerVolumeComponent.h" />
     <ClInclude Include="PlayerControllerComponent.h" />
     <ClInclude Include="TextureAnimatorComponent.h" />

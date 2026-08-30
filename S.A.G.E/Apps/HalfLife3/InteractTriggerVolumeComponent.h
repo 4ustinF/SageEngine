@@ -14,7 +14,6 @@ protected:
 	virtual void OnInteract() {};
 
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
-
 	bool mIsOneShot = false;
 	bool mTriggered = false;
 };

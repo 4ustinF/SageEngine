@@ -45,6 +45,12 @@
     <ClCompile Include="DoorITVComponent.cpp">
       <Filter>Components\TriggerVolumes\Interact</Filter>
     </ClCompile>
+    <ClCompile Include="HoldInteractTriggerVolumeComponent.cpp">
+      <Filter>Components\TriggerVolumes\Interact</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthChargerHITVComponent.cpp">
+      <Filter>Components\TriggerVolumes\Interact</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -66,6 +72,12 @@
       <Filter>Components\TriggerVolumes\Interact</Filter>
     </ClInclude>
     <ClInclude Include="DoorITVComponent.h">
+      <Filter>Components\TriggerVolumes\Interact</Filter>
+    </ClInclude>
+    <ClInclude Include="HoldInteractTriggerVolumeComponent.h">
+      <Filter>Components\TriggerVolumes\Interact</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthChargerHITVComponent.h">
       <Filter>Components\TriggerVolumes\Interact</Filter>
     </ClInclude>
   </ItemGroup>

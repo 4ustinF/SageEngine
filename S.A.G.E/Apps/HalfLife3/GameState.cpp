@@ -1,6 +1,7 @@
 #include "GameState.h"
 
 #include "DoorITVComponent.h"
+#include "HealthChargerHITVComponent.h"
 #include "PlayerControllerComponent.h"
 #include "TextureAnimatorComponent.h"
 #include "ToggleTriggerVolumeComponent.h"
@@ -20,6 +21,12 @@ namespace
 		{
 			DoorITVComponent* doorITVComponent = gameObject.AddComponent<DoorITVComponent>();
 			doorITVComponent->LoadComponentFromTemplate(value);
+			return true;
+		}
+		else if (strcmp(componentName, "Health Charger HITV Component") == 0)
+		{
+			HealthChargerHITVComponent* healthChargerHITVComponent = gameObject.AddComponent<HealthChargerHITVComponent>();
+			healthChargerHITVComponent->LoadComponentFromTemplate(value);
 			return true;
 		}
 		else if (strcmp(componentName, "Texture Animator Component") == 0)

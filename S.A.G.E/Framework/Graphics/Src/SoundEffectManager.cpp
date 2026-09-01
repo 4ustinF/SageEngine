@@ -110,10 +110,10 @@ void SoundEffectManager::Play(SoundId id, bool loop, float volume, float pitch, 
 	{
 		if (loop)
 		{
+			iter->second->instance->SetVolume(volume);
+			iter->second->instance->SetPitch(pitch);
+			iter->second->instance->SetPan(pan);
 			iter->second->instance->Play(true);
-			//iter->second->instance->SetVolume(volume);
-			//iter->second->instance->SetPitch(pitch);
-			//iter->second->instance->SetPan(pan);
 		}
 		else
 		{

@@ -12,7 +12,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int)
 	//appConfig.winHeight = 10;
 	appConfig.debugDrawLimit = 20000;
 	appConfig.textureRoot = "../../Assets/Images";
-	appConfig.audioRoot = "../../Assets/Audio";
+	appConfig.audioRoot = "../../Assets/Audio/Halflife";
 	// appConfig.assetRoot = "../../Assets"; // TODO:
 
 	auto& app = MainApp();

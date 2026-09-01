@@ -23,16 +23,20 @@ void HealthChargerHITVComponent::Initialize()
 	HoldInteractTriggerVolumeComponent::Initialize();
 	ResetCharger();
 
+	TextureManager* tm = TextureManager::Get();
+	mActiveTextureID = tm->LoadTexture("../Models/HalfLife/Misc/Materials/HealthCharger/_0MEDKIT.png");
+	mEmptyTextureID = tm->LoadTexture("../Models/HalfLife/Misc/Materials/HealthCharger/_1MEDKIT.png");
+
 	mSoundEffectManager = SoundEffectManager::Get();
 	mMedShot4SoundID = mSoundEffectManager->Load("items/medshot4.wav");
 	mMedCharge4SoundID = mSoundEffectManager->Load("items/medcharge4.wav");
 	mMedShotNo1SoundID = mSoundEffectManager->Load("items/medshotno1.wav");
-
-
 }
 
 void HealthChargerHITVComponent::Terminate()
 {
+	mActiveTextureID = 0;
+	mEmptyTextureID = 0;
 	mMedShot4SoundID = 0;
 	mMedCharge4SoundID = 0;
 	mMedShotNo1SoundID = 0;
@@ -88,7 +92,7 @@ void HealthChargerHITVComponent::OnEmptiedCharger()
 
 	if (MeshRendererComponent* frontMedkitMeshRenderer = GetFrontMedkitMeshRenderer())
 	{
-		frontMedkitMeshRenderer->SetDiffuseMapFileName("D:/GitHubFiles/SageEngine/S.A.G.E/Assets/Models/HalfLife/Misc/Materials/HealthCharger/_1MEDKIT.png");
+		frontMedkitMeshRenderer->GetRenderObject().diffuseMapId = mEmptyTextureID;
 	}
 }
 
@@ -96,7 +100,7 @@ void HealthChargerHITVComponent::ResetCharger()
 {
 	if (MeshRendererComponent* frontMedkitMeshRenderer = GetFrontMedkitMeshRenderer())
 	{
-		frontMedkitMeshRenderer->SetDiffuseMapFileName("D:/GitHubFiles/SageEngine/S.A.G.E/Assets/Models/HalfLife/Misc/Materials/HealthCharger/_0MEDKIT.png");
+		frontMedkitMeshRenderer->GetRenderObject().diffuseMapId = mActiveTextureID;
 	}
 
 	mDrainAccumulator = 0.0f;

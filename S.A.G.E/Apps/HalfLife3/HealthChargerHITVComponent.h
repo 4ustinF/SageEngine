@@ -31,6 +31,9 @@ protected:
 	float mDrainRate = 10.0f; // units per second
 	float mDrainAccumulator = 0.0f;
 
+	SAGE::Graphics::TextureId mActiveTextureID = 0;
+	SAGE::Graphics::TextureId mEmptyTextureID = 0;
+
 	SAGE::Graphics::SoundId mMedShot4SoundID = 0;
 	SAGE::Graphics::SoundId mMedCharge4SoundID = 0;
 	SAGE::Graphics::SoundId mMedShotNo1SoundID = 0;

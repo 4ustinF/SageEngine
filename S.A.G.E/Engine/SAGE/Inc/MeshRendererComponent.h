@@ -35,10 +35,10 @@ namespace SAGE
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }
-		void SetDiffuseMapFileName(const char* fileName) { mMaterialData.diffuseMapName = fileName; }					// TODO: Might need to update mMaterialData when these update as well.
-		void SetSpecularMapFileName(const char* fileName) { mMaterialData.specularMapName = fileName; }					// TODO: Might need to update mMaterialData when these update as well.
-		void SetBumpMapFileName(const char* fileName) { mMaterialData.bumpMapName = fileName; }							// TODO: Might need to update mMaterialData when these update as well.
-		void SetNormalMapFileName(const char* fileName) { mMaterialData.normalMapName = fileName; }						// TODO: Might need to update mMaterialData when these update as well.
+		void SetDiffuseMapFileName(const char* fileName);				
+		void SetSpecularMapFileName(const char* fileName) { mMaterialData.specularMapName = fileName; } // TODO:
+		void SetBumpMapFileName(const char* fileName) { mMaterialData.bumpMapName = fileName; } // TODO:
+		void SetNormalMapFileName(const char* fileName) { mMaterialData.normalMapName = fileName; } // TODO:
 		void SetTilingSize(float xTilingSize, float yTilingSize);
 		void SetTilingSize(const Math::Vector2& tilingSize);
 		void SetTilingOffset(float xTilingOffset, float yTilingOffset);

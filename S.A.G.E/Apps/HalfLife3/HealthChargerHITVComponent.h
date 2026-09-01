@@ -12,13 +12,18 @@ public:
 	void Initialize() override;
 	void Terminate() override;
 	void DebugUI() override;
+
+	void OnEnable() override;
 	
 protected:
 	void OnInteractStart() override;
 	void OnInteract(float deltaTime) override;
 	void OnInteractEnd() override;
+	void OnEmptiedCharger();
 	void ResetCharger();
 
+	SAGE::MeshRendererComponent* GetFrontMedkitMeshRenderer();
+	SAGE::MeshRendererComponent* mFrontMedkitMeshRenderer = nullptr;
 	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
 
 	int mChargeAmount = 50; // charger's remaining charge

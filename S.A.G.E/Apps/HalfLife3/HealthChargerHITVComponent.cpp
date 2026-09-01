@@ -1,6 +1,8 @@
 #include "SAGE/Inc/Precompiled.h"
 #include "HealthChargerHITVComponent.h"
 
+#include "SAGE/Inc/MeshRendererComponent.h"
+
 using namespace SAGE;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
@@ -25,6 +27,8 @@ void HealthChargerHITVComponent::Initialize()
 	mMedShot4SoundID = mSoundEffectManager->Load("items/medshot4.wav");
 	mMedCharge4SoundID = mSoundEffectManager->Load("items/medcharge4.wav");
 	mMedShotNo1SoundID = mSoundEffectManager->Load("items/medshotno1.wav");
+
+
 }
 
 void HealthChargerHITVComponent::Terminate()
@@ -33,7 +37,21 @@ void HealthChargerHITVComponent::Terminate()
 	mMedCharge4SoundID = 0;
 	mMedShotNo1SoundID = 0;
 	mSoundEffectManager = nullptr;
+	mFrontMedkitMeshRenderer = nullptr;
 	HoldInteractTriggerVolumeComponent::Terminate();
+}
+
+void HealthChargerHITVComponent::OnEnable()
+{
+	HoldInteractTriggerVolumeComponent::OnEnable();
+
+	if (mFrontMedkitMeshRenderer == nullptr)
+	{
+		if (GameObject* frontMedkit = GetOwner().FindChildByName("Medkit Front"))
+		{
+			mFrontMedkitMeshRenderer = frontMedkit->GetComponent<MeshRendererComponent>();
+		}
+	}
 }
 
 void HealthChargerHITVComponent::OnInteractStart()
@@ -54,8 +72,7 @@ void HealthChargerHITVComponent::OnInteract(float deltaTime)
 
 	if (mChargeAmount <= 0)
 	{
-		SetCanTrigger(false);
-		mSoundEffectManager->Play(mMedShotNo1SoundID, false, mAudioVolume);
+		OnEmptiedCharger();
 	}
 }
 
@@ -64,9 +81,38 @@ void HealthChargerHITVComponent::OnInteractEnd()
 	mSoundEffectManager->Stop(mMedCharge4SoundID);
 }
 
+void HealthChargerHITVComponent::OnEmptiedCharger()
+{
+	SetCanTrigger(false);
+	mSoundEffectManager->Play(mMedShotNo1SoundID, false, mAudioVolume);
+
+	if (MeshRendererComponent* frontMedkitMeshRenderer = GetFrontMedkitMeshRenderer())
+	{
+		frontMedkitMeshRenderer->SetDiffuseMapFileName("D:/GitHubFiles/SageEngine/S.A.G.E/Assets/Models/HalfLife/Misc/Materials/HealthCharger/_1MEDKIT.png");
+	}
+}
+
 void HealthChargerHITVComponent::ResetCharger()
 {
+	if (MeshRendererComponent* frontMedkitMeshRenderer = GetFrontMedkitMeshRenderer())
+	{
+		frontMedkitMeshRenderer->SetDiffuseMapFileName("D:/GitHubFiles/SageEngine/S.A.G.E/Assets/Models/HalfLife/Misc/Materials/HealthCharger/_0MEDKIT.png");
+	}
+
 	mDrainAccumulator = 0.0f;
 	mChargeAmount = mMaxChargeAmount;
 	SetCanTrigger(true);
+}
+
+MeshRendererComponent* HealthChargerHITVComponent::GetFrontMedkitMeshRenderer()
+{
+	if (mFrontMedkitMeshRenderer == nullptr)
+	{
+		if (GameObject* frontMedkit = GetOwner().FindChildByName("Medkit Front"))
+		{
+			mFrontMedkitMeshRenderer = frontMedkit->GetComponent<MeshRendererComponent>();
+		}
+	}
+
+	return mFrontMedkitMeshRenderer;
 }

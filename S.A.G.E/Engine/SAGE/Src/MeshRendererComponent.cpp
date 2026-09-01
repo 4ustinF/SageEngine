@@ -306,6 +306,15 @@ RenderObject& MeshRendererComponent::GetRenderObject()
 	return mMeshFilter->GetRenderObject();
 }
 
+void MeshRendererComponent::SetDiffuseMapFileName(const char* fileName)
+{
+	mMaterialData.diffuseMapName = fileName;
+
+	const auto relativePath = std::filesystem::relative(fileName, mTextureManager->GetRootDirectory());
+	RenderObject& renderObject = mMeshFilter->GetRenderObject();
+	renderObject.diffuseMapId = mTextureManager->LoadTexture(relativePath.generic_string());
+}
+
 void MeshRendererComponent::SetTilingSize(float xTilingSize, float yTilingSize)
 {
 	SetTilingSize(Vector2(xTilingSize, yTilingSize));

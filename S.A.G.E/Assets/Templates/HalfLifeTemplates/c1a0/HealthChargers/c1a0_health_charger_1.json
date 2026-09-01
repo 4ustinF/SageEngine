@@ -29,10 +29,10 @@
   },
   "GameObjects": [
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/medkit_front.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HealthCharger/medkit_front.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/medkit_side.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Misc/HealthCharger/medkit_side.json"
     }
   ]
 }

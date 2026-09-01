@@ -1,0 +1,14 @@
+{
+  "Name": "Medkit Side",
+  "Components": {
+    "Transform Component": {
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Custom",
+      "Custom Mesh File Path": "../../Assets/Models/HalfLife/Misc/Meshes/HealthCharger/medkit_side.mesh"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/Misc/Materials/HealthCharger/medkit_side.material"
+    }
+  }
+}

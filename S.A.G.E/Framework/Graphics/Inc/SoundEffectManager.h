@@ -20,6 +20,8 @@ namespace SAGE::Graphics
 		SoundEffectManager& operator=(const SoundEffectManager&) = delete;
 
 		void SetRootPath(const char* path);
+		void SetMasterVolume(float volume);
+		void SetMasterVolumeUnclamped(float volume);
 
 		SoundId Load(const char* fileName);
 		void Clear();
@@ -36,5 +38,6 @@ namespace SAGE::Graphics
 
 		std::string mRoot;
 		std::unordered_map<std::size_t, std::unique_ptr<Entry>> mInventory;
+		float mMasterVolume = 1.0f;
 	};
 }

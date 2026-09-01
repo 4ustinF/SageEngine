@@ -1,3 +1,4 @@
+
 #include "Precompiled.h"
 #include "SoundEffectManager.h"
 
@@ -5,6 +6,7 @@
 #include <DirectXTK/Inc/Audio.h>
 
 using namespace DirectX;
+using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
 namespace
@@ -60,6 +62,18 @@ void SoundEffectManager::SetRootPath(const char* path)
 
 //----------------------------------------------------------------------------------------------------
 
+void SoundEffectManager::SetMasterVolume(float volume)
+{
+	mMasterVolume = Clamp(volume, 0.0f, 1.0f);
+}
+
+void SoundEffectManager::SetMasterVolumeUnclamped(float volume)
+{
+	mMasterVolume = volume;
+}
+
+//----------------------------------------------------------------------------------------------------
+
 SoundId SoundEffectManager::Load(const char* fileName)
 {
 	std::string fullName = mRoot + "/" + fileName;
@@ -105,19 +119,21 @@ void SoundEffectManager::Clear()
 
 void SoundEffectManager::Play(SoundId id, bool loop, float volume, float pitch, float pan)
 {
+	const float finalVolume = Lerp(0.0f, mMasterVolume, Clamp(volume, 0.0f, 1.0f)); // TODO: Should we have an unclamped version of this function?
+
 	auto iter = mInventory.find(id);
 	if (iter != mInventory.end())
 	{
 		if (loop)
 		{
-			iter->second->instance->SetVolume(volume);
+			iter->second->instance->SetVolume(finalVolume);
 			iter->second->instance->SetPitch(pitch);
 			iter->second->instance->SetPan(pan);
 			iter->second->instance->Play(true);
 		}
 		else
 		{
-			iter->second->effect->Play(volume, pitch, pan);
+			iter->second->effect->Play(finalVolume, pitch, pan);
 		}
 	}
 }

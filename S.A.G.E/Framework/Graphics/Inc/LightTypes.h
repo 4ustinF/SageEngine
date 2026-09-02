@@ -12,4 +12,19 @@ namespace SAGE::Graphics
 		Color diffuse;
 		Color specular;
 	};
+
+	struct SpotLight
+	{
+		Math::Vector3 position;
+		float range;
+		Math::Vector3 direction;
+		float innerConeAngle;
+
+		Color ambient;
+		Color diffuse;
+		Color specular;
+
+		Math::Vector3 attenuation;
+		float outerConeAngle;
+	};
 }

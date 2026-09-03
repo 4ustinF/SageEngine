@@ -466,7 +466,7 @@ void RenderService::LoadSkyDome(const char* fileName, int divisions, float radiu
 	mSkyBoxType = SkyBoxType::Dome;
 }
 
-void RenderService::SetSkyBoxPos(SAGE::Vector3 position)
+void RenderService::SetSkyBoxPos(Vector3 position)
 {
 	switch (mSkyBoxType)
 	{

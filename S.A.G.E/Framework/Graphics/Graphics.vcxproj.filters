@@ -267,6 +267,9 @@
     <ClInclude Include="Inc\SpotShadowEffect.h">
       <Filter>Inc\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\TextureBaking.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\GraphicsSystem.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="Src\SpotShadowEffect.cpp">
       <Filter>Src\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\TextureBaking.cpp">
+      <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

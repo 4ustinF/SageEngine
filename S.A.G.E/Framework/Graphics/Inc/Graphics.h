@@ -84,6 +84,7 @@
 #include "DebugUI.h"
 
 // Other
+#include "TextureBaking.h"
 #include "GraphicsSystem.h"
 
 namespace SAGE::Graphics

@@ -67,6 +67,7 @@
     <ClInclude Include="Inc\TerrainEffect.h" />
     <ClInclude Include="Inc\Texture.h" />
     <ClInclude Include="Inc\PostProccessingEffect.h" />
+    <ClInclude Include="Inc\TextureBaking.h" />
     <ClInclude Include="Inc\TextureManager.h" />
     <ClInclude Include="Inc\TexturingEffect.h" />
     <ClInclude Include="Inc\ToonEffect.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="Src\TerrainEffect.cpp" />
     <ClCompile Include="Src\Texture.cpp" />
     <ClCompile Include="Src\PostProccessingEffect.cpp" />
+    <ClCompile Include="Src\TextureBaking.cpp" />
     <ClCompile Include="Src\TextureManager.cpp" />
     <ClCompile Include="Src\TexturingEffect.cpp" />
     <ClCompile Include="Src\ToonEffect .cpp" />

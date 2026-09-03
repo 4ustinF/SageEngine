@@ -109,18 +109,19 @@ void ShadowEffect::Render(const RenderObject& renderObject)
 void ShadowEffect::SetDirectionalLight(const DirectionalLight& directionalLight)
 {
 	mDirectionalLight = &directionalLight;
+	Invalidate();
 }
 
 void ShadowEffect::SetFocus(const Vector3& focusPosition) 
 { 
 	mFocusPosition = focusPosition; 
-	mIsDirty = true;
+	Invalidate();
 }
 
 void ShadowEffect::SetSize(float size) 
 { 
 	mSize = size; 
-	mIsDirty = true;
+	Invalidate();
 }
 
 void ShadowEffect::DebugUI()

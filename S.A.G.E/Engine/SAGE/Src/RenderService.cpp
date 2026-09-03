@@ -13,8 +13,8 @@
 #include "TransformComponent.h"
 
 using namespace SAGE;
-using namespace SAGE::Graphics;
 using namespace SAGE::Math;
+using namespace SAGE::Graphics;
 
 void RenderService::Initialize()
 {
@@ -24,27 +24,18 @@ void RenderService::Initialize()
 	mCameraService = GetWorld().GetService<CameraService>();
 	mTerrainService = GetWorld().GetService<TerrainService>();
 
-	mDirectionalLight.direction = Math::Normalize({ 1.0f, -1.0f, 1.0f });
+	mDirectionalLight.direction = Normalize({ 1.0f, -1.0f, 1.0f });
 	mDirectionalLight.ambient = { 0.1f, 0.1f, 0.1f, 1.0f };
 	mDirectionalLight.diffuse = { 0.7f, 0.7f, 0.7f, 1.0f };
 	mDirectionalLight.specular = { 0.7f, 0.7f, 0.7f, 1.0f };
 
-	for (auto& shadowEffect : mSpotShadowEffects)
-	{
-		shadowEffect.Initialize(512);
-		// set up mSpotLights[0..] with position/direction/cone angles/attenuation/colors as needed
-	}
-	//mActiveSpotLightCount = 0; // however many you're actually using
-
-	mActiveSpotLightCount = Graphics::MaxSpotLights;
-	mActiveSpotLightCount = 1;
-
-	struct SpotLightPreset { Math::Vector3 position; Math::Vector3 direction; };
+	mActiveSpotLightCount = 1; // Graphics::MaxSpotLights;
+	struct SpotLightPreset { Vector3 position; Vector3 direction; };
 	const SpotLightPreset presets[Graphics::MaxSpotLights] = {
-		{ { 0.0f, 0.0f, 0.0f }, Math::Normalize({  0.1f, -1.0f,  0.1f }) },
-		{ { 0.0f, 0.0f, 0.0f }, Math::Normalize({ -0.05f, -1.0f,  0.05f }) },
-		{ { 0.0f, 0.0f, 0.0f }, Math::Normalize({  0.05f, -1.0f, -0.05f }) },
-		{ { 0.0f, 0.0f, 0.0f }, Math::Normalize({ -0.05f, -1.0f, -0.05f }) },
+		{ { 0.0f, 0.0f, 0.0f }, Normalize({  0.1f, -1.0f,  0.1f }) },
+		{ { 0.0f, 0.0f, 0.0f }, Normalize({ -0.05f, -1.0f,  0.05f }) },
+		{ { 0.0f, 0.0f, 0.0f }, Normalize({  0.05f, -1.0f, -0.05f }) },
+		{ { 0.0f, 0.0f, 0.0f }, Normalize({ -0.05f, -1.0f, -0.05f }) },
 	};
 
 	for (size_t i = 0; i < mActiveSpotLightCount; ++i)
@@ -52,9 +43,9 @@ void RenderService::Initialize()
 		auto& light = mSpotLights[i];
 		light.position = presets[i].position;
 		light.direction = presets[i].direction;
-		light.range = 500.0f;
-		light.innerConeAngle = 15.0f * Math::Constants::DegToRad;
-		light.outerConeAngle = 80.0f * Math::Constants::DegToRad;
+		light.range = 200.0f;
+		light.innerConeAngle = 15.0f * Constants::DegToRad;
+		light.outerConeAngle = 60.0f * Constants::DegToRad;
 		light.ambient = { 0.05f, 0.05f, 0.05f, 1.0f };
 		light.diffuse = { 10.0f, 1.0f, 1.0f, 1.0f };
 		light.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -160,7 +151,7 @@ void RenderService::Render()
 		for (auto& renderObject : entry.renderGroup)
 		{
 			//const auto angles = entry.modelComponent->GetRotation();
-			//const auto rotation = Math::Quaternion::RotationEuler(angles);
+			//const auto rotation = Quaternion::RotationEuler(angles);
 			////auto transform = *(static_cast<const Graphics::Transform*>(entry.transformComponent));
 			//transform.rotation = rotation * transform.rotation;
 			renderObject.transform = entry.transformComponent->GetTransform();
@@ -346,7 +337,7 @@ void RenderService::DebugUI()
 	if (ImGui::CollapsingHeader("Light##RenderServiceLight", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		if (ImGui::DragFloat3("Direction##RenderServiceLight", &mDirectionalLight.direction.x, 0.01f, -1.0f, 1.0f)) {
-			mDirectionalLight.direction = Math::Normalize(mDirectionalLight.direction);
+			mDirectionalLight.direction = Normalize(mDirectionalLight.direction);
 		}
 
 		ImGui::ColorEdit4("Ambient##RenderServiceLight", &mDirectionalLight.ambient.r);
@@ -379,18 +370,18 @@ void RenderService::DebugUI()
 				ImGui::DragFloat3("Position", &light.position.x, 0.1f);
 
 				if (ImGui::DragFloat3("Direction", &light.direction.x, 0.01f, -1.0f, 1.0f)) {
-					light.direction = Math::Normalize(light.direction);
+					light.direction = Normalize(light.direction);
 				}
 
 				ImGui::DragFloat("Range", &light.range, 0.5f, 1.0f, 500.0f);
 
-				float innerDeg = light.innerConeAngle * Math::Constants::RadToDeg;
-				float outerDeg = light.outerConeAngle * Math::Constants::RadToDeg;
+				float innerDeg = light.innerConeAngle * Constants::RadToDeg;
+				float outerDeg = light.outerConeAngle * Constants::RadToDeg;
 				if (ImGui::DragFloat("Inner Cone (deg)", &innerDeg, 0.5f, 1.0f, outerDeg)) {
-					light.innerConeAngle = innerDeg * Math::Constants::DegToRad;
+					light.innerConeAngle = innerDeg * Constants::DegToRad;
 				}
 				if (ImGui::DragFloat("Outer Cone (deg)", &outerDeg, 0.5f, innerDeg, 90.0f)) {
-					light.outerConeAngle = outerDeg * Math::Constants::DegToRad;
+					light.outerConeAngle = outerDeg * Constants::DegToRad;
 				}
 
 				ImGui::ColorEdit4("Ambient", &light.ambient.r);
@@ -475,7 +466,7 @@ void RenderService::LoadSkyDome(const char* fileName, int divisions, float radiu
 	mSkyBoxType = SkyBoxType::Dome;
 }
 
-void RenderService::SetSkyBoxPos(SAGE::Math::Vector3 position)
+void RenderService::SetSkyBoxPos(SAGE::Vector3 position)
 {
 	switch (mSkyBoxType)
 	{
@@ -492,7 +483,7 @@ void RenderService::SetSkyBoxPos(SAGE::Math::Vector3 position)
 	}
 }
 
-void RenderService::SetShadowFocus(const Math::Vector3& focusPosition)
+void RenderService::SetShadowFocus(const Vector3& focusPosition)
 {
 	mShadowEffect.SetFocus(focusPosition);
 }

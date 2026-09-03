@@ -34,8 +34,8 @@ namespace SAGE::Math
 		Vector3& operator+=(const Vector3& v) noexcept { x += v.x; y += v.y; z += v.z; return *this; }
 		Vector3& operator-=(const Vector3& v) noexcept { x -= v.x; y -= v.y; z -= v.z; return *this; }
 		Vector3& operator*=(const Vector3& v) noexcept { x *= v.x; y *= v.y; z *= v.z; return *this; }
-		bool operator==(const Vector3& v) const noexcept { return x == v.x && y == v.y && z == v.z;}
-		bool operator!=(const Vector3& v) { return x != v.x || y != v.y || z != v.z; }
+		bool operator==(const Vector3& v) const noexcept { return x == v.x && y == v.y && z == v.z; }
+		bool operator!=(const Vector3& v) const noexcept { return !(*this == v); }
 		Vector3& operator*=(float f) noexcept { x *= f; y *= f; z *= f; return *this; }
 		Vector3& operator/=(float f) noexcept { x /= f; y /= f; z /= f; return *this; }
 	};

@@ -39,6 +39,10 @@ namespace SAGE::Graphics
 
 		void DebugUI();
 
+		bool NeedsUpdate() const;
+		void MarkClean();
+		void Invalidate() { mIsDirty = true; }
+
 	private:
 		void UpdateLightCamera();
 
@@ -75,6 +79,13 @@ namespace SAGE::Graphics
 		SettingsBuffer mSettingsBuffer;
 
 		RenderTarget mDepthMapRenderTarget;
+
+		Math::Vector3 mFocusPosition = Math::Vector3::Zero;
+		float mSize = 100.0f;
+
+		// ---------------------------------------- Temp baking ----------------------------------------
+		bool mIsDirty = true; // Starts true so the first frame always renders
+		Math::Vector3 mBakedDirection = Math::Vector3::Zero;
 
 		Math::Vector3 mFocusPosition = Math::Vector3::Zero;
 		float mSize = 100.0f;

@@ -132,3 +132,23 @@ void ShadowEffect::UpdateLightCamera()
 	mLightCamera.SetFarPlane(1500.0f);
 	mLightCamera.SetSize(mSize, mSize);
 }
+
+bool ShadowEffect::NeedsUpdate() const
+{
+	if (mIsDirty) {
+		return true;
+	}
+
+	// Direction lives on the light itself and can be edited externally
+	// (e.g. your DebugUI drags it directly), so pull-check it here too.
+	return mDirectionalLight != nullptr && mDirectionalLight->direction != mBakedDirection;
+}
+
+void ShadowEffect::MarkClean()
+{
+	mIsDirty = false;
+	if (mDirectionalLight) 
+	{
+		mBakedDirection = mDirectionalLight->direction;
+	}
+}

@@ -155,17 +155,21 @@ void RenderService::Render()
 		}
 		mStandardEffect.End();
 
-		mShadowEffect.Begin();
-		for (auto& entry : mRenderEntries) {
-			mShadowEffect.Render(entry.renderGroup);
+		if (mShadowEffect.NeedsUpdate())
+		{
+			mShadowEffect.Begin();
+			for (auto& entry : mRenderEntries) {
+				mShadowEffect.Render(entry.renderGroup);
+			}
+			for (auto& entry : mMeshRendererEntrys) {
+				mShadowEffect.Render(entry->GetRenderObject());
+			}
+			if (mTerrainService) {
+				mShadowEffect.Render(mTerrainService->GetTerrainRenderObject());
+			}
+			mShadowEffect.End();
+			mShadowEffect.MarkClean();
 		}
-		for (auto& entry : mMeshRendererEntrys) {
-			mShadowEffect.Render(entry->GetRenderObject());
-		}
-		if (mTerrainService) {
-			mShadowEffect.Render(mTerrainService->GetTerrainRenderObject());
-		}
-		mShadowEffect.End();
 
 		std::vector<MeshRendererComponent*> transparentObjects;
 

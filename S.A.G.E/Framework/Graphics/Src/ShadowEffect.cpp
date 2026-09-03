@@ -8,6 +8,7 @@
 #include "VertexTypes.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
 void ShadowEffect::Initialize()
@@ -110,14 +111,36 @@ void ShadowEffect::SetDirectionalLight(const DirectionalLight& directionalLight)
 	mDirectionalLight = &directionalLight;
 }
 
+void ShadowEffect::SetFocus(const Vector3& focusPosition) 
+{ 
+	mFocusPosition = focusPosition; 
+	mIsDirty = true;
+}
+
+void ShadowEffect::SetSize(float size) 
+{ 
+	mSize = size; 
+	mIsDirty = true;
+}
+
 void ShadowEffect::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Shadow Effect", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		ImGui::Text("Depth Map");
 		ImGui::Image(mDepthMapRenderTarget.GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, {1, 1, 1, 1}, { 1, 1, 1, 1 });
-		ImGui::DragFloat3("Focus", &mFocusPosition.x, 0.01f);
-		ImGui::DragFloat("Size", &mSize, 1.0f, 1.0f, 1000.0f);
+
+		Vector3 focusPosition = mFocusPosition;
+		if (ImGui::DragFloat3("Focus", &focusPosition.x, 0.01f))
+		{
+			SetFocus(focusPosition);
+		}
+
+		float size = mSize;
+		if (ImGui::DragFloat("Size", &size, 1.0f, 1.0f, 1000.0f))
+		{
+			SetSize(size);
+		}
 	}
 }
 
@@ -135,7 +158,8 @@ void ShadowEffect::UpdateLightCamera()
 
 bool ShadowEffect::NeedsUpdate() const
 {
-	if (mIsDirty) {
+	if (mIsDirty) 
+	{
 		return true;
 	}
 

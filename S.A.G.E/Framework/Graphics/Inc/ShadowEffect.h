@@ -30,9 +30,8 @@ namespace SAGE::Graphics
 		void Render(const RenderObject& renderObject);
 
 		void SetDirectionalLight(const DirectionalLight& directionalLight);
-
-		void SetFocus(const Math::Vector3& focusPosition) { mFocusPosition = focusPosition; }
-		void SetSize(float size) { mSize = size; }
+		void SetFocus(const Math::Vector3& focusPosition);
+		void SetSize(float size);
 
 		const Camera& GetLightCamera() const { return mLightCamera; }
 		const Texture& GetDepthMap() const { return mDepthMapRenderTarget; }
@@ -79,9 +78,6 @@ namespace SAGE::Graphics
 		SettingsBuffer mSettingsBuffer;
 
 		RenderTarget mDepthMapRenderTarget;
-
-		Math::Vector3 mFocusPosition = Math::Vector3::Zero;
-		float mSize = 100.0f;
 
 		// ---------------------------------------- Temp baking ----------------------------------------
 		bool mIsDirty = true; // Starts true so the first frame always renders

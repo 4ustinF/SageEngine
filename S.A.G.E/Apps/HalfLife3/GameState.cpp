@@ -105,6 +105,8 @@ void GameState::Initialize()
 	settings.iterations = 10;
 	settings.drag = 0.1f;
 	mPhysicsWorld.Initialize(settings);
+
+	SoundEffectManager::Get()->SetMasterVolume(0.1f); // TODO: Just making game sounds quieter for now.
 }
 
 void GameState::Terminate()

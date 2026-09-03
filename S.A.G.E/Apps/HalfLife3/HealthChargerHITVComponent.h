@@ -37,5 +37,5 @@ protected:
 	SAGE::Graphics::SoundId mMedShot4SoundID = 0;
 	SAGE::Graphics::SoundId mMedCharge4SoundID = 0;
 	SAGE::Graphics::SoundId mMedShotNo1SoundID = 0;
-	float mAudioVolume = 0.1f; // TODO: We need a better game play system wise on how to handle audio levels.
+	float mAudioVolume = 1.0f; // TODO: We need a better game play system wise on how to handle audio levels.
 };

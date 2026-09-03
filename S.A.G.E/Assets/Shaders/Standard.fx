@@ -100,6 +100,7 @@ struct VS_INPUT
 struct VS_OUTPUT
 {
     float4 position     : SV_Position;
+    float3 worldPosition : TEXCOORD4;
     float3 worldNormal  : NORMAL;
 	float3 worldTangent : TANGENT;
     float3 dirToLight   : TEXCOORD0;
@@ -179,10 +180,11 @@ VS_OUTPUT VS(VS_INPUT input)
     
     VS_OUTPUT output;
     output.position = mul(float4(localPosition, 1.0f), toNDC);
+    output.worldPosition = mul(float4(localPosition, 1.0f), toWorld).xyz;
     output.worldNormal = mul(input.normal, (float3x3) toWorld);
     output.worldTangent = mul(input.tangent, (float3x3) toWorld);
     output.dirToLight = -lightDirection;
-    output.dirToView = normalize(viewPosition - mul(float4(localPosition, 1.0f), toWorld).xyz);
+    output.dirToView = normalize(viewPosition - output.worldPosition);
     output.texCoord = (input.texCoord * tiling) + tilingOffset;
     output.lightNDCPosition = mul(float4(localPosition, 1.0f), toLightNDC);
     output.fogFactor = saturate((fogEnd - output.position.w) / (fogEnd - fogStart));
@@ -264,7 +266,7 @@ float4 PS(VS_OUTPUT input) : SV_Target
     if (IDX < spotLightCount) \
     { \
         SpotLightData light = spotLights[IDX]; \
-        float3 toLight = light.position - (float3)input.position; \
+        float3 toLight = light.position - input.worldPosition; \
         float dist = length(toLight); \
         float3 spotL = toLight / dist; \
         float cosAngle = dot(-spotL, normalize(light.direction)); \
@@ -278,7 +280,7 @@ float4 PS(VS_OUTPUT input) : SV_Target
             float shadowFactor = 1.0f; \
             if (useSpotShadows) \
             { \
-                float4 spotNDC = mul(float4((float3)input.position, 1.0f), spotLightViewProj[IDX]); \
+                float4 spotNDC = mul(float4(input.worldPosition, 1.0f), spotLightViewProj[IDX]); \
                 shadowFactor = ComputeShadowFactor(spotShadowMaps[IDX], spotNDC, depthBias, sampleSize); \
             } \
             float4 spotAmb  = light.ambient * materialAmbient; \

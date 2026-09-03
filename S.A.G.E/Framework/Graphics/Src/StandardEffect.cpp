@@ -267,6 +267,10 @@ void StandardEffect::DebugUI()
 		ImGui::Checkbox("Use Shadow Map", &useShadowMap);
 		mSettingsData.useShadowMap = useShadowMap ? 1 : 0;
 
+		bool useSpotShadows = (mSettingsData.useSpotShadows == 1);
+		ImGui::Checkbox("Use Spot Shadows", &useSpotShadows);
+		mSettingsData.useSpotShadows = useSpotShadows ? 1 : 0;
+
 		bool useFog = (mSettingsData.useFog == 1);
 		ImGui::Checkbox("Use Fog##StandardEffect", &useFog);
 		mSettingsData.useFog = useFog ? 1 : 0;

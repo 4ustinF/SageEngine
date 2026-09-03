@@ -31,10 +31,40 @@ void RenderService::Initialize()
 
 	for (auto& shadowEffect : mSpotShadowEffects)
 	{
-		shadowEffect.Initialize(1024);
+		shadowEffect.Initialize(512);
 		// set up mSpotLights[0..] with position/direction/cone angles/attenuation/colors as needed
 	}
-	mActiveSpotLightCount = 0; // however many you're actually using
+	//mActiveSpotLightCount = 0; // however many you're actually using
+
+	mActiveSpotLightCount = Graphics::MaxSpotLights;
+	mActiveSpotLightCount = 1;
+
+	struct SpotLightPreset { Math::Vector3 position; Math::Vector3 direction; };
+	const SpotLightPreset presets[Graphics::MaxSpotLights] = {
+		{ { 0.0f, 0.0f, 0.0f }, Math::Normalize({  0.1f, -1.0f,  0.1f }) },
+		{ { 0.0f, 0.0f, 0.0f }, Math::Normalize({ -0.05f, -1.0f,  0.05f }) },
+		{ { 0.0f, 0.0f, 0.0f }, Math::Normalize({  0.05f, -1.0f, -0.05f }) },
+		{ { 0.0f, 0.0f, 0.0f }, Math::Normalize({ -0.05f, -1.0f, -0.05f }) },
+	};
+
+	for (size_t i = 0; i < mActiveSpotLightCount; ++i)
+	{
+		auto& light = mSpotLights[i];
+		light.position = presets[i].position;
+		light.direction = presets[i].direction;
+		light.range = 500.0f;
+		light.innerConeAngle = 15.0f * Math::Constants::DegToRad;
+		light.outerConeAngle = 80.0f * Math::Constants::DegToRad;
+		light.ambient = { 0.05f, 0.05f, 0.05f, 1.0f };
+		light.diffuse = { 10.0f, 1.0f, 1.0f, 1.0f };
+		light.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+		light.attenuation = { 1.0f, 0.045f, 0.0075f };
+
+		mSpotShadowEffects[i].Initialize(512); 
+	}
+
+	mStandardEffect.SetSpotLights(mSpotLights.data(), mActiveSpotLightCount);
+	mStandardEffect.UseSpotShadows(true);
 
 	mStandardEffect.SetBlendState(BlendState::Mode::AlphaBlend);
 	mStandardEffect.Initialize(mSampleFilter);
@@ -94,6 +124,11 @@ void RenderService::Terminate()
 		shadowEffect.Terminate();
 	}
 
+	for (size_t i = 0; i < mActiveSpotLightCount; ++i) 
+	{
+		mSpotShadowEffects[i].Terminate();
+	}
+
 	mShadowEffect.Terminate();
 	mTerrainEffect.Terminate();
 	mSkyBoxEffect.Terminate();
@@ -115,6 +150,7 @@ void RenderService::Render()
 {
 	auto& camera = mCameraService->GetCamera();
 	mStandardEffect.SetCamera(camera);
+	mStandardEffect.SetSpotLights(mSpotLights.data(), mActiveSpotLightCount);
 	mTexturingEffect.SetCamera(camera);
 	mSkyBoxEffect.SetCamera(camera);
 	mTerrainEffect.SetCamera(camera);
@@ -199,8 +235,6 @@ void RenderService::Render()
 			const auto& cam = mSpotShadowEffects[i].GetLightCamera();
 			mStandardEffect.SetSpotLightViewProj(i, cam.GetViewMatrix() * cam.GetProjectionMatrix());
 		}
-		mStandardEffect.SetSpotLights(mSpotLights.data(), mActiveSpotLightCount);
-		mStandardEffect.UseSpotShadows(true);
 
 		std::vector<MeshRendererComponent*> transparentObjects;
 
@@ -331,6 +365,49 @@ void RenderService::DebugUI()
 	ImGui::Separator();
 	mTerrainEffect.DebugUI();
 	ImGui::Separator();
+	if (ImGui::CollapsingHeader("Spot Lights##RenderService", ImGuiTreeNodeFlags_CollapsingHeader))
+	{
+		for (size_t i = 0; i < mActiveSpotLightCount; ++i)
+		{
+			auto& light = mSpotLights[i];
+			std::string label = "Light " + std::to_string(i);
+
+			if (ImGui::TreeNode(label.c_str()))
+			{
+				ImGui::PushID(static_cast<int>(i));
+
+				ImGui::DragFloat3("Position", &light.position.x, 0.1f);
+
+				if (ImGui::DragFloat3("Direction", &light.direction.x, 0.01f, -1.0f, 1.0f)) {
+					light.direction = Math::Normalize(light.direction);
+				}
+
+				ImGui::DragFloat("Range", &light.range, 0.5f, 1.0f, 500.0f);
+
+				float innerDeg = light.innerConeAngle * Math::Constants::RadToDeg;
+				float outerDeg = light.outerConeAngle * Math::Constants::RadToDeg;
+				if (ImGui::DragFloat("Inner Cone (deg)", &innerDeg, 0.5f, 1.0f, outerDeg)) {
+					light.innerConeAngle = innerDeg * Math::Constants::DegToRad;
+				}
+				if (ImGui::DragFloat("Outer Cone (deg)", &outerDeg, 0.5f, innerDeg, 90.0f)) {
+					light.outerConeAngle = outerDeg * Math::Constants::DegToRad;
+				}
+
+				ImGui::ColorEdit4("Ambient", &light.ambient.r);
+				ImGui::ColorEdit4("Diffuse", &light.diffuse.r);
+				ImGui::ColorEdit4("Specular", &light.specular.r);
+				ImGui::DragFloat3("Attenuation (const/lin/quad)", &light.attenuation.x, 0.001f, 0.0f, 2.0f);
+				
+				ImGui::Text("Shadow Map");
+				ImGui::Image(mSpotShadowEffects[i].GetDepthMap().GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
+
+				SimpleDraw::AddSphere(light.position, 32, 0.1f, Colors::Green);
+
+				ImGui::PopID();
+				ImGui::TreePop();
+			}
+		}
+	}
 
 	// ---- TODO: Clean up
 	ImGui::Separator();

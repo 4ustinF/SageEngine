@@ -14,6 +14,8 @@ void StandardEffect::Initialize(Sampler::Filter sampleFilter)
 	mVertexShader.Initialize<Vertex>(L"../../Assets/Shaders/Standard.fx");
 	mPixelShader.Initialize(L"../../Assets/Shaders/Standard.fx");
 
+	mSpotLightBuffer.Initialize();
+	mSpotShadowMatrixBuffer.Initialize();
 	mTransformBuffer.Initialize();
 	mBoneTransformBuffer.Initialize();
 	mLightBuffer.Initialize();
@@ -30,6 +32,8 @@ void StandardEffect::Terminate()
 
 	mAlphaBlendState.Terminate();
 
+	mSpotLightBuffer.Terminate();
+	mSpotShadowMatrixBuffer.Terminate();
 	mSettingsBuffer.Terminate();
 	mMaterialBuffer.Terminate();
 	mLightBuffer.Terminate();
@@ -59,6 +63,9 @@ void StandardEffect::Begin()
 	mSettingsBuffer.BindVS(4);
 	mSettingsBuffer.BindPS(4);
 
+	mSpotLightBuffer.BindPS(5);
+	mSpotShadowMatrixBuffer.BindPS(6);
+
 	mSampler.BindVS(0);
 	mSampler.BindPS(0);
 }
@@ -67,6 +74,10 @@ void StandardEffect::End()
 {
 	if (mShadowMap != nullptr) {
 		Texture::UnbindPS(4);
+	}
+
+	for (size_t i = 0; i < mActiveSpotLightCount; ++i) {
+		Texture::UnbindPS(5 + static_cast<uint32_t>(i));
 	}
 }
 
@@ -165,6 +176,17 @@ void StandardEffect::Render(const RenderObject& renderObject)
 
 	mSettingsBuffer.Update(settingsData);
 
+	mSpotLightBuffer.Update(mSpotLightBufferData);
+	mSpotShadowMatrixBuffer.Update(mSpotShadowMatrixData);
+	for (size_t i = 0; i < mActiveSpotLightCount; ++i)
+	{
+		if (mSpotShadowMaps[i])
+		{
+			mSpotShadowMaps[i]->BindPS(5 + static_cast<uint32_t>(i));
+		}
+	}
+	settingsData.useSpotShadows = mSettingsData.useSpotShadows;
+
 	auto tm = TextureManager::Get();
 	tm->BindPS(renderObject.diffuseMapId, 0);
 	tm->BindPS(renderObject.specularMapId, 1);
@@ -194,6 +216,29 @@ void StandardEffect::SetDirectionalLight(const DirectionalLight& directionalLigh
 void StandardEffect::SetShadowMap(const Texture* shadowMap)
 {
 	mShadowMap = shadowMap;
+}
+
+void StandardEffect::SetSpotLights(const SpotLight* lights, size_t count)
+{
+	ASSERT(lights != nullptr || count == 0, "StandardEffect -- lights cannot be null when count > 0");
+
+	mActiveSpotLightCount = std::min(count, MaxSpotLights);
+	for (size_t i = 0; i < mActiveSpotLightCount; ++i) {
+		mSpotLightBufferData.spotLights[i] = lights[i];
+	}
+	mSpotLightBufferData.spotLightCount = static_cast<int>(mActiveSpotLightCount);
+}
+
+void StandardEffect::SetSpotShadowMap(size_t index, const Texture* shadowMap)
+{
+	ASSERT(index < MaxSpotLights, "StandardEffect -- spot shadow map index out of range");
+	mSpotShadowMaps[index] = shadowMap;
+}
+
+void StandardEffect::SetSpotLightViewProj(size_t index, const Math::Matrix4& viewProj)
+{
+	ASSERT(index < MaxSpotLights, "StandardEffect -- spot light view proj index out of range");
+	mSpotShadowMatrixData.viewProj[index] = Math::Transpose(viewProj);
 }
 
 void StandardEffect::DebugUI()

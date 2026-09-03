@@ -29,6 +29,13 @@ void RenderService::Initialize()
 	mDirectionalLight.diffuse = { 0.7f, 0.7f, 0.7f, 1.0f };
 	mDirectionalLight.specular = { 0.7f, 0.7f, 0.7f, 1.0f };
 
+	for (auto& shadowEffect : mSpotShadowEffects)
+	{
+		shadowEffect.Initialize(1024);
+		// set up mSpotLights[0..] with position/direction/cone angles/attenuation/colors as needed
+	}
+	mActiveSpotLightCount = 0; // however many you're actually using
+
 	mStandardEffect.SetBlendState(BlendState::Mode::AlphaBlend);
 	mStandardEffect.Initialize(mSampleFilter);
 	mStandardEffect.SetLightCamera(mShadowEffect.GetLightCamera());
@@ -81,6 +88,11 @@ void RenderService::Terminate()
 	mBloomRenderTarget.Terminate();
 	mBaseRenderTarget.Terminate();
 	mScreenQuad.Terminate();
+
+	for (auto& shadowEffect : mSpotShadowEffects)
+	{
+		shadowEffect.Terminate();
+	}
 
 	mShadowEffect.Terminate();
 	mTerrainEffect.Terminate();
@@ -170,6 +182,25 @@ void RenderService::Render()
 			mShadowEffect.End();
 			mShadowEffect.MarkClean();
 		}
+
+		for (size_t i = 0; i < mActiveSpotLightCount; ++i)
+		{
+			mSpotShadowEffects[i].SetSpotLight(mSpotLights[i]);
+			mSpotShadowEffects[i].Begin();
+			for (auto& entry : mRenderEntries) {
+				mSpotShadowEffects[i].Render(entry.renderGroup);
+			}
+			for (auto* entry : mMeshRendererEntrys) {
+				mSpotShadowEffects[i].Render(entry->GetRenderObject());
+			}
+			mSpotShadowEffects[i].End();
+
+			mStandardEffect.SetSpotShadowMap(i, &mSpotShadowEffects[i].GetDepthMap());
+			const auto& cam = mSpotShadowEffects[i].GetLightCamera();
+			mStandardEffect.SetSpotLightViewProj(i, cam.GetViewMatrix() * cam.GetProjectionMatrix());
+		}
+		mStandardEffect.SetSpotLights(mSpotLights.data(), mActiveSpotLightCount);
+		mStandardEffect.UseSpotShadows(true);
 
 		std::vector<MeshRendererComponent*> transparentObjects;
 

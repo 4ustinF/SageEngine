@@ -264,6 +264,9 @@
     <ClInclude Include="Inc\GlassEffect.h">
       <Filter>Inc\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\SpotShadowEffect.h">
+      <Filter>Inc\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\GraphicsSystem.cpp">
@@ -402,6 +405,9 @@
       <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Src\GlassEffect.cpp">
+      <Filter>Src\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SpotShadowEffect.cpp">
       <Filter>Src\Effect</Filter>
     </ClCompile>
   </ItemGroup>

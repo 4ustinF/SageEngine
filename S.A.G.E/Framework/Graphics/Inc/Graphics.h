@@ -25,6 +25,7 @@
 #include "PostProccessingEffect.h"
 #include "ReflectionEffect.h"
 #include "ShadowEffect.h"
+#include "SpotShadowEffect.h"
 #include "StandardEffect.h"
 #include "TerrainEffect.h"
 #include "ToonEffect.h"

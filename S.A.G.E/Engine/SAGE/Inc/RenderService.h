@@ -76,6 +76,10 @@ namespace SAGE
 		// TODO - turn these into components
 		SAGE::Graphics::DirectionalLight mDirectionalLight;
 
+		std::array<SAGE::Graphics::SpotLight, Graphics::MaxSpotLights> mSpotLights;
+		std::array<SAGE::Graphics::SpotShadowEffect, Graphics::MaxSpotLights> mSpotShadowEffects;
+		size_t mActiveSpotLightCount = 0;
+
 		SAGE::Graphics::StandardEffect mStandardEffect;
 		SAGE::Graphics::TexturingEffect mSkyBoxEffect;
 		SAGE::Graphics::TexturingEffect mTexturingEffect;

@@ -1,5 +1,20 @@
 // Description: Standard shader for SAGE
 
+#define MAX_SPOT_LIGHTS 4
+
+struct SpotLightData
+{
+    float3 position;
+    float range;
+    float3 direction;
+    float innerConeAngle;
+    float3 attenuation;
+    float outerConeAngle;
+    float4 ambient;
+    float4 diffuse;
+    float4 specular;
+};
+
 cbuffer TransformBuffer : register(b0)
 {
     matrix world;
@@ -45,10 +60,22 @@ cbuffer SettingBuffer : register(b4)
     bool useFog;
     float fogStart;
     float fogEnd;
-    float padding;
+    bool useSpotShadows;
 
     float2 tiling;
     float2 tilingOffset;
+}
+
+cbuffer SpotLightBuffer : register(b5)
+{
+    SpotLightData spotLights[MAX_SPOT_LIGHTS];
+    int spotLightCount;
+    float3 spotLightPadding;
+}
+
+cbuffer SpotLightMatrixBuffer : register(b6)
+{
+    matrix spotLightViewProj[MAX_SPOT_LIGHTS];
 }
 
 Texture2D diffuseMap : register(t0);
@@ -56,6 +83,7 @@ Texture2D specularMap : register(t1);
 Texture2D bumpMap : register(t2);
 Texture2D normalMap : register(t3);
 Texture2D shadowMap : register(t4);
+Texture2D spotShadowMaps[MAX_SPOT_LIGHTS] : register(t5);
 
 SamplerState textureSampler : register(s0);
 
@@ -101,6 +129,33 @@ matrix GetBoneTransform(int4 indices, float4 weights)
     transform += boneTransforms[indices[2]] * weights[2];
     transform += boneTransforms[indices[3]] * weights[3];
     return transform;
+}
+
+float ComputeShadowFactor(Texture2D shadowTex, float4 lightNDCPosition, float bias, int sampleSize)
+{
+    float actualDepth = 1.0f - (lightNDCPosition.z / lightNDCPosition.w);
+    float2 shadowUV = lightNDCPosition.xy / lightNDCPosition.w;
+    float u = (shadowUV.x + 1.0f) * 0.5f;
+    float v = 1.0f - (shadowUV.y + 1.0f) * 0.5f;
+
+    if (saturate(u) != u || saturate(v) != v)
+        return 1.0f; // outside frustum: fully lit
+
+    float savedDepth = shadowTex.Sample(textureSampler, float2(u, v)).r;
+    if (savedDepth <= actualDepth + bias)
+        return 1.0f;
+
+    float shadowMult = 0.0f;
+    int width, height;
+    shadowTex.GetDimensions(width, height);
+    float2 texelSize = 1.0 / float2(width, height);
+    int size = clamp(sampleSize, 0, 5);
+    for (int x = -size; x <= size; ++x)
+        for (int y = -size; y <= size; ++y)
+            shadowMult += savedDepth > shadowTex.Sample(textureSampler, float2(u + x * texelSize.x, v + y * texelSize.y)).r + bias ? 1.0f : 0.0f;
+
+    int amt = size * 2 + 1;
+    return shadowMult / (amt * amt);
 }
 
 VS_OUTPUT VS(VS_INPUT input)
@@ -191,7 +246,7 @@ float4 PS(VS_OUTPUT input) : SV_Target
                 
                 for (int x = -size; x <= size; ++x) {
                     for (int y = -size; y <= size; ++y) {
-                        float pcfDepth = shadowMap.Sample(textureSampler, float2(u + x * texelSize.x, v + y * texelSize.y)).r;
+                        float pcfDepth = shadowMap.SampleLevel(textureSampler, float2(u + x * texelSize.x, v + y * texelSize.y), 0).r;
                         shadowMult += savedDepth > pcfDepth + depthBias ? 1.0f : 0.0f;
                     }
                 }
@@ -204,6 +259,39 @@ float4 PS(VS_OUTPUT input) : SV_Target
             }
         }
     }
+    
+#define SPOT_LIGHT_CONTRIBUTION(IDX) \
+    if (IDX < spotLightCount) \
+    { \
+        SpotLightData light = spotLights[IDX]; \
+        float3 toLight = light.position - (float3)input.position; \
+        float dist = length(toLight); \
+        float3 spotL = toLight / dist; \
+        float cosAngle = dot(-spotL, normalize(light.direction)); \
+        float spotFactor = smoothstep(cos(light.outerConeAngle), cos(light.innerConeAngle), cosAngle); \
+        if (spotFactor > 0.0f) \
+        { \
+            float atten = spotFactor / max(light.attenuation.x + light.attenuation.y * dist + light.attenuation.z * dist * dist, 0.0001f); \
+            float sd = saturate(dot(spotL, n)); \
+            float3 sr = reflect(-spotL, n); \
+            float ss = pow(saturate(dot(sr, V)), materialPower); \
+            float shadowFactor = 1.0f; \
+            if (useSpotShadows) \
+            { \
+                float4 spotNDC = mul(float4((float3)input.position, 1.0f), spotLightViewProj[IDX]); \
+                shadowFactor = ComputeShadowFactor(spotShadowMaps[IDX], spotNDC, depthBias, sampleSize); \
+            } \
+            float4 spotAmb  = light.ambient * materialAmbient; \
+            float4 spotDiff = sd * light.diffuse * materialDiffuse * shadowFactor; \
+            float4 spotSpec = ss * light.specular * materialSpecular * shadowFactor; \
+            finalColor += ((spotAmb + spotDiff) * diffuseMapColor + spotSpec * specularMapColor) * atten; \
+        } \
+    }
+
+SPOT_LIGHT_CONTRIBUTION(0)
+SPOT_LIGHT_CONTRIBUTION(1)
+SPOT_LIGHT_CONTRIBUTION(2)
+SPOT_LIGHT_CONTRIBUTION(3)
     
     if (useFog)
     {

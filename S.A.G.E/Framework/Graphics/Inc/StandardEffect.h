@@ -45,6 +45,11 @@ namespace SAGE::Graphics
 		void UseShadowMap(bool use) { mSettingsData.useShadowMap = use ? 1 : 0; }
 		void UseFog(bool use) { mSettingsData.useFog = use ? 1 : 0; }
 
+		void SetSpotLights(const SpotLight* lights, size_t count); // copies up to MaxSpotLights
+		void SetSpotShadowMap(size_t index, const Texture* shadowMap);
+		void SetSpotLightViewProj(size_t index, const Math::Matrix4& viewProj);
+		void UseSpotShadows(bool use) { mSettingsData.useSpotShadows = use ? 1 : 0; }
+
 		void DebugUI();
 
 	private:
@@ -78,10 +83,22 @@ namespace SAGE::Graphics
 			int useFog = 0;
 			float fogStart = 50.0f;
 			float fogEnd = 100.0f;
-			float padding = 0;
+			int useSpotShadows = 1;
 
 			SAGE::Math::Vector2 tiling = { 1.0f, 1.0f };
 			SAGE::Math::Vector2 tilingOffset = { 0.0f, 0.0f };
+		};
+
+		struct SpotLightBufferData
+		{
+			SpotLight spotLights[MaxSpotLights];
+			int spotLightCount = 0;
+			Math::Vector3 padding;
+		};
+
+		struct SpotShadowMatrixData
+		{
+			Math::Matrix4 viewProj[MaxSpotLights];
 		};
 
 		using TransformBuffer = TypedConstantBuffer<TransformData>;
@@ -89,6 +106,8 @@ namespace SAGE::Graphics
 		using LightBuffer = TypedConstantBuffer<DirectionalLight>;
 		using MaterialBuffer = TypedConstantBuffer<Material>;
 		using SettingsBuffer = TypedConstantBuffer<SettingsData>;
+		using SpotLightBuffer = TypedConstantBuffer<SpotLightBufferData>;
+		using SpotShadowMatrixBuffer = TypedConstantBuffer<SpotShadowMatrixData>;
 
 		const Camera* mCamera = nullptr;
 		const Camera* mLightCamera = nullptr;
@@ -117,5 +136,13 @@ namespace SAGE::Graphics
 		SAGE::Graphics::Color mFogColor = Colors::Gray;
 		float mFogStart = 50.0f;
 		float mFogEnd = 100.0f;
+
+		// Spot light support
+		SpotLightBuffer mSpotLightBuffer;
+		SpotShadowMatrixBuffer mSpotShadowMatrixBuffer;
+		SpotLightBufferData mSpotLightBufferData;
+		SpotShadowMatrixData mSpotShadowMatrixData;
+		std::array<const Texture*, MaxSpotLights> mSpotShadowMaps{};
+		size_t mActiveSpotLightCount = 0;
 	};
 }

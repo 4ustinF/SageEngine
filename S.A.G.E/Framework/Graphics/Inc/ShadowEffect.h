@@ -21,13 +21,10 @@ namespace SAGE::Graphics
 		void Begin();
 		void End();
 
-		void Render(const RenderGroup& renderGroup)
-		{
-			for (auto& renderObjects : renderGroup) {
-				Render(renderObjects);
-			}
-		}
+		void Render(const RenderGroup& renderGroup);
 		void Render(const RenderObject& renderObject);
+
+		void DebugUI();
 
 		void SetDirectionalLight(const DirectionalLight& directionalLight);
 		void SetFocus(const Math::Vector3& focusPosition);
@@ -36,11 +33,9 @@ namespace SAGE::Graphics
 		const Camera& GetLightCamera() const { return mLightCamera; }
 		const Texture& GetDepthMap() const { return mDepthMapRenderTarget; }
 
-		void DebugUI();
-
 		bool NeedsUpdate() const;
 		void MarkClean();
-		void Invalidate() { mIsDirty = true; }
+		void Invalidate();
 
 	private:
 		void UpdateLightCamera();

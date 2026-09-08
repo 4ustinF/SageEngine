@@ -57,6 +57,14 @@ void ShadowEffect::End()
 	mDepthMapRenderTarget.EndRender();
 }
 
+void ShadowEffect::Render(const RenderGroup& renderGroup)
+{
+	for (auto& renderObjects : renderGroup) 
+	{
+		Render(renderObjects);
+	}
+}
+
 void ShadowEffect::Render(const RenderObject& renderObject)
 {
 	const auto& matWorld = renderObject.transform.GetMatrix4();
@@ -106,6 +114,27 @@ void ShadowEffect::Render(const RenderObject& renderObject)
 	renderObject.meshBuffer.Render();
 }
 
+void ShadowEffect::DebugUI()
+{
+	if (ImGui::CollapsingHeader("Shadow Effect", ImGuiTreeNodeFlags_CollapsingHeader))
+	{
+		ImGui::Text("Depth Map");
+		ImGui::Image(mDepthMapRenderTarget.GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
+
+		Vector3 focusPosition = mFocusPosition;
+		if (ImGui::DragFloat3("Focus", &focusPosition.x, 0.01f))
+		{
+			SetFocus(focusPosition);
+		}
+
+		float size = mSize;
+		if (ImGui::DragFloat("Size", &size, 1.0f, 1.0f, 1000.0f))
+		{
+			SetSize(size);
+		}
+	}
+}
+
 void ShadowEffect::SetDirectionalLight(const DirectionalLight& directionalLight)
 {
 	mDirectionalLight = &directionalLight;
@@ -122,27 +151,6 @@ void ShadowEffect::SetSize(float size)
 { 
 	mSize = size; 
 	Invalidate();
-}
-
-void ShadowEffect::DebugUI()
-{
-	if (ImGui::CollapsingHeader("Shadow Effect", ImGuiTreeNodeFlags_CollapsingHeader))
-	{
-		ImGui::Text("Depth Map");
-		ImGui::Image(mDepthMapRenderTarget.GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, {1, 1, 1, 1}, { 1, 1, 1, 1 });
-
-		Vector3 focusPosition = mFocusPosition;
-		if (ImGui::DragFloat3("Focus", &focusPosition.x, 0.01f))
-		{
-			SetFocus(focusPosition);
-		}
-
-		float size = mSize;
-		if (ImGui::DragFloat("Size", &size, 1.0f, 1.0f, 1000.0f))
-		{
-			SetSize(size);
-		}
-	}
 }
 
 void ShadowEffect::UpdateLightCamera()
@@ -176,4 +184,9 @@ void ShadowEffect::MarkClean()
 	{
 		mBakedDirection = mDirectionalLight->direction;
 	}
+}
+
+void ShadowEffect::Invalidate()
+{
+	mIsDirty = true;
 }

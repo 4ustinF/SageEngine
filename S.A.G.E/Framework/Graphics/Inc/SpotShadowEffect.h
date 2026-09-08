@@ -23,13 +23,16 @@ namespace SAGE::Graphics
 
 		void Render(const RenderGroup& renderGroup);
 		void Render(const RenderObject& renderObject);
+		void DebugUI();
 
 		void SetSpotLight(const SpotLight& spotLight);
 
 		const Camera& GetLightCamera() const { return mLightCamera; }
 		const Texture& GetDepthMap() const { return mDepthMapRenderTarget; }
 
-		void DebugUI();
+		bool NeedsUpdate() const;
+		void MarkClean();
+		void Invalidate();
 
 	private:
 		struct TransformData
@@ -64,5 +67,8 @@ namespace SAGE::Graphics
 		SettingsBuffer mSettingsBuffer;
 
 		RenderTarget mDepthMapRenderTarget;
+
+		// ---------------------------------------- Temp baking ----------------------------------------
+		bool mIsDirty = true; // Starts true so the first frame always renders
 	};
 }

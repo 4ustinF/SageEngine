@@ -112,6 +112,15 @@ void SpotShadowEffect::Render(const RenderObject& renderObject)
 	renderObject.meshBuffer.Render();
 }
 
+void SpotShadowEffect::DebugUI()
+{
+	if (ImGui::CollapsingHeader("Spot Shadow Effect", ImGuiTreeNodeFlags_CollapsingHeader))
+	{
+		ImGui::Text("Depth Map");
+		ImGui::Image(mDepthMapRenderTarget.GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
+	}
+}
+
 void SpotShadowEffect::SetSpotLight(const SpotLight& spotLight)
 {
 	mLightCamera.SetPosition(spotLight.position);
@@ -120,13 +129,20 @@ void SpotShadowEffect::SetSpotLight(const SpotLight& spotLight)
 	mLightCamera.SetFarPlane(spotLight.range);
 	// FOV needs a little headroom past the outer cone or edges clip out of the shadow frustum
 	mLightCamera.SetFov(Math::Clamp(spotLight.outerConeAngle * 2.2f, 10.0f * Math::Constants::DegToRad, 170.0f * Math::Constants::DegToRad));
+	Invalidate();
 }
 
-void SpotShadowEffect::DebugUI()
+bool SpotShadowEffect::NeedsUpdate() const
 {
-	if (ImGui::CollapsingHeader("Shadow Effect", ImGuiTreeNodeFlags_CollapsingHeader))
-	{
-		ImGui::Text("Depth Map");
-		ImGui::Image(mDepthMapRenderTarget.GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, {1, 1, 1, 1}, { 1, 1, 1, 1 });
-	}
+	return mIsDirty;
+}
+
+void SpotShadowEffect::MarkClean()
+{
+	mIsDirty = false;
+}
+
+void SpotShadowEffect::Invalidate() 
+{ 
+	mIsDirty = true; 
 }

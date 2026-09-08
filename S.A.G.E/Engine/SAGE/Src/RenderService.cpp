@@ -210,21 +210,22 @@ void RenderService::Render()
 			mShadowEffect.MarkClean();
 		}
 
-		for (size_t i = 0; i < mActiveSpotLightCount; ++i)
+		for (size_t spotLightIndex = 0; spotLightIndex < mActiveSpotLightCount; ++spotLightIndex)
 		{
-			mSpotShadowEffects[i].SetSpotLight(mSpotLights[i]);
-			mSpotShadowEffects[i].Begin();
+			SpotShadowEffect& spotShadowEffect = mSpotShadowEffects[spotLightIndex];
+			spotShadowEffect.SetSpotLight(mSpotLights[spotLightIndex]);
+			spotShadowEffect.Begin();
 			for (auto& entry : mRenderEntries) {
-				mSpotShadowEffects[i].Render(entry.renderGroup);
+				spotShadowEffect.Render(entry.renderGroup);
 			}
 			for (auto* entry : mMeshRendererEntrys) {
-				mSpotShadowEffects[i].Render(entry->GetRenderObject());
+				spotShadowEffect.Render(entry->GetRenderObject());
 			}
-			mSpotShadowEffects[i].End();
+			spotShadowEffect.End();
 
-			mStandardEffect.SetSpotShadowMap(i, &mSpotShadowEffects[i].GetDepthMap());
-			const auto& cam = mSpotShadowEffects[i].GetLightCamera();
-			mStandardEffect.SetSpotLightViewProj(i, cam.GetViewMatrix() * cam.GetProjectionMatrix());
+			mStandardEffect.SetSpotShadowMap(spotLightIndex, &spotShadowEffect.GetDepthMap());
+			const auto& cam = spotShadowEffect.GetLightCamera();
+			mStandardEffect.SetSpotLightViewProj(spotLightIndex, cam.GetViewMatrix() * cam.GetProjectionMatrix());
 		}
 
 		std::vector<MeshRendererComponent*> transparentObjects;

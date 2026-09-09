@@ -213,19 +213,23 @@ void RenderService::Render()
 		for (size_t spotLightIndex = 0; spotLightIndex < mActiveSpotLightCount; ++spotLightIndex)
 		{
 			SpotShadowEffect& spotShadowEffect = mSpotShadowEffects[spotLightIndex];
-			spotShadowEffect.SetSpotLight(mSpotLights[spotLightIndex]);
-			spotShadowEffect.Begin();
-			for (auto& entry : mRenderEntries) {
-				spotShadowEffect.Render(entry.renderGroup);
-			}
-			for (auto* entry : mMeshRendererEntrys) {
-				spotShadowEffect.Render(entry->GetRenderObject());
-			}
-			spotShadowEffect.End();
+			if (spotShadowEffect.NeedsUpdate())
+			{
+				spotShadowEffect.SetSpotLight(mSpotLights[spotLightIndex]);
+				spotShadowEffect.Begin();
+				for (auto& entry : mRenderEntries) {
+					spotShadowEffect.Render(entry.renderGroup);
+				}
+				for (auto* entry : mMeshRendererEntrys) {
+					spotShadowEffect.Render(entry->GetRenderObject());
+				}
+				spotShadowEffect.End();
+				spotShadowEffect.MarkClean();
 
-			mStandardEffect.SetSpotShadowMap(spotLightIndex, &spotShadowEffect.GetDepthMap());
-			const auto& cam = spotShadowEffect.GetLightCamera();
-			mStandardEffect.SetSpotLightViewProj(spotLightIndex, cam.GetViewMatrix() * cam.GetProjectionMatrix());
+				mStandardEffect.SetSpotShadowMap(spotLightIndex, &spotShadowEffect.GetDepthMap());
+				const auto& cam = spotShadowEffect.GetLightCamera();
+				mStandardEffect.SetSpotLightViewProj(spotLightIndex, cam.GetViewMatrix() * cam.GetProjectionMatrix());
+			}
 		}
 
 		std::vector<MeshRendererComponent*> transparentObjects;
@@ -368,21 +372,33 @@ void RenderService::DebugUI()
 			{
 				ImGui::PushID(static_cast<int>(i));
 
-				ImGui::DragFloat3("Position", &light.position.x, 0.1f);
-
-				if (ImGui::DragFloat3("Direction", &light.direction.x, 0.01f, -1.0f, 1.0f)) {
-					light.direction = Normalize(light.direction);
+				if (ImGui::DragFloat3("Position", &light.position.x, 0.1f))
+				{
+					mSpotShadowEffects[i].Invalidate();
 				}
 
-				ImGui::DragFloat("Range", &light.range, 0.5f, 1.0f, 500.0f);
+				if (ImGui::DragFloat3("Direction", &light.direction.x, 0.01f, -1.0f, 1.0f)) 
+				{
+					light.direction = Normalize(light.direction);
+					mSpotShadowEffects[i].Invalidate();
+				}
+
+				if (ImGui::DragFloat("Range", &light.range, 0.5f, 1.0f, 500.0f))
+				{
+					mSpotShadowEffects[i].Invalidate();
+				}
 
 				float innerDeg = light.innerConeAngle * Constants::RadToDeg;
 				float outerDeg = light.outerConeAngle * Constants::RadToDeg;
-				if (ImGui::DragFloat("Inner Cone (deg)", &innerDeg, 0.5f, 1.0f, outerDeg)) {
+				if (ImGui::DragFloat("Inner Cone (deg)", &innerDeg, 0.5f, 1.0f, outerDeg)) 
+				{
 					light.innerConeAngle = innerDeg * Constants::DegToRad;
+					mSpotShadowEffects[i].Invalidate();
 				}
-				if (ImGui::DragFloat("Outer Cone (deg)", &outerDeg, 0.5f, innerDeg, 90.0f)) {
+				if (ImGui::DragFloat("Outer Cone (deg)", &outerDeg, 0.5f, innerDeg, 90.0f)) 
+				{
 					light.outerConeAngle = outerDeg * Constants::DegToRad;
+					mSpotShadowEffects[i].Invalidate();
 				}
 
 				ImGui::ColorEdit4("Ambient", &light.ambient.r);

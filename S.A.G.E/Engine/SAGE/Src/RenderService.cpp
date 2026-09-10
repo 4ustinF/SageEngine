@@ -29,7 +29,7 @@ void RenderService::Initialize()
 	mDirectionalLight.diffuse = { 0.7f, 0.7f, 0.7f, 1.0f };
 	mDirectionalLight.specular = { 0.7f, 0.7f, 0.7f, 1.0f };
 
-	mActiveSpotLightCount = 4; // Graphics::MaxSpotLights;
+	mActiveSpotLightCount = 2; // Graphics::MaxSpotLights;
 	struct SpotLightPreset { Vector3 position; Vector3 direction; };
 	const SpotLightPreset presets[Graphics::MaxSpotLights] = {
 		{ { -1.0f, -2.5f, 5.42f }, Normalize({  0.1f, -1.0f,  0.1f }) },

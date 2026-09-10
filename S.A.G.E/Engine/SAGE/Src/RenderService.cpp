@@ -51,7 +51,7 @@ void RenderService::Initialize()
 		light.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
 		light.attenuation = { 1.0f, 0.045f, 0.0075f };
 
-		mSpotShadowEffects[i].Initialize(512);
+		mSpotShadowEffects[i].Initialize(1024);
 	}
 
 	mStandardEffect.SetSpotLights(mSpotLights.data(), mActiveSpotLightCount);
@@ -441,6 +441,33 @@ void RenderService::DebugUI()
 				ImGui::Image(mSpotShadowEffects[i].GetDepthMap().GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
 
 				SimpleDraw::AddSphere(light.position, 32, 0.1f, Colors::Green);
+
+				if (ImGui::Button("SaveSRVToDDS"))
+				{
+					bool saved = TextureBaking::SaveSRVToDDS(
+						GraphicsSystem::Get()->GetContext(),
+						mSpotShadowEffects[i].GetDepthMap().GetShaderResourceView(),
+						L"D:/GitHubFiles/SageEngine/S.A.G.E/Assets/Baked/SpotShadow0.dds"
+					);
+				}
+
+				if (ImGui::Button("LoadDDSAsSRV"))
+				{
+					//SAGE::Graphics::Texture mBakedSpotShadowMap;
+					//bool mBakedSpotShadowMapLoaded = true;
+
+					//ID3D11ShaderResourceView* srv = TextureBaking::LoadDDSAsSRV(GraphicsSystem::Get()->GetDevice(), L"D:/GitHubFiles/SageEngine/S.A.G.E/Assets/Baked/SpotShadow0.dds");
+
+					//if (srv != nullptr)
+					//{
+					//	if (mBakedSpotShadowMapLoaded) {
+					//		mBakedSpotShadowMap.Terminate(); // release the previous one first if reloading
+					//	}
+					//	mBakedSpotShadowMap.InitializeFromSRV(srv);
+					//	mBakedSpotShadowMapLoaded = true;
+					//	mStandardEffect.SetSpotShadowMap(i, &mBakedSpotShadowMap);
+					//}
+				}
 
 				ImGui::PopID();
 				ImGui::TreePop();

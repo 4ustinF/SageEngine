@@ -57,6 +57,21 @@ void Texture::Initialize(uint32_t width, uint32_t height, Format format)
 	//D3D11_TEXTURE2D_DESC;
 }
 
+void Texture::InitializeFromSRV(ID3D11ShaderResourceView* srv)
+{
+	ASSERT(srv != nullptr, "Texture -- null SRV passed to InitializeFromSRV");
+	ASSERT(mShaderResourceView == nullptr, "Texture -- already initialized");
+	mShaderResourceView = srv;
+
+	ID3D11Resource* resource = nullptr;
+	mShaderResourceView->GetResource(&resource);
+	ID3D11Texture2D* texture = static_cast<ID3D11Texture2D*>(resource);
+	D3D11_TEXTURE2D_DESC desc{};
+	texture->GetDesc(&desc);
+	mWidth = desc.Width;
+	mHeight = desc.Height;
+}
+
 void Texture::Terminate()
 {
 	SafeRelease(mShaderResourceView);

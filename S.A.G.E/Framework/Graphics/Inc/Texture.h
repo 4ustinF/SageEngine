@@ -27,6 +27,7 @@ namespace SAGE::Graphics
 
 		virtual void Initialize(const std::filesystem::path& fileName);
 		virtual void Initialize(uint32_t width, uint32_t height, Format format);
+		void InitializeFromSRV(ID3D11ShaderResourceView* srv);
 		virtual void Terminate();
 
 		void BindVS(uint32_t slot) const;

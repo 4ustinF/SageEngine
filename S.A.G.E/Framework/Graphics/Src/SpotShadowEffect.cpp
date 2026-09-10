@@ -65,6 +65,11 @@ void SpotShadowEffect::Render(const RenderGroup& renderGroup)
 
 void SpotShadowEffect::Render(const RenderObject& renderObject)
 {
+	if (!renderObject.canCastShadows)
+	{
+		return;
+	}
+
 	const auto& matWorld = renderObject.transform.GetMatrix4();
 	const auto& view = mLightCamera.GetViewMatrix();
 	const auto& proj = mLightCamera.GetProjectionMatrix();

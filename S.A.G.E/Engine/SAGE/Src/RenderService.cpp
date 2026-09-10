@@ -51,7 +51,7 @@ void RenderService::Initialize()
 		light.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
 		light.attenuation = { 1.0f, 0.045f, 0.0075f };
 
-		mSpotShadowEffects[i].Initialize(512); 
+		mSpotShadowEffects[i].Initialize(512);
 	}
 
 	mStandardEffect.SetSpotLights(mSpotLights.data(), mActiveSpotLightCount);
@@ -62,7 +62,7 @@ void RenderService::Initialize()
 	mStandardEffect.SetLightCamera(mShadowEffect.GetLightCamera());
 	mStandardEffect.SetDirectionalLight(mDirectionalLight);
 	mStandardEffect.SetShadowMap(&mShadowEffect.GetDepthMap());
-	mStandardEffect.SetDepthBias(0.000021f);
+	mStandardEffect.SetDepthBias(0.000040f); // 0.000021f
 	mStandardEffect.SetBumpWeight(0.25f);
 	mStandardEffect.SetSampleSize(0);
 

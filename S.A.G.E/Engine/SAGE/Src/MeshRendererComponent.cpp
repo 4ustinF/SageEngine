@@ -128,6 +128,12 @@ void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& va
 		SetTileToZScale(value["TileToZScale"].GetBool());
 	}
 
+	if (value.HasMember("Can Cast Shadows"))
+	{
+		const bool canCastShadows = value["Can Cast Shadows"].GetBool();
+		SetCanCastShadows(canCastShadows);
+	}
+
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
 	renderObject.material = mMaterialData.material;
 }
@@ -174,6 +180,12 @@ void MeshRendererComponent::SaveComponentToTemplate(rapidjson::Value& compObj, r
 	if (mIsTransparent == true)
 	{
 		SaveBoolToTemplate(compObj, allocator, "Transparent", mIsTransparent);
+	}
+
+	// --- Can Cast Shadows ---
+	if (mMeshFilter && !mMeshFilter->GetRenderObject().canCastShadows)
+	{
+		SaveBoolToTemplate(compObj, allocator, "Can Cast Shadows", false);
 	}
 
 	// --- Tiling Size ---
@@ -270,10 +282,11 @@ void MeshRendererComponent::DebugUI()
 		}
 		}
 
+		RenderObject& renderObject = mMeshFilter->GetRenderObject();
 		ImGui::Checkbox("Bloom##MeshRendererComponent", &mAllowBloom);
 		ImGui::Checkbox("Is Transparent##MeshRendererComponent", &mIsTransparent);
+		ImGui::Checkbox("Can Cast Shadows##MeshRendererComponent", &renderObject.canCastShadows);
 
-		RenderObject& renderObject = mMeshFilter->GetRenderObject();
 		TextureDebugUI("Diffuse Map", renderObject.diffuseMapId, mMaterialData.diffuseMapName);
 		TextureDebugUI("Specular Map", renderObject.specularMapId, mMaterialData.specularMapName);
 		TextureDebugUI("Bump Map", renderObject.bumpMapId, mMaterialData.bumpMapName);
@@ -304,6 +317,17 @@ void MeshRendererComponent::OnDisable()
 RenderObject& MeshRendererComponent::GetRenderObject()
 {
 	return mMeshFilter->GetRenderObject();
+}
+
+bool MeshRendererComponent::GetCanCastShadows() const
+{
+	if (mMeshFilter == nullptr)
+	{
+		return false;
+	}
+
+	RenderObject& renderObject = mMeshFilter->GetRenderObject();
+	return renderObject.canCastShadows;
 }
 
 void MeshRendererComponent::SetDiffuseMapFileName(const char* fileName)
@@ -378,6 +402,17 @@ void MeshRendererComponent::SetTileToZScale(bool tileToZScale)
 
 	mTileToZScale = tileToZScale;
 	UpdateScaleSizeDelegateHandle();
+}
+
+void MeshRendererComponent::SetCanCastShadows(bool canCastShadows)
+{
+	if (mMeshFilter == nullptr)
+	{
+		return;
+	}
+
+	RenderObject& renderObject = mMeshFilter->GetRenderObject();
+	renderObject.canCastShadows = canCastShadows;
 }
 
 void MeshRendererComponent::TextureDebugUI(const char* mapName, TextureId& textureId, std::string& filePath)

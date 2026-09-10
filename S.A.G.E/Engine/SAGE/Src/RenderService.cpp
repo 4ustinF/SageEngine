@@ -469,6 +469,11 @@ void RenderService::DebugUI()
 					//}
 				}
 
+				if (ImGui::Button("Invalidate"))
+				{
+					mSpotShadowEffects[i].Invalidate();
+				}
+
 				ImGui::PopID();
 				ImGui::TreePop();
 			}

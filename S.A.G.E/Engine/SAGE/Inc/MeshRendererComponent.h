@@ -32,6 +32,7 @@ namespace SAGE
 		Graphics::RenderObject& GetRenderObject();
 		bool GetShouldBloom() const { return mAllowBloom; }
 		bool GetIsTransparent() const { return mIsTransparent; }
+		bool GetCanCastShadows() const;
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }
@@ -46,7 +47,8 @@ namespace SAGE
 		void SetTileToScale(bool tileToXScale = false, bool tileToYScale = false, bool tileToZScale = false);
 		void SetTileToXScale(bool tileToXScale);
 		void SetTileToYScale(bool tileToYScale);
-		void SetTileToZScale(bool tileToYScale);
+		void SetTileToZScale(bool tileToZScale);
+		void SetCanCastShadows(bool canCastShadows);
 
 	private:
 		MeshFilterComponent* mMeshFilter = nullptr;

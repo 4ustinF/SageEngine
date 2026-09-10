@@ -94,7 +94,14 @@ namespace SAGE
 
 		SAGE::Graphics::Sampler::Filter mSampleFilter = SAGE::Graphics::Sampler::Filter::Linear;
 
+		// FPS
 		int mFPS = 0;
+		static constexpr int mMaxSampleCount = 150; // max samples you'll ever want
+		int mSamepleCount = mMaxSampleCount;
+		float mFPSHistory[mMaxSampleCount] = {};
+		int mFPSHistoryOffset = 0;
+		int mFPSHistorySize = 0; // how many valid samples we have so far
+		float mFPSGraphMax = 200.0f;
 
 		// TODO: Move out
 		SAGE::Graphics::RenderObject mScreenQuad;

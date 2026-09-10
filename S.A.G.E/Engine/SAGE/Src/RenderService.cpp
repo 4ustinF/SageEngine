@@ -29,7 +29,7 @@ void RenderService::Initialize()
 	mDirectionalLight.diffuse = { 0.7f, 0.7f, 0.7f, 1.0f };
 	mDirectionalLight.specular = { 0.7f, 0.7f, 0.7f, 1.0f };
 
-	mActiveSpotLightCount = 1; // Graphics::MaxSpotLights;
+	mActiveSpotLightCount = 4; // Graphics::MaxSpotLights;
 	struct SpotLightPreset { Vector3 position; Vector3 direction; };
 	const SpotLightPreset presets[Graphics::MaxSpotLights] = {
 		{ { -1.0f, -2.5f, 5.42f }, Normalize({  0.1f, -1.0f,  0.1f }) },
@@ -334,10 +334,41 @@ void RenderService::Render()
 	SimpleDraw::Render(camera);
 }
 
+// TODO: Make it so we can swap mSampleFilter on the fly.
 void RenderService::DebugUI()
 {
-	ImGui::Text("FPS: %i", mFPS);
-	// TODO: Make it so we can swap mSampleFilter on the fly.
+	if (ImGui::CollapsingHeader("Performance##Debug"))
+	{
+		ImGui::Text("FPS: %i", mFPS);
+
+		// Only record a sample if this section is actually open/visible.
+		mFPSHistory[mFPSHistoryOffset] = static_cast<float>(mFPS);
+		mFPSHistoryOffset = (mFPSHistoryOffset + 1) % mMaxSampleCount;
+		if (mFPSHistorySize < mMaxSampleCount)
+		{
+			mFPSHistorySize += 1;
+		}
+
+		ImGui::SliderInt("Sample Count##FPS", &mSamepleCount, 10, mMaxSampleCount);
+		ImGui::SliderFloat("Graph Max FPS##FPS", &mFPSGraphMax, 0.0f, 500.0f, "%1.0f");
+
+		int count = std::min(mSamepleCount, mFPSHistorySize);
+		if (count > 0)
+		{
+			static float displayBuffer[mMaxSampleCount];
+			for (int i = 0; i < count; ++i)
+			{
+				int index = (mFPSHistoryOffset - count + i + mMaxSampleCount) % mMaxSampleCount;
+				displayBuffer[i] = mFPSHistory[index];
+			}
+
+			char overlay[32];
+			snprintf(overlay, sizeof(overlay), "%.1f fps", displayBuffer[count - 1]);
+
+			// Fixed 0 to kFPSGraphMax range instead of auto-scaling min/max.
+			ImGui::PlotLines("##FPSGraph", displayBuffer, count, 0, overlay, 0.0f, mFPSGraphMax, ImVec2(0, 80));
+		}
+	}
 
 	if (ImGui::CollapsingHeader("Light##RenderServiceLight", ImGuiTreeNodeFlags_CollapsingHeader))
 	{

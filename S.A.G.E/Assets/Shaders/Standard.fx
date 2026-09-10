@@ -42,7 +42,7 @@ cbuffer MaterialBuffer : register(b3)
     float4 materialDiffuse;
     float4 materialSpecular;
     float4 materialEmissive;
-    float  materialPower;
+    float materialPower;
 }
 
 cbuffer SettingBuffer : register(b4)
@@ -90,8 +90,8 @@ SamplerState textureSampler : register(s0);
 struct VS_INPUT
 {
     float3 position : POSITION;
-    float3 normal   : NORMAL;
-    float3 tangent  : TANGENT;
+    float3 normal : NORMAL;
+    float3 tangent : TANGENT;
     float2 texCoord : TEXCOORD;
     int4 blendIndices : BLENDINDICES;
     float4 blendWeights : BLENDWEIGHT;
@@ -99,13 +99,13 @@ struct VS_INPUT
 
 struct VS_OUTPUT
 {
-    float4 position     : SV_Position;
+    float4 position : SV_Position;
     float3 worldPosition : TEXCOORD4;
-    float3 worldNormal  : NORMAL;
-	float3 worldTangent : TANGENT;
-    float3 dirToLight   : TEXCOORD0;
-    float3 dirToView    : TEXCOORD1;
-    float2 texCoord     : TEXCOORD2;
+    float3 worldNormal : NORMAL;
+    float3 worldTangent : TANGENT;
+    float3 dirToLight : TEXCOORD0;
+    float3 dirToView : TEXCOORD1;
+    float2 texCoord : TEXCOORD2;
     float4 lightNDCPosition : TEXCOORD3;
     float fogFactor : FOG;
 };
@@ -120,7 +120,8 @@ static matrix Identity =
 
 matrix GetBoneTransform(int4 indices, float4 weights)
 {
-    if (length(weights) <= 0.0f) {
+    if (length(weights) <= 0.0f)
+    {
         return Identity;
     }
     
@@ -159,10 +160,51 @@ float ComputeShadowFactor(Texture2D shadowTex, float4 lightNDCPosition, float bi
     return shadowMult / (amt * amt);
 }
 
+float4 ComputeSpotLightContribution(int index, float3 worldPosition, float3 normal, float3 viewDirection, float4 diffuseMapColor, float specularMapColor)
+{
+    SpotLightData light = spotLights[index];
+    float3 toLight = light.position - worldPosition;
+    float dist = length(toLight);
+
+    if (dist <= 0.0001f)
+    {
+        return 0.0f;
+    }
+
+    float3 spotL = toLight / dist;
+    float cosAngle = dot(-spotL, normalize(light.direction));
+    float spotFactor = smoothstep(cos(light.outerConeAngle), cos(light.innerConeAngle), cosAngle);
+
+    if (spotFactor <= 0.0f)
+    {
+        return 0.0f;
+    }
+
+    float attenuation = light.attenuation.x + light.attenuation.y * dist + light.attenuation.z * dist * dist;
+    float atten = spotFactor / max(attenuation, 0.0001f);
+    float diffuseAmount = saturate(dot(spotL, normal));
+    float3 reflection = reflect(-spotL, normal);
+    float specularAmount = pow(saturate(dot(reflection, viewDirection)), materialPower);
+
+    float shadowFactor = 1.0f;
+
+    if (useSpotShadows)
+    {
+        float4 spotNDC = mul(float4(worldPosition, 1.0f), spotLightViewProj[index]);
+        shadowFactor = ComputeShadowFactor(spotShadowMaps[index], spotNDC, depthBias, sampleSize);
+    }
+
+    float4 ambient = light.ambient * materialAmbient;
+    float4 diffuse = diffuseAmount * light.diffuse * materialDiffuse * shadowFactor;
+    float4 specular = specularAmount * light.specular * materialSpecular * shadowFactor;
+    return ((ambient + diffuse) * diffuseMapColor + specular * specularMapColor) * atten;
+}
+
 VS_OUTPUT VS(VS_INPUT input)
 {
     float3 localPosition = input.position;
-    if (useBumpMap) {
+    if (useBumpMap)
+    {
         float bumpMapColor = bumpMap.SampleLevel(textureSampler, input.texCoord, 0.0f).r; //  - 0.5f 
         localPosition += (input.normal * bumpMapColor * bumpWeight);
     }
@@ -171,7 +213,8 @@ VS_OUTPUT VS(VS_INPUT input)
     matrix toLightNDC = wvp[1];
     matrix toWorld = world;
     
-    if (useSkinning) {
+    if (useSkinning)
+    {
         matrix boneTransform = GetBoneTransform(input.blendIndices, input.blendWeights);
         toNDC = mul(boneTransform, toNDC);
         toLightNDC = mul(boneTransform, toLightNDC);
@@ -195,12 +238,13 @@ float4 PS(VS_OUTPUT input) : SV_Target
 {
     float3 n = normalize(input.worldNormal);
     float3 t = normalize(input.worldTangent);
-	float3 b = normalize(cross(n, t));
+    float3 b = normalize(cross(n, t));
     
     float3 L = normalize(input.dirToLight);
     float3 V = normalize(input.dirToView);
     
-    if (useNormalMap) {
+    if (useNormalMap)
+    {
         float3x3 tbnw = float3x3(t, b, n);
         float4 normalMapColor = normalMap.Sample(textureSampler, input.texCoord);
         float3 unpackedNormal = normalize(float3((normalMapColor.xy * 2.0f) - 1.0f, normalMapColor.z));
@@ -221,7 +265,8 @@ float4 PS(VS_OUTPUT input) : SV_Target
     float specularMapColor = useSpecularMap ? specularMap.Sample(textureSampler, input.texCoord).r : 1.0f;
     float4 finalColor = (ambient + diffuse + materialEmissive) * diffuseMapColor + (specular * specularMapColor);
     
-    if (useShadowMap) {
+    if (useShadowMap)
+    {
         float actualDepth = 1.0f - (input.lightNDCPosition.z / input.lightNDCPosition.w);
         float2 shadowUV = input.lightNDCPosition.xy / input.lightNDCPosition.w;
         float u = (shadowUV.x + 1.0f) * 0.5f;
@@ -240,14 +285,31 @@ float4 PS(VS_OUTPUT input) : SV_Target
                 
                 //sampleSize
                 int size = 1;
-                if (sampleSize <= 0) { size = 0; }
-                else if (sampleSize == 2) { size = 2; }
-                else if (sampleSize == 3) { size = 3; }
-                else if (sampleSize == 4) { size = 4; }
-                else if (sampleSize >= 5) { size = 5; }
+                if (sampleSize <= 0)
+                {
+                    size = 0;
+                }
+                else if (sampleSize == 2)
+                {
+                    size = 2;
+                }
+                else if (sampleSize == 3)
+                {
+                    size = 3;
+                }
+                else if (sampleSize == 4)
+                {
+                    size = 4;
+                }
+                else if (sampleSize >= 5)
+                {
+                    size = 5;
+                }
                 
-                for (int x = -size; x <= size; ++x) {
-                    for (int y = -size; y <= size; ++y) {
+                for (int x = -size; x <= size; ++x)
+                {
+                    for (int y = -size; y <= size; ++y)
+                    {
                         float pcfDepth = shadowMap.SampleLevel(textureSampler, float2(u + x * texelSize.x, v + y * texelSize.y), 0).r;
                         shadowMult += savedDepth > pcfDepth + depthBias ? 1.0f : 0.0f;
                     }
@@ -262,38 +324,10 @@ float4 PS(VS_OUTPUT input) : SV_Target
         }
     }
     
-#define SPOT_LIGHT_CONTRIBUTION(IDX) \
-    if (IDX < spotLightCount) \
-    { \
-        SpotLightData light = spotLights[IDX]; \
-        float3 toLight = light.position - input.worldPosition; \
-        float dist = length(toLight); \
-        float3 spotL = toLight / dist; \
-        float cosAngle = dot(-spotL, normalize(light.direction)); \
-        float spotFactor = smoothstep(cos(light.outerConeAngle), cos(light.innerConeAngle), cosAngle); \
-        if (spotFactor > 0.0f) \
-        { \
-            float atten = spotFactor / max(light.attenuation.x + light.attenuation.y * dist + light.attenuation.z * dist * dist, 0.0001f); \
-            float sd = saturate(dot(spotL, n)); \
-            float3 sr = reflect(-spotL, n); \
-            float ss = pow(saturate(dot(sr, V)), materialPower); \
-            float shadowFactor = 1.0f; \
-            if (useSpotShadows) \
-            { \
-                float4 spotNDC = mul(float4(input.worldPosition, 1.0f), spotLightViewProj[IDX]); \
-                shadowFactor = ComputeShadowFactor(spotShadowMaps[IDX], spotNDC, depthBias, sampleSize); \
-            } \
-            float4 spotAmb  = light.ambient * materialAmbient; \
-            float4 spotDiff = sd * light.diffuse * materialDiffuse * shadowFactor; \
-            float4 spotSpec = ss * light.specular * materialSpecular * shadowFactor; \
-            finalColor += ((spotAmb + spotDiff) * diffuseMapColor + spotSpec * specularMapColor) * atten; \
-        } \
+    for (int spotLightIndex = 0; spotLightIndex < spotLightCount; ++spotLightIndex) // TODO: Should we clamp the count? int count = min(spotLightCount, MAX_SPOT_LIGHTS);
+    {
+        finalColor += ComputeSpotLightContribution(spotLightIndex, input.worldPosition, n, V, diffuseMapColor, specularMapColor);
     }
-
-SPOT_LIGHT_CONTRIBUTION(0)
-SPOT_LIGHT_CONTRIBUTION(1)
-SPOT_LIGHT_CONTRIBUTION(2)
-SPOT_LIGHT_CONTRIBUTION(3)
     
     if (useFog)
     {

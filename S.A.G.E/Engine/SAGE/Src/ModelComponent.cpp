@@ -61,6 +61,12 @@ void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjso
 		compObj.AddMember("Rotation", rotation, allocator);
 	}
 
+	// --- Can Cast Shadows ---
+	if (!mCanCastShadows)
+	{
+		SaveBoolToTemplate(compObj, allocator, "Can Cast Shadows", mCanCastShadows);
+	}
+
 	// --- Is Basic Model ---
 	if (mIsBasicModel == true)
 	{
@@ -70,7 +76,6 @@ void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjso
 			allocator
 		);
 	}
-
 }
 
 void ModelComponent::DebugUI()

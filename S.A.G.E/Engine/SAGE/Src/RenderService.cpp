@@ -32,8 +32,8 @@ void RenderService::Initialize()
 	mActiveSpotLightCount = 1; // Graphics::MaxSpotLights;
 	struct SpotLightPreset { Vector3 position; Vector3 direction; };
 	const SpotLightPreset presets[Graphics::MaxSpotLights] = {
-		{ { 0.0f, 0.0f, 0.0f }, Normalize({  0.1f, -1.0f,  0.1f }) },
-		{ { 0.0f, 0.0f, 0.0f }, Normalize({ -0.05f, -1.0f,  0.05f }) },
+		{ { -1.0f, -2.5f, 5.42f }, Normalize({  0.1f, -1.0f,  0.1f }) },
+		{ { -1.0f, -2.5f, 6.77f }, Normalize({ 0.1f, -1.0f,  0.1f  }) },
 		{ { 0.0f, 0.0f, 0.0f }, Normalize({  0.05f, -1.0f, -0.05f }) },
 		{ { 0.0f, 0.0f, 0.0f }, Normalize({ -0.05f, -1.0f, -0.05f }) },
 	};
@@ -43,11 +43,11 @@ void RenderService::Initialize()
 		auto& light = mSpotLights[i];
 		light.position = presets[i].position;
 		light.direction = presets[i].direction;
-		light.range = 200.0f;
-		light.innerConeAngle = 15.0f * Constants::DegToRad;
-		light.outerConeAngle = 60.0f * Constants::DegToRad;
+		light.range = 10.0f;
+		light.innerConeAngle = 10.0f * Constants::DegToRad;
+		light.outerConeAngle = 70.0f * Constants::DegToRad;
 		light.ambient = { 0.05f, 0.05f, 0.05f, 1.0f };
-		light.diffuse = { 10.0f, 1.0f, 1.0f, 1.0f };
+		light.diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
 		light.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
 		light.attenuation = { 1.0f, 0.045f, 0.0075f };
 

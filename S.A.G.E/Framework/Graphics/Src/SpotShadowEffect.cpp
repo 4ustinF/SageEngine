@@ -11,7 +11,7 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
-void SpotShadowEffect::Initialize(uint32_t resolution)
+void SpotShadowEffect::Initialize(uint32_t depthMapResolution)
 {
 	mLightCamera.SetMode(Camera::ProjectionMode::Perspective);
 	mLightCamera.SetAspectRatio(1.0f); // shadow map is square
@@ -23,7 +23,7 @@ void SpotShadowEffect::Initialize(uint32_t resolution)
 	mBoneTransformBuffer.Initialize();
 	mSettingsBuffer.Initialize();
 
-	mDepthMapRenderTarget.Initialize(resolution, resolution, Texture::Format::RGBA_U32);
+	mDepthMapRenderTarget.Initialize(depthMapResolution, depthMapResolution, Texture::Format::RGBA_U32);
 }
 
 void SpotShadowEffect::Terminate()

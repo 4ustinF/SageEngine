@@ -11,7 +11,7 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
-void ShadowEffect::Initialize()
+void ShadowEffect::Initialize(uint32_t depthMapResolution)
 {
 	mLightCamera.SetMode(Camera::ProjectionMode::Orthographic);
 
@@ -22,7 +22,6 @@ void ShadowEffect::Initialize()
 	mBoneTransformBuffer.Initialize();
 	mSettingsBuffer.Initialize();
 
-	constexpr uint32_t depthMapResolution = 4096;
 	mDepthMapRenderTarget.Initialize(depthMapResolution, depthMapResolution, Texture::Format::RGBA_U32);
 }
 

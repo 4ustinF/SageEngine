@@ -15,7 +15,7 @@ namespace SAGE::Graphics
 	class SpotShadowEffect
 	{
 	public:
-		void Initialize(uint32_t resolution = 1024);
+		void Initialize(uint32_t depthMapResolution = 1024);
 		void Terminate();
 
 		void Begin();

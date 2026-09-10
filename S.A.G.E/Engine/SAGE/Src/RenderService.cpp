@@ -75,7 +75,7 @@ void RenderService::Initialize()
 	mTerrainEffect.SetShadowMap(&mShadowEffect.GetDepthMap());
 	mTerrainEffect.SetDepthBias(0.000021f);
 
-	mShadowEffect.Initialize();
+	mShadowEffect.Initialize(512); // TODO:
 	mShadowEffect.SetDirectionalLight(mDirectionalLight);
 	//mShadowEffect.SetSize(200);
 

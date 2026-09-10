@@ -15,7 +15,7 @@ namespace SAGE::Graphics
 	class ShadowEffect
 	{
 	public:
-		void Initialize();
+		void Initialize(uint32_t depthMapResolution = 4096);
 		void Terminate();
 
 		void Begin();

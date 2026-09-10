@@ -422,7 +422,7 @@ void RenderService::DebugUI()
 	mPostProccessingEffect.DebugUI();
 	ImGui::Separator();
 
-	if (ImGui::CollapsingHeader("Blur Settings", ImGuiTreeNodeFlags_DefaultOpen))
+	if (ImGui::CollapsingHeader("Blur Settings", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		ImGui::DragInt("Blur Iteration", &mGaussianBlurEffect.BlurIterations(), 1, 1, 100);
 		ImGui::DragFloat("Blur Saturation", &mGaussianBlurEffect.BlurSaturation(), 0.001f, 1.0f, 100.0f);

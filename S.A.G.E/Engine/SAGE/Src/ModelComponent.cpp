@@ -10,7 +10,37 @@ using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(ModelComponent, 1000);
+MEMORY_POOL_DEFINE(ModelComponent, 500);
+
+void ModelComponent::LoadComponentFromTemplate(const rj::Value& value)
+{
+	if (value.HasMember("FileName"))
+	{
+		const char* fileName = value["FileName"].GetString();
+		SetFileName(fileName);
+	}
+
+	if (value.HasMember("Rotation"))
+	{
+		const auto& rotation = value["Rotation"].GetArray();
+		const float x = rotation[0].GetFloat() * Math::Constants::DegToRad;
+		const float y = rotation[1].GetFloat() * Math::Constants::DegToRad;
+		const float z = rotation[2].GetFloat() * Math::Constants::DegToRad;
+		SetRotation({ x, y, z });
+	}
+
+	if (value.HasMember("IsBasicModel"))
+	{
+		const bool isBasic = value["IsBasicModel"].GetBool();
+		SetIsBasicModel(isBasic);
+	}
+
+	if (value.HasMember("Can Cast Shadows"))
+	{
+		const bool canCastShadows = value["Can Cast Shadows"].GetBool();
+		SetCanCastShadows(canCastShadows);
+	}
+}
 
 void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator)
 {
@@ -43,33 +73,30 @@ void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjso
 
 }
 
-void ModelComponent::Terminate()
-{
-	mRenderGroup = nullptr;
-}
-
 void ModelComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Model Component##ModelComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		ImGui::Indent(mIdentSize);
+		if (ImGui::Checkbox("Can Cast Shadows##ModelComponent", &mCanCastShadows))
+		{
+			UpdateRenderGroupShadowSettings();
+		}
 
-		Model& model = GetModel();
+		Model& model = GetModel(); // TODO:
 		if (mRenderGroup != nullptr)
 		{
 			int materialIndex = 0;
 			for (RenderObject& renderObject : *mRenderGroup)
 			{
 				ImGui::PushID(materialIndex);
-				const std::string headerText = "Material Data " + std::to_string(materialIndex++) + "##ModelComponent";
-				if (ImGui::CollapsingHeader(headerText.c_str(), ImGuiTreeNodeFlags_CollapsingHeader))
+				const std::string headerText = "Render Object " + std::to_string(materialIndex++) + "##ModelComponent";
+
+				if (ImGui::TreeNode(headerText.c_str()))
 				{
-					ImGui::ColorEdit4("Ambient##ModelComponent", &renderObject.material.ambient.r);
-					ImGui::ColorEdit4("Diffuse##ModelComponent", &renderObject.material.diffuse.r);
-					ImGui::ColorEdit4("Specular##ModelComponent", &renderObject.material.specular.r);
-					ImGui::ColorEdit4("Emissive##ModelComponent", &renderObject.material.emissive.r);
-					ImGui::DragFloat("Power##ModelComponent", &renderObject.material.power, 1.0f, 1.0f, 100.0f);
+					renderObject.DebugUI();
+					ImGui::TreePop();
 				}
+
 				ImGui::PopID();
 			}
 		}
@@ -83,6 +110,7 @@ void ModelComponent::OnEnable()
 
 	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
 	mRenderGroup = renderService->Register(this, mIsBasicModel);
+	UpdateRenderGroupShadowSettings();
 }
 
 void ModelComponent::OnDisable()
@@ -90,4 +118,33 @@ void ModelComponent::OnDisable()
 	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
 	renderService->Unregister(this, mIsBasicModel);
 	mRenderGroup = nullptr;
+}
+
+Model& ModelComponent::GetModel()
+{
+	return const_cast<Model&>(*ModelManager::Get()->GetModel(mModelId));
+}
+
+const Model& ModelComponent::GetModel() const
+{
+	return *ModelManager::Get()->GetModel(mModelId);
+}
+
+void ModelComponent::SetCanCastShadows(bool canCast)
+{
+	mCanCastShadows = canCast;
+	UpdateRenderGroupShadowSettings();
+}
+
+void ModelComponent::UpdateRenderGroupShadowSettings()
+{
+	if (mRenderGroup == nullptr)
+	{
+		return;
+	}
+
+	for (RenderObject& renderObject : *mRenderGroup)
+	{
+		renderObject.canCastShadows = mCanCastShadows;
+	}
 }

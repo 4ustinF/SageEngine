@@ -15,6 +15,7 @@ namespace SAGE::Graphics
 	{
 	public:
 		void Terminate();
+		void DebugUI();
 
 		Transform transform;
 

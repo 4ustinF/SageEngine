@@ -129,7 +129,7 @@ void PostProcessingEffect::SetMode(Mode mode)
 
 void PostProcessingEffect::DebugUI()
 {
-	if (ImGui::CollapsingHeader("PostProcessingEffect", ImGuiTreeNodeFlags_DefaultOpen))
+	if (ImGui::CollapsingHeader("PostProcessingEffect", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		int currentMode = static_cast<int>(mMode);
 		const char* modeNames[] =

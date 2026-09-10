@@ -14,6 +14,16 @@ void RenderObject::Terminate()
 	meshBuffer.Terminate();
 }
 
+void RenderObject::DebugUI()
+{
+	ImGui::ColorEdit4("Ambient##RenderObject", &material.ambient.r);
+	ImGui::ColorEdit4("Diffuse##RenderObject", &material.diffuse.r);
+	ImGui::ColorEdit4("Specular##RenderObject", &material.specular.r);
+	ImGui::ColorEdit4("Emissive##RenderObject", &material.emissive.r);
+	ImGui::DragFloat("Power##RenderObject", &material.power, 1.0f, 1.0f, 100.0f);
+	ImGui::Checkbox("Can Cast Shadows##RenderObject", &canCastShadows);
+}
+
 RenderGroup SAGE::Graphics::CreateRenderGroup(const Model& model, const IAnimator* animator)
 {
 	RenderGroup renderGroup;

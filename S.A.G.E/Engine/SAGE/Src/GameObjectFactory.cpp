@@ -286,25 +286,8 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 	}
 	else if (strcmp(componentName, "Model Component") == 0)
 	{
-		auto modelComponent = gameObject.AddComponent<ModelComponent>();
-		if (value.HasMember("FileName"))
-		{
-			const char* fileName = value["FileName"].GetString();
-			modelComponent->SetFileName(fileName);
-		}
-		if (value.HasMember("Rotation"))
-		{
-			const auto& rotation = value["Rotation"].GetArray();
-			const float x = rotation[0].GetFloat() * Math::Constants::DegToRad;
-			const float y = rotation[1].GetFloat() * Math::Constants::DegToRad;
-			const float z = rotation[2].GetFloat() * Math::Constants::DegToRad;
-			modelComponent->SetRotation({ x, y, z });
-		}
-		if (value.HasMember("IsBasicModel"))
-		{
-			const bool isBasic = value["IsBasicModel"].GetBool();
-			modelComponent->SetIsBasicModel(isBasic);
-		}
+		ModelComponent* modelComponent = gameObject.AddComponent<ModelComponent>();
+		modelComponent->LoadComponentFromTemplate(value);
 	}
 	else if (strcmp(componentName, "ParticleComponent") == 0)
 	{

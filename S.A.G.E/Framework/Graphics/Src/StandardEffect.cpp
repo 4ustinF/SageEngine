@@ -174,8 +174,6 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	settingsData.tiling = renderObject.tilingSize;
 	settingsData.tilingOffset = renderObject.tilingOffset;
 
-	mSettingsBuffer.Update(settingsData);
-
 	mSpotLightBuffer.Update(mSpotLightBufferData);
 	mSpotShadowMatrixBuffer.Update(mSpotShadowMatrixData);
 	for (size_t i = 0; i < mActiveSpotLightCount; ++i)
@@ -186,6 +184,8 @@ void StandardEffect::Render(const RenderObject& renderObject)
 		}
 	}
 	settingsData.useSpotShadows = mSettingsData.useSpotShadows;
+
+	mSettingsBuffer.Update(settingsData);
 
 	auto tm = TextureManager::Get();
 	tm->BindPS(renderObject.diffuseMapId, 0);

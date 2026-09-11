@@ -133,7 +133,7 @@ matrix GetBoneTransform(int4 indices, float4 weights)
     return transform;
 }
 
-float ComputeShadowFactor(Texture2D shadowTex, float4 lightNDCPosition, float bias, int sampleSize)
+float ComputeShadowFactor(Texture2D shadowTex, float4 lightNDCPosition, float bias)
 {
     float actualDepth = 1.0f - (lightNDCPosition.z / lightNDCPosition.w);
     float2 shadowUV = lightNDCPosition.xy / lightNDCPosition.w;
@@ -150,14 +150,8 @@ float ComputeShadowFactor(Texture2D shadowTex, float4 lightNDCPosition, float bi
     float shadowMult = 0.0f;
     int width, height;
     shadowTex.GetDimensions(width, height);
-    float2 texelSize = 1.0 / float2(width, height);
-    int size = clamp(sampleSize, 0, 5);
-    for (int x = -size; x <= size; ++x)
-        for (int y = -size; y <= size; ++y)
-            shadowMult += savedDepth > shadowTex.Sample(textureSampler, float2(u + x * texelSize.x, v + y * texelSize.y)).r + bias ? 1.0f : 0.0f;
-
-    int amt = size * 2 + 1;
-    return shadowMult / (amt * amt);
+    float2 texelSize = 1.0f / float2(width, height);
+    return shadowMult;
 }
 
 float4 ComputeSpotLightContribution(int index, float3 worldPosition, float3 normal, float3 viewDirection, float4 diffuseMapColor, float specularMapColor)
@@ -187,12 +181,8 @@ float4 ComputeSpotLightContribution(int index, float3 worldPosition, float3 norm
     float specularAmount = pow(saturate(dot(reflection, viewDirection)), materialPower);
 
     float shadowFactor = 1.0f;
-
-    if (useSpotShadows)
-    {
-        float4 spotNDC = mul(float4(worldPosition, 1.0f), spotLightViewProj[index]);
-        shadowFactor = ComputeShadowFactor(spotShadowMaps[index], spotNDC, depthBias, sampleSize);
-    }
+    float4 spotNDC = mul(float4(worldPosition, 1.0f), spotLightViewProj[index]);
+    shadowFactor = ComputeShadowFactor(spotShadowMaps[index], spotNDC, depthBias);
 
     float4 ambient = light.ambient * materialAmbient;
     float4 diffuse = diffuseAmount * light.diffuse * materialDiffuse * shadowFactor;
@@ -281,41 +271,19 @@ float4 PS(VS_OUTPUT input) : SV_Target
                 float shadowMult = 0.0f;
                 int width, height;
                 shadowMap.GetDimensions(width, height);
-                float2 texelSize = 1.0 / float2(width, height);
+                float2 texelSize = 1.0f / float2(width, height);
                 
-                //sampleSize
-                int size = 1;
-                if (sampleSize <= 0)
-                {
-                    size = 0;
-                }
-                else if (sampleSize == 2)
-                {
-                    size = 2;
-                }
-                else if (sampleSize == 3)
-                {
-                    size = 3;
-                }
-                else if (sampleSize == 4)
-                {
-                    size = 4;
-                }
-                else if (sampleSize >= 5)
-                {
-                    size = 5;
-                }
-                
-                for (int x = -size; x <= size; ++x)
-                {
-                    for (int y = -size; y <= size; ++y)
-                    {
-                        float pcfDepth = shadowMap.SampleLevel(textureSampler, float2(u + x * texelSize.x, v + y * texelSize.y), 0).r;
-                        shadowMult += savedDepth > pcfDepth + depthBias ? 1.0f : 0.0f;
-                    }
-                }
-                int amt = size * 2 + 1;
-                shadowMult /= amt * amt;
+                // This was for sampling sorrounding pixels for PCF (Percentage Closer Filtering) to smooth shadows. Didn't look great will need to be fixed.
+                //for (int x = -size; x <= size; ++x)
+                //{
+                //    for (int y = -size; y <= size; ++y)
+                //    {
+                //        float pcfDepth = shadowMap.SampleLevel(textureSampler, float2(u + x * texelSize.x, v + y * texelSize.y), 0).r;
+                //        shadowMult += savedDepth > pcfDepth + depthBias ? 1.0f : 0.0f;
+                //    }
+                //}
+                //int amt = size * 2 + 1;
+                //shadowMult /= amt * amt;
                 //shadowMult = 0.0f;
                 
                 float4 trans = diffuse * shadowMult; // shadowMult = 0.0f(black) - 1.0f(clear)
@@ -324,9 +292,12 @@ float4 PS(VS_OUTPUT input) : SV_Target
         }
     }
     
-    for (int spotLightIndex = 0; spotLightIndex < spotLightCount; ++spotLightIndex) // TODO: Should we clamp the count? int count = min(spotLightCount, MAX_SPOT_LIGHTS);
+    if (useSpotShadows)
     {
-        finalColor += ComputeSpotLightContribution(spotLightIndex, input.worldPosition, n, V, diffuseMapColor, specularMapColor);
+        for (int spotLightIndex = 0; spotLightIndex < spotLightCount; ++spotLightIndex) // TODO: Should we clamp the count? int count = min(spotLightCount, MAX_SPOT_LIGHTS);
+        {
+            finalColor += ComputeSpotLightContribution(spotLightIndex, input.worldPosition, n, V, diffuseMapColor, specularMapColor);
+        }
     }
     
     if (useFog)

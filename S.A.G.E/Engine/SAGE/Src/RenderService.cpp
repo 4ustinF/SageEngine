@@ -195,7 +195,7 @@ void RenderService::Render()
 			if (!entry->GetIsTransparent()) // TODO: This is a hack. Separate these groupings in 2? We should also sort the transparent objects so they are sorted back to front.
 			{
 				const MeshFilterComponent* meshFilterComponent = entry->GetOwner().GetComponent<MeshFilterComponent>();
-				const OBB aabb = meshFilterComponent->GetGlobalBoundingBox(); // however you access center/extents now
+				const OBB aabb = meshFilterComponent->GetGlobalBoundingBox();
 
 				if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
 				{
@@ -287,7 +287,14 @@ void RenderService::Render()
 		mStandardEffect.Begin();
 		for (auto* entry : transparentObjects)
 		{
-			mStandardEffect.Render(entry->GetRenderObject());
+			const MeshFilterComponent* meshFilterComponent = entry->GetOwner().GetComponent<MeshFilterComponent>();
+			const OBB aabb = meshFilterComponent->GetGlobalBoundingBox();
+
+			if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+			{
+				mStandardEffect.Render(entry->GetRenderObject());
+				mItemRenderCount += 1;
+			}
 		}
 		mStandardEffect.End();
 

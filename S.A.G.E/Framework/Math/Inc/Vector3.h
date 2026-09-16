@@ -14,6 +14,7 @@ namespace SAGE::Math
 		constexpr Vector3() noexcept : Vector3(0.0f) {}
 		explicit constexpr Vector3(float f) noexcept : Vector3(f, f, f) {}
 		constexpr Vector3(float x, float y, float z) noexcept : x(x), y(y), z(z) { }
+		//constexpr Vector3(Vector4 v) noexcept : x(v.x), y(v.y), z(v.z) { }
 
 		//Commonly used vectors
 		const static Vector3 Zero;

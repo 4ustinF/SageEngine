@@ -79,6 +79,8 @@ namespace SAGE::Math
 	inline Vector3 Cross(const Vector3& a, const Vector3& b)					{ return Vector3((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x)); }
 	inline Vector3 Reflect(const Vector3& a, const Vector3& b)					{ return a - (b * (2.0f * Dot(a, b))); }
 	inline Vector3 ProjectOnPlane(const Vector3& vec, const Vector3& normal)	{ return vec - normal * Dot(vec, normal); }
+	inline Vector3 Min(const Vector3& a, const Vector3& b)						{ return Vector3{ Min(a.x, b.x), Min(a.y, b.y), Min(a.z, b.z)}; }
+	inline Vector3 Max(const Vector3& a, const Vector3& b)						{ return Vector3{ Max(a.x, b.x), Max(a.y, b.y), Max(a.z, b.z) }; }
 
 	// Rotate a Vector3 by a Quaternion
 	inline Vector3 operator*(const Quaternion& q, const Vector3& v)
@@ -126,6 +128,31 @@ namespace SAGE::Math
 			m._13 * v.x + m._23 * v.y + m._33 * v.z
 		}; // Same as the Matrix3 version, just drop the _14/_24/_34 translation terms.
 	}
+
+#pragma endregion
+
+	//Vector4
+#pragma region ---Vector4---
+
+	inline Vector4 operator*(const Vector4& v, const Matrix4& m)
+	{
+		return Vector4{
+			m._11 * v.x + m._21 * v.y + m._31 * v.z + m._41 * v.w,
+			m._12 * v.x + m._22 * v.y + m._32 * v.z + m._42 * v.w,
+			m._13 * v.x + m._23 * v.y + m._33 * v.z + m._43 * v.w,
+			m._14 * v.x + m._24 * v.y + m._34 * v.z + m._44 * v.w
+		};
+	}
+
+	//inline Vector4 operator*(const Matrix4& m, const Vector4& v)
+	//{
+	//	return Vector4{
+	//		m._11 * v.x + m._12 * v.y + m._13 * v.z + m._14 * v.w,
+	//		m._21 * v.x + m._22 * v.y + m._23 * v.z + m._24 * v.w,
+	//		m._31 * v.x + m._32 * v.y + m._33 * v.z + m._34 * v.w,
+	//		m._41 * v.x + m._42 * v.y + m._43 * v.z + m._44 * v.w
+	//	};
+	//}
 
 #pragma endregion
 

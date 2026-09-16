@@ -103,6 +103,12 @@ namespace SAGE
 		int mFPSHistorySize = 0; // how many valid samples we have so far
 		float mFPSGraphMax = 200.0f;
 
+		// Debug
+		int mItemRenderCount = 0;
+		int mItemRenderShadowCount = 0;
+		bool IsAABBInFrustum(const Math::Plane frustumPlanes[6], const Math::Vector3& center, const Math::Vector3& extents);
+		void ExtractFrustumPlanes(const Math::Matrix4& vp, Math::Plane outPlanes[6]);
+
 		// TODO: Move out
 		SAGE::Graphics::RenderObject mScreenQuad;
 		SAGE::Graphics::RenderTarget mBaseRenderTarget;

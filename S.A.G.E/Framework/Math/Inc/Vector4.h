@@ -13,6 +13,7 @@ namespace SAGE::Math
 		constexpr Vector4() noexcept : Vector4(0.0f) {}
 		explicit constexpr Vector4(float f) noexcept : Vector4(f, f, f, f) {}
 		constexpr Vector4(float x, float y, float z, float w) noexcept : x(x), y(y), z(z), w(w) { }
+		//constexpr Vector4(Vector3 v, float w) noexcept : x(v.x), y(v.y), z(v.z), w(w) { }
 
 		//Commonly used vectors
 		const static Vector4 Zero;

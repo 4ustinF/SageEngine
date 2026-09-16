@@ -8,6 +8,7 @@
 #include "GameWorld.h"
 
 #include "AnimatorComponent.h"
+#include "MeshFilterComponent.h"
 #include "MeshRendererComponent.h"
 #include "ModelComponent.h"
 #include "TransformComponent.h"
@@ -181,6 +182,10 @@ void RenderService::Render()
 		}
 		mTexturingEffect.End();
 
+		Plane frustumPlanes[6];
+		ExtractFrustumPlanes(camera.GetViewMatrix() * camera.GetProjectionMatrix(), frustumPlanes);
+
+		mItemRenderCount = 0;
 		mStandardEffect.Begin();
 		for (auto& entry : mRenderEntries) {
 			mStandardEffect.Render(entry.renderGroup);
@@ -189,7 +194,14 @@ void RenderService::Render()
 		{
 			if (!entry->GetIsTransparent()) // TODO: This is a hack. Separate these groupings in 2? We should also sort the transparent objects so they are sorted back to front.
 			{
-				mStandardEffect.Render(entry->GetRenderObject());
+				const MeshFilterComponent* meshFilterComponent = entry->GetOwner().GetComponent<MeshFilterComponent>();
+				const OBB aabb = meshFilterComponent->GetGlobalBoundingBox(); // however you access center/extents now
+
+				if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+				{
+					mStandardEffect.Render(entry->GetRenderObject());
+					mItemRenderCount += 1;
+				}
 			}
 		}
 		mStandardEffect.End();
@@ -337,6 +349,10 @@ void RenderService::Render()
 // TODO: Make it so we can swap mSampleFilter on the fly.
 void RenderService::DebugUI()
 {
+	ImGui::Begin("Render Service", nullptr, ImGuiTreeNodeFlags_CollapsingHeader);
+	ImGui::SliderInt("Item Render Count##RenderService", &mItemRenderCount, 0, 1000000);
+	ImGui::End();
+
 	if (ImGui::CollapsingHeader("Performance##Debug"))
 	{
 		ImGui::Text("FPS: %i", mFPS);
@@ -630,5 +646,60 @@ void RenderService::RenderSkyBox()
 	case Dome:
 		mSkyBoxEffect.Render(mSkyBox);
 		break;
+	}
+}
+
+bool RenderService::IsAABBInFrustum(const Plane frustumPlanes[6], const Vector3& center, const Vector3& extents)
+{
+	for (int i = 0; i < 6; ++i)
+	{
+		const Vector3& n = frustumPlanes[i].normal;
+
+		// Projected half-extent of the AABB onto this plane's normal
+		float radius =
+			extents.x * fabsf(n.x) +
+			extents.y * fabsf(n.y) +
+			extents.z * fabsf(n.z);
+
+		float dist = Dot(n, center) + frustumPlanes[i].distance;
+
+		if (dist < -radius)
+			return false; // fully outside this plane -> culled
+	}
+	return true; // inside or intersecting on all planes -> visible
+}
+
+void RenderService::ExtractFrustumPlanes(const Matrix4& vp, Plane outPlanes[6])
+{
+	// Left
+	outPlanes[0].normal = Vector3(vp._14 + vp._11, vp._24 + vp._21, vp._34 + vp._31);
+	outPlanes[0].distance = vp._44 + vp._41;
+
+	// Right
+	outPlanes[1].normal = Vector3(vp._14 - vp._11, vp._24 - vp._21, vp._34 - vp._31);
+	outPlanes[1].distance = vp._44 - vp._41;
+
+	// Bottom
+	outPlanes[2].normal = Vector3(vp._14 + vp._12, vp._24 + vp._22, vp._34 + vp._32);
+	outPlanes[2].distance = vp._44 + vp._42;
+
+	// Top
+	outPlanes[3].normal = Vector3(vp._14 - vp._12, vp._24 - vp._22, vp._34 - vp._32);
+	outPlanes[3].distance = vp._44 - vp._42;
+
+	// Near (DirectX z range is [0,1], so this differs from OpenGL's near plane row)
+	outPlanes[4].normal = Vector3(vp._13, vp._23, vp._33);
+	outPlanes[4].distance = vp._43;
+
+	// Far
+	outPlanes[5].normal = Vector3(vp._14 - vp._13, vp._24 - vp._23, vp._34 - vp._33);
+	outPlanes[5].distance = vp._44 - vp._43;
+
+	for (int i = 0; i < 6; ++i)
+	{
+		// Plane Normalize
+		float len = SAGE::Math::Magnitude(outPlanes[i].normal);
+		outPlanes[i].normal /= len;
+		outPlanes[i].distance /= len;
 	}
 }

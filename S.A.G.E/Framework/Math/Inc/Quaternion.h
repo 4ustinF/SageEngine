@@ -70,6 +70,6 @@ namespace SAGE::Math
 			return { w / s, x / s, y / s, z / s };
 		}
 
-		bool operator==(const Quaternion& q) const noexcept { return w == q.w, x == q.x && y == q.y && z == q.z; } // TODO: Floating point precision :/
+		bool operator==(const Quaternion& q) const noexcept { return w == q.w && x == q.x && y == q.y && z == q.z; } // TODO: Floating point precision :/
 	};
 }

@@ -184,6 +184,7 @@ void RenderService::Render()
 
 		Plane frustumPlanes[6];
 		ExtractFrustumPlanes(camera.GetViewMatrix() * camera.GetProjectionMatrix(), frustumPlanes);
+		std::vector<MeshRendererComponent*> transparentObjects;
 
 		mItemRenderCount = 0;
 		mStandardEffect.Begin();
@@ -202,6 +203,10 @@ void RenderService::Render()
 					mStandardEffect.Render(entry->GetRenderObject());
 					mItemRenderCount += 1;
 				}
+			}
+			else
+			{
+				transparentObjects.push_back(entry);
 			}
 		}
 		mStandardEffect.End();
@@ -241,16 +246,6 @@ void RenderService::Render()
 				mStandardEffect.SetSpotShadowMap(spotLightIndex, &spotShadowEffect.GetDepthMap());
 				const auto& cam = spotShadowEffect.GetLightCamera();
 				mStandardEffect.SetSpotLightViewProj(spotLightIndex, cam.GetViewMatrix() * cam.GetProjectionMatrix());
-			}
-		}
-
-		std::vector<MeshRendererComponent*> transparentObjects;
-
-		for (auto& entry : mMeshRendererEntrys)
-		{
-			if (entry->GetIsTransparent())
-			{
-				transparentObjects.push_back(entry);
 			}
 		}
 

@@ -193,9 +193,9 @@ void RenderService::Render()
 		}
 		for (auto& entry : mMeshRendererEntrys)
 		{
-			if (!entry->GetIsTransparent()) // TODO: This is a hack. Separate these groupings in 2? We should also sort the transparent objects so they are sorted back to front.
+			if (!entry->GetIsTransparent()) // TODO: This is a hack. Separate these groupings in 2?
 			{
-				const MeshFilterComponent* meshFilterComponent = entry->GetOwner().GetComponent<MeshFilterComponent>();
+				const MeshFilterComponent* meshFilterComponent = entry->GetOwner().GetComponent<MeshFilterComponent>(); // TODO: 
 				const OBB aabb = meshFilterComponent->GetGlobalBoundingBox();
 
 				if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
@@ -233,19 +233,30 @@ void RenderService::Render()
 			if (spotShadowEffect.NeedsUpdate())
 			{
 				spotShadowEffect.SetSpotLight(mSpotLights[spotLightIndex]);
+
+				const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
+				const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
+				ExtractFrustumPlanes(viewProjection, frustumPlanes);
+
 				spotShadowEffect.Begin();
 				for (auto& entry : mRenderEntries) {
 					spotShadowEffect.Render(entry.renderGroup);
 				}
-				for (auto* entry : mMeshRendererEntrys) {
-					spotShadowEffect.Render(entry->GetRenderObject());
+				for (auto* entry : mMeshRendererEntrys) 
+				{
+					const MeshFilterComponent* meshFilterComponent = entry->GetOwner().GetComponent<MeshFilterComponent>(); // TODO: 
+					const OBB aabb = meshFilterComponent->GetGlobalBoundingBox();
+
+					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+					{
+						spotShadowEffect.Render(entry->GetRenderObject());
+					}
 				}
 				spotShadowEffect.End();
 				spotShadowEffect.MarkClean();
 
 				mStandardEffect.SetSpotShadowMap(spotLightIndex, &spotShadowEffect.GetDepthMap());
-				const auto& cam = spotShadowEffect.GetLightCamera();
-				mStandardEffect.SetSpotLightViewProj(spotLightIndex, cam.GetViewMatrix() * cam.GetProjectionMatrix());
+				mStandardEffect.SetSpotLightViewProj(spotLightIndex, viewProjection);
 			}
 		}
 

@@ -1,0 +1,24 @@
+{
+  "Name": "Table",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -6.7055,
+        -4.115,
+        -7.8485
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.0,
+        0.343,
+        0.0
+      ],
+      "Size": [
+        1.219,
+        0.686,
+        2.133
+      ]
+    }
+  }
+}

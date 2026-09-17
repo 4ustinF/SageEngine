@@ -1,0 +1,29 @@
+{
+  "Name": "Right Wall 6",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -14.097,
+        -4.115,
+        -5.029
+      ],
+      "Local Rotation": [
+        0.0,
+        45.0,
+        0.0
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        0.269407,
+        2.743,
+        -0.2
+      ],
+      "Size": [
+        0.538815,
+        5.486,
+        0.4
+      ]
+    }
+  }
+}

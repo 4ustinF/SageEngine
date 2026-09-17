@@ -330,6 +330,11 @@ bool MeshRendererComponent::GetCanCastShadows() const
 	return renderObject.canCastShadows;
 }
 
+const OBB MeshRendererComponent::GetGlobalBoundingBox() const
+{
+	return mMeshFilter->GetGlobalBoundingBox();
+};
+
 void MeshRendererComponent::SetDiffuseMapFileName(const char* fileName)
 {
 	mMaterialData.diffuseMapName = fileName;

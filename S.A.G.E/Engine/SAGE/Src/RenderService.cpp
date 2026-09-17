@@ -195,9 +195,7 @@ void RenderService::Render()
 		{
 			if (!entry->GetIsTransparent()) // TODO: This is a hack. Separate these groupings in 2?
 			{
-				const MeshFilterComponent* meshFilterComponent = entry->GetOwner().GetComponent<MeshFilterComponent>(); // TODO: 
-				const OBB aabb = meshFilterComponent->GetGlobalBoundingBox();
-
+				const OBB aabb = entry->GetGlobalBoundingBox();
 				if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
 				{
 					mStandardEffect.Render(entry->GetRenderObject());
@@ -244,9 +242,7 @@ void RenderService::Render()
 				}
 				for (auto* entry : mMeshRendererEntrys) 
 				{
-					const MeshFilterComponent* meshFilterComponent = entry->GetOwner().GetComponent<MeshFilterComponent>(); // TODO: 
-					const OBB aabb = meshFilterComponent->GetGlobalBoundingBox();
-
+					const OBB aabb = entry->GetGlobalBoundingBox();
 					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
 					{
 						spotShadowEffect.Render(entry->GetRenderObject());
@@ -293,9 +289,7 @@ void RenderService::Render()
 		mStandardEffect.Begin();
 		for (auto* entry : transparentObjects)
 		{
-			const MeshFilterComponent* meshFilterComponent = entry->GetOwner().GetComponent<MeshFilterComponent>();
-			const OBB aabb = meshFilterComponent->GetGlobalBoundingBox();
-
+			const OBB aabb = entry->GetGlobalBoundingBox();
 			if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
 			{
 				mStandardEffect.Render(entry->GetRenderObject());

@@ -33,6 +33,7 @@ namespace SAGE
 		bool GetShouldBloom() const { return mAllowBloom; }
 		bool GetIsTransparent() const { return mIsTransparent; }
 		bool GetCanCastShadows() const;
+		const Math::OBB GetGlobalBoundingBox() const;
 
 		// Setters
 		void SetMeshFilterComponent(MeshFilterComponent* meshFilterComponent) { mMeshFilter = meshFilterComponent; }

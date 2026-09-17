@@ -22,6 +22,7 @@ namespace SAGE
 		RigidBodyOld,
 		SelectionBox,
 		Spawner,
+		Spotlight,
 		Transform,
 		Count
 	};

@@ -662,26 +662,6 @@ void RenderService::RenderSkyBox()
 	}
 }
 
-bool RenderService::IsAABBInFrustum(const Plane frustumPlanes[6], const Vector3& center, const Vector3& extents)
-{
-	for (int i = 0; i < 6; ++i)
-	{
-		const Vector3& n = frustumPlanes[i].normal;
-
-		// Projected half-extent of the AABB onto this plane's normal
-		float radius =
-			extents.x * fabsf(n.x) +
-			extents.y * fabsf(n.y) +
-			extents.z * fabsf(n.z);
-
-		float dist = Dot(n, center) + frustumPlanes[i].distance;
-
-		if (dist < -radius)
-			return false; // fully outside this plane -> culled
-	}
-	return true; // inside or intersecting on all planes -> visible
-}
-
 void RenderService::ExtractFrustumPlanes(const Matrix4& vp, Plane outPlanes[6])
 {
 	// Left
@@ -711,8 +691,8 @@ void RenderService::ExtractFrustumPlanes(const Matrix4& vp, Plane outPlanes[6])
 	for (int i = 0; i < 6; ++i)
 	{
 		// Plane Normalize
-		float len = SAGE::Math::Magnitude(outPlanes[i].normal);
-		outPlanes[i].normal /= len;
-		outPlanes[i].distance /= len;
+		const float length = Magnitude(outPlanes[i].normal);
+		outPlanes[i].normal /= length;
+		outPlanes[i].distance /= length;
 	}
 }

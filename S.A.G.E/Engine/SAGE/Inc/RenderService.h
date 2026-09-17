@@ -106,7 +106,6 @@ namespace SAGE
 		// Debug
 		int mItemRenderCount = 0;
 		int mItemRenderShadowCount = 0;
-		bool IsAABBInFrustum(const Math::Plane frustumPlanes[6], const Math::Vector3& center, const Math::Vector3& extents);
 		void ExtractFrustumPlanes(const Math::Matrix4& vp, Math::Plane outPlanes[6]);
 
 		// TODO: Move out

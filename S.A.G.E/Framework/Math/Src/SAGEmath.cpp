@@ -649,4 +649,22 @@ bool SAGE::Math::IntersectRayTriangle(const Ray& ray, const Vector3& v0, const V
 	return true;
 }
 
+bool SAGE::Math::IsAABBInFrustum(const Plane frustumPlanes[6], const Vector3& center, const Vector3& extents)
+{
+	for (int planeIndex = 0; planeIndex < 6; ++planeIndex)
+	{
+		const Vector3& n = frustumPlanes[planeIndex].normal;
+
+		// Projected half-extent of the AABB onto this plane's normal
+		const float radius = extents.x * fabsf(n.x) + extents.y * fabsf(n.y) + extents.z * fabsf(n.z);
+		const float dist = Dot(n, center) + frustumPlanes[planeIndex].distance;
+
+		if (dist < -radius)
+		{
+			return false; // fully outside this plane -> culled
+		}
+	}
+	return true; // inside or intersecting on all planes -> visible
+}
+
 #pragma endregion

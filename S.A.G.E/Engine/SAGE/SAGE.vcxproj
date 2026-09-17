@@ -56,6 +56,7 @@
     <ClInclude Include="Inc\SelectionBoxComponent.h" />
     <ClInclude Include="Inc\Service.h" />
     <ClInclude Include="Inc\SpawnerComponent.h" />
+    <ClInclude Include="Inc\SpotLightComponent.h" />
     <ClInclude Include="Inc\TerrainService.h" />
     <ClInclude Include="Inc\TransformComponent.h" />
     <ClInclude Include="Inc\TypeIds.h" />
@@ -100,6 +101,7 @@
     <ClCompile Include="Src\SAGE.cpp" />
     <ClCompile Include="Src\SelectionBoxComponent.cpp" />
     <ClCompile Include="Src\SpawnerComponent.cpp" />
+    <ClCompile Include="Src\SpotLightComponent.cpp" />
     <ClCompile Include="Src\TerrainService.cpp" />
     <ClCompile Include="Src\TransformComponent.cpp" />
     <ClCompile Include="Src\UIService.cpp" />

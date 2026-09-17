@@ -165,6 +165,9 @@
     <ClInclude Include="Inc\Precompiled.h">
       <Filter>Inc</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\SpotLightComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\App.cpp">
@@ -273,6 +276,9 @@
       <Filter>Src\Components</Filter>
     </ClCompile>
     <ClCompile Include="Src\CapsuleColliderComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SpotLightComponent.cpp">
       <Filter>Src\Components</Filter>
     </ClCompile>
   </ItemGroup>

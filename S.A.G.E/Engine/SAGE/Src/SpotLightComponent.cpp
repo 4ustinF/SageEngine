@@ -76,63 +76,82 @@ void SpotLightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 
 #pragma region ---Setters---
 
-void SpotLightComponent::SetPosition(const Vector3& newPosition)
+void SpotLightComponent::SetPosition(const Vector3& position)
 {
-	// TODO:
+	if (mTransformComponent != nullptr)
+	{
+		mTransformComponent->SetPosition(position);
+	}
+	else
+	{
+		OnTransformPositionChanged(position);
+	}
 }
 
-void SpotLightComponent::SetDirection(const Vector3& newDirection)
+void SpotLightComponent::SetDirection(const Vector3& direction)
 {
 	// TODO:
 }
 
 void SpotLightComponent::SetInnerConeAngle(float innerConeAngle)
 {
+	mInnerConeAngle = innerConeAngle;
 	// TODO:
+	// mInnerConeAngle * Constants::DegToRad 
 }
 
 void SpotLightComponent::SetOuterConeAngle(float outerConeAngle)
 {
+	mOuterConeAngle = outerConeAngle;
 	// TODO:
+	// mOuterConeAngle * Constants::DegToRad 
 }
 
 void SpotLightComponent::SetRange(float range)
 {
+	mRange = range;
 	// TODO:
 }
 
-void SpotLightComponent::SetAttenuation(const Vector3& newAttenuation)
+void SpotLightComponent::SetAttenuation(const Vector3& attenuation)
 {
+	mAttenuation = attenuation;
 	// TODO:
 }
 
 void SpotLightComponent::SetAttenuationConstantTerm(float constantTerm)
 {
+	mAttenuation.x = constantTerm;
 	// TODO:
 }
 
 void SpotLightComponent::SetAttenuationLinearTerm(float linearTerm)
 {
+	mAttenuation.y = linearTerm;
 	// TODO:
 }
 
 void SpotLightComponent::SetAttenuationQuadraticTerm(float quadraticTerm)
 {
+	mAttenuation.z = quadraticTerm;
 	// TODO:
 }
 
-void SpotLightComponent::SetAmbient(const Color& color)
+void SpotLightComponent::SetAmbientColor(const Color& color)
 {
+	mAmbientColor = color;
 	// TODO:
 }
 
-void SpotLightComponent::SetDiffuse(const Color& color)
+void SpotLightComponent::SetDiffuseColor(const Color& color)
 {
+	mDiffuseColor = color;
 	// TODO:
 }
 
-void SpotLightComponent::SetSpecular(const Color& color)
+void SpotLightComponent::SetSpecularColor(const Color& color)
 {
+	mSpecularColor = color;
 	// TODO:
 }
 

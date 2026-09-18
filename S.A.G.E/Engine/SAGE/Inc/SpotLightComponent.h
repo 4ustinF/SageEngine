@@ -24,20 +24,20 @@ namespace SAGE
 		void OnEnable() override;
 		void OnDisable() override;
 
-		void SetPosition(const Math::Vector3& newPosition);
-		void SetDirection(const Math::Vector3& newDirection);
+		void SetPosition(const Math::Vector3& position);
+		void SetDirection(const Math::Vector3& direction);
 		void SetInnerConeAngle(float innerConeAngle);
 		void SetOuterConeAngle(float outerConeAngle);
 		void SetRange(float range);
 
-		void SetAttenuation(const Math::Vector3& newAttenuation);
+		void SetAttenuation(const Math::Vector3& attenuation);
 		void SetAttenuationConstantTerm(float constantTerm);	// Doesn't involve distance at all. It is just added flatly regardless of distance.
 		void SetAttenuationLinearTerm(float linearTerm);		// Falloff proportional to distance. A straight, gentle fade.
-		void SetAttenuationQuadraticTerm(float quadraticTerm);	// Falloff proportional to distance²
+		void SetAttenuationQuadraticTerm(float quadraticTerm);	// Falloff proportional to distance².
 
-		void SetAmbient(const Graphics::Color& color);
-		void SetDiffuse(const Graphics::Color& color);
-		void SetSpecular(const Graphics::Color& color);
+		void SetAmbientColor(const Graphics::Color& color);
+		void SetDiffuseColor(const Graphics::Color& color);
+		void SetSpecularColor(const Graphics::Color& color);
 
 	private:
 		void OnTransformPositionChanged(const Math::Vector3& position);
@@ -48,14 +48,12 @@ namespace SAGE
 		Core::Delegate::FDelegateHandle OnPositionChangedHandle;
 		Core::Delegate::FDelegateHandle OnRotationChangedHandle;
 
-		//Math::Vector3 position;
-		//float range;
-		//Math::Vector3 direction;
-		//float innerConeAngle;
-		//Math::Vector3 attenuation; // {1.0f, 0.045f, 0.0075f}
-		//float outerConeAngle;
-		//Color ambient;
-		//Color diffuse;
-		//Color specular;
+		float mInnerConeAngle = 10.0f; // 10.0f * Constants::DegToRad = 0.17453292519f
+		float mOuterConeAngle = 50.0f; // 50.0f * Constants::DegToRad = 0.87266462599f
+		float mRange = 100.0f;
+		Math::Vector3 mAttenuation = Math::Vector3(1.0f, 0.045f, 0.0075f);
+		Graphics::Color mAmbientColor = { 0.05f, 0.05f, 0.05f, 1.0f };
+		Graphics::Color mDiffuseColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+		Graphics::Color mSpecularColor = { 1.0f, 1.0f, 1.0f, 1.0f };
 	};
 }

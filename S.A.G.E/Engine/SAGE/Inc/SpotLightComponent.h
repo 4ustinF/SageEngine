@@ -4,6 +4,8 @@
 
 namespace SAGE
 {
+	class TransformComponent;
+
 	class SpotLightComponent final : public Component
 	{
 	public:
@@ -23,6 +25,12 @@ namespace SAGE
 		void OnDisable() override;
 
 	private:
-		
+		void OnTransformPositionChanged(const Math::Vector3& position);
+		void OnTransformRotationChanged(const Math::Quaternion& rotation);
+
+		TransformComponent* mTransformComponent = nullptr;
+
+		Core::Delegate::FDelegateHandle OnPositionChangedHandle;
+		Core::Delegate::FDelegateHandle OnRotationChangedHandle;
 	};
 }

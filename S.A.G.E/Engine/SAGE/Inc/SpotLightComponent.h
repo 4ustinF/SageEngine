@@ -24,6 +24,21 @@ namespace SAGE
 		void OnEnable() override;
 		void OnDisable() override;
 
+		void SetPosition(const Math::Vector3& newPosition);
+		void SetDirection(const Math::Vector3& newDirection);
+		void SetInnerConeAngle(float innerConeAngle);
+		void SetOuterConeAngle(float outerConeAngle);
+		void SetRange(float range);
+
+		void SetAttenuation(const Math::Vector3& newAttenuation);
+		void SetAttenuationConstantTerm(float constantTerm);	// Doesn't involve distance at all. It is just added flatly regardless of distance.
+		void SetAttenuationLinearTerm(float linearTerm);		// Falloff proportional to distance. A straight, gentle fade.
+		void SetAttenuationQuadraticTerm(float quadraticTerm);	// Falloff proportional to distance²
+
+		void SetAmbient(const Graphics::Color& color);
+		void SetDiffuse(const Graphics::Color& color);
+		void SetSpecular(const Graphics::Color& color);
+
 	private:
 		void OnTransformPositionChanged(const Math::Vector3& position);
 		void OnTransformRotationChanged(const Math::Quaternion& rotation);
@@ -32,5 +47,15 @@ namespace SAGE
 
 		Core::Delegate::FDelegateHandle OnPositionChangedHandle;
 		Core::Delegate::FDelegateHandle OnRotationChangedHandle;
+
+		//Math::Vector3 position;
+		//float range;
+		//Math::Vector3 direction;
+		//float innerConeAngle;
+		//Math::Vector3 attenuation; // {1.0f, 0.045f, 0.0075f}
+		//float outerConeAngle;
+		//Color ambient;
+		//Color diffuse;
+		//Color specular;
 	};
 }

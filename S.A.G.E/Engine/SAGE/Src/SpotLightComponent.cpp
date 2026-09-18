@@ -73,3 +73,67 @@ void SpotLightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 {
 	// TODO: Look into if spot lights can look straight down?
 }
+
+#pragma region ---Setters---
+
+void SpotLightComponent::SetPosition(const Vector3& newPosition)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetDirection(const Vector3& newDirection)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetInnerConeAngle(float innerConeAngle)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetOuterConeAngle(float outerConeAngle)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetRange(float range)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetAttenuation(const Vector3& newAttenuation)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetAttenuationConstantTerm(float constantTerm)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetAttenuationLinearTerm(float linearTerm)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetAttenuationQuadraticTerm(float quadraticTerm)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetAmbient(const Color& color)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetDiffuse(const Color& color)
+{
+	// TODO:
+}
+
+void SpotLightComponent::SetSpecular(const Color& color)
+{
+	// TODO:
+}
+
+#pragma endregion

@@ -24,6 +24,19 @@ namespace SAGE
 		void OnEnable() override;
 		void OnDisable() override;
 
+		//const Math::Vector3& GetPosition();
+		//const Math::Vector3& GetDirection();
+		float GetInnerConeAngle() const { return mInnerConeAngle; }
+		float GetOuterConeAngle() const { return mOuterConeAngle; }
+		float GetRange() const { return mRange; }
+		const Math::Vector3& GetAttenuation() const { return mAttenuation; }
+		float GetAttenuationConstantTerm() const { return mAttenuation.x; }
+		float GetAttenuationLinearTerm() const { return mAttenuation.y; }
+		float GetAttenuationQuadraticTerm() const { return mAttenuation.z; }
+		const Graphics::Color& GetAmbientColor() const { return mAmbientColor; }
+		const Graphics::Color& GetDiffuseColor() const { return mDiffuseColor; }
+		const Graphics::Color& GetSpecularColor() const { return mSpecularColor; }
+
 		void SetPosition(const Math::Vector3& position);
 		void SetDirection(const Math::Vector3& direction);
 		void SetInnerConeAngle(float innerConeAngle);

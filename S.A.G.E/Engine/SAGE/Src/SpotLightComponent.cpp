@@ -66,13 +66,34 @@ void SpotLightComponent::OnDisable()
 
 void SpotLightComponent::OnTransformPositionChanged(const Vector3& position)
 {
-	
+	// TODO:
 }
 
 void SpotLightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 {
 	// TODO: Look into if spot lights can look straight down?
 }
+
+#pragma region ---Getters---
+
+//const Vector3& SpotLightComponent::GetPosition()
+//{
+//	if (mTransformComponent != nullptr)
+//	{
+//		return mTransformComponent->GetPosition();
+//	}
+//
+//	// TODO: Check if we have a cached spot light and if so return its position.
+//
+//	return Vector3::Zero; // TODO:
+//}
+//
+//const Vector3& SpotLightComponent::GetDirection()
+//{
+//	return Vector3::One; // TODO:
+//}
+
+#pragma endregion
 
 #pragma region ---Setters---
 

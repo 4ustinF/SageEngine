@@ -23,7 +23,7 @@
 #include "RigidBodyComponentOld.h"
 #include "SelectionBoxComponent.h"
 #include "SpawnerComponent.h"
-#include "SpotLightComponent.h"
+#include "SpotlightComponent.h"
 #include "TransformComponent.h"
 
 // Service Headers

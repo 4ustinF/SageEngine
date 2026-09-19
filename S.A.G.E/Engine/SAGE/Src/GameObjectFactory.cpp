@@ -19,6 +19,7 @@
 #include "RigidBodyComponentOld.h"
 #include "SelectionBoxComponent.h"
 #include "SpawnerComponent.h"
+#include "SpotlightComponent.h"
 #include "TransformComponent.h"
 
 using namespace SAGE;
@@ -346,6 +347,11 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 			const auto waitTime = value["WaitTime"].GetFloat();
 			spawnerComponent->SetWaitTime(waitTime);
 		}
+	}
+	else if (strcmp(componentName, "Spot Light Component") == 0)
+	{
+		SpotlightComponent* spotlightComponent = gameObject.AddComponent<SpotlightComponent>();
+		spotlightComponent->LoadComponentFromTemplate(value);
 	}
 	else if (strcmp(componentName, "Transform Component") == 0)
 	{	

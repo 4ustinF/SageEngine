@@ -4,9 +4,10 @@
 
 namespace SAGE
 {
+	class RenderService;
 	class TransformComponent;
 
-	class SpotLightComponent final : public Component
+	class SpotlightComponent final : public Component
 	{
 	public:
 		SET_TYPE_ID(ComponentId::Spotlight)
@@ -26,7 +27,7 @@ namespace SAGE
 
 		//const Math::Vector3& GetPosition();
 		//const Math::Vector3& GetDirection();
-		float GetInnerConeAngle() const { return mInnerConeAngle; }
+	/*	float GetInnerConeAngle() const { return mInnerConeAngle; }
 		float GetOuterConeAngle() const { return mOuterConeAngle; }
 		float GetRange() const { return mRange; }
 		const Math::Vector3& GetAttenuation() const { return mAttenuation; }
@@ -35,7 +36,7 @@ namespace SAGE
 		float GetAttenuationQuadraticTerm() const { return mAttenuation.z; }
 		const Graphics::Color& GetAmbientColor() const { return mAmbientColor; }
 		const Graphics::Color& GetDiffuseColor() const { return mDiffuseColor; }
-		const Graphics::Color& GetSpecularColor() const { return mSpecularColor; }
+		const Graphics::Color& GetSpecularColor() const { return mSpecularColor; }*/
 
 		void SetPosition(const Math::Vector3& position);
 		void SetDirection(const Math::Vector3& direction);
@@ -53,20 +54,40 @@ namespace SAGE
 		void SetSpecularColor(const Graphics::Color& color);
 
 	private:
+		friend class RenderService;
+		uint32_t GetDepthMapResolution() const { return static_cast<uint32_t>(mDepthMapResolution); }
+		const Graphics::SpotLight& GetSpotLightData() const { return mSpotLightData; }
+		void SetSlotIndex(int index) { mSlotIndex = index; }
+		int GetSlotIndex() const { return mSlotIndex; }
+		int mSlotIndex = -1;
+		bool mIsSlotIndexValid = false;
+
 		void OnTransformPositionChanged(const Math::Vector3& position);
 		void OnTransformRotationChanged(const Math::Quaternion& rotation);
 
+		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
 
 		Core::Delegate::FDelegateHandle OnPositionChangedHandle;
 		Core::Delegate::FDelegateHandle OnRotationChangedHandle;
 
-		float mInnerConeAngle = 10.0f; // 10.0f * Constants::DegToRad = 0.17453292519f
-		float mOuterConeAngle = 50.0f; // 50.0f * Constants::DegToRad = 0.87266462599f
-		float mRange = 100.0f;
-		Math::Vector3 mAttenuation = Math::Vector3(1.0f, 0.045f, 0.0075f);
-		Graphics::Color mAmbientColor = { 0.05f, 0.05f, 0.05f, 1.0f };
-		Graphics::Color mDiffuseColor = { 1.0f, 1.0f, 1.0f, 1.0f };
-		Graphics::Color mSpecularColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+		Graphics::SpotLight mSpotLightData;
+		Graphics::DepthMapResolution mDepthMapResolution = Graphics::DepthMapResolution::DMPR_1024;
+
+		const char* DepthMapResolutionNames[5] = {
+			"DMPR_256",
+			"DMPR_512",
+			"DMPR_1024",
+			"DMPR_2048",
+			"DMPR_4096",
+		};
+
+		const std::vector<Graphics::DepthMapResolution> DepthMapResolutionValues = {
+			Graphics::DepthMapResolution::DMPR_256,
+			Graphics::DepthMapResolution::DMPR_512,
+			Graphics::DepthMapResolution::DMPR_1024,
+			Graphics::DepthMapResolution::DMPR_2048,
+			Graphics::DepthMapResolution::DMPR_4096,
+		};
 	};
 }

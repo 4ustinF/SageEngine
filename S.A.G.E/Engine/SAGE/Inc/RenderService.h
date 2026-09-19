@@ -7,6 +7,7 @@ namespace SAGE
 	class AnimatorComponent;
 	class ModelComponent;
 	class TransformComponent;
+	class SpotlightComponent;
 
 	class CameraService;
 	class TerrainService;
@@ -56,6 +57,12 @@ namespace SAGE
 		void RegisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic = false);
 		void UnregisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic = false);
 
+		friend class SpotlightComponent;
+		bool RegisterSpotLight(SpotlightComponent* spotlightComponent);
+		void UnregisterSpotLight(SpotlightComponent* spotlightComponent);
+		SAGE::Graphics::SpotLight& GetSpotLight(int slot);
+		SAGE::Graphics::SpotShadowEffect& GetSpotShadowEffect(int slot);
+
 		struct Entry
 		{
 			const AnimatorComponent* animatorComponent = nullptr;
@@ -70,15 +77,18 @@ namespace SAGE
 		std::vector<MeshRendererComponent*> mMeshRendererEntrys; // TODO: Add tiling support to this.
 		std::vector<MeshRendererComponent*> mBasicMeshRendererEntrys;
 
+
 		const CameraService* mCameraService = nullptr;
 		const TerrainService* mTerrainService = nullptr;
 
 		// TODO - turn these into components
 		SAGE::Graphics::DirectionalLight mDirectionalLight;
 
-		std::array<SAGE::Graphics::SpotLight, Graphics::MaxSpotLights> mSpotLights;
+		std::array<SAGE::Graphics::SpotLight, Graphics::MaxSpotLights> mSpotLights{};
 		std::array<SAGE::Graphics::SpotShadowEffect, Graphics::MaxSpotLights> mSpotShadowEffects;
-		size_t mActiveSpotLightCount = 0;
+		std::array<SpotlightComponent*, Graphics::MaxSpotLights> mSpotlightSlotOwners{}; // nullptr = free slot
+		std::vector<int> mActiveSpotLightSlots;   // compact — only holds slots currently in use
+		std::vector<int> mFreeSpotLightSlots;     // stack of unused slot indices, avoids scanning for a free one
 
 		SAGE::Graphics::StandardEffect mStandardEffect;
 		SAGE::Graphics::TexturingEffect mSkyBoxEffect;

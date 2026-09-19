@@ -1,7 +1,9 @@
 #include "Precompiled.h"
-#include "SpotLightComponent.h"
+#include "SpotlightComponent.h"
 
 #include "GameObject.h"
+#include "GameWorld.h"
+#include "RenderService.h"
 #include "TransformComponent.h"
 
 using namespace SAGE;
@@ -9,40 +11,61 @@ using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(SpotLightComponent, 128);
+MEMORY_POOL_DEFINE(SpotlightComponent, 128);
 
-void SpotLightComponent::LoadComponentFromTemplate(const rj::Value& value)
+void SpotlightComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
 	// TODO: Load in a pointer to a baked light map if one exist.
 }
 
-void SpotLightComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
+void SpotlightComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
 
 }
 
-void SpotLightComponent::Initialize()
+void SpotlightComponent::Initialize()
 {
-	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
-	if (mTransformComponent != nullptr)
+	GameObject& owner = GetOwner();
+	GameWorld& world = owner.GetWorld();
+
+	mRenderService = world.GetService<RenderService>();
+	mTransformComponent = owner.GetComponent<TransformComponent>();
+
+	if (mTransformComponent)
 	{
-		OnPositionChangedHandle = mTransformComponent->GetOnPositionChangeDelegate().AddRaw(this, &SpotLightComponent::OnTransformPositionChanged);
-		OnRotationChangedHandle = mTransformComponent->GetOnRotationChangeDelegate().AddRaw(this, &SpotLightComponent::OnTransformRotationChanged);
+		mSpotLightData.position = mTransformComponent->GetPosition();
+		//mSpotLightData.direction = mTransformComponent->GetRotation(); // TODO:
 	}
 }
 
-void SpotLightComponent::Terminate()
+void SpotlightComponent::Terminate()
 {
-	if (mTransformComponent != nullptr)
-	{
-		mTransformComponent->GetOnPositionChangeDelegate().Remove(OnPositionChangedHandle);
-		mTransformComponent->GetOnRotationChangeDelegate().Remove(OnRotationChangedHandle);
-		mTransformComponent = nullptr;
-	}
+	mRenderService = nullptr;
+	mTransformComponent = nullptr;
 }
 
-void SpotLightComponent::DebugUI()
+void SpotlightComponent::DebugUI()
 {
+	if (ImGui::CollapsingHeader("Spotlight Component##SpotLightComponent", ImGuiTreeNodeFlags_CollapsingHeader))
+	{
+		ImGui::Text("Resolution: "); ImGui::SameLine();
+		int currentResolution = static_cast<int>(std::log2(static_cast<int>(mDepthMapResolution) >> 8));
+		if (ImGui::Combo(" ", &currentResolution, DepthMapResolutionNames, IM_ARRAYSIZE(DepthMapResolutionNames)))
+		{
+			DepthMapResolution currentDepthMapResolution = static_cast<DepthMapResolution>(256 << currentResolution);
+			if (mDepthMapResolution != currentDepthMapResolution)
+			{
+				mDepthMapResolution = currentDepthMapResolution;
+				if (mRenderService)
+				{
+					mRenderService->UnregisterSpotLight(this);
+					mIsSlotIndexValid = mRenderService->RegisterSpotLight(this);
+				}
+			}
+		}
+
+	}
+
 	// TODO:
 	// Debug view of spotlight
 	
@@ -54,22 +77,45 @@ void SpotLightComponent::DebugUI()
 	// Shadows: bool canCastShadows = true;
 }
 
-void SpotLightComponent::OnEnable()
+void SpotlightComponent::OnEnable()
 {
 	// TODO: Get/Create/Init/Cache a spotlight from the render service.
+	if (mRenderService)
+	{
+		mIsSlotIndexValid = mRenderService->RegisterSpotLight(this);
+	}
+
+	if (mTransformComponent != nullptr)
+	{
+		OnPositionChangedHandle = mTransformComponent->GetOnPositionChangeDelegate().AddRaw(this, &SpotlightComponent::OnTransformPositionChanged);
+		OnRotationChangedHandle = mTransformComponent->GetOnRotationChangeDelegate().AddRaw(this, &SpotlightComponent::OnTransformRotationChanged);
+	}
 }
 
-void SpotLightComponent::OnDisable()
+void SpotlightComponent::OnDisable()
 {
-	// TODO: Return/Terminate/null a spotlight from the render service.
+	if (mRenderService)
+	{
+		mRenderService->UnregisterSpotLight(this);
+	}
+
+	if (mTransformComponent != nullptr)
+	{
+		mTransformComponent->GetOnPositionChangeDelegate().Remove(OnPositionChangedHandle);
+		mTransformComponent->GetOnRotationChangeDelegate().Remove(OnRotationChangedHandle);
+	}
 }
 
-void SpotLightComponent::OnTransformPositionChanged(const Vector3& position)
+void SpotlightComponent::OnTransformPositionChanged(const Vector3& position)
 {
-	// TODO:
+	mSpotLightData.position = position;
+	if (mIsSlotIndexValid)
+	{
+		mRenderService->GetSpotLight(mSlotIndex).position = position;
+	}
 }
 
-void SpotLightComponent::OnTransformRotationChanged(const Quaternion& rotation)
+void SpotlightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 {
 	// TODO: Look into if spot lights can look straight down?
 }
@@ -97,7 +143,7 @@ void SpotLightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 
 #pragma region ---Setters---
 
-void SpotLightComponent::SetPosition(const Vector3& position)
+void SpotlightComponent::SetPosition(const Vector3& position)
 {
 	if (mTransformComponent != nullptr)
 	{
@@ -109,70 +155,70 @@ void SpotLightComponent::SetPosition(const Vector3& position)
 	}
 }
 
-void SpotLightComponent::SetDirection(const Vector3& direction)
+void SpotlightComponent::SetDirection(const Vector3& direction)
 {
 	// TODO:
 }
 
-void SpotLightComponent::SetInnerConeAngle(float innerConeAngle)
+void SpotlightComponent::SetInnerConeAngle(float innerConeAngle)
 {
-	mInnerConeAngle = innerConeAngle;
+	//mInnerConeAngle = innerConeAngle;
 	// TODO:
 	// mInnerConeAngle * Constants::DegToRad 
 }
 
-void SpotLightComponent::SetOuterConeAngle(float outerConeAngle)
+void SpotlightComponent::SetOuterConeAngle(float outerConeAngle)
 {
-	mOuterConeAngle = outerConeAngle;
+	//mOuterConeAngle = outerConeAngle;
 	// TODO:
 	// mOuterConeAngle * Constants::DegToRad 
 }
 
-void SpotLightComponent::SetRange(float range)
+void SpotlightComponent::SetRange(float range)
 {
-	mRange = range;
+	//mRange = range;
 	// TODO:
 }
 
-void SpotLightComponent::SetAttenuation(const Vector3& attenuation)
+void SpotlightComponent::SetAttenuation(const Vector3& attenuation)
 {
-	mAttenuation = attenuation;
+	//mAttenuation = attenuation;
 	// TODO:
 }
 
-void SpotLightComponent::SetAttenuationConstantTerm(float constantTerm)
+void SpotlightComponent::SetAttenuationConstantTerm(float constantTerm)
 {
-	mAttenuation.x = constantTerm;
+	//mAttenuation.x = constantTerm;
 	// TODO:
 }
 
-void SpotLightComponent::SetAttenuationLinearTerm(float linearTerm)
+void SpotlightComponent::SetAttenuationLinearTerm(float linearTerm)
 {
-	mAttenuation.y = linearTerm;
+	//mAttenuation.y = linearTerm;
 	// TODO:
 }
 
-void SpotLightComponent::SetAttenuationQuadraticTerm(float quadraticTerm)
+void SpotlightComponent::SetAttenuationQuadraticTerm(float quadraticTerm)
 {
-	mAttenuation.z = quadraticTerm;
+	//mAttenuation.z = quadraticTerm;
 	// TODO:
 }
 
-void SpotLightComponent::SetAmbientColor(const Color& color)
+void SpotlightComponent::SetAmbientColor(const Color& color)
 {
-	mAmbientColor = color;
+	//mAmbientColor = color;
 	// TODO:
 }
 
-void SpotLightComponent::SetDiffuseColor(const Color& color)
+void SpotlightComponent::SetDiffuseColor(const Color& color)
 {
-	mDiffuseColor = color;
+	//mDiffuseColor = color;
 	// TODO:
 }
 
-void SpotLightComponent::SetSpecularColor(const Color& color)
+void SpotlightComponent::SetSpecularColor(const Color& color)
 {
-	mSpecularColor = color;
+	//mSpecularColor = color;
 	// TODO:
 }
 

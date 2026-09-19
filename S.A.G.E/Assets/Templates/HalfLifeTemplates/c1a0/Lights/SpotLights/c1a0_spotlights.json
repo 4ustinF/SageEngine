@@ -1,0 +1,8 @@
+{
+  "Name": "Spotlights",
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Lights/SpotLights/c1a0_spotlight_00.json"
+    }
+  ]
+}

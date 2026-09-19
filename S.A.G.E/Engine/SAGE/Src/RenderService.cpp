@@ -11,6 +11,7 @@
 #include "MeshFilterComponent.h"
 #include "MeshRendererComponent.h"
 #include "ModelComponent.h"
+#include "SpotlightComponent.h"
 #include "TransformComponent.h"
 
 using namespace SAGE;
@@ -30,32 +31,38 @@ void RenderService::Initialize()
 	mDirectionalLight.diffuse = { 0.7f, 0.7f, 0.7f, 1.0f };
 	mDirectionalLight.specular = { 0.7f, 0.7f, 0.7f, 1.0f };
 
-	mActiveSpotLightCount = 2; // Graphics::MaxSpotLights;
-	struct SpotLightPreset { Vector3 position; Vector3 direction; };
-	const SpotLightPreset presets[Graphics::MaxSpotLights] = {
-		{ { -1.0f, -2.5f, 5.42f }, Normalize({  0.1f, -1.0f,  0.1f }) },
-		{ { -1.0f, -2.5f, 6.77f }, Normalize({ 0.1f, -1.0f,  0.1f  }) },
-		{ { 0.0f, 0.0f, 0.0f }, Normalize({  0.05f, -1.0f, -0.05f }) },
-		{ { 0.0f, 0.0f, 0.0f }, Normalize({ -0.05f, -1.0f, -0.05f }) },
-	};
+	//static_cast<int>(mActiveSpotLightSlots.size()) = 2; // Graphics::MaxSpotLights;
+	//struct SpotLightPreset { Vector3 position; Vector3 direction; };
+	//const SpotLightPreset presets[Graphics::MaxSpotLights] = {
+	//	{ { -1.0f, -2.5f, 5.42f }, Normalize({  0.1f, -1.0f,  0.1f }) },
+	//	{ { -1.0f, -2.5f, 6.77f }, Normalize({ 0.1f, -1.0f,  0.1f  }) },
+	//	{ { 0.0f, 0.0f, 0.0f }, Normalize({  0.05f, -1.0f, -0.05f }) },
+	//	{ { 0.0f, 0.0f, 0.0f }, Normalize({ -0.05f, -1.0f, -0.05f }) },
+	//};
 
-	for (size_t i = 0; i < mActiveSpotLightCount; ++i)
+	//for (size_t i = 0; i < static_cast<int>(mActiveSpotLightSlots.size()); ++i)
+	//{
+	//	auto& light = mSpotLights[i];
+	//	light.position = presets[i].position;
+	//	light.direction = presets[i].direction;
+	//	light.range = 10.0f;
+	//	light.innerConeAngle = 10.0f * Constants::DegToRad;
+	//	light.outerConeAngle = 70.0f * Constants::DegToRad;
+	//	light.ambient = { 0.05f, 0.05f, 0.05f, 1.0f };
+	//	light.diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
+	//	light.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	//	light.attenuation = { 1.0f, 0.045f, 0.0075f };
+
+	//	mSpotShadowEffects[i].Initialize(1024);
+	//}
+
+	mFreeSpotLightSlots.reserve(Graphics::MaxSpotLights);
+	for (int i = static_cast<int>(Graphics::MaxSpotLights) - 1; i >= 0; --i) 
 	{
-		auto& light = mSpotLights[i];
-		light.position = presets[i].position;
-		light.direction = presets[i].direction;
-		light.range = 10.0f;
-		light.innerConeAngle = 10.0f * Constants::DegToRad;
-		light.outerConeAngle = 70.0f * Constants::DegToRad;
-		light.ambient = { 0.05f, 0.05f, 0.05f, 1.0f };
-		light.diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
-		light.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
-		light.attenuation = { 1.0f, 0.045f, 0.0075f };
-
-		mSpotShadowEffects[i].Initialize(1024);
+		mFreeSpotLightSlots.push_back(i); // reverse order so slot 0 gets handed out first
 	}
 
-	mStandardEffect.SetSpotLights(mSpotLights.data(), mActiveSpotLightCount);
+	mStandardEffect.SetSpotLights(mSpotLights.data(), static_cast<int>(mActiveSpotLightSlots.size()));
 	mStandardEffect.UseSpotShadows(true);
 
 	mStandardEffect.SetBlendState(BlendState::Mode::AlphaBlend);
@@ -116,10 +123,10 @@ void RenderService::Terminate()
 		shadowEffect.Terminate();
 	}
 
-	for (size_t i = 0; i < mActiveSpotLightCount; ++i) 
-	{
-		mSpotShadowEffects[i].Terminate();
-	}
+	//for (size_t i = 0; i < static_cast<int>(mActiveSpotLightSlots.size()); ++i) 
+	//{
+	//	mSpotShadowEffects[i].Terminate();
+	//}
 
 	mShadowEffect.Terminate();
 	mTerrainEffect.Terminate();
@@ -142,7 +149,7 @@ void RenderService::Render()
 {
 	auto& camera = mCameraService->GetCamera();
 	mStandardEffect.SetCamera(camera);
-	mStandardEffect.SetSpotLights(mSpotLights.data(), mActiveSpotLightCount);
+	mStandardEffect.SetSpotLights(mSpotLights.data(), static_cast<int>(mActiveSpotLightSlots.size()));
 	mTexturingEffect.SetCamera(camera);
 	mSkyBoxEffect.SetCamera(camera);
 	mTerrainEffect.SetCamera(camera);
@@ -225,7 +232,7 @@ void RenderService::Render()
 			mShadowEffect.MarkClean();
 		}
 
-		for (size_t spotLightIndex = 0; spotLightIndex < mActiveSpotLightCount; ++spotLightIndex)
+		for (size_t spotLightIndex = 0; spotLightIndex < static_cast<int>(mActiveSpotLightSlots.size()); ++spotLightIndex)
 		{
 			SpotShadowEffect& spotShadowEffect = mSpotShadowEffects[spotLightIndex];
 			if (spotShadowEffect.NeedsUpdate())
@@ -417,7 +424,7 @@ void RenderService::DebugUI()
 	ImGui::Separator();
 	if (ImGui::CollapsingHeader("Spot Lights##RenderService", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		for (size_t i = 0; i < mActiveSpotLightCount; ++i)
+		for (size_t i = 0; i < static_cast<int>(mActiveSpotLightSlots.size()); ++i)
 		{
 			auto& light = mSpotLights[i];
 			std::string label = "Light " + std::to_string(i);
@@ -638,8 +645,65 @@ void RenderService::UnregisterMeshRenderer(MeshRendererComponent* meshRendererCo
 	{
 		const MeshRendererComponent* entry = *iter;
 		renderEntrys.erase(iter);
+	}
+}
+
+bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
+{
+	if (spotlightComponent == nullptr || mFreeSpotLightSlots.empty()) 
+	{
+		return false; // Pool full — cap still enforced, same as before.
+	}
+
+	const int slot = mFreeSpotLightSlots.back();
+	mFreeSpotLightSlots.pop_back();
+
+	mSpotlightSlotOwners[slot] = spotlightComponent;
+	mSpotLights[slot] = spotlightComponent->GetSpotLightData();
+	SpotShadowEffect& spotShadowEffect = mSpotShadowEffects[slot];
+	spotShadowEffect.Initialize(spotlightComponent->GetDepthMapResolution());
+	spotShadowEffect.Invalidate();
+	mActiveSpotLightSlots.push_back(slot);
+	spotlightComponent->SetSlotIndex(slot);
+	return true;
+}
+
+void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
+{
+	if (spotlightComponent == nullptr)
+	{
 		return;
 	}
+
+	const int slot = spotlightComponent->GetSlotIndex();
+	if (slot < 0 || mSpotlightSlotOwners[slot] != spotlightComponent)
+	{
+		return;
+	}
+
+	mSpotShadowEffects[slot].Terminate();
+	mSpotlightSlotOwners[slot] = nullptr;
+	spotlightComponent->SetSlotIndex(-1);
+	mFreeSpotLightSlots.push_back(slot);
+
+	auto it = std::find(mActiveSpotLightSlots.begin(), mActiveSpotLightSlots.end(), slot);
+	if (it != mActiveSpotLightSlots.end())
+	{
+		*it = mActiveSpotLightSlots.back(); // swap with the last element...
+		mActiveSpotLightSlots.pop_back();   // ...then pop it — O(1), order doesn't matter for rendering
+	}
+}
+
+SpotLight& RenderService::GetSpotLight(int slot)
+{
+	//ASSERT(slot >= 0 && static_cast<size_t>(slot) < Graphics::MaxSpotLights, "RenderService -- spot light slot out of range");
+	return mSpotLights[slot];
+}
+
+SpotShadowEffect& RenderService::GetSpotShadowEffect(int slot)
+{
+	//ASSERT(slot >= 0 && static_cast<size_t>(slot) < Graphics::MaxSpotLights, "RenderService -- spot shadow effect slot out of range");
+	return mSpotShadowEffects[slot];
 }
 
 void RenderService::RenderSkyBox()

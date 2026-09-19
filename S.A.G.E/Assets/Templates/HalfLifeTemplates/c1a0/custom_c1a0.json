@@ -58,6 +58,9 @@
     },
     {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/TriggerVolumes/c1a0_trigger_volumes.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Lights/c1a0_lights.json"
     }
   ]
 }

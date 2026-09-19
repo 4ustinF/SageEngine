@@ -26,13 +26,4 @@ namespace SAGE::Graphics
 		Color diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);		// TODO:
 		Color specular = Color(1.0f, 1.0f, 1.0f, 1.0f);		// TODO:
 	};
-
-	enum DepthMapResolution : uint32_t
-	{
-		DMPR_256 = 256,
-		DMPR_512 = 512,
-		DMPR_1024 = 1024,
-		DMPR_2048 = 2048,
-		DMPR_4096 = 4096
-	};
 }

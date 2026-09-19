@@ -7,6 +7,22 @@ namespace SAGE
 	class RenderService;
 	class TransformComponent;
 
+	enum DepthMapResolution : uint32_t
+	{
+		DMPR_256 = 256,
+		DMPR_512 = 512,
+		DMPR_1024 = 1024,
+		DMPR_2048 = 2048,
+		DMPR_4096 = 4096
+	};
+
+	enum LightMode : uint32_t
+	{
+		RealTime,
+		PseudoBaked,
+		Baked,
+	};
+
 	class SpotlightComponent final : public Component
 	{
 	public:
@@ -56,6 +72,7 @@ namespace SAGE
 	private:
 		friend class RenderService;
 		uint32_t GetDepthMapResolution() const { return static_cast<uint32_t>(mDepthMapResolution); }
+		bool GetCanMarkClean() const;
 		const Graphics::SpotLight& GetSpotLightData() const { return mSpotLightData; }
 		void SetSlotIndex(int index) { mSlotIndex = index; }
 		int GetSlotIndex() const { return mSlotIndex; }
@@ -65,6 +82,8 @@ namespace SAGE
 		void OnTransformPositionChanged(const Math::Vector3& position);
 		void OnTransformRotationChanged(const Math::Quaternion& rotation);
 
+		void InvalidateSpotLight();
+
 		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
 
@@ -72,7 +91,14 @@ namespace SAGE
 		Core::Delegate::FDelegateHandle OnRotationChangedHandle;
 
 		Graphics::SpotLight mSpotLightData;
-		Graphics::DepthMapResolution mDepthMapResolution = Graphics::DepthMapResolution::DMPR_1024;
+		DepthMapResolution mDepthMapResolution = DepthMapResolution::DMPR_1024;
+		LightMode mLightMode = LightMode::PseudoBaked;
+
+		const char* LightModeNames[3] = {
+			"Real Time",
+			"Pseudo Baked",
+			"Baked",
+		};
 
 		const char* DepthMapResolutionNames[5] = {
 			"DMPR_256",
@@ -82,12 +108,12 @@ namespace SAGE
 			"DMPR_4096",
 		};
 
-		const std::vector<Graphics::DepthMapResolution> DepthMapResolutionValues = {
-			Graphics::DepthMapResolution::DMPR_256,
-			Graphics::DepthMapResolution::DMPR_512,
-			Graphics::DepthMapResolution::DMPR_1024,
-			Graphics::DepthMapResolution::DMPR_2048,
-			Graphics::DepthMapResolution::DMPR_4096,
+		const std::vector<DepthMapResolution> DepthMapResolutionValues = {
+			DepthMapResolution::DMPR_256,
+			DepthMapResolution::DMPR_512,
+			DepthMapResolution::DMPR_1024,
+			DepthMapResolution::DMPR_2048,
+			DepthMapResolution::DMPR_4096,
 		};
 	};
 }

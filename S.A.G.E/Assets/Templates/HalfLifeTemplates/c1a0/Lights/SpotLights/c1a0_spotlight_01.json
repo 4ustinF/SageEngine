@@ -1,0 +1,14 @@
+{
+  "Name": "Spotlight 1",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -1.0,
+        -2.555,
+        6.7725
+      ]
+    },
+    "Spot Light Component": {
+    }
+  }
+}

@@ -50,7 +50,7 @@ void SpotlightComponent::DebugUI()
 	{
 		ImGui::Text("Resolution: "); ImGui::SameLine();
 		int currentResolution = static_cast<int>(std::log2(static_cast<int>(mDepthMapResolution) >> 8));
-		if (ImGui::Combo(" ", &currentResolution, DepthMapResolutionNames, IM_ARRAYSIZE(DepthMapResolutionNames)))
+		if (ImGui::Combo("##Resolution", &currentResolution, DepthMapResolutionNames, IM_ARRAYSIZE(DepthMapResolutionNames)))
 		{
 			DepthMapResolution currentDepthMapResolution = static_cast<DepthMapResolution>(256 << currentResolution);
 			if (mDepthMapResolution != currentDepthMapResolution)
@@ -64,6 +64,16 @@ void SpotlightComponent::DebugUI()
 			}
 		}
 
+		ImGui::Text("Light Mode: "); ImGui::SameLine();
+		int currentLightMode = static_cast<int>(mLightMode);
+		if (ImGui::Combo("##LightMode", &currentLightMode, LightModeNames, IM_ARRAYSIZE(LightModeNames)))
+		{
+			const LightMode currentLightModeEnum = static_cast<LightMode>(currentLightMode);
+			if (mLightMode != currentLightModeEnum)
+			{
+				mLightMode = currentLightModeEnum;
+			}
+		}
 	}
 
 	// TODO:
@@ -112,6 +122,7 @@ void SpotlightComponent::OnTransformPositionChanged(const Vector3& position)
 	if (mIsSlotIndexValid)
 	{
 		mRenderService->GetSpotLight(mSlotIndex).position = position;
+		mRenderService->GetSpotShadowEffect(mSlotIndex).Invalidate();
 	}
 }
 
@@ -120,7 +131,31 @@ void SpotlightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 	// TODO: Look into if spot lights can look straight down?
 }
 
+void SpotlightComponent::InvalidateSpotLight()
+{
+	if (!mIsSlotIndexValid)
+	{
+		return;
+	}
+
+	mRenderService->GetSpotShadowEffect(mSlotIndex).Invalidate();
+}
+
 #pragma region ---Getters---
+
+bool SpotlightComponent::GetCanMarkClean() const
+{
+	switch (mLightMode)
+	{
+		case LightMode::RealTime:
+			return false;
+		case LightMode::PseudoBaked:
+		case LightMode::Baked:
+			return true;
+	}
+
+	return false;
+}
 
 //const Vector3& SpotLightComponent::GetPosition()
 //{

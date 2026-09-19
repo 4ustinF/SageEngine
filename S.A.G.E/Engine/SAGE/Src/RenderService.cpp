@@ -31,31 +31,6 @@ void RenderService::Initialize()
 	mDirectionalLight.diffuse = { 0.7f, 0.7f, 0.7f, 1.0f };
 	mDirectionalLight.specular = { 0.7f, 0.7f, 0.7f, 1.0f };
 
-	//static_cast<int>(mActiveSpotLightSlots.size()) = 2; // Graphics::MaxSpotLights;
-	//struct SpotLightPreset { Vector3 position; Vector3 direction; };
-	//const SpotLightPreset presets[Graphics::MaxSpotLights] = {
-	//	{ { -1.0f, -2.5f, 5.42f }, Normalize({  0.1f, -1.0f,  0.1f }) },
-	//	{ { -1.0f, -2.5f, 6.77f }, Normalize({ 0.1f, -1.0f,  0.1f  }) },
-	//	{ { 0.0f, 0.0f, 0.0f }, Normalize({  0.05f, -1.0f, -0.05f }) },
-	//	{ { 0.0f, 0.0f, 0.0f }, Normalize({ -0.05f, -1.0f, -0.05f }) },
-	//};
-
-	//for (size_t i = 0; i < static_cast<int>(mActiveSpotLightSlots.size()); ++i)
-	//{
-	//	auto& light = mSpotLights[i];
-	//	light.position = presets[i].position;
-	//	light.direction = presets[i].direction;
-	//	light.range = 10.0f;
-	//	light.innerConeAngle = 10.0f * Constants::DegToRad;
-	//	light.outerConeAngle = 70.0f * Constants::DegToRad;
-	//	light.ambient = { 0.05f, 0.05f, 0.05f, 1.0f };
-	//	light.diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
-	//	light.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
-	//	light.attenuation = { 1.0f, 0.045f, 0.0075f };
-
-	//	mSpotShadowEffects[i].Initialize(1024);
-	//}
-
 	mFreeSpotLightSlots.reserve(Graphics::MaxSpotLights);
 	for (int i = static_cast<int>(Graphics::MaxSpotLights) - 1; i >= 0; --i) 
 	{
@@ -232,22 +207,25 @@ void RenderService::Render()
 			mShadowEffect.MarkClean();
 		}
 
-		for (size_t spotLightIndex = 0; spotLightIndex < static_cast<int>(mActiveSpotLightSlots.size()); ++spotLightIndex)
+		const int mActiveSpotLightSlotsSize = static_cast<int>(mActiveSpotLightSlots.size());
+		for (int i = 0; i < mActiveSpotLightSlotsSize; ++i)
 		{
+			const int spotLightIndex = mActiveSpotLightSlots[i];
 			SpotShadowEffect& spotShadowEffect = mSpotShadowEffects[spotLightIndex];
+
 			if (spotShadowEffect.NeedsUpdate())
 			{
 				spotShadowEffect.SetSpotLight(mSpotLights[spotLightIndex]);
-
 				const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
 				const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
 				ExtractFrustumPlanes(viewProjection, frustumPlanes);
 
 				spotShadowEffect.Begin();
-				for (auto& entry : mRenderEntries) {
+				for (auto& entry : mRenderEntries) 
+				{
 					spotShadowEffect.Render(entry.renderGroup);
 				}
-				for (auto* entry : mMeshRendererEntrys) 
+				for (auto* entry : mMeshRendererEntrys)
 				{
 					const OBB aabb = entry->GetGlobalBoundingBox();
 					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
@@ -663,6 +641,7 @@ bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 	SpotShadowEffect& spotShadowEffect = mSpotShadowEffects[slot];
 	spotShadowEffect.Initialize(spotlightComponent->GetDepthMapResolution());
 	spotShadowEffect.Invalidate();
+
 	mActiveSpotLightSlots.push_back(slot);
 	spotlightComponent->SetSlotIndex(slot);
 	return true;

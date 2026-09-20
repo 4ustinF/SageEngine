@@ -56,10 +56,10 @@ void SpotlightComponent::DebugUI()
 			if (mDepthMapResolution != currentDepthMapResolution)
 			{
 				mDepthMapResolution = currentDepthMapResolution;
-				if (mIsSlotIndexValid && mRenderService)
+				if (mIsRegisteredWithRenderService && mRenderService)
 				{
 					mRenderService->UnregisterSpotLight(this);
-					mRenderService->RegisterSpotLight(this);
+					mIsRegisteredWithRenderService = mRenderService->RegisterSpotLight(this);
 				}
 			}
 		}
@@ -73,6 +73,12 @@ void SpotlightComponent::DebugUI()
 			{
 				mLightMode = currentLightModeEnum;
 			}
+		}
+
+		if (mIsRegisteredWithRenderService)
+		{
+			ImGui::Text("Shadow Map");
+			ImGui::Image(mSpotShadowEffect.GetDepthMap().GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
 		}
 	}
 
@@ -92,7 +98,7 @@ void SpotlightComponent::OnEnable()
 	// TODO: Get/Create/Init/Cache a spotlight from the render service.
 	if (mRenderService)
 	{
-		mRenderService->RegisterSpotLight(this);
+		mIsRegisteredWithRenderService = mRenderService->RegisterSpotLight(this);
 	}
 
 	if (mTransformComponent != nullptr)
@@ -107,6 +113,7 @@ void SpotlightComponent::OnDisable()
 	if (mRenderService)
 	{
 		mRenderService->UnregisterSpotLight(this);
+		mIsRegisteredWithRenderService = false;
 	}
 
 	if (mTransformComponent != nullptr)
@@ -119,26 +126,12 @@ void SpotlightComponent::OnDisable()
 void SpotlightComponent::OnTransformPositionChanged(const Vector3& position)
 {
 	mSpotLightData.position = position;
-	if (mIsSlotIndexValid)
-	{
-		mRenderService->GetSpotLight(mSlotIndex).position = position;
-		mRenderService->GetSpotShadowEffect(mSlotIndex).Invalidate();
-	}
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 {
 	// TODO: Look into if spot lights can look straight down?
-}
-
-void SpotlightComponent::InvalidateSpotLight()
-{
-	if (!mIsSlotIndexValid)
-	{
-		return;
-	}
-
-	mRenderService->GetSpotShadowEffect(mSlotIndex).Invalidate();
 }
 
 #pragma region ---Getters---

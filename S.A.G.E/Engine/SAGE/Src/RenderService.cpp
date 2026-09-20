@@ -31,6 +31,8 @@ void RenderService::Initialize()
 	mDirectionalLight.diffuse = { 0.7f, 0.7f, 0.7f, 1.0f };
 	mDirectionalLight.specular = { 0.7f, 0.7f, 0.7f, 1.0f };
 
+	mSpotShadowEffectResources.Initialize();
+
 	mFreeSpotLightSlots.reserve(Graphics::MaxSpotLights);
 	for (int i = static_cast<int>(Graphics::MaxSpotLights) - 1; i >= 0; --i) 
 	{
@@ -97,6 +99,7 @@ void RenderService::Terminate()
 	{
 		shadowEffect.Terminate();
 	}
+	mSpotShadowEffectResources.Terminate();
 
 	//for (size_t i = 0; i < static_cast<int>(mActiveSpotLightSlots.size()); ++i) 
 	//{
@@ -639,7 +642,7 @@ bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 	mSpotlightSlotOwners[slot] = spotlightComponent;
 	mSpotLights[slot] = spotlightComponent->GetSpotLightData();
 	SpotShadowEffect& spotShadowEffect = mSpotShadowEffects[slot];
-	spotShadowEffect.Initialize(spotlightComponent->GetDepthMapResolution());
+	spotShadowEffect.Initialize(&mSpotShadowEffectResources, spotlightComponent->GetDepthMapResolution());
 	spotShadowEffect.Invalidate();
 
 	mActiveSpotLightSlots.push_back(slot);

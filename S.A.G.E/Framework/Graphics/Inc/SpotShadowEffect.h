@@ -1,21 +1,19 @@
 #pragma once
 
 #include "Camera.h"
-#include "ConstantBuffer.h"
 #include "LightTypes.h"
-#include "PixelShader.h"
-#include "RenderTarget.h"
 #include "RenderObject.h"
-#include "VertexShader.h"
+#include "RenderTarget.h"
 
 namespace SAGE::Graphics
 {
 	class RenderObject;
+	class SpotShadowEffectResources;
 
 	class SpotShadowEffect
 	{
 	public:
-		void Initialize(uint32_t depthMapResolution = 1024);
+		void Initialize(SpotShadowEffectResources* sharedResources, uint32_t depthMapResolution = 1024);
 		void Terminate();
 
 		void Begin();
@@ -35,36 +33,9 @@ namespace SAGE::Graphics
 		void Invalidate();
 
 	private:
-		struct TransformData
-		{
-			SAGE::Math::Matrix4 wvp;
-		};
-
-		struct BoneTransformData
-		{
-			static constexpr size_t MaxBoneCount = 128;
-			Math::Matrix4 boneTransforms[MaxBoneCount];
-		};
-
-		struct SettingsData
-		{
-			int useSkinning = 0;
-			float padding[3] = {};
-		};
-
-		using TransformBuffer = TypedConstantBuffer<TransformData>;
-		using BoneTransformBuffer = TypedConstantBuffer<BoneTransformData>;
-		using SettingsBuffer = TypedConstantBuffer<SettingsData>;
-
 		Camera mLightCamera;
 		const SpotLight* mSpotLight = nullptr;
-
-		VertexShader mVertexShader;
-		PixelShader mPixelShader;
-
-		TransformBuffer mTransformBuffer;
-		BoneTransformBuffer mBoneTransformBuffer;
-		SettingsBuffer mSettingsBuffer;
+		SpotShadowEffectResources* mSharedResources = nullptr;
 
 		RenderTarget mDepthMapRenderTarget;
 

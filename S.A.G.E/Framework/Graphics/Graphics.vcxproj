@@ -61,6 +61,7 @@
     <ClInclude Include="Inc\Skeleton.h" />
     <ClInclude Include="Inc\SoundEffectManager.h" />
     <ClInclude Include="Inc\SpotShadowEffect.h" />
+    <ClInclude Include="Inc\SpotShadowEffectResources.h" />
     <ClInclude Include="Inc\SpriteRenderer.h" />
     <ClInclude Include="Inc\StandardEffect.h" />
     <ClInclude Include="Inc\Terrain.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="Src\SimpleDraw.cpp" />
     <ClCompile Include="Src\SoundEffectManager.cpp" />
     <ClCompile Include="Src\SpotShadowEffect.cpp" />
+    <ClCompile Include="Src\SpotShadowEffectResources.cpp" />
     <ClCompile Include="Src\SpriteRenderer.cpp" />
     <ClCompile Include="Src\StandardEffect.cpp" />
     <ClCompile Include="Src\Terrain.cpp" />

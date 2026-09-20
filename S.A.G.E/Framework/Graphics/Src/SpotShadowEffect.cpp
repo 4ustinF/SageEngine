@@ -4,24 +4,20 @@
 #include "AnimationUtil.h"
 #include "Animator.h"
 #include "Camera.h"
-#include "RenderObject.h"
-#include "VertexTypes.h"
+
+#include "SpotShadowEffectResources.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
-void SpotShadowEffect::Initialize(uint32_t depthMapResolution)
+void SpotShadowEffect::Initialize(SpotShadowEffectResources* sharedResources, uint32_t depthMapResolution)
 {
+	ASSERT(sharedResources != nullptr, "SpotShadowEffect -- sharedResources cannot be null");
+	mSharedResources = sharedResources;
+
 	mLightCamera.SetMode(Camera::ProjectionMode::Perspective);
 	mLightCamera.SetAspectRatio(1.0f); // shadow map is square
-
-	mVertexShader.Initialize<Vertex>(L"../../Assets/Shaders/Shadow.fx");
-	mPixelShader.Initialize(L"../../Assets/Shaders/Shadow.fx");
-
-	mTransformBuffer.Initialize();
-	mBoneTransformBuffer.Initialize();
-	mSettingsBuffer.Initialize();
 
 	mDepthMapRenderTarget.Initialize(depthMapResolution, depthMapResolution, Texture::Format::RGBA_U32);
 }
@@ -30,22 +26,18 @@ void SpotShadowEffect::Terminate()
 {
 	mDepthMapRenderTarget.Terminate();
 
-	mSettingsBuffer.Terminate();
-	mBoneTransformBuffer.Terminate();
-	mTransformBuffer.Terminate();
-
-	mPixelShader.Terminate();
-	mVertexShader.Terminate();
+	mSpotLight = nullptr;
+	mSharedResources = nullptr;
 }
 
 void SpotShadowEffect::Begin()
 {
-	mVertexShader.Bind();
-	mPixelShader.Bind();
+	mSharedResources->vertexShader.Bind();
+	mSharedResources->pixelShader.Bind();
 
-	mTransformBuffer.BindVS(0);
-	mBoneTransformBuffer.BindVS(1);
-	mSettingsBuffer.BindVS(2);
+	mSharedResources->transformBuffer.BindVS(0);
+	mSharedResources->boneTransformBuffer.BindVS(1);
+	mSharedResources->settingsBuffer.BindVS(2);
 
 	mDepthMapRenderTarget.BeginRender();
 }
@@ -74,45 +66,45 @@ void SpotShadowEffect::Render(const RenderObject& renderObject)
 	const auto& view = mLightCamera.GetViewMatrix();
 	const auto& proj = mLightCamera.GetProjectionMatrix();
 
-	TransformData transformData;
+	SpotShadowTransformData transformData;
 	transformData.wvp = Math::Transpose(matWorld * view * proj);
 
-	SettingsData settingsData;
+	SpotShadowSettingsData settingsData;
 	if (renderObject.animator)
 	{
-		BoneTransformData boneTransformData;
+		SpotShadowBoneTransformData boneTransformData;
 
 		std::vector<Math::Matrix4> boneTransforms;
 		AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [animator = renderObject.animator](const Bone* bone) {return animator->GetTransform(bone); });
 		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
 
 		const size_t boneCount = renderObject.skeleton->bones.size();
-		for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
+		for (size_t i = 0; i < boneCount && i < SpotShadowBoneTransformData::MaxBoneCount; ++i) {
 			boneTransformData.boneTransforms[i] = Math::Transpose(boneTransforms[i]);
 		}
 
-		mBoneTransformBuffer.Update(boneTransformData);
+		mSharedResources->boneTransformBuffer.Update(boneTransformData);
 		settingsData.useSkinning = 1;
 	}
 	else if (renderObject.skeleton)
 	{
-		BoneTransformData boneTransformData;
+		SpotShadowBoneTransformData boneTransformData;
 
 		std::vector<Math::Matrix4> boneTransforms;
 		AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [](const Bone* bone) {return bone->toParentTransform; });
 		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
 
 		const size_t boneCount = renderObject.skeleton->bones.size();
-		for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
+		for (size_t i = 0; i < boneCount && i < SpotShadowBoneTransformData::MaxBoneCount; ++i) {
 			boneTransformData.boneTransforms[i] = Math::Transpose(boneTransforms[i]);
 		}
 
-		mBoneTransformBuffer.Update(boneTransformData);
+		mSharedResources->boneTransformBuffer.Update(boneTransformData);
 		settingsData.useSkinning = 1;
 	}
 
-	mTransformBuffer.Update(transformData);
-	mSettingsBuffer.Update(settingsData);
+	mSharedResources->transformBuffer.Update(transformData);
+	mSharedResources->settingsBuffer.Update(settingsData);
 
 	renderObject.meshBuffer.Render();
 }

@@ -56,7 +56,7 @@ void SpotlightComponent::DebugUI()
 			if (mDepthMapResolution != currentDepthMapResolution)
 			{
 				mDepthMapResolution = currentDepthMapResolution;
-				if (mRenderService)
+				if (mIsSlotIndexValid && mRenderService)
 				{
 					mRenderService->UnregisterSpotLight(this);
 					mIsSlotIndexValid = mRenderService->RegisterSpotLight(this);

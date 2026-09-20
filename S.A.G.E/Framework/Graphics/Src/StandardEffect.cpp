@@ -7,6 +7,7 @@
 #include "VertexTypes.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
 void StandardEffect::Initialize(Sampler::Filter sampleFilter)
@@ -142,13 +143,13 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	{
 		BoneTransformData boneTransformData;
 
-		std::vector<Math::Matrix4> boneTransforms;
+		std::vector<Matrix4> boneTransforms;
 		AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [animator = renderObject.animator](const Bone* bone) {return animator->GetTransform(bone); });
 		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
 
 		const size_t boneCount = renderObject.skeleton->bones.size();
 		for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
-			boneTransformData.boneTransforms[i] = Math::Transpose(boneTransforms[i]);
+			boneTransformData.boneTransforms[i] = Transpose(boneTransforms[i]);
 		}
 
 		mBoneTransformBuffer.Update(boneTransformData);
@@ -158,13 +159,13 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	{
 		BoneTransformData boneTransformData;
 
-		std::vector<Math::Matrix4> boneTransforms;
+		std::vector<Matrix4> boneTransforms;
 		AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [](const Bone* bone) {return bone->toParentTransform; });
 		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
 
 		const size_t boneCount = renderObject.skeleton->bones.size();
 		for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
-			boneTransformData.boneTransforms[i] = Math::Transpose(boneTransforms[i]);
+			boneTransformData.boneTransforms[i] = Transpose(boneTransforms[i]);
 		}
 
 		mBoneTransformBuffer.Update(boneTransformData);
@@ -196,6 +197,18 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	mAlphaBlendState.Set();
 	renderObject.meshBuffer.Render();
 	BlendState::ClearState();
+}
+
+const Texture* StandardEffect::GetSpotShadowMap(size_t index) const
+{
+	ASSERT(index < MaxSpotLights, "StandardEffect -- spot shadow map index out of range");
+	return mSpotShadowMaps[index];
+}
+
+const Matrix4& StandardEffect::GetSpotLightViewProj(size_t index) const
+{
+	ASSERT(index < MaxSpotLights, "StandardEffect -- spot light view proj index out of range");
+	return mSpotShadowMatrixData.viewProj[index];
 }
 
 void StandardEffect::SetCamera(const Camera& camera)
@@ -235,10 +248,16 @@ void StandardEffect::SetSpotShadowMap(size_t index, const Texture* shadowMap)
 	mSpotShadowMaps[index] = shadowMap;
 }
 
-void StandardEffect::SetSpotLightViewProj(size_t index, const Math::Matrix4& viewProj)
+void StandardEffect::SetSpotLightViewProj(size_t index, const Matrix4& viewProj)
 {
 	ASSERT(index < MaxSpotLights, "StandardEffect -- spot light view proj index out of range");
-	mSpotShadowMatrixData.viewProj[index] = Math::Transpose(viewProj);
+	mSpotShadowMatrixData.viewProj[index] = Transpose(viewProj);
+}
+
+void StandardEffect::SetSpotLightTransposeViewProj(size_t index, const Matrix4& transposeViewProj)
+{
+	ASSERT(index < MaxSpotLights, "StandardEffect -- spot light view proj index out of range");
+	mSpotShadowMatrixData.viewProj[index] = transposeViewProj;
 }
 
 void StandardEffect::DebugUI()

@@ -26,6 +26,9 @@ namespace SAGE::Graphics
 		void Render(const RenderGroup& renderGroup);
 		void Render(const RenderObject& renderObject);
 
+		const Texture* GetSpotShadowMap(size_t index) const;
+		const Math::Matrix4& GetSpotLightViewProj(size_t index) const;
+
 		void SetCamera(const Camera& camera);
 		void SetLightCamera(const Camera& camera);
 		void SetDirectionalLight(const DirectionalLight& directionalLight);
@@ -48,21 +51,10 @@ namespace SAGE::Graphics
 		void SetSpotLights(const SpotLight* lights, size_t count); // copies up to MaxSpotLights
 		void SetSpotShadowMap(size_t index, const Texture* shadowMap);
 		void SetSpotLightViewProj(size_t index, const Math::Matrix4& viewProj);
+		void SetSpotLightTransposeViewProj(size_t index, const Math::Matrix4& transposeViewProj);
 		void UseSpotShadows(bool use) { mSettingsData.useSpotShadows = use ? 1 : 0; }
 
 		void DebugUI();
-
-		const Texture* GetSpotShadowMap(size_t index) const
-		{
-			//ASSERT(index < MaxSpotLights, "StandardEffect -- spot shadow map index out of range");
-			return mSpotShadowMaps[index];
-		}
-
-		const Math::Matrix4& GetSpotLightViewProj(size_t index) const
-		{
-			//ASSERT(index < MaxSpotLights, "StandardEffect -- spot light view proj index out of range");
-			return mSpotShadowMatrixData.viewProj[index];
-		}
 
 	private:
 		struct TransformData

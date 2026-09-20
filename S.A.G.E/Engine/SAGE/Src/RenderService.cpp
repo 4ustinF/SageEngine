@@ -634,7 +634,6 @@ bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 
 	mSpotlightComponents.push_back(spotlightComponent);
 
-	// TODO: This is a hack.
 	spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
 	const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
 	const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
@@ -657,54 +656,25 @@ void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 
 	auto match = [&](const auto& entry) { return entry == spotlightComponent; };
 	auto iter = std::find_if(mSpotlightComponents.begin(), mSpotlightComponents.end(), match);
-	if (iter != mSpotlightComponents.end())
+	if (iter == mSpotlightComponents.end())
 	{
-		const SpotlightComponent* entry = *iter;
-		mSpotlightComponents.erase(iter);
+		return;
 	}
 
-	// TODO: This is a hack. Instead just make i = i + 1.
-	const int spotlightCompsSize = static_cast<int>(mSpotlightComponents.size());
-	for (int i = 0; i < spotlightCompsSize; ++i)
+	const int removedIndex = static_cast<int>(std::distance(mSpotlightComponents.begin(), iter));
+	mSpotlightComponents.erase(iter);
+
+	const int remainingCount = static_cast<int>(mSpotlightComponents.size());
+	for (int i = removedIndex; i < remainingCount; ++i)
 	{
-		SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
-		SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
-
-		const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
-		const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
-
-		mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
-		mStandardEffect.SetSpotLightViewProj(i, viewProjection);
+		mStandardEffect.SetSpotShadowMap(i, mStandardEffect.GetSpotShadowMap(i + 1));
+		mStandardEffect.SetSpotLightTransposeViewProj(i, mStandardEffect.GetSpotLightViewProj(i + 1));
 	}
+
+	// TODO: Null the last elements
+	//mStandardEffect.SetSpotShadowMap(remainingCount, nullptr);
+	//mStandardEffect.SetSpotLightTransposeViewProj(remainingCount, Matrix4{});
 }
-
-//void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
-//{
-//	if (spotlightComponent == nullptr)
-//	{
-//		return;
-//	}
-//
-//	spotlightComponent->GetSpotShadowEffect().Terminate();
-//
-//	auto match = [&](const auto& entry) { return entry == spotlightComponent; };
-//	auto iter = std::find_if(mSpotlightComponents.begin(), mSpotlightComponents.end(), match);
-//	if (iter == mSpotlightComponents.end())
-//	{
-//		return;
-//	}
-//
-//	const int removedIndex = static_cast<int>(std::distance(mSpotlightComponents.begin(), iter));
-//	mSpotlightComponents.erase(iter);
-//
-//	const int remainingCount = static_cast<int>(mSpotlightComponents.size());
-//	for (int i = removedIndex; i < remainingCount; ++i)
-//	{
-//		mStandardEffect.SetSpotShadowMap(i, mStandardEffect.GetSpotShadowMap(i + 1));
-//		mStandardEffect.SetSpotLightViewProj(i, mStandardEffect.GetSpotLightViewProj(i + 1));
-//		//mStandardEffect.SetSpotLightData(i, mStandardEffect.GetSpotLightData(i + 1));
-//	}
-//}
 
 void RenderService::RenderSkyBox()
 {

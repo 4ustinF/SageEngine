@@ -634,20 +634,14 @@ bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 
 	mSpotlightComponents.push_back(spotlightComponent);
 
-	// TODO: This is a hack. 
-	const int spotlightCompsSize = static_cast<int>(mSpotlightComponents.size());
-	for (int i = 0; i < spotlightCompsSize; ++i)
-	{
-		SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
-		SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
+	// TODO: This is a hack.
+	spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
+	const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
+	const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
 
-		spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
-		const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
-		const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
-
-		mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
-		mStandardEffect.SetSpotLightViewProj(i, viewProjection);
-	}
+	const int spotlightindex = static_cast<int>(mSpotlightComponents.size()) - 1;
+	mStandardEffect.SetSpotShadowMap(spotlightindex, &spotShadowEffect.GetDepthMap());
+	mStandardEffect.SetSpotLightViewProj(spotlightindex, viewProjection);
 
 	return true;
 }

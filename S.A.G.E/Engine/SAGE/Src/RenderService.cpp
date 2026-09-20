@@ -205,13 +205,11 @@ void RenderService::Render()
 			SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
 			SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
 
-			const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
-			const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
-
 			if (spotShadowEffect.NeedsUpdate())
 			{
 				spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
-
+				const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
+				const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
 				ExtractFrustumPlanes(viewProjection, frustumPlanes);
 
 				spotShadowEffect.Begin();
@@ -230,11 +228,9 @@ void RenderService::Render()
 				spotShadowEffect.End();
 				spotShadowEffect.MarkClean();
 
+				mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
+				mStandardEffect.SetSpotLightViewProj(i, viewProjection);
 			}
-
-			// TODO: We should instead update this on register/unregister of spotlights, not every frame. But for now this is fine.
-			mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
-			mStandardEffect.SetSpotLightViewProj(i, viewProjection);
 		}
 
 		const Vector3& cameraPos = camera.GetPosition();
@@ -624,25 +620,7 @@ void RenderService::UnregisterMeshRenderer(MeshRendererComponent* meshRendererCo
 
 bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 {
-	//if (spotlightComponent == nullptr || mFreeSpotLightSlots.empty()) 
-	//{
-	//	return ; // Pool full — cap still enforced, same as before.
-	//}
-
-	//const int slot = mFreeSpotLightSlots.back();
-	//mFreeSpotLightSlots.pop_back();
-
-	//mSpotlightSlotOwners[slot] = spotlightComponent;
-	//mSpotLights[slot] = spotlightComponent->GetSpotLightData();
-	//SpotShadowEffect& spotShadowEffect = mSpotShadowEffects[slot];
-	//spotShadowEffect.Initialize(&mSpotShadowEffectResources, spotlightComponent->GetDepthMapResolution());
-	//spotShadowEffect.Invalidate();
-
-	//mActiveSpotLightSlots.push_back(slot);
-	//spotlightComponent->SetSlotIndex(slot);
-
-	// TODO: Add cap
-	if (spotlightComponent == nullptr)// || mSpotLights.size() >= Graphics::MaxSpotLights)
+	if (spotlightComponent == nullptr || mSpotlightComponents.size() >= Graphics::MaxSpotLights)
 	{
 		return false; // Pool full — cap still enforced, same as before.
 	}
@@ -655,34 +633,27 @@ bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 	spotShadowEffect.Invalidate();
 
 	mSpotlightComponents.push_back(spotlightComponent);
+
+	// TODO: This is a hack. 
+	const int spotlightCompsSize = static_cast<int>(mSpotlightComponents.size());
+	for (int i = 0; i < spotlightCompsSize; ++i)
+	{
+		SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
+		SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
+
+		spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
+		const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
+		const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
+
+		mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
+		mStandardEffect.SetSpotLightViewProj(i, viewProjection);
+	}
+
 	return true;
 }
 
 void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 {
-	//if (spotlightComponent == nullptr)
-	//{
-	//	return;
-	//}
-
-	//const int slot = spotlightComponent->GetSlotIndex();
-	//if (slot < 0 || mSpotlightSlotOwners[slot] != spotlightComponent)
-	//{
-	//	return;
-	//}
-
-	//mSpotShadowEffects[slot].Terminate();
-	//mSpotlightSlotOwners[slot] = nullptr;
-	//spotlightComponent->SetSlotIndex(-1);
-	//mFreeSpotLightSlots.push_back(slot);
-
-	//auto it = std::find(mActiveSpotLightSlots.begin(), mActiveSpotLightSlots.end(), slot);
-	//if (it != mActiveSpotLightSlots.end())
-	//{
-	//	*it = mActiveSpotLightSlots.back(); // swap with the last element...
-	//	mActiveSpotLightSlots.pop_back();   // ...then pop it — O(1), order doesn't matter for rendering
-	//}
-
 	if (spotlightComponent == nullptr)
 	{
 		return;
@@ -697,6 +668,21 @@ void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 	{
 		const SpotlightComponent* entry = *iter;
 		mSpotlightComponents.erase(iter);
+	}
+
+	// TODO: This is a hack. 
+	const int spotlightCompsSize = static_cast<int>(mSpotlightComponents.size());
+	for (int i = 0; i < spotlightCompsSize; ++i)
+	{
+		SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
+		SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
+
+		spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
+		const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
+		const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
+
+		mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
+		mStandardEffect.SetSpotLightViewProj(i, viewProjection);
 	}
 }
 

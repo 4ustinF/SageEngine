@@ -74,8 +74,8 @@ namespace SAGE
 		uint32_t GetDepthMapResolution() const { return static_cast<uint32_t>(mDepthMapResolution); }
 		bool GetCanMarkClean() const;
 		const Graphics::SpotLight& GetSpotLightData() const { return mSpotLightData; }
-		void SetSlotIndex(int index) { mSlotIndex = index; }
 		int GetSlotIndex() const { return mSlotIndex; }
+		void SetSlotIndex(int index) { mSlotIndex = index; mIsSlotIndexValid = mSlotIndex >= 0; }
 		int mSlotIndex = -1;
 		bool mIsSlotIndexValid = false;
 

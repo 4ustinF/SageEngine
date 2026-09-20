@@ -629,11 +629,11 @@ void RenderService::UnregisterMeshRenderer(MeshRendererComponent* meshRendererCo
 	}
 }
 
-bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
+void RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 {
 	if (spotlightComponent == nullptr || mFreeSpotLightSlots.empty()) 
 	{
-		return false; // Pool full — cap still enforced, same as before.
+		return ; // Pool full — cap still enforced, same as before.
 	}
 
 	const int slot = mFreeSpotLightSlots.back();
@@ -647,7 +647,6 @@ bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 
 	mActiveSpotLightSlots.push_back(slot);
 	spotlightComponent->SetSlotIndex(slot);
-	return true;
 }
 
 void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)

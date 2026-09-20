@@ -59,7 +59,7 @@ void SpotlightComponent::DebugUI()
 				if (mIsSlotIndexValid && mRenderService)
 				{
 					mRenderService->UnregisterSpotLight(this);
-					mIsSlotIndexValid = mRenderService->RegisterSpotLight(this);
+					mRenderService->RegisterSpotLight(this);
 				}
 			}
 		}
@@ -92,7 +92,7 @@ void SpotlightComponent::OnEnable()
 	// TODO: Get/Create/Init/Cache a spotlight from the render service.
 	if (mRenderService)
 	{
-		mIsSlotIndexValid = mRenderService->RegisterSpotLight(this);
+		mRenderService->RegisterSpotLight(this);
 	}
 
 	if (mTransformComponent != nullptr)

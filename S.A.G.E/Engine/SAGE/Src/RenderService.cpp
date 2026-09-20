@@ -671,9 +671,11 @@ void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 		mStandardEffect.SetSpotLightTransposeViewProj(i, mStandardEffect.GetSpotLightViewProj(i + 1));
 	}
 
-	// TODO: Null the last elements
-	//mStandardEffect.SetSpotShadowMap(remainingCount, nullptr);
-	//mStandardEffect.SetSpotLightTransposeViewProj(remainingCount, Matrix4{});
+	if (remainingCount > 0)
+	{
+		mStandardEffect.SetSpotShadowMap(remainingCount, nullptr);
+		mStandardEffect.SetSpotLightTransposeViewProj(remainingCount, Matrix4{});
+	}
 }
 
 void RenderService::RenderSkyBox()

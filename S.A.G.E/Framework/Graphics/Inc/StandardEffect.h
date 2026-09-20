@@ -52,6 +52,18 @@ namespace SAGE::Graphics
 
 		void DebugUI();
 
+		const Texture* GetSpotShadowMap(size_t index) const
+		{
+			//ASSERT(index < MaxSpotLights, "StandardEffect -- spot shadow map index out of range");
+			return mSpotShadowMaps[index];
+		}
+
+		const Math::Matrix4& GetSpotLightViewProj(size_t index) const
+		{
+			//ASSERT(index < MaxSpotLights, "StandardEffect -- spot light view proj index out of range");
+			return mSpotShadowMatrixData.viewProj[index];
+		}
+
 	private:
 		struct TransformData
 		{

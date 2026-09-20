@@ -653,8 +653,7 @@ void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 		return;
 	}
 
-	SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
-	spotShadowEffect.Terminate();
+	spotlightComponent->GetSpotShadowEffect().Terminate();
 
 	auto match = [&](const auto& entry) { return entry == spotlightComponent; };
 	auto iter = std::find_if(mSpotlightComponents.begin(), mSpotlightComponents.end(), match);
@@ -664,14 +663,13 @@ void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 		mSpotlightComponents.erase(iter);
 	}
 
-	// TODO: This is a hack. 
+	// TODO: This is a hack. Instead just make i = i + 1.
 	const int spotlightCompsSize = static_cast<int>(mSpotlightComponents.size());
 	for (int i = 0; i < spotlightCompsSize; ++i)
 	{
 		SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
 		SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
 
-		spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
 		const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
 		const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
 
@@ -680,16 +678,32 @@ void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 	}
 }
 
-//SpotLight& RenderService::GetSpotLight(int slot)
+//void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 //{
-//	//ASSERT(slot >= 0 && static_cast<size_t>(slot) < Graphics::MaxSpotLights, "RenderService -- spot light slot out of range");
-//	return mSpotLights[slot];
-//}
+//	if (spotlightComponent == nullptr)
+//	{
+//		return;
+//	}
 //
-//SpotShadowEffect& RenderService::GetSpotShadowEffect(int slot)
-//{
-//	//ASSERT(slot >= 0 && static_cast<size_t>(slot) < Graphics::MaxSpotLights, "RenderService -- spot shadow effect slot out of range");
-//	return mSpotShadowEffects[slot];
+//	spotlightComponent->GetSpotShadowEffect().Terminate();
+//
+//	auto match = [&](const auto& entry) { return entry == spotlightComponent; };
+//	auto iter = std::find_if(mSpotlightComponents.begin(), mSpotlightComponents.end(), match);
+//	if (iter == mSpotlightComponents.end())
+//	{
+//		return;
+//	}
+//
+//	const int removedIndex = static_cast<int>(std::distance(mSpotlightComponents.begin(), iter));
+//	mSpotlightComponents.erase(iter);
+//
+//	const int remainingCount = static_cast<int>(mSpotlightComponents.size());
+//	for (int i = removedIndex; i < remainingCount; ++i)
+//	{
+//		mStandardEffect.SetSpotShadowMap(i, mStandardEffect.GetSpotShadowMap(i + 1));
+//		mStandardEffect.SetSpotLightViewProj(i, mStandardEffect.GetSpotLightViewProj(i + 1));
+//		//mStandardEffect.SetSpotLightData(i, mStandardEffect.GetSpotLightData(i + 1));
+//	}
 //}
 
 void RenderService::RenderSkyBox()

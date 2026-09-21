@@ -75,6 +75,29 @@ void SpotlightComponent::DebugUI()
 			}
 		}
 
+		if (ImGui::DragFloat("Range", &mSpotLightData.range, 0.5f, 1.0f, 500.0f))
+		{
+			mSpotShadowEffect.Invalidate();
+		}
+
+		float innerDeg = mSpotLightData.innerConeAngle * Constants::RadToDeg;
+		float outerDeg = mSpotLightData.outerConeAngle * Constants::RadToDeg;
+		if (ImGui::DragFloat("Inner Cone (deg)", &innerDeg, 0.5f, 1.0f, outerDeg)) 
+		{
+			mSpotLightData.innerConeAngle = innerDeg * Constants::DegToRad;
+			mSpotShadowEffect.Invalidate();
+		}
+		if (ImGui::DragFloat("Outer Cone (deg)", &outerDeg, 0.5f, innerDeg, 90.0f)) 
+		{
+			mSpotLightData.outerConeAngle = outerDeg * Constants::DegToRad;
+			mSpotShadowEffect.Invalidate();
+		}
+
+		ImGui::ColorEdit4("Ambient", &mSpotLightData.ambient.r);
+		ImGui::ColorEdit4("Diffuse", &mSpotLightData.diffuse.r);
+		ImGui::ColorEdit4("Specular", &mSpotLightData.specular.r);
+		ImGui::DragFloat3("Attenuation (const/lin/quad)", &mSpotLightData.attenuation.x, 0.001f, 0.0f, 2.0f);
+
 		if (mIsRegisteredWithRenderService)
 		{
 			ImGui::Text("Shadow Map");
@@ -83,13 +106,6 @@ void SpotlightComponent::DebugUI()
 	}
 
 	// TODO:
-	// Debug view of spotlight
-	
-	// Inner Spot Angle
-	// Outer Spot Angle
-	// Range
-	// Color
-	// Intensity
 	// Shadows: bool canCastShadows = true;
 }
 

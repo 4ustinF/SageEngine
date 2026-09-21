@@ -41,18 +41,18 @@ namespace SAGE
 		void OnEnable() override;
 		void OnDisable() override;
 
-		//const Math::Vector3& GetPosition();
-		//const Math::Vector3& GetDirection();
-	/*	float GetInnerConeAngle() const { return mInnerConeAngle; }
-		float GetOuterConeAngle() const { return mOuterConeAngle; }
-		float GetRange() const { return mRange; }
-		const Math::Vector3& GetAttenuation() const { return mAttenuation; }
-		float GetAttenuationConstantTerm() const { return mAttenuation.x; }
-		float GetAttenuationLinearTerm() const { return mAttenuation.y; }
-		float GetAttenuationQuadraticTerm() const { return mAttenuation.z; }
-		const Graphics::Color& GetAmbientColor() const { return mAmbientColor; }
-		const Graphics::Color& GetDiffuseColor() const { return mDiffuseColor; }
-		const Graphics::Color& GetSpecularColor() const { return mSpecularColor; }*/
+		const Math::Vector3& GetPosition() { return mSpotLightData.position; }
+		const Math::Vector3& GetDirection() { return mSpotLightData.direction; }
+		float GetInnerConeAngle() const { return mSpotLightData.innerConeAngle * Constants::RadToDeg; }
+		float GetOuterConeAngle() const { return mSpotLightData.outerConeAngle * Constants::RadToDeg; }
+		float GetRange() const { return mSpotLightData.range; }
+		const Math::Vector3& GetAttenuation() const { return mSpotLightData.attenuation; }
+		float GetAttenuationConstantTerm() const { return mSpotLightData.attenuation.x; }
+		float GetAttenuationLinearTerm() const { return mSpotLightData.attenuation.y; }
+		float GetAttenuationQuadraticTerm() const { return mSpotLightData.attenuation.z; }
+		const Graphics::Color& GetAmbientColor() const { return mSpotLightData.ambient; }
+		const Graphics::Color& GetDiffuseColor() const { return mSpotLightData.diffuse; }
+		const Graphics::Color& GetSpecularColor() const { return mSpotLightData.specular; }
 
 		void SetPosition(const Math::Vector3& position);
 		void SetDirection(const Math::Vector3& direction);

@@ -134,27 +134,6 @@ void SpotlightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 	// TODO: Look into if spot lights can look straight down?
 }
 
-#pragma region ---Getters---
-
-//const Vector3& SpotLightComponent::GetPosition()
-//{
-//	if (mTransformComponent != nullptr)
-//	{
-//		return mTransformComponent->GetPosition();
-//	}
-//
-//	// TODO: Check if we have a cached spot light and if so return its position.
-//
-//	return Vector3::Zero; // TODO:
-//}
-//
-//const Vector3& SpotLightComponent::GetDirection()
-//{
-//	return Vector3::One; // TODO:
-//}
-
-#pragma endregion
-
 #pragma region ---Setters---
 
 void SpotlightComponent::SetPosition(const Vector3& position)
@@ -171,23 +150,19 @@ void SpotlightComponent::SetPosition(const Vector3& position)
 
 void SpotlightComponent::SetDirection(const Vector3& direction)
 {
-	// TODO:
+	mSpotLightData.direction = direction;
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetInnerConeAngle(float innerConeAngle)
 {
-	//mInnerConeAngle = innerConeAngle;
-	// TODO:
-	// mInnerConeAngle * Constants::DegToRad 
+	mSpotLightData.innerConeAngle = innerConeAngle * Constants::DegToRad;
 	mSpotShadowEffect.Invalidate();
-
 }
 
 void SpotlightComponent::SetOuterConeAngle(float outerConeAngle)
 {
-	//mOuterConeAngle = outerConeAngle;
-	// TODO:
-	// mOuterConeAngle * Constants::DegToRad 
+	mSpotLightData.outerConeAngle = outerConeAngle * Constants::DegToRad;
 	mSpotShadowEffect.Invalidate();
 }
 
@@ -231,7 +206,6 @@ void SpotlightComponent::SetDiffuseColor(const Color& color)
 {
 	mSpotLightData.diffuse = color;
 	mSpotShadowEffect.Invalidate();
-
 }
 
 void SpotlightComponent::SetSpecularColor(const Color& color)

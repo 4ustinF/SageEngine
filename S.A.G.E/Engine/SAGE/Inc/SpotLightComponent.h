@@ -72,11 +72,8 @@ namespace SAGE
 	private:
 		friend class RenderService;
 		uint32_t GetDepthMapResolution() const { return static_cast<uint32_t>(mDepthMapResolution); }
-		bool GetCanMarkClean() const;
-		Graphics::SpotLight& GetSpotLightData() { return mSpotLightData; }
-		bool mIsRegisteredWithRenderService = false;
-
 		Graphics::SpotShadowEffect& GetSpotShadowEffect() { return mSpotShadowEffect; }
+		Graphics::SpotLight& GetSpotLightData() { return mSpotLightData; }
 
 		void OnTransformPositionChanged(const Math::Vector3& position);
 		void OnTransformRotationChanged(const Math::Quaternion& rotation);
@@ -88,8 +85,10 @@ namespace SAGE
 		Core::Delegate::FDelegateHandle OnRotationChangedHandle;
 
 		Graphics::SpotLight mSpotLightData;
+		Graphics::SpotShadowEffect mSpotShadowEffect;
 		DepthMapResolution mDepthMapResolution = DepthMapResolution::DMPR_1024;
 		LightMode mLightMode = LightMode::PseudoBaked;
+		bool mIsRegisteredWithRenderService = false;
 
 		const char* LightModeNames[3] = {
 			"Real Time",
@@ -113,6 +112,5 @@ namespace SAGE
 			DepthMapResolution::DMPR_4096,
 		};
 
-		Graphics::SpotShadowEffect mSpotShadowEffect;
 	};
 }

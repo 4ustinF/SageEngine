@@ -136,20 +136,6 @@ void SpotlightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 
 #pragma region ---Getters---
 
-bool SpotlightComponent::GetCanMarkClean() const
-{
-	switch (mLightMode)
-	{
-		case LightMode::RealTime:
-			return false;
-		case LightMode::PseudoBaked:
-		case LightMode::Baked:
-			return true;
-	}
-
-	return false;
-}
-
 //const Vector3& SpotLightComponent::GetPosition()
 //{
 //	if (mTransformComponent != nullptr)
@@ -193,6 +179,8 @@ void SpotlightComponent::SetInnerConeAngle(float innerConeAngle)
 	//mInnerConeAngle = innerConeAngle;
 	// TODO:
 	// mInnerConeAngle * Constants::DegToRad 
+	mSpotShadowEffect.Invalidate();
+
 }
 
 void SpotlightComponent::SetOuterConeAngle(float outerConeAngle)
@@ -200,54 +188,56 @@ void SpotlightComponent::SetOuterConeAngle(float outerConeAngle)
 	//mOuterConeAngle = outerConeAngle;
 	// TODO:
 	// mOuterConeAngle * Constants::DegToRad 
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetRange(float range)
 {
-	//mRange = range;
-	// TODO:
+	mSpotLightData.range = range;
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetAttenuation(const Vector3& attenuation)
 {
-	//mAttenuation = attenuation;
-	// TODO:
+	mSpotLightData.attenuation = attenuation;
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetAttenuationConstantTerm(float constantTerm)
 {
-	//mAttenuation.x = constantTerm;
-	// TODO:
+	mSpotLightData.attenuation.x = constantTerm;
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetAttenuationLinearTerm(float linearTerm)
 {
-	//mAttenuation.y = linearTerm;
-	// TODO:
+	mSpotLightData.attenuation.y = linearTerm;
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetAttenuationQuadraticTerm(float quadraticTerm)
 {
-	//mAttenuation.z = quadraticTerm;
-	// TODO:
+	mSpotLightData.attenuation.z = quadraticTerm;
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetAmbientColor(const Color& color)
 {
-	//mAmbientColor = color;
-	// TODO:
+	mSpotLightData.ambient = color;
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetDiffuseColor(const Color& color)
 {
-	//mDiffuseColor = color;
-	// TODO:
+	mSpotLightData.diffuse = color;
+	mSpotShadowEffect.Invalidate();
+
 }
 
 void SpotlightComponent::SetSpecularColor(const Color& color)
 {
-	//mSpecularColor = color;
-	// TODO:
+	mSpotLightData.specular = color;
+	mSpotShadowEffect.Invalidate();
 }
 
 #pragma endregion

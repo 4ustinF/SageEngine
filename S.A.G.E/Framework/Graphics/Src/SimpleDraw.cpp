@@ -22,8 +22,8 @@ namespace
 		void Initiazlie(uint32_t maxVertexCount);
 		void Terminate();
 
-		void AddLine(const Math::Vector3& v0, const Math::Vector3& v1, Color color);
-		void AddFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, Color color);
+		void AddLine(const Vector3& v0, const Vector3& v1, Color color);
+		void AddFace(const Vector3& v0, const Vector3& v1, const Vector3& v2, Color color);
 
 		void Render(const Camera& camera);
 
@@ -45,7 +45,7 @@ namespace
 	{
 		mVertexShader.Initialize<VertexPC>(L"../../Assets/Shaders/SimpleDraw.fx");
 		mPixelShader.Initialize(L"../../Assets/Shaders/SimpleDraw.fx");
-		mConstantBuffer.Initialize(sizeof(Math::Matrix4));
+		mConstantBuffer.Initialize(sizeof(Matrix4));
 		mMeshBuffer.Initialize(nullptr, sizeof(VertexPC), maxVertexCount);
 		mAlphaBlendState.Initialize(BlendState::Mode::AlphaBlend);
 
@@ -65,7 +65,7 @@ namespace
 		mVertexShader.Terminate();
 	}
 
-	void SimpleDrawImpl::AddLine(const Math::Vector3& v0, const Math::Vector3& v1, const Color color)
+	void SimpleDrawImpl::AddLine(const Vector3& v0, const Vector3& v1, const Color color)
 	{
 		if (mLineVertexCount + 2 <= mMaxVertexCount) {
 			mLineVertices[mLineVertexCount++] = VertexPC{v0, color};
@@ -73,7 +73,7 @@ namespace
 		}
 	}
 
-	void SimpleDrawImpl::AddFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, const Color color)
+	void SimpleDrawImpl::AddFace(const Vector3& v0, const Vector3& v1, const Vector3& v2, const Color color)
 	{
 		if (mFaceVertexCount + 3 <= mMaxVertexCount) {
 			mFaceVertices[mFaceVertexCount++] = VertexPC{ v0, color };
@@ -86,7 +86,7 @@ namespace
 	{
 		auto matView = camera.GetViewMatrix();
 		auto matProj = camera.GetProjectionMatrix();
-		auto transform = Math::Transpose(matView * matProj);
+		auto transform = Transpose(matView * matProj);
 		mConstantBuffer.Update(&transform);
 		mConstantBuffer.BindVS(0);
 
@@ -124,29 +124,29 @@ void SimpleDraw::StaticTerminate()
 	sInstance.reset();
 }
 
-void SimpleDraw::AddLine(const Math::Vector3& v0, const Math::Vector3& v1, const Color color)
+void SimpleDraw::AddLine(const Vector3& v0, const Vector3& v1, const Color color)
 {
 	sInstance->AddLine(v0, v1, color);
 }
 
-void SimpleDraw::AddFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, const Color color)
+void SimpleDraw::AddFace(const Vector3& v0, const Vector3& v1, const Vector3& v2, const Color color)
 {
 	sInstance->AddLine(v0, v1, color);
 	sInstance->AddLine(v1, v2, color);
 	sInstance->AddLine(v2, v0, color);
 }
 
-void SimpleDraw::AddFilledFace(const Math::Vector3& v0, const Math::Vector3& v1, const Math::Vector3& v2, const Color color)
+void SimpleDraw::AddFilledFace(const Vector3& v0, const Vector3& v1, const Vector3& v2, const Color color)
 {
 	sInstance->AddFace(v0, v1, v2, color);
 }
 
-void SimpleDraw::AddAABB(const Math::AABB& aabb, Color color)
+void SimpleDraw::AddAABB(const AABB& aabb, Color color)
 {
 	AddAABB(aabb.center, aabb.extend, color);
 }
 
-void SimpleDraw::AddAABB(const Math::Vector3& center, const Math::Vector3& extend, Color color)
+void SimpleDraw::AddAABB(const Vector3& center, const Vector3& extend, Color color)
 {
 	AddAABB(
 		center.x - extend.x,
@@ -160,14 +160,14 @@ void SimpleDraw::AddAABB(const Math::Vector3& center, const Math::Vector3& exten
 
 void SimpleDraw::AddAABB(float minX, float maxX, float minY, float maxY, float minZ, float maxZ, Color color)
 {
-	const Math::Vector3 NNN = { minX, minY, minZ };
-	const Math::Vector3 NNP = { minX, minY, maxZ };
-	const Math::Vector3 NPN = { minX, maxY, minZ };
-	const Math::Vector3 NPP = { minX, maxY, maxZ };
-	const Math::Vector3 PNN = { maxX, minY, minZ };
-	const Math::Vector3 PNP = { maxX, minY, maxZ };
-	const Math::Vector3 PPN = { maxX, maxY, minZ };
-	const Math::Vector3 PPP = { maxX, maxY, maxZ };
+	const Vector3 NNN = { minX, minY, minZ };
+	const Vector3 NNP = { minX, minY, maxZ };
+	const Vector3 NPN = { minX, maxY, minZ };
+	const Vector3 NPP = { minX, maxY, maxZ };
+	const Vector3 PNN = { maxX, minY, minZ };
+	const Vector3 PNP = { maxX, minY, maxZ };
+	const Vector3 PPN = { maxX, maxY, minZ };
+	const Vector3 PPP = { maxX, maxY, maxZ };
 
 	//Bot
 	AddLine(NNN, NNP, color); //BotLeft	 -> TopLeft
@@ -188,12 +188,12 @@ void SimpleDraw::AddAABB(float minX, float maxX, float minY, float maxY, float m
 	AddLine(PPN, NPN, color); //BotRight -> BotLeft
 }
 
-void SimpleDraw::AddFilledAABB(const Math::AABB& aabb, Color color)
+void SimpleDraw::AddFilledAABB(const AABB& aabb, Color color)
 {
 	AddFilledAABB(aabb.center, aabb.extend, color);
 }
 					
-void SimpleDraw::AddFilledAABB(const Math::Vector3& center, const Math::Vector3& extend, Color color)
+void SimpleDraw::AddFilledAABB(const Vector3& center, const Vector3& extend, Color color)
 {
 	AddFilledAABB(
 		center.x - extend.x,
@@ -207,14 +207,14 @@ void SimpleDraw::AddFilledAABB(const Math::Vector3& center, const Math::Vector3&
 					
 void SimpleDraw::AddFilledAABB(float minX, float maxX, float minY, float maxY, float minZ, float maxZ, Color color)
 {
-	const Math::Vector3 NNN = { minX, minY, minZ };
-	const Math::Vector3 NNP = { minX, minY, maxZ };
-	const Math::Vector3 NPN = { minX, maxY, minZ };
-	const Math::Vector3 NPP = { minX, maxY, maxZ };
-	const Math::Vector3 PNN = { maxX, minY, minZ };
-	const Math::Vector3 PNP = { maxX, minY, maxZ };
-	const Math::Vector3 PPN = { maxX, maxY, minZ };
-	const Math::Vector3 PPP = { maxX, maxY, maxZ };
+	const Vector3 NNN = { minX, minY, minZ };
+	const Vector3 NNP = { minX, minY, maxZ };
+	const Vector3 NPN = { minX, maxY, minZ };
+	const Vector3 NPP = { minX, maxY, maxZ };
+	const Vector3 PNN = { maxX, minY, minZ };
+	const Vector3 PNP = { maxX, minY, maxZ };
+	const Vector3 PPN = { maxX, maxY, minZ };
+	const Vector3 PPP = { maxX, maxY, maxZ };
 
 	sInstance->AddFace(NNN, NPN, PPN, color);
 	sInstance->AddFace(NNN, PPN, PNN, color);
@@ -235,9 +235,9 @@ void SimpleDraw::AddFilledAABB(float minX, float maxX, float minY, float maxY, f
 	sInstance->AddFace(PNN, PNP, NNN, color);
 }
 
-void SimpleDraw::AddOBB(const Math::OBB& obb, const Color color)
+void SimpleDraw::AddOBB(const OBB& obb, const Color color)
 {
-	Math::Vector3 points[] =
+	Vector3 points[] =
 	{
 		{ -1.0f, -1.0f, -1.0f },
 		{ -1.0f, +1.0f, -1.0f },
@@ -249,10 +249,10 @@ void SimpleDraw::AddOBB(const Math::OBB& obb, const Color color)
 		{ +1.0f, -1.0f, +1.0f }
 	};
 
-	const Math::Matrix4 transform = Transform{obb.center, obb.rotation, obb.extend}.GetMatrix4();
+	const Matrix4 transform = Transform{obb.center, obb.rotation, obb.extend}.GetMatrix4();
 
 	for (auto& point : points) {
-		point = Math::TransformCoord(point, transform);
+		point = TransformCoord(point, transform);
 	}
 
 	AddLine(points[0], points[1], color);
@@ -271,15 +271,15 @@ void SimpleDraw::AddOBB(const Math::OBB& obb, const Color color)
 	AddLine(points[3], points[7], color);
 }
 
-void SimpleDraw::AddOBB(const Math::Vector3& center, const Math::Vector3& extend, const Math::Quaternion& rotation, const Color color)
+void SimpleDraw::AddOBB(const Vector3& center, const Vector3& extend, const Quaternion& rotation, const Color color)
 {
-	const Math::OBB obb = {center, extend, rotation};
+	const OBB obb = {center, extend, rotation};
 	AddOBB(obb, color);
 }
 
-void SimpleDraw::AddFilledOBB(const Math::OBB& obb, const Color color)
+void SimpleDraw::AddFilledOBB(const OBB& obb, const Color color)
 {
-	Math::Vector3 points[] =
+	Vector3 points[] =
 	{
 		{ -1.0f, -1.0f, -1.0f },
 		{ -1.0f, +1.0f, -1.0f },
@@ -291,10 +291,10 @@ void SimpleDraw::AddFilledOBB(const Math::OBB& obb, const Color color)
 		{ +1.0f, -1.0f, +1.0f }
 	};
 
-	const Math::Matrix4 transform = Transform{ obb.center, obb.rotation, obb.extend }.GetMatrix4();
+	const Matrix4 transform = Transform{ obb.center, obb.rotation, obb.extend }.GetMatrix4();
 
 	for (auto& point : points) {
-		point = Math::TransformCoord(point, transform);
+		point = TransformCoord(point, transform);
 	}
 
 	sInstance->AddFace(points[0], points[1], points[2], color);
@@ -316,12 +316,12 @@ void SimpleDraw::AddFilledOBB(const Math::OBB& obb, const Color color)
 	sInstance->AddFace(points[3], points[7], points[4], color);
 }
 
-void SimpleDraw::AddFilledOBB(const Math::Vector3& center, const Math::Vector3& extend, const Math::Quaternion& rotation, const Color color)
+void SimpleDraw::AddFilledOBB(const Vector3& center, const Vector3& extend, const Quaternion& rotation, const Color color)
 {
 	AddFilledOBB({center, extend, rotation }, color);
 }
 
-void SimpleDraw::AddCapsule(const Math::Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Math::Quaternion& rotation, const Color& color)
+void SimpleDraw::AddCapsule(const Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Quaternion& rotation, const Color& color)
 {
 	ringSegments = Max(4, ringSegments);
 	arcSegments = Max(2, arcSegments);
@@ -419,27 +419,27 @@ void SimpleDraw::AddCapsule(const Math::Vector3& center, int ringSegments, int a
 	drawArc(botArcNegZY, arcSegments);
 }
 
-void SimpleDraw::AddFilledCapsule(const Math::Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Math::Quaternion& rotation, const Color& color)
+void SimpleDraw::AddFilledCapsule(const Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Quaternion& rotation, const Color& color)
 {
 	ringSegments = Max(4, ringSegments);
 	arcSegments = Max(2, arcSegments);
 
 	const float halfHeight = Max(0.05f, height * 0.5f - radius);
-	const Math::Matrix4 transform = Transform(center, rotation, Math::Vector3::One).GetMatrix4();
+	const Matrix4 transform = Transform(center, rotation, Vector3::One).GetMatrix4();
 
 	// Each ring runs around the capsule's local Y axis.
 	// Rings are stored from bottom to top.
-	std::vector<std::vector<Math::Vector3>> rings;
+	std::vector<std::vector<Vector3>> rings;
 	rings.reserve(arcSegments * 2);
 
 	auto createRing = [&rings, ringSegments, transform](float y, float ringRadius)
 	{
-		std::vector<Math::Vector3> ring(ringSegments);
+		std::vector<Vector3> ring(ringSegments);
 		for (int i = 0; i < ringSegments; ++i)
 		{
 			const float theta = static_cast<float>(i) / static_cast<float>(ringSegments) * Constants::TwoPi;
-			Math::Vector3 point(ringRadius * cosf(theta), y, ringRadius * sinf(theta));
-			ring[i] = Math::TransformCoord(point, transform);
+			Vector3 point(ringRadius * cosf(theta), y, ringRadius * sinf(theta));
+			ring[i] = TransformCoord(point, transform);
 		}
 
 		rings.emplace_back(std::move(ring));
@@ -495,7 +495,7 @@ void SimpleDraw::AddFilledCapsule(const Math::Vector3& center, int ringSegments,
 	}
 }
 
-//void SimpleDraw::AddCapsule(const Math::Vector3& pointA, const Math::Vector3& pointB, float radius, const Color& color)
+//void SimpleDraw::AddCapsule(const Vector3& pointA, const Vector3& pointB, float radius, const Color& color)
 //{
 //	// Convenience overload: capsule defined by its two segment endpoints (like Unity's).
 //	const Vector3 axis = pointB - pointA;
@@ -510,25 +510,66 @@ void SimpleDraw::AddFilledCapsule(const Math::Vector3& center, int ringSegments,
 //	AddCapsule(center, radius, halfHeight, rotation, color);
 //}
 
-void SimpleDraw::AddCylinder(const Math::Cylinder& cylinder, Color color, bool hasLid)
+void SimpleDraw::AddCone(const Vector3& apex, const Vector3& direction, float angle, float length, int slices, const Color& color)
+{
+	if (slices < 3) { slices = 3; }
+	if (length < 0.0f) { length *= -1.0f; }
+	angle = Abs(angle);
+
+	const Vector3 dir = Normalize(direction);
+
+	// TODO: Build a stable perpendicular basis, same trick as Camera's view matrix —
+	// picking YAxis as "up" breaks down if dir is itself near-vertical, so fall back to ZAxis.
+	Vector3 up = Vector3::YAxis;
+	if (Abs(Dot(dir, up)) > 0.99f) 
+	{
+		up = Vector3::ZAxis;
+	}
+	const Vector3 right = Normalize(Cross(up, dir));
+	const Vector3 trueUp = Normalize(Cross(dir, right));
+
+	const float radius = length * tan(angle); // angle is the HALF-angle from the center axis
+	const float sectorStep = Constants::TwoPi / slices;
+
+	const Vector3 baseCenter = apex + dir * length;
+
+	std::vector<Vector3> rimVertices;
+	rimVertices.reserve(slices);
+
+	for (int i = 0; i < slices; ++i)
+	{
+		const float sectorAngle = i * sectorStep;
+		const Vector3 offset = (right * cos(sectorAngle) + trueUp * sin(sectorAngle)) * radius;
+		rimVertices.push_back(baseCenter + offset);
+	}
+
+	// Spokes (apex to rim) + the rim circle itself
+	for (int i = 0; i < slices; ++i)
+	{
+		AddLine(apex, rimVertices[i], color);
+		AddLine(rimVertices[i], rimVertices[(i + 1) % slices], color);
+	}
+}
+
+void SimpleDraw::AddCylinder(const Cylinder& cylinder, Color color, bool hasLid)
 {
 	AddCylinder(cylinder.center, cylinder.slices, cylinder.rings, cylinder.radius, cylinder.height, color, hasLid ? cylinder.hasLid : hasLid);
 }
 
-void SimpleDraw::AddCylinder(Math::Vector3 center, int slices, int rings, float radius, float height, Color color, bool hasLid)
+void SimpleDraw::AddCylinder(Vector3 center, int slices, int rings, float radius, float height, Color color, bool hasLid)
 {
 	if (slices < 3) { slices = 3; }
 	if (rings < 1) { rings = 1; }
 	if (radius < 0.0f) { radius *= -1.0f; }
 	if (height < 0.0f) { height *= -1.0f; }
 
-	Math::Vector3 v0, v1 = {};
-	std::vector<Math::Vector3> vertices;
+	Vector3 v0, v1 = {};
+	std::vector<Vector3> vertices;
 
 	const float spacing = height / rings;
 	const float yOffSet = height * 0.5f;
 
-	const float sectorStep = Math::Constants::TwoPi / slices;
+	const float sectorStep = Constants::TwoPi / slices;
 	float sectorAngle; //Radian
 
 	for (int i = 0; i <= rings; ++i) {
@@ -561,7 +602,7 @@ void SimpleDraw::AddCylinder(Math::Vector3 center, int slices, int rings, float 
 		return;
 	}
 
-	Math::Vector3 botCent, topCent = Math::Vector3::Zero;
+	Vector3 botCent, topCent = Vector3::Zero;
 	botCent.x += center.x;
 	topCent.x += center.x;
 
@@ -587,12 +628,12 @@ void SimpleDraw::AddCylinder(Math::Vector3 center, int slices, int rings, float 
 	}
 }
 
-void SimpleDraw::AddFilledCylinder(const Math::Cylinder& cylinder, Color color, bool hasLid)
+void SimpleDraw::AddFilledCylinder(const Cylinder& cylinder, Color color, bool hasLid)
 {
 	AddFilledCylinder(cylinder.center, cylinder.slices, cylinder.rings, cylinder.radius, cylinder.height, color, hasLid ? cylinder.hasLid : hasLid);
 }
 
-void SimpleDraw::AddFilledCylinder(Math::Vector3 center, int slices, int rings, float radius, float height, Color color, bool hasLid)
+void SimpleDraw::AddFilledCylinder(Vector3 center, int slices, int rings, float radius, float height, Color color, bool hasLid)
 {
 	if (slices < 3) { slices = 3; }
 	if (rings < 1) { rings = 1; }
@@ -602,10 +643,10 @@ void SimpleDraw::AddFilledCylinder(Math::Vector3 center, int slices, int rings, 
 	const float spacing = height / rings;
 	const float yOffSet = height * 0.5f;
 
-	const float sectorStep = Math::Constants::TwoPi / slices;
+	const float sectorStep = Constants::TwoPi / slices;
 	float sectorAngle; //Radian
 
-	std::vector<Math::Vector3> vertices;
+	std::vector<Vector3> vertices;
 	std::vector<float> indices;
 
 	for (int i = 0; i <= rings; ++i) {
@@ -666,8 +707,8 @@ void SimpleDraw::AddPlane(int grid, Color color)
 	}
 
 	const float spacing = 1.0f;
-	Math::Vector3 v0, v1 = {};
-	std::vector<Math::Vector3> vertices;
+	Vector3 v0, v1 = {};
+	std::vector<Vector3> vertices;
 
 	const float OffSet = grid * 0.5f;
 
@@ -692,32 +733,32 @@ void SimpleDraw::AddPlane(int grid, Color color)
 	}
 }
 
-void SimpleDraw::AddPyramid(const Math::Pyramid& pyramid, Color color)
+void SimpleDraw::AddPyramid(const Pyramid& pyramid, Color color)
 {
 	AddPyramid(pyramid.center, pyramid.length, pyramid.width, pyramid.height, pyramid.rotation, color);
 }
 
-void SimpleDraw::AddPyramid(const Math::Vector3& center, float baseLength, float baseWidth, float height, const Math::Quaternion& rotation, Color color)
+void SimpleDraw::AddPyramid(const Vector3& center, float baseLength, float baseWidth, float height, const Quaternion& rotation, Color color)
 {
-	baseLength = Math::Abs(baseLength);
-	baseWidth = Math::Abs(baseWidth);
-	height = Math::Abs(height);
+	baseLength = Abs(baseLength);
+	baseWidth = Abs(baseWidth);
+	height = Abs(height);
 
 	const float length = baseLength * 0.5f;
 	const float width = baseWidth * 0.5f;
 
-	Math::Vector3 LL = { center.x - length, center.y, center.z - width };
-	Math::Vector3 LR = { center.x + length, center.y, center.z - width };
-	Math::Vector3 UR = { center.x + length, center.y, center.z + width };
-	Math::Vector3 UL = { center.x - length, center.y, center.z + width };
-	Math::Vector3 Tip = { center.x, center.y + height, center.z };
+	Vector3 LL = { center.x - length, center.y, center.z - width };
+	Vector3 LR = { center.x + length, center.y, center.z - width };
+	Vector3 UR = { center.x + length, center.y, center.z + width };
+	Vector3 UL = { center.x - length, center.y, center.z + width };
+	Vector3 Tip = { center.x, center.y + height, center.z };
 
-	//const Math::Matrix4 transform = Transform{ {center.x, center.y + length, center.z}, rotation, {width, height, length} }.GetMatrix4();
-	//LL = Math::TransformCoord(LL, transform);
-	//LR = Math::TransformCoord(LR, transform);
-	//UR = Math::TransformCoord(UR, transform);
-	//UL = Math::TransformCoord(UL, transform);
-	//Tip = Math::TransformCoord(Tip, transform);
+	//const Matrix4 transform = Transform{ {center.x, center.y + length, center.z}, rotation, {width, height, length} }.GetMatrix4();
+	//LL = TransformCoord(LL, transform);
+	//LR = TransformCoord(LR, transform);
+	//UR = TransformCoord(UR, transform);
+	//UL = TransformCoord(UL, transform);
+	//Tip = TransformCoord(Tip, transform);
 
 	//Base
 	AddLine(LL, LR, color);
@@ -732,12 +773,12 @@ void SimpleDraw::AddPyramid(const Math::Vector3& center, float baseLength, float
 	AddLine(UL, Tip, color);
 }
 
-void SimpleDraw::AddFilledPyramid(const Math::Pyramid& pyramid, Color color)
+void SimpleDraw::AddFilledPyramid(const Pyramid& pyramid, Color color)
 {
 	AddFilledPyramid(pyramid.center, pyramid.length, pyramid.width, pyramid.height, pyramid.rotation, color);
 }
 
-void SimpleDraw::AddFilledPyramid(const Math::Vector3& center, float baseLength, float baseWidth, float height, const Math::Quaternion& rotation, Color color)
+void SimpleDraw::AddFilledPyramid(const Vector3& center, float baseLength, float baseWidth, float height, const Quaternion& rotation, Color color)
 {
 	if (baseLength < 0.0f) {
 		baseLength *= -1.0f;
@@ -752,18 +793,18 @@ void SimpleDraw::AddFilledPyramid(const Math::Vector3& center, float baseLength,
 	const float length = baseLength * 0.5f;
 	const float width = baseWidth * 0.5f;
 
-	Math::Vector3 LL = { center.x - length, center.y, center.z - width };
-	Math::Vector3 LR = { center.x + length, center.y, center.z - width };
-	Math::Vector3 UR = { center.x + length, center.y, center.z + width };
-	Math::Vector3 UL = { center.x - length, center.y, center.z + width };
-	Math::Vector3 Tip = { center.x, center.y + height, center.z };
+	Vector3 LL = { center.x - length, center.y, center.z - width };
+	Vector3 LR = { center.x + length, center.y, center.z - width };
+	Vector3 UR = { center.x + length, center.y, center.z + width };
+	Vector3 UL = { center.x - length, center.y, center.z + width };
+	Vector3 Tip = { center.x, center.y + height, center.z };
 
-	const Math::Matrix4 transform = Transform{ center, rotation, {1.0f, 1.0f, 1.0f} }.GetMatrix4();
-	LL = Math::TransformCoord(LL, transform);
-	LR = Math::TransformCoord(LR, transform);
-	UR = Math::TransformCoord(UR, transform);
-	UL = Math::TransformCoord(UL, transform);
-	Tip = Math::TransformCoord(Tip, transform);
+	const Matrix4 transform = Transform{ center, rotation, {1.0f, 1.0f, 1.0f} }.GetMatrix4();
+	LL = TransformCoord(LL, transform);
+	LR = TransformCoord(LR, transform);
+	UR = TransformCoord(UR, transform);
+	UL = TransformCoord(UL, transform);
+	Tip = TransformCoord(Tip, transform);
 
 	//Base
 	sInstance->AddFace(LL, LR, UR, color);
@@ -776,12 +817,12 @@ void SimpleDraw::AddFilledPyramid(const Math::Vector3& center, float baseLength,
 	sInstance->AddFace(Tip, LL, UL, color);
 }
 
-void SimpleDraw::AddSphere(const Math::Sphere& sphere, Color color)
+void SimpleDraw::AddSphere(const Sphere& sphere, Color color)
 {
 	AddSphere(sphere.center, sphere.slices, sphere.rings, sphere.radius, color);
 }
 
-void SimpleDraw::AddSphere(Math::Vector3 center, int divisions, float radius, Color color)
+void SimpleDraw::AddSphere(Vector3 center, int divisions, float radius, Color color)
 {
 	AddSphere(center, divisions, divisions, radius, color);
 }
@@ -798,14 +839,14 @@ void SimpleDraw::AddSphere(Vector3 center, int slices, int rings, float radius, 
 		radius *= -1.0f;
 	}
 
-	const float sectorStep = Math::Constants::TwoPi / slices;
+	const float sectorStep = Constants::TwoPi / slices;
 	float sectorAngle; //Radian
 
-	const float sectorLeap = Math::Constants::Pi / rings;
+	const float sectorLeap = Constants::Pi / rings;
 	float sectorLeapAngle; //Radian
 
 	Vector3 v0, v1 = {};
-	std::vector<Math::Vector3> vertices;
+	std::vector<Vector3> vertices;
 
 	for (int i = 0; i <= rings; ++i) {
 		sectorLeapAngle = i * sectorLeap;
@@ -834,12 +875,12 @@ void SimpleDraw::AddSphere(Vector3 center, int slices, int rings, float radius, 
 	}
 }
 
-void SimpleDraw::AddSphere(Math::Vector3 center, int divisions, float radius, Color color, const Quaternion& rotation)
+void SimpleDraw::AddSphere(Vector3 center, int divisions, float radius, Color color, const Quaternion& rotation)
 {
 	AddSphere(center, divisions, divisions, radius, color, rotation);
 }
 
-void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float radius, Color color, const Quaternion& rotation)
+void SimpleDraw::AddSphere(Vector3 center, int slices, int rings, float radius, Color color, const Quaternion& rotation)
 {
 	if (slices < 4) {
 		slices = 4;
@@ -851,13 +892,13 @@ void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float ra
 		radius *= -1.0f;
 	}
 
-	const float sectorStep = Math::Constants::TwoPi / slices;
-	const float ringStep = Math::Constants::Pi / rings;
+	const float sectorStep = Constants::TwoPi / slices;
+	const float ringStep = Constants::Pi / rings;
 
-	std::vector<Math::Vector3> vertices;
+	std::vector<Vector3> vertices;
 	vertices.reserve((rings + 1) * (slices + 1));
 
-	Math::Vector3 v0, v1;
+	Vector3 v0, v1;
 
 	// =========================
 	// Generate + horizontal lines
@@ -871,14 +912,14 @@ void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float ra
 			float sectorAngle = j * sectorStep;
 
 			// 1. Local position (centered at origin)
-			Math::Vector3 localPos = {
+			Vector3 localPos = {
 				radius * sin(sectorAngle) * sin(ringAngle),
 				radius * cos(ringAngle),
 				radius * cos(sectorAngle) * sin(ringAngle)
 			};
 
 			// 2. Apply rotation
-			Math::Vector3 rotated = rotation * localPos;
+			Vector3 rotated = rotation * localPos;
 
 			// 3. Translate
 			v1 = rotated + center;
@@ -912,17 +953,17 @@ void SimpleDraw::AddSphere(Math::Vector3 center, int slices, int rings, float ra
 	}
 }
 
-void SimpleDraw::AddFilledSphere(const Math::Sphere& sphere, Color color)
+void SimpleDraw::AddFilledSphere(const Sphere& sphere, Color color)
 {
 	AddFilledSphere(sphere.center, sphere.slices, sphere.rings, sphere.radius, color);
 }
 
-void SimpleDraw::AddFilledSphere(Math::Vector3 center, int divisions, float radius, Color color)
+void SimpleDraw::AddFilledSphere(Vector3 center, int divisions, float radius, Color color)
 {
 	AddFilledSphere(center, divisions, divisions, radius, color);
 }
 
-void SimpleDraw::AddFilledSphere(Math::Vector3 center, int slices, int rings, float radius, Color color)
+void SimpleDraw::AddFilledSphere(Vector3 center, int slices, int rings, float radius, Color color)
 {
 	if (slices < 4) {
 		slices = 4;
@@ -934,13 +975,13 @@ void SimpleDraw::AddFilledSphere(Math::Vector3 center, int slices, int rings, fl
 		radius *= -1.0f;
 	}
 
-	std::vector<Math::Vector3> vertices;
+	std::vector<Vector3> vertices;
 	std::vector<float> indices;
 
-	const float sectorStep = Math::Constants::TwoPi / slices;
+	const float sectorStep = Constants::TwoPi / slices;
 	float sectorAngle; //Radian
 
-	const float sectorLeap = Math::Constants::Pi / rings;
+	const float sectorLeap = Constants::Pi / rings;
 	float sectorLeapAngle; //Radian
 
 	for (int i = 0; i <= rings; ++i) {
@@ -969,12 +1010,12 @@ void SimpleDraw::AddFilledSphere(Math::Vector3 center, int slices, int rings, fl
 	}
 }
 
-void SimpleDraw::AddTransform(Math::Matrix4 matrix)
+void SimpleDraw::AddTransform(Matrix4 matrix)
 {
-	const Math::Vector3 S = {matrix._11, matrix._12, matrix._13}; //Side
-	const Math::Vector3 L = {matrix._31, matrix._32, matrix._33}; //Look
-	const Math::Vector3 U = {matrix._21, matrix._22, matrix._23}; //Up
-	const Math::Vector3 T = {matrix._41, matrix._42, matrix._43}; //Translation
+	const Vector3 S = {matrix._11, matrix._12, matrix._13}; //Side
+	const Vector3 L = {matrix._31, matrix._32, matrix._33}; //Look
+	const Vector3 U = {matrix._21, matrix._22, matrix._23}; //Up
+	const Vector3 T = {matrix._41, matrix._42, matrix._43}; //Translation
 
 	AddLine(T, T + S, Colors::Red);
 	AddLine(T, T + U, Colors::Green);

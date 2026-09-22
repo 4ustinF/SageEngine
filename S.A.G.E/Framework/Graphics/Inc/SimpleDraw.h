@@ -30,6 +30,8 @@ namespace SAGE::Graphics
 		void AddCapsule(const Math::Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Math::Quaternion& rotation, const Color& color);
 		void AddFilledCapsule(const Math::Vector3& center, int ringSegments, int arcSegments, float radius, float height, const Math::Quaternion& rotation, const Color& color);
 
+		void AddCone(const Math::Vector3& apex, const Math::Vector3& direction, float angle, float length, int slices, const Color& color);
+
 		void AddCylinder(const Math::Cylinder& cylinder, Color color, bool hasLid = true);
 		void AddCylinder(Math::Vector3 center, int slices, int rings, float radius, float height, Color color, bool hasLid = true);
 		void AddFilledCylinder(const Math::Cylinder& cylinder, Color color, bool hasLid = true);

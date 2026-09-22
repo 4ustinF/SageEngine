@@ -98,11 +98,43 @@ void SpotlightComponent::DebugUI()
 		ImGui::ColorEdit4("Specular", &mSpotLightData.specular.r);
 		ImGui::DragFloat3("Attenuation (const/lin/quad)", &mSpotLightData.attenuation.x, 0.001f, 0.0f, 2.0f);
 
-		if (mIsRegisteredWithRenderService)
+		ImGui::Text("Shadow Map");
+		ImGui::Image(mSpotShadowEffect.GetDepthMap().GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
+
+		if (ImGui::Button("Invalidate"))
 		{
-			ImGui::Text("Shadow Map");
-			ImGui::Image(mSpotShadowEffect.GetDepthMap().GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
+			mSpotShadowEffect.Invalidate();
 		}
+
+		//if (ImGui::Button("SaveSRVToDDS"))
+		//{
+		//	bool saved = TextureBaking::SaveSRVToDDS(
+		//		GraphicsSystem::Get()->GetContext(),
+		//		mSpotShadowEffects[i].GetDepthMap().GetShaderResourceView(),
+		//		L"D:/GitHubFiles/SageEngine/S.A.G.E/Assets/Baked/SpotShadow0.dds"
+		//	);
+		//}
+
+		//if (ImGui::Button("LoadDDSAsSRV"))
+		//{
+		//	//SAGE::Graphics::Texture mBakedSpotShadowMap;
+		//	//bool mBakedSpotShadowMapLoaded = true;
+
+		//	//ID3D11ShaderResourceView* srv = TextureBaking::LoadDDSAsSRV(GraphicsSystem::Get()->GetDevice(), L"D:/GitHubFiles/SageEngine/S.A.G.E/Assets/Baked/SpotShadow0.dds");
+
+		//	//if (srv != nullptr)
+		//	//{
+		//	//	if (mBakedSpotShadowMapLoaded) {
+		//	//		mBakedSpotShadowMap.Terminate(); // release the previous one first if reloading
+		//	//	}
+		//	//	mBakedSpotShadowMap.InitializeFromSRV(srv);
+		//	//	mBakedSpotShadowMapLoaded = true;
+		//	//	mStandardEffect.SetSpotShadowMap(i, &mBakedSpotShadowMap);
+		//	//}
+		//}
+
+		SimpleDraw::AddCone(mSpotLightData.position, mSpotLightData.direction, mSpotLightData.outerConeAngle, mSpotLightData.range, 16, Colors::Green);
+		SimpleDraw::AddCone(mSpotLightData.position, mSpotLightData.direction, mSpotLightData.innerConeAngle, mSpotLightData.range, 16, Colors::Green);
 	}
 
 	// TODO:

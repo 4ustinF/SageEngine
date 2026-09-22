@@ -83,13 +83,6 @@ namespace SAGE
 		// TODO - turn these into components
 		Graphics::DirectionalLight mDirectionalLight;
 
-		// TODO: Make these more dynamic?
-		//std::array<Graphics::SpotLight, Graphics::MaxSpotLights> mSpotLights{};
-		//std::array<Graphics::SpotShadowEffect, Graphics::MaxSpotLights> mSpotShadowEffects;
-		//std::array<SpotlightComponent*, Graphics::MaxSpotLights> mSpotlightSlotOwners{}; // nullptr = free slot
-		//std::vector<int> mActiveSpotLightSlots;   // compact — only holds slots currently in use
-		//std::vector<int> mFreeSpotLightSlots;     // stack of unused slot indices, avoids scanning for a free one
-
 		std::vector<Graphics::SpotLight*> mSpotLights;
 		std::vector<SpotlightComponent*> mSpotlightComponents;
 

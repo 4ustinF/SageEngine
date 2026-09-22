@@ -38,16 +38,16 @@ namespace SAGE
 		void LoadCrossCubeMapSkyBox(const char* fileName, float size = 1000.0f);
 		void LoadSkyDome(const char* fileName, int divisions = 256, float radius = 1000.0f);
 
-		void SetSkyBoxPos(SAGE::Math::Vector3 position);
+		void SetSkyBoxPos(Math::Vector3 position);
 
 		void SetShadowFocus(const Math::Vector3& focusPosition);
-		void SetSampleFilter(SAGE::Graphics::Sampler::Filter sampleFilter) { mSampleFilter = sampleFilter; }
+		void SetSampleFilter(Graphics::Sampler::Filter sampleFilter) { mSampleFilter = sampleFilter; }
 
-		SAGE::Graphics::DirectionalLight& GetDirectionalLight() { return mDirectionalLight; }
-		const SAGE::Graphics::DirectionalLight& GetDirectionalLight() const { return mDirectionalLight; }
+		Graphics::DirectionalLight& GetDirectionalLight() { return mDirectionalLight; }
+		const Graphics::DirectionalLight& GetDirectionalLight() const { return mDirectionalLight; }
 
 		// TODO: Remove
-		SAGE::Graphics::ShadowEffect& GetShadowEffect() { return mShadowEffect; }
+		Graphics::ShadowEffect& GetShadowEffect() { return mShadowEffect; }
 
 	private:
 		friend class ModelComponent;
@@ -81,33 +81,33 @@ namespace SAGE
 		const TerrainService* mTerrainService = nullptr;
 
 		// TODO - turn these into components
-		SAGE::Graphics::DirectionalLight mDirectionalLight;
+		Graphics::DirectionalLight mDirectionalLight;
 
 		// TODO: Make these more dynamic?
-		//std::array<SAGE::Graphics::SpotLight, Graphics::MaxSpotLights> mSpotLights{};
-		//std::array<SAGE::Graphics::SpotShadowEffect, Graphics::MaxSpotLights> mSpotShadowEffects;
+		//std::array<Graphics::SpotLight, Graphics::MaxSpotLights> mSpotLights{};
+		//std::array<Graphics::SpotShadowEffect, Graphics::MaxSpotLights> mSpotShadowEffects;
 		//std::array<SpotlightComponent*, Graphics::MaxSpotLights> mSpotlightSlotOwners{}; // nullptr = free slot
 		//std::vector<int> mActiveSpotLightSlots;   // compact — only holds slots currently in use
 		//std::vector<int> mFreeSpotLightSlots;     // stack of unused slot indices, avoids scanning for a free one
 
-		std::vector<SAGE::Graphics::SpotLight*> mSpotLights;
+		std::vector<Graphics::SpotLight*> mSpotLights;
 		std::vector<SpotlightComponent*> mSpotlightComponents;
 
-		SAGE::Graphics::SpotShadowEffectResources mSpotShadowEffectResources;
+		Graphics::SpotShadowEffectResources mSpotShadowEffectResources;
 
-		SAGE::Graphics::StandardEffect mStandardEffect;
-		SAGE::Graphics::TexturingEffect mSkyBoxEffect;
-		SAGE::Graphics::TexturingEffect mTexturingEffect;
-		SAGE::Graphics::TerrainEffect mTerrainEffect;
-		SAGE::Graphics::ShadowEffect mShadowEffect;
+		Graphics::StandardEffect mStandardEffect;
+		Graphics::TexturingEffect mSkyBoxEffect;
+		Graphics::TexturingEffect mTexturingEffect;
+		Graphics::TerrainEffect mTerrainEffect;
+		Graphics::ShadowEffect mShadowEffect;
 
 		void RenderSkyBox();
-		SAGE::Graphics::RenderObject mSkyBox;
-		SAGE::Graphics::RenderGroup mNewSkyBox;
+		Graphics::RenderObject mSkyBox;
+		Graphics::RenderGroup mNewSkyBox;
 		SkyBoxType mSkyBoxType = SkyBoxType::None;
 		const float mSkyBoxDefaultSize = 1000.0f;
 
-		SAGE::Graphics::Sampler::Filter mSampleFilter = SAGE::Graphics::Sampler::Filter::Linear;
+		Graphics::Sampler::Filter mSampleFilter = Graphics::Sampler::Filter::Linear;
 
 		// FPS
 		int mFPS = 0;
@@ -124,11 +124,11 @@ namespace SAGE
 		void ExtractFrustumPlanes(const Math::Matrix4& vp, Math::Plane outPlanes[6]);
 
 		// TODO: Move out
-		SAGE::Graphics::RenderObject mScreenQuad;
-		SAGE::Graphics::RenderTarget mBaseRenderTarget;
-		SAGE::Graphics::RenderTarget mBloomRenderTarget;
-		SAGE::Graphics::PostProcessingEffect mPostProccessingEffect;
-		SAGE::Graphics::GaussianBlurEffect mGaussianBlurEffect;
+		Graphics::RenderObject mScreenQuad;
+		Graphics::RenderTarget mBaseRenderTarget;
+		Graphics::RenderTarget mBloomRenderTarget;
+		Graphics::PostProcessingEffect mPostProccessingEffect;
+		Graphics::GaussianBlurEffect mGaussianBlurEffect;
 
 	};
 }

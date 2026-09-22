@@ -43,8 +43,8 @@ namespace SAGE
 
 		const Math::Vector3& GetPosition() { return mSpotLightData.position; }
 		const Math::Vector3& GetDirection() { return mSpotLightData.direction; }
-		float GetInnerConeAngle() const { return mSpotLightData.innerConeAngle * Constants::RadToDeg; }
-		float GetOuterConeAngle() const { return mSpotLightData.outerConeAngle * Constants::RadToDeg; }
+		float GetInnerConeAngle() const { return mSpotLightData.innerConeAngle * Math::Constants::RadToDeg; }
+		float GetOuterConeAngle() const { return mSpotLightData.outerConeAngle * Math::Constants::RadToDeg; }
 		float GetRange() const { return mSpotLightData.range; }
 		const Math::Vector3& GetAttenuation() const { return mSpotLightData.attenuation; }
 		float GetAttenuationConstantTerm() const { return mSpotLightData.attenuation.x; }

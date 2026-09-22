@@ -146,7 +146,7 @@ namespace SAGE::Graphics
 		SpotShadowMatrixBuffer mSpotShadowMatrixBuffer;
 		SpotLightBufferData mSpotLightBufferData;
 		SpotShadowMatrixData mSpotShadowMatrixData;
-		std::array<const Texture*, MaxSpotLights> mSpotShadowMaps{};
+		std::array<const Texture*, MaxSpotLights> mSpotShadowMaps{}; // TODO: Convert to vector
 		size_t mActiveSpotLightCount = 0;
 	};
 }

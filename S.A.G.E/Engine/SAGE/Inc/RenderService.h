@@ -8,6 +8,7 @@ namespace SAGE
 	class ModelComponent;
 	class TransformComponent;
 	class SpotlightComponent;
+	class Graphics::SpotShadowEffectResources;
 
 	class CameraService;
 	class TerrainService;
@@ -60,8 +61,6 @@ namespace SAGE
 		friend class SpotlightComponent;
 		bool RegisterSpotLight(SpotlightComponent* spotlightComponent);
 		void UnregisterSpotLight(SpotlightComponent* spotlightComponent);
-		SAGE::Graphics::SpotLight& GetSpotLight(int slot);
-		SAGE::Graphics::SpotShadowEffect& GetSpotShadowEffect(int slot);
 
 		struct Entry
 		{
@@ -84,11 +83,17 @@ namespace SAGE
 		// TODO - turn these into components
 		SAGE::Graphics::DirectionalLight mDirectionalLight;
 
-		std::array<SAGE::Graphics::SpotLight, Graphics::MaxSpotLights> mSpotLights{};
-		std::array<SAGE::Graphics::SpotShadowEffect, Graphics::MaxSpotLights> mSpotShadowEffects;
-		std::array<SpotlightComponent*, Graphics::MaxSpotLights> mSpotlightSlotOwners{}; // nullptr = free slot
-		std::vector<int> mActiveSpotLightSlots;   // compact — only holds slots currently in use
-		std::vector<int> mFreeSpotLightSlots;     // stack of unused slot indices, avoids scanning for a free one
+		// TODO: Make these more dynamic?
+		//std::array<SAGE::Graphics::SpotLight, Graphics::MaxSpotLights> mSpotLights{};
+		//std::array<SAGE::Graphics::SpotShadowEffect, Graphics::MaxSpotLights> mSpotShadowEffects;
+		//std::array<SpotlightComponent*, Graphics::MaxSpotLights> mSpotlightSlotOwners{}; // nullptr = free slot
+		//std::vector<int> mActiveSpotLightSlots;   // compact — only holds slots currently in use
+		//std::vector<int> mFreeSpotLightSlots;     // stack of unused slot indices, avoids scanning for a free one
+
+		std::vector<SAGE::Graphics::SpotLight*> mSpotLights;
+		std::vector<SpotlightComponent*> mSpotlightComponents;
+
+		SAGE::Graphics::SpotShadowEffectResources mSpotShadowEffectResources;
 
 		SAGE::Graphics::StandardEffect mStandardEffect;
 		SAGE::Graphics::TexturingEffect mSkyBoxEffect;

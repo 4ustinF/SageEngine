@@ -35,7 +35,6 @@ namespace SAGE::Graphics
 		void SetBumpWeight(float weight) { mBumpWeight = weight; }
 		void SetShadowMap(const Texture* shadowMap);
 		void SetDepthBias(float bias) { mDepthBias = bias; }
-		void SetSampleSize(int size) { mSampleSize = size; }
 		void SetFogColor(Color fogColor) { mFogColor = fogColor; }
 		void SetFogStart(float startDistance) { mFogStart = startDistance; }
 		void SetFogEnd(float endDistance) { mFogEnd = endDistance; }
@@ -81,7 +80,7 @@ namespace SAGE::Graphics
 			int useShadowMap = 1;
 			int useSkinning = 0;
 			float depthBias = 0.0f;
-			int sampleSize = 1;
+			int sampleSize = 1; // TODO: Remove from here and shader
 
 			SAGE::Graphics::Color fogColor = Colors::Gray;
 			int useFog = 0;
@@ -135,7 +134,6 @@ namespace SAGE::Graphics
 		SettingsData mSettingsData;
 		float mBumpWeight = 0.0f;
 		float mDepthBias = 0.0f;
-		int mSampleSize = 1;
 
 		SAGE::Graphics::Color mFogColor = Colors::Gray;
 		float mFogStart = 50.0f;

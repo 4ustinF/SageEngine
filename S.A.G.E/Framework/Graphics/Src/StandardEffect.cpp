@@ -133,7 +133,7 @@ void StandardEffect::Render(const RenderObject& renderObject)
 		mShadowMap->BindPS(4);
 		settingsData.useShadowMap = 1;
 		settingsData.depthBias = mDepthBias;
-		settingsData.sampleSize = mSampleSize;
+		settingsData.sampleSize = 1;
 	}
 	else {
 		settingsData.useShadowMap = 0;
@@ -302,6 +302,5 @@ void StandardEffect::DebugUI()
 		//mSettingsData.useSkinning = useSkinning ? 1 : 0;
 
 		ImGui::DragFloat("Depth Bias##StandardEffect", &mDepthBias, 0.000001f, 0.0f, 1.0f, "%.6f");
-		ImGui::DragInt("Sample Size##StandardEffect", &mSampleSize, 0.1f, 0, 5);
 	}
 }

@@ -133,7 +133,7 @@ matrix GetBoneTransform(int4 indices, float4 weights)
     return transform;
 }
 
-float ComputeShadowFactor(Texture2D shadowTex, float4 lightNDCPosition, float bias)
+float ComputeShadowFactor(Texture2D shadowTex, float4 lightNDCPosition, float bias, float NdotL)
 {
     float actualDepth = 1.0f - (lightNDCPosition.z / lightNDCPosition.w);
     float2 shadowUV = lightNDCPosition.xy / lightNDCPosition.w;
@@ -143,15 +143,11 @@ float ComputeShadowFactor(Texture2D shadowTex, float4 lightNDCPosition, float bi
     if (saturate(u) != u || saturate(v) != v)
         return 1.0f; // outside frustum: fully lit
 
-    float savedDepth = shadowTex.Sample(textureSampler, float2(u, v)).r;
-    if (savedDepth <= actualDepth + bias)
-        return 1.0f;
+    float slopeBias = bias * clamp(tan(acos(saturate(NdotL))), 0.0f, 8.0f);
+    float effectiveBias = bias + slopeBias;
 
-    float shadowMult = 0.0f;
-    int width, height;
-    shadowTex.GetDimensions(width, height);
-    float2 texelSize = 1.0f / float2(width, height);
-    return shadowMult;
+    float savedDepth = shadowTex.Sample(textureSampler, float2(u, v)).r;
+    return (savedDepth > actualDepth + effectiveBias) ? 0.0f : 1.0f;
 }
 
 float4 ComputeSpotLightContribution(int index, float3 worldPosition, float3 normal, float3 viewDirection, float4 diffuseMapColor, float specularMapColor)
@@ -180,9 +176,14 @@ float4 ComputeSpotLightContribution(int index, float3 worldPosition, float3 norm
     float3 reflection = reflect(-spotL, normal);
     float specularAmount = pow(saturate(dot(reflection, viewDirection)), materialPower);
 
+    // Push the shadow test point along the normal before sampling — compensates
+    // for curvature-induced self-shadowing that a depth-only bias can't fix.
+    const float normalOffsetScale = 0.01f; // tune per scene scale; start small and increase until acne clears
+    float3 shadowSamplePos = worldPosition + normal * normalOffsetScale;
+
     float shadowFactor = 1.0f;
-    float4 spotNDC = mul(float4(worldPosition, 1.0f), spotLightViewProj[index]);
-    shadowFactor = ComputeShadowFactor(spotShadowMaps[index], spotNDC, depthBias);
+    float4 spotNDC = mul(float4(shadowSamplePos, 1.0f), spotLightViewProj[index]);
+    shadowFactor = ComputeShadowFactor(spotShadowMaps[index], spotNDC, depthBias, diffuseAmount);
 
     float4 ambient = light.ambient * materialAmbient;
     float4 diffuse = diffuseAmount * light.diffuse * materialDiffuse * shadowFactor;

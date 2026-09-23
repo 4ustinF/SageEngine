@@ -42,7 +42,6 @@ void RenderService::Initialize()
 	mStandardEffect.SetShadowMap(&mShadowEffect.GetDepthMap());
 	mStandardEffect.SetDepthBias(0.000040f); // 0.000021f
 	mStandardEffect.SetBumpWeight(0.25f);
-	mStandardEffect.SetSampleSize(0);
 
 	mTexturingEffect.Initialize();
 	mSkyBoxEffect.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Clamp);

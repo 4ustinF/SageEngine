@@ -78,6 +78,7 @@ void GameState::Initialize()
 	standardEffect.UseSpecularMap(false);
 	standardEffect.UseBumpMap(false);
 	standardEffect.UseNormalMap(false);
+	standardEffect.UseShadowMap(false);
 
 	// TODO: Move over to level asset.
 	//physicsService->SetRenderDebugUI(true);

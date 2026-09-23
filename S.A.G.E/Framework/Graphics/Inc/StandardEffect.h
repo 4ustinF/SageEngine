@@ -48,7 +48,7 @@ namespace SAGE::Graphics
 		void UseShadowMap(bool use) { mSettingsData.useShadowMap = use ? 1 : 0; }
 		void UseFog(bool use) { mSettingsData.useFog = use ? 1 : 0; }
 
-		void SetSpotLights(const SpotLight* lights, size_t count); // copies up to MaxSpotLights
+		void SetSpotLights(const std::vector<SpotLight*>& lights); // copies up to MaxSpotLights
 		void SetSpotShadowMap(size_t index, const Texture* shadowMap);
 		void SetSpotLightViewProj(size_t index, const Math::Matrix4& viewProj);
 		void SetSpotLightTransposeViewProj(size_t index, const Math::Matrix4& transposeViewProj);

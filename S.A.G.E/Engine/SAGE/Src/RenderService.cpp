@@ -112,15 +112,7 @@ void RenderService::Render()
 	auto& camera = mCameraService->GetCamera();
 	mStandardEffect.SetCamera(camera);
 
-	// TODO: This is a hack. We should have a better way to manage active spotlights and their data not by making an array every frame.
-	std::vector<SpotLight> activeSpotLights;
-	activeSpotLights.reserve(static_cast<size_t>(mSpotlightComponents.size()));
-	for (SpotlightComponent* spotlightComponent : mSpotlightComponents)
-	{
-		activeSpotLights.push_back(spotlightComponent->GetSpotLightData());
-	}
-
-	mStandardEffect.SetSpotLights(activeSpotLights.data(), static_cast<int>(activeSpotLights.size()));
+	mStandardEffect.SetSpotLights(mSpotLights);
 	mTexturingEffect.SetCamera(camera);
 	mSkyBoxEffect.SetCamera(camera);
 	mTerrainEffect.SetCamera(camera);
@@ -545,6 +537,7 @@ bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 	spotShadowEffect.Invalidate();
 
 	mSpotlightComponents.push_back(spotlightComponent);
+	mSpotLights.push_back(&spotlightComponent->GetSpotLightData());
 
 	spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
 	const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
@@ -575,6 +568,11 @@ void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 
 	const int removedIndex = static_cast<int>(std::distance(mSpotlightComponents.begin(), iter));
 	mSpotlightComponents.erase(iter);
+
+	if (removedIndex < static_cast<int>(mSpotLights.size()))
+	{
+		mSpotLights.erase(mSpotLights.begin() + removedIndex);
+	}
 
 	const int remainingCount = static_cast<int>(mSpotlightComponents.size());
 	for (int i = removedIndex; i < remainingCount; ++i)

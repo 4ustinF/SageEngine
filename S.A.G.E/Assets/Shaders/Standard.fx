@@ -1,6 +1,6 @@
 // Description: Standard shader for SAGE
 
-#define MAX_SPOT_LIGHTS 4
+#define MAX_SPOT_LIGHTS 16
 
 struct SpotLightData
 {

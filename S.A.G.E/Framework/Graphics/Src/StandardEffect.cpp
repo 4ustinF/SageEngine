@@ -236,7 +236,8 @@ void StandardEffect::SetSpotLights(const SpotLight* lights, size_t count)
 	ASSERT(lights != nullptr || count == 0, "StandardEffect -- lights cannot be null when count > 0");
 
 	mActiveSpotLightCount = std::min(count, MaxSpotLights);
-	for (size_t i = 0; i < mActiveSpotLightCount; ++i) {
+	for (size_t i = 0; i < mActiveSpotLightCount; ++i) 
+	{
 		mSpotLightBufferData.spotLights[i] = lights[i];
 	}
 	mSpotLightBufferData.spotLightCount = static_cast<int>(mActiveSpotLightCount);

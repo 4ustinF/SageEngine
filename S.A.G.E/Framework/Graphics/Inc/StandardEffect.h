@@ -26,8 +26,8 @@ namespace SAGE::Graphics
 		void Render(const RenderGroup& renderGroup);
 		void Render(const RenderObject& renderObject);
 
-		const Texture* GetSpotShadowMap(size_t index) const;
-		const Math::Matrix4& GetSpotLightViewProj(size_t index) const;
+		const Texture* GetSpotShadowMap(size_t index) const;		   // TODO: Maybe remove?
+		const Math::Matrix4& GetSpotLightViewProj(size_t index) const; // TODO: Maybe remove?
 
 		void SetCamera(const Camera& camera);
 		void SetLightCamera(const Camera& camera);

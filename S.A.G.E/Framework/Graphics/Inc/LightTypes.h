@@ -13,7 +13,7 @@ namespace SAGE::Graphics
 		Color specular;
 	};
 
-	inline constexpr size_t MaxSpotLights = 4;
+	inline constexpr size_t MaxSpotLights = 16;
 	struct SpotLight
 	{
 		Math::Vector3 position;

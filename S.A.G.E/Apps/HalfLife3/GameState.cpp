@@ -74,6 +74,10 @@ void GameState::Initialize()
 	renderService->GetDirectionalLight().direction = Math::Normalize(Vector3(0.0f, -1.0f, 0.0f));
 	renderService->GetDirectionalLight().ambient = Colors::White;
 	renderService->GetDirectionalLight().diffuse = Colors::White;
+	StandardEffect& standardEffect = renderService->GetStandardEffect();
+	standardEffect.UseSpecularMap(false);
+	standardEffect.UseBumpMap(false);
+	standardEffect.UseNormalMap(false);
 
 	// TODO: Move over to level asset.
 	//physicsService->SetRenderDebugUI(true);

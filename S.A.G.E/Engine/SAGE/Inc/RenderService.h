@@ -48,6 +48,7 @@ namespace SAGE
 
 		// TODO: Remove
 		Graphics::ShadowEffect& GetShadowEffect() { return mShadowEffect; }
+		Graphics::StandardEffect& GetStandardEffect() { return mStandardEffect; }
 
 	private:
 		friend class ModelComponent;

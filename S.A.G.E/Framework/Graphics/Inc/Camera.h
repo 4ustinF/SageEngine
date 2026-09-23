@@ -18,9 +18,11 @@ namespace SAGE::Graphics
 		void SetPosition(const Math::Vector3& position);
 		void SetDirection(const Math::Vector3& direction);
 		void SetLookAt(const Math::Vector3& target);
+		void SetOrientation(const Math::Quaternion& orientation);
 
 		// Perspective params
 		void SetFov(float fov);
+		void SetFovInDegrees(float fov);
 		void SetAspectRatio(float ratio);
 
 		// Orthographic params
@@ -48,6 +50,17 @@ namespace SAGE::Graphics
 		const Math::Vector3& GetDirection() const;
 		const Math::Vector3 GetDirectionWithoutPitch() const;
 
+		const Math::Quaternion& GetOrientation() const;
+		Math::Vector3 GetRight() const;
+		Math::Vector3 GetUp() const;
+
+		const float GetFOV() { return mFov; }
+		const float GetMinFOV() { return mMinFov; }
+		const float GetMaxFOV() { return mMaxFov; }
+		const float GetFOVInDegrees() { return mFov * Math::Constants::RadToDeg; }
+		const float GetMinFOVInDegrees() { return mMinFov * Math::Constants::RadToDeg; }
+		const float GetMaxFOVInDegrees() { return mMaxFov * Math::Constants::RadToDeg; }
+
 		Math::Matrix4 GetWorldMatrix() const;
 		Math::Matrix4 GetViewMatrix() const;
 		Math::Matrix4 GetProjectionMatrix() const;
@@ -56,13 +69,18 @@ namespace SAGE::Graphics
 		Math::Matrix4 GetOrthographicMatrix() const;
 
 	private:
+		void UpdateDirection();
+
 		ProjectionMode mProjectionMode = ProjectionMode::Perspective;
 
 		Math::Vector3 mPosition = Math::Vector3::Zero;
 		Math::Vector3 mDirection = Math::Vector3::ZAxis;
+		Math::Quaternion mOrientation = Math::Quaternion::Identity;
 
 		// 0 aspect ratio = use back buffer dimension
 		float mFov = 60.0f * Math::Constants::DegToRad;
+		const float mMinFov = 10.0f * Math::Constants::DegToRad;
+		const float mMaxFov = 170.0f * Math::Constants::DegToRad;
 		float mAspectRatio = 0.0f;
 
 		// 0 width or height = use back buffer dimension

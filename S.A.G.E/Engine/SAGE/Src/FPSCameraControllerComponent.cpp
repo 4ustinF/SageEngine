@@ -7,15 +7,20 @@
 #include "CameraUtil.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::Input;
 using namespace SAGE::Graphics;
-using namespace SAGE::Math;
 
-MEMORY_POOL_DEFINE(FPSCameraControllerComponent, 80);
+MEMORY_POOL_DEFINE(FPSCameraControllerComponent, 10);
 
 void FPSCameraControllerComponent::Initialize()
 {
 	mCameraComponent = GetOwner().GetComponent<CameraComponent>();
+}
+
+void FPSCameraControllerComponent::Terminate()
+{
+	mCameraComponent = nullptr;
 }
 
 void FPSCameraControllerComponent::Update(float deltaTime)
@@ -34,18 +39,24 @@ void FPSCameraControllerComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("FPS Camera Component##FPSCameraControllerComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		SAGE::Graphics::Camera& camera = mCameraComponent->GetCamera();
+		Camera& camera = mCameraComponent->GetCamera();
 
-		Math::Vector3 position = camera.GetPosition();
+		Vector3 position = camera.GetPosition();
 		if (ImGui::DragFloat3("Position##FPSCameraControllerComponent", &position.x, 0.1f))
 		{
 			camera.SetPosition(position);	
 		}
 
-		Math::Vector3 direction = camera.GetDirection();
+		Vector3 direction = camera.GetDirection();
 		if (ImGui::DragFloat3("Direction##FPSCameraControllerComponent", &direction.x, 0.1f))
 		{
 			camera.SetDirection(direction);
+		}
+
+		float fov = camera.GetFOVInDegrees();
+		if (ImGui::DragFloat("FOV##FPSCameraControllerComponent", &fov, 0.1f, camera.GetMinFOVInDegrees(), camera.GetMaxFOVInDegrees()))
+		{
+			camera.SetFovInDegrees(fov);
 		}
 
 		ImGui::InputFloat("Normal Speed##FPSCameraControllerComponent", &normSpeed, 0.1f, 0.05f);

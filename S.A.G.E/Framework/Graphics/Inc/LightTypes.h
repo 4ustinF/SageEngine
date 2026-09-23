@@ -18,10 +18,10 @@ namespace SAGE::Graphics
 	{
 		Math::Vector3 position;
 		float range = 10.0f;
-		Math::Vector3 direction = Math::Normalize({ 0.1f, -1.0f,  0.1f }); // TODO: 
-		float innerConeAngle = 0.17453292519f; // 10.0f * Constants::DegToRad;
+		Math::Vector3 direction = -Math::Vector3::YAxis;
+		float innerConeAngle = 10.0f * Math::Constants::DegToRad;
 		Math::Vector3 attenuation = Math::Vector3(1.0f, 0.045f, 0.0075f);
-		float outerConeAngle = 1.2217304764f; // 70.0f * Constants::DegToRad;
+		float outerConeAngle = 70.0f * Math::Constants::DegToRad;
 		Color ambient = Color(0.05f, 0.05f, 0.05f, 1.0f);	// TODO:
 		Color diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);		// TODO:
 		Color specular = Color(1.0f, 1.0f, 1.0f, 1.0f);		// TODO:

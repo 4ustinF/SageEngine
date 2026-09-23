@@ -21,7 +21,6 @@ namespace SAGE::Graphics
 
 		void Render(const RenderGroup& renderGroup);
 		void Render(const RenderObject& renderObject);
-		void DebugUI();
 
 		void SetSpotLight(const SpotLight& spotLight);
 

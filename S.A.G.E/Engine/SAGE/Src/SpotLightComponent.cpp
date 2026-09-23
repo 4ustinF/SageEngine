@@ -143,7 +143,6 @@ void SpotlightComponent::DebugUI()
 
 void SpotlightComponent::OnEnable()
 {
-	// TODO: Get/Create/Init/Cache a spotlight from the render service.
 	if (mRenderService)
 	{
 		mIsRegisteredWithRenderService = mRenderService->RegisterSpotLight(this);

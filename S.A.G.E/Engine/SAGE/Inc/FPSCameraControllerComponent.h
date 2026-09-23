@@ -9,11 +9,15 @@ namespace SAGE
 	class FPSCameraControllerComponent final : public Component
 	{
 	public:
+		const char* GetCompName() override { return "FPSCameraControllerComponent"; }
 		SET_TYPE_ID(ComponentId::FPSCameraController)
 		MEMORY_POOL_DECLARE
 
 		void Initialize() override;
+		void Terminate() override;
+
 		void Update(float deltaTime) override;
+
 
 		void DebugUI() override;
 

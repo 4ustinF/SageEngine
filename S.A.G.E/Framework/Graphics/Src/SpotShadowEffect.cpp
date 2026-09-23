@@ -109,15 +109,6 @@ void SpotShadowEffect::Render(const RenderObject& renderObject)
 	renderObject.meshBuffer.Render();
 }
 
-void SpotShadowEffect::DebugUI()
-{
-	if (ImGui::CollapsingHeader("Spot Shadow Effect", ImGuiTreeNodeFlags_CollapsingHeader))
-	{
-		ImGui::Text("Depth Map");
-		ImGui::Image(mDepthMapRenderTarget.GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
-	}
-}
-
 void SpotShadowEffect::SetSpotLight(const SpotLight& spotLight)
 {
 	mLightCamera.SetPosition(spotLight.position);

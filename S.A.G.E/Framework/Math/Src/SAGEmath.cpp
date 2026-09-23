@@ -242,21 +242,19 @@ Quaternion Quaternion::RotationLook(const Vector3& direction, const Vector3& up)
 
 Quaternion Quaternion::RotationFromTo(const Vector3& from, const Vector3& to)
 {
-	float dot = Dot(from, to);
-
-	float wx = from.y * to.z - from.z * to.y;
-	float wy = from.z * to.x - from.x * to.z;
-	float wz = from.x * to.y - from.y * to.x;
+	const float dot = Dot(from, to);
+	const float wx = from.y * to.z - from.z * to.y;
+	const float wy = from.z * to.x - from.x * to.z;
+	const float wz = from.x * to.y - from.y * to.x;
 
 	Quaternion quat(dot + sqrt(dot * dot + wx * wx + wy * wy + wz * wz), wx, wy, wz);
-
 	return Normalize(quat);
 }
 
 Vector3 Quaternion::Rotate(const Vector3& v) const
 {
 	// v' = q * v * q^-1, optimized (Fabian Giesen's derivation)
-	const Vector3 qv(v.x, v.y, v.z);
+	const Vector3 qv(x, y, z);
 	const Vector3 t = 2.0f * Cross(qv, v);
 	return v + w * t + Cross(qv, t);
 }

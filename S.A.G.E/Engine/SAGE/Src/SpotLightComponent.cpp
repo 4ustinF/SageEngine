@@ -34,7 +34,7 @@ void SpotlightComponent::Initialize()
 	if (mTransformComponent)
 	{
 		mSpotLightData.position = mTransformComponent->GetPosition();
-		//mSpotLightData.direction = mTransformComponent->GetRotation(); // TODO:
+		mSpotLightData.direction = mTransformComponent->GetRotation().Rotate(-Vector3::YAxis);
 	}
 }
 
@@ -178,7 +178,8 @@ void SpotlightComponent::OnTransformPositionChanged(const Vector3& position)
 
 void SpotlightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 {
-	// TODO: Look into if spot lights can look straight down?
+	mSpotLightData.direction = rotation.Rotate(-Vector3::YAxis);
+	mSpotShadowEffect.Invalidate();
 }
 
 #pragma region ---Setters---
@@ -195,11 +196,10 @@ void SpotlightComponent::SetPosition(const Vector3& position)
 	}
 }
 
-void SpotlightComponent::SetDirection(const Vector3& direction)
-{
-	mSpotLightData.direction = direction;
-	mSpotShadowEffect.Invalidate();
-}
+//void SpotlightComponent::SetDirection(const Vector3& direction)
+//{
+//
+//}
 
 void SpotlightComponent::SetInnerConeAngle(float innerConeAngle)
 {

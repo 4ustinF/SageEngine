@@ -55,7 +55,7 @@ namespace SAGE
 		const Graphics::Color& GetSpecularColor() const { return mSpotLightData.specular; }
 
 		void SetPosition(const Math::Vector3& position);
-		void SetDirection(const Math::Vector3& direction);
+		//void SetDirection(const Math::Vector3& direction);
 		void SetInnerConeAngle(float innerConeAngle);
 		void SetOuterConeAngle(float outerConeAngle);
 		void SetRange(float range);

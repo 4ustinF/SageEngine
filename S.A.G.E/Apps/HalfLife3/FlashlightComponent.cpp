@@ -48,6 +48,7 @@ void FlashlightComponent::Update(float deltaTime)
 {
 	Camera& camera = mCameraService->GetCamera();
 	//mTransformComponent->SetRotation(camera.GetOrientation());
+	// TODO: spotlights might need to default identity like everything else and not straight down.
 	mSpotlightComponent->Invalidate();
 }
 

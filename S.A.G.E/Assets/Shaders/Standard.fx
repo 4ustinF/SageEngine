@@ -182,8 +182,11 @@ float4 ComputeSpotLightContribution(int index, float3 worldPosition, float3 norm
     float3 shadowSamplePos = worldPosition + normal * normalOffsetScale;
 
     float shadowFactor = 1.0f;
-    float4 spotNDC = mul(float4(shadowSamplePos, 1.0f), spotLightViewProj[index]);
-    shadowFactor = ComputeShadowFactor(spotShadowMaps[index], spotNDC, depthBias, diffuseAmount);
+    if (useSpotShadows)
+    {
+        float4 spotNDC = mul(float4(shadowSamplePos, 1.0f), spotLightViewProj[index]);
+        shadowFactor = ComputeShadowFactor(spotShadowMaps[index], spotNDC, depthBias, diffuseAmount);
+    }
 
     float4 ambient = light.ambient * materialAmbient;
     float4 diffuse = diffuseAmount * light.diffuse * materialDiffuse * shadowFactor;
@@ -292,13 +295,10 @@ float4 PS(VS_OUTPUT input) : SV_Target
             }
         }
     }
-    
-    if (useSpotShadows)
+
+    for (int spotLightIndex = 0; spotLightIndex < spotLightCount; ++spotLightIndex) // TODO: Should we clamp the count? int count = min(spotLightCount, MAX_SPOT_LIGHTS);
     {
-        for (int spotLightIndex = 0; spotLightIndex < spotLightCount; ++spotLightIndex) // TODO: Should we clamp the count? int count = min(spotLightCount, MAX_SPOT_LIGHTS);
-        {
-            finalColor += ComputeSpotLightContribution(spotLightIndex, input.worldPosition, n, V, diffuseMapColor, specularMapColor);
-        }
+        finalColor += ComputeSpotLightContribution(spotLightIndex, input.worldPosition, n, V, diffuseMapColor, specularMapColor);
     }
     
     if (useFog)

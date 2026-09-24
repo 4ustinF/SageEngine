@@ -2,7 +2,10 @@
 
 #include "TypeIds.h"
 
+class SAGE::CameraService;
 class SAGE::Input::InputSystem;
+class SAGE::SpotlightComponent;
+class SAGE::TransformComponent;
 
 class FlashlightComponent final : public SAGE::Component
 {
@@ -21,6 +24,9 @@ public:
 	void DebugUI() override;
 
 private:
-	
+	SAGE::CameraService* mCameraService = nullptr;
+	SAGE::Input::InputSystem* mInputSystem = nullptr;
+	SAGE::SpotlightComponent* mSpotlightComponent = nullptr;
+	SAGE::TransformComponent* mTransformComponent = nullptr;
 
 };

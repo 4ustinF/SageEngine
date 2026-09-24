@@ -170,6 +170,11 @@ void SpotlightComponent::OnDisable()
 	}
 }
 
+void SpotlightComponent::Invalidate()
+{
+	mSpotShadowEffect.Invalidate();
+}
+
 void SpotlightComponent::OnTransformPositionChanged(const Vector3& position)
 {
 	mSpotLightData.position = position;

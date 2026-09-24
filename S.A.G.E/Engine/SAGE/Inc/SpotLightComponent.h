@@ -41,6 +41,8 @@ namespace SAGE
 		void OnEnable() override;
 		void OnDisable() override;
 
+		void Invalidate();
+
 		const Math::Vector3& GetPosition() { return mSpotLightData.position; }
 		const Math::Vector3& GetDirection() { return mSpotLightData.direction; }
 		float GetInnerConeAngle() const { return mSpotLightData.innerConeAngle * Math::Constants::RadToDeg; }

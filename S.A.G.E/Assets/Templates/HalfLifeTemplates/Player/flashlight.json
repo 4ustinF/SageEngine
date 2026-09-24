@@ -1,0 +1,12 @@
+{
+  "Name": "Flashlight",
+  "Components": {
+    "Transform Component": {
+
+    },
+    "Spot Light Component": {
+    },
+    "Flashlight Component": {
+    }
+  }
+}

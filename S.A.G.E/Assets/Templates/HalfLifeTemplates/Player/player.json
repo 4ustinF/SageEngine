@@ -22,5 +22,10 @@
     },
     "Player Controller Component": {
     }
-  }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/flashlight.json"
+    }
+  ]
 }

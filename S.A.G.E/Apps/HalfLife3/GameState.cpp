@@ -1,6 +1,7 @@
 #include "GameState.h"
 
 #include "DoorITVComponent.h"
+#include "FlashlightComponent.h"
 #include "HealthChargerHITVComponent.h"
 #include "PlayerControllerComponent.h"
 #include "TextureAnimatorComponent.h"
@@ -21,6 +22,12 @@ namespace
 		{
 			DoorITVComponent* doorITVComponent = gameObject.AddComponent<DoorITVComponent>();
 			doorITVComponent->LoadComponentFromTemplate(value);
+			return true;
+		}
+		else if (strcmp(componentName, "Flashlight Component") == 0)
+		{
+			FlashlightComponent* flashlightComponent = gameObject.AddComponent<FlashlightComponent>();
+			flashlightComponent->LoadComponentFromTemplate(value);
 			return true;
 		}
 		else if (strcmp(componentName, "Health Charger HITV Component") == 0)

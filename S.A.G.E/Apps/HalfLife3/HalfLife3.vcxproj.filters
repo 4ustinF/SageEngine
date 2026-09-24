@@ -51,6 +51,9 @@
     <ClCompile Include="HealthChargerHITVComponent.cpp">
       <Filter>Components\TriggerVolumes\Interact</Filter>
     </ClCompile>
+    <ClCompile Include="FlashlightComponent.cpp">
+      <Filter>Components\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="HealthChargerHITVComponent.h">
       <Filter>Components\TriggerVolumes\Interact</Filter>
+    </ClInclude>
+    <ClInclude Include="FlashlightComponent.h">
+      <Filter>Components\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

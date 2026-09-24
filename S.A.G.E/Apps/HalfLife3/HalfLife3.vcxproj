@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DoorITVComponent.cpp" />
+    <ClCompile Include="FlashlightComponent.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HealthChargerHITVComponent.cpp" />
     <ClCompile Include="HoldInteractTriggerVolumeComponent.cpp" />
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoorITVComponent.h" />
+    <ClInclude Include="FlashlightComponent.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="HealthChargerHITVComponent.h" />
     <ClInclude Include="HoldInteractTriggerVolumeComponent.h" />

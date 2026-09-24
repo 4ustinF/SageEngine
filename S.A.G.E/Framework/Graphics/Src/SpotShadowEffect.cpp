@@ -18,6 +18,7 @@ void SpotShadowEffect::Initialize(SpotShadowEffectResources* sharedResources, ui
 
 	mLightCamera.SetMode(Camera::ProjectionMode::Perspective);
 	mLightCamera.SetAspectRatio(1.0f); // shadow map is square
+	mLightCamera.SetNearPlane(0.5f);
 
 	mDepthMapRenderTarget.Initialize(depthMapResolution, depthMapResolution, Texture::Format::RGBA_U32);
 }
@@ -113,10 +114,8 @@ void SpotShadowEffect::SetSpotLight(const SpotLight& spotLight)
 {
 	mLightCamera.SetPosition(spotLight.position);
 	mLightCamera.SetDirection(spotLight.direction);
-	mLightCamera.SetNearPlane(0.5f);
 	mLightCamera.SetFarPlane(spotLight.range);
-	// FOV needs a little headroom past the outer cone or edges clip out of the shadow frustum
-	mLightCamera.SetFov(Math::Clamp(spotLight.outerConeAngle * 2.2f, 10.0f * Math::Constants::DegToRad, 170.0f * Math::Constants::DegToRad));
+	mLightCamera.SetFov(spotLight.outerConeAngle * 2.2f); // FOV needs a little headroom past the outer cone or edges clip out of the shadow frustum
 	Invalidate();
 }
 

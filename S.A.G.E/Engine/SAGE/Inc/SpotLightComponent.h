@@ -71,6 +71,7 @@ namespace SAGE
 		void SetDiffuseColor(const Graphics::Color& color);
 		void SetSpecularColor(const Graphics::Color& color);
 
+		void OnTransformRotationChanged(const Math::Quaternion& rotation);
 	private:
 		friend class RenderService;
 		uint32_t GetDepthMapResolution() const { return static_cast<uint32_t>(mDepthMapResolution); }
@@ -78,7 +79,6 @@ namespace SAGE
 		Graphics::SpotLight& GetSpotLightData() { return mSpotLightData; }
 
 		void OnTransformPositionChanged(const Math::Vector3& position);
-		void OnTransformRotationChanged(const Math::Quaternion& rotation);
 
 		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;

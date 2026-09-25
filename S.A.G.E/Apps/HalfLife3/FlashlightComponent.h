@@ -29,4 +29,6 @@ private:
 	SAGE::SpotlightComponent* mSpotlightComponent = nullptr;
 	SAGE::TransformComponent* mTransformComponent = nullptr;
 
+	bool mFollow = false;
+
 };

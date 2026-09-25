@@ -46,9 +46,12 @@ void FlashlightComponent::Terminate()
 
 void FlashlightComponent::Update(float deltaTime)
 {
-	Camera& camera = mCameraService->GetCamera();
-	//mTransformComponent->SetRotation(camera.GetOrientation());
-	// TODO: spotlights might need to default identity like everything else and not straight down.
+	if (mFollow)
+	{
+		Camera& camera = mCameraService->GetCamera();
+		mTransformComponent->SetPosition(camera.GetPosition());
+		mTransformComponent->SetRotation(camera.GetOrientation());
+	}
 	mSpotlightComponent->Invalidate();
 }
 
@@ -56,6 +59,9 @@ void FlashlightComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Flashlight Component##FlashlightComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-
+		if (ImGui::Button("Follow"))
+		{
+			mFollow = !mFollow;
+		}
 	}
 }

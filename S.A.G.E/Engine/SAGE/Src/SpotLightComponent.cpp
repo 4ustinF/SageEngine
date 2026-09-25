@@ -183,7 +183,7 @@ void SpotlightComponent::OnTransformPositionChanged(const Vector3& position)
 
 void SpotlightComponent::OnTransformRotationChanged(const Quaternion& rotation)
 {
-	mSpotLightData.direction = rotation.Rotate(-Vector3::YAxis);
+	mSpotLightData.direction = rotation.Rotate(Vector3::ZAxis);
 	mSpotShadowEffect.Invalidate();
 }
 

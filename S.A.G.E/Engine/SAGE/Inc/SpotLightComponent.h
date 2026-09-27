@@ -13,7 +13,7 @@ namespace SAGE
 		DMPR_512 = 512,
 		DMPR_1024 = 1024,
 		DMPR_2048 = 2048,
-		DMPR_4096 = 4096
+		DMPR_4096 = 4096,
 	};
 
 	enum LightMode : uint32_t
@@ -71,7 +71,11 @@ namespace SAGE
 		void SetDiffuseColor(const Graphics::Color& color);
 		void SetSpecularColor(const Graphics::Color& color);
 
-		void OnTransformRotationChanged(const Math::Quaternion& rotation); // TODO: Move to private
+		void SetDepthMapResolution(const std::string& depthMapResolution);
+		void SetDepthMapResolution(DepthMapResolution depthMapResolution);
+		void SetLightMode(LightMode lightMode);
+		void SetCanCastShadows(bool castShadows);
+
 	private:
 		friend class RenderService;
 		uint32_t GetDepthMapResolution() const { return static_cast<uint32_t>(mDepthMapResolution); }
@@ -79,6 +83,7 @@ namespace SAGE
 		Graphics::SpotLight& GetSpotLightData() { return mSpotLightData; }
 
 		void OnTransformPositionChanged(const Math::Vector3& position);
+		void OnTransformRotationChanged(const Math::Quaternion& rotation);
 
 		RenderService* mRenderService = nullptr;
 		TransformComponent* mTransformComponent = nullptr;
@@ -90,6 +95,7 @@ namespace SAGE
 		Graphics::SpotShadowEffect mSpotShadowEffect;
 		DepthMapResolution mDepthMapResolution = DepthMapResolution::DMPR_1024;
 		LightMode mLightMode = LightMode::PseudoBaked;
+		bool mCanCastShadows = true;
 		bool mIsRegisteredWithRenderService = false;
 
 		const char* LightModeNames[3] = {

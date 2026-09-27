@@ -370,6 +370,13 @@ void RenderService::DebugUI()
 		ImGui::ColorEdit4("Ambient##RenderServiceLight", &mDirectionalLight.ambient.r);
 		ImGui::ColorEdit4("Diffuse##RenderServiceLight", &mDirectionalLight.diffuse.r);
 		ImGui::ColorEdit4("Specular##RenderServiceLight", &mDirectionalLight.specular.r);
+
+		if (ImGui::Button("Black Out##RenderServiceLight"))
+		{
+			mDirectionalLight.ambient = Colors::Black;
+			mDirectionalLight.diffuse = Colors::Black;
+			mDirectionalLight.specular = Colors::Black;
+		}
 	}
 
 	ImGui::Separator();

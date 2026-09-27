@@ -15,12 +15,53 @@ MEMORY_POOL_DEFINE(SpotlightComponent, 128);
 
 void SpotlightComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
-	// TODO: Load in a pointer to a baked light map if one exist.
+	if (value.HasMember("Depth Map Resolution"))
+	{
+		SetDepthMapResolution(value["Depth Map Resolution"].GetString());
+	}
+
+	// TODO:
+	//LightMode mLightMode = LightMode::PseudoBaked;
+	//bool mCanCastShadows = true;
+	// Load in a pointer to a baked light map if one exist.
+
+	if (value.HasMember("Inner Cone Angle"))
+	{
+		SetInnerConeAngle(value["Inner Cone Angle"].GetFloat());
+	}
+
+	if (value.HasMember("Outer Cone Angle"))
+	{
+		SetOuterConeAngle(value["Outer Cone Angle"].GetFloat());
+	}
+
+	if (value.HasMember("Range"))
+	{
+		SetRange(value["Range"].GetFloat());
+	}
+	
+	//void SetAttenuation(const Math::Vector3 & attenuation);
+	//void SetAttenuationConstantTerm(float constantTerm);	// Doesn't involve distance at all. It is just added flatly regardless of distance.
+	//void SetAttenuationLinearTerm(float linearTerm);		// Falloff proportional to distance. A straight, gentle fade.
+	//void SetAttenuationQuadraticTerm(float quadraticTerm);	// Falloff proportional to distance².
+	
+	//void SetAmbientColor(const Graphics::Color & color);
+	//void SetDiffuseColor(const Graphics::Color & color);
+	//void SetSpecularColor(const Graphics::Color & color);
 }
 
 void SpotlightComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
-
+	const int depthMapCount = static_cast<int>(DepthMapResolutionValues.size());
+	for (int depthMapIndex = 0; depthMapIndex < depthMapCount; ++depthMapIndex)
+	{
+		const DepthMapResolution depthMapResolution = DepthMapResolutionValues[depthMapIndex];
+		if (depthMapResolution == mDepthMapResolution)
+		{
+			SaveStringToTemplate(compObj, allocator, "Depth Map Resolution", DepthMapResolutionNames[depthMapIndex]);
+			break;
+		}
+	}
 }
 
 void SpotlightComponent::Initialize()
@@ -52,16 +93,8 @@ void SpotlightComponent::DebugUI()
 		int currentResolution = static_cast<int>(std::log2(static_cast<int>(mDepthMapResolution) >> 8));
 		if (ImGui::Combo("##Resolution", &currentResolution, DepthMapResolutionNames, IM_ARRAYSIZE(DepthMapResolutionNames)))
 		{
-			DepthMapResolution currentDepthMapResolution = static_cast<DepthMapResolution>(256 << currentResolution);
-			if (mDepthMapResolution != currentDepthMapResolution)
-			{
-				mDepthMapResolution = currentDepthMapResolution;
-				if (mIsRegisteredWithRenderService && mRenderService)
-				{
-					mRenderService->UnregisterSpotLight(this);
-					mIsRegisteredWithRenderService = mRenderService->RegisterSpotLight(this);
-				}
-			}
+			const DepthMapResolution currentDepthMapResolution = static_cast<DepthMapResolution>(256 << currentResolution);
+			SetDepthMapResolution(currentDepthMapResolution);
 		}
 
 		ImGui::Text("Light Mode: "); ImGui::SameLine();
@@ -69,10 +102,13 @@ void SpotlightComponent::DebugUI()
 		if (ImGui::Combo("##LightMode", &currentLightMode, LightModeNames, IM_ARRAYSIZE(LightModeNames)))
 		{
 			const LightMode currentLightModeEnum = static_cast<LightMode>(currentLightMode);
-			if (mLightMode != currentLightModeEnum)
-			{
-				mLightMode = currentLightModeEnum;
-			}
+			SetLightMode(currentLightModeEnum);
+		}
+
+		bool canCastShadows = mCanCastShadows;
+		if (ImGui::Checkbox("Cast Shadows##SpotLightComponent", &canCastShadows))
+		{
+			SetCanCastShadows(canCastShadows);
 		}
 
 		if (ImGui::DragFloat("Range", &mSpotLightData.range, 0.5f, 1.0f, 500.0f))
@@ -264,6 +300,51 @@ void SpotlightComponent::SetSpecularColor(const Color& color)
 {
 	mSpotLightData.specular = color;
 	mSpotShadowEffect.Invalidate();
+}
+
+void SpotlightComponent::SetDepthMapResolution(const std::string& depthMapResolution)
+{
+	const int depthMapCount = static_cast<int>(DepthMapResolutionValues.size());
+	for (int depthMapIndex = 0; depthMapIndex < depthMapCount; ++depthMapIndex)
+	{
+		if (DepthMapResolutionNames[depthMapIndex] == depthMapResolution)
+		{
+			SetDepthMapResolution(DepthMapResolutionValues[depthMapIndex]);
+			break;
+		}
+	}
+}
+
+void SpotlightComponent::SetDepthMapResolution(DepthMapResolution depthMapResolution)
+{
+	if (mDepthMapResolution == depthMapResolution)
+	{
+		return;
+	}
+
+	mDepthMapResolution = depthMapResolution;
+	if (mIsRegisteredWithRenderService && mRenderService)
+	{
+		mRenderService->UnregisterSpotLight(this);
+		mIsRegisteredWithRenderService = mRenderService->RegisterSpotLight(this);
+	}
+}
+
+void SpotlightComponent::SetLightMode(LightMode lightMode)
+{
+	if (mLightMode == lightMode)
+	{
+		return;
+	}
+
+	// TODO: Light mode currently doesn't do anything.
+	mLightMode = lightMode;
+}
+
+void SpotlightComponent::SetCanCastShadows(bool castShadows)
+{
+	// TODO: Can Cast Shadows currently doesn't do anything.
+	mCanCastShadows = castShadows;
 }
 
 #pragma endregion

@@ -14,6 +14,8 @@
       ]
     },
     "Spot Light Component": {
+      "Depth Map Resolution": "DMPR_1024",
+      "Outer Cone Angle": 60.0
     }
   }
 }

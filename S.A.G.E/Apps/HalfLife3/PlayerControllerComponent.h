@@ -2,10 +2,11 @@
 
 #include "TypeIds.h"
 
+class SAGE::Graphics::Camera;
+class SAGE::Input::InputSystem;
 class SAGE::CameraService;
 class SAGE::CapsuleColliderComponent;
-class SAGE::Input::InputSystem;
-class SAGE::Graphics::Camera;
+class FlashlightComponent;
 
 class PlayerControllerComponent final : public SAGE::Component
 {
@@ -28,8 +29,11 @@ private:
 	SAGE::RBPhysicsService* mRBPhysicsService = nullptr;
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 	SAGE::CapsuleColliderComponent* mCapsuleColliderComponent = nullptr;
+	FlashlightComponent* mFlashlightComponent = nullptr;
+	FlashlightComponent* LazyGetFlashlightComponent(); // Figure out a better way to get a childs comp.
 
 	void IsGroundedCheck();
+	void CheckForFlashlightInput();
 	void CheckForPlayerMovementInput(SAGE::Graphics::Camera& camera, float deltaTime);
 	void UpdateCameraPosition(SAGE::Graphics::Camera& camera);
 

@@ -23,12 +23,13 @@ public:
 	void Update(float deltaTime) override;
 	void DebugUI() override;
 
+	void ToggleFlashlight();
+	void TurnOnFlashlight();
+	void TurnOFFFlashlight();
+
 private:
 	SAGE::CameraService* mCameraService = nullptr;
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 	SAGE::SpotlightComponent* mSpotlightComponent = nullptr;
 	SAGE::TransformComponent* mTransformComponent = nullptr;
-
-	bool mFollow = false;
-
 };

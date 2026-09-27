@@ -71,7 +71,7 @@ namespace SAGE
 		void SetDiffuseColor(const Graphics::Color& color);
 		void SetSpecularColor(const Graphics::Color& color);
 
-		void OnTransformRotationChanged(const Math::Quaternion& rotation);
+		void OnTransformRotationChanged(const Math::Quaternion& rotation); // TODO: Move to private
 	private:
 		friend class RenderService;
 		uint32_t GetDepthMapResolution() const { return static_cast<uint32_t>(mDepthMapResolution); }

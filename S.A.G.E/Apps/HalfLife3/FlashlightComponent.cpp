@@ -30,11 +30,13 @@ void FlashlightComponent::Initialize()
 	mInputSystem = InputSystem::Get();
 
 	GameObject& owner = GetOwner();
-	GameWorld& world = GetOwner().GetWorld();
+	GameWorld& world = owner.GetWorld();
 
 	mCameraService = world.GetService<CameraService>();
 	mTransformComponent = owner.GetComponent<TransformComponent>();
 	mSpotlightComponent = owner.GetComponent<SpotlightComponent>();
+
+	TurnOFFFlashlight(); // TODO: should have a way to start game objects off via json.
 }
 
 void FlashlightComponent::Terminate()
@@ -46,12 +48,9 @@ void FlashlightComponent::Terminate()
 
 void FlashlightComponent::Update(float deltaTime)
 {
-	if (mFollow)
-	{
-		Camera& camera = mCameraService->GetCamera();
-		mTransformComponent->SetPosition(camera.GetPosition());
-		mTransformComponent->SetRotation(camera.GetOrientation());
-	}
+	Camera& camera = mCameraService->GetCamera();
+	mTransformComponent->SetPosition(camera.GetPosition());
+	mTransformComponent->SetRotation(camera.GetOrientation());
 	mSpotlightComponent->Invalidate();
 }
 
@@ -59,9 +58,30 @@ void FlashlightComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Flashlight Component##FlashlightComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		if (ImGui::Button("Follow"))
-		{
-			mFollow = !mFollow;
-		}
+
 	}
+}
+
+void FlashlightComponent::ToggleFlashlight()
+{
+	const GameObject& owner = GetOwner();
+
+	if (owner.IsSelfActive())
+	{
+		TurnOFFFlashlight();
+	}
+	else
+	{
+		TurnOnFlashlight();
+	}
+}
+
+void FlashlightComponent::TurnOnFlashlight()
+{
+	GetOwner().SetActive(true);
+}
+
+void FlashlightComponent::TurnOFFFlashlight()
+{
+	GetOwner().SetActive(false);
 }

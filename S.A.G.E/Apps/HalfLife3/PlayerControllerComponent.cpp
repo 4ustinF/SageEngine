@@ -6,6 +6,7 @@
 #include "SAGE/Inc/CameraService.h"
 #include "SAGE/Inc/RBPhysicsService.h"
 #include "SAGE/Inc/CapsuleColliderComponent.h"
+#include "FlashlightComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -14,7 +15,7 @@ using namespace SAGE::Graphics;
 using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(PlayerControllerComponent, 5);
+MEMORY_POOL_DEFINE(PlayerControllerComponent, 1);
 
 void PlayerControllerComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
@@ -35,6 +36,7 @@ void PlayerControllerComponent::Initialize()
 	mCameraService = world.GetService<CameraService>();
 	mRBPhysicsService = world.GetService<RBPhysicsService>();
 	mCapsuleColliderComponent = owner.GetComponent<CapsuleColliderComponent>();
+	mFlashlightComponent = LazyGetFlashlightComponent();
 }
 
 void PlayerControllerComponent::Terminate()
@@ -43,12 +45,14 @@ void PlayerControllerComponent::Terminate()
 	mRBPhysicsService = nullptr;
 	mInputSystem = nullptr;
 	mCapsuleColliderComponent = nullptr;
+	mFlashlightComponent = nullptr;
 }
 
 void PlayerControllerComponent::Update(float deltaTime)
 {
 	Camera& camera = mCameraService->GetCamera();
 	IsGroundedCheck();
+	CheckForFlashlightInput();
 	CheckForPlayerMovementInput(camera, deltaTime);
 	UpdateCameraPosition(camera);
 }
@@ -65,6 +69,30 @@ void PlayerControllerComponent::DebugUI()
 		ImGui::DragFloat("Jump Force##PlayerControllerComponent", &mJumpForce, 0.1f);
 		ImGui::DragFloat3("Camera Offset##PlayerControllerComponent", &mCameraOffset.x, 0.01f);
 	}
+}
+
+FlashlightComponent* PlayerControllerComponent::LazyGetFlashlightComponent()
+{
+	if (mFlashlightComponent != nullptr)
+	{
+		return mFlashlightComponent;
+	}
+
+	GameObject& owner = GetOwner();
+	GameWorld& world = owner.GetWorld();
+	for (const GameObjectHandle& handle : owner.GetChildrenHandles())
+	{
+		if (GameObject* childObj = world.GetGameObject(handle))
+		{
+			if (FlashlightComponent* flashlightComponent = childObj->GetComponent<FlashlightComponent>())
+			{
+				mFlashlightComponent = flashlightComponent;
+				return mFlashlightComponent;
+			}
+		}
+	}
+
+	return nullptr;
 }
 
 void PlayerControllerComponent::IsGroundedCheck()
@@ -86,6 +114,17 @@ void PlayerControllerComponent::IsGroundedCheck()
 	}
 
 	mIsGrounded = false;
+}
+
+void PlayerControllerComponent::CheckForFlashlightInput()
+{
+	if (mInputSystem->IsKeyPressed(KeyCode::F))
+	{
+		if (FlashlightComponent* flashlightComponent = LazyGetFlashlightComponent())
+		{
+			mFlashlightComponent->ToggleFlashlight();
+		}
+	}
 }
 
 void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, float deltaTime)

@@ -65,6 +65,31 @@ namespace SAGE
 			return nullptr;
 		}
 
+		//template <class ComponentType>
+		//ComponentType* GetComponentInChildren()
+		//{
+		//	auto constMe = static_cast<const GameObject*>(this);
+		//	return const_cast<ComponentType*>(constMe->GetComponentInChildren<ComponentType>());
+		//}
+
+		//template <class ComponentType>
+		//const ComponentType* GetComponentInChildren() const // TODO: Might need to make this recursive. 
+		//{
+		//	GameWorld& world = GetWorld();
+		//	for (const GameObjectHandle& handle : mChildGameObjectHandles)
+		//	{
+		//		if (GameObject* childObj = world.GetGameObject(handle)) // Requires world logic :(
+		//		{
+		//			if (const ComponentType* component = childObj->GetComponent<ComponentType>())
+		//			{
+		//				return component;
+		//			}
+		//		}
+		//	}
+
+		//	return nullptr;
+		//}
+
 		GameWorld& GetWorld() { return *mWorld; }
 		const GameWorld& GetWorld() const { return *mWorld; }
 

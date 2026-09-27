@@ -6,6 +6,11 @@
         -1.0,
         -2.555,
         5.4195
+      ],
+      "Local Rotation": [
+        90.0,
+        0.0,
+        0.0
       ]
     },
     "Spot Light Component": {

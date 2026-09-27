@@ -9,7 +9,6 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
-using namespace SAGE::Input;
 using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
@@ -27,8 +26,6 @@ void FlashlightComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memory
 
 void FlashlightComponent::Initialize()
 {
-	mInputSystem = InputSystem::Get();
-
 	GameObject& owner = GetOwner();
 	GameWorld& world = owner.GetWorld();
 
@@ -36,14 +33,13 @@ void FlashlightComponent::Initialize()
 	mTransformComponent = owner.GetComponent<TransformComponent>();
 	mSpotlightComponent = owner.GetComponent<SpotlightComponent>();
 
-	TurnOFFFlashlight(); // TODO: should have a way to start game objects off via json.
+	TurnOffFlashlight(); // TODO: should have a way to start game objects off via json.
 }
 
 void FlashlightComponent::Terminate()
 {
 	mSpotlightComponent = nullptr;
 	mCameraService = nullptr;
-	mInputSystem = nullptr;
 }
 
 void FlashlightComponent::Update(float deltaTime)
@@ -58,7 +54,9 @@ void FlashlightComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Flashlight Component##FlashlightComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-
+		if (ImGui::Button("Toggle Light##FlashlightComponent")) { ToggleFlashlight(); }
+		if (ImGui::Button("Turn On##FlashlightComponent")) { TurnOnFlashlight(); }
+		if (ImGui::Button("Turn Off##FlashlightComponent")) { TurnOffFlashlight(); }
 	}
 }
 
@@ -68,7 +66,7 @@ void FlashlightComponent::ToggleFlashlight()
 
 	if (owner.IsSelfActive())
 	{
-		TurnOFFFlashlight();
+		TurnOffFlashlight();
 	}
 	else
 	{
@@ -81,7 +79,7 @@ void FlashlightComponent::TurnOnFlashlight()
 	GetOwner().SetActive(true);
 }
 
-void FlashlightComponent::TurnOFFFlashlight()
+void FlashlightComponent::TurnOffFlashlight()
 {
 	GetOwner().SetActive(false);
 }

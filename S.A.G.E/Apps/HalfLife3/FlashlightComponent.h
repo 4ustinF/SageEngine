@@ -3,7 +3,6 @@
 #include "TypeIds.h"
 
 class SAGE::CameraService;
-class SAGE::Input::InputSystem;
 class SAGE::SpotlightComponent;
 class SAGE::TransformComponent;
 
@@ -25,11 +24,10 @@ public:
 
 	void ToggleFlashlight();
 	void TurnOnFlashlight();
-	void TurnOFFFlashlight();
+	void TurnOffFlashlight();
 
 private:
 	SAGE::CameraService* mCameraService = nullptr;
-	SAGE::Input::InputSystem* mInputSystem = nullptr;
 	SAGE::SpotlightComponent* mSpotlightComponent = nullptr;
 	SAGE::TransformComponent* mTransformComponent = nullptr;
 };

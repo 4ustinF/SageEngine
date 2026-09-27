@@ -34,7 +34,7 @@ void SpotlightComponent::Initialize()
 	if (mTransformComponent)
 	{
 		mSpotLightData.position = mTransformComponent->GetPosition();
-		mSpotLightData.direction = mTransformComponent->GetRotation().Rotate(-Vector3::YAxis);
+		mSpotLightData.direction = mTransformComponent->GetRotation().Rotate(Vector3::ZAxis);
 	}
 }
 

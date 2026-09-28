@@ -39,15 +39,60 @@ void SpotlightComponent::LoadComponentFromTemplate(const rj::Value& value)
 	{
 		SetRange(value["Range"].GetFloat());
 	}
-	
-	//void SetAttenuation(const Math::Vector3 & attenuation);
-	//void SetAttenuationConstantTerm(float constantTerm);	// Doesn't involve distance at all. It is just added flatly regardless of distance.
-	//void SetAttenuationLinearTerm(float linearTerm);		// Falloff proportional to distance. A straight, gentle fade.
-	//void SetAttenuationQuadraticTerm(float quadraticTerm);	// Falloff proportional to distance².
-	
-	//void SetAmbientColor(const Graphics::Color & color);
-	//void SetDiffuseColor(const Graphics::Color & color);
-	//void SetSpecularColor(const Graphics::Color & color);
+
+	if (value.HasMember("Attenuation"))
+	{
+		const auto& attenuation = value["Attenuation"].GetArray();
+		const float x = attenuation[0].GetFloat();
+		const float y = attenuation[1].GetFloat();
+		const float z = attenuation[2].GetFloat();
+		SetAttenuation(Vector3(x, y, z));
+	}
+
+	if (value.HasMember("Attenuation Constant Term"))
+	{
+		SetAttenuationConstantTerm(value["Attenuation Constant Term"].GetFloat());
+	}
+
+	if (value.HasMember("Attenuation Linear Term"))
+	{
+		SetAttenuationLinearTerm(value["Attenuation Linear Term"].GetFloat());
+	}
+
+	if (value.HasMember("Attenuation Quadratic Term"))
+	{
+		SetAttenuationQuadraticTerm(value["Attenuation Quadratic Term"].GetFloat());
+	}
+
+	if (value.HasMember("Ambient Color"))
+	{
+		const auto& attenuation = value["Ambient Color"].GetArray();
+		const float r = attenuation[0].GetFloat();
+		const float g = attenuation[1].GetFloat();
+		const float b = attenuation[2].GetFloat();
+		const float a = attenuation[3].GetFloat();
+		SetAmbientColor(Color(r, g, b, a));
+	}
+
+	if (value.HasMember("Diffuse Color"))
+	{
+		const auto& attenuation = value["Diffuse Color"].GetArray();
+		const float r = attenuation[0].GetFloat();
+		const float g = attenuation[1].GetFloat();
+		const float b = attenuation[2].GetFloat();
+		const float a = attenuation[3].GetFloat();
+		SetDiffuseColor(Color(r, g, b, a));
+	}
+
+	if (value.HasMember("Specular Color"))
+	{
+		const auto& attenuation = value["Specular Color"].GetArray();
+		const float r = attenuation[0].GetFloat();
+		const float g = attenuation[1].GetFloat();
+		const float b = attenuation[2].GetFloat();
+		const float a = attenuation[3].GetFloat();
+		SetSpecularColor(Color(r, g, b, a));
+	}
 }
 
 void SpotlightComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)

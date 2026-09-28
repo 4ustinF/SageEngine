@@ -107,6 +107,18 @@ void SpotlightComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 			break;
 		}
 	}
+
+	SpotLight defaultSpotLightData;
+	SaveNumberToTemplate(compObj, allocator, "Inner Cone Angle", GetInnerConeAngle(), defaultSpotLightData.innerConeAngle);
+	SaveNumberToTemplate(compObj, allocator, "Outer Cone Angle", GetOuterConeAngle(), defaultSpotLightData.outerConeAngle);
+	SaveNumberToTemplate(compObj, allocator, "Range", GetRange(), defaultSpotLightData.range);
+	SaveVector3ToTemplate(compObj, allocator, "Attenuation", GetAttenuation(), defaultSpotLightData.attenuation);
+	SaveNumberToTemplate(compObj, allocator, "Attenuation Constant Term", GetAttenuationConstantTerm(), defaultSpotLightData.attenuation.x);
+	SaveNumberToTemplate(compObj, allocator, "Attenuation Linear Term", GetAttenuationLinearTerm(), defaultSpotLightData.attenuation.y);
+	SaveNumberToTemplate(compObj, allocator, "Attenuation Quadratic Term", GetAttenuationQuadraticTerm(), defaultSpotLightData.attenuation.z);
+	SaveColorToTemplate(compObj, allocator, "Ambient Color", GetAmbientColor(), defaultSpotLightData.ambient);
+	SaveColorToTemplate(compObj, allocator, "Diffuse Color", GetDiffuseColor(), defaultSpotLightData.diffuse);
+	SaveColorToTemplate(compObj, allocator, "Specular Color", GetSpecularColor(), defaultSpotLightData.specular);
 }
 
 void SpotlightComponent::Initialize()
@@ -289,12 +301,14 @@ void SpotlightComponent::SetPosition(const Vector3& position)
 
 void SpotlightComponent::SetInnerConeAngle(float innerConeAngle)
 {
+	// TODO: Clamp values.
 	mSpotLightData.innerConeAngle = innerConeAngle * Constants::DegToRad;
 	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetOuterConeAngle(float outerConeAngle)
 {
+	// TODO: Clamp values.
 	mSpotLightData.outerConeAngle = outerConeAngle * Constants::DegToRad;
 	mSpotShadowEffect.Invalidate();
 }

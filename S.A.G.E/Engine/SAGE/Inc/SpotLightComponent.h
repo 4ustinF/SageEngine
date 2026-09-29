@@ -16,13 +16,6 @@ namespace SAGE
 		DMPR_4096 = 4096,
 	};
 
-	enum LightMode : uint32_t
-	{
-		RealTime,
-		PseudoBaked,
-		Baked,
-	};
-
 	class SpotlightComponent final : public Component
 	{
 	public:
@@ -74,7 +67,7 @@ namespace SAGE
 
 		void SetDepthMapResolution(const std::string& depthMapResolution);
 		void SetDepthMapResolution(DepthMapResolution depthMapResolution);
-		void SetLightMode(LightMode lightMode);
+		void SetLightMode(Graphics::LightMode lightMode);
 		void SetCanCastShadows(bool castShadows);
 
 	private:
@@ -95,7 +88,6 @@ namespace SAGE
 		Graphics::SpotLight mSpotLightData;
 		Graphics::SpotShadowEffect mSpotShadowEffect;
 		DepthMapResolution mDepthMapResolution = DepthMapResolution::DMPR_1024;
-		LightMode mLightMode = LightMode::PseudoBaked;
 		bool mCanCastShadows = true;
 		bool mIsRegisteredWithRenderService = false;
 

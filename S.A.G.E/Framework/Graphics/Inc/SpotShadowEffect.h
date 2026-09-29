@@ -10,6 +10,13 @@ namespace SAGE::Graphics
 	class RenderObject;
 	class SpotShadowEffectResources;
 
+	enum LightMode : uint32_t
+	{
+		RealTime,
+		PseudoBaked,
+		Baked,
+	};
+
 	class SpotShadowEffect
 	{
 	public:
@@ -22,10 +29,12 @@ namespace SAGE::Graphics
 		void Render(const RenderGroup& renderGroup);
 		void Render(const RenderObject& renderObject);
 
-		void SetSpotLight(const SpotLight& spotLight);
-
 		const Camera& GetLightCamera() const { return mLightCamera; }
 		const Texture& GetDepthMap() const { return mDepthMapRenderTarget; }
+		LightMode GetLightMode() const { return mLightMode; }
+
+		void SetSpotLight(const SpotLight& spotLight);
+		void SetLightMode(LightMode ligthMode);
 
 		void EnableDepthMap(uint32_t depthMapResolution = 1024, bool force = false);
 		void DisableDepthMap();
@@ -44,5 +53,6 @@ namespace SAGE::Graphics
 
 		// ---------------------------------------- Temp baking ----------------------------------------
 		bool mIsDirty = true; // Starts true so the first frame always renders
+		LightMode mLightMode = LightMode::PseudoBaked;
 	};
 }

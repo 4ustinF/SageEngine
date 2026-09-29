@@ -124,6 +124,11 @@ void SpotShadowEffect::SetSpotLight(const SpotLight& spotLight)
 	Invalidate();
 }
 
+void SpotShadowEffect::SetLightMode(LightMode ligthMode)
+{
+	mLightMode = ligthMode;
+}
+
 void SpotShadowEffect::EnableDepthMap(uint32_t depthMapResolution, bool force)
 {
 	if (!force && bEnableDepthMap)
@@ -158,7 +163,10 @@ bool SpotShadowEffect::NeedsUpdate() const
 
 void SpotShadowEffect::MarkClean()
 {
-	mIsDirty = false;
+	if (mLightMode != LightMode::RealTime)
+	{
+		mIsDirty = false;
+	}
 }
 
 void SpotShadowEffect::Invalidate() 

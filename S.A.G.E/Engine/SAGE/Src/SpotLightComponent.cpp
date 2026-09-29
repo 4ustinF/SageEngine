@@ -160,7 +160,7 @@ void SpotlightComponent::DebugUI()
 		}
 
 		ImGui::Text("Light Mode: "); ImGui::SameLine();
-		int currentLightMode = static_cast<int>(mLightMode);
+		int currentLightMode = static_cast<int>(mSpotShadowEffect.GetLightMode());
 		if (ImGui::Combo("##LightMode", &currentLightMode, LightModeNames, IM_ARRAYSIZE(LightModeNames)))
 		{
 			const LightMode currentLightModeEnum = static_cast<LightMode>(currentLightMode);
@@ -399,13 +399,8 @@ void SpotlightComponent::SetDepthMapResolution(DepthMapResolution depthMapResolu
 
 void SpotlightComponent::SetLightMode(LightMode lightMode)
 {
-	if (mLightMode == lightMode)
-	{
-		return;
-	}
-
-	// TODO: Light mode currently doesn't do anything.
-	mLightMode = lightMode;
+	mSpotShadowEffect.SetLightMode(lightMode);
+	mSpotShadowEffect.Invalidate();
 }
 
 void SpotlightComponent::SetCanCastShadows(bool castShadows)

@@ -550,7 +550,7 @@ bool RenderService::RegisterSpotLight(SpotlightComponent* spotlightComponent)
 	//mSpotLights.push_back(spotlight);
 
 	SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
-	spotShadowEffect.Initialize(&mSpotShadowEffectResources, spotlightComponent->GetDepthMapResolution());
+	spotShadowEffect.Initialize(&mSpotShadowEffectResources, spotlightComponent->GetCanCastShadows(), spotlightComponent->GetDepthMapResolution());
 	spotShadowEffect.Invalidate();
 
 	mSpotlightComponents.push_back(spotlightComponent);

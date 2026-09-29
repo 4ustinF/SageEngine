@@ -13,7 +13,7 @@ namespace SAGE::Graphics
 	class SpotShadowEffect
 	{
 	public:
-		void Initialize(SpotShadowEffectResources* sharedResources, uint32_t depthMapResolution = 1024);
+		void Initialize(SpotShadowEffectResources* sharedResources, bool canCastShadow, uint32_t depthMapResolution = 1024);
 		void Terminate();
 
 		void Begin();

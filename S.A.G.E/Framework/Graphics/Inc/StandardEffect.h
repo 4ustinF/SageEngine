@@ -87,7 +87,7 @@ namespace SAGE::Graphics
 			int useFog = 0;
 			float fogStart = 50.0f;
 			float fogEnd = 100.0f;
-			int useSpotShadows = 1;
+			int useSpotShadows = 1; // TODO: Remove from here and shader
 
 			SAGE::Math::Vector2 tiling = { 1.0f, 1.0f };
 			SAGE::Math::Vector2 tilingOffset = { 0.0f, 0.0f };

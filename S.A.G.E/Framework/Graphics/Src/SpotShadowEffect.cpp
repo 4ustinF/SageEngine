@@ -11,12 +11,15 @@ using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
-void SpotShadowEffect::Initialize(SpotShadowEffectResources* sharedResources, uint32_t depthMapResolution)
+void SpotShadowEffect::Initialize(SpotShadowEffectResources* sharedResources, bool canCastShadow, uint32_t depthMapResolution)
 {
 	ASSERT(sharedResources != nullptr, "SpotShadowEffect -- sharedResources cannot be null");
 	mSharedResources = sharedResources;
 
-	EnableDepthMap(depthMapResolution, true);
+	if (canCastShadow)
+	{
+		EnableDepthMap(depthMapResolution, true);
+	}
 }
 
 void SpotShadowEffect::Terminate()

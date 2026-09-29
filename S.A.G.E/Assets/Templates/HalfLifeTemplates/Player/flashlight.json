@@ -25,7 +25,8 @@
         1.0,
         1.0,
         1.0
-      ]
+      ],
+      "Can Cast Shadow": false
     },
     "Flashlight Component": {
     }

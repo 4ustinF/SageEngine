@@ -93,6 +93,11 @@ void SpotlightComponent::LoadComponentFromTemplate(const rj::Value& value)
 		const float a = attenuation[3].GetFloat();
 		SetSpecularColor(Color(r, g, b, a));
 	}
+
+	if (value.HasMember("Can Cast Shadow"))
+	{
+		SetCanCastShadows(value["Can Cast Shadow"].GetBool());
+	}
 }
 
 void SpotlightComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
@@ -384,8 +389,11 @@ void SpotlightComponent::SetDepthMapResolution(DepthMapResolution depthMapResolu
 	mDepthMapResolution = depthMapResolution;
 	if (mIsRegisteredWithRenderService && mRenderService)
 	{
-		mRenderService->UnregisterSpotLight(this);
-		mIsRegisteredWithRenderService = mRenderService->RegisterSpotLight(this);
+		if (mCanCastShadows)
+		{
+			mSpotShadowEffect.DisableDepthMap();
+			mSpotShadowEffect.EnableDepthMap(GetDepthMapResolution());
+		}
 	}
 }
 
@@ -404,20 +412,19 @@ void SpotlightComponent::SetCanCastShadows(bool castShadows)
 {
 	mCanCastShadows = castShadows;
 
-	// TODO: If was on remove shadow map. 
-	// if was off enable shadow map
-	// TODO: If object is even active or not
+	if (mIsRegisteredWithRenderService)
+	{
+		if (mCanCastShadows)
+		{
+			mSpotShadowEffect.EnableDepthMap(GetDepthMapResolution());
+		}
+		else
+		{
+			mSpotShadowEffect.DisableDepthMap();
+		}
 
-	if (mCanCastShadows)
-	{
-		mSpotShadowEffect.EnableDepthMap(GetDepthMapResolution());
+		mSpotShadowEffect.Invalidate();
 	}
-	else
-	{
-		mSpotShadowEffect.DisableDepthMap();
-	}
-	
-	mSpotShadowEffect.Invalidate();
 }
 
 #pragma endregion

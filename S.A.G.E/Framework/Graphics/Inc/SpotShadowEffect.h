@@ -27,6 +27,9 @@ namespace SAGE::Graphics
 		const Camera& GetLightCamera() const { return mLightCamera; }
 		const Texture& GetDepthMap() const { return mDepthMapRenderTarget; }
 
+		void EnableDepthMap(uint32_t depthMapResolution = 1024, bool force = false);
+		void DisableDepthMap();
+
 		bool NeedsUpdate() const;
 		void MarkClean();
 		void Invalidate();
@@ -37,6 +40,7 @@ namespace SAGE::Graphics
 		SpotShadowEffectResources* mSharedResources = nullptr;
 
 		RenderTarget mDepthMapRenderTarget;
+		bool bEnableDepthMap = true;
 
 		// ---------------------------------------- Temp baking ----------------------------------------
 		bool mIsDirty = true; // Starts true so the first frame always renders

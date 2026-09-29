@@ -179,9 +179,11 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	mSpotShadowMatrixBuffer.Update(mSpotShadowMatrixData);
 	for (size_t i = 0; i < mActiveSpotLightCount; ++i)
 	{
-		if (mSpotShadowMaps[i])
-		{
+		if (mSpotShadowMaps[i] != nullptr) {
 			mSpotShadowMaps[i]->BindPS(5 + static_cast<uint32_t>(i));
+		}
+		else {
+			Texture::UnbindPS(5 + static_cast<uint32_t>(i));
 		}
 	}
 	settingsData.useSpotShadows = mSettingsData.useSpotShadows;

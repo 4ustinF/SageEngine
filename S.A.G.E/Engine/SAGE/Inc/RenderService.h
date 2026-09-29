@@ -86,6 +86,7 @@ namespace SAGE
 
 		std::vector<Graphics::SpotLight*> mSpotLights;
 		std::vector<SpotlightComponent*> mSpotlightComponents;
+		int mShadowMask = 0; // bit i set = light i has a real shadow map to sample
 
 		Graphics::SpotShadowEffectResources mSpotShadowEffectResources;
 

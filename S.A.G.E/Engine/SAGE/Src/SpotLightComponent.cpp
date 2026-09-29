@@ -402,8 +402,22 @@ void SpotlightComponent::SetLightMode(LightMode lightMode)
 
 void SpotlightComponent::SetCanCastShadows(bool castShadows)
 {
-	// TODO: Can Cast Shadows currently doesn't do anything.
 	mCanCastShadows = castShadows;
+
+	// TODO: If was on remove shadow map. 
+	// if was off enable shadow map
+	// TODO: If object is even active or not
+
+	if (mCanCastShadows)
+	{
+		mSpotShadowEffect.EnableDepthMap(GetDepthMapResolution());
+	}
+	else
+	{
+		mSpotShadowEffect.DisableDepthMap();
+	}
+	
+	mSpotShadowEffect.Invalidate();
 }
 
 #pragma endregion

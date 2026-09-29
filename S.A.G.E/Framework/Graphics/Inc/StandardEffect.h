@@ -52,6 +52,7 @@ namespace SAGE::Graphics
 		void SetSpotLightViewProj(size_t index, const Math::Matrix4& viewProj);
 		void SetSpotLightTransposeViewProj(size_t index, const Math::Matrix4& transposeViewProj);
 		void UseSpotShadows(bool use) { mSettingsData.useSpotShadows = use ? 1 : 0; }
+		void SetSpotShadowMask(int mask) { mSpotLightBufferData.spotLightShadowMask = mask; }
 
 		void DebugUI();
 
@@ -96,7 +97,8 @@ namespace SAGE::Graphics
 		{
 			SpotLight spotLights[MaxSpotLights];
 			int spotLightCount = 0;
-			Math::Vector3 padding;
+			int spotLightShadowMask = 0;
+			Math::Vector2 padding;
 		};
 
 		struct SpotShadowMatrixData

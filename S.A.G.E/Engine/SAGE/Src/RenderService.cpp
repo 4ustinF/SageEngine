@@ -198,34 +198,45 @@ void RenderService::Render()
 
 			if (spotShadowEffect.NeedsUpdate())
 			{
-				spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
 				const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
 				const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
-				ExtractFrustumPlanes(viewProjection, frustumPlanes);
-
-				spotShadowEffect.Begin();
-				for (auto& entry : mRenderEntries) 
-				{
-					spotShadowEffect.Render(entry.renderGroup);
-				}
-				for (auto* entry : mMeshRendererEntrys)
-				{
-					const OBB aabb = entry->GetGlobalBoundingBox();
-					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
-					{
-						spotShadowEffect.Render(entry->GetRenderObject());
-					}
-				}
-				spotShadowEffect.End();
-				spotShadowEffect.MarkClean();
-
-				mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
+				spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
 				mStandardEffect.SetSpotLightViewProj(i, viewProjection);
+
+				if (spotlightComponent->GetCanCastShadows())
+				{
+					ExtractFrustumPlanes(viewProjection, frustumPlanes);
+
+					spotShadowEffect.Begin();
+					for (auto& entry : mRenderEntries)
+					{
+						spotShadowEffect.Render(entry.renderGroup);
+					}
+					for (auto* entry : mMeshRendererEntrys)
+					{
+						const OBB aabb = entry->GetGlobalBoundingBox();
+						if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+						{
+							spotShadowEffect.Render(entry->GetRenderObject());
+						}
+					}
+					spotShadowEffect.End();
+
+					mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
+					mShadowMask |= (1 << i);
+				}
+				else
+				{
+					mStandardEffect.SetSpotShadowMap(i, nullptr);
+					mShadowMask |= (0 << i);
+				}
+
+				spotShadowEffect.MarkClean();
 			}
 		}
+		mStandardEffect.SetSpotShadowMask(mShadowMask);
 
 		const Vector3& cameraPos = camera.GetPosition();
-
 		// Hack to sort transparent stuff from back to front. 
 		std::sort(
 			transparentObjects.begin(),

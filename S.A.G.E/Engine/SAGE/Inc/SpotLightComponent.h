@@ -55,6 +55,7 @@ namespace SAGE
 		const Graphics::Color& GetAmbientColor() const { return mSpotLightData.ambient; }
 		const Graphics::Color& GetDiffuseColor() const { return mSpotLightData.diffuse; }
 		const Graphics::Color& GetSpecularColor() const { return mSpotLightData.specular; }
+		bool GetCanCastShadows() const { return mCanCastShadows; }
 
 		void SetPosition(const Math::Vector3& position);
 		//void SetDirection(const Math::Vector3& direction);

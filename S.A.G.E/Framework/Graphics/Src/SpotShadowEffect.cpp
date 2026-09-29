@@ -16,11 +16,7 @@ void SpotShadowEffect::Initialize(SpotShadowEffectResources* sharedResources, ui
 	ASSERT(sharedResources != nullptr, "SpotShadowEffect -- sharedResources cannot be null");
 	mSharedResources = sharedResources;
 
-	mLightCamera.SetMode(Camera::ProjectionMode::Perspective);
-	mLightCamera.SetAspectRatio(1.0f); // shadow map is square
-	mLightCamera.SetNearPlane(0.5f);
-
-	mDepthMapRenderTarget.Initialize(depthMapResolution, depthMapResolution, Texture::Format::RGBA_U32);
+	EnableDepthMap(depthMapResolution, true);
 }
 
 void SpotShadowEffect::Terminate()
@@ -40,12 +36,18 @@ void SpotShadowEffect::Begin()
 	mSharedResources->boneTransformBuffer.BindVS(1);
 	mSharedResources->settingsBuffer.BindVS(2);
 
-	mDepthMapRenderTarget.BeginRender();
+	if (bEnableDepthMap)
+	{
+		mDepthMapRenderTarget.BeginRender();
+	}
 }
 
 void SpotShadowEffect::End()
 {
-	mDepthMapRenderTarget.EndRender();
+	if (bEnableDepthMap)
+	{
+		mDepthMapRenderTarget.EndRender();
+	}
 }
 
 void SpotShadowEffect::Render(const RenderGroup& renderGroup)
@@ -116,6 +118,33 @@ void SpotShadowEffect::SetSpotLight(const SpotLight& spotLight)
 	mLightCamera.SetDirection(spotLight.direction);
 	mLightCamera.SetFarPlane(spotLight.range);
 	mLightCamera.SetFov(spotLight.outerConeAngle * 2.2f); // FOV needs a little headroom past the outer cone or edges clip out of the shadow frustum
+	Invalidate();
+}
+
+void SpotShadowEffect::EnableDepthMap(uint32_t depthMapResolution, bool force)
+{
+	if (!force && bEnableDepthMap)
+	{
+		return;
+	}
+
+	mLightCamera.SetMode(Camera::ProjectionMode::Perspective);
+	mLightCamera.SetAspectRatio(1.0f);
+	mLightCamera.SetNearPlane(0.5f);
+	mDepthMapRenderTarget.Initialize(depthMapResolution, depthMapResolution, Texture::Format::RGBA_U32);
+	bEnableDepthMap = true;
+	Invalidate();
+}
+
+void SpotShadowEffect::DisableDepthMap()
+{
+	if (!bEnableDepthMap)
+	{
+		return;
+	}
+
+	bEnableDepthMap = false;
+	mDepthMapRenderTarget.Terminate();
 	Invalidate();
 }
 

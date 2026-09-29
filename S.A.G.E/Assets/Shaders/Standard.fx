@@ -60,7 +60,7 @@ cbuffer SettingBuffer : register(b4)
     bool useFog;
     float fogStart;
     float fogEnd;
-    bool useSpotShadows;
+    bool useSpotShadows; // TODO: Remove
 
     float2 tiling;
     float2 tilingOffset;
@@ -70,7 +70,8 @@ cbuffer SpotLightBuffer : register(b5)
 {
     SpotLightData spotLights[MAX_SPOT_LIGHTS];
     int spotLightCount;
-    float3 spotLightPadding;
+    int spotLightShadowMask;
+    float2 spotLightPadding;
 }
 
 cbuffer SpotLightMatrixBuffer : register(b6)
@@ -182,7 +183,7 @@ float4 ComputeSpotLightContribution(int index, float3 worldPosition, float3 norm
     float3 shadowSamplePos = worldPosition + normal * normalOffsetScale;
 
     float shadowFactor = 1.0f;
-    if (useSpotShadows)
+    if ((spotLightShadowMask & (1 << index)) != 0) // Can Casts Shadow
     {
         float4 spotNDC = mul(float4(shadowSamplePos, 1.0f), spotLightViewProj[index]);
         shadowFactor = ComputeShadowFactor(spotShadowMaps[index], spotNDC, depthBias, diffuseAmount);

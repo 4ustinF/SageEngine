@@ -53,16 +53,28 @@ void SpotShadowEffect::End()
 	}
 }
 
-void SpotShadowEffect::Render(const RenderGroup& renderGroup)
+void SpotShadowEffect::Render(const RenderGroup& renderGroup, const std::unordered_map<const void*, CachedBoneTransforms>* boneCache)
 {
-	for (auto& renderObjects : renderGroup) 
+	//for (auto& renderObjects : renderGroup) 
+	//{
+	//	Render(renderObjects);
+	//}
+
+	for (auto& renderObject : renderGroup)
 	{
-		Render(renderObjects);
+		const CachedBoneTransforms* cached = nullptr;
+		if (boneCache != nullptr)
+		{
+			auto it = boneCache->find(&renderObject);
+			if (it != boneCache->end()) {
+				cached = &it->second;
+			}
+		}
+		Render(renderObject, cached);
 	}
 }
 
-// TODO: Remove ComputeBoneTransforms & ApplyBoneOffset as this work has already been done prior. No need to have to recalculate these again.
-void SpotShadowEffect::Render(const RenderObject& renderObject)
+void SpotShadowEffect::Render(const RenderObject& renderObject, const CachedBoneTransforms* cachedBones)
 {
 	if (!renderObject.canCastShadows)
 	{
@@ -77,38 +89,49 @@ void SpotShadowEffect::Render(const RenderObject& renderObject)
 	transformData.wvp = Math::Transpose(matWorld * view * proj);
 
 	SpotShadowSettingsData settingsData;
-	if (renderObject.animator)
+	if (cachedBones != nullptr && cachedBones->useSkinning)
 	{
+		// Cache hit — just copy already-computed matrices, no recomputation at all.
 		SpotShadowBoneTransformData boneTransformData;
-
-		std::vector<Math::Matrix4> boneTransforms;
-		AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [animator = renderObject.animator](const Bone* bone) {return animator->GetTransform(bone); });
-		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
-
-		const size_t boneCount = renderObject.skeleton->bones.size();
+		const size_t boneCount = cachedBones->matrices.size();
 		for (size_t i = 0; i < boneCount && i < SpotShadowBoneTransformData::MaxBoneCount; ++i) {
-			boneTransformData.boneTransforms[i] = Math::Transpose(boneTransforms[i]);
+			boneTransformData.boneTransforms[i] = cachedBones->matrices[i];
 		}
-
 		mSharedResources->boneTransformBuffer.Update(boneTransformData);
 		settingsData.useSkinning = 1;
 	}
-	else if (renderObject.skeleton)
-	{
-		SpotShadowBoneTransformData boneTransformData;
+	//else if (renderObject.animator) // Fallback
+	//{
+	//	SpotShadowBoneTransformData boneTransformData;
 
-		std::vector<Math::Matrix4> boneTransforms;
-		AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [](const Bone* bone) {return bone->toParentTransform; });
-		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
+	//	std::vector<Math::Matrix4> boneTransforms;
+	//	AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [animator = renderObject.animator](const Bone* bone) {return animator->GetTransform(bone); });
+	//	AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
 
-		const size_t boneCount = renderObject.skeleton->bones.size();
-		for (size_t i = 0; i < boneCount && i < SpotShadowBoneTransformData::MaxBoneCount; ++i) {
-			boneTransformData.boneTransforms[i] = Math::Transpose(boneTransforms[i]);
-		}
+	//	const size_t boneCount = renderObject.skeleton->bones.size();
+	//	for (size_t i = 0; i < boneCount && i < SpotShadowBoneTransformData::MaxBoneCount; ++i) {
+	//		boneTransformData.boneTransforms[i] = Math::Transpose(boneTransforms[i]);
+	//	}
 
-		mSharedResources->boneTransformBuffer.Update(boneTransformData);
-		settingsData.useSkinning = 1;
-	}
+	//	mSharedResources->boneTransformBuffer.Update(boneTransformData);
+	//	settingsData.useSkinning = 1;
+	//}
+	//else if (renderObject.skeleton) // Fallback
+	//{
+	//	SpotShadowBoneTransformData boneTransformData;
+
+	//	std::vector<Math::Matrix4> boneTransforms;
+	//	AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [](const Bone* bone) {return bone->toParentTransform; });
+	//	AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
+
+	//	const size_t boneCount = renderObject.skeleton->bones.size();
+	//	for (size_t i = 0; i < boneCount && i < SpotShadowBoneTransformData::MaxBoneCount; ++i) {
+	//		boneTransformData.boneTransforms[i] = Math::Transpose(boneTransforms[i]);
+	//	}
+
+	//	mSharedResources->boneTransformBuffer.Update(boneTransformData);
+	//	settingsData.useSkinning = 1;
+	//}
 
 	mSharedResources->transformBuffer.Update(transformData);
 	mSharedResources->settingsBuffer.Update(settingsData);

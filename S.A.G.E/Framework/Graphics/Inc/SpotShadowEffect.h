@@ -26,8 +26,8 @@ namespace SAGE::Graphics
 		void Begin();
 		void End();
 
-		void Render(const RenderGroup& renderGroup);
-		void Render(const RenderObject& renderObject);
+		void Render(const RenderGroup& renderGroup, const std::unordered_map<const void*, CachedBoneTransforms>* boneCache = nullptr);
+		void Render(const RenderObject& renderObject, const CachedBoneTransforms* cachedBones = nullptr);
 
 		const Camera& GetLightCamera() const { return mLightCamera; }
 		const Texture& GetDepthMap() const { return mDepthMapRenderTarget; }

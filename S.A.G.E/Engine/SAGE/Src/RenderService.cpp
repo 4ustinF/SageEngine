@@ -132,6 +132,8 @@ void RenderService::Render()
 		}
 	}
 
+	UpdateBoneTransformCache();
+
 	//mBaseRenderTarget.BeginRender();
 	{
 		mSkyBoxEffect.Begin();
@@ -154,7 +156,8 @@ void RenderService::Render()
 		mItemRenderCount = 0;
 		mStandardEffect.Begin();
 		for (auto& entry : mRenderEntries) {
-			mStandardEffect.Render(entry.renderGroup);
+			//mStandardEffect.Render(entry.renderGroup);
+			mStandardEffect.Render(entry.renderGroup, &mBoneTransformCache);
 		}
 		for (auto& entry : mMeshRendererEntrys)
 		{
@@ -178,7 +181,8 @@ void RenderService::Render()
 		{
 			mShadowEffect.Begin();
 			for (auto& entry : mRenderEntries) {
-				mShadowEffect.Render(entry.renderGroup);
+				//mShadowEffect.Render(entry.renderGroup);
+				mShadowEffect.Render(entry.renderGroup, &mBoneTransformCache);
 			}
 			for (auto& entry : mMeshRendererEntrys) {
 				mShadowEffect.Render(entry->GetRenderObject());
@@ -210,7 +214,7 @@ void RenderService::Render()
 					spotShadowEffect.Begin();
 					for (auto& entry : mRenderEntries)
 					{
-						spotShadowEffect.Render(entry.renderGroup);
+						spotShadowEffect.Render(entry.renderGroup, &mBoneTransformCache);
 					}
 					for (auto* entry : mMeshRendererEntrys)
 					{
@@ -218,6 +222,8 @@ void RenderService::Render()
 						if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
 						{
 							spotShadowEffect.Render(entry->GetRenderObject());
+							//spotShadowEffect.Render(entry->GetRenderObject(), 
+							//	mBoneTransformCache.count(&entry->GetRenderObject()) ? &mBoneTransformCache[&entry->GetRenderObject()] : nullptr);
 						}
 					}
 					spotShadowEffect.End();
@@ -652,4 +658,48 @@ void RenderService::ExtractFrustumPlanes(const Matrix4& vp, Plane outPlanes[6])
 		outPlanes[i].normal /= length;
 		outPlanes[i].distance /= length;
 	}
+}
+
+void RenderService::UpdateBoneTransformCache()
+{
+	mBoneTransformCache.clear();
+
+	auto cacheObject = [this](const RenderObject& renderObject)
+	{
+		if (renderObject.animator == nullptr && renderObject.skeleton == nullptr) {
+			return;
+		}
+
+		CachedBoneTransforms cache;
+		std::vector<Math::Matrix4> boneTransforms;
+
+		if (renderObject.animator)
+		{
+			AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms,
+				[animator = renderObject.animator](const Bone* bone) { return animator->GetTransform(bone); });
+		}
+		else
+		{
+			AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms,
+				[](const Bone* bone) { return bone->toParentTransform; });
+		}
+		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
+
+		cache.matrices.resize(boneTransforms.size());
+		for (size_t i = 0; i < boneTransforms.size(); ++i) {
+			cache.matrices[i] = Math::Transpose(boneTransforms[i]);
+		}
+		cache.useSkinning = true;
+
+		mBoneTransformCache[&renderObject] = std::move(cache); // keyed by stable per-frame address
+	};
+
+	for (auto& entry : mRenderEntries) {
+		for (auto& renderObject : entry.renderGroup) {
+			cacheObject(renderObject);
+		}
+	}
+	//for (auto* entry : mMeshRendererEntrys) {
+	//	cacheObject(entry->GetRenderObject());
+	//}
 }

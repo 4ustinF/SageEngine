@@ -82,14 +82,28 @@ void StandardEffect::End()
 	}
 }
 
-void StandardEffect::Render(const RenderGroup& renderGroup)
+void StandardEffect::Render(const RenderGroup& renderGroup, const std::unordered_map<const void*, CachedBoneTransforms>* boneCache)
 {
-	for (auto& renderObjects : renderGroup) {
-		Render(renderObjects);
+	//for (auto& renderObjects : renderGroup) 
+	//{
+	//	Render(renderObjects);
+	//}
+
+	for (auto& renderObject : renderGroup)
+	{
+		const CachedBoneTransforms* cached = nullptr;
+		if (boneCache != nullptr)
+		{
+			auto it = boneCache->find(&renderObject);
+			if (it != boneCache->end()) {
+				cached = &it->second;
+			}
+		}
+		Render(renderObject, cached);
 	}
 }
 
-void StandardEffect::Render(const RenderObject& renderObject)
+void StandardEffect::Render(const RenderObject& renderObject, const CachedBoneTransforms* cachedBones)
 {
 	const auto& matWorld = renderObject.transform.GetMatrix4();
 	const auto& view = mCamera->GetViewMatrix();
@@ -139,38 +153,50 @@ void StandardEffect::Render(const RenderObject& renderObject)
 		settingsData.useShadowMap = 0;
 	}
 
-	if (renderObject.animator)
+	if (cachedBones != nullptr && cachedBones->useSkinning)
 	{
+		// Cache hit — just copy already-computed matrices, no recomputation at all.
 		BoneTransformData boneTransformData;
-
-		std::vector<Matrix4> boneTransforms;
-		AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [animator = renderObject.animator](const Bone* bone) {return animator->GetTransform(bone); });
-		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
-
-		const size_t boneCount = renderObject.skeleton->bones.size();
+		const size_t boneCount = cachedBones->matrices.size();
 		for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
-			boneTransformData.boneTransforms[i] = Transpose(boneTransforms[i]);
+			boneTransformData.boneTransforms[i] = cachedBones->matrices[i];
 		}
 
 		mBoneTransformBuffer.Update(boneTransformData);
 		settingsData.useSkinning = 1;
 	}
-	else if (renderObject.skeleton)
-	{
-		BoneTransformData boneTransformData;
+	//else if (renderObject.animator) // Fallback
+	//{
+	//	BoneTransformData boneTransformData;
 
-		std::vector<Matrix4> boneTransforms;
-		AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [](const Bone* bone) {return bone->toParentTransform; });
-		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
+	//	std::vector<Matrix4> boneTransforms;
+	//	AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [animator = renderObject.animator](const Bone* bone) {return animator->GetTransform(bone); });
+	//	AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
 
-		const size_t boneCount = renderObject.skeleton->bones.size();
-		for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
-			boneTransformData.boneTransforms[i] = Transpose(boneTransforms[i]);
-		}
+	//	const size_t boneCount = renderObject.skeleton->bones.size();
+	//	for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
+	//		boneTransformData.boneTransforms[i] = Transpose(boneTransforms[i]);
+	//	}
 
-		mBoneTransformBuffer.Update(boneTransformData);
-		settingsData.useSkinning = 1;
-	}
+	//	mBoneTransformBuffer.Update(boneTransformData);
+	//	settingsData.useSkinning = 1;
+	//}
+	//else if (renderObject.skeleton) // Fallback
+	//{
+	//	BoneTransformData boneTransformData;
+
+	//	std::vector<Matrix4> boneTransforms;
+	//	AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [](const Bone* bone) {return bone->toParentTransform; });
+	//	AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
+
+	//	const size_t boneCount = renderObject.skeleton->bones.size();
+	//	for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
+	//		boneTransformData.boneTransforms[i] = Transpose(boneTransforms[i]);
+	//	}
+
+	//	mBoneTransformBuffer.Update(boneTransformData);
+	//	settingsData.useSkinning = 1;
+	//}
 
 	settingsData.tiling = renderObject.tilingSize;
 	settingsData.tilingOffset = renderObject.tilingOffset;

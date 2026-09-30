@@ -18,4 +18,10 @@ namespace SAGE::Graphics
 		Math::Matrix4 toParentTransform;
 		Math::Matrix4 offSetTransform; // For skinning
 	};
+
+	struct CachedBoneTransforms
+	{
+		std::vector<Math::Matrix4> matrices;
+		bool useSkinning = false;
+	};
 }

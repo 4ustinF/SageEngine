@@ -23,8 +23,10 @@ namespace SAGE::Graphics
 		void Begin();
 		void End();
 
-		void Render(const RenderGroup& renderGroup);
-		void Render(const RenderObject& renderObject);
+	/*	void Render(const RenderGroup& renderGroup);
+		void Render(const RenderObject& renderObject);*/
+		void Render(const RenderGroup& renderGroup, const std::unordered_map<const void*, CachedBoneTransforms>* boneCache = nullptr);
+		void Render(const RenderObject& renderObject, const CachedBoneTransforms* cachedBones = nullptr);
 
 		const Texture* GetSpotShadowMap(size_t index) const;		   // TODO: Maybe remove?
 		const Math::Matrix4& GetSpotLightViewProj(size_t index) const; // TODO: Maybe remove?

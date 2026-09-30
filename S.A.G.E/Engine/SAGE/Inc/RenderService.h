@@ -125,5 +125,8 @@ namespace SAGE
 		Graphics::PostProcessingEffect mPostProccessingEffect;
 		Graphics::GaussianBlurEffect mGaussianBlurEffect;
 
+		// TODO: Clean up
+		std::unordered_map<const void*, Graphics::CachedBoneTransforms> mBoneTransformCache;
+		void UpdateBoneTransformCache(); // TODO: Instead of doing this in one sweep at the beggining just do a get/create wheneevr the data is used instead.
 	};
 }

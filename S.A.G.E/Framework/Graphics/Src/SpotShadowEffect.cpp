@@ -61,6 +61,7 @@ void SpotShadowEffect::Render(const RenderGroup& renderGroup)
 	}
 }
 
+// TODO: Remove ComputeBoneTransforms & ApplyBoneOffset as this work has already been done prior. No need to have to recalculate these again.
 void SpotShadowEffect::Render(const RenderObject& renderObject)
 {
 	if (!renderObject.canCastShadows)

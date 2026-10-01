@@ -127,6 +127,6 @@ namespace SAGE
 
 		// TODO: Clean up
 		std::unordered_map<const void*, Graphics::CachedBoneTransforms> mBoneTransformCache;
-		const Graphics::CachedBoneTransforms* GetOrComputeBoneCache(const RenderObject& renderObject);
+		const Graphics::CachedBoneTransforms* GetOrComputeBoneCache(const Graphics::RenderObject& renderObject);
 	};
 }

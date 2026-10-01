@@ -55,9 +55,9 @@ void SpotShadowEffect::End()
 
 void SpotShadowEffect::Render(const RenderGroup& renderGroup, const std::unordered_map<const void*, CachedBoneTransforms>* boneCache)
 {
-	//for (auto& renderObjects : renderGroup) 
+	//for (auto& renderObject : renderGroup) 
 	//{
-	//	Render(renderObjects);
+	//	Render(renderObject);
 	//}
 
 	for (auto& renderObject : renderGroup)

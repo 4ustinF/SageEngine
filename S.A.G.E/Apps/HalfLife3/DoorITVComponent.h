@@ -20,12 +20,17 @@ protected:
 
 private:
 	SAGE::TransformComponent* GetDoorTransformComp();
+	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
 	SAGE::GameObject* mDoorGameObj = nullptr;
 	SAGE::TransformComponent* mDoorTransformComp = nullptr;
 
+	bool mIsDoorLocked = false;
 	bool mIsOpening = false;
 	bool mIsAnimating = false;
 	float mElpasedTime = 0.0f;
 	float mAnimationTime = 0.5f;
 	float mDoorEndPos = -1.22f;
+
+	SAGE::Graphics::SoundId mOnLockedDoorInteractedSoundID = 0;
+	float mPitch = 0.01f;
 };

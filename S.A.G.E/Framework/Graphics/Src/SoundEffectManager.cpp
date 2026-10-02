@@ -119,22 +119,34 @@ void SoundEffectManager::Clear()
 
 void SoundEffectManager::Play(SoundId id, bool loop, float volume, float pitch, float pan)
 {
-	const float finalVolume = Lerp(0.0f, mMasterVolume, Clamp(volume, 0.0f, 1.0f)); // TODO: Should we have an unclamped version of this function?
-
-	auto iter = mInventory.find(id);
-	if (iter != mInventory.end())
+	if (loop)
 	{
-		if (loop)
+		const float finalVolume = Lerp(0.0f, mMasterVolume, Clamp(volume, 0.0f, 1.0f)); // TODO: Should we have an unclamped version of this function?
+		auto iter = mInventory.find(id);
+		if (iter != mInventory.end())
 		{
 			iter->second->instance->SetVolume(finalVolume);
 			iter->second->instance->SetPitch(pitch);
 			iter->second->instance->SetPan(pan);
 			iter->second->instance->Play(true);
 		}
-		else
-		{
-			iter->second->effect->Play(finalVolume, pitch, pan);
-		}
+	}
+	else
+	{
+		PlayOneShot(id, volume, pitch, pan);
+	}
+}
+
+//----------------------------------------------------------------------------------------------------
+
+void SoundEffectManager::PlayOneShot(SoundId id, float volume, float pitch, float pan)
+{
+	const float finalVolume = Lerp(0.0f, mMasterVolume, Clamp(volume, 0.0f, 1.0f)); // TODO: Should we have an unclamped version of this function?
+
+	auto iter = mInventory.find(id);
+	if (iter != mInventory.end())
+	{
+		iter->second->effect->Play(finalVolume, pitch, pan);
 	}
 }
 

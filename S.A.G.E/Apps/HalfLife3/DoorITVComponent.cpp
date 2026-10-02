@@ -7,6 +7,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(DoorITVComponent, 50);
@@ -14,12 +15,19 @@ MEMORY_POOL_DEFINE(DoorITVComponent, 50);
 void DoorITVComponent::Initialize()
 {
 	InteractTriggerVolumeComponent::Initialize();
+
+	mSoundEffectManager = SoundEffectManager::Get();
+	mOnLockedDoorInteractedSoundID = mSoundEffectManager->Load("buttons/button2.wav");
 }
 
 void DoorITVComponent::Terminate()
 {
+	mOnLockedDoorInteractedSoundID = 0;
+
 	mDoorTransformComp = nullptr;
 	mDoorGameObj = nullptr;
+	mSoundEffectManager = nullptr;
+
 	InteractTriggerVolumeComponent::Terminate();
 }
 
@@ -49,7 +57,8 @@ void DoorITVComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Door ITV Component##DoorITVComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-
+		ImGui::Checkbox("Door Locked##DoorITVComponent", &mIsDoorLocked);
+		ImGui::DragFloat("Pitch##DoorITVComponent", &mPitch, 0.1f, -1.0f, 1.0f);
 	}
 }
 
@@ -57,6 +66,13 @@ void DoorITVComponent::OnInteract()
 {
 	if (mIsAnimating)
 	{
+		return;
+	}
+
+	if (mIsDoorLocked)
+	{
+		const float pitch = Math::Lerp(-mPitch, mPitch, Math::Random::UniformFloat());
+		mSoundEffectManager->PlayOneShot(mOnLockedDoorInteractedSoundID, 1.0f, pitch);
 		return;
 	}
 

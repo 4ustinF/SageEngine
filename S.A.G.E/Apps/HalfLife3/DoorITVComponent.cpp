@@ -71,7 +71,7 @@ void DoorITVComponent::OnInteract()
 
 	if (mIsDoorLocked)
 	{
-		const float pitch = Math::Lerp(-mPitch, mPitch, Math::Random::UniformFloat());
+		const float pitch = Lerp(-mPitch, mPitch, Random::UniformFloat());
 		mSoundEffectManager->PlayOneShot(mOnLockedDoorInteractedSoundID, 1.0f, pitch);
 		return;
 	}

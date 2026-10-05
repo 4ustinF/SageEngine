@@ -64,6 +64,8 @@ void StandardEffect::Begin()
 	mSettingsBuffer.BindVS(4);
 	mSettingsBuffer.BindPS(4);
 
+	// TODO: mShadowSettingsBufferbinding
+
 	mSpotLightBuffer.BindPS(5);
 	mSpotShadowMatrixBuffer.BindPS(6);
 
@@ -215,6 +217,10 @@ void StandardEffect::Render(const RenderObject& renderObject, const CachedBoneTr
 	settingsData.useSpotShadows = mSettingsData.useSpotShadows;
 
 	mSettingsBuffer.Update(settingsData);
+
+	//ShadowSettingsData shadowSettingsData;
+	//// TODO: Make these values adjustable in the future.
+	//mShadowSettingsBuffer.Update(shadowSettingsData);
 
 	auto tm = TextureManager::Get();
 	tm->BindPS(renderObject.diffuseMapId, 0);

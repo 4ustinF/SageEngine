@@ -95,6 +95,19 @@ namespace SAGE::Graphics
 			SAGE::Math::Vector2 tilingOffset = { 0.0f, 0.0f };
 		};
 
+		struct ShadowSettingsData
+		{
+			int pcfSampleCount = 16;				// taps for the final filter
+			int blockerSampleCount = 12;			// taps for the PCSS blocker search
+			float pcfRadiusTexels = 2.0f;			// spot light filter radius
+			float pcssLightSize = 400.0f;			// penumbra texels per unit of NDC depth difference
+
+			float pcssSearchRadiusTexels = 10.0f;	// how far to look for blockers
+			float pcssMinRadiusTexels = 1.0f;		// sharpest allowed shadow edge
+			float pcssMaxRadiusTexels = 12.0f;		// softest allowed shadow edge
+			float kernelBiasScale = 0.15f;			// extra bias multiplier per texel of filter radius
+		};
+
 		struct SpotLightBufferData
 		{
 			SpotLight spotLights[MaxSpotLights];
@@ -113,6 +126,7 @@ namespace SAGE::Graphics
 		using LightBuffer = TypedConstantBuffer<DirectionalLight>;
 		using MaterialBuffer = TypedConstantBuffer<Material>;
 		using SettingsBuffer = TypedConstantBuffer<SettingsData>;
+		using ShadowSettingsBuffer = TypedConstantBuffer<ShadowSettingsData>;
 		using SpotLightBuffer = TypedConstantBuffer<SpotLightBufferData>;
 		using SpotShadowMatrixBuffer = TypedConstantBuffer<SpotShadowMatrixData>;
 
@@ -129,6 +143,7 @@ namespace SAGE::Graphics
 		LightBuffer mLightBuffer;
 		MaterialBuffer mMaterialBuffer;
 		SettingsBuffer mSettingsBuffer;
+		ShadowSettingsBuffer mShadowSettingsBuffer;
 
 		BlendState mAlphaBlendState;
 		BlendState::Mode mBlendStateMode = BlendState::Mode::Opaque;

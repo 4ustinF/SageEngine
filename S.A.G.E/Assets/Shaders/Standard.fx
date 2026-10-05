@@ -54,7 +54,7 @@ cbuffer SettingBuffer : register(b4)
     bool useShadowMap;
     bool useSkinning;
     float depthBias;
-    int sampleSize;
+    int sampleSize; // TODO: Remove
     
     float4 fogColor;
     bool useFog;

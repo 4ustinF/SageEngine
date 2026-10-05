@@ -22,6 +22,9 @@ namespace SAGE
 		Graphics::Animator& GetAnimator() { return mAnimator; }
 		const Graphics::Animator& GetAnimator() const { return mAnimator; }
 
+		std::string GetAnimationName(int index);
+		std::string GetAnimationName(const std::string& path);
+
 	private:
 		ModelComponent* mModelComponent = nullptr;
 

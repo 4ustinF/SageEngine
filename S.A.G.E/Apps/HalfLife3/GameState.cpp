@@ -74,7 +74,7 @@ void GameState::Initialize()
 	AnimatorComponent* barneyGOAnimatorComp = barneyGO->GetComponent<AnimatorComponent>();
 	ModelComponent* barneyGOModelComp = barneyGO->GetComponent<ModelComponent>();
 	Animator& barneyGOAnimator = barneyGOAnimatorComp->GetAnimator();
-	barneyGOAnimator.PlayAnimation(static_cast<int>(barneyGOModelComp->GetModel().animationSet.size()) -1, true);
+	barneyGOAnimator.PlayAnimation(static_cast<int>(barneyGOModelComp->GetModel().animationSet.size()) - 9, true);
 
 	// TODO: Move over to level asset.
 	renderService->SetSampleFilter(Sampler::Filter::Point);

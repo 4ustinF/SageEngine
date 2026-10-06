@@ -49,6 +49,16 @@ namespace SAGE::Graphics
 		void UseShadowMap(bool use) { mSettingsData.useShadowMap = use ? 1 : 0; }
 		void UseFog(bool use) { mSettingsData.useFog = use ? 1 : 0; }
 
+		//mShadowSettingsData
+		void SetPcfSampleCount(int pcfSampleCount) { mShadowSettingsData.pcfSampleCount = pcfSampleCount; }
+		void SetBlockerSampleCount(int blockerSampleCount) { mShadowSettingsData.blockerSampleCount = blockerSampleCount; }
+		//float pcfRadiusTexels = 2.0f;			// spot light filter radius
+		//float pcssLightSize = 400.0f;			// penumbra texels per unit of NDC depth difference
+		//float pcssSearchRadiusTexels = 10.0f;	// how far to look for blockers
+		//float pcssMinRadiusTexels = 1.0f;		// sharpest allowed shadow edge
+		//float pcssMaxRadiusTexels = 12.0f;		// softest allowed shadow edge
+		//float kernelBiasScale = 0.15f;			// extra bias multiplier per texel of filter radius
+
 		void SetSpotLights(const std::vector<SpotLight*>& lights); // copies up to MaxSpotLights
 		void SetSpotShadowMap(size_t index, const Texture* shadowMap);
 		void SetSpotLightViewProj(size_t index, const Math::Matrix4& viewProj);
@@ -151,6 +161,7 @@ namespace SAGE::Graphics
 		Sampler mSampler;
 
 		SettingsData mSettingsData;
+		ShadowSettingsData mShadowSettingsData;
 		float mBumpWeight = 0.0f;
 		float mDepthBias = 0.0f;
 

@@ -1,6 +1,7 @@
 // Description: Standard shader for SAGE
 
 #define MAX_SPOT_LIGHTS 16
+#define MAX_SHADOW_SAMPLES 64 // Upper bound for the runtime sample counts. Must match StandardEffect::MaxShadowSamples
 
 struct SpotLightData
 {
@@ -51,19 +52,20 @@ cbuffer SettingBuffer : register(b4)
     bool useSpecularMap;
     bool useBumpMap;
     bool useNormalMap;
+
     bool useShadowMap;
     bool useSkinning;
-    float depthBias;
-    int sampleSize; // TODO: Remove
-    
-    float4 fogColor;
     bool useFog;
+    float depthBias;
+
+    float4 fogColor;
+
     float fogStart;
     float fogEnd;
-    bool useSpotShadows; // TODO: Remove
-
     float2 tiling;
+
     float2 tilingOffset;
+    float2 settingPadding;
 }
 
 cbuffer SpotLightBuffer : register(b5)
@@ -77,6 +79,22 @@ cbuffer SpotLightBuffer : register(b5)
 cbuffer SpotLightMatrixBuffer : register(b6)
 {
     matrix spotLightViewProj[MAX_SPOT_LIGHTS];
+}
+
+cbuffer ShadowSettingBuffer : register(b7)
+{
+    int pcfSampleCount; // taps for the final filter (16-32 looks great)
+    int blockerSampleCount; // taps for the PCSS blocker search
+    float pcfRadiusTexels; // spot light filter radius
+    float pcssLightSize; // penumbra texels per unit of NDC depth difference
+
+    float pcssSearchRadiusTexels; // how far to look for blockers
+    float pcssMinRadiusTexels; // sharpest allowed shadow edge
+    float pcssMaxRadiusTexels; // softest allowed shadow edge
+    float kernelBiasScale; // extra bias multiplier per texel of filter radius
+
+    float spotNormalOffset; // world units to push spot shadow lookups along the normal
+    float3 shadowSettingPadding;
 }
 
 Texture2D diffuseMap : register(t0);
@@ -119,19 +137,6 @@ static matrix Identity =
     0, 0, 0, 1
 };
 
-// ---------------------------------------------------------------------------
-// Shadow filtering settings (hard-coded for now; move to a cbuffer later)
-// ---------------------------------------------------------------------------
-#define SHADOW_PCF_SAMPLES      16     // taps for the final filter (16-32 looks great)
-#define SHADOW_BLOCKER_SAMPLES  12     // taps for the PCSS blocker search
-
-static const float PCF_RADIUS_TEXELS = 2.0f; // spot light filter radius
-static const float PCSS_LIGHT_SIZE = 400.0f; // penumbra texels per unit of NDC depth difference
-static const float PCSS_SEARCH_RADIUS_TEXELS = 10.0f; // how far to look for blockers
-static const float PCSS_MIN_RADIUS_TEXELS = 1.0f; // sharpest allowed shadow edge
-static const float PCSS_MAX_RADIUS_TEXELS = 12.0f; // softest allowed shadow edge
-static const float KERNEL_BIAS_SCALE = 0.15f; // grows bias with filter radius
-
 static const float TWO_PI = 6.28318530718f;
 
 matrix GetBoneTransform(int4 indices, float4 weights)
@@ -149,6 +154,10 @@ matrix GetBoneTransform(int4 indices, float4 weights)
     return transform;
 }
 
+// ---------------------------------------------------------------------------
+// Shadow filtering
+// ---------------------------------------------------------------------------
+
 // Cheap, high quality per-pixel noise (Jimenez). Needs SV_Position.xy
 float InterleavedGradientNoise(float2 pixelPos)
 {
@@ -164,6 +173,13 @@ float2 VogelDiskSample(int index, int count, float rotation)
     float s, c;
     sincos(theta, s, c);
     return float2(c, s) * r;
+}
+
+float2 GetTextureSize(Texture2D tex)
+{
+    uint w, h;
+    tex.GetDimensions(w, h);
+    return float2(w, h);
 }
 
 // Converts light-space clip pos to shadow map UV + depth. Returns false if outside frustum.
@@ -200,20 +216,21 @@ float ComputeShadowBias(float bias, float NdotL, float radiusTexels)
 {
     const float nl = saturate(NdotL);
     const float slope = clamp(sqrt(1.0f - nl * nl) / max(nl, 0.0001f), 0.0f, 8.0f);
-    return bias * (1.0f + slope) * (1.0f + radiusTexels * KERNEL_BIAS_SCALE);
+    return bias * (1.0f + slope) * (1.0f + radiusTexels * kernelBiasScale);
 }
 
 // Rotated Vogel-disk PCF. Returns 0 (shadowed) .. 1 (lit)
 float FilterShadow(Texture2D shadowTex, float2 uv, float receiverDepth, float effectiveBias,
                    float radiusTexels, float2 dim, float rotation)
 {
-    float2 radiusUV = radiusTexels / dim;
+    const int sampleCount = clamp(pcfSampleCount, 1, MAX_SHADOW_SAMPLES);
+    const float2 radiusUV = radiusTexels / dim;
     float lit = 0.0f;
 
-    [unroll]
-    for (int i = 0; i < SHADOW_PCF_SAMPLES; ++i)
+    [loop]
+    for (int i = 0; i < sampleCount; ++i)
     {
-        float2 sampleUV = uv + VogelDiskSample(i, SHADOW_PCF_SAMPLES, rotation) * radiusUV;
+        const float2 sampleUV = uv + VogelDiskSample(i, sampleCount, rotation) * radiusUV;
         float savedDepth;
         if (!LoadShadowDepth(shadowTex, sampleUV, dim, savedDepth))
         {
@@ -222,7 +239,7 @@ float FilterShadow(Texture2D shadowTex, float2 uv, float receiverDepth, float ef
         }
         lit += (savedDepth > receiverDepth + effectiveBias) ? 0.0f : 1.0f;
     }
-    return lit / SHADOW_PCF_SAMPLES;
+    return lit / sampleCount;
 }
 
 // Fixed-radius randomized PCF (used for spot lights)
@@ -236,13 +253,10 @@ float ComputeShadowFactorPCF(Texture2D shadowTex, float4 lightNDCPosition, float
         return 1.0f; // outside frustum: fully lit
     }
 
-    uint w, h;
-    shadowTex.GetDimensions(w, h);
-    float2 dim = float2(w, h);
-
-    float rotation = InterleavedGradientNoise(pixelPos) * TWO_PI + rotationOffset;
-    float effectiveBias = ComputeShadowBias(bias, NdotL, PCF_RADIUS_TEXELS);
-    return FilterShadow(shadowTex, uv, depth, effectiveBias, PCF_RADIUS_TEXELS, dim, rotation);
+    const float2 dim = GetTextureSize(shadowTex);
+    const float rotation = InterleavedGradientNoise(pixelPos) * TWO_PI + rotationOffset;
+    const float effectiveBias = ComputeShadowBias(bias, NdotL, pcfRadiusTexels);
+    return FilterShadow(shadowTex, uv, depth, effectiveBias, pcfRadiusTexels, dim, rotation);
 }
 
 // PCSS: blocker search -> penumbra estimate -> variable-radius PCF (orthographic light only)
@@ -256,22 +270,20 @@ float ComputeShadowFactorPCSS(Texture2D shadowTex, float4 lightNDCPosition, floa
         return 1.0f;
     }
 
-    uint w, h;
-    shadowTex.GetDimensions(w, h);
-    const float2 dim = float2(w, h);
-
+    const float2 dim = GetTextureSize(shadowTex);
     const float rotation = InterleavedGradientNoise(pixelPos) * TWO_PI;
 
     // 1) Blocker search
-    const float searchBias = ComputeShadowBias(bias, NdotL, PCSS_SEARCH_RADIUS_TEXELS);
-    const float2 searchRadiusUV = PCSS_SEARCH_RADIUS_TEXELS / dim;
+    const int searchCount = clamp(blockerSampleCount, 1, MAX_SHADOW_SAMPLES);
+    const float searchBias = ComputeShadowBias(bias, NdotL, pcssSearchRadiusTexels);
+    const float2 searchRadiusUV = pcssSearchRadiusTexels / dim;
     float blockerSum = 0.0f;
     int blockerCount = 0;
 
-    [unroll]
-    for (int i = 0; i < SHADOW_BLOCKER_SAMPLES; ++i)
+    [loop]
+    for (int i = 0; i < searchCount; ++i)
     {
-        const float2 sampleUV = uv + VogelDiskSample(i, SHADOW_BLOCKER_SAMPLES, rotation) * searchRadiusUV;
+        const float2 sampleUV = uv + VogelDiskSample(i, searchCount, rotation) * searchRadiusUV;
         float savedDepth;
         if (LoadShadowDepth(shadowTex, sampleUV, dim, savedDepth) && savedDepth > depth + searchBias)
         {
@@ -287,12 +299,16 @@ float ComputeShadowFactorPCSS(Texture2D shadowTex, float4 lightNDCPosition, floa
 
     // 2) Penumbra estimate: farther blocker = wider, softer edge
     const float avgBlockerDepth = blockerSum / blockerCount;
-    const float radiusTexels = clamp((avgBlockerDepth - depth) * PCSS_LIGHT_SIZE, PCSS_MIN_RADIUS_TEXELS, PCSS_MAX_RADIUS_TEXELS);
+    const float radiusTexels = clamp((avgBlockerDepth - depth) * pcssLightSize, pcssMinRadiusTexels, pcssMaxRadiusTexels);
 
     // 3) Filter with the estimated radius
     const float effectiveBias = ComputeShadowBias(bias, NdotL, radiusTexels);
     return FilterShadow(shadowTex, uv, depth, effectiveBias, radiusTexels, dim, rotation);
 }
+
+// ---------------------------------------------------------------------------
+// Lighting
+// ---------------------------------------------------------------------------
 
 float4 ComputeSpotLightContribution(int index, float3 worldPosition, float3 normal, float3 viewDirection,
                                     float4 diffuseMapColor, float specularMapColor, float2 pixelPos)
@@ -321,15 +337,14 @@ float4 ComputeSpotLightContribution(int index, float3 worldPosition, float3 norm
     const float3 reflection = reflect(-spotL, normal);
     const float specularAmount = pow(saturate(dot(reflection, viewDirection)), materialPower);
 
-    // Push the shadow test point along the normal before sampling — compensates
-    // for curvature-induced self-shadowing that a depth-only bias can't fix.
-    const float normalOffsetScale = 0.01f; // tune per scene scale; start small and increase until acne clears
-    const float3 shadowSamplePos = worldPosition + normal * normalOffsetScale;
-
     float shadowFactor = 1.0f;
     if ((spotLightShadowMask & (1 << index)) != 0) // Can Casts Shadow
     {
-        float4 spotNDC = mul(float4(shadowSamplePos, 1.0f), spotLightViewProj[index]);
+        // Push the shadow test point along the normal before sampling. Compensates
+        // for curvature-induced self-shadowing that a depth-only bias can't fix.
+        const float normalOffsetScale = 0.01f; // tune per scene scale; start small and increase until acne clears
+        const float3 shadowSamplePos = worldPosition + normal * normalOffsetScale;
+        const float4 spotNDC = mul(float4(shadowSamplePos, 1.0f), spotLightViewProj[index]);
         shadowFactor = ComputeShadowFactorPCF(spotShadowMaps[index], spotNDC, depthBias, diffuseAmount,
                                               pixelPos, index * 1.7f); // offset so lights get different noise
     }
@@ -410,7 +425,7 @@ float4 PS(VS_OUTPUT input) : SV_Target
         shadowFactor = ComputeShadowFactorPCSS(shadowMap, input.lightNDCPosition, depthBias, d, input.position.xy);
     }
 
-    // Shadow now scales diffuse and specular smoothly (0 = fully shadowed, 1 = lit)
+    // Shadow scales diffuse and specular smoothly (0 = fully shadowed, 1 = lit)
     float4 finalColor = (ambient + diffuse * shadowFactor + materialEmissive) * diffuseMapColor
                       + (specular * specularMapColor * shadowFactor);
 

@@ -22,6 +22,7 @@ void StandardEffect::Initialize(Sampler::Filter sampleFilter)
 	mLightBuffer.Initialize();
 	mMaterialBuffer.Initialize();
 	mSettingsBuffer.Initialize();
+	mShadowSettingsBuffer.Initialize();
 
 	mAlphaBlendState.Initialize(mBlendStateMode);
 	mSampler.Initialize(sampleFilter, Sampler::AddressMode::Wrap);
@@ -33,6 +34,7 @@ void StandardEffect::Terminate()
 
 	mAlphaBlendState.Terminate();
 
+	mShadowSettingsBuffer.Terminate();
 	mSpotLightBuffer.Terminate();
 	mSpotShadowMatrixBuffer.Terminate();
 	mSettingsBuffer.Terminate();
@@ -64,10 +66,12 @@ void StandardEffect::Begin()
 	mSettingsBuffer.BindVS(4);
 	mSettingsBuffer.BindPS(4);
 
-	// TODO: mShadowSettingsBufferbinding
-
 	mSpotLightBuffer.BindPS(5);
 	mSpotShadowMatrixBuffer.BindPS(6);
+
+	// Shadow filter settings are the same for every object, so upload once per Begin
+	mShadowSettingsBuffer.Update(mShadowSettingsData);
+	mShadowSettingsBuffer.BindPS(7);
 
 	mSampler.BindVS(0);
 	mSampler.BindPS(0);
@@ -149,7 +153,6 @@ void StandardEffect::Render(const RenderObject& renderObject, const CachedBoneTr
 		mShadowMap->BindPS(4);
 		settingsData.useShadowMap = 1;
 		settingsData.depthBias = mDepthBias;
-		settingsData.sampleSize = 1;
 	}
 	else {
 		settingsData.useShadowMap = 0;
@@ -214,13 +217,8 @@ void StandardEffect::Render(const RenderObject& renderObject, const CachedBoneTr
 			Texture::UnbindPS(5 + static_cast<uint32_t>(i));
 		}
 	}
-	settingsData.useSpotShadows = mSettingsData.useSpotShadows;
 
 	mSettingsBuffer.Update(settingsData);
-
-	//ShadowSettingsData shadowSettingsData;
-	//// TODO: Make these values adjustable in the future.
-	//mShadowSettingsBuffer.Update(shadowSettingsData);
 
 	auto tm = TextureManager::Get();
 	tm->BindPS(renderObject.diffuseMapId, 0);
@@ -268,7 +266,7 @@ void StandardEffect::SetShadowMap(const Texture* shadowMap)
 void StandardEffect::SetSpotLights(const std::vector<SpotLight*>& lights)
 {
 	mActiveSpotLightCount = std::min(lights.size(), MaxSpotLights);
-	for (size_t i = 0; i < mActiveSpotLightCount; ++i) 
+	for (size_t i = 0; i < mActiveSpotLightCount; ++i)
 	{
 		mSpotLightBufferData.spotLights[i] = *lights[i];
 	}
@@ -316,12 +314,8 @@ void StandardEffect::DebugUI()
 		mSettingsData.useNormalMap = useNormalMap ? 1 : 0;
 
 		bool useShadowMap = (mSettingsData.useShadowMap == 1);
-		ImGui::Checkbox("Use Shadow Map", &useShadowMap);
+		ImGui::Checkbox("Use Shadow Map##StandardEffect", &useShadowMap);
 		mSettingsData.useShadowMap = useShadowMap ? 1 : 0;
-
-		bool useSpotShadows = (mSettingsData.useSpotShadows == 1);
-		ImGui::Checkbox("Use Spot Shadows", &useSpotShadows);
-		mSettingsData.useSpotShadows = useSpotShadows ? 1 : 0;
 
 		bool useFog = (mSettingsData.useFog == 1);
 		ImGui::Checkbox("Use Fog##StandardEffect", &useFog);
@@ -336,5 +330,33 @@ void StandardEffect::DebugUI()
 		//mSettingsData.useSkinning = useSkinning ? 1 : 0;
 
 		ImGui::DragFloat("Depth Bias##StandardEffect", &mDepthBias, 0.000001f, 0.0f, 1.0f, "%.6f");
+
+		if (ImGui::TreeNode("Shadow Filtering##StandardEffect"))
+		{
+			auto& s = mShadowSettingsData;
+
+			const int maxShadowSamples = 64;
+			ImGui::SliderInt("PCF Samples##StandardEffect", &s.pcfSampleCount, 1, maxShadowSamples);
+			ImGui::SliderInt("Blocker Samples##StandardEffect", &s.blockerSampleCount, 1, maxShadowSamples);
+			
+			ImGui::DragFloat("Spot PCF Radius (texels)##StandardEffect", &s.pcfRadiusTexels, 0.05f, 0.0f, 16.0f);
+			ImGui::DragFloat("PCSS Light Size##StandardEffect", &s.pcssLightSize, 1.0f, 0.0f, 2000.0f);
+			ImGui::DragFloat("PCSS Search Radius (texels)##StandardEffect", &s.pcssSearchRadiusTexels, 0.1f, 0.0f, 32.0f);
+			if(ImGui::DragFloat("PCSS Min Radius (texels)##StandardEffect", &s.pcssMinRadiusTexels, 0.05f, 0.0f, 16.0f))
+			{
+				// Keep the penumbra range valid
+				s.pcssMaxRadiusTexels = std::max(s.pcssMaxRadiusTexels, s.pcssMinRadiusTexels);
+			}
+
+			if(ImGui::DragFloat("PCSS Max Radius (texels)##StandardEffect", &s.pcssMaxRadiusTexels, 0.1f, 0.0f, 32.0f))
+			{
+				// Keep the penumbra range valid
+				s.pcssMaxRadiusTexels = std::max(s.pcssMaxRadiusTexels, s.pcssMinRadiusTexels);
+			}
+
+			ImGui::DragFloat("Kernel Bias Scale##StandardEffect", &s.kernelBiasScale, 0.005f, 0.0f, 2.0f);
+
+			ImGui::TreePop();
+		}
 	}
 }

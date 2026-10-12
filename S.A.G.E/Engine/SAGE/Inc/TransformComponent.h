@@ -63,7 +63,9 @@ namespace SAGE
 		void UpdateWorldScale(const Math::Vector3& inScale);
 		void PropagateTransformToChildren();
 		void PropagateTransformToChild(const GameObjectHandle& gameObjectHandle);
+		void RecomputeLocalFromWorld(const Graphics::Transform& parentTransform);
 
+		bool mIsStatic = false;
 		Graphics::Transform mTransform;
 		Graphics::Transform mLocalTransform;
 		Math::Vector3 mDegreeAngles = Math::Vector3::Zero;

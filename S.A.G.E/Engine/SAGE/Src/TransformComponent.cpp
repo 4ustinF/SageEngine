@@ -71,11 +71,22 @@ void TransformComponent::LoadComponentFromTemplate(const rj::Value& value)
 		const float z = scale[2].GetFloat();
 		SetLocalScale(Vector3(x, y, z));
 	}
+
+	if (value.HasMember("Is Static"))
+	{
+		mIsStatic = value["Is Static"].GetBool();
+	}
 }
 
 void TransformComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
 	const bool hasParentTransformComponent = FindParentTransformComponent() != nullptr;
+
+	// --- Is Static ---
+	if (mIsStatic)
+	{
+		SaveBoolToTemplate(compObj, allocator, "Is Static", mIsStatic);
+	}
 
 	// --- Position, Rotation, Scale ---
 	if (!hasParentTransformComponent)
@@ -112,41 +123,46 @@ void TransformComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Transform Component##TransformComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		Vector3 pos = mTransform.position;
-		if (ImGui::DragFloat3("Position##TransformComponent", &pos.x, 0.1f))
+		ImGui::Checkbox("Is Static##TransformComponent", &mIsStatic);
+		ImGui::BeginDisabled(mIsStatic);
 		{
-			SetPosition(pos);
-		}
+			Vector3 pos = mTransform.position;
+			if (ImGui::DragFloat3("Position##TransformComponent", &pos.x, 0.1f))
+			{
+				SetPosition(pos);
+			}
 
-		Vector3 locPos = mLocalTransform.position;
-		if (ImGui::DragFloat3("Local Position##TransformComponent", &locPos.x, 0.1f))
-		{
-			SetLocalPosition(locPos);
-		}
+			Vector3 locPos = mLocalTransform.position;
+			if (ImGui::DragFloat3("Local Position##TransformComponent", &locPos.x, 0.1f))
+			{
+				SetLocalPosition(locPos);
+			}
 
-		Vector3 rot = mDegreeAngles;
-		if (ImGui::DragFloat3("Rotation##TransformComponent", &rot.x, 0.1f))
-		{
-			SetRotation(rot);
-		}
+			Vector3 rot = mDegreeAngles;
+			if (ImGui::DragFloat3("Rotation##TransformComponent", &rot.x, 0.1f))
+			{
+				SetRotation(rot);
+			}
 
-		Vector3 locRot = mLocalDegreeAngles;
-		if (ImGui::DragFloat3("Local Rotation##TransformComponent", &locRot.x, 0.1f))
-		{
-			SetLocalRotation(locRot);
-		}
+			Vector3 locRot = mLocalDegreeAngles;
+			if (ImGui::DragFloat3("Local Rotation##TransformComponent", &locRot.x, 0.1f))
+			{
+				SetLocalRotation(locRot);
+			}
 
-		Vector3 scale = mTransform.scale;
-		if (ImGui::DragFloat3("Scale##TransformComponent", &scale.x, 0.1f))
-		{
-			SetScale(scale);
-		}
+			Vector3 scale = mTransform.scale;
+			if (ImGui::DragFloat3("Scale##TransformComponent", &scale.x, 0.1f))
+			{
+				SetScale(scale);
+			}
 
-		Vector3 localScale = mLocalTransform.scale;
-		if (ImGui::DragFloat3("Local Scale##TransformComponent", &localScale.x, 0.1f))
-		{
-			SetLocalScale(localScale);
+			Vector3 localScale = mLocalTransform.scale;
+			if (ImGui::DragFloat3("Local Scale##TransformComponent", &localScale.x, 0.1f))
+			{
+				SetLocalScale(localScale);
+			}
 		}
+		ImGui::EndDisabled();
 	}
 
 	Graphics::SimpleDraw::AddTransform(mTransform.GetMatrix4()); // TODO: This should not grow with scale. 
@@ -154,6 +170,7 @@ void TransformComponent::DebugUI()
 
 void TransformComponent::SetPosition(const Vector3& inPos)
 {
+	if (mIsStatic) { return; }
 	if (const TransformComponent* parent = FindParentTransformComponent())
 	{
 		const Transform& parentTransform = parent->GetTransform();
@@ -184,11 +201,13 @@ void TransformComponent::SetPosition(const Vector3& inPos)
 
 void TransformComponent::SetRotation(const Vector3& inRotation)
 {
+	if (mIsStatic) { return; }
 	SetRotation(Quaternion::RotationEuler(inRotation * Constants::DegToRad));
 }
 
 void TransformComponent::SetRotation(const Quaternion& inRotation)
 {
+	if (mIsStatic) { return; }
 	if (const TransformComponent* parent = FindParentTransformComponent())
 	{
 		// Convert world -> local
@@ -205,6 +224,7 @@ void TransformComponent::SetRotation(const Quaternion& inRotation)
 
 void TransformComponent::SetScale(const Vector3& inScale)
 {
+	if (mIsStatic) { return; }
 	if (const TransformComponent* parent = FindParentTransformComponent())
 	{
 		// Convert world -> local
@@ -323,6 +343,12 @@ void TransformComponent::PropagateTransformToChild(const GameObjectHandle& gameO
 
 	if (TransformComponent* child = gameObject->GetComponent<TransformComponent>())
 	{
+		if (child->mIsStatic)
+		{
+			child->RecomputeLocalFromWorld(mTransform);
+			return; // world unchanged, so grandchildren don't need updating
+		}
+
 		// Recompute the child's FULL world transform from this (already up-to-date)
 		// parent transform and the child's own stored local transform.
 		const Vector3 newWorldPos = mTransform.position + mTransform.rotation * (child->mLocalTransform.position * mTransform.scale);
@@ -352,4 +378,15 @@ void TransformComponent::PropagateTransformToChild(const GameObjectHandle& gameO
 			PropagateTransformToChild(grandChildHandle);
 		}
 	}
+}
+
+void TransformComponent::RecomputeLocalFromWorld(const Transform& parentTransform)
+{
+	const Quaternion invParentRot = Conjugate(parentTransform.rotation);
+
+	mLocalTransform.position = (invParentRot * (mTransform.position - parentTransform.position)) / parentTransform.scale;
+	mLocalTransform.rotation = invParentRot * mTransform.rotation;
+	mLocalTransform.scale = mTransform.scale / parentTransform.scale; // parent 2x -> local 0.5x
+
+	mLocalDegreeAngles = mLocalTransform.rotation.ToClampedDegree();
 }

@@ -33,8 +33,6 @@ void RenderService::Initialize()
 
 	mSpotShadowEffectResources.Initialize();
 
-	mStandardEffect.UseSpotShadows(true);
-
 	mStandardEffect.SetBlendState(BlendState::Mode::AlphaBlend);
 	mStandardEffect.Initialize(mSampleFilter);
 	mStandardEffect.SetLightCamera(mShadowEffect.GetLightCamera());

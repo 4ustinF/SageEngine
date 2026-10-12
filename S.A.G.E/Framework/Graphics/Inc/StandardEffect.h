@@ -62,7 +62,6 @@ namespace SAGE::Graphics
 		void SetSpotShadowMap(size_t index, const Texture* shadowMap);
 		void SetSpotLightViewProj(size_t index, const Math::Matrix4& viewProj);
 		void SetSpotLightTransposeViewProj(size_t index, const Math::Matrix4& transposeViewProj);
-		void UseSpotShadows(bool use) { mSettingsData.useSpotShadows = use ? 1 : 0; }
 		void SetSpotShadowMask(int mask) { mSpotLightBufferData.spotLightShadowMask = mask; }
 
 		void DebugUI();
@@ -91,17 +90,17 @@ namespace SAGE::Graphics
 
 			int useShadowMap = 1;
 			int useSkinning = 0;
+			int useFog = 0;
 			float depthBias = 0.0f;
-			int sampleSize = 1; // TODO: Remove from here and shader
 
 			SAGE::Graphics::Color fogColor = Colors::Gray;
-			int useFog = 0;
+
 			float fogStart = 50.0f;
 			float fogEnd = 100.0f;
-			int useSpotShadows = 1; // TODO: Remove from here and shader
 
 			SAGE::Math::Vector2 tiling = { 1.0f, 1.0f };
 			SAGE::Math::Vector2 tilingOffset = { 0.0f, 0.0f };
+			SAGE::Math::Vector2 settingPadding = { 0.0f, 0.0f };
 		};
 
 		struct ShadowSettingsData

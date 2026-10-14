@@ -73,7 +73,8 @@ void BaseColliderComponent::OnEnable()
 	}
 
 	std::unique_ptr<Collider> collider = CreateCollider();
-	const PhysicsObjectType objectType = mRigidBodyComponent ? (mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static;
+	const PhysicsObjectType objectType = mTransformComponent->GetIsStatic() ? PhysicsObjectType::Static : 
+		mRigidBodyComponent ? (mRigidBodyComponent->IsKinematic() ? PhysicsObjectType::Kinematic : PhysicsObjectType::Dynamic) : PhysicsObjectType::Static;
 	mPhysicsObject = mPhysicsService->GetPhysicsWorld().CreatePhysicsObject(std::move(collider), objectType);
 
 	UpdatePhysicsObjectPropertys();

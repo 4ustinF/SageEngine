@@ -41,6 +41,7 @@ namespace SAGE
 		const Math::Vector3& GetLocalScale() const { return mLocalTransform.scale; }
 		const Math::Matrix4 GetLocalMatrix4() const { return mLocalTransform.GetMatrix4(); }
 
+		bool GetIsStatic() const { return mIsStatic; }
 		FOnPositionChange& GetOnPositionChangeDelegate() { return mOnPositionChange; }
 		FOnRotationChange& GetOnRotationChangeDelegate() { return mOnRotationChange; }
 		FOnScaleChange& GetOnScaleChangeDelegate() { return mOnScaleChange; }

@@ -13,7 +13,7 @@ using namespace SAGE::Graphics;
 using namespace SAGE::Core::Delegate;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(MeshRendererComponent, 300);
+MEMORY_POOL_DEFINE(MeshRendererComponent, 500);
 
 void MeshRendererComponent::LoadComponentFromTemplate(const rapidjson::Value& value)
 {
@@ -284,7 +284,8 @@ void MeshRendererComponent::DebugUI()
 
 		RenderObject& renderObject = mMeshFilter->GetRenderObject();
 		ImGui::Checkbox("Bloom##MeshRendererComponent", &mAllowBloom);
-		ImGui::Checkbox("Is Transparent##MeshRendererComponent", &mIsTransparent);
+		bool isTransparent = mIsTransparent;
+		if (ImGui::Checkbox("Is Transparent##MeshRendererComponent", &isTransparent)) { SetIsTransparent(isTransparent); }
 		ImGui::Checkbox("Can Cast Shadows##MeshRendererComponent", &renderObject.canCastShadows);
 
 		TextureDebugUI("Diffuse Map", renderObject.diffuseMapId, mMaterialData.diffuseMapName);
@@ -418,6 +419,21 @@ void MeshRendererComponent::SetCanCastShadows(bool canCastShadows)
 
 	RenderObject& renderObject = mMeshFilter->GetRenderObject();
 	renderObject.canCastShadows = canCastShadows;
+}
+
+void MeshRendererComponent::SetIsTransparent(bool isTransparent)
+{
+	if (mIsTransparent == isTransparent)
+	{
+		return;
+	}
+
+	mIsTransparent = isTransparent;
+	if (GetOwner().IsActiveInHierarchy()) // Refresh what render bucket we are in.
+	{
+		mRenderService->UnregisterMeshRenderer(this);
+		mRenderService->RegisterMeshRenderer(this, mIsBasic);
+	}
 }
 
 void MeshRendererComponent::TextureDebugUI(const char* mapName, TextureId& textureId, std::string& filePath)

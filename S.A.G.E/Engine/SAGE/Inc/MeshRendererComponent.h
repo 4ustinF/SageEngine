@@ -50,6 +50,7 @@ namespace SAGE
 		void SetTileToYScale(bool tileToYScale);
 		void SetTileToZScale(bool tileToZScale);
 		void SetCanCastShadows(bool canCastShadows);
+		void SetIsTransparent(bool isTransparent);
 
 	private:
 		MeshFilterComponent* mMeshFilter = nullptr;

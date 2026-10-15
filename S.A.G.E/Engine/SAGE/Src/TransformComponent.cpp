@@ -287,6 +287,17 @@ void TransformComponent::SetLocalScale(const Vector3& inScale)
 	}
 }
 
+void TransformComponent::SetIsStatic(bool isStatic)
+{
+	if (mIsStatic == isStatic)
+	{
+		return;
+	}
+
+	mIsStatic = isStatic;
+	// TODO: Notify the physics system and the renderer system.
+}
+
 const TransformComponent* TransformComponent::FindParentTransformComponent() const
 {
 	GameObject* current = GetOwner().GetParentGameObject();

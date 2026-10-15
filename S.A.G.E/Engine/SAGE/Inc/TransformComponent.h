@@ -57,6 +57,8 @@ namespace SAGE
 		void SetLocalRotation(const Math::Quaternion& inRotation);
 		void SetLocalScale(const Math::Vector3& inScale);
 
+		void SetIsStatic(bool isStatic);
+
 	private:
 		const TransformComponent* FindParentTransformComponent() const;
 		void UpdateWorldPosition(const Math::Vector3& inPos);

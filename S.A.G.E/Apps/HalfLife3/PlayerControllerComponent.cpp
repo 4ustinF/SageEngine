@@ -155,29 +155,29 @@ void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, floa
 		right = Normalize(ProjectOnPlane(right, mGroundNormal));
 	}
 
-	if (mInputSystem->IsKeyDown(KeyCode::UP))
+	if (mInputSystem->IsKeyDown(mIsInFPSMode ? KeyCode::W : KeyCode::UP))
 	{
 		physicsObject->ApplyForce(forward * moveSpeed);
 	}
 
-	if (mInputSystem->IsKeyDown(KeyCode::DOWN))
+	if (mInputSystem->IsKeyDown(mIsInFPSMode ? KeyCode::S : KeyCode::DOWN))
 	{
 		physicsObject->ApplyForce(-forward * moveSpeed);
 	}
 
-	if (mInputSystem->IsKeyDown(KeyCode::RIGHT))
+	if (mInputSystem->IsKeyDown(mIsInFPSMode ? KeyCode::D : KeyCode::RIGHT))
 	{
 		physicsObject->ApplyForce(right * moveSpeed);
 	}
 
-	if (mInputSystem->IsKeyDown(KeyCode::LEFT))
+	if (mInputSystem->IsKeyDown(mIsInFPSMode ? KeyCode::A : KeyCode::LEFT))
 	{
 		physicsObject->ApplyForce(-right * moveSpeed);
 	}
 
 	if (mIsGrounded)
 	{
-		if (mInputSystem->IsKeyPressed(KeyCode::NUMPAD0))
+		if (mInputSystem->IsKeyPressed(mIsInFPSMode ? KeyCode::SPACE : KeyCode::NUMPAD0))
 		{
 			physicsObject->ApplyForce(Vector3::YAxis * mJumpForce * deltaTime);
 			mIsGrounded = false;

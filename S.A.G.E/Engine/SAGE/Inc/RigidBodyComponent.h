@@ -47,6 +47,7 @@ namespace SAGE
 		float mAngularDrag = 0.05f;
 		bool mUseGravity = true;
 		bool mIsKinematic = false; // If true, the rigid body will not be affected by physics forces and will only move when explicitly moved by the user.
+		// TODO: Have transform comp manage if this is static or not.
 		// Interpolate
 		// Collision Detection
 

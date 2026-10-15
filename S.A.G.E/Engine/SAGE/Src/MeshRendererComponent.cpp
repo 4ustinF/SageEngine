@@ -311,7 +311,7 @@ void MeshRendererComponent::OnEnable()
 
 void MeshRendererComponent::OnDisable()
 {
-	mRenderService->UnregisterMeshRenderer(this, mIsBasic);
+	mRenderService->UnregisterMeshRenderer(this);
 }
 
 RenderObject& MeshRendererComponent::GetRenderObject()

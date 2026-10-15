@@ -80,6 +80,6 @@ namespace SAGE
 		std::string mMaterialFilePath = "";
 		bool mIsBasic = false;
 		bool mAllowBloom = false;
-		bool mIsTransparent = false;
+		bool mIsTransparent = false; // TODO: Make it so when we update this value it updates the render service buckets.
 	};
 }

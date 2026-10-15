@@ -76,6 +76,11 @@ void RenderService::Initialize()
 
 void RenderService::Terminate()
 {
+	for (std::vector<MeshRendererComponent*>& bucket : mMeshRendererBuckets)
+	{
+		bucket.clear();
+	}
+
 	mNewSkyBox.clear();
 	mBoneTransformCache.clear();
 
@@ -139,18 +144,23 @@ void RenderService::Render()
 		RenderSkyBox();
 		mSkyBoxEffect.End();
 
+		Plane frustumPlanes[6];
+		ExtractFrustumPlanes(camera.GetViewMatrix() * camera.GetProjectionMatrix(), frustumPlanes);
+
 		mTexturingEffect.Begin();
-		for (auto& entry : mBasicMeshRendererEntrys) {
-			mTexturingEffect.Render(entry->GetRenderObject());
+		const std::vector<MeshRendererComponent*>& basicRenderers = GetMeshRendererBucket(Basic);
+		for (auto& entry : basicRenderers)
+		{
+			const OBB aabb = entry->GetGlobalBoundingBox();
+			if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+			{
+				mTexturingEffect.Render(entry->GetRenderObject());
+			}
 		}
 		for (auto& entry : mBasicRenderEntries) {
 			mTexturingEffect.Render(entry.renderGroup);
 		}
 		mTexturingEffect.End();
-
-		Plane frustumPlanes[6];
-		ExtractFrustumPlanes(camera.GetViewMatrix() * camera.GetProjectionMatrix(), frustumPlanes);
-		std::vector<MeshRendererComponent*> transparentObjects;
 
 		mItemRenderCount = 0;
 		mStandardEffect.Begin();
@@ -162,22 +172,29 @@ void RenderService::Render()
 				mStandardEffect.Render(renderObject, cachedBoneTransforms);
 			}
 		}
-		for (auto& entry : mMeshRendererEntrys)
+
+		const std::vector<MeshRendererComponent*>& staticRenderers = GetMeshRendererBucket(StaticOpaque);
+		for (auto& entry : staticRenderers)
 		{
-			if (!entry->GetIsTransparent()) // TODO: This is a hack. Separate these groupings in 2?
+			const OBB aabb = entry->GetGlobalBoundingBox();
+			if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
 			{
-				const OBB aabb = entry->GetGlobalBoundingBox();
-				if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
-				{
-					mStandardEffect.Render(entry->GetRenderObject());
-					mItemRenderCount += 1;
-				}
-			}
-			else
-			{
-				transparentObjects.push_back(entry);
+				mStandardEffect.Render(entry->GetRenderObject());
+				mItemRenderCount += 1;
 			}
 		}
+
+		const std::vector<MeshRendererComponent*>& dynamicRenderers = GetMeshRendererBucket(DynamicOpaque);
+		for (auto& entry : dynamicRenderers)
+		{
+			const OBB aabb = entry->GetGlobalBoundingBox();
+			if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+			{
+				mStandardEffect.Render(entry->GetRenderObject());
+				mItemRenderCount += 1;
+			}
+		}
+
 		mStandardEffect.End();
 
 		if (mShadowEffect.NeedsUpdate())
@@ -191,7 +208,13 @@ void RenderService::Render()
 					mShadowEffect.Render(renderObject, cachedBoneTransforms);
 				}
 			}
-			for (auto& entry : mMeshRendererEntrys) {
+			//for (auto& entry : mMeshRendererEntrys) {
+			//	mShadowEffect.Render(entry->GetRenderObject());
+			//}
+			for (auto& entry : staticRenderers) {
+				mShadowEffect.Render(entry->GetRenderObject());
+			}
+			for (auto& entry : dynamicRenderers) {
 				mShadowEffect.Render(entry->GetRenderObject());
 			}
 			if (mTerrainService) {
@@ -229,7 +252,7 @@ void RenderService::Render()
 						//spotShadowEffect.Render(entry.renderGroup, &mBoneTransformCache);
 					}
 
-					for (auto* entry : mMeshRendererEntrys)
+					for (auto& entry : staticRenderers)
 					{
 						const OBB aabb = entry->GetGlobalBoundingBox();
 						if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
@@ -237,6 +260,16 @@ void RenderService::Render()
 							spotShadowEffect.Render(entry->GetRenderObject());
 						}
 					}
+
+					for (auto& entry : dynamicRenderers)
+					{
+						const OBB aabb = entry->GetGlobalBoundingBox();
+						if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+						{
+							spotShadowEffect.Render(entry->GetRenderObject());
+						}
+					}
+
 					spotShadowEffect.End();
 
 					mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
@@ -254,10 +287,12 @@ void RenderService::Render()
 		mStandardEffect.SetSpotShadowMask(mShadowMask);
 
 		const Vector3& cameraPos = camera.GetPosition();
+		std::vector<MeshRendererComponent*>& transparentRenderers = GetMeshRendererBucket(Transparent);
+
 		// Hack to sort transparent stuff from back to front. 
 		std::sort(
-			transparentObjects.begin(),
-			transparentObjects.end(),
+			transparentRenderers.begin(),
+			transparentRenderers.end(),
 			[&cameraPos](const auto* a, const auto* b)
 			{
 				const TransformComponent* transformA = a->GetOwner().GetComponent<TransformComponent>();
@@ -283,7 +318,7 @@ void RenderService::Render()
 			});
 
 		mStandardEffect.Begin();
-		for (auto* entry : transparentObjects)
+		for (auto* entry : transparentRenderers)
 		{
 			const OBB aabb = entry->GetGlobalBoundingBox();
 			if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
@@ -540,19 +575,43 @@ void RenderService::Unregister(const ModelComponent* modelComponent, bool isBasi
 
 void RenderService::RegisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic)
 {
-	std::vector<MeshRendererComponent*>& renderEntrys = isBasic ? mBasicMeshRendererEntrys : mMeshRendererEntrys;
-	renderEntrys.push_back(meshRendererComponent);
+	if (isBasic)
+	{
+		GetMeshRendererBucket(RenderBucket::Basic).push_back(meshRendererComponent);
+		return;
+	}
+
+	if (meshRendererComponent->GetIsTransparent())
+	{
+		GetMeshRendererBucket(RenderBucket::Transparent).push_back(meshRendererComponent);
+		return;
+	}
+
+	GameObject& owner = meshRendererComponent->GetOwner();
+	if (TransformComponent* transformComponent = owner.GetComponent<TransformComponent>())
+	{
+		if (transformComponent->GetIsStatic())
+		{
+			GetMeshRendererBucket(RenderBucket::StaticOpaque).push_back(meshRendererComponent);
+			return;
+		}
+	}
+
+	GetMeshRendererBucket(RenderBucket::DynamicOpaque).push_back(meshRendererComponent);
 }
 
-void RenderService::UnregisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic)
+void RenderService::UnregisterMeshRenderer(MeshRendererComponent* meshRendererComponent)
 {
-	std::vector<MeshRendererComponent*>& renderEntrys = isBasic ? mBasicMeshRendererEntrys : mMeshRendererEntrys;
-	auto match = [&](const auto& entry) { return entry == meshRendererComponent; };
-	auto iter = std::find_if(renderEntrys.begin(), renderEntrys.end(), match);
-	if (iter != renderEntrys.end())
+	for (std::vector<MeshRendererComponent*>& bucket : mMeshRendererBuckets)
 	{
-		const MeshRendererComponent* entry = *iter;
-		renderEntrys.erase(iter);
+		auto match = [&](const auto& entry) { return entry == meshRendererComponent; };
+		auto iter = std::find_if(bucket.begin(), bucket.end(), match);
+		if (iter != bucket.end())
+		{
+			const MeshRendererComponent* entry = *iter;
+			bucket.erase(iter);
+			break;
+		}
 	}
 }
 

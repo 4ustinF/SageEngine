@@ -1,20 +1,2 @@
-﻿  BPhysicsComponent.cpp
-  BPhysicsService.cpp
-  BaseColliderComponent.cpp
-  BoxColliderComponent.cpp
-  CapsuleColliderComponent.cpp
-  ColliderComponent.cpp
-  FollowCameraControllerComponent.cpp
-  GameObjectFactory.cpp
-  GameWorld.cpp
-  MeshFilterComponent.cpp
-  MeshRendererComponent.cpp
-  RenderService.cpp
-  RigidBodyComponent.cpp
-  RigidBodyComponentOld.cpp
-  SAGE.cpp
-  SpawnerComponent.cpp
-  SpotlightComponent.cpp
-  TransformComponent.cpp
-  Generating Code...
+﻿  RenderService.cpp
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

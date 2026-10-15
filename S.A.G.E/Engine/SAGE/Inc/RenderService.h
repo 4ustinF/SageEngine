@@ -21,6 +21,15 @@ namespace SAGE
 		Dome
 	};
 
+	enum RenderBucket 
+	{ 
+		Basic,
+		DynamicOpaque, 
+		StaticOpaque, 
+		Transparent, 
+		Count 
+	};
+
 	class RenderService final : public Service
 	{
 	public:
@@ -57,7 +66,7 @@ namespace SAGE
 
 		friend class MeshRendererComponent;
 		void RegisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic = false);
-		void UnregisterMeshRenderer(MeshRendererComponent* meshRendererComponent, bool isBasic = false);
+		void UnregisterMeshRenderer(MeshRendererComponent* meshRendererComponent);
 
 		friend class SpotlightComponent;
 		bool RegisterSpotLight(SpotlightComponent* spotlightComponent);
@@ -74,9 +83,10 @@ namespace SAGE
 		std::vector<Entry> mRenderEntries;
 		std::vector<Entry> mBasicRenderEntries;
 
-		std::vector<MeshRendererComponent*> mMeshRendererEntrys; // TODO: Add tiling support to this.
-		std::vector<MeshRendererComponent*> mBasicMeshRendererEntrys;
-
+		// Basic, DynamicOpaque, StaticOpaque, Transparent
+		// TODO: Add tiling support to this.
+		std::vector<MeshRendererComponent*>& GetMeshRendererBucket(RenderBucket bucket) { return mMeshRendererBuckets[static_cast<size_t>(bucket)]; }
+		std::array<std::vector<MeshRendererComponent*>, (size_t)RenderBucket::Count> mMeshRendererBuckets;
 
 		const CameraService* mCameraService = nullptr;
 		const TerrainService* mTerrainService = nullptr;

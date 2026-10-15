@@ -2,6 +2,7 @@
   "Name": "Front Desk",
   "Components": {
     "Transform Component": {
+      "Is Static": true,
       "Local Position": [
         -0.990600,
         -3.924301,

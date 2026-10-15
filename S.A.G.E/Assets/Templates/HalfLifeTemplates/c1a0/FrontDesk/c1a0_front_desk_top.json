@@ -2,6 +2,7 @@
   "Name": "Desk Top",
   "Components": {
     "Transform Component": {
+      "Is Static": true
     },
     "Mesh Filter Component": {
       "MeshType": "Custom",

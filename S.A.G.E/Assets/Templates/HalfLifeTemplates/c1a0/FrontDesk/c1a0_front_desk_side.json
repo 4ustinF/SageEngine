@@ -2,6 +2,7 @@
   "Name": "Desk Side",
   "Components": {
     "Transform Component": {
+      "Is Static": true,
       "Local Position": [
         0.0,
         -0.304800,

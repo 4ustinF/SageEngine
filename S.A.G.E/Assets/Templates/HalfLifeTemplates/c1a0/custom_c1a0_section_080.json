@@ -2,6 +2,7 @@
   "Name": "Section 80",
   "Components": {
     "Transform Component": {
+      "Is Static": true
     },
     "Mesh Filter Component": {
       "MeshType": "Custom",

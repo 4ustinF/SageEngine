@@ -2,6 +2,7 @@
   "Name": "Heatlh Charger 0",
   "Components": {
     "Transform Component": {
+      "Is Static": true,
       "Local Position": [
         -8.305800,
         -3.200402,
@@ -29,7 +30,6 @@
       ]
     },
     "Health Charger HITV Component": {
-
     }
   },
   "GameObjects": [

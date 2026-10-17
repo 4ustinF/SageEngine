@@ -10,11 +10,13 @@ using namespace SAGE::Graphics;
 void Camera::SetMode(ProjectionMode mode)
 {
 	mProjectionMode = mode;
+	mIsDirty = true;
 }
 
 void Camera::SetPosition(const Vector3& position)
 {
 	mPosition = position;
+	mIsDirty = true;
 }
 
 void Camera::SetDirection(const Vector3& direction)
@@ -77,6 +79,7 @@ void Camera::SetOrientation(const Quaternion& orientation)
 void Camera::SetFov(float fov)
 {
 	mFov = Clamp(fov, mMinFov, mMaxFov);
+	mIsDirty = true;
 }
 
 void Camera::SetFovInDegrees(float fov)
@@ -87,38 +90,42 @@ void Camera::SetFovInDegrees(float fov)
 void Camera::SetAspectRatio(float ratio)
 {
 	mAspectRatio = ratio;
+	mIsDirty = true;
 }
 
 void Camera::SetSize(float width, float height)
 {
 	mWidth = width;
 	mHeight = height;
+	mIsDirty = true;
 }
 
 void Camera::SetNearPlane(float nearPlane)
 {
 	mNearPlane = nearPlane;
+	mIsDirty = true;
 }
 
 void Camera::SetFarPlane(float farPlane)
 {
 	mFarPlane = farPlane;
+	mIsDirty = true;
 }
 
 void Camera::Walk(float distance)
 {
-	mPosition += mDirection * distance;
+	SetPosition(mPosition + (mDirection * distance));
 }
 
 void Camera::Strafe(float distance)
 {
 	const Vector3 right = Normalize(Cross(Vector3::YAxis, mDirection));
-	mPosition += right * distance;
+	SetPosition(mPosition + (right * distance));
 }
 
 void Camera::Rise(float distance)
 {
-	mPosition += Vector3::YAxis * distance;
+	SetPosition(mPosition + (Vector3::YAxis * distance));
 }
 
 void Camera::Yaw(float radian)
@@ -237,4 +244,5 @@ Matrix4 Camera::GetOrthographicMatrix() const
 void Camera::UpdateDirection()
 {
 	mDirection = mOrientation.Rotate(Vector3::ZAxis);
+	mIsDirty = true;
 }

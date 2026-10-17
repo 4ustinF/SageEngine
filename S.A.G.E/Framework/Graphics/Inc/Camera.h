@@ -71,11 +71,11 @@ namespace SAGE::Graphics
 	private:
 		void UpdateDirection();
 
-		ProjectionMode mProjectionMode = ProjectionMode::Perspective;
-
+		bool mIsDirty = true;
 		Math::Vector3 mPosition = Math::Vector3::Zero;
 		Math::Vector3 mDirection = Math::Vector3::ZAxis;
 		Math::Quaternion mOrientation = Math::Quaternion::Identity;
+		ProjectionMode mProjectionMode = ProjectionMode::Perspective;
 
 		// 0 aspect ratio = use back buffer dimension
 		float mFov = 60.0f * Math::Constants::DegToRad;

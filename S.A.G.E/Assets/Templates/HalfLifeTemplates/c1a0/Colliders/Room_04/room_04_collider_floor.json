@@ -1,0 +1,24 @@
+{
+  "Name": "Room 4 Floor",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        -14.63,
+        -4.115,
+        -12.0395
+      ]
+    },
+    "Box Collider Component": {
+      "Center": [
+        -3.5055,
+        -0.2,
+        0.0
+      ],
+      "Size": [
+        7.011,
+        0.4,
+        10.68
+      ]
+    }
+  }
+}

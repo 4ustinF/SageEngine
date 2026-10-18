@@ -3,6 +3,9 @@
   "Is Active": true,
   "GameObjects": [
     {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_04/room_04_collider_floor.json"
+    },
+    {
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/c1a0/Colliders/Room_04/room_04_collider_leftwall.json"
     },
     {

@@ -647,7 +647,7 @@ bool SAGE::Math::IntersectRayTriangle(const Ray& ray, const Vector3& v0, const V
 	return true;
 }
 
-bool SAGE::Math::IsAABBInFrustum(const Plane frustumPlanes[6], const Vector3& center, const Vector3& extents)
+bool SAGE::Math::IsAABBInFrustum(const Plane* frustumPlanes, const Vector3& center, const Vector3& extents)
 {
 	for (int planeIndex = 0; planeIndex < 6; ++planeIndex)
 	{

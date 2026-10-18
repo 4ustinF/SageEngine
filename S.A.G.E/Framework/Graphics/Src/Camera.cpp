@@ -241,8 +241,56 @@ Matrix4 Camera::GetOrthographicMatrix() const
 	};
 }
 
+const Plane* Camera::GetFrustrumPlanes()
+{
+	if (mIsDirty)
+	{
+		UpdateFrustumPlanes();
+		mIsDirty = false;
+	}
+
+	return mFrustumPlanes;
+}
+
 void Camera::UpdateDirection()
 {
 	mDirection = mOrientation.Rotate(Vector3::ZAxis);
 	mIsDirty = true;
+}
+
+void Camera::UpdateFrustumPlanes()
+{
+	const Matrix4 vp = GetViewMatrix() * GetProjectionMatrix();
+
+	// Left
+	mFrustumPlanes[0].normal = Vector3(vp._14 + vp._11, vp._24 + vp._21, vp._34 + vp._31);
+	mFrustumPlanes[0].distance = vp._44 + vp._41;
+
+	// Right
+	mFrustumPlanes[1].normal = Vector3(vp._14 - vp._11, vp._24 - vp._21, vp._34 - vp._31);
+	mFrustumPlanes[1].distance = vp._44 - vp._41;
+
+	// Bottom
+	mFrustumPlanes[2].normal = Vector3(vp._14 + vp._12, vp._24 + vp._22, vp._34 + vp._32);
+	mFrustumPlanes[2].distance = vp._44 + vp._42;
+
+	// Top
+	mFrustumPlanes[3].normal = Vector3(vp._14 - vp._12, vp._24 - vp._22, vp._34 - vp._32);
+	mFrustumPlanes[3].distance = vp._44 - vp._42;
+
+	// Near (DirectX z range is [0,1], so this differs from OpenGL's near plane row)
+	mFrustumPlanes[4].normal = Vector3(vp._13, vp._23, vp._33);
+	mFrustumPlanes[4].distance = vp._43;
+
+	// Far
+	mFrustumPlanes[5].normal = Vector3(vp._14 - vp._13, vp._24 - vp._23, vp._34 - vp._33);
+	mFrustumPlanes[5].distance = vp._44 - vp._43;
+
+	for (int i = 0; i < 6; ++i)
+	{
+		// Plane Normalize
+		const float length = Magnitude(mFrustumPlanes[i].normal);
+		mFrustumPlanes[i].normal /= length;
+		mFrustumPlanes[i].distance /= length;
+	}
 }

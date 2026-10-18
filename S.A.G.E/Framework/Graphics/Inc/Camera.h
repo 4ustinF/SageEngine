@@ -68,8 +68,11 @@ namespace SAGE::Graphics
 		Math::Matrix4 GetPerspectiveMatrix() const;
 		Math::Matrix4 GetOrthographicMatrix() const;
 
+		const Math::Plane* GetFrustrumPlanes();
+
 	private:
 		void UpdateDirection();
+		void UpdateFrustumPlanes();
 
 		bool mIsDirty = true;
 		Math::Vector3 mPosition = Math::Vector3::Zero;
@@ -89,5 +92,7 @@ namespace SAGE::Graphics
 
 		float mNearPlane = 0.01f;
 		float mFarPlane = 10000.0f;
+
+		Math::Plane mFrustumPlanes[6];
 	};
 }

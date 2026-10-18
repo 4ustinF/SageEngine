@@ -407,7 +407,7 @@ namespace SAGE::Math
 
 	bool IntersectRayTriangle(const Ray& ray, const Vector3& v0, const Vector3& v1, const Vector3& v2, float& outDistance, Vector3& outNormal);
 
-	bool IsAABBInFrustum(const Plane frustumPlanes[6], const Vector3& center, const Vector3& extents);
+	bool IsAABBInFrustum(const Plane* frustumPlanes, const Vector3& center, const Vector3& extents);
 
 #pragma endregion
 

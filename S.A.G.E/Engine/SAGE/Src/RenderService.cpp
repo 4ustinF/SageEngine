@@ -110,9 +110,11 @@ void RenderService::Update(float deltaTime)
 	}
 }
 
+#pragma region ---Render---
+
 void RenderService::Render()
 {
-	auto& camera = mCameraService->GetCamera();
+	Camera& camera = mCameraService->GetCamera();
 	mStandardEffect.SetCamera(camera);
 
 	mStandardEffect.SetSpotLights(mSpotLights);
@@ -120,7 +122,34 @@ void RenderService::Render()
 	mSkyBoxEffect.SetCamera(camera);
 	mTerrainEffect.SetCamera(camera);
 
-	for (auto& entry : mRenderEntries) 
+	mBoneTransformCache.clear();
+
+	//mBaseRenderTarget.BeginRender();
+	{
+		const Plane* frustumPlanes = camera.GetFrustrumPlanes();
+		const std::vector<MeshRendererComponent*>& staticRenderers = GetMeshRendererBucket(StaticOpaque);
+		const std::vector<MeshRendererComponent*>& dynamicRenderers = GetMeshRendererBucket(DynamicOpaque);
+
+		UpdateRenderObjectsTransform();
+		RenderSkyBox();
+		RenderBasicRenderObjects(frustumPlanes);
+		RenderStandardRenderObjects(staticRenderers, dynamicRenderers, frustumPlanes);
+		RenderShadowEffect(staticRenderers, dynamicRenderers);
+		RenderSpotShadowEffect(staticRenderers, dynamicRenderers);
+		RenderTransparentRenderObjects(camera.GetPosition(), frustumPlanes);
+		RenderTerrain();
+	}
+	//mBaseRenderTarget.EndRender();
+
+	// TODO: Grid settings like size, on/off, and y value?
+	SimpleDraw::AddTransform(Matrix4::Identity); // TODO: Add settings to display these.
+	//SimpleDraw::AddPlane(20, Colors::White); // TODO: Add settings to display these.
+	SimpleDraw::Render(camera);
+}
+
+void RenderService::UpdateRenderObjectsTransform()
+{
+	for (auto& entry : mRenderEntries)
 	{
 		for (auto& renderObject : entry.renderGroup)
 		{
@@ -135,35 +164,39 @@ void RenderService::Render()
 			renderObject.transform = entry.transformComponent->GetTransform();
 		}
 	}
+}
 
-	mBoneTransformCache.clear();
+void RenderService::RenderSkyBox()
+{
+	mSkyBoxEffect.Begin();
+	RenderSkyBoxEffect();
+	mSkyBoxEffect.End();
+}
 
-	//mBaseRenderTarget.BeginRender();
+void RenderService::RenderBasicRenderObjects(const Plane* frustumPlanes)
+{
+	mTexturingEffect.Begin();
+	const std::vector<MeshRendererComponent*>& basicRenderers = GetMeshRendererBucket(Basic);
+	for (auto& entry : basicRenderers)
 	{
-		mSkyBoxEffect.Begin();
-		RenderSkyBox();
-		mSkyBoxEffect.End();
-
-		Plane frustumPlanes[6];
-		ExtractFrustumPlanes(camera.GetViewMatrix() * camera.GetProjectionMatrix(), frustumPlanes);
-
-		mTexturingEffect.Begin();
-		const std::vector<MeshRendererComponent*>& basicRenderers = GetMeshRendererBucket(Basic);
-		for (auto& entry : basicRenderers)
+		const OBB aabb = entry->GetGlobalBoundingBox();
+		if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
 		{
-			const OBB aabb = entry->GetGlobalBoundingBox();
-			if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
-			{
-				mTexturingEffect.Render(entry->GetRenderObject());
-			}
+			mTexturingEffect.Render(entry->GetRenderObject());
 		}
-		for (auto& entry : mBasicRenderEntries) {
-			mTexturingEffect.Render(entry.renderGroup);
-		}
-		mTexturingEffect.End();
+	}
+	for (auto& entry : mBasicRenderEntries) {
+		mTexturingEffect.Render(entry.renderGroup);
+	}
+	mTexturingEffect.End();
+}
 
-		mItemRenderCount = 0;
-		mStandardEffect.Begin();
+void RenderService::RenderStandardRenderObjects(const std::vector<MeshRendererComponent*>& staticRenderers, const std::vector<MeshRendererComponent*>& dynamicRenderers, const Plane* frustumPlanes)
+{
+	mItemRenderCount = 0;
+
+	mStandardEffect.Begin();
+	{
 		for (auto& entry : mRenderEntries) {
 			//mStandardEffect.Render(entry.renderGroup);
 			for (auto& renderObject : entry.renderGroup)
@@ -173,7 +206,6 @@ void RenderService::Render()
 			}
 		}
 
-		const std::vector<MeshRendererComponent*>& staticRenderers = GetMeshRendererBucket(StaticOpaque);
 		for (auto& entry : staticRenderers)
 		{
 			const OBB aabb = entry->GetGlobalBoundingBox();
@@ -184,7 +216,6 @@ void RenderService::Render()
 			}
 		}
 
-		const std::vector<MeshRendererComponent*>& dynamicRenderers = GetMeshRendererBucket(DynamicOpaque);
 		for (auto& entry : dynamicRenderers)
 		{
 			const OBB aabb = entry->GetGlobalBoundingBox();
@@ -194,195 +225,149 @@ void RenderService::Render()
 				mItemRenderCount += 1;
 			}
 		}
+	}
+	mStandardEffect.End();
+}
 
-		mStandardEffect.End();
+void RenderService::RenderShadowEffect(const std::vector<MeshRendererComponent*>& staticRenderers, const std::vector<MeshRendererComponent*>& dynamicRenderers)
+{
+	if (!mShadowEffect.NeedsUpdate())
+	{
+		return;
+	}
 
-		if (mShadowEffect.NeedsUpdate())
-		{
-			mShadowEffect.Begin();
-			for (auto& entry : mRenderEntries) {
-				//mShadowEffect.Render(entry.renderGroup);
-				for (auto& renderObject : entry.renderGroup)
-				{
-					const CachedBoneTransforms* cachedBoneTransforms = GetOrComputeBoneCache(renderObject);
-					mShadowEffect.Render(renderObject, cachedBoneTransforms);
-				}
-			}
-			//for (auto& entry : mMeshRendererEntrys) {
-			//	mShadowEffect.Render(entry->GetRenderObject());
-			//}
-			for (auto& entry : staticRenderers) {
-				mShadowEffect.Render(entry->GetRenderObject());
-			}
-			for (auto& entry : dynamicRenderers) {
-				mShadowEffect.Render(entry->GetRenderObject());
-			}
-			if (mTerrainService) {
-				mShadowEffect.Render(mTerrainService->GetTerrainRenderObject());
-			}
-			mShadowEffect.End();
-			mShadowEffect.MarkClean();
-		}
-
-		const int spotlightCompsSize= static_cast<int>(mSpotlightComponents.size());
-		for (int i = 0; i < spotlightCompsSize; ++i)
-		{	
-			SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
-			SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
-
-			if (spotShadowEffect.NeedsUpdate())
+	mShadowEffect.Begin();
+	{
+		for (auto& entry : mRenderEntries) {
+			//mShadowEffect.Render(entry.renderGroup);
+			for (auto& renderObject : entry.renderGroup)
 			{
-				const Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
-				const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
-				spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
-				mStandardEffect.SetSpotLightViewProj(i, viewProjection);
-
-				if (spotlightComponent->GetCanCastShadows())
-				{
-					ExtractFrustumPlanes(viewProjection, frustumPlanes);
-
-					spotShadowEffect.Begin();
-					for (auto& entry : mRenderEntries)
-					{
-						for (auto& renderObject : entry.renderGroup)
-						{
-							const CachedBoneTransforms* cachedBoneTransforms = GetOrComputeBoneCache(renderObject);
-							spotShadowEffect.Render(renderObject, cachedBoneTransforms);
-						}
-						//spotShadowEffect.Render(entry.renderGroup, &mBoneTransformCache);
-					}
-
-					for (auto& entry : staticRenderers)
-					{
-						const OBB aabb = entry->GetGlobalBoundingBox();
-						if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
-						{
-							spotShadowEffect.Render(entry->GetRenderObject());
-						}
-					}
-
-					for (auto& entry : dynamicRenderers)
-					{
-						const OBB aabb = entry->GetGlobalBoundingBox();
-						if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
-						{
-							spotShadowEffect.Render(entry->GetRenderObject());
-						}
-					}
-
-					spotShadowEffect.End();
-
-					mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
-					mShadowMask |= (1 << i);
-				}
-				else
-				{
-					mStandardEffect.SetSpotShadowMap(i, nullptr);
-					mShadowMask |= (0 << i);
-				}
-
-				spotShadowEffect.MarkClean();
+				const CachedBoneTransforms* cachedBoneTransforms = GetOrComputeBoneCache(renderObject);
+				mShadowEffect.Render(renderObject, cachedBoneTransforms);
 			}
 		}
-		mStandardEffect.SetSpotShadowMask(mShadowMask);
-
-		const Vector3& cameraPos = camera.GetPosition();
-		std::vector<MeshRendererComponent*>& transparentRenderers = GetMeshRendererBucket(Transparent);
-
-		// Hack to sort transparent stuff from back to front. 
-		std::sort(
-			transparentRenderers.begin(),
-			transparentRenderers.end(),
-			[&cameraPos](const auto* a, const auto* b)
-			{
-				const TransformComponent* transformA = a->GetOwner().GetComponent<TransformComponent>();
-				const TransformComponent* transformB = b->GetOwner().GetComponent<TransformComponent>();
-
-				const Vector3 posA =
-					transformA != nullptr
-					? transformA->GetPosition()
-					: Vector3::Zero;
-
-				const Vector3 posB =
-					transformB != nullptr
-					? transformB->GetPosition()
-					: Vector3::Zero;
-
-				const float distSqA =
-					MagnitudeSqr(posA - cameraPos);
-
-				const float distSqB =
-					MagnitudeSqr(posB - cameraPos);
-
-				return distSqA > distSqB;
-			});
-
-		mStandardEffect.Begin();
-		for (auto* entry : transparentRenderers)
-		{
-			const OBB aabb = entry->GetGlobalBoundingBox();
-			if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
-			{
-				mStandardEffect.Render(entry->GetRenderObject());
-				mItemRenderCount += 1;
-			}
+		for (auto& entry : staticRenderers) { // TODO: Should we be doing frustum culling for shadow renderers? We will need to grab the frustrum from this camera.
+			mShadowEffect.Render(entry->GetRenderObject());
 		}
-		mStandardEffect.End();
-
+		for (auto& entry : dynamicRenderers) {
+			mShadowEffect.Render(entry->GetRenderObject());
+		}
 		if (mTerrainService) {
-			mTerrainEffect.Begin();
-			mTerrainEffect.Render(mTerrainService->GetTerrainRenderObject());
-			mTerrainEffect.End();
+			mShadowEffect.Render(mTerrainService->GetTerrainRenderObject());
 		}
 	}
-	//mBaseRenderTarget.EndRender();
-
-	//mBloomRenderTarget.BeginRender(); //TODO: Clean up
-	//{
-	//	mStandardEffect.Begin();
-	//	for (auto& entry : mMeshRendererEntrys)
-	//	{
-	//		Material dummyMaterial;
-	//		dummyMaterial.power = 1.0f;
-	//		RenderObject& renderObject = entry->GetRenderObject();
-
-	//		bool swap = false;
-	//		if (entry->GetShouldBloom() == false)
-	//		{
-	//			std::swap(renderObject.material, dummyMaterial);
-	//			swap = true;
-	//		}
-
-	//		mStandardEffect.Render(renderObject);
-
-	//		if (swap)
-	//		{
-	//			std::swap(renderObject.material, dummyMaterial);
-	//		}
-	//	}
-	//	mStandardEffect.End();
-	//}
-	//mBloomRenderTarget.EndRender();
-
-	// ------------------------------------------------------------
-	//mGaussianBlurEffect.Begin();
-	//{
-	//	mGaussianBlurEffect.Render(mScreenQuad);
-	//}
-	//mGaussianBlurEffect.End();
-
-	//mPostProccessingEffect.Begin();
-	//{
-	//	mPostProccessingEffect.Render(mScreenQuad);
-	//}
-	//mPostProccessingEffect.End();
-	// ------------------------------------------------------------
-
-	// TODO: Grid settings like size, on/off, and y value?
-	SimpleDraw::AddTransform(Matrix4::Identity); // TODO: Add settings to display these.
-	//SimpleDraw::AddPlane(20, Colors::White); // TODO: Add settings to display these.
-	SimpleDraw::Render(camera);
+	mShadowEffect.End();
+	mShadowEffect.MarkClean();
 }
+
+void RenderService::RenderSpotShadowEffect(const std::vector<MeshRendererComponent*>& staticRenderers, const std::vector<MeshRendererComponent*>& dynamicRenderers)
+{
+	const int spotlightCompsSize = static_cast<int>(mSpotlightComponents.size());
+	for (int i = 0; i < spotlightCompsSize; ++i)
+	{
+		SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
+		SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
+
+		if (spotShadowEffect.NeedsUpdate())
+		{
+			Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
+			const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
+			spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
+			mStandardEffect.SetSpotLightViewProj(i, viewProjection);
+
+			if (spotlightComponent->GetCanCastShadows())
+			{
+				const Plane* frustumPlanes = spotLightCamera.GetFrustrumPlanes();
+				spotShadowEffect.Begin();
+				for (auto& entry : mRenderEntries)
+				{
+					//spotShadowEffect.Render(entry.renderGroup, &mBoneTransformCache);
+					for (auto& renderObject : entry.renderGroup)
+					{
+						const CachedBoneTransforms* cachedBoneTransforms = GetOrComputeBoneCache(renderObject);
+						spotShadowEffect.Render(renderObject, cachedBoneTransforms);
+					}
+				}
+
+				for (auto& entry : staticRenderers)
+				{
+					const OBB aabb = entry->GetGlobalBoundingBox();
+					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+					{
+						spotShadowEffect.Render(entry->GetRenderObject());
+					}
+				}
+
+				for (auto& entry : dynamicRenderers)
+				{
+					const OBB aabb = entry->GetGlobalBoundingBox();
+					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+					{
+						spotShadowEffect.Render(entry->GetRenderObject());
+					}
+				}
+
+				spotShadowEffect.End();
+
+				mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
+				mShadowMask |= (1 << i);
+			}
+			else
+			{
+				mStandardEffect.SetSpotShadowMap(i, nullptr);
+				mShadowMask |= (0 << i);
+			}
+
+			spotShadowEffect.MarkClean();
+		}
+	}
+	mStandardEffect.SetSpotShadowMask(mShadowMask);
+}
+
+void RenderService::RenderTransparentRenderObjects(const Vector3& cameraPos, const Plane* frustumPlanes)
+{
+	std::vector<MeshRendererComponent*>& transparentRenderers = GetMeshRendererBucket(Transparent);
+
+	// Hack to sort transparent stuff from back to front. 
+	std::sort(transparentRenderers.begin(), transparentRenderers.end(), [&cameraPos](const auto* a, const auto* b)
+	{
+		const TransformComponent* transformA = a->GetOwner().GetComponent<TransformComponent>();
+		const TransformComponent* transformB = b->GetOwner().GetComponent<TransformComponent>();
+
+		const Vector3 posA = transformA != nullptr ? transformA->GetPosition() : Vector3::Zero;
+		const Vector3 posB = transformB != nullptr ? transformB->GetPosition() : Vector3::Zero;
+		const float distSqA = MagnitudeSqr(posA - cameraPos);
+		const float distSqB = MagnitudeSqr(posB - cameraPos);
+
+		return distSqA > distSqB;
+	});
+
+	mStandardEffect.Begin();
+	for (auto* entry : transparentRenderers)
+	{
+		const OBB aabb = entry->GetGlobalBoundingBox();
+		if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+		{
+			mStandardEffect.Render(entry->GetRenderObject());
+			mItemRenderCount += 1;
+		}
+	}
+	mStandardEffect.End();
+}
+
+void RenderService::RenderTerrain()
+{
+	if (!mTerrainService) 
+	{
+		return;
+	}
+
+	mTerrainEffect.Begin();
+	mTerrainEffect.Render(mTerrainService->GetTerrainRenderObject());
+	mTerrainEffect.End();
+}
+
+#pragma endregion
 
 // TODO: Make it so we can swap mSampleFilter on the fly.
 void RenderService::DebugUI()
@@ -681,7 +666,7 @@ void RenderService::UnregisterSpotLight(SpotlightComponent* spotlightComponent)
 	}
 }
 
-void RenderService::RenderSkyBox()
+void RenderService::RenderSkyBoxEffect()
 {
 	switch (mSkyBoxType)
 	{
@@ -692,41 +677,6 @@ void RenderService::RenderSkyBox()
 	case Dome:
 		mSkyBoxEffect.Render(mSkyBox);
 		break;
-	}
-}
-
-void RenderService::ExtractFrustumPlanes(const Matrix4& vp, Plane outPlanes[6])
-{
-	// Left
-	outPlanes[0].normal = Vector3(vp._14 + vp._11, vp._24 + vp._21, vp._34 + vp._31);
-	outPlanes[0].distance = vp._44 + vp._41;
-
-	// Right
-	outPlanes[1].normal = Vector3(vp._14 - vp._11, vp._24 - vp._21, vp._34 - vp._31);
-	outPlanes[1].distance = vp._44 - vp._41;
-
-	// Bottom
-	outPlanes[2].normal = Vector3(vp._14 + vp._12, vp._24 + vp._22, vp._34 + vp._32);
-	outPlanes[2].distance = vp._44 + vp._42;
-
-	// Top
-	outPlanes[3].normal = Vector3(vp._14 - vp._12, vp._24 - vp._22, vp._34 - vp._32);
-	outPlanes[3].distance = vp._44 - vp._42;
-
-	// Near (DirectX z range is [0,1], so this differs from OpenGL's near plane row)
-	outPlanes[4].normal = Vector3(vp._13, vp._23, vp._33);
-	outPlanes[4].distance = vp._43;
-
-	// Far
-	outPlanes[5].normal = Vector3(vp._14 - vp._13, vp._24 - vp._23, vp._34 - vp._33);
-	outPlanes[5].distance = vp._44 - vp._43;
-
-	for (int i = 0; i < 6; ++i)
-	{
-		// Plane Normalize
-		const float length = Magnitude(outPlanes[i].normal);
-		outPlanes[i].normal /= length;
-		outPlanes[i].distance /= length;
 	}
 }
 
@@ -768,3 +718,46 @@ const CachedBoneTransforms* RenderService::GetOrComputeBoneCache(const RenderObj
 	auto [insertedIt, success] = mBoneTransformCache.emplace(&renderObject, std::move(cache));
 	return &insertedIt->second;
 }
+
+
+// TODO: 
+//mBloomRenderTarget.BeginRender(); //TODO: Clean up
+	//{
+	//	mStandardEffect.Begin();
+	//	for (auto& entry : mMeshRendererEntrys)
+	//	{
+	//		Material dummyMaterial;
+	//		dummyMaterial.power = 1.0f;
+	//		RenderObject& renderObject = entry->GetRenderObject();
+
+	//		bool swap = false;
+	//		if (entry->GetShouldBloom() == false)
+	//		{
+	//			std::swap(renderObject.material, dummyMaterial);
+	//			swap = true;
+	//		}
+
+	//		mStandardEffect.Render(renderObject);
+
+	//		if (swap)
+	//		{
+	//			std::swap(renderObject.material, dummyMaterial);
+	//		}
+	//	}
+	//	mStandardEffect.End();
+	//}
+	//mBloomRenderTarget.EndRender();
+
+	// ------------------------------------------------------------
+	//mGaussianBlurEffect.Begin();
+	//{
+	//	mGaussianBlurEffect.Render(mScreenQuad);
+	//}
+	//mGaussianBlurEffect.End();
+
+	//mPostProccessingEffect.Begin();
+	//{
+	//	mPostProccessingEffect.Render(mScreenQuad);
+	//}
+	//mPostProccessingEffect.End();
+	// ------------------------------------------------------------

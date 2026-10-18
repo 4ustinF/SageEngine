@@ -72,6 +72,15 @@ namespace SAGE
 		bool RegisterSpotLight(SpotlightComponent* spotlightComponent);
 		void UnregisterSpotLight(SpotlightComponent* spotlightComponent);
 
+		void UpdateRenderObjectsTransform();
+		void RenderSkyBox();
+		void RenderBasicRenderObjects(const Math::Plane* frustumPlanes);
+		void RenderStandardRenderObjects(const std::vector<MeshRendererComponent*>& staticRenderers, const std::vector<MeshRendererComponent*>& dynamicRenderers, const Math::Plane* frustumPlanes);
+		void RenderShadowEffect(const std::vector<MeshRendererComponent*>& staticRenderers, const std::vector<MeshRendererComponent*>& dynamicRenderers);
+		void RenderSpotShadowEffect(const std::vector<MeshRendererComponent*>& staticRenderers, const std::vector<MeshRendererComponent*>& dynamicRenderers);
+		void RenderTransparentRenderObjects(const Math::Vector3& cameraPos, const Math::Plane* frustumPlanes);
+		void RenderTerrain();
+
 		struct Entry
 		{
 			const AnimatorComponent* animatorComponent = nullptr;
@@ -88,8 +97,8 @@ namespace SAGE
 		std::vector<MeshRendererComponent*>& GetMeshRendererBucket(RenderBucket bucket) { return mMeshRendererBuckets[static_cast<size_t>(bucket)]; }
 		std::array<std::vector<MeshRendererComponent*>, (size_t)RenderBucket::Count> mMeshRendererBuckets;
 
-		const CameraService* mCameraService = nullptr;
-		const TerrainService* mTerrainService = nullptr;
+		CameraService* mCameraService = nullptr;
+		TerrainService* mTerrainService = nullptr;
 
 		// TODO - turn these into components
 		Graphics::DirectionalLight mDirectionalLight;
@@ -106,7 +115,7 @@ namespace SAGE
 		Graphics::TerrainEffect mTerrainEffect;
 		Graphics::ShadowEffect mShadowEffect;
 
-		void RenderSkyBox();
+		void RenderSkyBoxEffect();
 		Graphics::RenderObject mSkyBox;
 		Graphics::RenderGroup mNewSkyBox;
 		SkyBoxType mSkyBoxType = SkyBoxType::None;
@@ -126,7 +135,6 @@ namespace SAGE
 		// Debug
 		int mItemRenderCount = 0;
 		int mItemRenderShadowCount = 0;
-		void ExtractFrustumPlanes(const Math::Matrix4& vp, Math::Plane outPlanes[6]);
 
 		// TODO: Move out
 		Graphics::RenderObject mScreenQuad;

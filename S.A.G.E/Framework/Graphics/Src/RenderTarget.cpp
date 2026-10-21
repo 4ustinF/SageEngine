@@ -26,35 +26,27 @@ void RenderTarget::Initialize(uint32_t width, uint32_t height, Format format)
 	desc.ArraySize = 1;
 	desc.Format = GetDXGIFormat(format);
 	desc.SampleDesc.Count = 1;
-	desc.SampleDesc.Quality = 0;
 	desc.Usage = D3D11_USAGE_DEFAULT;
 	desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-	desc.CPUAccessFlags = 0;
-	desc.MiscFlags = 0;
 
 	auto device = GraphicsSystem::Get()->GetDevice();
 
-	ID3D11Texture2D* texture = nullptr;
-	HRESULT hr = device->CreateTexture2D(&desc, nullptr, &texture);
+	HRESULT hr = device->CreateTexture2D(&desc, nullptr, &mColorTexture);
 	ASSERT(SUCCEEDED(hr), "RenderTarget -- failed to create render texture");
-
-	hr = device->CreateShaderResourceView(texture, nullptr, &mShaderResourceView);
+	hr = device->CreateShaderResourceView(mColorTexture, nullptr, &mShaderResourceView);
 	ASSERT(SUCCEEDED(hr), "RenderTarget -- failed to create shader resource view");
-
-	hr = device->CreateRenderTargetView(texture, nullptr, &mRenderTargetView);
+	hr = device->CreateRenderTargetView(mColorTexture, nullptr, &mRenderTargetView);
 	ASSERT(SUCCEEDED(hr), "RenderTarget -- failed to create render target view");
-	SafeRelease(texture);
 
 	desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-
-	hr = device->CreateTexture2D(&desc, nullptr, &texture);
-	ASSERT(SUCCEEDED(hr), "RenderTarget -- failed to depth stencil texture");
-
-	hr = device->CreateDepthStencilView(texture, nullptr, &mDepthStencilView);
+	hr = device->CreateTexture2D(&desc, nullptr, &mDepthTexture);
+	ASSERT(SUCCEEDED(hr), "RenderTarget -- failed to create depth stencil texture");
+	hr = device->CreateDepthStencilView(mDepthTexture, nullptr, &mDepthStencilView);
 	ASSERT(SUCCEEDED(hr), "RenderTarget -- failed to create depth stencil view");
 
-	SafeRelease(texture);
+	mWidth = width;   // these were never being set for render targets
+	mHeight = height;
 
 	mViewport.TopLeftX = 0.0f;
 	mViewport.TopLeftY = 0.0f;
@@ -67,12 +59,23 @@ void RenderTarget::Initialize(uint32_t width, uint32_t height, Format format)
 void RenderTarget::Terminate()
 {
 	Texture::Terminate();
-
 	SafeRelease(mRenderTargetView);
 	SafeRelease(mDepthStencilView);
+	SafeRelease(mColorTexture);
+	SafeRelease(mDepthTexture);
 }
 
-void RenderTarget::BeginRender(Color clearColor)
+void RenderTarget::CopyFrom(const RenderTarget& source)
+{
+	ASSERT(mColorTexture && source.mColorTexture, "RenderTarget -- CopyFrom on uninitialized target");
+	ASSERT(mWidth == source.mWidth && mHeight == source.mHeight, "RenderTarget -- CopyFrom size mismatch");
+
+	auto context = GraphicsSystem::Get()->GetContext();
+	context->CopyResource(mColorTexture, source.mColorTexture);
+	context->CopyResource(mDepthTexture, source.mDepthTexture);
+}
+
+void RenderTarget::BeginRender(Color clearColor, bool clear)
 {
 	auto context = GraphicsSystem::Get()->GetContext();
 
@@ -80,8 +83,12 @@ void RenderTarget::BeginRender(Color clearColor)
 	context->OMGetRenderTargets(1, &mOldRenderTargetView, &mOldDepthStencilView);
 	context->RSGetViewports(&numViewports, &mOldViewport);
 
-	context->ClearRenderTargetView(mRenderTargetView, &clearColor.r);
-	context->ClearDepthStencilView(mDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	if (clear)
+	{
+		context->ClearRenderTargetView(mRenderTargetView, &clearColor.r);
+		context->ClearDepthStencilView(mDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	}
+
 	context->OMSetRenderTargets(1, &mRenderTargetView, mDepthStencilView);
 	context->RSSetViewports(1, &mViewport);
 }
@@ -91,4 +98,8 @@ void RenderTarget::EndRender()
 	auto context = GraphicsSystem::Get()->GetContext();
 	context->OMSetRenderTargets(1, &mOldRenderTargetView, mOldDepthStencilView);
 	context->RSSetViewports(1, &mOldViewport);
+
+	// OMGetRenderTargets AddRef'd these. Without this they leak a ref per pass.
+	SafeRelease(mOldRenderTargetView);
+	SafeRelease(mOldDepthStencilView);
 }

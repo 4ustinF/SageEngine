@@ -19,7 +19,7 @@
     },
     "Model Component": {
       "FileName": "../../Assets/Models/HalfLife/Characters/Barney/Barney.model",
-      "Can Cast Shadows": false
+      "Can Cast Shadows": true
     },
     "Animator Component": {
     "AnimSets": [

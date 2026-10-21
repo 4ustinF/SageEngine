@@ -20,8 +20,12 @@ void SpotlightComponent::LoadComponentFromTemplate(const rj::Value& value)
 		SetDepthMapResolution(value["Depth Map Resolution"].GetString());
 	}
 
+	if (value.HasMember("Light Mode"))
+	{
+		SetLightMode(value["Light Mode"].GetString());
+	}
+
 	// TODO:
-	//LightMode mLightMode = LightMode::PseudoBaked;
 	//bool mCanCastShadows = true;
 	// Load in a pointer to a baked light map if one exist.
 
@@ -113,6 +117,9 @@ void SpotlightComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryP
 		}
 	}
 
+	// TODO: Wrap in an if to not save if value is not default.
+	SaveStringToTemplate(compObj, allocator, "Light Mode", LightModeNames[static_cast<int>(mSpotShadowEffect.GetLightMode())]);
+
 	SpotLight defaultSpotLightData;
 	SaveNumberToTemplate(compObj, allocator, "Inner Cone Angle", GetInnerConeAngle(), defaultSpotLightData.innerConeAngle);
 	SaveNumberToTemplate(compObj, allocator, "Outer Cone Angle", GetOuterConeAngle(), defaultSpotLightData.outerConeAngle);
@@ -196,6 +203,8 @@ void SpotlightComponent::DebugUI()
 		ImGui::ColorEdit4("Specular", &mSpotLightData.specular.r);
 		ImGui::DragFloat3("Attenuation (const/lin/quad)", &mSpotLightData.attenuation.x, 0.001f, 0.0f, 2.0f);
 
+		ImGui::Text("Static Shadow Map");
+		ImGui::Image(mSpotShadowEffect.GetStaticDepthMap().GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
 		ImGui::Text("Shadow Map");
 		ImGui::Image(mSpotShadowEffect.GetDepthMap().GetRawData(), { 144, 144 }, { 0, 0 }, { 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 });
 
@@ -394,6 +403,23 @@ void SpotlightComponent::SetDepthMapResolution(DepthMapResolution depthMapResolu
 			mSpotShadowEffect.DisableDepthMap();
 			mSpotShadowEffect.EnableDepthMap(GetDepthMapResolution());
 		}
+	}
+}
+
+void SpotlightComponent::SetLightMode(const std::string& lightMode)
+{
+	// TODO: Use a map instead of if-else chain.
+	if (lightMode == "Real Time")
+	{
+		SetLightMode(LightMode::RealTime);
+	}
+	else if (lightMode == "Pseudo Baked")
+	{
+		SetLightMode(LightMode::PseudoBaked);
+	}
+	else if (lightMode == "Baked")
+	{
+		SetLightMode(LightMode::Baked);
 	}
 }
 

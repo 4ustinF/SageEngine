@@ -67,6 +67,7 @@ namespace SAGE
 
 		void SetDepthMapResolution(const std::string& depthMapResolution);
 		void SetDepthMapResolution(DepthMapResolution depthMapResolution);
+		void SetLightMode(const std::string& lightMode);
 		void SetLightMode(Graphics::LightMode lightMode);
 		void SetCanCastShadows(bool castShadows);
 

@@ -24,32 +24,47 @@ void SpotShadowEffect::Initialize(SpotShadowEffectResources* sharedResources, bo
 
 void SpotShadowEffect::Terminate()
 {
-	mDepthMapRenderTarget.Terminate();
-
+	mStaticMap.Terminate();
+	ReleaseDynamicMap();
 	mSpotLight = nullptr;
 	mSharedResources = nullptr;
 }
 
-void SpotShadowEffect::Begin()
+void SpotShadowEffect::BeginStatic()
 {
-	mSharedResources->vertexShader.Bind();
-	mSharedResources->pixelShader.Bind();
-
-	mSharedResources->transformBuffer.BindVS(0);
-	mSharedResources->boneTransformBuffer.BindVS(1);
-	mSharedResources->settingsBuffer.BindVS(2);
-
+	BindSharedState();
 	if (bEnableDepthMap)
 	{
-		mDepthMapRenderTarget.BeginRender();
+		mStaticMap.BeginRender();
 	}
 }
 
-void SpotShadowEffect::End()
+void SpotShadowEffect::EndStatic()
 {
 	if (bEnableDepthMap)
 	{
-		mDepthMapRenderTarget.EndRender();
+		mStaticMap.EndRender();
+	}
+}
+
+void SpotShadowEffect::BeginDynamic()   // RealTime only
+{
+	BindSharedState();
+	if (!bEnableDepthMap)
+	{
+		return;
+	}
+
+	EnsureDynamicMap();
+	mDynamicMap.CopyFrom(mStaticMap);
+	mDynamicMap.BeginRender(Colors::Black, false);   // no clear, keep the copied statics
+}
+
+void SpotShadowEffect::EndDynamic()
+{
+	if (bEnableDepthMap)
+	{
+		mDynamicMap.EndRender();
 	}
 }
 
@@ -141,59 +156,150 @@ void SpotShadowEffect::Render(const RenderObject& renderObject, const CachedBone
 
 void SpotShadowEffect::SetSpotLight(const SpotLight& spotLight)
 {
+	const bool same = mHasCachedLight
+		&& mCachedPos == spotLight.position
+		&& mCachedDir == spotLight.direction
+		&& mCachedRange == spotLight.range
+		&& mCachedOuterCone == spotLight.outerConeAngle;
+
+	if (same)
+	{
+		return;
+	}
+
+	mCachedPos = spotLight.position;
+	mCachedDir = spotLight.direction;
+	mCachedRange = spotLight.range;
+	mCachedOuterCone = spotLight.outerConeAngle;
+	mHasCachedLight = true;
+
 	mLightCamera.SetPosition(spotLight.position);
 	mLightCamera.SetDirection(spotLight.direction);
 	mLightCamera.SetFarPlane(spotLight.range);
-	mLightCamera.SetFov(spotLight.outerConeAngle * 2.2f); // FOV needs a little headroom past the outer cone or edges clip out of the shadow frustum
-	Invalidate();
+	mLightCamera.SetFov(spotLight.outerConeAngle * 2.2f);
+	InvalidateStatic();
 }
 
-void SpotShadowEffect::SetLightMode(LightMode ligthMode)
+void SpotShadowEffect::SetLightMode(LightMode newMode)
 {
-	mLightMode = ligthMode;
+	if (newMode == mLightMode) 
+	{ 
+		return; 
+	}
+
+	const bool wasRealTime = (mLightMode == LightMode::RealTime);
+	mLightMode = newMode;
+
+	if (bEnableDepthMap) 
+	{ 
+		if (wasRealTime)
+		{
+			ReleaseDynamicMap();        // static map was never touched by dynamics, nothing to clean
+		}
+		else if (newMode == LightMode::RealTime)
+		{
+			EnsureDynamicMap();
+			mDynamicDirty = true;       // first RealTime frame must build the composite
+		}
+	}
 }
 
-void SpotShadowEffect::EnableDepthMap(uint32_t depthMapResolution, bool force)
+void SpotShadowEffect::EnableDepthMap(uint32_t res, bool force)
 {
 	if (!force && bEnableDepthMap)
 	{
 		return;
 	}
 
+	if (bEnableDepthMap)            // forced re-init, free what exists first
+	{
+		mStaticMap.Terminate();
+		ReleaseDynamicMap();
+	}
+
+	mResolution = res;
 	mLightCamera.SetMode(Camera::ProjectionMode::Perspective);
 	mLightCamera.SetAspectRatio(1.0f);
 	mLightCamera.SetNearPlane(0.5f);
-	mDepthMapRenderTarget.Initialize(depthMapResolution, depthMapResolution, Texture::Format::RGBA_U32);
+
+	mStaticMap.Initialize(res, res, Texture::Format::RGBA_U32);
 	bEnableDepthMap = true;
-	Invalidate();
+	if (mLightMode == LightMode::RealTime) 
+	{ 
+		EnsureDynamicMap();
+	}
+	InvalidateStatic();
 }
 
 void SpotShadowEffect::DisableDepthMap()
 {
-	if (!bEnableDepthMap)
-	{
+	if (!bEnableDepthMap) 
+	{ 
 		return;
 	}
 
 	bEnableDepthMap = false;
-	mDepthMapRenderTarget.Terminate();
-	Invalidate();
+	mStaticMap.Terminate();
+	ReleaseDynamicMap();
+	InvalidateStatic();
 }
 
-bool SpotShadowEffect::NeedsUpdate() const
+void SpotShadowEffect::MarkStaticClean() 
 {
-	return mIsDirty;
+	mStaticDirty = false; 
 }
 
-void SpotShadowEffect::MarkClean()
+void SpotShadowEffect::MarkDynamicClean()
 {
-	if (mLightMode != LightMode::RealTime)
-	{
-		mIsDirty = false;
+	if (mLightMode != LightMode::RealTime) 
+	{ 
+		mDynamicDirty = false; 
 	}
 }
 
-void SpotShadowEffect::Invalidate() 
-{ 
-	mIsDirty = true; 
+void SpotShadowEffect::Invalidate()
+{
+	InvalidateStatic();
+}
+
+void SpotShadowEffect::InvalidateStatic()
+{
+	mStaticDirty = true;
+	mDynamicDirty = true;
+}
+
+void SpotShadowEffect::InvalidateDynamic()
+{
+	mDynamicDirty = true;
+}
+
+void SpotShadowEffect::BindSharedState()
+{
+	mSharedResources->vertexShader.Bind();
+	mSharedResources->pixelShader.Bind();
+	mSharedResources->transformBuffer.BindVS(0);
+	mSharedResources->boneTransformBuffer.BindVS(1);
+	mSharedResources->settingsBuffer.BindVS(2);
+}
+
+void SpotShadowEffect::EnsureDynamicMap()
+{
+	if (mHasDynamicMap || !bEnableDepthMap) 
+	{
+		return; 
+	}
+
+	mDynamicMap.Initialize(mResolution, mResolution, Texture::Format::RGBA_U32);
+	mHasDynamicMap = true;
+}
+
+void SpotShadowEffect::ReleaseDynamicMap()
+{
+	if (!mHasDynamicMap) 
+	{ 
+		return; 
+	}
+
+	mDynamicMap.Terminate();
+	mHasDynamicMap = false;
 }

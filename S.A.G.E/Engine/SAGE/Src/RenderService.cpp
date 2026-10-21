@@ -260,66 +260,132 @@ void RenderService::RenderShadowEffect(const std::vector<MeshRendererComponent*>
 	mShadowEffect.MarkClean();
 }
 
+//void RenderService::RenderSpotShadowEffect(const std::vector<MeshRendererComponent*>& staticRenderers, const std::vector<MeshRendererComponent*>& dynamicRenderers)
+//{
+//	const int spotlightCompsSize = static_cast<int>(mSpotlightComponents.size());
+//	for (int i = 0; i < spotlightCompsSize; ++i)
+//	{
+//		SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
+//		SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
+//
+//		if (spotShadowEffect.NeedsUpdate())
+//		{
+//			Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
+//			const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
+//			spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
+//			mStandardEffect.SetSpotLightViewProj(i, viewProjection);
+//
+//			if (spotlightComponent->GetCanCastShadows())
+//			{
+//				const Plane* frustumPlanes = spotLightCamera.GetFrustrumPlanes();
+//				spotShadowEffect.Begin();
+//				for (auto& entry : mRenderEntries)
+//				{
+//					//spotShadowEffect.Render(entry.renderGroup, &mBoneTransformCache);
+//					for (auto& renderObject : entry.renderGroup)
+//					{
+//						const CachedBoneTransforms* cachedBoneTransforms = GetOrComputeBoneCache(renderObject);
+//						spotShadowEffect.Render(renderObject, cachedBoneTransforms);
+//					}
+//				}
+//
+//				for (auto& entry : staticRenderers)
+//				{
+//					const OBB aabb = entry->GetGlobalBoundingBox();
+//					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+//					{
+//						spotShadowEffect.Render(entry->GetRenderObject());
+//					}
+//				}
+//
+//				for (auto& entry : dynamicRenderers)
+//				{
+//					const OBB aabb = entry->GetGlobalBoundingBox();
+//					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
+//					{
+//						spotShadowEffect.Render(entry->GetRenderObject());
+//					}
+//				}
+//
+//				spotShadowEffect.End();
+//
+//				mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
+//				mShadowMask |= (1 << i);
+//			}
+//			else
+//			{
+//				mStandardEffect.SetSpotShadowMap(i, nullptr);
+//				mShadowMask |= (0 << i);
+//			}
+//
+//			spotShadowEffect.MarkClean();
+//		}
+//	}
+//	mStandardEffect.SetSpotShadowMask(mShadowMask);
+//}
+
 void RenderService::RenderSpotShadowEffect(const std::vector<MeshRendererComponent*>& staticRenderers, const std::vector<MeshRendererComponent*>& dynamicRenderers)
 {
-	const int spotlightCompsSize = static_cast<int>(mSpotlightComponents.size());
-	for (int i = 0; i < spotlightCompsSize; ++i)
+	const int spotLightCompCount = static_cast<int>(mSpotlightComponents.size());
+	for (int spotLightCompIndex = 0; spotLightCompIndex < spotLightCompCount; ++spotLightCompIndex)
 	{
-		SpotlightComponent* spotlightComponent = mSpotlightComponents[i];
-		SpotShadowEffect& spotShadowEffect = spotlightComponent->GetSpotShadowEffect();
+		SpotlightComponent* comp = mSpotlightComponents[spotLightCompIndex];
+		SpotShadowEffect& spotShadowEffect = comp->GetSpotShadowEffect();
+		spotShadowEffect.SetSpotLight(comp->GetSpotLightData());
 
-		if (spotShadowEffect.NeedsUpdate())
+		Camera& lightCam = spotShadowEffect.GetLightCamera();
+		mStandardEffect.SetSpotLightViewProj(spotLightCompIndex, lightCam.GetViewMatrix() * lightCam.GetProjectionMatrix());
+
+		if (!comp->GetCanCastShadows())
 		{
-			Camera& spotLightCamera = spotShadowEffect.GetLightCamera();
-			const Matrix4 viewProjection = spotLightCamera.GetViewMatrix() * spotLightCamera.GetProjectionMatrix();
-			spotShadowEffect.SetSpotLight(spotlightComponent->GetSpotLightData());
-			mStandardEffect.SetSpotLightViewProj(i, viewProjection);
-
-			if (spotlightComponent->GetCanCastShadows())
-			{
-				const Plane* frustumPlanes = spotLightCamera.GetFrustrumPlanes();
-				spotShadowEffect.Begin();
-				for (auto& entry : mRenderEntries)
-				{
-					//spotShadowEffect.Render(entry.renderGroup, &mBoneTransformCache);
-					for (auto& renderObject : entry.renderGroup)
-					{
-						const CachedBoneTransforms* cachedBoneTransforms = GetOrComputeBoneCache(renderObject);
-						spotShadowEffect.Render(renderObject, cachedBoneTransforms);
-					}
-				}
-
-				for (auto& entry : staticRenderers)
-				{
-					const OBB aabb = entry->GetGlobalBoundingBox();
-					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
-					{
-						spotShadowEffect.Render(entry->GetRenderObject());
-					}
-				}
-
-				for (auto& entry : dynamicRenderers)
-				{
-					const OBB aabb = entry->GetGlobalBoundingBox();
-					if (IsAABBInFrustum(frustumPlanes, aabb.center, aabb.extend))
-					{
-						spotShadowEffect.Render(entry->GetRenderObject());
-					}
-				}
-
-				spotShadowEffect.End();
-
-				mStandardEffect.SetSpotShadowMap(i, &spotShadowEffect.GetDepthMap());
-				mShadowMask |= (1 << i);
-			}
-			else
-			{
-				mStandardEffect.SetSpotShadowMap(i, nullptr);
-				mShadowMask |= (0 << i);
-			}
-
-			spotShadowEffect.MarkClean();
+			mStandardEffect.SetSpotShadowMap(spotLightCompIndex, nullptr);
+			mShadowMask &= ~(1 << spotLightCompIndex);   // was (0 << i), which never cleared the bit
+			spotShadowEffect.MarkStaticClean();
+			spotShadowEffect.MarkDynamicClean();
+			continue;
 		}
+
+		if (spotShadowEffect.NeedsStaticUpdate())
+		{
+			const Plane* planes = lightCam.GetFrustrumPlanes();
+			spotShadowEffect.BeginStatic();
+			for (auto& entry : staticRenderers)
+			{
+				const OBB aabb = entry->GetGlobalBoundingBox();
+				if (IsAABBInFrustum(planes, aabb.center, aabb.extend))
+				{
+					spotShadowEffect.Render(entry->GetRenderObject());
+				}
+			}
+			spotShadowEffect.EndStatic();
+			spotShadowEffect.MarkStaticClean();
+		}
+
+		if (spotShadowEffect.NeedsDynamicUpdate()) // always true right after a static rebuild
+		{
+			const Plane* planes = lightCam.GetFrustrumPlanes();
+			spotShadowEffect.BeginDynamic();
+			for (auto& entry : mRenderEntries)
+			{
+				for (auto& renderObject : entry.renderGroup)
+				{
+					spotShadowEffect.Render(renderObject, GetOrComputeBoneCache(renderObject));
+				}
+			}
+			for (auto& entry : dynamicRenderers)
+			{
+				const OBB aabb = entry->GetGlobalBoundingBox();
+				if (IsAABBInFrustum(planes, aabb.center, aabb.extend))
+				{
+					spotShadowEffect.Render(entry->GetRenderObject());
+				}
+			}
+			spotShadowEffect.EndDynamic();
+			spotShadowEffect.MarkDynamicClean();
+		}
+
+		mStandardEffect.SetSpotShadowMap(spotLightCompIndex, &spotShadowEffect.GetDepthMap());
+		mShadowMask |= (1 << spotLightCompIndex);
 	}
 	mStandardEffect.SetSpotShadowMask(mShadowMask);
 }

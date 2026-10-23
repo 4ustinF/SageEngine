@@ -34,12 +34,7 @@ namespace SAGE::Graphics
 		Camera& GetLightCamera() { return mLightCamera; }
 		const Camera& GetLightCamera() const { return mLightCamera; }
 		const Texture& GetStaticDepthMap() const { return mStaticMap; }
-		//const Texture& GetDepthMap() const { return mShadowMap; } // the map the lighting shader samples
-
-		const Texture& GetDepthMap() const
-		{
-			return (mLightMode == LightMode::RealTime && mHasDynamicMap) ? mDynamicMap : mStaticMap;
-		}
+		const Texture& GetDepthMap() const { return (mLightMode == LightMode::RealTime && mHasDynamicMap) ? mDynamicMap : mStaticMap; }
 
 		LightMode GetLightMode() const { return mLightMode; }
 

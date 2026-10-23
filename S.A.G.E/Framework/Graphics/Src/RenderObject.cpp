@@ -16,6 +16,9 @@ void RenderObject::Terminate()
 
 void RenderObject::DebugUI()
 {
+	ImGui::DragFloat3("Position##RenderObject", &transform.position.x, 0.1f);
+	ImGui::DragFloat4("Rotation##RenderObject", &transform.rotation.w, 0.1f);
+	ImGui::DragFloat3("Scale##RenderObject", &transform.scale.x, 0.1f);
 	ImGui::ColorEdit4("Ambient##RenderObject", &material.ambient.r);
 	ImGui::ColorEdit4("Diffuse##RenderObject", &material.diffuse.r);
 	ImGui::ColorEdit4("Specular##RenderObject", &material.specular.r);

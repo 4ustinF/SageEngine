@@ -29,7 +29,9 @@ void RenderTarget::Initialize(uint32_t width, uint32_t height, Format format)
 	desc.Usage = D3D11_USAGE_DEFAULT;
 	desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
 
-	auto device = GraphicsSystem::Get()->GetDevice();
+	GraphicsSystem* gs = GraphicsSystem::Get();
+	mContext = gs->GetContext();
+	auto device = gs->GetDevice();
 
 	HRESULT hr = device->CreateTexture2D(&desc, nullptr, &mColorTexture);
 	ASSERT(SUCCEEDED(hr), "RenderTarget -- failed to create render texture");
@@ -58,11 +60,12 @@ void RenderTarget::Initialize(uint32_t width, uint32_t height, Format format)
 
 void RenderTarget::Terminate()
 {
-	Texture::Terminate();
+	mContext = nullptr;
 	SafeRelease(mRenderTargetView);
 	SafeRelease(mDepthStencilView);
 	SafeRelease(mColorTexture);
 	SafeRelease(mDepthTexture);
+	Texture::Terminate();
 }
 
 void RenderTarget::CopyFrom(const RenderTarget& source)
@@ -70,34 +73,30 @@ void RenderTarget::CopyFrom(const RenderTarget& source)
 	ASSERT(mColorTexture && source.mColorTexture, "RenderTarget -- CopyFrom on uninitialized target");
 	ASSERT(mWidth == source.mWidth && mHeight == source.mHeight, "RenderTarget -- CopyFrom size mismatch");
 
-	auto context = GraphicsSystem::Get()->GetContext();
-	context->CopyResource(mColorTexture, source.mColorTexture);
-	context->CopyResource(mDepthTexture, source.mDepthTexture);
+	mContext->CopyResource(mColorTexture, source.mColorTexture);
+	mContext->CopyResource(mDepthTexture, source.mDepthTexture);
 }
 
 void RenderTarget::BeginRender(Color clearColor, bool clear)
 {
-	auto context = GraphicsSystem::Get()->GetContext();
-
 	UINT numViewports = 1;
-	context->OMGetRenderTargets(1, &mOldRenderTargetView, &mOldDepthStencilView);
-	context->RSGetViewports(&numViewports, &mOldViewport);
+	mContext->OMGetRenderTargets(1, &mOldRenderTargetView, &mOldDepthStencilView);
+	mContext->RSGetViewports(&numViewports, &mOldViewport);
 
 	if (clear)
 	{
-		context->ClearRenderTargetView(mRenderTargetView, &clearColor.r);
-		context->ClearDepthStencilView(mDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+		mContext->ClearRenderTargetView(mRenderTargetView, &clearColor.r);
+		mContext->ClearDepthStencilView(mDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 	}
 
-	context->OMSetRenderTargets(1, &mRenderTargetView, mDepthStencilView);
-	context->RSSetViewports(1, &mViewport);
+	mContext->OMSetRenderTargets(1, &mRenderTargetView, mDepthStencilView);
+	mContext->RSSetViewports(1, &mViewport);
 }
 
 void RenderTarget::EndRender()
 {
-	auto context = GraphicsSystem::Get()->GetContext();
-	context->OMSetRenderTargets(1, &mOldRenderTargetView, mOldDepthStencilView);
-	context->RSSetViewports(1, &mOldViewport);
+	mContext->OMSetRenderTargets(1, &mOldRenderTargetView, mOldDepthStencilView);
+	mContext->RSSetViewports(1, &mOldViewport);
 
 	// OMGetRenderTargets AddRef'd these. Without this they leak a ref per pass.
 	SafeRelease(mOldRenderTargetView);

@@ -20,6 +20,8 @@ namespace SAGE::Graphics
 		void CopyFrom(const RenderTarget& source); // color + depth, must match size/format
 
 	private:
+		ID3D11DeviceContext* mContext = nullptr;
+
 		ID3D11Texture2D* mColorTexture = nullptr;
 		ID3D11Texture2D* mDepthTexture = nullptr;
 

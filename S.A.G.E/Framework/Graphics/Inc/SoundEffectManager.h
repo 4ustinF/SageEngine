@@ -28,6 +28,7 @@ namespace SAGE::Graphics
 
 		void Play(SoundId id, bool loop = false, float volume = 1.0f, float pitch = 0.0f, float pan = 0.0f);
 		void PlayOneShot(SoundId id, float volume = 1.0f, float pitch = 0.0f, float pan = 0.0f);
+		void PlayOneShotWithPitchOffset(SoundId id, float pitch = 0.0f, float volume = 1.0f, float pan = 0.0f);
 		void Stop(SoundId id);
 
 	private:

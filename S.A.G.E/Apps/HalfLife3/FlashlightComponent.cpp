@@ -34,12 +34,18 @@ void FlashlightComponent::Initialize()
 	mSpotlightComponent = owner.GetComponent<SpotlightComponent>();
 
 	TurnOffFlashlight(); // TODO: should have a way to start game objects off via json.
+
+	mSoundEffectManager = SoundEffectManager::Get();
+	mToggleSoundID = mSoundEffectManager->Load("items/flashlight1.wav");
 }
 
 void FlashlightComponent::Terminate()
 {
+	mToggleSoundID = 0;
+
 	mSpotlightComponent = nullptr;
 	mCameraService = nullptr;
+	mSoundEffectManager = nullptr;
 }
 
 void FlashlightComponent::Update(float deltaTime)
@@ -57,6 +63,7 @@ void FlashlightComponent::DebugUI()
 		if (ImGui::Button("Toggle Light##FlashlightComponent")) { ToggleFlashlight(); }
 		if (ImGui::Button("Turn On##FlashlightComponent")) { TurnOnFlashlight(); }
 		if (ImGui::Button("Turn Off##FlashlightComponent")) { TurnOffFlashlight(); }
+		ImGui::SliderFloat("Pitch Volume", &mToggleSoundPitchVolume, 0.0f, 1.0f);
 	}
 }
 
@@ -77,9 +84,19 @@ void FlashlightComponent::ToggleFlashlight()
 void FlashlightComponent::TurnOnFlashlight()
 {
 	GetOwner().SetActive(true);
+	PlayToggleSound();
 }
 
 void FlashlightComponent::TurnOffFlashlight()
 {
+	PlayToggleSound();
 	GetOwner().SetActive(false);
+}
+
+void FlashlightComponent::PlayToggleSound()
+{
+	if (mSoundEffectManager)
+	{
+		mSoundEffectManager->PlayOneShotWithPitchOffset(mToggleSoundID, mToggleSoundPitchVolume);
+	}
 }

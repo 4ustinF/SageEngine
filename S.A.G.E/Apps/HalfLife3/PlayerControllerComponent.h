@@ -25,6 +25,7 @@ public:
 	void DebugUI() override;
 
 private:
+	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
 	SAGE::CameraService* mCameraService = nullptr;
 	SAGE::RBPhysicsService* mRBPhysicsService = nullptr;
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
@@ -49,6 +50,9 @@ private:
 
 	// TODO: Move out
 	SAGE::GameObject* armsGO = nullptr;
+	bool mIsEquipped = true;
+	SAGE::Graphics::SoundId mShootSoundID = 0;
+	float mShootSoundPitchVolume = 0.05f;
 
 	// Debug
 	bool mCanMove = true;

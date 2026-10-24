@@ -38,15 +38,21 @@ void PlayerControllerComponent::Initialize()
 	mRBPhysicsService = world.GetService<RBPhysicsService>();
 	mCapsuleColliderComponent = owner.GetComponent<CapsuleColliderComponent>();
 	mFlashlightComponent = LazyGetFlashlightComponent();
+
+	mSoundEffectManager = SoundEffectManager::Get();
+	mShootSoundID = mSoundEffectManager->Load("weapons/pl_gun3.wav");
 }
 
 void PlayerControllerComponent::Terminate()
 {
+	mShootSoundID = 0;
+
 	mCameraService = nullptr;
 	mRBPhysicsService = nullptr;
 	mInputSystem = nullptr;
 	mCapsuleColliderComponent = nullptr;
 	mFlashlightComponent = nullptr;
+	mSoundEffectManager = nullptr;
 }
 
 void PlayerControllerComponent::Update(float deltaTime)
@@ -204,20 +210,39 @@ void PlayerControllerComponent::CheckForPlayerGameplayInput()
 	if (AnimatorComponent* armsAC = armsGO->GetComponent<AnimatorComponent>())
 	{
 		Animator& animator = armsAC->GetAnimator();
-		if (animator.IsFinished())
-		{
-			animator.PlayAnimation(0, true);
-		}
 
-		if (animator.GetIsLooping())
+		if (!mIsEquipped)
 		{
-			if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
+			if (mInputSystem->IsKeyPressed(KeyCode::ONE))
 			{
-				animator.PlayAnimation(4, false);
+				mIsEquipped = true;
+				animator.PlayAnimation(3, false);
 			}
-			else if (mInputSystem->IsKeyDown(KeyCode::R))
+		}
+		else
+		{
+			if (animator.IsFinished())
 			{
-				animator.PlayAnimation(5, false);
+				animator.PlayAnimation(0, true);
+			}
+
+			if (animator.GetIsLooping())
+			{
+				if (mInputSystem->IsKeyPressed(KeyCode::ZERO))
+				{
+					mIsEquipped = false;
+					animator.PlayAnimation(6, false);
+				}
+
+				if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
+				{
+					animator.PlayAnimation(4, false);
+					mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundID, mShootSoundPitchVolume);
+				}
+				else if (mInputSystem->IsKeyPressed(KeyCode::R))
+				{
+					animator.PlayAnimation(5, false);
+				}
 			}
 		}
 	}

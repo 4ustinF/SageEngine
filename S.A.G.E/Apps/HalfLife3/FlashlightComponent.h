@@ -27,7 +27,13 @@ public:
 	void TurnOffFlashlight();
 
 private:
+	void PlayToggleSound();
+
+	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
 	SAGE::CameraService* mCameraService = nullptr;
 	SAGE::SpotlightComponent* mSpotlightComponent = nullptr;
 	SAGE::TransformComponent* mTransformComponent = nullptr;
+
+	SAGE::Graphics::SoundId mToggleSoundID = 0;
+	float mToggleSoundPitchVolume = 0.04f;
 };

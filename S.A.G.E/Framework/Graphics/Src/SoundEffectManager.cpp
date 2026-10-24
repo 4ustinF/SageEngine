@@ -152,6 +152,13 @@ void SoundEffectManager::PlayOneShot(SoundId id, float volume, float pitch, floa
 
 //----------------------------------------------------------------------------------------------------
 
+void SoundEffectManager::PlayOneShotWithPitchOffset(SoundId id, float pitch, float volume, float pan)
+{
+	PlayOneShot(id, volume, Random::UniformFloat(-pitch, pitch), pan);
+}
+
+//----------------------------------------------------------------------------------------------------
+
 void SoundEffectManager::Stop(SoundId id)
 {
 	auto iter = mInventory.find(id);

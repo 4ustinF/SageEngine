@@ -18,6 +18,9 @@
       "Can Cast Shadows": false
     },
     "Animator Component": {
+      "AnimSets": [
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_shoot.animset"
+      ]
     }
   }
 }

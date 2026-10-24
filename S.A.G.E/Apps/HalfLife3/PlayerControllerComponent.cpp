@@ -5,6 +5,7 @@
 #include "SAGE/Inc/GameObject.h"
 #include "SAGE/Inc/CameraService.h"
 #include "SAGE/Inc/RBPhysicsService.h"
+#include "SAGE/Inc/AnimatorComponent.h"
 #include "SAGE/Inc/CapsuleColliderComponent.h"
 #include "FlashlightComponent.h"
 
@@ -54,6 +55,7 @@ void PlayerControllerComponent::Update(float deltaTime)
 	IsGroundedCheck();
 	CheckForFlashlightInput();
 	CheckForPlayerMovementInput(camera, deltaTime);
+	CheckForPlayerGameplayInput();
 	UpdateCameraPosition(camera);
 	UpdateArmsPosition(camera);
 }
@@ -182,6 +184,34 @@ void PlayerControllerComponent::CheckForPlayerMovementInput(Camera& camera, floa
 		{
 			physicsObject->ApplyForce(Vector3::YAxis * mJumpForce * deltaTime);
 			mIsGrounded = false;
+		}
+	}
+}
+
+void PlayerControllerComponent::CheckForPlayerGameplayInput()
+{
+	if (!mIsInFPSMode) // TODO: Also check if we are in edit mode
+	{
+		return;
+	}
+
+	if (armsGO == nullptr) // TODO: For now a lazy get.
+	{
+		armsGO = GetOwner().GetWorld().FindGameObject("Player Arms");
+		if (armsGO == nullptr) { return; }
+	}
+
+	if (AnimatorComponent* armsAC = armsGO->GetComponent<AnimatorComponent>())
+	{
+		Animator& animator = armsAC->GetAnimator();
+
+		if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
+		{
+			animator.PlayAnimation(1, false);
+		}
+		else if(animator.IsFinished())
+		{
+			animator.PlayAnimation(0, true);
 		}
 	}
 }

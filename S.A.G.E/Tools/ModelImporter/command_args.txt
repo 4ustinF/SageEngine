@@ -42,3 +42,10 @@
 -scale 0.01 ../../Assets/Models/ChessBoard/chess_board.fbx ../../Assets/Models/ChessBoard/chess_board.model 
 
 -scale 0.01 ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_shoot.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_shoot.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_add_silencer.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/AnimSets/9mmhandgun_add_silencer.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_draw.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/AnimSets/9mmhandgun_draw.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_holster.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/AnimSets/9mmhandgun_holster.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_idle_01.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/AnimSets/9mmhandgun_idle_01.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_idle_02.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/AnimSets/9mmhandgun_idle_02.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_reload.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/AnimSets/9mmhandgun_reload.model

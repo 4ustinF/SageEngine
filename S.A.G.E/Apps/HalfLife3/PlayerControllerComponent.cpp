@@ -204,14 +204,21 @@ void PlayerControllerComponent::CheckForPlayerGameplayInput()
 	if (AnimatorComponent* armsAC = armsGO->GetComponent<AnimatorComponent>())
 	{
 		Animator& animator = armsAC->GetAnimator();
-
-		if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
-		{
-			animator.PlayAnimation(1, false);
-		}
-		else if(animator.IsFinished())
+		if (animator.IsFinished())
 		{
 			animator.PlayAnimation(0, true);
+		}
+
+		if (animator.GetIsLooping())
+		{
+			if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
+			{
+				animator.PlayAnimation(4, false);
+			}
+			else if (mInputSystem->IsKeyDown(KeyCode::R))
+			{
+				animator.PlayAnimation(5, false);
+			}
 		}
 	}
 }

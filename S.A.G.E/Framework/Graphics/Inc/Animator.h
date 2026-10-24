@@ -25,6 +25,8 @@ namespace SAGE::Graphics
 
 		Math::Matrix4 GetTransform(const Bone* bone) const override;
 
+		bool GetIsLooping() const { return mLooping; }
+
 	//private:
 		const Model* mModel = nullptr;
 		size_t mClipIndex = -1; // TODO: Default 0?

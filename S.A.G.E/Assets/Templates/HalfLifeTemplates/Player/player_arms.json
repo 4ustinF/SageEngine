@@ -19,7 +19,13 @@
     },
     "Animator Component": {
       "AnimSets": [
-        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_shoot.animset"
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_idle_01.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_idle_02.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_draw.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_shoot.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_reload.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_holster.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_add_silencer.animset"
       ]
     }
   }

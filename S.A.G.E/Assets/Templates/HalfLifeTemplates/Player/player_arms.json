@@ -1,0 +1,23 @@
+{
+  "Name": "Player Arms",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        0.0,
+        0.74,
+        0.0
+      ],
+      "Local Scale": [
+        0.01,
+        0.01,
+        0.01
+      ]
+    },
+    "Model Component": {
+      "FileName": "../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun.model",
+      "Can Cast Shadows": false
+    },
+    "Animator Component": {
+    }
+  }
+}

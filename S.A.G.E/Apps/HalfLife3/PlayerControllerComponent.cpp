@@ -32,7 +32,7 @@ void PlayerControllerComponent::Initialize()
 	mInputSystem = InputSystem::Get();
 
 	GameObject& owner = GetOwner();
-	GameWorld& world = GetOwner().GetWorld();
+	GameWorld& world = owner.GetWorld();
 	mCameraService = world.GetService<CameraService>();
 	mRBPhysicsService = world.GetService<RBPhysicsService>();
 	mCapsuleColliderComponent = owner.GetComponent<CapsuleColliderComponent>();
@@ -55,6 +55,7 @@ void PlayerControllerComponent::Update(float deltaTime)
 	CheckForFlashlightInput();
 	CheckForPlayerMovementInput(camera, deltaTime);
 	UpdateCameraPosition(camera);
+	UpdateArmsPosition(camera);
 }
 
 void PlayerControllerComponent::DebugUI()
@@ -202,6 +203,26 @@ void PlayerControllerComponent::UpdateCameraPosition(Camera& camera)
 	{
 		const Vector3 camNewPos = boundingCapsule->GetTopCenter() + mCameraOffset;
 		camera.SetPosition(camNewPos);
+	}
+}
+
+void PlayerControllerComponent::UpdateArmsPosition(const Camera& camera)
+{
+	if (!mIsInFPSMode) // TODO: Also check if we are in edit mode
+	{
+		return;
+	}
+
+	if (armsGO == nullptr) // TODO: For now a lazy get.
+	{
+		armsGO = GetOwner().GetWorld().FindGameObject("Player Arms");
+		if (armsGO == nullptr) { return; }
+	}
+
+	if (TransformComponent* armsTC = armsGO->GetComponent<TransformComponent>())
+	{
+		const Quaternion rotation = camera.GetOrientation() * Quaternion::RotationAxis(Vector3::YAxis, Constants::Pi);
+		armsTC->SetLocalRotation(rotation);
 	}
 }
 

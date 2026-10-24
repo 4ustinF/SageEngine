@@ -36,6 +36,7 @@ private:
 	void CheckForFlashlightInput();
 	void CheckForPlayerMovementInput(SAGE::Graphics::Camera& camera, float deltaTime);
 	void UpdateCameraPosition(SAGE::Graphics::Camera& camera);
+	void UpdateArmsPosition(const SAGE::Graphics::Camera& camera);
 
 	float GetMovementSpeed(float deltaTime) const;
 
@@ -44,6 +45,9 @@ private:
 	float mJumpForce = 500.0f;
 	bool mIsGrounded = true;
 	SAGE::Math::Vector3 mGroundNormal = SAGE::Math::Vector3::YAxis;
+
+	// TODO: Move out
+	SAGE::GameObject* armsGO = nullptr;
 
 	// Debug
 	bool mCanMove = true;

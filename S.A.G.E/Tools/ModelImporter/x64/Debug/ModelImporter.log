@@ -1,4 +1,5 @@
-﻿assimp-vc143-mtd.lib(Importer.obj) : warning LNK4099: PDB 'assimp-vc143-mtd.pdb' was not found with 'assimp-vc143-mtd.lib(Importer.obj)' or at 'D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\assimp-vc143-mtd.pdb'; linking object as if no debug info
+﻿  Main.cpp
+assimp-vc143-mtd.lib(Importer.obj) : warning LNK4099: PDB 'assimp-vc143-mtd.pdb' was not found with 'assimp-vc143-mtd.lib(Importer.obj)' or at 'D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\assimp-vc143-mtd.pdb'; linking object as if no debug info
 assimp-vc143-mtd.lib(MaterialSystem.obj) : warning LNK4099: PDB 'assimp-vc143-mtd.pdb' was not found with 'assimp-vc143-mtd.lib(MaterialSystem.obj)' or at 'D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\assimp-vc143-mtd.pdb'; linking object as if no debug info
 assimp-vc143-mtd.lib(Version.obj) : warning LNK4099: PDB 'assimp-vc143-mtd.pdb' was not found with 'assimp-vc143-mtd.lib(Version.obj)' or at 'D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\assimp-vc143-mtd.pdb'; linking object as if no debug info
 assimp-vc143-mtd.lib(BaseProcess.obj) : warning LNK4099: PDB 'assimp-vc143-mtd.pdb' was not found with 'assimp-vc143-mtd.lib(BaseProcess.obj)' or at 'D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\assimp-vc143-mtd.pdb'; linking object as if no debug info

@@ -8,6 +8,7 @@
 #include "SAGE/Inc/AnimatorComponent.h"
 #include "SAGE/Inc/CapsuleColliderComponent.h"
 #include "FlashlightComponent.h"
+#include "PlayerWeaponComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -38,21 +39,15 @@ void PlayerControllerComponent::Initialize()
 	mRBPhysicsService = world.GetService<RBPhysicsService>();
 	mCapsuleColliderComponent = owner.GetComponent<CapsuleColliderComponent>();
 	mFlashlightComponent = LazyGetFlashlightComponent();
-
-	mSoundEffectManager = SoundEffectManager::Get();
-	mShootSoundID = mSoundEffectManager->Load("weapons/pl_gun3.wav");
 }
 
 void PlayerControllerComponent::Terminate()
 {
-	mShootSoundID = 0;
-
 	mCameraService = nullptr;
 	mRBPhysicsService = nullptr;
 	mInputSystem = nullptr;
 	mCapsuleColliderComponent = nullptr;
 	mFlashlightComponent = nullptr;
-	mSoundEffectManager = nullptr;
 }
 
 void PlayerControllerComponent::Update(float deltaTime)
@@ -201,49 +196,9 @@ void PlayerControllerComponent::CheckForPlayerGameplayInput()
 		return;
 	}
 
-	if (armsGO == nullptr) // TODO: For now a lazy get.
+	if (PlayerWeaponComponent* weapon = LazyGetPlayerWeaponComponent())
 	{
-		armsGO = GetOwner().GetWorld().FindGameObject("Player Arms");
-		if (armsGO == nullptr) { return; }
-	}
-
-	if (AnimatorComponent* armsAC = armsGO->GetComponent<AnimatorComponent>())
-	{
-		Animator& animator = armsAC->GetAnimator();
-
-		if (!mIsEquipped)
-		{
-			if (mInputSystem->IsKeyPressed(KeyCode::ONE))
-			{
-				mIsEquipped = true;
-				animator.PlayAnimation(3, false);
-			}
-		}
-		else
-		{
-			if (animator.IsFinished())
-			{
-				animator.PlayAnimation(0, true);
-			}
-
-			if (animator.GetIsLooping())
-			{
-				if (mInputSystem->IsKeyPressed(KeyCode::ZERO))
-				{
-					mIsEquipped = false;
-					animator.PlayAnimation(6, false);
-				}
-				else if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
-				{
-					animator.PlayAnimation(4, false);
-					mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundID, mShootSoundPitchVolume);
-				}
-				else if (mInputSystem->IsKeyPressed(KeyCode::R))
-				{
-					animator.PlayAnimation(5, false);
-				}
-			}
-		}
+		weapon->CheckForPlayerGameplayInput();
 	}
 }
 
@@ -274,15 +229,9 @@ void PlayerControllerComponent::UpdateArmsPosition(const Camera& camera)
 		return;
 	}
 
-	if (armsGO == nullptr) // TODO: For now a lazy get.
+	if (PlayerWeaponComponent* weapon = LazyGetPlayerWeaponComponent())
 	{
-		armsGO = GetOwner().GetWorld().FindGameObject("Player Arms");
-		if (armsGO == nullptr) { return; }
-	}
-
-	if (TransformComponent* armsTC = armsGO->GetComponent<TransformComponent>())
-	{
-		armsTC->SetLocalRotation(camera.GetOrientation());
+		weapon->UpdateWeaponRotation(camera.GetOrientation());
 	}
 }
 
@@ -294,4 +243,16 @@ float PlayerControllerComponent::GetMovementSpeed(float deltaTime) const
 	}
 
 	return (mIsGrounded ? mGroundSpeed.x : mAirSpeed.x) * deltaTime;
+}
+
+PlayerWeaponComponent* PlayerControllerComponent::LazyGetPlayerWeaponComponent()
+{
+	if (mWeapon == nullptr)
+	{
+		GameObject* weaponGO = GetOwner().GetWorld().FindGameObject("Player 9mm Handgun");
+		if (weaponGO == nullptr) { return nullptr; }
+		mWeapon = weaponGO->GetComponent<PlayerWeaponComponent>();
+	}
+
+	return mWeapon;
 }

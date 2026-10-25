@@ -4,6 +4,7 @@
 #include "FlashlightComponent.h"
 #include "HealthChargerHITVComponent.h"
 #include "PlayerControllerComponent.h"
+#include "PlayerWeaponComponent.h"
 #include "TextureAnimatorComponent.h"
 #include "ToggleTriggerVolumeComponent.h"
 
@@ -52,6 +53,12 @@ namespace
 		{
 			PlayerControllerComponent* playerControllerComponent = gameObject.AddComponent<PlayerControllerComponent>();
 			playerControllerComponent->LoadComponentFromTemplate(value);
+			return true;
+		}
+		else if (strcmp(componentName, "Player Weapon Component") == 0)
+		{
+			PlayerWeaponComponent* playerWeaponComponent = gameObject.AddComponent<PlayerWeaponComponent>();
+			playerWeaponComponent->LoadComponentFromTemplate(value);
 			return true;
 		}
 		return false;

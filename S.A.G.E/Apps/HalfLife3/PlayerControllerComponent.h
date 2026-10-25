@@ -7,6 +7,7 @@ class SAGE::Input::InputSystem;
 class SAGE::CameraService;
 class SAGE::CapsuleColliderComponent;
 class FlashlightComponent;
+class PlayerWeaponComponent;
 
 class PlayerControllerComponent final : public SAGE::Component
 {
@@ -25,7 +26,6 @@ public:
 	void DebugUI() override;
 
 private:
-	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
 	SAGE::CameraService* mCameraService = nullptr;
 	SAGE::RBPhysicsService* mRBPhysicsService = nullptr;
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
@@ -49,14 +49,11 @@ private:
 	SAGE::Math::Vector3 mGroundNormal = SAGE::Math::Vector3::YAxis;
 
 	// TODO: Move out
-	SAGE::GameObject* armsGO = nullptr;
-	bool mIsEquipped = true;
-	SAGE::Graphics::SoundId mShootSoundID = 0;
-	float mShootSoundPitchVolume = 0.05f;
+	PlayerWeaponComponent* LazyGetPlayerWeaponComponent(); // Figure out a better way to get a childs comp.
+	PlayerWeaponComponent* mWeapon = nullptr;
 
 	// Debug
 	bool mCanMove = true;
 	bool mIsInFPSMode = false;
 	SAGE::Math::Vector3 mCameraOffset = SAGE::Math::Vector3(0.0f, -0.1f, 0.0f);
-
 };

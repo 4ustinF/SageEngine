@@ -1,0 +1,22 @@
+{
+  "Name": "Player Weapons",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        0.0,
+        0.74,
+        0.0
+      ],
+      "Local Scale": [
+        0.01,
+        0.01,
+        0.01
+      ]
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/player_9mmhandgun.json"
+    }
+  ]
+}

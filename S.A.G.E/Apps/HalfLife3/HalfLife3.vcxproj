@@ -141,6 +141,7 @@
     <ClCompile Include="HoldInteractTriggerVolumeComponent.cpp" />
     <ClCompile Include="InteractTriggerVolumeComponent.cpp" />
     <ClCompile Include="PlayerControllerComponent.cpp" />
+    <ClCompile Include="PlayerWeaponComponent.cpp" />
     <ClCompile Include="TextureAnimatorComponent.cpp" />
     <ClCompile Include="ToggleTriggerVolumeComponent.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="HoldInteractTriggerVolumeComponent.h" />
     <ClInclude Include="InteractTriggerVolumeComponent.h" />
     <ClInclude Include="PlayerControllerComponent.h" />
+    <ClInclude Include="PlayerWeaponComponent.h" />
     <ClInclude Include="TextureAnimatorComponent.h" />
     <ClInclude Include="ToggleTriggerVolumeComponent.h" />
     <ClInclude Include="TypeIds.h" />

@@ -54,6 +54,9 @@
     <ClCompile Include="FlashlightComponent.cpp">
       <Filter>Components\Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerWeaponComponent.cpp">
+      <Filter>Components\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -84,6 +87,9 @@
       <Filter>Components\TriggerVolumes\Interact</Filter>
     </ClInclude>
     <ClInclude Include="FlashlightComponent.h">
+      <Filter>Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWeaponComponent.h">
       <Filter>Components\Player</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,6 +5,7 @@
 enum class ComponentId
 {
 	PlayerController = static_cast<uint32_t>(SAGE::ComponentId::Count),
+	PlayerWeapon,
 	DoorITV,
 	Flashlight,
 	HealthChargerHITV,

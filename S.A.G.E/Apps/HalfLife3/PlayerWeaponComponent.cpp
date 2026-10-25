@@ -13,12 +13,21 @@ MEMORY_POOL_DEFINE(PlayerWeaponComponent, 10);
 
 void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
-	
+	if (value.HasMember("Max Ammo"))
+	{
+		mMaxAmmo = value["Max Ammo"].GetInt();
+	}
+
+	if (value.HasMember("Max Ammo Reserve"))
+	{
+		mMaxAmmoReserve = value["Max Ammo Reserve"].GetInt();
+	}
 }
 
 void PlayerWeaponComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
-
+	SaveNumberToTemplate(compObj, allocator, "Max Ammo", mMaxAmmo);
+	SaveNumberToTemplate(compObj, allocator, "Max Ammo Reserve", mMaxAmmoReserve);
 }
 
 void PlayerWeaponComponent::Initialize()
@@ -32,6 +41,9 @@ void PlayerWeaponComponent::Initialize()
 
 	mSoundEffectManager = SoundEffectManager::Get();
 	mShootSoundID = mSoundEffectManager->Load("weapons/pl_gun3.wav");
+
+	mCurrentAmmo = mMaxAmmo;
+	mCurrentAmmoReserve = mMaxAmmoReserve;
 }
 
 void PlayerWeaponComponent::Terminate()
@@ -54,7 +66,13 @@ void PlayerWeaponComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Player Weapon Component##PlayerWeaponComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		ImGui::DragFloat("Shoot Sound Pitch Volume", &mShootSoundPitchVolume, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Shoot Sound Pitch Volume##PlayerWeaponComponent", &mShootSoundPitchVolume, 0.01f, 0.0f, 1.0f);
+		
+		ImGui::DragInt("Current Ammo##PlayerWeaponComponent", &mCurrentAmmo, 1, 0, mMaxAmmo);
+		ImGui::DragInt("Max Ammo##PlayerWeaponComponent", &mMaxAmmo, 1, 0, 100);
+		
+		ImGui::DragInt("Current Ammo Reserve##PlayerWeaponComponent", &mCurrentAmmoReserve, 1, 0, mMaxAmmoReserve);
+		ImGui::DragInt("Max Ammo Reserve##PlayerWeaponComponent", &mMaxAmmoReserve, 1, 0, 500);
 	}
 }
 
@@ -110,17 +128,46 @@ void PlayerWeaponComponent::Idle()
 
 void PlayerWeaponComponent::Shoot()
 {
+	if (mCurrentAmmo == 0)
+	{
+		Reload();
+		return;
+	}
+
 	mAnimator->PlayAnimation(4, false);
 	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundID, mShootSoundPitchVolume);
+	mCurrentAmmo -= 1;
 }
 
 void PlayerWeaponComponent::Reload()
 {
+	if (mCurrentAmmoReserve == 0)
+	{
+		return;
+	}
+
 	mAnimator->PlayAnimation(5, false);
+
+	const int ammoNeeded = mMaxAmmo - mCurrentAmmo;
+	if (mCurrentAmmoReserve >= ammoNeeded)
+	{
+		mCurrentAmmo = mMaxAmmo;
+		mCurrentAmmoReserve -= ammoNeeded;
+	}
+	else
+	{
+		mCurrentAmmo += mCurrentAmmoReserve;
+		mCurrentAmmoReserve = 0;
+	}
 }
 
 void PlayerWeaponComponent::Holster()
 {
 	mIsEquipped = false;
 	mAnimator->PlayAnimation(6, false);
+}
+
+void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
+{
+	mCurrentAmmoReserve = Math::Clamp(mCurrentAmmoReserve + Abs(ammoAmount), 0, mMaxAmmoReserve);
 }

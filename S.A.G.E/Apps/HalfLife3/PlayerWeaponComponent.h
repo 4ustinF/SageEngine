@@ -23,6 +23,7 @@ public:
 
 	void CheckForPlayerGameplayInput();
 	void UpdateWeaponRotation(const SAGE::Math::Quaternion& rotation);
+	void OnAmmoPickedUp(int ammoAmount);
 
 private:
 	void Draw();
@@ -38,6 +39,10 @@ private:
 	SAGE::Graphics::Animator* mAnimator = nullptr;
 
 	bool mIsEquipped = true;
+	int mCurrentAmmo = 0;
+	int mMaxAmmo = 0;
+	int mCurrentAmmoReserve = 0;
+	int mMaxAmmoReserve = 0;
 
 	// Audio
 	SAGE::Graphics::SoundId mShootSoundID = 0;

@@ -8,6 +8,8 @@
       "Can Cast Shadows": false
     },
     "Player Weapon Component": {
+      "Max Ammo": 17,
+      "Max Ammo Reserve": 250
     },
     "Animator Component": {
       "AnimSets": [

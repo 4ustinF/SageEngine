@@ -233,8 +233,7 @@ void PlayerControllerComponent::CheckForPlayerGameplayInput()
 					mIsEquipped = false;
 					animator.PlayAnimation(6, false);
 				}
-
-				if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
+				else if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
 				{
 					animator.PlayAnimation(4, false);
 					mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundID, mShootSoundPitchVolume);
@@ -283,8 +282,7 @@ void PlayerControllerComponent::UpdateArmsPosition(const Camera& camera)
 
 	if (TransformComponent* armsTC = armsGO->GetComponent<TransformComponent>())
 	{
-		const Quaternion rotation = camera.GetOrientation() * Quaternion::RotationAxis(Vector3::YAxis, Constants::Pi);
-		armsTC->SetLocalRotation(rotation);
+		armsTC->SetLocalRotation(camera.GetOrientation());
 	}
 }
 

@@ -36,16 +36,16 @@ void BulletHolesPoolComponent::OnQueueUpdate(float deltaTime)
 		BulletHole& bulletHole = mActiveBulletHoles[activeIndex];
 
 		bulletHole.remainingLifeTime -= deltaTime;
-		if (bulletHole.remainingLifeTime <= 1.0f)
+		if (bulletHole.remainingLifeTime <= 0.0f)
 		{
-			bulletHole.meshRendererComp->GetRenderObject().material.emissive.a = bulletHole.remainingLifeTime; // TODO: This only works because above the fade check is 1.0f, we should make it fade out faster.
-
-			if (bulletHole.remainingLifeTime <= 0.0f)
-			{
-				bulletHole.gameObject->SetActive(false);
-				mDisabledBulletHoles.push_back(std::move(mActiveBulletHoles[activeIndex]));
-				mActiveBulletHoles.erase(mActiveBulletHoles.begin() + activeIndex);
-			}
+			bulletHole.gameObject->SetActive(false);
+			mDisabledBulletHoles.push_back(std::move(mActiveBulletHoles[activeIndex]));
+			mActiveBulletHoles.erase(mActiveBulletHoles.begin() + activeIndex);
+		}
+		else if (bulletHole.remainingLifeTime <= mFadeOutTime)
+		{
+			const float alpha = Clamp(bulletHole.remainingLifeTime / mFadeOutTime, 0.0f, 1.0f);
+			bulletHole.meshRendererComp->GetRenderObject().material.emissive.a = alpha;
 		}
 	}
 
@@ -59,6 +59,7 @@ void BulletHolesPoolComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Bullet Holes Pool Component##BulletHolesPoolComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
+		ImGui::DragFloat("Fade Out Time", &mFadeOutTime, 0.1f);
 		// TODO: Count?
 	}
 }

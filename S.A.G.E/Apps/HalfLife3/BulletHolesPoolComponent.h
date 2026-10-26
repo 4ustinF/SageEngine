@@ -38,4 +38,6 @@ private:
 
 	std::vector<BulletHole> mActiveBulletHoles;
 	std::vector<BulletHole> mDisabledBulletHoles;
+
+	float mFadeOutTime = 0.4f;
 };

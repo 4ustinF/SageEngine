@@ -22,6 +22,12 @@
     <Filter Include="Components\TriggerVolumes\Interact">
       <UniqueIdentifier>{f0e16af3-0666-4fad-8ee4-23c90c2eb431}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Player\Weapons">
+      <UniqueIdentifier>{7706b72a-b0a2-45fe-8054-3c46226980e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Player\Weapons\BulletHoles">
+      <UniqueIdentifier>{3650c86f-0652-42bf-a81f-e999a054ba91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp">
@@ -55,7 +61,10 @@
       <Filter>Components\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerWeaponComponent.cpp">
-      <Filter>Components\Player</Filter>
+      <Filter>Components\Player\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletHolesPoolComponent.cpp">
+      <Filter>Components\Player\Weapons\BulletHoles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,7 +99,10 @@
       <Filter>Components\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerWeaponComponent.h">
-      <Filter>Components\Player</Filter>
+      <Filter>Components\Player\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletHolesPoolComponent.h">
+      <Filter>Components\Player\Weapons\BulletHoles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

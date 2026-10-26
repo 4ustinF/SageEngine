@@ -2,17 +2,24 @@
   BPhysicsService.cpp
   BaseColliderComponent.cpp
   BoxColliderComponent.cpp
+  CameraComponent.cpp
   CapsuleColliderComponent.cpp
-  ColliderComponent.cpp
   FollowCameraControllerComponent.cpp
-  GameObjectFactory.cpp
+  GameObject.cpp
   GameWorld.cpp
-  MeshFilterComponent.cpp
   MeshRendererComponent.cpp
+  ModelComponent.cpp
+  ParticleComponent.cpp
+  ParticleService.cpp
+  PhysicsDebugDraw.cpp
+  RBPhysicsService.cpp
   RenderService.cpp
   RigidBodyComponent.cpp
   RigidBodyComponentOld.cpp
   SAGE.cpp
+  SelectionBoxComponent.cpp
+  Generating Code...
+  Compiling...
   SpawnerComponent.cpp
   SpotlightComponent.cpp
   TransformComponent.cpp

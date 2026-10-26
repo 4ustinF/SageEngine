@@ -308,6 +308,11 @@ bool RBPhysicsWorld::Raycast(const PhysicsRay& ray, PhysicsRayHit& rayHit)
 
 	for (std::unique_ptr<RBPhysicsObject>& staticObject : mStaticObjects)
 	{
+		if (staticObject->GetIsTrigger())
+		{
+			continue;
+		}
+
 		if (RaycastAgainstCollider(ray, staticObject->GetCollider(), newHit))
 		{
 			if (newHit.distance < rayHit.distance)

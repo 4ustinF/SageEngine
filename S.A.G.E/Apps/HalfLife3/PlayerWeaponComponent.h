@@ -4,6 +4,7 @@
 
 class SAGE::AnimatorComponent;
 class SAGE::TransformComponent;
+class BulletHolesPoolComponent;
 
 class PlayerWeaponComponent final : public SAGE::Component
 {
@@ -32,11 +33,14 @@ private:
 	void Reload();
 	void Holster();
 
+	BulletHolesPoolComponent* GetOrCreateBulletPool();
+
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
 	SAGE::TransformComponent* mTransformComponent = nullptr;
 	SAGE::AnimatorComponent* mAnimatorComponent = nullptr;
 	SAGE::Graphics::Animator* mAnimator = nullptr;
+	BulletHolesPoolComponent* mBulletPool = nullptr;
 
 	bool mIsEquipped = true;
 	int mCurrentAmmo = 0;

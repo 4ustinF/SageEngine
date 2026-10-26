@@ -134,6 +134,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BulletHolesPoolComponent.cpp" />
     <ClCompile Include="DoorITVComponent.cpp" />
     <ClCompile Include="FlashlightComponent.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BulletHolesPoolComponent.h" />
     <ClInclude Include="DoorITVComponent.h" />
     <ClInclude Include="FlashlightComponent.h" />
     <ClInclude Include="GameState.h" />

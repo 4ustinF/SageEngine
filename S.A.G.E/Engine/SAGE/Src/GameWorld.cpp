@@ -304,7 +304,7 @@ GameObject* GameWorld::CreateGameObjectRecursive(std::filesystem::path templateF
 	return newObject.get();
 }
 
-GameObject* GameWorld::CreateGameObject(std::filesystem::path templateFile)
+GameObject* GameWorld::CreateGameObject(std::filesystem::path templateFile, GameObject* parentGO)
 {
 	ASSERT(mInitialized, "GameWorld - World must be initialized frist before creating game objects.");
 
@@ -338,6 +338,11 @@ GameObject* GameWorld::CreateGameObject(std::filesystem::path templateFile)
 	// Dirty Hierarchy
 	newObject->SetTemplatePath(templateFile);
 	mHierarchyDirty = true;
+
+	if (parentGO)
+	{
+		newObject.get()->SetParent(parentGO->GetHandle());
+	}
 
 	return newObject.get();
 }

@@ -5,6 +5,7 @@
 #include "SAGE/Inc/RBPhysicsService.h"
 
 #include "SAGE/Inc/AnimatorComponent.h"
+#include "BulletHolesPoolComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
@@ -119,6 +120,11 @@ void PlayerWeaponComponent::UpdateWeaponRotation(const Quaternion& rotation)
 	mTransformComponent->SetLocalRotation(rotation);
 }
 
+void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
+{
+	mCurrentAmmoReserve = Math::Clamp(mCurrentAmmoReserve + Abs(ammoAmount), 0, mMaxAmmoReserve);
+}
+
 void PlayerWeaponComponent::Draw()
 {
 	mIsEquipped = true;
@@ -142,6 +148,7 @@ void PlayerWeaponComponent::Shoot()
 	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundID, mShootSoundPitchVolume);
 	mCurrentAmmo -= 1;
 
+	// TODO: Clean up
 	GameWorld& world = GetOwner().GetWorld();
 	RBPhysicsService* phsyicsService = world.GetService<RBPhysicsService>();
 	RBPhysicsWorld& physicsWorld = phsyicsService->GetPhysicsWorld();
@@ -154,11 +161,15 @@ void PlayerWeaponComponent::Shoot()
 	
 	if (physicsWorld.Raycast(physicsRay, physicsRayHit))
 	{
-		GameObject* bulletHoleGO = world.CreateGameObject("../../Assets/Templates/HalfLifeTemplates/Player/Weapons/BulletHoles/bullet_hole.json");
-		TransformComponent* bulletHoleTransformComp = bulletHoleGO->GetComponent<TransformComponent>();
-		bulletHoleTransformComp->SetPosition(physicsRayHit.impactPoint + (physicsRayHit.normal * 0.01f));
-		bulletHoleTransformComp->SetRotation(Quaternion::RotationFromTo(Vector3::YAxis, physicsRayHit.normal));
-		bulletHoleTransformComp->SetScale(Random::UniformFloat(0.14f, 0.18f));
+		if (BulletHolesPoolComponent* bulletHolesPool = GetOrCreateBulletPool())
+		{
+			bulletHolesPool->SpawnBulletHole(
+				physicsRayHit.impactPoint + (physicsRayHit.normal * 0.01f), 
+				Quaternion::RotationFromTo(Vector3::YAxis, physicsRayHit.normal), 
+				Random::UniformFloat(0.14f, 0.18f), 
+				5.0f
+			);
+		}
 	}
 }
 
@@ -190,7 +201,22 @@ void PlayerWeaponComponent::Holster()
 	mAnimator->PlayAnimation(6, false);
 }
 
-void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
+BulletHolesPoolComponent* PlayerWeaponComponent::GetOrCreateBulletPool()
 {
-	mCurrentAmmoReserve = Math::Clamp(mCurrentAmmoReserve + Abs(ammoAmount), 0, mMaxAmmoReserve);
+	if (mBulletPool != nullptr)
+	{
+		return mBulletPool;
+	}
+
+	GameWorld& world = GetOwner().GetWorld();
+	if (GameObject* bulletPoolGO = world.FindGameObject("Bullet Hole Pool"))
+	{
+		mBulletPool = bulletPoolGO->GetComponent<BulletHolesPoolComponent>();
+		return mBulletPool;
+	}
+
+	GameObject* bulletPoolGO = world.CreateGameObject("../../Assets/Templates/HalfLifeTemplates/Player/Weapons/BulletHoles/bullet_hole_pool.json");
+	mBulletPool = bulletPoolGO->GetComponent<BulletHolesPoolComponent>();
+
+	return mBulletPool;
 }

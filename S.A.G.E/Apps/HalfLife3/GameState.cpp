@@ -1,5 +1,6 @@
 #include "GameState.h"
 
+#include "BulletHolesPoolComponent.h"
 #include "DoorITVComponent.h"
 #include "FlashlightComponent.h"
 #include "HealthChargerHITVComponent.h"
@@ -59,6 +60,12 @@ namespace
 		{
 			PlayerWeaponComponent* playerWeaponComponent = gameObject.AddComponent<PlayerWeaponComponent>();
 			playerWeaponComponent->LoadComponentFromTemplate(value);
+			return true;
+		}
+		else if (strcmp(componentName, "Bullet Holes Pool Component") == 0)
+		{
+			BulletHolesPoolComponent* bulletHolesPoolComponent = gameObject.AddComponent<BulletHolesPoolComponent>();
+			bulletHolesPoolComponent->LoadComponentFromTemplate(value);
 			return true;
 		}
 		return false;

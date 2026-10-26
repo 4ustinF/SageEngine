@@ -38,7 +38,7 @@ namespace SAGE
 		}
 
 		void LoadLevel(std::filesystem::path levelFile);
-		GameObject* CreateGameObject(std::filesystem::path templateFile);
+		GameObject* CreateGameObject(std::filesystem::path templateFile, GameObject* parentGO = nullptr);
 		GameObject* FindGameObject(const std::string& name);
 		GameObject* GetGameObject(GameObjectHandle handle);
 		const GameObject* GetGameObject(GameObjectHandle handle) const;

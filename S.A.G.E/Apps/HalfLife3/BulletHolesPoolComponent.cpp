@@ -3,6 +3,7 @@
 
 using namespace SAGE;
 using namespace SAGE::Math;
+using namespace SAGE::Graphics;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(BulletHolesPoolComponent, 1);
@@ -24,8 +25,8 @@ void BulletHolesPoolComponent::Initialize()
 
 void BulletHolesPoolComponent::Terminate()
 {
-	mActiveBulletHoles.empty();
-	mDisabledBulletHoles.empty();
+	mActiveBulletHoles.clear();
+	mDisabledBulletHoles.clear();
 }
 
 void BulletHolesPoolComponent::OnQueueUpdate(float deltaTime)
@@ -35,14 +36,17 @@ void BulletHolesPoolComponent::OnQueueUpdate(float deltaTime)
 		BulletHole& bulletHole = mActiveBulletHoles[activeIndex];
 
 		bulletHole.remainingLifeTime -= deltaTime;
-		if (bulletHole.remainingLifeTime <= 0.0f)
+		if (bulletHole.remainingLifeTime <= 1.0f)
 		{
-			bulletHole.gameObject->SetActive(false);
-			mDisabledBulletHoles.push_back(std::move(mActiveBulletHoles[activeIndex]));
-			mActiveBulletHoles.erase(mActiveBulletHoles.begin() + activeIndex);
-		}
+			bulletHole.meshRendererComp->GetRenderObject().material.emissive.a = bulletHole.remainingLifeTime; // TODO: This only works because above the fade check is 1.0f, we should make it fade out faster.
 
-		// TODO: Fade emmisiveness
+			if (bulletHole.remainingLifeTime <= 0.0f)
+			{
+				bulletHole.gameObject->SetActive(false);
+				mDisabledBulletHoles.push_back(std::move(mActiveBulletHoles[activeIndex]));
+				mActiveBulletHoles.erase(mActiveBulletHoles.begin() + activeIndex);
+			}
+		}
 	}
 
 	if (mActiveBulletHoles.size() > 0)
@@ -64,6 +68,7 @@ void BulletHolesPoolComponent::SpawnBulletHole(const SAGE::Math::Vector3& positi
 	if (mDisabledBulletHoles.size() > 0)
 	{
 		BulletHole& bulletHole = mDisabledBulletHoles.back();
+		bulletHole.meshRendererComp->GetRenderObject().material.emissive.a = 1.0f;
 		bulletHole.transformComp->SetPosition(position);
 		bulletHole.transformComp->SetRotation(rotation);
 		bulletHole.transformComp->SetScale(scale);
@@ -81,6 +86,7 @@ void BulletHolesPoolComponent::SpawnBulletHole(const SAGE::Math::Vector3& positi
 
 		BulletHole bulletHole;
 		bulletHole.gameObject = bulletHoleGO;
+		bulletHole.meshRendererComp = bulletHoleGO->GetComponent<MeshRendererComponent>();
 		bulletHole.transformComp = bulletHoleGO->GetComponent<TransformComponent>();
 		bulletHole.transformComp->SetPosition(position);
 		bulletHole.transformComp->SetRotation(rotation);

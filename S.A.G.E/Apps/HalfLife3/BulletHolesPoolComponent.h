@@ -3,11 +3,13 @@
 #include "TypeIds.h"
 
 class SAGE::AnimatorComponent;
+class SAGE::MeshRendererComponent;
 class SAGE::TransformComponent;
 
 struct BulletHole
 {
 	SAGE::GameObject* gameObject = nullptr;
+	SAGE::MeshRendererComponent* meshRendererComp = nullptr;
 	SAGE::TransformComponent* transformComp = nullptr;
 	float remainingLifeTime = 1.0f;
 };

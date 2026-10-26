@@ -16,8 +16,7 @@ namespace SAGE
 		Custom
 	};
 
-	class MeshFilterComponent final 
-		: public Component
+	class MeshFilterComponent final : public Component
 	{
 	public:
 		SET_TYPE_ID(ComponentId::MeshFilter)

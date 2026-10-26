@@ -8,8 +8,7 @@ namespace SAGE
 	class MeshFilterComponent;
 	class TransformComponent;
 
-	class MeshRendererComponent final 
-		: public Component
+	class MeshRendererComponent final : public Component
 	{
 	public:
 		SET_TYPE_ID(ComponentId::MeshRenderer)

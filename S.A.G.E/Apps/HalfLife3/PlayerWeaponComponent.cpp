@@ -1,12 +1,16 @@
 #include "SAGE/Inc/Precompiled.h"
 #include "PlayerWeaponComponent.h"
 
+#include "SAGE/Inc/CameraService.h"
+#include "SAGE/Inc/RBPhysicsService.h"
+
 #include "SAGE/Inc/AnimatorComponent.h"
 
 using namespace SAGE;
 using namespace SAGE::Math;
 using namespace SAGE::Input;
 using namespace SAGE::Graphics;
+using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(PlayerWeaponComponent, 10);
@@ -137,6 +141,25 @@ void PlayerWeaponComponent::Shoot()
 	mAnimator->PlayAnimation(4, false);
 	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundID, mShootSoundPitchVolume);
 	mCurrentAmmo -= 1;
+
+	GameWorld& world = GetOwner().GetWorld();
+	RBPhysicsService* phsyicsService = world.GetService<RBPhysicsService>();
+	RBPhysicsWorld& physicsWorld = phsyicsService->GetPhysicsWorld();
+
+	CameraService* mCameraService = world.GetService<CameraService>();
+	Camera& camera = mCameraService->GetCamera();
+
+	PhysicsRayHit physicsRayHit;
+	PhysicsRay physicsRay = PhysicsRay(camera.GetPosition(), camera.GetDirection());
+	
+	if (physicsWorld.Raycast(physicsRay, physicsRayHit))
+	{
+		GameObject* bulletHoleGO = world.CreateGameObject("../../Assets/Templates/HalfLifeTemplates/Player/Weapons/BulletHoles/bullet_hole.json");
+		TransformComponent* bulletHoleTransformComp = bulletHoleGO->GetComponent<TransformComponent>();
+		bulletHoleTransformComp->SetPosition(physicsRayHit.impactPoint + (physicsRayHit.normal * 0.01f));
+		bulletHoleTransformComp->SetRotation(Quaternion::RotationFromTo(Vector3::YAxis, physicsRayHit.normal));
+		bulletHoleTransformComp->SetScale(Random::UniformFloat(0.14f, 0.18f));
+	}
 }
 
 void PlayerWeaponComponent::Reload()

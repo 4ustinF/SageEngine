@@ -182,7 +182,6 @@ Quaternion Quaternion::RotationMatrix(const Matrix4& m)
 Quaternion Quaternion::RotationLook(const Vector3& direction, const Vector3& up) // Use RotationMatrix
 {
 	// Direction is normalized before entering method
-
 	Vector3 vector = Normalize(direction);
 	Vector3 vector2 = Normalize(Cross(up, vector));
 	Vector3 vector3 = Cross(vector, vector2);

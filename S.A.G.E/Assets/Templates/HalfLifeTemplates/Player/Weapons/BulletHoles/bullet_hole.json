@@ -1,0 +1,20 @@
+{
+  "Name": "Bullet Hole",
+  "Components": {
+    "Transform Component": {
+      "Local Scale": [
+        0.15,
+        0.15,
+        0.15
+      ]
+    },
+    "Mesh Filter Component": {
+      "MeshType": "Quad"
+    },
+    "Mesh Renderer Component": {
+      "MaterialFilePath": "../../Assets/Models/HalfLife/Weapons/BulletHoles/bullet_hole.material",
+      "Transparent": true,
+      "Can Cast Shadows": false
+    }
+  }
+}

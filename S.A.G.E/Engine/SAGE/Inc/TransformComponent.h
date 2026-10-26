@@ -51,6 +51,7 @@ namespace SAGE
 		void SetRotation(const Math::Vector3& inRotation);
 		void SetRotation(const Math::Quaternion& inRotation);
 		void SetScale(const Math::Vector3& inScale);
+		void SetScale(float inScale);
 
 		void SetLocalPosition(const Math::Vector3& inPos);
 		void SetLocalRotation(const Math::Vector3& inRotation);

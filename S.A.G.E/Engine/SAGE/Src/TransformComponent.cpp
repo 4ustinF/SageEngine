@@ -238,6 +238,11 @@ void TransformComponent::SetScale(const Vector3& inScale)
 	UpdateWorldScale(inScale);
 }
 
+void TransformComponent::SetScale(float inScale)
+{
+	SetScale(Vector3(inScale, inScale, inScale));
+}
+
 void TransformComponent::SetLocalPosition(const Vector3& inPos)
 {
 	mLocalTransform.position = inPos;

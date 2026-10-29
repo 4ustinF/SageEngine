@@ -827,3 +827,161 @@ void GameWorld::UpdateVertexCount()
 }
 
 #pragma endregion
+
+// ------------------------------------
+
+/*
+
+public:
+	// The only public way to make objects. Instantiates the whole template
+	// hierarchy, then initializes it.
+	GameObject* CreateGameObject(const std::filesystem::path& templateFile,
+								 GameObject* parentGO = nullptr,
+								 const char* overrideName = nullptr);
+
+private:
+	GameObject* InstantiateRecursive(const std::filesystem::path& templateFile,
+									 GameObject* parentGO,
+									 const char* overrideName,
+									 std::vector<GameObjectHandle>& outCreated);
+
+	void InitializeCreated(const std::vector<GameObjectHandle>& created);
+
+*/
+
+/*
+
+std::vector<GameObjectHandle> created;
+
+for (auto& gameObject : document["GameObjects"].GetArray())
+{
+	if (!gameObject.HasMember("TemplateFile") || !gameObject["TemplateFile"].IsString())
+	{
+		continue;
+	}
+
+	const char* objectName = (gameObject.HasMember("Name") && gameObject["Name"].IsString())
+								 ? gameObject["Name"].GetString() : nullptr;
+
+	InstantiateRecursive(gameObject["TemplateFile"].GetString(), nullptr, objectName, created);
+}
+
+// Everything in the level exists now, so init.
+InitializeCreated(created);
+
+*/
+
+/*
+
+GameObject* GameWorld::CreateGameObject(const std::filesystem::path& templateFile,
+										GameObject* parentGO,
+										const char* overrideName)
+{
+	std::vector<GameObjectHandle> created;
+	GameObject* root = InstantiateRecursive(templateFile, parentGO, overrideName, created);
+	InitializeCreated(created);
+	return root;
+}
+
+void GameWorld::InitializeCreated(const std::vector<GameObjectHandle>& created)
+{
+	// Iterate our own list, not mUpdateList. Init code may spawn more objects,
+	// which would grow mUpdateList mid-loop. Nested CreateGameObject calls
+	// initialize their own batch, so that's fine.
+	for (const GameObjectHandle& handle : created)
+	{
+		// An earlier init could have destroyed this object, so re-validate.
+		if (!IsValid(handle))
+		{
+			continue;
+		}
+
+		GameObject* go = GetGameObject(handle); // whatever your handle -> pointer lookup is
+		go->Initialize();
+	}
+}
+
+GameObject* GameWorld::InstantiateRecursive(const std::filesystem::path& templateFile,
+											GameObject* parentGO,
+											const char* overrideName,
+											std::vector<GameObjectHandle>& outCreated)
+{
+	ASSERT(mInitialized, "GameWorld - World must be initialized first before creating game objects.");
+
+	if (mFreeSlots.empty())
+	{
+		return nullptr;
+	}
+
+	// Parse the template ONCE.
+	FILE* file = nullptr;
+	auto err = fopen_s(&file, templateFile.u8string().c_str(), "r");
+	ASSERT(err == 0 && file != nullptr, "GameWorld --- Failed to open template file '%s'", templateFile.u8string().c_str());
+
+	char readBuffer[65536];
+	rj::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
+	rj::Document document;
+	document.ParseStream(readStream);
+	fclose(file);
+
+	// Reserve slot
+	const uint32_t freeSlot = mFreeSlots.back();
+	mFreeSlots.pop_back();
+
+	auto& slot = mGameObjectSlots[freeSlot];
+	auto& newObject = slot.gameObject;
+	newObject = std::make_unique<GameObject>();
+
+	GameObjectHandle handle;
+	handle.mIndex = freeSlot;
+	handle.mGeneration = slot.generation;
+
+	newObject->SetTemplatePath(templateFile);
+	if (overrideName != nullptr)
+	{
+		newObject->SetName(overrideName);
+	}
+	newObject->mWorld = this;
+	newObject->mHandle = handle;
+
+	if (parentGO != nullptr)
+	{
+		newObject->SetParent(parentGO);
+	}
+
+	// Attach components (see note below about passing the document in)
+	GameObjectFactory::Make(document, *newObject);
+
+	bool isSelfActive = true;
+	if (document.HasMember("Is Active") && document["Is Active"].IsBool())
+	{
+		isSelfActive = document["Is Active"].GetBool();
+	}
+	const bool isActiveInHierarchy = isSelfActive && (parentGO ? parentGO->IsActiveInHierarchy() : true);
+	newObject->PreSeedSetActive(isSelfActive, isActiveInHierarchy);
+
+	// Parent is recorded before its children => pre-order, so parents init first.
+	mUpdateList.push_back(newObject.get());
+	outCreated.push_back(handle);
+	mHierarchyDirty = true;
+
+	if (document.HasMember("GameObjects") && document["GameObjects"].IsArray())
+	{
+		for (auto& child : document["GameObjects"].GetArray())
+		{
+			if (!child.HasMember("TemplateFile") || !child["TemplateFile"].IsString())
+			{
+				continue;
+			}
+
+			const char* childName = (child.HasMember("Name") && child["Name"].IsString())
+										? child["Name"].GetString() : nullptr;
+
+			InstantiateRecursive(child["TemplateFile"].GetString(), newObject.get(), childName, outCreated);
+		}
+	}
+
+	return newObject.get();
+}
+
+*/

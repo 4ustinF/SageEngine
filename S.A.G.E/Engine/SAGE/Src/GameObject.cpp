@@ -7,7 +7,7 @@ using namespace SAGE;
 using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(GameObject, 700);
+MEMORY_POOL_DEFINE(GameObject, 1000);
 
 void GameObject::Initialize()
 {

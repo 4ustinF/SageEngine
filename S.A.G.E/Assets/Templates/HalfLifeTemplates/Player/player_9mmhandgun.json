@@ -8,6 +8,7 @@
       "Can Cast Shadows": false
     },
     "Player Weapon Component": {
+      "Damage": 8,
       "Max Ammo": 17,
       "Max Ammo Reserve": 250
     },

@@ -43,6 +43,7 @@ private:
 	BulletHolesPoolComponent* mBulletPool = nullptr;
 
 	bool mIsEquipped = true;
+	int mDammage = 0;
 	int mCurrentAmmo = 0;
 	int mMaxAmmo = 0;
 	int mCurrentAmmoReserve = 0;

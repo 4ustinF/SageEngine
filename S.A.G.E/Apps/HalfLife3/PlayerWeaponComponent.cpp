@@ -18,6 +18,11 @@ MEMORY_POOL_DEFINE(PlayerWeaponComponent, 10);
 
 void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
+	if (value.HasMember("Damage"))
+	{
+		mDammage = value["Damage"].GetInt();
+	}
+
 	if (value.HasMember("Max Ammo"))
 	{
 		mMaxAmmo = value["Max Ammo"].GetInt();
@@ -31,6 +36,7 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 
 void PlayerWeaponComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
+	SaveNumberToTemplate(compObj, allocator, "Damage", mDammage);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo", mMaxAmmo);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo Reserve", mMaxAmmoReserve);
 }

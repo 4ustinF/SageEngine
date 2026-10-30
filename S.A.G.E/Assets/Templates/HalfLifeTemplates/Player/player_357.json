@@ -1,0 +1,27 @@
+{
+  "Name": "Player 357",
+  "Components": {
+    "Transform Component": {
+    },
+    "Model Component": {
+      "FileName": "../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun.model",
+      "Can Cast Shadows": false
+    },
+    "Player Weapon Component": {
+      "Damage": 40,
+      "Max Ammo": 6,
+      "Max Ammo Reserve": 36
+    },
+    "Animator Component": {
+      "AnimSets": [
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_idle_01.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_idle_02.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_draw.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_shoot.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_reload.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_holster.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_add_silencer.animset"
+      ]
+    }
+  }
+}

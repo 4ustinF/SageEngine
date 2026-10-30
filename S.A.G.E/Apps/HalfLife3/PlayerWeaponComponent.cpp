@@ -163,11 +163,16 @@ void PlayerWeaponComponent::Shoot()
 	{
 		if (BulletHolesPoolComponent* bulletHolesPool = GetOrCreateBulletPool())
 		{
+			const Quaternion align = Quaternion::RotationFromTo(Vector3::YAxis, physicsRayHit.normal);
+			const float angle = Random::UniformFloat(0.0f, Constants::TwoPi);
+			const Quaternion spin = Quaternion::RotationAxis(Vector3::YAxis, angle);
+			const Quaternion rotation = align * spin;
+
 			bulletHolesPool->SpawnBulletHole(
-				physicsRayHit.impactPoint + (physicsRayHit.normal * 0.01f), 
-				Quaternion::RotationFromTo(Vector3::YAxis, physicsRayHit.normal), 
-				Random::UniformFloat(0.14f, 0.18f), 
-				5.0f
+				physicsRayHit.impactPoint + (physicsRayHit.normal * 0.01), // Random::UniformFloat(0.009f, 0.011f)
+				rotation,
+				Random::UniformFloat(0.14f, 0.18f), // Size
+				5.0f								// Life Time
 			);
 		}
 	}

@@ -169,7 +169,7 @@ void PlayerWeaponComponent::Shoot()
 			const Quaternion rotation = align * spin;
 
 			bulletHolesPool->SpawnBulletHole(
-				physicsRayHit.impactPoint + (physicsRayHit.normal * 0.01), // Random::UniformFloat(0.009f, 0.011f)
+				physicsRayHit.impactPoint + (physicsRayHit.normal * 0.01f), // Random::UniformFloat(0.009f, 0.011f)
 				rotation,
 				Random::UniformFloat(0.14f, 0.18f), // Size
 				5.0f								// Life Time

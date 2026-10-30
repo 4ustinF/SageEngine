@@ -39,24 +39,8 @@ void PlayerControllerComponent::Initialize()
 	mRBPhysicsService = world.GetService<RBPhysicsService>();
 	mCapsuleColliderComponent = owner.GetComponent<CapsuleColliderComponent>();
 
-	// TODO: Get better way like get all childrenwithcomp call.
-	for (auto handle : owner.GetChildrenHandles())
-	{
-		if (GameObject* go = world.GetGameObject(handle))
-		{
-			if (go->GetName() == "Flashlight")
-			{
-				mFlashlightComponent = go->GetComponent<FlashlightComponent>();
-			}
-			else if (go->GetName() == "Player Weapons")
-			{
-				if (GameObject* weaponGO = go->FindChildByName("Player 9mm Handgun"))
-				{
-					mWeapon = weaponGO->GetComponent<PlayerWeaponComponent>();
-				}
-			}
-		}
-	}
+	mFlashlightComponent = owner.GetComponentInChildren<FlashlightComponent>();
+	mWeapon = owner.GetComponentInChildren<PlayerWeaponComponent>(); // TODO: Replace with GetComponentsInChildren
 }
 
 void PlayerControllerComponent::Terminate()

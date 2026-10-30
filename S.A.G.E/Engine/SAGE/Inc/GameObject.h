@@ -108,8 +108,68 @@ namespace SAGE
 		void AddChild(GameObjectHandle childObjectHandle);
 		void RemoveChild(GameObjectHandle childObjectHandle);
 		const std::vector<GameObjectHandle>& GetChildrenHandles() const { return mChildGameObjectHandles; }
+		GameObject* GetChildByIndex(int index);
 		GameObject* FindChildByName(const std::string& name);
 		GameObject* FindDeepChildByName(const std::string& name);
+
+		template <class ComponentType>
+		ComponentType* GetComponentInChildren(bool includeInactive = true)
+		{
+			if (!includeInactive && !mActiveInHierarchy)
+			{
+				return nullptr; // Inactive objects have inactive children too, so skip the subtree.
+			}
+
+			if (ComponentType* component = GetComponent<ComponentType>())
+			{
+				return component;
+			}
+
+			const int childCount = static_cast<int>(mChildGameObjectHandles.size());
+			for (int i = 0; i < childCount; ++i)
+			{
+				if (GameObject* child = GetChildByIndex(i))
+				{
+					if (ComponentType* found = child->GetComponentInChildren<ComponentType>(includeInactive))
+					{
+						return found;
+					}
+				}
+			}
+
+			return nullptr;
+		}
+
+		template <class ComponentType>
+		void GetComponentsInChildren(std::vector<ComponentType*>& outComponents, bool includeInactive = true)
+		{
+			if (!includeInactive && !mActiveInHierarchy)
+			{
+				return;
+			}
+
+			if (ComponentType* component = GetComponent<ComponentType>())
+			{
+				outComponents.push_back(component);
+			}
+
+			const int childCount = static_cast<int>(mChildGameObjectHandles.size());
+			for (int i = 0; i < childCount; ++i)
+			{
+				if (GameObject* child = GetChildByIndex(i))
+				{
+					child->GetComponentsInChildren<ComponentType>(outComponents, includeInactive);
+				}
+			}
+		}
+
+		template <class ComponentType>
+		std::vector<ComponentType*> GetComponentsInChildren(bool includeInactive = true)
+		{
+			std::vector<ComponentType*> results;
+			GetComponentsInChildren<ComponentType>(results, includeInactive);
+			return results;
+		}
 
 	protected:
 		bool GetIsReparenting() const { return mIsReparenting; }

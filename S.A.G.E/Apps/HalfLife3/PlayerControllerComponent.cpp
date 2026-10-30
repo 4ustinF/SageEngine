@@ -38,7 +38,25 @@ void PlayerControllerComponent::Initialize()
 	mCameraService = world.GetService<CameraService>();
 	mRBPhysicsService = world.GetService<RBPhysicsService>();
 	mCapsuleColliderComponent = owner.GetComponent<CapsuleColliderComponent>();
-	mFlashlightComponent = LazyGetFlashlightComponent();
+
+	// TODO: Get better way like get all childrenwithcomp call.
+	for (auto handle : owner.GetChildrenHandles())
+	{
+		if (GameObject* go = world.GetGameObject(handle))
+		{
+			if (go->GetName() == "Flashlight")
+			{
+				mFlashlightComponent = go->GetComponent<FlashlightComponent>();
+			}
+			else if (go->GetName() == "Player Weapons")
+			{
+				if (GameObject* weaponGO = go->FindChildByName("Player 9mm Handgun"))
+				{
+					mWeapon = weaponGO->GetComponent<PlayerWeaponComponent>();
+				}
+			}
+		}
+	}
 }
 
 void PlayerControllerComponent::Terminate()
@@ -75,30 +93,6 @@ void PlayerControllerComponent::DebugUI()
 	}
 }
 
-FlashlightComponent* PlayerControllerComponent::LazyGetFlashlightComponent()
-{
-	if (mFlashlightComponent != nullptr)
-	{
-		return mFlashlightComponent;
-	}
-
-	GameObject& owner = GetOwner();
-	GameWorld& world = owner.GetWorld();
-	for (const GameObjectHandle& handle : owner.GetChildrenHandles())
-	{
-		if (GameObject* childObj = world.GetGameObject(handle))
-		{
-			if (FlashlightComponent* flashlightComponent = childObj->GetComponent<FlashlightComponent>())
-			{
-				mFlashlightComponent = flashlightComponent;
-				return mFlashlightComponent;
-			}
-		}
-	}
-
-	return nullptr;
-}
-
 void PlayerControllerComponent::IsGroundedCheck()
 {
 	if (const RBPhysicsObject* physicsObject = mCapsuleColliderComponent->GetPhysicsObject())
@@ -124,7 +118,7 @@ void PlayerControllerComponent::CheckForFlashlightInput()
 {
 	if (mInputSystem->IsKeyPressed(KeyCode::F))
 	{
-		if (FlashlightComponent* flashlightComponent = LazyGetFlashlightComponent())
+		if (mFlashlightComponent != nullptr)
 		{
 			mFlashlightComponent->ToggleFlashlight();
 		}
@@ -196,9 +190,9 @@ void PlayerControllerComponent::CheckForPlayerGameplayInput()
 		return;
 	}
 
-	if (PlayerWeaponComponent* weapon = LazyGetPlayerWeaponComponent())
+	if (mWeapon != nullptr)
 	{
-		weapon->CheckForPlayerGameplayInput();
+		mWeapon->CheckForPlayerGameplayInput();
 	}
 }
 
@@ -229,9 +223,9 @@ void PlayerControllerComponent::UpdateArmsPosition(const Camera& camera)
 		return;
 	}
 
-	if (PlayerWeaponComponent* weapon = LazyGetPlayerWeaponComponent())
+	if (mWeapon != nullptr)
 	{
-		weapon->UpdateWeaponRotation(camera.GetOrientation());
+		mWeapon->UpdateWeaponRotation(camera.GetOrientation());
 	}
 }
 
@@ -243,16 +237,4 @@ float PlayerControllerComponent::GetMovementSpeed(float deltaTime) const
 	}
 
 	return (mIsGrounded ? mGroundSpeed.x : mAirSpeed.x) * deltaTime;
-}
-
-PlayerWeaponComponent* PlayerControllerComponent::LazyGetPlayerWeaponComponent()
-{
-	if (mWeapon == nullptr)
-	{
-		GameObject* weaponGO = GetOwner().GetWorld().FindGameObject("Player 9mm Handgun");
-		if (weaponGO == nullptr) { return nullptr; }
-		mWeapon = weaponGO->GetComponent<PlayerWeaponComponent>();
-	}
-
-	return mWeapon;
 }

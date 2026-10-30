@@ -31,7 +31,6 @@ private:
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 	SAGE::CapsuleColliderComponent* mCapsuleColliderComponent = nullptr;
 	FlashlightComponent* mFlashlightComponent = nullptr;
-	FlashlightComponent* LazyGetFlashlightComponent(); // Figure out a better way to get a childs comp.
 
 	void IsGroundedCheck();
 	void CheckForFlashlightInput();
@@ -48,8 +47,7 @@ private:
 	bool mIsGrounded = true;
 	SAGE::Math::Vector3 mGroundNormal = SAGE::Math::Vector3::YAxis;
 
-	// TODO: Move out
-	PlayerWeaponComponent* LazyGetPlayerWeaponComponent(); // Figure out a better way to get a childs comp.
+	// Weapons
 	PlayerWeaponComponent* mWeapon = nullptr;
 
 	// Debug

@@ -38,17 +38,17 @@ namespace SAGE
 		}
 
 		void LoadLevel(std::filesystem::path levelFile);
-		GameObject* CreateGameObject(std::filesystem::path templateFile, GameObject* parentGO = nullptr);
+		GameObject* CreateGameObject(const std::filesystem::path& templateFile, GameObject* parentGO = nullptr, const char* overrideName = nullptr);
 		GameObject* FindGameObject(const std::string& name);
 		GameObject* GetGameObject(GameObjectHandle handle);
 		const GameObject* GetGameObject(GameObjectHandle handle) const;
 		void DestroyGameObject(GameObjectHandle handle);
 
-		GameObject* CreateGameObjectRecursive(std::filesystem::path templateFile, GameObject* parentGO, const char* overrideName);
-
 		void SetEditMode(bool editMode) { mEditMode = editMode; }
 
 	private:
+		GameObject* InstantiateRecursive(const std::filesystem::path& templateFile, GameObject* parentGO, const char* overrideName, std::vector<GameObjectHandle>& outCreated);
+		void InitializeCreated(const std::vector<GameObjectHandle>& created);
 		bool IsValid(GameObjectHandle handle) const;
 		void ProcessDestroyList();
 		SAGE::Input::InputSystem* mInputSystem = nullptr;

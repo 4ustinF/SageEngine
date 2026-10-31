@@ -49,3 +49,12 @@
 -scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_idle_01.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/AnimSets/9mmhandgun_idle_01.model
 -scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_idle_02.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/AnimSets/9mmhandgun_idle_02.model
 -scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/9mmhandgun/9mmhandgun_reload.fbx ../../Assets/Models/HalfLife/Player/9mmhandgun/AnimSets/9mmhandgun_reload.model
+
+-scale 0.01 ../../Assets/Models/HalfLife/Player/ColtPython/v_357.fbx ../../Assets/Models/HalfLife/Player/ColtPython/colt_python.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/v_357_draw.fbx ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/colt_python_draw.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/v_357_fidget.fbx ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/colt_python_fidget.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/v_357_fire.fbx ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/colt_python_fire.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/v_357_holster.fbx ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/colt_python_holster.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/v_357_idle_01.fbx ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/colt_python_idle_01.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/v_357_idle_02.fbx ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/colt_python_idle_02.model
+-scale 0.01 -animOnly ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/v_357_reload.fbx ../../Assets/Models/HalfLife/Player/ColtPython/AnimSets/colt_python_reload.model

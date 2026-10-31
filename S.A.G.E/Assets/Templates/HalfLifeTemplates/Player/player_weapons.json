@@ -16,7 +16,7 @@
   },
   "GameObjects": [
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/player_9mmhandgun.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/player_colt_python.json"
     }
   ]
 }

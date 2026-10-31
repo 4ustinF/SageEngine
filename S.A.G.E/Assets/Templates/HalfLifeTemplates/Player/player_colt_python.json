@@ -1,0 +1,26 @@
+{
+  "Name": "Player Colt Python",
+  "Components": {
+    "Transform Component": {
+    },
+    "Model Component": {
+      "FileName": "../../Assets/Models/HalfLife/Player/ColtPython/colt_python.model",
+      "Can Cast Shadows": false
+    },
+    "Player Weapon Component": {
+      "Damage": 40,
+      "Max Ammo": 6,
+      "Max Ammo Reserve": 36
+    },
+    "Animator Component": {
+      "AnimSets": [
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_idle_01.animset",
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_idle_02.animset",
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_draw.animset",
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_fire.animset",
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_reload.animset",
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_holster.animset"
+      ]
+    }
+  }
+}

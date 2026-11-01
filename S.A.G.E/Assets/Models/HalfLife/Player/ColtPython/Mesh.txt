@@ -1,0 +1,11 @@
+1 = Bullets
+2 = gun body
+3 = gun handle
+4 = gun mag
+5 = arms
+6 = hands
+7 = knuckles
+8 = Handpack
+9 = Laser sight clip (should be same texture as gun body)
+10 = Laser sight
+11 = reload thing

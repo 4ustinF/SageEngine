@@ -98,6 +98,24 @@ void PlayerWeaponComponent::DebugUI()
 		
 		ImGui::DragInt("Current Ammo Reserve##PlayerWeaponComponent", &mCurrentAmmoReserve, 1, 0, mMaxAmmoReserve);
 		ImGui::DragInt("Max Ammo Reserve##PlayerWeaponComponent", &mMaxAmmoReserve, 1, 0, 500);
+
+		ImGui::Checkbox("Is Busy##PlayerWeaponComponent", &mIsBusy);
+	}
+}
+
+void PlayerWeaponComponent::OnEnable()
+{
+	if (mAnimatorComponent)
+	{
+		mOnAnimationFinishedHandle = mAnimatorComponent->GetOnAnimationFinishedDelegate().AddRaw(this, &PlayerWeaponComponent::OnAnimationFinishedCallback);
+	}
+}
+
+void PlayerWeaponComponent::OnDisable()
+{
+	if (mAnimatorComponent)
+	{
+		mAnimatorComponent->GetOnAnimationFinishedDelegate().Remove(mOnAnimationFinishedHandle);
 	}
 }
 
@@ -150,17 +168,10 @@ void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
 	mCurrentAmmoReserve = Math::Clamp(mCurrentAmmoReserve + Abs(ammoAmount), 0, mMaxAmmoReserve);
 }
 
-bool PlayerWeaponComponent::IsBusy() const
-{
-	const int clipIndex = static_cast<int>(mAnimator->GetClipIndex());
-	
-	// Draw, Shoot, Reload, Holster
-	return (clipIndex == 3 || clipIndex == 4 || clipIndex == 5 || clipIndex == 6);
-}
-
 void PlayerWeaponComponent::Draw()
 {
 	mIsEquipped = true;
+	mIsBusy = true;
 	mAnimator->PlayAnimation(3, false);
 }
 
@@ -177,6 +188,7 @@ void PlayerWeaponComponent::Shoot()
 		return;
 	}
 
+	mIsBusy = true;
 	mAnimator->PlayAnimation(4, false);
 	const int shootSoundIDIndex = Random::UniformInt(0, static_cast<int>(mShootSoundIDs.size()) - 1);
 	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundIDs[shootSoundIDIndex], mShootSoundPitchVolume);
@@ -219,6 +231,7 @@ void PlayerWeaponComponent::Reload()
 		return;
 	}
 
+	mIsBusy = true;
 	mAnimator->PlayAnimation(5, false);
 
 	const int ammoNeeded = mMaxAmmo - mCurrentAmmo;
@@ -237,7 +250,27 @@ void PlayerWeaponComponent::Reload()
 void PlayerWeaponComponent::Holster()
 {
 	mIsEquipped = false;
+	mIsBusy = true;
 	mAnimator->PlayAnimation(6, false);
+}
+
+void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
+{
+	const int clip = static_cast<int>(clipIndex);
+	mIsBusy = false;
+
+	// TODO: Handle animation finished callbacks for different animations
+
+	// Draw, Shoot, Reload, Holster
+	if (clip == 3 || clip == 4 || clip == 5)
+	{
+		Idle();
+	}
+	else if (clip == 6)
+	{
+		
+	}
+	// else if other one shot anims idle as well
 }
 
 BulletHolesPoolComponent* PlayerWeaponComponent::GetOrCreateBulletPool()

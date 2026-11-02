@@ -22,6 +22,7 @@ namespace SAGE
 
 		Graphics::Animator& GetAnimator() { return mAnimator; }
 		const Graphics::Animator& GetAnimator() const { return mAnimator; }
+		Graphics::FOnAnimationFinished& GetOnAnimationFinishedDelegate() { return mAnimator.GetOnAnimationFinishedDelegate(); }
 
 		std::string GetAnimationName(int index);
 		std::string GetAnimationName(const std::string& path);

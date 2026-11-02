@@ -22,12 +22,14 @@ public:
 
 	void Update(float deltaTime) override;
 	void DebugUI() override;
+	void OnEnable() override;
+	void OnDisable() override;
 
 	void CheckForPlayerGameplayInput();
 	void UpdateWeaponRotation(const SAGE::Math::Quaternion& rotation);
 	void OnAmmoPickedUp(int ammoAmount);
 
-	bool IsBusy() const;
+	bool IsBusy() const { return mIsBusy; };
 
 private:
 	friend class PlayerControllerComponent;
@@ -36,6 +38,9 @@ private:
 	void Shoot();
 	void Reload();
 	void Holster(); // We need callbacks so this deactivates itself after holster animation is done.
+
+	void OnAnimationFinishedCallback(size_t clipIndex);
+	SAGE::Core::Delegate::FDelegateHandle mOnAnimationFinishedHandle;
 
 	BulletHolesPoolComponent* GetOrCreateBulletPool();
 
@@ -52,6 +57,7 @@ private:
 	int mMaxAmmo = 0;
 	int mCurrentAmmoReserve = 0;
 	int mMaxAmmoReserve = 0;
+	bool mIsBusy = false;
 
 	// Audio
 	std::vector<std::string> mShootSoundFilePaths;

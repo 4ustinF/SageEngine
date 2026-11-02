@@ -2,6 +2,8 @@
 
 namespace SAGE::Graphics
 {
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnAnimationFinished, size_t); // Clip Index
+
 	struct Bone;
 	struct Model;
 
@@ -30,11 +32,16 @@ namespace SAGE::Graphics
 		float GetAnimationTick() const { return mAnimationTick; }
 		bool GetIsLooping() const { return mLooping; }
 
+		FOnAnimationFinished& GetOnAnimationFinishedDelegate() { return mOnAnimationFinished; }
+
 	private:
 		const Model* mModel = nullptr;
 		size_t mClipIndex = 0;
 		float mAnimationTick = 0.0f;
 		bool mLooping = true;
+
+		bool mIsAnimating = false;
+		FOnAnimationFinished mOnAnimationFinished;
 	};
 
 	class AnimationBlender final : public IAnimator

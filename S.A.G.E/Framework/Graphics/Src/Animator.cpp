@@ -20,11 +20,17 @@ void Animator::PlayAnimation(size_t clipIndex, bool looping)
 		mClipIndex = clipIndex;
 		mAnimationTick = 0.0f;
 		mLooping = looping;
+		mIsAnimating = true;
 	}
 }
 
 void Animator::Update(float deltaTime)
 {
+	if (!mIsAnimating) // Queue tick instead?
+	{
+		return;
+	}
+
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
 	mAnimationTick += clip.ticksPerSecond * deltaTime;
 	if (mAnimationTick > clip.tickDuration)
@@ -37,6 +43,8 @@ void Animator::Update(float deltaTime)
 		}
 		else {
 			mAnimationTick = clip.tickDuration;
+			mIsAnimating = false;
+			mOnAnimationFinished.Broadcast(mClipIndex);
 		}
 	}
 }

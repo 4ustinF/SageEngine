@@ -268,7 +268,7 @@ void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 	}
 	else if (clip == 6)
 	{
-		
+		GetOwner().SetActive(false);
 	}
 	// else if other one shot anims idle as well
 }

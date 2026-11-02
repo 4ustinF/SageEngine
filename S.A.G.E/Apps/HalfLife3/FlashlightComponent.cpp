@@ -33,8 +33,6 @@ void FlashlightComponent::Initialize()
 	mTransformComponent = owner.GetComponent<TransformComponent>();
 	mSpotlightComponent = owner.GetComponent<SpotlightComponent>();
 
-	TurnOffFlashlight(); // TODO: should have a way to start game objects off via json.
-
 	mSoundEffectManager = SoundEffectManager::Get();
 	mToggleSoundID = mSoundEffectManager->Load("items/flashlight1.wav");
 }

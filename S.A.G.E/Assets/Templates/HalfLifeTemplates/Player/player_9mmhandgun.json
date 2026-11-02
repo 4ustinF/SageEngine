@@ -11,7 +11,10 @@
     "Player Weapon Component": {
       "Damage": 8,
       "Max Ammo": 17,
-      "Max Ammo Reserve": 250
+      "Max Ammo Reserve": 250,
+      "Shoot Sound IDs": [
+        "weapons/pl_gun3.wav"
+      ]
     },
     "Animator Component": {
       "AnimSets": [

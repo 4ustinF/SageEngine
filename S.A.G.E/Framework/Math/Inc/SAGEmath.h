@@ -52,6 +52,49 @@ namespace SAGE::Math
 	template <class T>
 	constexpr T Sqrt(T value) { return std::sqrt(value); }
 
+	template <class T>
+	T Wrap(T value, T min, T max) // Min is inclusive. Max is exlusive.
+	{
+		const T range = max - min;
+
+		T result;
+		if constexpr (std::is_floating_point_v<T>)
+		{
+			result = std::fmod(value - min, range);
+		}
+		else
+		{
+			result = (value - min) % range;
+		}
+
+		// % and fmod keep the sign of the input, so fix negatives
+		if (result < 0)
+		{
+			result += range;
+		}
+
+		return result + min;
+	}
+
+	template <class T>
+	T WrapInclusive(T value, T min, T max)
+	{
+		if constexpr (std::is_floating_point_v<T>)
+		{
+			// Anything already in range stays put, so max stays max.
+			if (value >= min && value <= max)
+			{
+				return value;
+			}
+			return Wrap(value, min, max);
+		}
+		else
+		{
+			// Integers have a countable number of values, so max is just one more slot in the range.
+			return Wrap(value, min, static_cast<T>(max + 1));
+		}
+	}
+
 	//Vector2
 	#pragma region ---Vector2---
 	inline float Dot(const Vector2& a, const Vector2& b) { return (a.x * b.x) + (a.y * b.y); }

@@ -29,10 +29,12 @@ namespace SAGE::Input
 
 		bool IsMouseDown(MouseButton button) const;
 		bool IsMousePressed(MouseButton button) const;
+		bool IsScrollWheelUp() const;
+		bool IsScrollWheelDown() const;
+		float GetScrollWheelValue() const;
 
 		int GetMouseMoveX() const;
 		int GetMouseMoveY() const;
-		float GetMouseMoveZ() const;
 
 		int& GetMouseScreenX();
 		int& GetMouseScreenY();
@@ -106,7 +108,8 @@ namespace SAGE::Input
 		int mMouseMoveX = 0;
 		int mMouseMoveY = 0;
 
-		float mMouseWheel = 0.0f;
+		float mScrollWheelValue = 0.0f;   // accumulates in the window message handler
+		float mScrollWheelDelta = 0.0f;   // how far the wheel moved this frame
 
 		bool mCurrMouseButtons[3]{};
 		bool mPrevMouseButtons[3]{};

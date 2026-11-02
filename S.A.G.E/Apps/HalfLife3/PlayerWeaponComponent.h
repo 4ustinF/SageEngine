@@ -5,6 +5,7 @@
 class SAGE::AnimatorComponent;
 class SAGE::TransformComponent;
 class BulletHolesPoolComponent;
+class PlayerControllerComponent;
 
 class PlayerWeaponComponent final : public SAGE::Component
 {
@@ -26,12 +27,15 @@ public:
 	void UpdateWeaponRotation(const SAGE::Math::Quaternion& rotation);
 	void OnAmmoPickedUp(int ammoAmount);
 
+	bool IsBusy() const;
+
 private:
+	friend class PlayerControllerComponent;
 	void Draw();
 	void Idle();
 	void Shoot();
 	void Reload();
-	void Holster();
+	void Holster(); // We need callbacks so this deactivates itself after holster animation is done.
 
 	BulletHolesPoolComponent* GetOrCreateBulletPool();
 
@@ -43,14 +47,15 @@ private:
 	BulletHolesPoolComponent* mBulletPool = nullptr;
 
 	bool mIsEquipped = true;
-	int mDammage = 0;
+	int mDamage = 0;
 	int mCurrentAmmo = 0;
 	int mMaxAmmo = 0;
 	int mCurrentAmmoReserve = 0;
 	int mMaxAmmoReserve = 0;
 
 	// Audio
-	SAGE::Graphics::SoundId mShootSoundID = 0;
+	std::vector<std::string> mShootSoundFilePaths;
+	std::vector<SAGE::Graphics::SoundId> mShootSoundIDs;
 	float mShootSoundPitchVolume = 0.05f;
 
 };

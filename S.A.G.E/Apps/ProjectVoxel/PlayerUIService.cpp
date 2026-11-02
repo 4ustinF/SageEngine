@@ -174,7 +174,7 @@ void PlayerUIService::DebugUI()
 
 void PlayerUIService::IconHotBarUpdate(const InputSystem* inputSystem)
 {
-	const float mouseZ = inputSystem->GetMouseMoveZ();
+	const float mouseZ = inputSystem->GetScrollWheelValue();
 	if (mMouseZCache != mouseZ)
 	{
 		int scrollAmt = static_cast<int>(mMouseZCache - mouseZ);

@@ -89,7 +89,7 @@ LRESULT CALLBACK InputSystem::InputSystemMessageHandler(HWND window, UINT messag
 			}
 			case WM_MOUSEWHEEL:
 			{
-				sInputSystem->mMouseWheel += (float)GET_WHEEL_DELTA_WPARAM(wParam) / (float)WHEEL_DELTA;
+				sInputSystem->mScrollWheelValue += (float)GET_WHEEL_DELTA_WPARAM(wParam) / (float)WHEEL_DELTA;
 				break;
 			}
 			case WM_MOUSEMOVE:
@@ -226,9 +226,15 @@ void InputSystem::Update()
 	}
 	memcpy(mPrevMouseButtons, mCurrMouseButtons, sizeof(mCurrMouseButtons));
 
+	// Latch this frame's scroll amount, then reset the accumulator
+	mScrollWheelDelta = mScrollWheelValue;
+	mScrollWheelValue = 0.0f;
+
 	// Update game pad
 	for (size_t i = 0; i < std::size(mGamePadState); ++i)
+	{
 		mGamePadState[i] = mGamePad->GetState((int)i);
+	}
 }
 
 bool InputSystem::IsKeyDown(KeyCode key) const
@@ -251,6 +257,21 @@ bool InputSystem::IsMousePressed(MouseButton button) const
 	return mPressedMouseButtons[(int)button];
 }
 
+bool InputSystem::IsScrollWheelUp() const
+{
+	return mScrollWheelDelta > 0.0f;
+}
+
+bool InputSystem::IsScrollWheelDown() const
+{
+	return mScrollWheelDelta < 0.0f;
+}
+
+float InputSystem::GetScrollWheelValue() const
+{
+	return mScrollWheelDelta;
+}
+
 int InputSystem::GetMouseMoveX() const
 {
 	return mMouseMoveX;
@@ -259,11 +280,6 @@ int InputSystem::GetMouseMoveX() const
 int InputSystem::GetMouseMoveY() const
 {
 	return mMouseMoveY;
-}
-
-float InputSystem::GetMouseMoveZ() const
-{
-	return mMouseWheel;
 }
 
 int& InputSystem::GetMouseScreenX()

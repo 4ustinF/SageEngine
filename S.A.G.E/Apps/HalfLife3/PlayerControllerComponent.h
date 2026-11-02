@@ -48,7 +48,10 @@ private:
 	SAGE::Math::Vector3 mGroundNormal = SAGE::Math::Vector3::YAxis;
 
 	// Weapons
-	PlayerWeaponComponent* mWeapon = nullptr;
+	void SwapWeapons(int mNewIndex);
+	PlayerWeaponComponent* mActiveWeapon = nullptr;
+	std::vector<PlayerWeaponComponent*> mWeapons;
+	int mActiveWeaponIndex = 0;
 
 	// Debug
 	bool mCanMove = true;

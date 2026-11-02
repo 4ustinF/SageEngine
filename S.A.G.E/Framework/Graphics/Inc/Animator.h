@@ -34,7 +34,7 @@ namespace SAGE::Graphics
 		const Model* mModel = nullptr;
 		size_t mClipIndex = 0;
 		float mAnimationTick = 0.0f;
-		bool mLooping = false;
+		bool mLooping = true;
 	};
 
 	class AnimationBlender final : public IAnimator

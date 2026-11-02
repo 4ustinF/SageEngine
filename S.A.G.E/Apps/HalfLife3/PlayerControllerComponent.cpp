@@ -40,7 +40,8 @@ void PlayerControllerComponent::Initialize()
 	mCapsuleColliderComponent = owner.GetComponent<CapsuleColliderComponent>();
 
 	mFlashlightComponent = owner.GetComponentInChildren<FlashlightComponent>();
-	mWeapon = owner.GetComponentInChildren<PlayerWeaponComponent>(); // TODO: Replace with GetComponentsInChildren
+	mWeapons = owner.GetComponentsInChildren<PlayerWeaponComponent>(); 
+	mActiveWeapon = mWeapons.empty() ? nullptr : mWeapons[mActiveWeaponIndex];
 }
 
 void PlayerControllerComponent::Terminate()
@@ -74,6 +75,9 @@ void PlayerControllerComponent::DebugUI()
 		ImGui::DragFloat2("Air Speed##PlayerControllerComponent", &mAirSpeed.x, 0.1f);
 		ImGui::DragFloat("Jump Force##PlayerControllerComponent", &mJumpForce, 0.1f);
 		ImGui::DragFloat3("Camera Offset##PlayerControllerComponent", &mCameraOffset.x, 0.01f);
+
+		// Debug
+		ImGui::DragInt("Active Weapon Index##PlayerControllerComponent", &mActiveWeaponIndex, 1, 0, (int)mWeapons.size() - 1);
 	}
 }
 
@@ -174,9 +178,18 @@ void PlayerControllerComponent::CheckForPlayerGameplayInput()
 		return;
 	}
 
-	if (mWeapon != nullptr)
+	if (mInputSystem->IsScrollWheelUp())
 	{
-		mWeapon->CheckForPlayerGameplayInput();
+		SwapWeapons(mActiveWeaponIndex - 1);
+	}
+	else if (mInputSystem->IsScrollWheelDown())
+	{
+		SwapWeapons(mActiveWeaponIndex + 1);
+	}
+
+	if (mActiveWeapon)
+	{
+		mActiveWeapon->CheckForPlayerGameplayInput();
 	}
 }
 
@@ -207,9 +220,9 @@ void PlayerControllerComponent::UpdateArmsPosition(const Camera& camera)
 		return;
 	}
 
-	if (mWeapon != nullptr)
+	if (mActiveWeapon != nullptr)
 	{
-		mWeapon->UpdateWeaponRotation(camera.GetOrientation());
+		mActiveWeapon->UpdateWeaponRotation(camera.GetOrientation());
 	}
 }
 
@@ -221,4 +234,31 @@ float PlayerControllerComponent::GetMovementSpeed(float deltaTime) const
 	}
 
 	return (mIsGrounded ? mGroundSpeed.x : mAirSpeed.x) * deltaTime;
+}
+
+void PlayerControllerComponent::SwapWeapons(int mNewIndex)
+{
+	// Weapon swapping = Active Disappears, new weapon appears with Draw animation.
+	if (mActiveWeapon)
+	{
+		if (mActiveWeapon->IsBusy())
+		{
+			return;
+		}
+
+		mActiveWeapon->GetOwner().SetActive(false);
+	}
+
+	const int weaponCount = static_cast<int>(mWeapons.size());
+	mActiveWeaponIndex = WrapInclusive(mNewIndex, 0, weaponCount);
+
+	if (mActiveWeaponIndex == weaponCount)
+	{
+		mActiveWeapon = nullptr;
+	}
+	else if (mActiveWeapon = mWeapons[mActiveWeaponIndex])
+	{
+		mActiveWeapon->GetOwner().SetActive(true);
+		mActiveWeapon->Draw();
+	}
 }

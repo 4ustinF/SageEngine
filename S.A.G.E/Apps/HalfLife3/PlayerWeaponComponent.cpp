@@ -14,13 +14,13 @@ using namespace SAGE::Graphics;
 using namespace SAGE::RBPhysics;
 namespace rj = rapidjson;
 
-MEMORY_POOL_DEFINE(PlayerWeaponComponent, 10);
+MEMORY_POOL_DEFINE(PlayerWeaponComponent, 16);
 
 void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
 	if (value.HasMember("Damage"))
 	{
-		mDammage = value["Damage"].GetInt();
+		mDamage = value["Damage"].GetInt();
 	}
 
 	if (value.HasMember("Max Ammo"))
@@ -32,13 +32,23 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 	{
 		mMaxAmmoReserve = value["Max Ammo Reserve"].GetInt();
 	}
+
+	if (value.HasMember("Shoot Sound IDs"))
+	{
+		const auto& soundIDs = value["Shoot Sound IDs"].GetArray();
+		for (const auto& soundId : soundIDs)
+		{
+			mShootSoundFilePaths.push_back(soundId.GetString());
+		}
+	}
 }
 
 void PlayerWeaponComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
-	SaveNumberToTemplate(compObj, allocator, "Damage", mDammage);
+	SaveNumberToTemplate(compObj, allocator, "Damage", mDamage);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo", mMaxAmmo);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo Reserve", mMaxAmmoReserve);
+	SaveStringsToTemplate(compObj, allocator, "Shoot Sound IDs", mShootSoundFilePaths);
 }
 
 void PlayerWeaponComponent::Initialize()
@@ -51,7 +61,10 @@ void PlayerWeaponComponent::Initialize()
 	mAnimator = &mAnimatorComponent->GetAnimator();
 
 	mSoundEffectManager = SoundEffectManager::Get();
-	mShootSoundID = mSoundEffectManager->Load("weapons/pl_gun3.wav");
+	for (const std::string& soundFilePath : mShootSoundFilePaths)
+	{
+		mShootSoundIDs.push_back(mSoundEffectManager->Load(soundFilePath.c_str()));
+	}
 
 	mCurrentAmmo = mMaxAmmo;
 	mCurrentAmmoReserve = mMaxAmmoReserve;
@@ -59,7 +72,8 @@ void PlayerWeaponComponent::Initialize()
 
 void PlayerWeaponComponent::Terminate()
 {
-	mShootSoundID = 0;
+	mShootSoundFilePaths.clear();
+	mShootSoundIDs.clear();
 
 	mAnimator = nullptr;
 	mAnimatorComponent = nullptr;
@@ -105,6 +119,11 @@ void PlayerWeaponComponent::CheckForPlayerGameplayInput()
 
 		if (mAnimator->GetIsLooping())
 		{
+			if (IsBusy())
+			{
+				return;
+			}
+
 			if (mInputSystem->IsKeyPressed(KeyCode::ZERO))
 			{
 				Holster();
@@ -131,6 +150,14 @@ void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
 	mCurrentAmmoReserve = Math::Clamp(mCurrentAmmoReserve + Abs(ammoAmount), 0, mMaxAmmoReserve);
 }
 
+bool PlayerWeaponComponent::IsBusy() const
+{
+	const int clipIndex = static_cast<int>(mAnimator->GetClipIndex());
+	
+	// Draw, Shoot, Reload, Holster
+	return (clipIndex == 3 || clipIndex == 4 || clipIndex == 5 || clipIndex == 6);
+}
+
 void PlayerWeaponComponent::Draw()
 {
 	mIsEquipped = true;
@@ -151,7 +178,8 @@ void PlayerWeaponComponent::Shoot()
 	}
 
 	mAnimator->PlayAnimation(4, false);
-	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundID, mShootSoundPitchVolume);
+	const int shootSoundIDIndex = Random::UniformInt(0, static_cast<int>(mShootSoundIDs.size()) - 1);
+	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundIDs[shootSoundIDIndex], mShootSoundPitchVolume);
 	mCurrentAmmo -= 1;
 
 	// TODO: Clean up
@@ -186,7 +214,7 @@ void PlayerWeaponComponent::Shoot()
 
 void PlayerWeaponComponent::Reload()
 {
-	if (mCurrentAmmoReserve == 0)
+	if (mCurrentAmmo == mMaxAmmo || mCurrentAmmoReserve == 0)
 	{
 		return;
 	}

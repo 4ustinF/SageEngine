@@ -60,7 +60,7 @@ void AnimatorComponent::OnEnable()
 	
 	LoadAnimationSet(model);
 	mAnimator.Initialize(&model);
-	mAnimator.PlayAnimation(mAnimator.GetClipIndex());
+	mAnimator.PlayAnimation(mAnimator.GetClipIndex(), mAnimator.GetIsLooping());
 }
 
 void AnimatorComponent::AddAnimation(std::string animationFileName)

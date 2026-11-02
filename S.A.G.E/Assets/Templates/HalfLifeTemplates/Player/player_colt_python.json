@@ -1,5 +1,6 @@
 {
   "Name": "Player Colt Python",
+  "Is Active": false,
   "Components": {
     "Transform Component": {
     },

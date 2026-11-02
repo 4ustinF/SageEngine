@@ -1,6 +1,6 @@
 {
   "Name": "Player 9mm Handgun",
-  "Is Active": false,
+  "Is Active": true,
   "Components": {
     "Transform Component": {
     },

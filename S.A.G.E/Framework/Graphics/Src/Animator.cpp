@@ -139,9 +139,9 @@ Math::Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
 	//return Transform{ position, rotation, scale }.GetMatrix4();
 
 	Math::Matrix4 parentTransform1 = bone->toParentTransform;
-	const AnimationClip& clip1 = mEntries[0]->animator.mModel->animationSet[mEntries[0]->animator.mClipIndex];
+	const AnimationClip& clip1 = mEntries[0]->animator.GetModel()->animationSet[mEntries[0]->animator.GetClipIndex()];
 	if (clip1.HasTransform(bone->index)) {
-		parentTransform1 = clip1.boneAnimations[bone->index]->GetTransform(mEntries[0]->animator.mAnimationTick);
+		parentTransform1 = clip1.boneAnimations[bone->index]->GetTransform(mEntries[0]->animator.GetAnimationTick());
 	}
 
 	for (int i = 1; i < mEntries.size(); ++i)
@@ -151,9 +151,9 @@ Math::Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
 		}
 
 		Math::Matrix4 parentTransform2 = bone->toParentTransform;
-		const AnimationClip& clip1 = mEntries[i]->animator.mModel->animationSet[mEntries[i]->animator.mClipIndex];
+		const AnimationClip& clip1 = mEntries[i]->animator.GetModel()->animationSet[mEntries[i]->animator.GetClipIndex()];
 		if (clip1.HasTransform(bone->index)) {
-			parentTransform2 = clip1.boneAnimations[bone->index]->GetTransform(mEntries[i]->animator.mAnimationTick);
+			parentTransform2 = clip1.boneAnimations[bone->index]->GetTransform(mEntries[i]->animator.GetAnimationTick());
 		}
 
 		parentTransform1 = Math::Lerp(parentTransform1, parentTransform2, mEntries[i]->weight);

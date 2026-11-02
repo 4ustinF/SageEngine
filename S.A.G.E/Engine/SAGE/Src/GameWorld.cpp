@@ -249,21 +249,6 @@ void GameWorld::DestroyGameObject(GameObjectHandle handle)
 	mHierarchyDirty = true;
 }
 
-void GameWorld::InitializeCreated(const std::vector<GameObjectHandle>& created)
-{
-	for (const GameObjectHandle& handle : created)
-	{
-		// An earlier init could have destroyed this object, so re-validate.
-		if (!IsValid(handle))
-		{
-			continue;
-		}
-
-		GameObject* go = GetGameObject(handle);
-		go->Initialize();
-	}
-}
-
 GameObject* GameWorld::InstantiateRecursive(const std::filesystem::path& templateFile, GameObject* parentGO, const char* overrideName, std::vector<GameObjectHandle>& outCreated)
 {
 	ASSERT(mInitialized, "GameWorld - World must be initialized first before creating game objects.");
@@ -343,6 +328,22 @@ GameObject* GameWorld::InstantiateRecursive(const std::filesystem::path& templat
 
 	return newObject.get();
 }
+
+void GameWorld::InitializeCreated(const std::vector<GameObjectHandle>& created)
+{
+	for (const GameObjectHandle& handle : created)
+	{
+		// An earlier init could have destroyed this object, so re-validate.
+		if (!IsValid(handle))
+		{
+			continue;
+		}
+
+		GameObject* go = GetGameObject(handle);
+		go->Initialize();
+	}
+}
+
 
 bool GameWorld::IsValid(GameObjectHandle handle) const
 {

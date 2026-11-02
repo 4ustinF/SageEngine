@@ -7,22 +7,11 @@
 using namespace SAGE;
 using namespace SAGE::Graphics;
 
-MEMORY_POOL_DEFINE(AnimatorComponent, 1000);
+MEMORY_POOL_DEFINE(AnimatorComponent, 500);
 
 void AnimatorComponent::Initialize()
 {
 	mModelComponent = GetOwner().GetComponent<ModelComponent>();
-
-	Model& model = mModelComponent->GetModel();
-	if (model.animationSet.size() == 1)
-	{
-		for (auto& animationFileName : mAnimationFileNames) {
-			ModelIO::LoadAnimationSet(animationFileName, model);
-		}
-	}
-
-	mAnimator.Initialize(&model);
-	mAnimator.PlayAnimation(0);
 }
 
 void AnimatorComponent::Update(float deltaTime)
@@ -65,11 +54,19 @@ void AnimatorComponent::DebugUI()
 	}
 }
 
+void AnimatorComponent::OnEnable()
+{
+	Model& model = mModelComponent->GetModel();
+	
+	LoadAnimationSet(model);
+	mAnimator.Initialize(&model);
+	mAnimator.PlayAnimation(mAnimator.GetClipIndex());
+}
+
 void AnimatorComponent::AddAnimation(std::string animationFileName)
 {
 	mAnimationFileNames.emplace_back(std::move(animationFileName));
 }
-
 
 std::string AnimatorComponent::GetAnimationName(int index)
 {
@@ -96,4 +93,21 @@ std::string AnimatorComponent::GetAnimationName(const std::string& path)
 	}
 
 	return filename;
+}
+
+void AnimatorComponent::LoadAnimationSet(Model& model)
+{
+	if (mHasLoadedAnimationSet)
+	{
+		return;
+	}
+
+	if (model.animationSet.size() == 1)
+	{
+		for (auto& animationFileName : mAnimationFileNames) {
+			ModelIO::LoadAnimationSet(animationFileName, model);
+		}
+	}
+
+	mHasLoadedAnimationSet = true;
 }

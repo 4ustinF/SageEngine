@@ -16,6 +16,7 @@ namespace SAGE
 
 		void Update(float deltaTime) override;
 		void DebugUI() override;
+		void OnEnable() override;
 
 		void AddAnimation(std::string animationFileName);
 
@@ -26,10 +27,11 @@ namespace SAGE
 		std::string GetAnimationName(const std::string& path);
 
 	private:
+		void LoadAnimationSet(Graphics::Model& model);//const std::string& animationFileName, Graphics::Model& model);
+
 		ModelComponent* mModelComponent = nullptr;
-
 		std::vector<std::string> mAnimationFileNames;
-
 		Graphics::Animator mAnimator;
+		bool mHasLoadedAnimationSet = false;
 	};
 }

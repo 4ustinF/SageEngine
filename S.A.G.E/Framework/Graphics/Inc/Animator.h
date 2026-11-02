@@ -25,11 +25,14 @@ namespace SAGE::Graphics
 
 		Math::Matrix4 GetTransform(const Bone* bone) const override;
 
+		const Model* GetModel() const { return mModel; }
+		size_t GetClipIndex() const { return mClipIndex; }
+		float GetAnimationTick() const { return mAnimationTick; }
 		bool GetIsLooping() const { return mLooping; }
 
-	//private:
+	private:
 		const Model* mModel = nullptr;
-		size_t mClipIndex = -1; // TODO: Default 0?
+		size_t mClipIndex = 0;
 		float mAnimationTick = 0.0f;
 		bool mLooping = false;
 	};

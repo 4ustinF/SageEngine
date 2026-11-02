@@ -484,8 +484,19 @@ void GameWorld::DrawGameObjectNode(GameObject* object)
 
 	ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, 10.0f);
 
+	const bool isActive = object->IsActiveInHierarchy();
+	if (!isActive)
+	{
+		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.5f, 0.5f, 0.5f, 1.0f));
+	}
+
 	const std::string label = object->GetName() + "###GameObject_" + std::to_string(reinterpret_cast<uintptr_t>(object));
 	const bool open = ImGui::TreeNodeEx(label.c_str(), flags);
+
+	if (!isActive)
+	{
+		ImGui::PopStyleColor();
+	}
 
 	if (mRevealHierarchyPending && isSelected)
 	{

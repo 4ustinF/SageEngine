@@ -6,6 +6,7 @@
     },
     "Model Component": {
       "FileName": "../../Assets/Models/HalfLife/Player/ColtPython/colt_python.model",
+      "Preload Model": true,
       "Can Cast Shadows": false
     },
     "Player Weapon Component": {

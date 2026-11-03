@@ -1,12 +1,9 @@
 ﻿  AnimatorComponent.cpp
-  App.cpp
+  BPhysicsComponent.cpp
   GameObjectFactory.cpp
   GameWorld.cpp
   ModelComponent.cpp
   RenderService.cpp
-  RigidBodyComponent.cpp
   SAGE.cpp
-  SelectionBoxComponent.cpp
-  UIService.cpp
   Generating Code...
   SAGE.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\SAGE.lib

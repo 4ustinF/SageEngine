@@ -14,6 +14,8 @@ namespace SAGE
 		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
 		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
+		void Initialize() override;
+
 		void DebugUI() override;
 		void OnEnable() override;
 		void OnDisable() override;
@@ -30,6 +32,7 @@ namespace SAGE
 		void SetIsBasicModel(bool isBasic) { mIsBasicModel = isBasic; }
 
 	private:
+		void LoadModel();
 		void UpdateRenderGroupShadowSettings();
 
 		std::string mFileName;
@@ -37,8 +40,8 @@ namespace SAGE
 		Graphics::RenderGroup* mRenderGroup = nullptr;
 		Math::Vector3 mRotation = Math::Vector3::Zero;
 
+		bool mPreloadModel = false;
 		bool mCanCastShadows = true;
 		bool mIsBasicModel = false;
-		float mIdentSize = 5.0f;
 	};
 }

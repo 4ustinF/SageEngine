@@ -29,6 +29,11 @@ void ModelComponent::LoadComponentFromTemplate(const rj::Value& value)
 		SetRotation({ x, y, z });
 	}
 
+	if (value.HasMember("Preload Model"))
+	{
+		mPreloadModel = value["Preload Model"].GetBool();
+	}
+
 	if (value.HasMember("IsBasicModel"))
 	{
 		const bool isBasic = value["IsBasicModel"].GetBool();
@@ -61,6 +66,12 @@ void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjso
 		compObj.AddMember("Rotation", rotation, allocator);
 	}
 
+	// --- Preload Model ---
+	if (mPreloadModel)
+	{
+		SaveBoolToTemplate(compObj, allocator, "Preload Model", mPreloadModel);
+	}
+
 	// --- Can Cast Shadows ---
 	if (!mCanCastShadows)
 	{
@@ -75,6 +86,14 @@ void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjso
 			rj::Value(mIsBasicModel),
 			allocator
 		);
+	}
+}
+
+void ModelComponent::Initialize()
+{
+	if (mPreloadModel)
+	{
+		LoadModel();
 	}
 }
 
@@ -110,8 +129,7 @@ void ModelComponent::DebugUI()
 
 void ModelComponent::OnEnable() 
 {
-	const char* modelFileName = mFileName.c_str();
-	mModelId = ModelManager::Get()->LoadModel(modelFileName);
+	LoadModel();
 
 	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
 	mRenderGroup = renderService->Register(this, mIsBasicModel);
@@ -139,6 +157,12 @@ void ModelComponent::SetCanCastShadows(bool canCast)
 {
 	mCanCastShadows = canCast;
 	UpdateRenderGroupShadowSettings();
+}
+
+void ModelComponent::LoadModel()
+{
+	const char* modelFileName = mFileName.c_str();
+	mModelId = ModelManager::Get()->LoadModel(modelFileName);
 }
 
 void ModelComponent::UpdateRenderGroupShadowSettings()

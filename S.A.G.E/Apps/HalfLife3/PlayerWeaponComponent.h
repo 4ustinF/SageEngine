@@ -2,6 +2,8 @@
 
 #include "TypeIds.h"
 
+class SAGE::RBPhysicsService;
+class SAGE::CameraService;
 class SAGE::AnimatorComponent;
 class SAGE::TransformComponent;
 class BulletHolesPoolComponent;
@@ -33,11 +35,15 @@ public:
 
 private:
 	friend class PlayerControllerComponent;
-	void Draw();
+	void StartDraw();
+	void FinishDraw();
 	void Idle();
-	void Shoot();
-	void Reload();
-	void Holster(); // We need callbacks so this deactivates itself after holster animation is done.
+	void StartShoot();
+	void FinishShoot();
+	void StartReload();
+	void FinishReload();
+	void StartHolster();
+	void FinishHolster();
 
 	void OnAnimationFinishedCallback(size_t clipIndex);
 	SAGE::Core::Delegate::FDelegateHandle mOnAnimationFinishedHandle;
@@ -46,6 +52,8 @@ private:
 
 	SAGE::Input::InputSystem* mInputSystem = nullptr;
 	SAGE::Graphics::SoundEffectManager* mSoundEffectManager = nullptr;
+	SAGE::RBPhysicsService* mPhysicsService = nullptr;
+	SAGE::CameraService* mCameraService = nullptr;
 	SAGE::TransformComponent* mTransformComponent = nullptr;
 	SAGE::AnimatorComponent* mAnimatorComponent = nullptr;
 	SAGE::Graphics::Animator* mAnimator = nullptr;

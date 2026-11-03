@@ -56,6 +56,9 @@ void PlayerWeaponComponent::Initialize()
 	mInputSystem = InputSystem::Get();
 
 	GameObject& owner = GetOwner();
+	GameWorld& world = owner.GetWorld();
+	mPhysicsService = world.GetService<RBPhysicsService>();
+	mCameraService = world.GetService<CameraService>();
 	mTransformComponent = owner.GetComponent<TransformComponent>();
 	mAnimatorComponent = owner.GetComponent<AnimatorComponent>();
 	mAnimator = &mAnimatorComponent->GetAnimator();
@@ -78,6 +81,10 @@ void PlayerWeaponComponent::Terminate()
 	mAnimator = nullptr;
 	mAnimatorComponent = nullptr;
 	mTransformComponent = nullptr;
+	
+	mPhysicsService = nullptr;
+	mCameraService = nullptr;
+
 	mSoundEffectManager = nullptr;
 	mInputSystem = nullptr;
 }
@@ -125,7 +132,7 @@ void PlayerWeaponComponent::CheckForPlayerGameplayInput()
 	{
 		if (mInputSystem->IsKeyPressed(KeyCode::ONE))
 		{
-			Draw();
+			StartDraw(); // TODO: Won't work anymore.
 		}
 	}
 	else
@@ -144,15 +151,15 @@ void PlayerWeaponComponent::CheckForPlayerGameplayInput()
 
 			if (mInputSystem->IsKeyPressed(KeyCode::ZERO))
 			{
-				Holster();
+				StartHolster();
 			}
 			else if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
 			{
-				Shoot();
+				StartShoot();
 			}
 			else if (mInputSystem->IsKeyPressed(KeyCode::R))
 			{
-				Reload();
+				StartReload();
 			}
 		}
 	}
@@ -168,11 +175,16 @@ void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
 	mCurrentAmmoReserve = Math::Clamp(mCurrentAmmoReserve + Abs(ammoAmount), 0, mMaxAmmoReserve);
 }
 
-void PlayerWeaponComponent::Draw()
+void PlayerWeaponComponent::StartDraw()
 {
 	mIsEquipped = true;
 	mIsBusy = true;
 	mAnimator->PlayAnimation(3, false);
+}
+
+void PlayerWeaponComponent::FinishDraw()
+{
+	Idle();
 }
 
 void PlayerWeaponComponent::Idle()
@@ -180,11 +192,11 @@ void PlayerWeaponComponent::Idle()
 	mAnimator->PlayAnimation(0, true);
 }
 
-void PlayerWeaponComponent::Shoot()
+void PlayerWeaponComponent::StartShoot()
 {
 	if (mCurrentAmmo == 0)
 	{
-		Reload();
+		StartReload();
 		return;
 	}
 
@@ -194,12 +206,7 @@ void PlayerWeaponComponent::Shoot()
 	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundIDs[shootSoundIDIndex], mShootSoundPitchVolume);
 	mCurrentAmmo -= 1;
 
-	// TODO: Clean up
-	GameWorld& world = GetOwner().GetWorld();
-	RBPhysicsService* phsyicsService = world.GetService<RBPhysicsService>();
-	RBPhysicsWorld& physicsWorld = phsyicsService->GetPhysicsWorld();
-
-	CameraService* mCameraService = world.GetService<CameraService>();
+	RBPhysicsWorld& physicsWorld = mPhysicsService->GetPhysicsWorld();
 	Camera& camera = mCameraService->GetCamera();
 
 	PhysicsRayHit physicsRayHit;
@@ -224,7 +231,12 @@ void PlayerWeaponComponent::Shoot()
 	}
 }
 
-void PlayerWeaponComponent::Reload()
+void PlayerWeaponComponent::FinishShoot()
+{
+	Idle();
+}
+
+void PlayerWeaponComponent::StartReload()
 {
 	if (mCurrentAmmo == mMaxAmmo || mCurrentAmmoReserve == 0)
 	{
@@ -233,7 +245,10 @@ void PlayerWeaponComponent::Reload()
 
 	mIsBusy = true;
 	mAnimator->PlayAnimation(5, false);
+}
 
+void PlayerWeaponComponent::FinishReload()
+{
 	const int ammoNeeded = mMaxAmmo - mCurrentAmmo;
 	if (mCurrentAmmoReserve >= ammoNeeded)
 	{
@@ -245,13 +260,21 @@ void PlayerWeaponComponent::Reload()
 		mCurrentAmmo += mCurrentAmmoReserve;
 		mCurrentAmmoReserve = 0;
 	}
+
+	Idle();
 }
 
-void PlayerWeaponComponent::Holster()
+void PlayerWeaponComponent::StartHolster()
 {
 	mIsEquipped = false;
 	mIsBusy = true;
 	mAnimator->PlayAnimation(6, false);
+}
+
+void PlayerWeaponComponent::FinishHolster()
+{
+	mIsEquipped = false;
+	GetOwner().SetActive(false);
 }
 
 void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
@@ -259,16 +282,21 @@ void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 	const int clip = static_cast<int>(clipIndex);
 	mIsBusy = false;
 
-	// TODO: Handle animation finished callbacks for different animations
-
-	// Draw, Shoot, Reload, Holster
-	if (clip == 3 || clip == 4 || clip == 5)
+	if (clip == 3) // Draw
 	{
-		Idle();
+		FinishDraw();
 	}
-	else if (clip == 6)
+	else if (clip == 4) // Shoot
 	{
-		GetOwner().SetActive(false);
+		FinishShoot();
+	}
+	else if (clip == 5) // Reload
+	{
+		FinishReload();
+	}
+	else if (clip == 6) // Holster
+	{
+		FinishHolster();
 	}
 	// else if other one shot anims idle as well
 }

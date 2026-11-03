@@ -259,6 +259,6 @@ void PlayerControllerComponent::SwapWeapons(int mNewIndex)
 	else if (mActiveWeapon = mWeapons[mActiveWeaponIndex])
 	{
 		mActiveWeapon->GetOwner().SetActive(true);
-		mActiveWeapon->Draw();
+		mActiveWeapon->StartDraw();
 	}
 }

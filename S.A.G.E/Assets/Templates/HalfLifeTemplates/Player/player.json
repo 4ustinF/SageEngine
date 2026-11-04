@@ -28,7 +28,7 @@
       "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/flashlight.json"
     },
     {
-      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/player_weapons.json"
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/Weapons/player_weapons.json"
     }
   ]
 }

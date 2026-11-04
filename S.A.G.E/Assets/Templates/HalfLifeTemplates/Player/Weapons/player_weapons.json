@@ -1,0 +1,28 @@
+{
+  "Name": "Player Weapons",
+  "Components": {
+    "Transform Component": {
+      "Local Position": [
+        0.0,
+        0.725,
+        0.0
+      ],
+      "Local Scale": [
+        0.01,
+        0.01,
+        0.01
+      ]
+    }
+  },
+  "GameObjects": [
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/Weapons/player_9mmhandgun.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/Weapons/player_colt_python.json"
+    },
+    {
+      "TemplateFile": "../../Assets/Templates/HalfLifeTemplates/Player/Weapons/player_9mmar.json"
+    }
+  ]
+}

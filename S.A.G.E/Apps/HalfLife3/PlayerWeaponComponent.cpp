@@ -107,6 +107,7 @@ void PlayerWeaponComponent::DebugUI()
 		ImGui::DragInt("Max Ammo Reserve##PlayerWeaponComponent", &mMaxAmmoReserve, 1, 0, 500);
 
 		ImGui::Checkbox("Is Busy##PlayerWeaponComponent", &mIsBusy);
+		ImGui::Checkbox("Is Semi-Automatic##PlayerWeaponComponent", &mIsSemiAutomatic);
 	}
 }
 
@@ -153,7 +154,7 @@ void PlayerWeaponComponent::CheckForPlayerGameplayInput()
 			{
 				StartHolster();
 			}
-			else if (mInputSystem->IsMousePressed(MouseButton::LBUTTON))
+			else if (mIsSemiAutomatic ? mInputSystem->IsMouseDown(MouseButton::LBUTTON) : mInputSystem->IsMousePressed(MouseButton::LBUTTON))
 			{
 				StartShoot();
 			}
@@ -189,6 +190,7 @@ void PlayerWeaponComponent::FinishDraw()
 
 void PlayerWeaponComponent::Idle()
 {
+	mIsBusy = false;
 	mAnimator->PlayAnimation(0, true);
 }
 

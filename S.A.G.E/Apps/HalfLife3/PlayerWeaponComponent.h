@@ -66,6 +66,7 @@ private:
 	int mCurrentAmmoReserve = 0;
 	int mMaxAmmoReserve = 0;
 	bool mIsBusy = false;
+	bool mIsSemiAutomatic = false;
 
 	// Audio
 	std::vector<std::string> mShootSoundFilePaths;

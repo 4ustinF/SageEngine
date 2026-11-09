@@ -13,6 +13,7 @@
       "Damage": 5,
       "Max Ammo": 50,
       "Max Ammo Reserve": 250,
+      "Is Semi Automatic": true,
       "Shoot Sound IDs": [
         "weapons/pl_gun3.wav"
       ]

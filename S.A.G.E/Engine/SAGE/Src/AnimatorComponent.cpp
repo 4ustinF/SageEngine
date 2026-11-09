@@ -12,6 +12,10 @@ MEMORY_POOL_DEFINE(AnimatorComponent, 500);
 void AnimatorComponent::Initialize()
 {
 	mModelComponent = GetOwner().GetComponent<ModelComponent>();
+	if (mModelComponent->GetIsPreloadingModel())
+	{
+		LoadAnimatorComponent();
+	}
 }
 
 void AnimatorComponent::Update(float deltaTime)
@@ -28,9 +32,9 @@ void AnimatorComponent::DebugUI()
 		const ImVec2 playButtonSize = ImVec2(50.0f, 0);
 		const ImVec2 oneShotButtonSize = ImVec2(70.0f, 0);
 
-		for (int i = 0; i < mAnimationFileNames.size(); ++i)
+		for (size_t i = 0; i < mAnimationFileNames.size(); ++i)
 		{
-			const std::string animationName = GetAnimationName(mAnimationFileNames[i]);
+			const std::string animationName = GetAnimationName(i);
 			ImGui::PushID(animationName.c_str());
 			ImGui::Text("%s", animationName.c_str());
 
@@ -39,14 +43,14 @@ void AnimatorComponent::DebugUI()
 
 			if (ImGui::Button("Play", playButtonSize))
 			{
-				mAnimator.PlayAnimation(i + 1, true);
+				mAnimator.PlayAnimation(i, true);
 			}
 
 			ImGui::SameLine();
 
 			if (ImGui::Button("One Shot", oneShotButtonSize))
 			{
-				mAnimator.PlayAnimation(i + 1, false);
+				mAnimator.PlayAnimation(i, false);
 			}
 
 			ImGui::PopID();
@@ -56,10 +60,7 @@ void AnimatorComponent::DebugUI()
 
 void AnimatorComponent::OnEnable()
 {
-	Model& model = mModelComponent->GetModel();
-	
-	LoadAnimationSet(model);
-	mAnimator.Initialize(&model);
+	LoadAnimatorComponent();
 	mAnimator.PlayAnimation(mAnimator.GetClipIndex(), mAnimator.GetIsLooping());
 }
 
@@ -68,13 +69,19 @@ void AnimatorComponent::AddAnimation(std::string animationFileName)
 	mAnimationFileNames.emplace_back(std::move(animationFileName));
 }
 
-std::string AnimatorComponent::GetAnimationName(int index)
+std::string AnimatorComponent::GetAnimationName(size_t index)
 {
+	std::string name = mAnimator.GetClipNameByIndex(index);
+	if (!name.empty())
+	{
+		return name;
+	}
+
 	const std::string& path = mAnimationFileNames[index];
-	return GetAnimationName(path);
+	return GetAnimationNameFromFilePath(path); // Fallback to filename if the clip name is empty.
 }
 
-std::string AnimatorComponent::GetAnimationName(const std::string& path)
+std::string AnimatorComponent::GetAnimationNameFromFilePath(const std::string& path)
 {
 	const size_t slash = path.find_last_of("/\\");
 
@@ -86,13 +93,21 @@ std::string AnimatorComponent::GetAnimationName(const std::string& path)
 
 	if (filename.size() >= extension.size() &&
 		filename.compare(filename.size() - extension.size(),
-			extension.size(),
-			extension) == 0)
+		extension.size(),
+		extension) == 0)
 	{
 		filename.erase(filename.size() - extension.size());
 	}
 
 	return filename;
+}
+
+void AnimatorComponent::LoadAnimatorComponent()
+{
+	Model& model = mModelComponent->GetModel();
+
+	LoadAnimationSet(model);
+	mAnimator.Initialize(&model);
 }
 
 void AnimatorComponent::LoadAnimationSet(Model& model)

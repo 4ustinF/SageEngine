@@ -33,6 +33,11 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 		mMaxAmmoReserve = value["Max Ammo Reserve"].GetInt();
 	}
 
+	if (value.HasMember("Is Semi Automatic"))
+	{
+		mIsSemiAutomatic = value["Is Semi Automatic"].GetBool();
+	}
+
 	if (value.HasMember("Shoot Sound IDs"))
 	{
 		const auto& soundIDs = value["Shoot Sound IDs"].GetArray();
@@ -48,6 +53,7 @@ void PlayerWeaponComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memo
 	SaveNumberToTemplate(compObj, allocator, "Damage", mDamage);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo", mMaxAmmo);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo Reserve", mMaxAmmoReserve);
+	if (mIsSemiAutomatic) { SaveBoolToTemplate(compObj, allocator, "Is Semi Automatic", mIsSemiAutomatic); }
 	SaveStringsToTemplate(compObj, allocator, "Shoot Sound IDs", mShootSoundFilePaths);
 }
 

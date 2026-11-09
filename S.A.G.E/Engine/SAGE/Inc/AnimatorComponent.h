@@ -24,11 +24,12 @@ namespace SAGE
 		const Graphics::Animator& GetAnimator() const { return mAnimator; }
 		Graphics::FOnAnimationFinished& GetOnAnimationFinishedDelegate() { return mAnimator.GetOnAnimationFinishedDelegate(); }
 
-		std::string GetAnimationName(int index);
-		std::string GetAnimationName(const std::string& path);
+		std::string GetAnimationName(size_t index);
 
 	private:
-		void LoadAnimationSet(Graphics::Model& model);//const std::string& animationFileName, Graphics::Model& model);
+		std::string GetAnimationNameFromFilePath(const std::string& path);
+		void LoadAnimatorComponent();
+		void LoadAnimationSet(Graphics::Model& model);
 
 		ModelComponent* mModelComponent = nullptr;
 		std::vector<std::string> mAnimationFileNames;

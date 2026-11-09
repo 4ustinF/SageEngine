@@ -5,14 +5,33 @@
 #include "Transform.h"
 
 using namespace SAGE;
+using namespace SAGE::Math;
 using namespace SAGE::Graphics;
 
 void Animator::Initialize(const Model* model)
 {
+	if (mModel == model)
+	{
+		return;
+	}
+
 	mModel = model;
+	mClipNameToIndexMap.clear();
+
+	const std::vector<AnimationClip>& animationClips = mModel->animationSet;
+	const size_t animationSetCount = animationClips.size();
+	for (size_t i = 0; i < animationSetCount; ++i)
+	{
+		mClipNameToIndexMap.insert_or_assign(animationClips[i].name, i);
+	}
+
+	if (mClipNameToIndexMap.size() != animationSetCount)
+	{
+		mClipNameToIndexMap.clear(); // Clear the map if there are duplicate names to avoid incorrect lookups.
+	}
 }
 
-void Animator::PlayAnimation(size_t clipIndex, bool looping)
+bool Animator::PlayAnimation(size_t clipIndex, bool looping)
 {
 	ASSERT(clipIndex < mModel->animationSet.size(), "Animator -- Invalid animation clip index.");
 	if (mClipIndex != clipIndex || IsFinished())
@@ -20,8 +39,47 @@ void Animator::PlayAnimation(size_t clipIndex, bool looping)
 		mClipIndex = clipIndex;
 		mAnimationTick = 0.0f;
 		mLooping = looping;
+		mReverse = false;
 		mIsAnimating = true;
+		return true;
 	}
+
+	return false;
+}
+
+bool Animator::PlayAnimationInReverse(size_t clipIndex, bool looping)
+{
+	if (PlayAnimation(clipIndex, looping))
+	{
+		mReverse = true;
+		return true;
+	}
+
+	return false;
+}
+
+bool Animator::PlayAnimation(const std::string& clipName, bool looping)
+{
+	// TODO: Should we check if (mClipIndex != clipIndex || IsFinished()) to prevent a unnecessary lookup?
+	const size_t clipIndex = GetClipIndexByName(clipName);
+	if (clipIndex >= static_cast<size_t>(0))
+	{
+		return false;
+	}
+
+	return PlayAnimation(clipIndex, looping);
+}
+
+bool Animator::PlayAnimationInReverse(const std::string& clipName, bool looping)
+{
+	// TODO: Should we check if (mClipIndex != clipIndex || IsFinished()) to prevent a unnecessary lookup?
+	const size_t clipIndex = GetClipIndexByName(clipName);
+	if (clipIndex >= static_cast<size_t>(0))
+	{
+		return false;
+	}
+
+	return PlayAnimationInReverse(clipIndex, looping);
 }
 
 void Animator::Update(float deltaTime)
@@ -55,9 +113,9 @@ bool Animator::IsFinished() const
 	return !mLooping && (mAnimationTick == clip.tickDuration);
 }
 
-Math::Vector3 Animator::GetPosition(const Bone* bone) const
+Vector3 Animator::GetPosition(const Bone* bone) const
 {
-	Math::Vector3 position = Math::GetTranslation(bone->toParentTransform);
+	Vector3 position = GetTranslation(bone->toParentTransform);
 
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
 	if (clip.HasTransform(bone->index)) {
@@ -66,9 +124,9 @@ Math::Vector3 Animator::GetPosition(const Bone* bone) const
 	return position;
 }
 
-Math::Quaternion Animator::GetRotation(const Bone* bone) const
+Quaternion Animator::GetRotation(const Bone* bone) const
 {
-	Math::Quaternion rotation = Math::Quaternion::RotationMatrix(bone->toParentTransform);
+	Quaternion rotation = Quaternion::RotationMatrix(bone->toParentTransform);
 
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
 	if (clip.HasTransform(bone->index)) {
@@ -77,9 +135,9 @@ Math::Quaternion Animator::GetRotation(const Bone* bone) const
 	return rotation;
 }
 
-Math::Vector3 Animator::GetScale(const Bone* bone) const
+Vector3 Animator::GetScale(const Bone* bone) const
 {
-	Math::Vector3 scale = Math::Vector3::One;
+	Vector3 scale = Vector3::One;
 
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
 	if (clip.HasTransform(bone->index)) {
@@ -88,9 +146,9 @@ Math::Vector3 Animator::GetScale(const Bone* bone) const
 	return scale;
 }
 
-Math::Matrix4 Animator::GetTransform(const Bone* bone) const
+Matrix4 Animator::GetTransform(const Bone* bone) const
 {
-	Math::Matrix4 toParentTransform = bone->toParentTransform;
+	Matrix4 toParentTransform = bone->toParentTransform;
 
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
 	if (clip.HasTransform(bone->index)) {
@@ -98,6 +156,44 @@ Math::Matrix4 Animator::GetTransform(const Bone* bone) const
 	}
 	return toParentTransform;
 }
+
+const std::string Animator::GetClipNameByIndex(size_t index) const
+{
+	if (index < 0 || !mModel || index >= mModel->animationSet.size())
+	{
+		return "";
+	}
+
+	return mModel->animationSet[index].name;
+}
+
+size_t Animator::GetClipIndexByName(const std::string& name) const
+{
+	if (mClipNameToIndexMap.size() > 0)
+	{
+		if (auto it = mClipNameToIndexMap.find(name); it != mClipNameToIndexMap.end()) 
+		{
+			return it->second;
+		}
+	}
+	else
+	{
+		// Fallback in case the map implementation didn't go through.
+		const size_t animationSetCount = mModel->animationSet.size();
+		for (size_t i = 0; i < animationSetCount; ++i)
+		{
+			if (mModel->animationSet[i].name == name)
+			{
+				return i;
+			}
+		}
+	}
+
+	// Failed to find.
+	return static_cast<size_t>(-1);
+}
+
+// -------------------- AnimationBlender --------------------
 
 Animator* AnimationBlender::AddAnimator()
 {
@@ -116,37 +212,37 @@ void AnimationBlender::Update(float deltaTime)
 	}
 }
 
-Math::Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
+Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
 {
-	//Math::Vector3 position = Math::Vector3::Zero;
-	//Math::Quaternion rotation = Math::Quaternion::Identity;
-	//Math::Vector3 scale = Math::Vector3::One;
+	//Vector3 position = Vector3::Zero;
+	//Quaternion rotation = Quaternion::Identity;
+	//Vector3 scale = Vector3::One;
 
 	//for (auto& entry : mEntries) 
 	//{
-	//	position = Math::Lerp(position, entry->animator.GetPosition(bone), entry->weight);
-	//	rotation = Math::Slerp(rotation, entry->animator.GetRotation(bone), entry->weight);
-	//	scale = Math::Lerp(scale, entry->animator.GetScale(bone), entry->weight);
+	//	position = Lerp(position, entry->animator.GetPosition(bone), entry->weight);
+	//	rotation = Slerp(rotation, entry->animator.GetRotation(bone), entry->weight);
+	//	scale = Lerp(scale, entry->animator.GetScale(bone), entry->weight);
 	//}
 
-	//position = Math::Lerp(
+	//position = Lerp(
 	//	mEntries[0]->animator.GetPosition(bone),
 	//	mEntries[1]->animator.GetPosition(bone),
 	//	mEntries[1]->weight );
 
-	//rotation = Math::Slerp(
+	//rotation = Slerp(
 	//	mEntries[0]->animator.GetRotation(bone),
 	//	mEntries[1]->animator.GetRotation(bone),
 	//	mEntries[1]->weight);
 
-	//scale = Math::Lerp(
+	//scale = Lerp(
 	//	mEntries[0]->animator.GetScale(bone),
 	//	mEntries[1]->animator.GetScale(bone),
 	//	mEntries[1]->weight);
 
 	//return Transform{ position, rotation, scale }.GetMatrix4();
 
-	Math::Matrix4 parentTransform1 = bone->toParentTransform;
+	Matrix4 parentTransform1 = bone->toParentTransform;
 	const AnimationClip& clip1 = mEntries[0]->animator.GetModel()->animationSet[mEntries[0]->animator.GetClipIndex()];
 	if (clip1.HasTransform(bone->index)) {
 		parentTransform1 = clip1.boneAnimations[bone->index]->GetTransform(mEntries[0]->animator.GetAnimationTick());
@@ -158,13 +254,13 @@ Math::Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
 			continue;
 		}
 
-		Math::Matrix4 parentTransform2 = bone->toParentTransform;
+		Matrix4 parentTransform2 = bone->toParentTransform;
 		const AnimationClip& clip1 = mEntries[i]->animator.GetModel()->animationSet[mEntries[i]->animator.GetClipIndex()];
 		if (clip1.HasTransform(bone->index)) {
 			parentTransform2 = clip1.boneAnimations[bone->index]->GetTransform(mEntries[i]->animator.GetAnimationTick());
 		}
 
-		parentTransform1 = Math::Lerp(parentTransform1, parentTransform2, mEntries[i]->weight);
+		parentTransform1 = Lerp(parentTransform1, parentTransform2, mEntries[i]->weight);
 	}
 
 	return parentTransform1;

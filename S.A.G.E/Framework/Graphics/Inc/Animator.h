@@ -17,7 +17,10 @@ namespace SAGE::Graphics
 	public:
 		void Initialize(const Model* model);
 
-		void PlayAnimation(size_t clipIndex, bool looping = true);
+		bool PlayAnimation(size_t clipIndex, bool looping = true);
+		bool PlayAnimationInReverse(size_t clipIndex, bool looping = true);
+		bool PlayAnimation(const std::string& clipName, bool looping = true);
+		bool PlayAnimationInReverse(const std::string& clipName, bool looping = true);
 		void Update(float deltaTime);
 		bool IsFinished() const;
 
@@ -32,6 +35,9 @@ namespace SAGE::Graphics
 		float GetAnimationTick() const { return mAnimationTick; }
 		bool GetIsLooping() const { return mLooping; }
 
+		const std::string GetClipNameByIndex(size_t index) const;
+		size_t GetClipIndexByName(const std::string& name) const;
+
 		FOnAnimationFinished& GetOnAnimationFinishedDelegate() { return mOnAnimationFinished; }
 
 	private:
@@ -39,9 +45,12 @@ namespace SAGE::Graphics
 		size_t mClipIndex = 0;
 		float mAnimationTick = 0.0f;
 		bool mLooping = true;
+		bool mReverse = false;
 
 		bool mIsAnimating = false;
 		FOnAnimationFinished mOnAnimationFinished;
+
+		std::unordered_map<std::string, size_t> mClipNameToIndexMap;
 	};
 
 	class AnimationBlender final : public IAnimator

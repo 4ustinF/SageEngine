@@ -22,8 +22,8 @@ namespace SAGE
 
 		Graphics::Model& GetModel();
 		const Graphics::Model& GetModel() const;
-
 		const Math::Vector3& GetRotation() const { return mRotation; }
+		bool GetIsPreloadingModel() const { return mPreloadModel; }
 
 		void SetFileName(const char* fileName) { mFileName = fileName; }
 		void SetRotation(const Math::Vector3& rotation) { mRotation = rotation; }

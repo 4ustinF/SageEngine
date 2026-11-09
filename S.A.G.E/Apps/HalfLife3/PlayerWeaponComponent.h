@@ -77,6 +77,16 @@ private:
 	int mMaxAmmoReserve = 0;
 	bool mIsSemiAutomatic = false;
 
+	// Animations
+	const size_t mIdlingAnimIndex = 0; // TODO: maybe turn this into a non looping anim and swap between idle anims?
+	const size_t mDrawAnimIndex = 1;
+	const size_t mReloadAnimIndex = 2;
+	size_t mHolsteringAnimIndex = -1; // 3
+	std::vector<size_t> mShootingAnimIndexs;
+	std::string mHolsteringAnimset = "";
+	std::vector<std::string> mShootingAnimsets;
+	std::vector<std::string> mOtherAnimsets; // TODO: These are anims we need to deal with later. Grenade, Add Silencer, Fidget
+
 	// Audio
 	std::vector<std::string> mShootSoundFilePaths;
 	std::vector<SAGE::Graphics::SoundId> mShootSoundIDs;

@@ -12,7 +12,7 @@ void Animator::Initialize(const Model* model)
 {
 	if (mModel == model)
 	{
-		return;
+		//return; // TODO:
 	}
 
 	mModel = model;

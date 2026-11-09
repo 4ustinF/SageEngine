@@ -38,6 +38,31 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 		mIsSemiAutomatic = value["Is Semi Automatic"].GetBool();
 	}
 
+	if (value.HasMember("Holstering Animset"))
+	{
+		mHolsteringAnimset = value["Holstering Animset"].GetString();
+	}
+
+	if (value.HasMember("Shooting Animsets"))
+	{
+		const auto& shootingAnimsets = value["Shooting Animsets"].GetArray();
+		mShootingAnimsets.reserve(shootingAnimsets.Size());
+		for (const auto& shootingAnimset : shootingAnimsets)
+		{
+			mShootingAnimsets.push_back(shootingAnimset.GetString());
+		}
+	}
+
+	if (value.HasMember("Other Animsets"))
+	{
+		const auto& otherAnimsets = value["Other Animsets"].GetArray();
+		mOtherAnimsets.reserve(otherAnimsets.Size());
+		for (const auto& shootingAnimset : otherAnimsets)
+		{
+			mOtherAnimsets.push_back(shootingAnimset.GetString());
+		}
+	}
+
 	if (value.HasMember("Shoot Sound IDs"))
 	{
 		const auto& soundIDs = value["Shoot Sound IDs"].GetArray();
@@ -54,6 +79,9 @@ void PlayerWeaponComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memo
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo", mMaxAmmo);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo Reserve", mMaxAmmoReserve);
 	if (mIsSemiAutomatic) { SaveBoolToTemplate(compObj, allocator, "Is Semi Automatic", mIsSemiAutomatic); }
+	SaveStringToTemplate(compObj, allocator, "Holstering Animset", mHolsteringAnimset);
+	SaveStringsToTemplate(compObj, allocator, "Shooting Animsets", mShootingAnimsets);
+	SaveStringsToTemplate(compObj, allocator, "Other Animsets", mOtherAnimsets);
 	SaveStringsToTemplate(compObj, allocator, "Shoot Sound IDs", mShootSoundFilePaths);
 }
 
@@ -69,6 +97,26 @@ void PlayerWeaponComponent::Initialize()
 	mAnimatorComponent = owner.GetComponent<AnimatorComponent>();
 	mAnimator = &mAnimatorComponent->GetAnimator();
 
+	// TODO: Move over to a animator init func in this class.
+	if (!mHolsteringAnimset.empty())
+	{
+		mAnimatorComponent->AddAnimation(mHolsteringAnimset); // TODO: Does not work.
+		mHolsteringAnimIndex = 3; // TODO: Should we instead do a lookup?
+	}
+
+	mShootingAnimIndexs.reserve(mShootingAnimsets.size());
+	size_t shootingIndex = mHolsteringAnimIndex;
+	for (const std::string& animset : mShootingAnimsets)
+	{
+		mAnimatorComponent->AddAnimation(animset); // TODO: Does not work.
+		mShootingAnimIndexs.push_back(shootingIndex++);
+	}
+
+	for (const std::string& animset : mOtherAnimsets)
+	{
+		mAnimatorComponent->AddAnimation(animset); // TODO: Does not work.
+	}
+
 	mSoundEffectManager = SoundEffectManager::Get();
 	for (const std::string& soundFilePath : mShootSoundFilePaths)
 	{
@@ -81,6 +129,10 @@ void PlayerWeaponComponent::Initialize()
 
 void PlayerWeaponComponent::Terminate()
 {
+	mShootingAnimIndexs.clear();
+	mShootingAnimsets.clear();
+	mOtherAnimsets.clear();
+
 	mShootSoundFilePaths.clear();
 	mShootSoundIDs.clear();
 
@@ -178,7 +230,7 @@ void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
 void PlayerWeaponComponent::StartDraw()
 {
 	mWeaponState = WeaponState::Drawing;
-	mAnimator->PlayAnimation(3, false);
+	mAnimator->PlayAnimation(mDrawAnimIndex, false);
 }
 
 void PlayerWeaponComponent::FinishDraw()
@@ -189,7 +241,7 @@ void PlayerWeaponComponent::FinishDraw()
 void PlayerWeaponComponent::Idle()
 {
 	mWeaponState = WeaponState::Idling;
-	mAnimator->PlayAnimation(0, true);
+	mAnimator->PlayAnimation(mIdlingAnimIndex, true);
 }
 
 void PlayerWeaponComponent::StartShooting()
@@ -201,7 +253,11 @@ void PlayerWeaponComponent::StartShooting()
 	}
 
 	mWeaponState = WeaponState::Shooting;
-	mAnimator->PlayAnimation(4, false);
+
+	const int shootingAnimIndexsSize = static_cast<int>(mShootingAnimIndexs.size());
+	const size_t shootingIndex = shootingAnimIndexsSize == 1 ? 0 : Math::Random::UniformInt(0, shootingAnimIndexsSize);
+	mAnimator->PlayAnimation(mShootingAnimIndexs[shootingIndex], false);
+
 	const int shootSoundIDIndex = Random::UniformInt(0, static_cast<int>(mShootSoundIDs.size()) - 1);
 	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundIDs[shootSoundIDIndex], mShootSoundPitchVolume);
 	mCurrentAmmo -= 1;
@@ -244,7 +300,7 @@ void PlayerWeaponComponent::StartReloading()
 	}
 
 	mWeaponState = WeaponState::Reloading;
-	mAnimator->PlayAnimation(5, false);
+	mAnimator->PlayAnimation(mReloadAnimIndex, false);
 }
 
 void PlayerWeaponComponent::FinishReloading()
@@ -267,8 +323,15 @@ void PlayerWeaponComponent::FinishReloading()
 void PlayerWeaponComponent::StartHolstering()
 {
 	mWeaponState = WeaponState::Holstering;
-	//mAnimator->PlayAnimation(6, false);
-	mAnimator->PlayAnimationInReverse(3, false);
+
+	if (mHolsteringAnimIndex >= 0) 
+	{
+		mAnimator->PlayAnimation(mHolsteringAnimIndex, false);
+	}
+	else // Does not have a holstering anim.
+	{
+		mAnimator->PlayAnimationInReverse(mDrawAnimIndex, false);
+	}
 }
 
 void PlayerWeaponComponent::FinishHolstering()

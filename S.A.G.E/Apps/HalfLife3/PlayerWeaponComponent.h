@@ -15,6 +15,16 @@ public:
 	SET_TYPE_ID(ComponentId::PlayerWeapon);
 	MEMORY_POOL_DECLARE;
 
+	enum WeaponState
+	{
+		Drawing,
+		Idling,
+		Shooting,
+		Reloading,
+		Holstering,
+		Holstered
+	};
+
 	const char* GetCompName() override { return "Player Weapon Component"; }
 	void LoadComponentFromTemplate(const rapidjson::Value& value) override;
 	void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
@@ -31,19 +41,19 @@ public:
 	void UpdateWeaponRotation(const SAGE::Math::Quaternion& rotation);
 	void OnAmmoPickedUp(int ammoAmount);
 
-	bool IsBusy() const { return mIsBusy; };
+	bool IsBusy() const { return mWeaponState != WeaponState::Idling; }
 
 private:
 	friend class PlayerControllerComponent;
 	void StartDraw();
 	void FinishDraw();
 	void Idle();
-	void StartShoot();
-	void FinishShoot();
-	void StartReload();
-	void FinishReload();
-	void StartHolster();
-	void FinishHolster();
+	void StartShooting();
+	void FinishShooting();
+	void StartReloading();
+	void FinishReloading();
+	void StartHolstering();
+	void FinishHolstering();
 
 	void OnAnimationFinishedCallback(size_t clipIndex);
 	SAGE::Core::Delegate::FDelegateHandle mOnAnimationFinishedHandle;
@@ -59,13 +69,12 @@ private:
 	SAGE::Graphics::Animator* mAnimator = nullptr;
 	BulletHolesPoolComponent* mBulletPool = nullptr;
 
-	bool mIsEquipped = true;
+	WeaponState mWeaponState = WeaponState::Holstered;
 	int mDamage = 0;
 	int mCurrentAmmo = 0;
 	int mMaxAmmo = 0;
 	int mCurrentAmmoReserve = 0;
 	int mMaxAmmoReserve = 0;
-	bool mIsBusy = false;
 	bool mIsSemiAutomatic = false;
 
 	// Audio

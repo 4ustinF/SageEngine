@@ -9,15 +9,6 @@
       "Preload Model": true,
       "Can Cast Shadows": false
     },
-    "Player Weapon Component": {
-      "Damage": 5,
-      "Max Ammo": 50,
-      "Max Ammo Reserve": 250,
-      "Is Semi Automatic": true,
-      "Shoot Sound IDs": [
-        "weapons/pl_gun3.wav"
-      ]
-    },
     "Animator Component": {
       "AnimSets": [
         "../../Assets/Models/HalfLife/Player/9mmar/Animsets/9mmar_idle_01.animset",
@@ -28,6 +19,15 @@
         "../../Assets/Models/HalfLife/Player/9mmar/Animsets/9mmar_deploy.animset",
         "../../Assets/Models/HalfLife/Player/9mmar/Animsets/9mmar_shoot_01.animset",
         "../../Assets/Models/HalfLife/Player/9mmar/Animsets/9mmar_shoot_02.animset"
+      ]
+    },
+    "Player Weapon Component": {
+      "Damage": 5,
+      "Max Ammo": 50,
+      "Max Ammo Reserve": 250,
+      "Is Semi Automatic": true,
+      "Shoot Sound IDs": [
+        "weapons/pl_gun3.wav"
       ]
     }
   }

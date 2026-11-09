@@ -9,15 +9,6 @@
       "Preload Model": true,
       "Can Cast Shadows": false
     },
-    "Player Weapon Component": {
-      "Damage": 40,
-      "Max Ammo": 6,
-      "Max Ammo Reserve": 36,
-      "Shoot Sound IDs": [
-        "weapons/357_shot1.wav",
-        "weapons/357_shot2.wav"
-      ]
-    },
     "Animator Component": {
       "AnimSets": [
         "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_idle_01.animset",
@@ -26,6 +17,15 @@
         "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_fire.animset",
         "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_reload.animset",
         "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_holster.animset"
+      ]
+    },
+    "Player Weapon Component": {
+      "Damage": 40,
+      "Max Ammo": 6,
+      "Max Ammo Reserve": 36,
+      "Shoot Sound IDs": [
+        "weapons/357_shot1.wav",
+        "weapons/357_shot2.wav"
       ]
     }
   }

@@ -112,7 +112,6 @@ void PlayerWeaponComponent::DebugUI()
 		ImGui::DragInt("Current Ammo Reserve##PlayerWeaponComponent", &mCurrentAmmoReserve, 1, 0, mMaxAmmoReserve);
 		ImGui::DragInt("Max Ammo Reserve##PlayerWeaponComponent", &mMaxAmmoReserve, 1, 0, 500);
 
-		ImGui::Checkbox("Is Busy##PlayerWeaponComponent", &mIsBusy);
 		ImGui::Checkbox("Is Semi-Automatic##PlayerWeaponComponent", &mIsSemiAutomatic);
 	}
 }
@@ -123,6 +122,8 @@ void PlayerWeaponComponent::OnEnable()
 	{
 		mOnAnimationFinishedHandle = mAnimatorComponent->GetOnAnimationFinishedDelegate().AddRaw(this, &PlayerWeaponComponent::OnAnimationFinishedCallback);
 	}
+
+	StartDraw();
 }
 
 void PlayerWeaponComponent::OnDisable()
@@ -135,40 +136,32 @@ void PlayerWeaponComponent::OnDisable()
 
 void PlayerWeaponComponent::CheckForPlayerGameplayInput()
 {
-	if (!mIsEquipped)
+	if (mWeaponState == WeaponState::Holstered) // TODO: Check if this is even needed?
 	{
-		if (mInputSystem->IsKeyPressed(KeyCode::ONE))
-		{
-			StartDraw(); // TODO: Won't work anymore.
-		}
+		//if (mInputSystem->IsKeyPressed(KeyCode::ONE))
+		//{
+		//	StartDraw(); // TODO: Won't work anymore. Move out
+		//}
+		return;
 	}
-	else
+
+	if (IsBusy())
 	{
-		if (mAnimator->IsFinished())
-		{
-			Idle();
-		}
+		return;
+	}
 
-		if (mAnimator->GetIsLooping())
-		{
-			if (IsBusy())
-			{
-				return;
-			}
-
-			if (mInputSystem->IsKeyPressed(KeyCode::ZERO))
-			{
-				StartHolster();
-			}
-			else if (mIsSemiAutomatic ? mInputSystem->IsMouseDown(MouseButton::LBUTTON) : mInputSystem->IsMousePressed(MouseButton::LBUTTON))
-			{
-				StartShoot();
-			}
-			else if (mInputSystem->IsKeyPressed(KeyCode::R))
-			{
-				StartReload();
-			}
-		}
+	if (mInputSystem->IsKeyPressed(KeyCode::ZERO))
+	{
+		StartHolstering();
+	}
+	else if (mIsSemiAutomatic ?
+		mInputSystem->IsMouseDown(MouseButton::LBUTTON) : mInputSystem->IsMousePressed(MouseButton::LBUTTON))
+	{
+		StartShooting();
+	}
+	else if (mInputSystem->IsKeyPressed(KeyCode::R))
+	{
+		StartReloading();
 	}
 }
 
@@ -184,8 +177,7 @@ void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
 
 void PlayerWeaponComponent::StartDraw()
 {
-	mIsEquipped = true;
-	mIsBusy = true;
+	mWeaponState = WeaponState::Drawing;
 	mAnimator->PlayAnimation(3, false);
 }
 
@@ -196,19 +188,19 @@ void PlayerWeaponComponent::FinishDraw()
 
 void PlayerWeaponComponent::Idle()
 {
-	mIsBusy = false;
+	mWeaponState = WeaponState::Idling;
 	mAnimator->PlayAnimation(0, true);
 }
 
-void PlayerWeaponComponent::StartShoot()
+void PlayerWeaponComponent::StartShooting()
 {
 	if (mCurrentAmmo == 0)
 	{
-		StartReload();
+		StartReloading();
 		return;
 	}
 
-	mIsBusy = true;
+	mWeaponState = WeaponState::Shooting;
 	mAnimator->PlayAnimation(4, false);
 	const int shootSoundIDIndex = Random::UniformInt(0, static_cast<int>(mShootSoundIDs.size()) - 1);
 	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundIDs[shootSoundIDIndex], mShootSoundPitchVolume);
@@ -239,23 +231,23 @@ void PlayerWeaponComponent::StartShoot()
 	}
 }
 
-void PlayerWeaponComponent::FinishShoot()
+void PlayerWeaponComponent::FinishShooting()
 {
 	Idle();
 }
 
-void PlayerWeaponComponent::StartReload()
+void PlayerWeaponComponent::StartReloading()
 {
 	if (mCurrentAmmo == mMaxAmmo || mCurrentAmmoReserve == 0)
 	{
 		return;
 	}
 
-	mIsBusy = true;
+	mWeaponState = WeaponState::Reloading;
 	mAnimator->PlayAnimation(5, false);
 }
 
-void PlayerWeaponComponent::FinishReload()
+void PlayerWeaponComponent::FinishReloading()
 {
 	const int ammoNeeded = mMaxAmmo - mCurrentAmmo;
 	if (mCurrentAmmoReserve >= ammoNeeded)
@@ -272,42 +264,36 @@ void PlayerWeaponComponent::FinishReload()
 	Idle();
 }
 
-void PlayerWeaponComponent::StartHolster()
+void PlayerWeaponComponent::StartHolstering()
 {
-	mIsEquipped = false;
-	mIsBusy = true;
+	mWeaponState = WeaponState::Holstering;
 	//mAnimator->PlayAnimation(6, false);
 	mAnimator->PlayAnimationInReverse(3, false);
 }
 
-void PlayerWeaponComponent::FinishHolster()
+void PlayerWeaponComponent::FinishHolstering()
 {
-	mIsEquipped = false;
+	mWeaponState = WeaponState::Holstered;
 	GetOwner().SetActive(false);
 }
 
 void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 {
-	const int clip = static_cast<int>(clipIndex);
-	mIsBusy = false;
-
-	if (clip == 3) // Draw
+	switch (mWeaponState)
 	{
-		mIsEquipped ? FinishDraw() : FinishHolster();
+	case PlayerWeaponComponent::Drawing:
+		FinishDraw();
+		break;
+	case PlayerWeaponComponent::Shooting:
+		FinishShooting();
+		break;
+	case PlayerWeaponComponent::Reloading:
+		FinishReloading();
+		break;
+	case PlayerWeaponComponent::Holstering:
+		FinishHolstering();
+		break;
 	}
-	else if (clip == 4) // Shoot
-	{
-		FinishShoot();
-	}
-	else if (clip == 5) // Reload
-	{
-		FinishReload();
-	}
-	else if (clip == 6) // Holster
-	{
-		FinishHolster();
-	}
-	// else if other one shot anims idle as well
 }
 
 BulletHolesPoolComponent* PlayerWeaponComponent::GetOrCreateBulletPool()

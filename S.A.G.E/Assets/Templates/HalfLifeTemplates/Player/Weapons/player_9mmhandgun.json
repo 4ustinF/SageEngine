@@ -9,14 +9,6 @@
       "Preload Model": true,
       "Can Cast Shadows": false
     },
-    "Player Weapon Component": {
-      "Damage": 8,
-      "Max Ammo": 17,
-      "Max Ammo Reserve": 250,
-      "Shoot Sound IDs": [
-        "weapons/pl_gun3.wav"
-      ]
-    },
     "Animator Component": {
       "AnimSets": [
         "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_idle_01.animset",
@@ -26,6 +18,14 @@
         "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_reload.animset",
         "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_holster.animset",
         "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_add_silencer.animset"
+      ]
+    },
+    "Player Weapon Component": {
+      "Damage": 8,
+      "Max Ammo": 17,
+      "Max Ammo Reserve": 250,
+      "Shoot Sound IDs": [
+        "weapons/pl_gun3.wav"
       ]
     }
   }

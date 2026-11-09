@@ -293,7 +293,7 @@ void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 
 	if (clip == 3) // Draw
 	{
-		FinishDraw();
+		mIsEquipped ? FinishDraw() : FinishHolster();
 	}
 	else if (clip == 4) // Shoot
 	{

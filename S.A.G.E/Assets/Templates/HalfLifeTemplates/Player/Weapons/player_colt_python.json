@@ -12,20 +12,20 @@
     "Animator Component": {
       "AnimSets": [
         "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_draw.animset",
-        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_reload.animset"
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_reload.animset",
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_holster.animset",
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_fire.animset",
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_idle_01.animset",
+        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_idle_02.animset"
       ]
     },
     "Player Weapon Component": {
       "Damage": 40,
       "Max Ammo": 6,
       "Max Ammo Reserve": 36,
-      "Holstering Animset": "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_holster.animset",
+      "Contains Holstering Animset": true,
       "Shooting Animsets": [
-        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_fire.animset"
-      ],
-      "Other Animsets": [
-        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_idle_01.animset",
-        "../../Assets/Models/HalfLife/Player/ColtPython/Animsets/colt_python_idle_02.animset"
+        4
       ],
       "Shoot Sound IDs": [
         "weapons/357_shot1.wav",

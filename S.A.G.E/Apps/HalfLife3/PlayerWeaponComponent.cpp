@@ -38,28 +38,22 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 		mIsSemiAutomatic = value["Is Semi Automatic"].GetBool();
 	}
 
-	if (value.HasMember("Holstering Animset"))
+	// "Contains Holstering Animset"
+	if (value.HasMember("Contains Holstering Animset"))
 	{
-		mHolsteringAnimset = value["Holstering Animset"].GetString();
+		if (value["Contains Holstering Animset"].GetBool())
+		{
+			mHolsteringAnimIndex = 3;
+		}
 	}
 
 	if (value.HasMember("Shooting Animsets"))
 	{
 		const auto& shootingAnimsets = value["Shooting Animsets"].GetArray();
-		mShootingAnimsets.reserve(shootingAnimsets.Size());
+		mShootingAnimIndexs.reserve(shootingAnimsets.Size());
 		for (const auto& shootingAnimset : shootingAnimsets)
 		{
-			mShootingAnimsets.push_back(shootingAnimset.GetString());
-		}
-	}
-
-	if (value.HasMember("Other Animsets"))
-	{
-		const auto& otherAnimsets = value["Other Animsets"].GetArray();
-		mOtherAnimsets.reserve(otherAnimsets.Size());
-		for (const auto& shootingAnimset : otherAnimsets)
-		{
-			mOtherAnimsets.push_back(shootingAnimset.GetString());
+			mShootingAnimIndexs.push_back(shootingAnimset.GetInt());
 		}
 	}
 
@@ -79,9 +73,11 @@ void PlayerWeaponComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memo
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo", mMaxAmmo);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo Reserve", mMaxAmmoReserve);
 	if (mIsSemiAutomatic) { SaveBoolToTemplate(compObj, allocator, "Is Semi Automatic", mIsSemiAutomatic); }
-	SaveStringToTemplate(compObj, allocator, "Holstering Animset", mHolsteringAnimset);
-	SaveStringsToTemplate(compObj, allocator, "Shooting Animsets", mShootingAnimsets);
-	SaveStringsToTemplate(compObj, allocator, "Other Animsets", mOtherAnimsets);
+	
+	// TODO:
+	SaveBoolToTemplate(compObj, allocator, "Contains Holstering Animset", mHolsteringAnimIndex == 3);
+	// "Shooting Animsets" = TODO: We need a SaveNumbersToTemplate func.
+
 	SaveStringsToTemplate(compObj, allocator, "Shoot Sound IDs", mShootSoundFilePaths);
 }
 
@@ -97,26 +93,6 @@ void PlayerWeaponComponent::Initialize()
 	mAnimatorComponent = owner.GetComponent<AnimatorComponent>();
 	mAnimator = &mAnimatorComponent->GetAnimator();
 
-	// TODO: Move over to a animator init func in this class.
-	if (!mHolsteringAnimset.empty())
-	{
-		mAnimatorComponent->AddAnimation(mHolsteringAnimset); // TODO: Does not work.
-		mHolsteringAnimIndex = 3; // TODO: Should we instead do a lookup?
-	}
-
-	mShootingAnimIndexs.reserve(mShootingAnimsets.size());
-	size_t shootingIndex = mHolsteringAnimIndex;
-	for (const std::string& animset : mShootingAnimsets)
-	{
-		mAnimatorComponent->AddAnimation(animset); // TODO: Does not work.
-		mShootingAnimIndexs.push_back(shootingIndex++);
-	}
-
-	for (const std::string& animset : mOtherAnimsets)
-	{
-		mAnimatorComponent->AddAnimation(animset); // TODO: Does not work.
-	}
-
 	mSoundEffectManager = SoundEffectManager::Get();
 	for (const std::string& soundFilePath : mShootSoundFilePaths)
 	{
@@ -130,8 +106,6 @@ void PlayerWeaponComponent::Initialize()
 void PlayerWeaponComponent::Terminate()
 {
 	mShootingAnimIndexs.clear();
-	mShootingAnimsets.clear();
-	mOtherAnimsets.clear();
 
 	mShootSoundFilePaths.clear();
 	mShootSoundIDs.clear();

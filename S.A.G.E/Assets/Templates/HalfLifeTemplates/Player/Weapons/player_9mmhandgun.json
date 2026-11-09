@@ -12,21 +12,21 @@
     "Animator Component": {
       "AnimSets": [
         "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_draw.animset",
-        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_reload.animset"
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_reload.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_holster.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_shoot.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_idle_01.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_idle_02.animset",
+        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_add_silencer.animset"
       ]
     },
     "Player Weapon Component": {
       "Damage": 8,
       "Max Ammo": 17,
       "Max Ammo Reserve": 250,
-      "Holstering Animset": "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_holster.animset",
+      "Contains Holstering Animset": true,
       "Shooting Animsets": [
-        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_shoot.animset"
-      ],
-      "Other Animsets": [
-        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_idle_01.animset",
-        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_idle_02.animset",
-        "../../Assets/Models/HalfLife/Player/9mmhandgun/Animsets/9mmhandgun_add_silencer.animset"
+        4
       ],
       "Shoot Sound IDs": [
         "weapons/pl_gun3.wav"

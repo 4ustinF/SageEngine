@@ -83,9 +83,6 @@ private:
 	const size_t mReloadAnimIndex = 2;
 	size_t mHolsteringAnimIndex = -1; // 3
 	std::vector<size_t> mShootingAnimIndexs;
-	std::string mHolsteringAnimset = "";
-	std::vector<std::string> mShootingAnimsets;
-	std::vector<std::string> mOtherAnimsets; // TODO: These are anims we need to deal with later. Grenade, Add Silencer, Fidget
 
 	// Audio
 	std::vector<std::string> mShootSoundFilePaths;

@@ -101,7 +101,7 @@ void ModelComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Model Component##ModelComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		if (ImGui::Checkbox("Preload Model##ModelComponent", &mPreloadModel));
+		ImGui::Checkbox("Preload Model##ModelComponent", &mPreloadModel);
 		if (ImGui::Checkbox("Can Cast Shadows##ModelComponent", &mCanCastShadows))
 		{
 			UpdateRenderGroupShadowSettings();

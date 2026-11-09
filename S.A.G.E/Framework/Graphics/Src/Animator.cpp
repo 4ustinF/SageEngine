@@ -119,7 +119,7 @@ Vector3 Animator::GetPosition(const Bone* bone) const
 
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
 	if (clip.HasTransform(bone->index)) {
-		position = clip.boneAnimations[bone->index]->GetPosition(mAnimationTick);
+		position = clip.boneAnimations[bone->index]->GetPosition(GetAnimationTick());
 	}
 	return position;
 }
@@ -130,7 +130,7 @@ Quaternion Animator::GetRotation(const Bone* bone) const
 
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
 	if (clip.HasTransform(bone->index)) {
-		rotation = clip.boneAnimations[bone->index]->GetRotation(mAnimationTick);
+		rotation = clip.boneAnimations[bone->index]->GetRotation(GetAnimationTick());
 	}
 	return rotation;
 }
@@ -141,7 +141,7 @@ Vector3 Animator::GetScale(const Bone* bone) const
 
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
 	if (clip.HasTransform(bone->index)) {
-		scale = clip.boneAnimations[bone->index]->GetScale(mAnimationTick);
+		scale = clip.boneAnimations[bone->index]->GetScale(GetAnimationTick());
 	}
 	return scale;
 }
@@ -152,9 +152,20 @@ Matrix4 Animator::GetTransform(const Bone* bone) const
 
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
 	if (clip.HasTransform(bone->index)) {
-		toParentTransform = clip.boneAnimations[bone->index]->GetTransform(mAnimationTick);
+		toParentTransform = clip.boneAnimations[bone->index]->GetTransform(GetAnimationTick());
 	}
 	return toParentTransform;
+}
+
+float Animator::GetAnimationTick() const
+{
+	if (mReverse)
+	{
+		const AnimationClip& clip = mModel->animationSet[mClipIndex]; // TODO: Cache this to avoid repeated lookups.
+		return clip.tickDuration - mAnimationTick;
+	}
+
+	return mAnimationTick;
 }
 
 const std::string Animator::GetClipNameByIndex(size_t index) const

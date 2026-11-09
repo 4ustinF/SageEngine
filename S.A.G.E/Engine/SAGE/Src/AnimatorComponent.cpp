@@ -27,7 +27,6 @@ void AnimatorComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Animator Component##AnimatorComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		// TODO: Play and pause buttons
 		const float spacing = ImGui::GetStyle().ItemSpacing.x;
 		const ImVec2 playButtonSize = ImVec2(50.0f, 0);
 		const ImVec2 oneShotButtonSize = ImVec2(70.0f, 0);

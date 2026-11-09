@@ -32,8 +32,9 @@ namespace SAGE::Graphics
 
 		const Model* GetModel() const { return mModel; }
 		size_t GetClipIndex() const { return mClipIndex; }
-		float GetAnimationTick() const { return mAnimationTick; }
+		float GetAnimationTick() const;
 		bool GetIsLooping() const { return mLooping; }
+		bool GetIsReverse() const { return mReverse; }
 
 		const std::string GetClipNameByIndex(size_t index) const;
 		size_t GetClipIndexByName(const std::string& name) const;

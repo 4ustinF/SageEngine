@@ -276,7 +276,8 @@ void PlayerWeaponComponent::StartHolster()
 {
 	mIsEquipped = false;
 	mIsBusy = true;
-	mAnimator->PlayAnimation(6, false);
+	//mAnimator->PlayAnimation(6, false);
+	mAnimator->PlayAnimationInReverse(3, false);
 }
 
 void PlayerWeaponComponent::FinishHolster()

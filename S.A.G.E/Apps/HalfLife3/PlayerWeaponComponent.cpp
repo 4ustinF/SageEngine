@@ -56,7 +56,7 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 		mShootingAnimIndexs.reserve(shootingAnimsets.Size());
 		for (const auto& shootingAnimset : shootingAnimsets)
 		{
-			mShootingAnimIndexs.push_back(shootingAnimset.GetInt());
+			mShootingAnimIndexs.push_back(static_cast<size_t>(shootingAnimset.GetInt()));
 		}
 	}
 
@@ -77,11 +77,8 @@ void PlayerWeaponComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memo
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo Reserve", mMaxAmmoReserve);
 	SaveNumberToTemplate(compObj, allocator, "Fire Rate", mRateOfFire);
 	if (mIsSemiAutomatic) { SaveBoolToTemplate(compObj, allocator, "Is Semi Automatic", mIsSemiAutomatic); }
-	
-	// TODO:
-	SaveNumberToTemplate(compObj, allocator, "Holstering Animset Index", mHolsteringAnimIndex, -1);
-	// "Shooting Animsets" = TODO: We need a SaveNumbersToTemplate func.
-
+	SaveNumberToTemplate(compObj, allocator, "Holstering Animset Index", mHolsteringAnimIndex, static_cast<size_t>(-1));
+	SaveNumbersToTemplate(compObj, allocator, "Shooting Animsets", mShootingAnimIndexs);
 	SaveStringsToTemplate(compObj, allocator, "Shoot Sound IDs", mShootSoundFilePaths);
 }
 

@@ -91,6 +91,63 @@ void Component::SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::Memor
 	compObj.AddMember(rj::Value(title.c_str(), allocator), numValue, allocator);
 }
 
+void Component::SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, size_t value, size_t defaultValue)
+{
+	if (title.empty() || value == defaultValue)
+	{
+		return;
+	}
+
+	rj::Value numValue(rj::kNumberType);
+	numValue.SetInt(value);
+	compObj.AddMember(rj::Value(title.c_str(), allocator), numValue, allocator);
+}
+
+void Component::SaveNumbersToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::vector<int>& values)
+{
+	if (title.empty() || values.empty())
+	{
+		return;
+	}
+
+	rj::Value array(rj::kArrayType);
+	for (const auto& value : values)
+	{
+		array.PushBack(rj::Value(value), allocator);
+	}
+	compObj.AddMember(rj::Value(title.c_str(), allocator), array, allocator);
+}
+
+void Component::SaveNumbersToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::vector<float>& values)
+{
+	if (title.empty() || values.empty())
+	{
+		return;
+	}
+
+	rj::Value array(rj::kArrayType);
+	for (const auto& value : values)
+	{
+		array.PushBack(rj::Value(value), allocator);
+	}
+	compObj.AddMember(rj::Value(title.c_str(), allocator), array, allocator);
+}
+
+void Component::SaveNumbersToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::vector<size_t>& values)
+{
+	if (title.empty() || values.empty())
+	{
+		return;
+	}
+
+	rj::Value array(rj::kArrayType);
+	for (const auto& value : values)
+	{
+		array.PushBack(rj::Value(value), allocator);
+	}
+	compObj.AddMember(rj::Value(title.c_str(), allocator), array, allocator);
+}
+
 void Component::SaveColorToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const Color& value, const Color& defaultValue)
 {
 	SaveVector4ToTemplate(compObj, allocator, title, value, defaultValue);

@@ -50,11 +50,16 @@ namespace SAGE
 	protected:
 		std::string OpenFileDialog(const char* fileFilterType);
 
+		// TODO: Clean up these save functions. They are a mess. We should templatize them and have a single function for each type.
 		void SaveBoolToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, bool value);
 		void SaveStringToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::string& value);
 		void SaveStringsToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::vector<std::string>& values);
 		void SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, int value, int defaultValue = 0);
 		void SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, float value, float defaultValue = 0.0f);
+		void SaveNumberToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, size_t value, size_t defaultValue = 0);
+		void SaveNumbersToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::vector<int>& values);
+		void SaveNumbersToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::vector<float>& values);
+		void SaveNumbersToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const std::vector<size_t>& values);
 		void SaveColorToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const SAGE::Graphics::Color& value, const SAGE::Graphics::Color& defaultValue = SAGE::Graphics::Colors::Black);
 		void SaveVector2ToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const SAGE::Math::Vector2& value, const SAGE::Math::Vector2& defaultValue = SAGE::Math::Vector2::Zero);
 		void SaveVector2IntToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator, const std::string& title, const SAGE::Math::Vector2Int& value, const SAGE::Math::Vector2Int& defaultValue = SAGE::Math::Vector2Int::Zero);

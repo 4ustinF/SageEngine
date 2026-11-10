@@ -113,7 +113,7 @@ void AnimatorComponent::LoadAnimationSet(Model& model)
 {
 	if (mHasLoadedAnimationSet)
 	{
-		//return; // TODO:
+		return;
 	}
 
 	if (model.animationSet.size() == 1)

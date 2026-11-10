@@ -226,16 +226,20 @@ void PlayerWeaponComponent::StartShooting()
 		return;
 	}
 
+	// State
 	mWeaponState = WeaponState::Shooting;
 
+	// Anim
 	const int shootingAnimIndexsSize = static_cast<int>(mShootingAnimIndexs.size());
-	const size_t shootingIndex = shootingAnimIndexsSize == 1 ? 0 : Math::Random::UniformInt(0, shootingAnimIndexsSize);
+	const size_t shootingIndex = shootingAnimIndexsSize == 1 ? 0 : Random::UniformInt(0, shootingAnimIndexsSize - 1);
 	mAnimator->PlayAnimation(mShootingAnimIndexs[shootingIndex], false);
 
+	// Audio
 	const int shootSoundIDIndex = Random::UniformInt(0, static_cast<int>(mShootSoundIDs.size()) - 1);
 	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundIDs[shootSoundIDIndex], mShootSoundPitchVolume);
 	mCurrentAmmo -= 1;
 
+	// Bullet
 	RBPhysicsWorld& physicsWorld = mPhysicsService->GetPhysicsWorld();
 	Camera& camera = mCameraService->GetCamera();
 

@@ -46,9 +46,9 @@ namespace SAGE::Graphics
 		void Draw(const std::size_t& textureID, const SpriteParams& params);
 		void Draw(const Texture& texture, const SpriteParams& params);
 
+		// Legacy overloads just build params and forward
 		void Draw(const std::size_t& textureID, const Math::Vector2& pos, float rotation = 0.0f, Input::Pivot pivot = Input::Pivot::Center, Input::Flip flip = Input::Flip::None);
 		void Draw(const std::size_t& textureID, const Math::Rect& sourceRect, const Math::Vector2& pos, float rotation = 0.0f, Input::Pivot pivot = Input::Pivot::Center, Input::Flip flip = Input::Flip::None);
-
 		void Draw(const Texture& texture, const Math::Vector2& pos, float rotation = 0.0f, Input::Pivot pivot = Input::Pivot::Center, Input::Flip flip = Input::Flip::None);
 		void Draw(const Texture& texture, const Math::Rect& sourceRect, const Math::Vector2& pos, float rotation = 0.0f, Input::Pivot pivot = Input::Pivot::Center, Input::Flip flip = Input::Flip::None);
 

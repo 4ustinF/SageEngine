@@ -235,7 +235,8 @@ void PlayerWeaponComponent::StartShooting()
 	mAnimator->PlayAnimation(mShootingAnimIndexs[shootingIndex], false);
 
 	// Audio
-	const int shootSoundIDIndex = Random::UniformInt(0, static_cast<int>(mShootSoundIDs.size()) - 1);
+	const int shootingSoundIndexsSize = static_cast<int>(mShootSoundIDs.size());
+	const int shootSoundIDIndex = shootingSoundIndexsSize == 1 ? 0 : Random::UniformInt(0, shootingSoundIndexsSize - 1);
 	mSoundEffectManager->PlayOneShotWithPitchOffset(mShootSoundIDs[shootSoundIDIndex], mShootSoundPitchVolume);
 	mCurrentAmmo -= 1;
 

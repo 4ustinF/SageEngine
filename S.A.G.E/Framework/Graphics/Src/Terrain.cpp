@@ -9,7 +9,7 @@ using namespace SAGE::Graphics;
 void Terrain::Initialize(std::filesystem::path fileName, float heightScale)
 {
 	FILE* file = nullptr;
-	fopen_s(&file, fileName.u8string().c_str(), "rb");
+	fopen_s(&file, fileName.string().c_str(), "rb");
 
 	fseek(file, 0L, SEEK_END);
 	const size_t fileSize = ftell(file);

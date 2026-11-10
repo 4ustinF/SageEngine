@@ -172,7 +172,7 @@ void SpriteRenderer::Draw(const Texture& texture, const SpriteParams& params)
 
 	// Origin is in source-texture pixels; SpriteBatch applies scale after, so pivots stay correct
 	const DirectX::XMFLOAT2 origin = GetOrigin(width, height, params.pivot);
-	const DirectX::XMVECTORF32 tint = { { { params.tint.r, params.tint.g, params.tint.b, params.tint.a } } };
+	const DirectX::XMVECTORF32 tint = { { { params.tint.x, params.tint.y, params.tint.z, params.tint.w } } };
 
 	mSpriteBatch->Draw(
 		texture.GetShaderResourceView(),
@@ -182,59 +182,60 @@ void SpriteRenderer::Draw(const Texture& texture, const SpriteParams& params)
 		params.rotation,
 		origin,
 		ToXMFLOAT2(params.scale),
-		GetSpriteEffects(params.flip));
+		GetSpriteEffects(params.flip), 
+		params.layerDepth);
 }
 
-//// Legacy overloads just build params and forward
-//void SpriteRenderer::Draw(const Texture& texture, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
-//{
-//	Draw(texture, SpriteParams{ .position = pos, .rotation = rotation, .pivot = pivot, .flip = flip });
-//}
-//
-//void SpriteRenderer::Draw(const Texture& texture, const Rect& sourceRect, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
-//{
-//	Draw(texture, SpriteParams{ .position = pos, .rotation = rotation, .pivot = pivot, .flip = flip, .sourceRect = sourceRect });
-//}
-//
-//void SpriteRenderer::Draw(const std::size_t& textureID, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
-//{
-//	Draw(*TextureManager::Get()->GetTexture(textureID), pos, rotation, pivot, flip);
-//}
-//
-//void SpriteRenderer::Draw(const std::size_t& textureID, const Rect& sourceRect, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
-//{
-//	Draw(*TextureManager::Get()->GetTexture(textureID), sourceRect, pos, rotation, pivot, flip);
-//}
-
-void SpriteRenderer::Draw(const std::size_t& textureID, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
-{
-	const Texture* texture = TextureManager::Get()->GetTexture(textureID);
-	Draw(*texture, pos, rotation, pivot, flip);
-}
-
-void SpriteRenderer::Draw(const std::size_t& textureID, const Rect& sourceRect, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
-{
-	const Texture* texture = TextureManager::Get()->GetTexture(textureID);
-	Draw(*texture, sourceRect, pos, rotation, pivot, flip);
-}
-
+// Legacy overloads just build params and forward
 void SpriteRenderer::Draw(const Texture& texture, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
 {
-	ASSERT(mSpriteBatch != nullptr, "[SpriteRenderer] Not initialized.");
-	DirectX::XMFLOAT2 origin = GetOrigin(texture.GetWidth(), texture.GetHeight(), pivot);
-	DirectX::SpriteEffects effects = GetSpriteEffects(flip);
-	mSpriteBatch->Draw(texture.GetShaderResourceView(), ToXMFLOAT2(pos), nullptr, DirectX::Colors::White, rotation, origin, 1.0f, effects);
+	Draw(texture, SpriteParams{ .position = pos, .rotation = rotation, .pivot = pivot, .flip = flip });
 }
 
 void SpriteRenderer::Draw(const Texture& texture, const Rect& sourceRect, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
 {
-	ASSERT(mSpriteBatch != nullptr, "[SpriteRenderer] Not initialized.");
-	RECT rect;
-	rect.left = static_cast<LONG>(sourceRect.left);
-	rect.top = static_cast<LONG>(sourceRect.top);
-	rect.right = static_cast<LONG>(sourceRect.right);
-	rect.bottom = static_cast<LONG>(sourceRect.bottom);
-	DirectX::XMFLOAT2 origin = GetOrigin(rect.right - rect.left, rect.bottom - rect.top, pivot);
-	DirectX::SpriteEffects effects = GetSpriteEffects(flip);
-	mSpriteBatch->Draw(texture.GetShaderResourceView(), ToXMFLOAT2(pos), &rect, DirectX::Colors::White, rotation, origin, 1.0f, effects);
+	Draw(texture, SpriteParams{ .position = pos, .rotation = rotation, .pivot = pivot, .flip = flip, .sourceRect = sourceRect });
 }
+
+void SpriteRenderer::Draw(const std::size_t& textureID, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
+{
+	Draw(*TextureManager::Get()->GetTexture(textureID), pos, rotation, pivot, flip);
+}
+
+void SpriteRenderer::Draw(const std::size_t& textureID, const Rect& sourceRect, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
+{
+	Draw(*TextureManager::Get()->GetTexture(textureID), sourceRect, pos, rotation, pivot, flip);
+}
+
+//void SpriteRenderer::Draw(const std::size_t& textureID, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
+//{
+//	const Texture* texture = TextureManager::Get()->GetTexture(textureID);
+//	Draw(*texture, pos, rotation, pivot, flip);
+//}
+//
+//void SpriteRenderer::Draw(const std::size_t& textureID, const Rect& sourceRect, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
+//{
+//	const Texture* texture = TextureManager::Get()->GetTexture(textureID);
+//	Draw(*texture, sourceRect, pos, rotation, pivot, flip);
+//}
+//
+//void SpriteRenderer::Draw(const Texture& texture, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
+//{
+//	ASSERT(mSpriteBatch != nullptr, "[SpriteRenderer] Not initialized.");
+//	DirectX::XMFLOAT2 origin = GetOrigin(texture.GetWidth(), texture.GetHeight(), pivot);
+//	DirectX::SpriteEffects effects = GetSpriteEffects(flip);
+//	mSpriteBatch->Draw(texture.GetShaderResourceView(), ToXMFLOAT2(pos), nullptr, DirectX::Colors::White, rotation, origin, 1.0f, effects);
+//}
+//
+//void SpriteRenderer::Draw(const Texture& texture, const Rect& sourceRect, const Vector2& pos, float rotation, Pivot pivot, Flip flip)
+//{
+//	ASSERT(mSpriteBatch != nullptr, "[SpriteRenderer] Not initialized.");
+//	RECT rect;
+//	rect.left = static_cast<LONG>(sourceRect.left);
+//	rect.top = static_cast<LONG>(sourceRect.top);
+//	rect.right = static_cast<LONG>(sourceRect.right);
+//	rect.bottom = static_cast<LONG>(sourceRect.bottom);
+//	DirectX::XMFLOAT2 origin = GetOrigin(rect.right - rect.left, rect.bottom - rect.top, pivot);
+//	DirectX::SpriteEffects effects = GetSpriteEffects(flip);
+//	mSpriteBatch->Draw(texture.GetShaderResourceView(), ToXMFLOAT2(pos), &rect, DirectX::Colors::White, rotation, origin, 1.0f, effects);
+//}

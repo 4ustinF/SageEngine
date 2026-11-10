@@ -92,7 +92,7 @@ void ModelIO::SaveModel(std::filesystem::path filePath, const Model& model)
 		return;
 
 	FILE* file = nullptr;
-	fopen_s(&file, filePath.u8string().c_str(), "w");
+	fopen_s(&file, filePath.string().c_str(), "w");
 	if (file == nullptr)
 		return;
 
@@ -137,7 +137,7 @@ void ModelIO::SaveModel(std::filesystem::path filePath, const Model& model)
 void ModelIO::LoadModel(std::filesystem::path filePath, Model& model)
 {
 	FILE* file = nullptr;
-	fopen_s(&file, filePath.u8string().c_str(), "r");
+	fopen_s(&file, filePath.string().c_str(), "r");
 	if (file == nullptr)
 		return;
 
@@ -193,7 +193,7 @@ void ModelIO::SaveMaterial(std::filesystem::path filePath, const Model& model)
 	filePath.replace_extension("material");
 
 	FILE* file = nullptr;
-	auto err = fopen_s(&file, filePath.u8string().c_str(), "w");
+	auto err = fopen_s(&file, filePath.string().c_str(), "w");
 	if (err != 0 || file == nullptr) {
 		return;
 	}
@@ -226,9 +226,9 @@ void ModelIO::LoadMaterial(std::filesystem::path filePath, Model& model)
 {
 	filePath.replace_extension("material");
 	FILE* file = nullptr;
-	auto err = fopen_s(&file, filePath.u8string().c_str(), "r");
+	auto err = fopen_s(&file, filePath.string().c_str(), "r");
 	if (err != 0 || file == nullptr) {
-		printf("Error: failed to open file %s for loading.", filePath.u8string().c_str());
+		printf("Error: failed to open file %s for loading.", filePath.string().c_str());
 		return;
 	}
 
@@ -239,7 +239,7 @@ void ModelIO::LoadMaterial(std::filesystem::path filePath, Model& model)
 	{
 		char textureName[1024]{};
 		if (fscanf_s(file, "%s\n", textureName, (uint32_t)sizeof(textureName)) && strcmp(textureName, "none") != 0) {
-			destName = filePath.replace_filename(textureName).u8string().c_str();
+			destName = filePath.replace_filename(textureName).string().c_str();
 		}
 	};
 
@@ -272,7 +272,7 @@ void ModelIO::SaveSkeleton(std::filesystem::path filePath, const Model& model)
 	filePath.replace_extension("skeleton");
 
 	FILE* file = nullptr;
-	auto err = fopen_s(&file, filePath.u8string().c_str(), "w");
+	auto err = fopen_s(&file, filePath.string().c_str(), "w");
 	if (err != 0 || file == nullptr) {
 		return;
 	}
@@ -301,9 +301,9 @@ void ModelIO::LoadSkeleton(std::filesystem::path filePath, Model& model)
 {
 	filePath.replace_extension("skeleton");
 	FILE* file = nullptr;
-	auto err = fopen_s(&file, filePath.u8string().c_str(), "r");
+	auto err = fopen_s(&file, filePath.string().c_str(), "r");
 	if (err != 0 || file == nullptr) {
-		printf("Error: failed to open file %s for loading.", filePath.u8string().c_str());
+		printf("Error: failed to open file %s for loading.", filePath.string().c_str());
 		return;
 	}
 
@@ -368,7 +368,7 @@ void ModelIO::SaveAnimationSet(std::filesystem::path filePath, const Model& mode
 	filePath.replace_extension("animset");
 
 	FILE* file = nullptr;
-	auto err = fopen_s(&file, filePath.u8string().c_str(), "w");
+	auto err = fopen_s(&file, filePath.string().c_str(), "w");
 	if (err != 0 || file == nullptr) {
 		return;
 	}
@@ -408,9 +408,9 @@ void ModelIO::LoadAnimationSet(std::filesystem::path filePath, Model& model)
 	filePath.replace_extension("animset");
 
 	FILE* file = nullptr;
-	auto err = fopen_s(&file, filePath.u8string().c_str(), "r");
+	auto err = fopen_s(&file, filePath.string().c_str(), "r");
 	if (err != 0 || file == nullptr) {
-		printf("Error: failed to open file %s for loading.", filePath.u8string().c_str());
+		printf("Error: failed to open file %s for loading.", filePath.string().c_str());
 		return;
 	}
 

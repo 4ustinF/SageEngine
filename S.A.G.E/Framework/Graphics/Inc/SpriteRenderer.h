@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Input/Inc/InputTypes.h"
+#include "Colors.h"
 
 namespace DirectX { class CommonStates; class SpriteBatch; }
 
@@ -16,6 +17,7 @@ namespace SAGE::Graphics
 		Color tint = Colors::White;
 		Input::Pivot pivot = Input::Pivot::Center;
 		Input::Flip flip = Input::Flip::None;
+		float layerDepth = 0.0f;
 		std::optional<Math::Rect> sourceRect = std::nullopt; // nullopt = whole texture
 	};
 

@@ -157,7 +157,7 @@ void GameState::Update(float deltaTime)
 void GameState::Render()
 {
 	mGameWorld.Render();
-	mSpriteRenderer->Draw(mTempCrosshairTextureID, Vector2(640.0f, 360.0f));
+	mSpriteRenderer->Draw(mTempCrosshairTextureID, SpriteParams{ .position = Vector2(640.0f, 360.0f), .scale = Vector2(0.08f, 0.08f) });
 
 	//mGlassEffect.Begin();
 	//mGlassEffect.Render(mGlassRenderObject);

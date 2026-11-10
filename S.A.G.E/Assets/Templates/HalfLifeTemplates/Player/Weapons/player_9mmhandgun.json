@@ -24,7 +24,8 @@
       "Damage": 8,
       "Max Ammo": 17,
       "Max Ammo Reserve": 250,
-      "Contains Holstering Animset": true,
+      "Fire Rate": 200,
+      "Holstering Animset Index": 3,
       "Shooting Animsets": [
         4
       ],

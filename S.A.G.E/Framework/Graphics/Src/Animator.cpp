@@ -31,10 +31,10 @@ void Animator::Initialize(const Model* model)
 	}
 }
 
-bool Animator::PlayAnimation(size_t clipIndex, bool looping)
+bool Animator::PlayAnimation(size_t clipIndex, bool looping, bool force)
 {
 	ASSERT(clipIndex < mModel->animationSet.size(), "Animator -- Invalid animation clip index.");
-	if (mClipIndex != clipIndex || IsFinished())
+	if (mClipIndex != clipIndex || IsFinished() || force)
 	{
 		mClipIndex = clipIndex;
 		mAnimationTick = 0.0f;

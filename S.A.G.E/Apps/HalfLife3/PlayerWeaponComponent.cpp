@@ -33,18 +33,21 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 		mMaxAmmoReserve = value["Max Ammo Reserve"].GetInt();
 	}
 
+	if (value.HasMember("Fire Rate"))
+	{
+		mRateOfFire = value["Fire Rate"].GetInt();
+		mRateOfFireInSeconds = 60.0f / static_cast<float>(mRateOfFire);
+	}
+
 	if (value.HasMember("Is Semi Automatic"))
 	{
 		mIsSemiAutomatic = value["Is Semi Automatic"].GetBool();
 	}
 
 	// "Contains Holstering Animset"
-	if (value.HasMember("Contains Holstering Animset"))
+	if (value.HasMember("Holstering Animset Index"))
 	{
-		if (value["Contains Holstering Animset"].GetBool())
-		{
-			mHolsteringAnimIndex = 3;
-		}
+		mHolsteringAnimIndex = value["Holstering Animset Index"].GetInt();
 	}
 
 	if (value.HasMember("Shooting Animsets"))
@@ -72,10 +75,11 @@ void PlayerWeaponComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memo
 	SaveNumberToTemplate(compObj, allocator, "Damage", mDamage);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo", mMaxAmmo);
 	SaveNumberToTemplate(compObj, allocator, "Max Ammo Reserve", mMaxAmmoReserve);
+	SaveNumberToTemplate(compObj, allocator, "Fire Rate", mRateOfFire);
 	if (mIsSemiAutomatic) { SaveBoolToTemplate(compObj, allocator, "Is Semi Automatic", mIsSemiAutomatic); }
 	
 	// TODO:
-	SaveBoolToTemplate(compObj, allocator, "Contains Holstering Animset", mHolsteringAnimIndex == 3);
+	SaveNumberToTemplate(compObj, allocator, "Holstering Animset Index", mHolsteringAnimIndex, -1);
 	// "Shooting Animsets" = TODO: We need a SaveNumbersToTemplate func.
 
 	SaveStringsToTemplate(compObj, allocator, "Shoot Sound IDs", mShootSoundFilePaths);
@@ -123,7 +127,23 @@ void PlayerWeaponComponent::Terminate()
 
 void PlayerWeaponComponent::Update(float deltaTime)
 {
+	// TODO: 
+}
 
+void PlayerWeaponComponent::OnQueueUpdate(float deltaTime)
+{
+	if (!mCanShoot)
+	{
+		mCanShootTimer -= deltaTime;
+		if (mCanShootTimer <= 0.0f)
+		{
+			ResetCanShootTimer();
+		}
+		else
+		{
+			EnqueueUpdate();
+		}
+	}
 }
 
 void PlayerWeaponComponent::DebugUI()
@@ -139,6 +159,13 @@ void PlayerWeaponComponent::DebugUI()
 		ImGui::DragInt("Max Ammo Reserve##PlayerWeaponComponent", &mMaxAmmoReserve, 1, 0, 500);
 
 		ImGui::Checkbox("Is Semi-Automatic##PlayerWeaponComponent", &mIsSemiAutomatic);
+
+		ImGui::Checkbox("Can Shoot##PlayerWeaponComponent", &mCanShoot);
+
+		if (ImGui::DragFloat("Rate of Fire (seconds)##PlayerWeaponComponent", &mRateOfFireInSeconds, 0.01f, 0.0f, 3.0f))
+		{
+			ResetCanShootTimer();
+		}
 	}
 }
 
@@ -149,6 +176,7 @@ void PlayerWeaponComponent::OnEnable()
 		mOnAnimationFinishedHandle = mAnimatorComponent->GetOnAnimationFinishedDelegate().AddRaw(this, &PlayerWeaponComponent::OnAnimationFinishedCallback);
 	}
 
+	ResetCanShootTimer();
 	StartDraw();
 }
 
@@ -173,6 +201,15 @@ void PlayerWeaponComponent::CheckForPlayerGameplayInput()
 
 	if (IsBusy())
 	{
+		if (mWeaponState == WeaponState::Shooting) // Shooting can interrupt shooting now.
+		{
+			if (mIsSemiAutomatic ? 
+				mInputSystem->IsMouseDown(MouseButton::LBUTTON) : mInputSystem->IsMousePressed(MouseButton::LBUTTON))
+			{
+				StartShooting();
+			}
+		}
+
 		return;
 	}
 
@@ -180,8 +217,7 @@ void PlayerWeaponComponent::CheckForPlayerGameplayInput()
 	{
 		StartHolstering();
 	}
-	else if (mIsSemiAutomatic ?
-		mInputSystem->IsMouseDown(MouseButton::LBUTTON) : mInputSystem->IsMousePressed(MouseButton::LBUTTON))
+	else if (mIsSemiAutomatic ? mInputSystem->IsMouseDown(MouseButton::LBUTTON) : mInputSystem->IsMousePressed(MouseButton::LBUTTON))
 	{
 		StartShooting();
 	}
@@ -220,6 +256,11 @@ void PlayerWeaponComponent::Idle()
 
 void PlayerWeaponComponent::StartShooting()
 {
+	if (!mCanShoot)
+	{
+		return;
+	}
+
 	if (mCurrentAmmo == 0)
 	{
 		StartReloading();
@@ -229,10 +270,14 @@ void PlayerWeaponComponent::StartShooting()
 	// State
 	mWeaponState = WeaponState::Shooting;
 
+	// Start Cooldown
+	mCanShoot = false;
+	EnqueueUpdate();
+
 	// Anim
 	const int shootingAnimIndexsSize = static_cast<int>(mShootingAnimIndexs.size());
 	const size_t shootingIndex = shootingAnimIndexsSize == 1 ? 0 : Random::UniformInt(0, shootingAnimIndexsSize - 1);
-	mAnimator->PlayAnimation(mShootingAnimIndexs[shootingIndex], false);
+	mAnimator->PlayAnimation(mShootingAnimIndexs[shootingIndex], false, true);
 
 	// Audio
 	const int shootingSoundIndexsSize = static_cast<int>(mShootSoundIDs.size());
@@ -356,4 +401,10 @@ BulletHolesPoolComponent* PlayerWeaponComponent::GetOrCreateBulletPool()
 	mBulletPool = bulletPoolGO->GetComponent<BulletHolesPoolComponent>();
 
 	return mBulletPool;
+}
+
+void PlayerWeaponComponent::ResetCanShootTimer()
+{
+	mCanShootTimer = mRateOfFireInSeconds;
+	mCanShoot = true;
 }

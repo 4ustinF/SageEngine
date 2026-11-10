@@ -17,7 +17,7 @@ namespace SAGE::Graphics
 	public:
 		void Initialize(const Model* model);
 
-		bool PlayAnimation(size_t clipIndex, bool looping = true);
+		bool PlayAnimation(size_t clipIndex, bool looping = true, bool force = false);
 		bool PlayAnimationInReverse(size_t clipIndex, bool looping = true);
 		bool PlayAnimation(const std::string& clipName, bool looping = true);
 		bool PlayAnimationInReverse(const std::string& clipName, bool looping = true);

@@ -24,10 +24,12 @@
       "Damage": 5,
       "Max Ammo": 50,
       "Max Ammo Reserve": 250,
+      "Fire Rate": 600,
       "Is Semi Automatic": true,
-      "Contains Holstering Animset": false,
       "Shooting Animsets": [
-        3, 4, 5
+        3,
+        4,
+        5
       ],
       "Shoot Sound IDs": [
         "weapons/hks1.wav",

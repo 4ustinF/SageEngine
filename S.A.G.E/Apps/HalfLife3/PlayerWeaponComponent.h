@@ -33,6 +33,7 @@ public:
 	void Terminate() override;
 
 	void Update(float deltaTime) override;
+	void OnQueueUpdate(float deltaTime) override;
 	void DebugUI() override;
 	void OnEnable() override;
 	void OnDisable() override;
@@ -76,6 +77,13 @@ private:
 	int mCurrentAmmoReserve = 0;
 	int mMaxAmmoReserve = 0;
 	bool mIsSemiAutomatic = false;
+
+	// Fire rate
+	void ResetCanShootTimer();
+	bool mCanShoot = true;
+	int mRateOfFire = 60; // In RPM
+	float mCanShootTimer = 1.0f;
+	float mRateOfFireInSeconds = 1.0f;
 
 	// Animations
 	const size_t mIdlingAnimIndex = 0; // TODO: maybe turn this into a non looping anim and swap between idle anims?

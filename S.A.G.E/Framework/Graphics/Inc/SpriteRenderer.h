@@ -8,6 +8,17 @@ namespace SAGE::Graphics
 {
 	class Texture;
 
+	struct SpriteParams
+	{
+		Math::Vector2 position = Math::Vector2::Zero;
+		float rotation = 0.0f;
+		Math::Vector2 scale = Math::Vector2::One;
+		Color tint = Colors::White;
+		Input::Pivot pivot = Input::Pivot::Center;
+		Input::Flip flip = Input::Flip::None;
+		std::optional<Math::Rect> sourceRect = std::nullopt; // nullopt = whole texture
+	};
+
 	class SpriteRenderer
 	{
 	public:
@@ -29,6 +40,9 @@ namespace SAGE::Graphics
 
 		void BeginRender();
 		void EndRender();
+
+		void Draw(const std::size_t& textureID, const SpriteParams& params);
+		void Draw(const Texture& texture, const SpriteParams& params);
 
 		void Draw(const std::size_t& textureID, const Math::Vector2& pos, float rotation = 0.0f, Input::Pivot pivot = Input::Pivot::Center, Input::Flip flip = Input::Flip::None);
 		void Draw(const std::size_t& textureID, const Math::Rect& sourceRect, const Math::Vector2& pos, float rotation = 0.0f, Input::Pivot pivot = Input::Pivot::Center, Input::Flip flip = Input::Flip::None);

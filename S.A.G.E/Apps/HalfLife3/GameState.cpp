@@ -101,6 +101,10 @@ void GameState::Initialize()
 	standardEffect.UseNormalMap(false);
 	standardEffect.UseShadowMap(false);
 
+	mSpriteRenderer = SpriteRenderer::Get();
+	auto tm = TextureManager::Get();
+	mTempCrosshairTextureID = tm->LoadTexture("crosshair.png");
+
 	// TODO: Move over to level asset.
 	//physicsService->SetRenderDebugUI(true);
 
@@ -137,6 +141,8 @@ void GameState::Initialize()
 
 void GameState::Terminate()
 {
+	mTempCrosshairTextureID = 0;
+
 	mGlassEffect.Terminate();
 	mCameraService = nullptr;
 	mGameWorld.Terminate();
@@ -151,6 +157,7 @@ void GameState::Update(float deltaTime)
 void GameState::Render()
 {
 	mGameWorld.Render();
+	mSpriteRenderer->Draw(mTempCrosshairTextureID, Vector2(640.0f, 360.0f));
 
 	//mGlassEffect.Begin();
 	//mGlassEffect.Render(mGlassRenderObject);

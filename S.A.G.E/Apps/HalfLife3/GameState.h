@@ -18,4 +18,7 @@ private:
 	SAGE::Graphics::GlassEffect mGlassEffect;
 
 	SAGE::Physics::PhysicsWorld mPhysicsWorld;
+
+	SAGE::Graphics::SpriteRenderer* mSpriteRenderer = nullptr;
+	SAGE::Graphics::TextureId mTempCrosshairTextureID = 0;
 };

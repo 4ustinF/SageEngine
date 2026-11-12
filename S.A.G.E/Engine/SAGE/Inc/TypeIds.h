@@ -41,6 +41,18 @@ namespace SAGE
 		Count
 	};
 
+	enum class TagId : uint32_t
+	{
+		Untagged,
+		Respawn,
+		Finish,
+		EditorOnly,
+		MainCamera,
+		Player,
+		GameController,
+		Count
+	};
+
 	enum CollisionGroups
 	{
 		Default = 1 << 0,

@@ -41,7 +41,7 @@ namespace SAGE
 		Count
 	};
 
-	enum class TagId : uint32_t
+	enum class TagId
 	{
 		Untagged,
 		Respawn,
@@ -51,6 +51,16 @@ namespace SAGE
 		Player,
 		GameController,
 		Count
+	};
+
+	enum class LayerId	
+	{
+		Default,
+		TransparentFX,
+		IgnoreRaycast,
+		Water,
+		UI,
+		Count,
 	};
 
 	enum CollisionGroups

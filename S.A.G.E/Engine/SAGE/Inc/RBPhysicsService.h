@@ -15,7 +15,7 @@ namespace SAGE
 		void Render() override;
 		void DebugUI() override;
 
-		RBPhysics::RBPhysicsWorld& GetPhysicsWorld() { return mPhysicsWorld; } // TODO: Turn this service more into a wrapper for the physics world and not expose it directly.
+		RBPhysics::RBPhysicsWorld& GetPhysicsWorld() { return mPhysicsWorld; }
 
 		void SetRenderDebugUI(bool renderDebugUI) { mRenderDebugUI = renderDebugUI; }
 		void SetFillDebugShapes(bool fillDebugShapes) { mFillDebugShapes = fillDebugShapes; }

@@ -51,11 +51,11 @@ void CapsuleColliderComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Capsule Collider Component##CapsuleColliderComponent ", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
-		ImGui::Checkbox("Debug Fill##BoxColliderComponent", &mDebugFill);
+		ImGui::Checkbox("Debug Fill##CapsuleColliderComponent", &mDebugFill);
 		ImGui::Checkbox("Is Trigger##CapsuleColliderComponent ", &mIsTrigger);
 		ImGui::DragFloat3("Center##CapsuleColliderComponent ", &mCenter.x, 0.1f);
-		if (ImGui::DragFloat("Radius##BoxColliderComponent", &mRadius, 0.1f)) { SetRadius(mRadius); }
-		if (ImGui::DragFloat("Height##BoxColliderComponent", &mHeight, 0.1f)) { SetHeight(mHeight); }
+		if (ImGui::DragFloat("Radius##CapsuleColliderComponent", &mRadius, 0.1f)) { SetRadius(mRadius); }
+		if (ImGui::DragFloat("Height##CapsuleColliderComponent", &mHeight, 0.1f)) { SetHeight(mHeight); }
 	}
 
 	const Vector3& pos = mPhysicsObject ? mPhysicsObject->GetPosition() : GetCenter();

@@ -16,8 +16,13 @@ void InteractTriggerVolumeComponent::Terminate()
 	mInputSystem = nullptr;
 }
 
-void InteractTriggerVolumeComponent::OnTriggerStay(Collider* collider)
+void InteractTriggerVolumeComponent::OnTriggerStay(BaseColliderComponent* collider)
 {
+	if (collider->GetOwner().GetName() != "Player")
+	{
+		return;
+	}
+	
 	if (mIsOneShot)
 	{
 		if (mTriggered)

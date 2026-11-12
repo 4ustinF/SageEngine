@@ -1,8 +1,38 @@
-﻿  BoundingBox.cpp
-  BoundingCapsule.cpp
-  BoundingSphere.cpp
-  Collider.cpp
-  Precompiled.cpp
-  RBPhysicsObject.cpp
+﻿  RBPhysicsObject.cpp
   RBPhysicsWorld.cpp
-  RBPhysics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\RBPhysics.lib
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(8,2): error C2065: 'RBPhysicsObject': undeclared identifier
+  (compiling source file 'Src/RBPhysicsObject.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(8,2): error C2059: syntax error: '>'
+  (compiling source file 'Src/RBPhysicsObject.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(9,2): error C2065: 'RBPhysicsObject': undeclared identifier
+  (compiling source file 'Src/RBPhysicsObject.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(9,2): error C2059: syntax error: '>'
+  (compiling source file 'Src/RBPhysicsObject.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(10,2): error C2065: 'RBPhysicsObject': undeclared identifier
+  (compiling source file 'Src/RBPhysicsObject.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(10,2): error C2059: syntax error: '>'
+  (compiling source file 'Src/RBPhysicsObject.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(8,2): error C2065: 'RBPhysicsObject': undeclared identifier
+  (compiling source file 'Src/RBPhysicsWorld.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(8,2): error C2059: syntax error: '>'
+  (compiling source file 'Src/RBPhysicsWorld.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(9,2): error C2065: 'RBPhysicsObject': undeclared identifier
+  (compiling source file 'Src/RBPhysicsWorld.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(9,2): error C2059: syntax error: '>'
+  (compiling source file 'Src/RBPhysicsWorld.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(10,2): error C2065: 'RBPhysicsObject': undeclared identifier
+  (compiling source file 'Src/RBPhysicsWorld.cpp')
+  
+D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(10,2): error C2059: syntax error: '>'
+  (compiling source file 'Src/RBPhysicsWorld.cpp')
+  

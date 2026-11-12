@@ -78,10 +78,14 @@ void ToggleTriggerVolumeComponent::DebugUI()
 	}
 }
 
-void ToggleTriggerVolumeComponent::OnTriggerEnter(Collider* collider)
+void ToggleTriggerVolumeComponent::OnTriggerEnter(BaseColliderComponent* collider)
 {
-	GameWorld& gameWorld = GetOwner().GetWorld();
+	if (collider->GetOwner().GetName() != "Player")
+	{
+		return;
+	}
 
+	GameWorld& gameWorld = GetOwner().GetWorld();
 	for (const std::string& name : mObjectsToDisableList)
 	{
 		if (GameObject* gameObject = gameWorld.FindGameObject(name))

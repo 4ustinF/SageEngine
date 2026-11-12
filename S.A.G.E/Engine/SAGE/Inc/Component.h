@@ -5,7 +5,7 @@
 namespace SAGE
 {
 	class GameObject;
-	class RBPhysics::Collider;
+	class BaseColliderComponent;
 
 	class Component
 	{
@@ -36,9 +36,9 @@ namespace SAGE
 		virtual void OnEnable() {}
 		virtual void OnDisable() {}
 
-		virtual void OnTriggerEnter(RBPhysics::Collider* collider) {}
-		virtual void OnTriggerStay(RBPhysics::Collider* collider) {}
-		virtual void OnTriggerExit(RBPhysics::Collider* collider) {}
+		virtual void OnTriggerEnter(BaseColliderComponent* other) {}
+		virtual void OnTriggerStay(BaseColliderComponent* other) {}
+		virtual void OnTriggerExit(BaseColliderComponent* other) {}
 
 		void EnqueueUpdate() { mQueueUpdate = true; }
 		void ClearQueueUpdate() { mQueueUpdate = false; }

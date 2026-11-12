@@ -38,8 +38,13 @@ void HoldInteractTriggerVolumeComponent::OnQueueUpdate(float deltaTime)
 	}
 }
 
-void HoldInteractTriggerVolumeComponent::OnTriggerEnter(Collider* collider)
+void HoldInteractTriggerVolumeComponent::OnTriggerEnter(BaseColliderComponent* collider)
 {
+	if (collider->GetOwner().GetName() != "Player")
+	{
+		return;
+	}
+
 	mIsOverlapping = true;
 
 	if (mCanTrigger)
@@ -48,8 +53,13 @@ void HoldInteractTriggerVolumeComponent::OnTriggerEnter(Collider* collider)
 	}
 }
 
-void HoldInteractTriggerVolumeComponent::OnTriggerExit(Collider* collider)
+void HoldInteractTriggerVolumeComponent::OnTriggerExit(BaseColliderComponent* collider)
 {
+	if (collider->GetOwner().GetName() != "Player")
+	{
+		return;
+	}
+
 	mIsOverlapping = false;
 	ClearQueueUpdate();
 

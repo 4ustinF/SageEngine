@@ -16,7 +16,7 @@ public:
 
 	void DebugUI() override;
 
-	void OnTriggerEnter(SAGE::RBPhysics::Collider* collider) override;
+	void OnTriggerEnter(SAGE::BaseColliderComponent* collider) override;
 
 private:
 	std::vector<std::string> mObjectsToDisableList;

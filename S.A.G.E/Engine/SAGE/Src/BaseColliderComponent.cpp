@@ -81,6 +81,8 @@ void BaseColliderComponent::OnEnable()
 
 	if (mPhysicsObject != nullptr)
 	{
+		mPhysicsObject->SetUserData(static_cast<void*>(this)); // TODO: always store as BaseColliderComponent*
+
 		OnTriggerEnterHandle = mPhysicsObject->GetOnTriggerEnterDelegate().AddRaw(this, &BaseColliderComponent::NotifyParentOnTriggerEnter);
 		OnTriggerStayHandle = mPhysicsObject->GetOnTriggerStayDelegate().AddRaw(this, &BaseColliderComponent::NotifyParentOnTriggerStay);
 		OnTriggerExitHandle = mPhysicsObject->GetOnTriggerExitDelegate().AddRaw(this, &BaseColliderComponent::NotifyParentOnTriggerExit);
@@ -117,6 +119,7 @@ void BaseColliderComponent::OnDisable()
 			mPhysicsObject->GetOnRotationChangeDelegate().Remove(OnRotationChangedHandle);
 		}
 
+		mPhysicsObject->SetUserData(nullptr);
 		mPhysicsService->GetPhysicsWorld().RemoveObject(mPhysicsObject);
 		mPhysicsObject = nullptr;
 	}
@@ -164,19 +167,33 @@ void BaseColliderComponent::UpdatePhysicsObjectPropertys()
 	mPhysicsObject->UpdateInverseMass();
 }
 
-void BaseColliderComponent::NotifyParentOnTriggerEnter(Collider* collider)
+BaseColliderComponent* BaseColliderComponent::FromPhysicsObject(const RBPhysicsObject* object)
 {
-	GetOwner().OnTriggerEnter(collider);
+	return object ? static_cast<BaseColliderComponent*>(object->GetUserData()) : nullptr;
 }
 
-void BaseColliderComponent::NotifyParentOnTriggerStay(Collider* collider)
+void BaseColliderComponent::NotifyParentOnTriggerEnter(RBPhysicsObject* other)
 {
-	GetOwner().OnTriggerStay(collider);
+	if (BaseColliderComponent* otherCollider = FromPhysicsObject(other))
+	{
+		GetOwner().OnTriggerEnter(otherCollider);
+	}
 }
 
-void BaseColliderComponent::NotifyParentOnTriggerExit(Collider* collider)
+void BaseColliderComponent::NotifyParentOnTriggerStay(RBPhysicsObject* other)
 {
-	GetOwner().OnTriggerExit(collider);
+	if (BaseColliderComponent* otherCollider = FromPhysicsObject(other))
+	{
+		GetOwner().OnTriggerStay(otherCollider);
+	}
+}
+
+void BaseColliderComponent::NotifyParentOnTriggerExit(RBPhysicsObject* other)
+{
+	if (BaseColliderComponent* otherCollider = FromPhysicsObject(other))
+	{
+		GetOwner().OnTriggerExit(otherCollider);
+	}
 }
 
 void BaseColliderComponent::OnTransformPositionChanged(const Vector3& position)

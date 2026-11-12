@@ -5,9 +5,10 @@
 
 namespace SAGE::RBPhysics
 {
-	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerEnter, Collider*);
-	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerStay, Collider*);
-	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerExit, Collider*);
+	class RBPhysicsObject; 
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerEnter, RBPhysicsObject*);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerStay, RBPhysicsObject*);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnTriggerExit, RBPhysicsObject*);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnPositionChange, const Math::Vector3&);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnRotationChange, const Math::Quaternion&);
 
@@ -58,9 +59,13 @@ namespace SAGE::RBPhysics
 		void SetOrientation(const Math::Quaternion& orientation) { mOrientation = orientation; }
 
 		// Delegates
-		void BroadcastTriggerEnterDelegate(Collider* collider) { mOnTriggerEnter.Broadcast(collider); };
-		void BroadcastTriggerStayDelegate(Collider* collider) { mOnTriggerStay.Broadcast(collider); };
-		void BroadcastTriggerExitDelegate(Collider* collider) { mOnTriggerExit.Broadcast(collider); };
+		void BroadcastTriggerEnterDelegate(RBPhysicsObject* other) { mOnTriggerEnter.Broadcast(other); }
+		void BroadcastTriggerStayDelegate(RBPhysicsObject* other) { mOnTriggerStay.Broadcast(other); }
+		void BroadcastTriggerExitDelegate(RBPhysicsObject* other) { mOnTriggerExit.Broadcast(other); }
+
+		void* GetUserData() const { return mUserData; }
+		void SetUserData(void* userData) { mUserData = userData; }
+
 		FOnTriggerEnter& GetOnTriggerEnterDelegate() { return mOnTriggerEnter; }
 		FOnTriggerStay& GetOnTriggerStayDelegate() { return mOnTriggerStay; }
 		FOnTriggerExit& GetOnTriggerExitDelegate() { return mOnTriggerExit; }
@@ -78,6 +83,7 @@ namespace SAGE::RBPhysics
 	private:
 		void ResolveCollisionInternal(const Math::Vector3& otherVelocity, float totalInvMass, float myShare, const IntersectData& intersectData);
 
+		void* mUserData = nullptr;
 		float mMass = 1.0f;
 		float mInverseMass = 1.0f;
 		float mDrag = 0.0f;

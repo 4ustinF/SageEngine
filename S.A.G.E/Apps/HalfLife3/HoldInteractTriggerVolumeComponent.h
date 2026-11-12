@@ -10,8 +10,8 @@ public:
 
 	void OnQueueUpdate(float deltaTime) override;
 
-	void OnTriggerEnter(SAGE::RBPhysics::Collider* collider) override;
-	void OnTriggerExit(SAGE::RBPhysics::Collider* collider) override;
+	void OnTriggerEnter(SAGE::BaseColliderComponent* collider) override;
+	void OnTriggerExit(SAGE::BaseColliderComponent* collider) override;
 
 	bool GetCanTrigger() const { return mCanTrigger; }
 	void SetCanTrigger(bool canTrigger);

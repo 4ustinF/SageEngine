@@ -200,17 +200,17 @@ void RBPhysicsWorld::ProcessTriggerEvents()
 	// Enter: in current, not in previous
 	for (const TriggerPairKey& pair : mCurrentTriggerPairs)
 	{
-		bool wasOverlappingLastFrame = mPreviousTriggerPairs.find(pair) != mPreviousTriggerPairs.end();
+		const bool wasOverlappingLastFrame = mPreviousTriggerPairs.find(pair) != mPreviousTriggerPairs.end();
 
 		if (!wasOverlappingLastFrame)
 		{
-			pair.first->BroadcastTriggerEnterDelegate(pair.second->GetCollider());
-			pair.second->BroadcastTriggerEnterDelegate(pair.first->GetCollider());
+			pair.first->BroadcastTriggerEnterDelegate(pair.second);
+			pair.second->BroadcastTriggerEnterDelegate(pair.first);
 		}
 		else
 		{
-			pair.first->BroadcastTriggerStayDelegate(pair.second->GetCollider());
-			pair.second->BroadcastTriggerStayDelegate(pair.first->GetCollider());
+			pair.first->BroadcastTriggerStayDelegate(pair.second);
+			pair.second->BroadcastTriggerStayDelegate(pair.first);
 		}
 	}
 
@@ -219,8 +219,8 @@ void RBPhysicsWorld::ProcessTriggerEvents()
 	{
 		if (mCurrentTriggerPairs.find(pair) == mCurrentTriggerPairs.end())
 		{
-			pair.first->BroadcastTriggerExitDelegate(pair.second->GetCollider());
-			pair.second->BroadcastTriggerExitDelegate(pair.first->GetCollider());
+			pair.first->BroadcastTriggerExitDelegate(pair.second);
+			pair.second->BroadcastTriggerExitDelegate(pair.first);
 		}
 	}
 

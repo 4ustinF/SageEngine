@@ -35,9 +35,11 @@ namespace SAGE
 		virtual std::unique_ptr<RBPhysics::Collider> CreateCollider() = 0;
 		virtual void ResizeToMesh() {};
 
-		void NotifyParentOnTriggerEnter(RBPhysics::Collider* collider);
-		void NotifyParentOnTriggerStay(RBPhysics::Collider* collider);
-		void NotifyParentOnTriggerExit(RBPhysics::Collider* collider);
+		BaseColliderComponent* FromPhysicsObject(const RBPhysics::RBPhysicsObject* object);
+
+		void NotifyParentOnTriggerEnter(RBPhysics::RBPhysicsObject* other);
+		void NotifyParentOnTriggerStay(RBPhysics::RBPhysicsObject* other);
+		void NotifyParentOnTriggerExit(RBPhysics::RBPhysicsObject* other);
 		void OnTransformPositionChanged(const Math::Vector3& position);
 		void OnTransformRotationChanged(const Math::Quaternion& rotation);
 		void OnPhysicsObjectPositionChanged(const Math::Vector3& position);

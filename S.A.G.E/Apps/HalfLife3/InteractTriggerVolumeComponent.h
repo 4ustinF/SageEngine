@@ -8,7 +8,7 @@ public:
 	void Initialize() override;
 	void Terminate() override;
 
-	void OnTriggerStay(SAGE::RBPhysics::Collider* collider) override;
+	void OnTriggerStay(SAGE::BaseColliderComponent* collider) override;
 
 protected:
 	virtual void OnInteract() {};

@@ -1,38 +1,3 @@
 ﻿  RBPhysicsObject.cpp
   RBPhysicsWorld.cpp
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(8,2): error C2065: 'RBPhysicsObject': undeclared identifier
-  (compiling source file 'Src/RBPhysicsObject.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(8,2): error C2059: syntax error: '>'
-  (compiling source file 'Src/RBPhysicsObject.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(9,2): error C2065: 'RBPhysicsObject': undeclared identifier
-  (compiling source file 'Src/RBPhysicsObject.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(9,2): error C2059: syntax error: '>'
-  (compiling source file 'Src/RBPhysicsObject.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(10,2): error C2065: 'RBPhysicsObject': undeclared identifier
-  (compiling source file 'Src/RBPhysicsObject.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(10,2): error C2059: syntax error: '>'
-  (compiling source file 'Src/RBPhysicsObject.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(8,2): error C2065: 'RBPhysicsObject': undeclared identifier
-  (compiling source file 'Src/RBPhysicsWorld.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(8,2): error C2059: syntax error: '>'
-  (compiling source file 'Src/RBPhysicsWorld.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(9,2): error C2065: 'RBPhysicsObject': undeclared identifier
-  (compiling source file 'Src/RBPhysicsWorld.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(9,2): error C2059: syntax error: '>'
-  (compiling source file 'Src/RBPhysicsWorld.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(10,2): error C2065: 'RBPhysicsObject': undeclared identifier
-  (compiling source file 'Src/RBPhysicsWorld.cpp')
-  
-D:\GitHubFiles\SageEngine\S.A.G.E\Framework\RBPhysics\Inc\RBPhysicsObject.h(10,2): error C2059: syntax error: '>'
-  (compiling source file 'Src/RBPhysicsWorld.cpp')
-  
+  RBPhysics.vcxproj -> D:\GitHubFiles\SageEngine\S.A.G.E\x64\Debug\RBPhysics.lib

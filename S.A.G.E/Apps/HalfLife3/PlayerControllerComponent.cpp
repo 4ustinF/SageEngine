@@ -34,6 +34,7 @@ void PlayerControllerComponent::Initialize()
 	mInputSystem = InputSystem::Get();
 
 	GameObject& owner = GetOwner();
+	owner.SetTag(TagId::Player);
 	GameWorld& world = owner.GetWorld();
 	mCameraService = world.GetService<CameraService>();
 	mRBPhysicsService = world.GetService<RBPhysicsService>();

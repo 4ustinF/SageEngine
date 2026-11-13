@@ -98,6 +98,9 @@ namespace SAGE
 		void SetName(const char* name) { mName = name; }
 		const std::string& GetName() const { return mName; }
 
+		void SetTag(TagId tag) { mTag = tag; }
+		TagId GetTag() const { return mTag; }
+
 		// New Hierarchy Flow
 		GameObjectHandle GetParentHandle() { return mParentGameObjectHandle; }
 		GameObject* GetParentGameObject() const;
@@ -187,6 +190,7 @@ namespace SAGE
 		std::string mName = "No Name";
 		std::filesystem::path mTemplatePath = "";
 		void SetTemplatePath(const std::filesystem::path& path) { mTemplatePath = path; }
+		TagId mTag = TagId::Untagged; // TODO: Make it so we can update this in inspector and add it to the file loading.
 		bool mInitialize = false;
 		bool mActiveInHierarchy = true;
 		bool mSelfActive = true;

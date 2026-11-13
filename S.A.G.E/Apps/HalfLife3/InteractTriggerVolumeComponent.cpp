@@ -18,7 +18,7 @@ void InteractTriggerVolumeComponent::Terminate()
 
 void InteractTriggerVolumeComponent::OnTriggerStay(BaseColliderComponent* collider)
 {
-	if (collider->GetOwner().GetName() != "Player")
+	if (collider->GetOwner().GetTag() != TagId::Player)
 	{
 		return;
 	}

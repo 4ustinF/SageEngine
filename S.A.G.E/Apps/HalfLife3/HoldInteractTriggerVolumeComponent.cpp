@@ -40,7 +40,7 @@ void HoldInteractTriggerVolumeComponent::OnQueueUpdate(float deltaTime)
 
 void HoldInteractTriggerVolumeComponent::OnTriggerEnter(BaseColliderComponent* collider)
 {
-	if (collider->GetOwner().GetName() != "Player")
+	if (collider->GetOwner().GetTag() != TagId::Player)
 	{
 		return;
 	}

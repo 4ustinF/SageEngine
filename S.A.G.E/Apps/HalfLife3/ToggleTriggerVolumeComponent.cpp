@@ -80,7 +80,7 @@ void ToggleTriggerVolumeComponent::DebugUI()
 
 void ToggleTriggerVolumeComponent::OnTriggerEnter(BaseColliderComponent* collider)
 {
-	if (collider->GetOwner().GetName() != "Player")
+	if (collider->GetOwner().GetTag() != TagId::Player)
 	{
 		return;
 	}

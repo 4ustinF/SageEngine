@@ -188,8 +188,7 @@ void GameObject::SaveComponents()
 	}
 
 	FILE* file = nullptr;
-	errno_t err =
-		fopen_s(&file, mTemplatePath.u8string().c_str(), "r");
+	errno_t err = fopen_s(&file, mTemplatePath.u8string().c_str(), "r");
 
 	assert(err == 0);
 	assert(file != nullptr);
@@ -213,6 +212,18 @@ void GameObject::SaveComponents()
 		else
 		{
 			doc.AddMember("Name", rj::Value(mName.c_str(), static_cast<rj::SizeType>(mName.length()), allocator), allocator);
+		}
+	}
+
+	if (mTag != TagId::Untagged)
+	{
+		if (doc.HasMember("Tag ID"))
+		{
+			doc["Tag ID"].SetInt(static_cast<int>(mTag));
+		}
+		else
+		{
+			doc.AddMember("Tag ID", rj::Value(static_cast<int>(mTag)), allocator);
 		}
 	}
 
@@ -407,6 +418,46 @@ GameObject* GameObject::FindDeepChildByName(const std::string& name)
 		if (GameObject* childObj = world.GetGameObject(handle))
 		{
 			if (GameObject* found = childObj->FindDeepChildByName(name))
+			{
+				return found;
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+GameObject* GameObject::FindChildByTag(TagId tag)
+{
+	GameWorld& world = GetWorld();
+	for (const GameObjectHandle& handle : mChildGameObjectHandles)
+	{
+		if (GameObject* childObj = world.GetGameObject(handle))
+		{
+			if (childObj->GetTag() == tag)
+			{
+				return childObj;
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+GameObject* GameObject::FindDeepChildByTag(TagId tag)
+{
+	// Direct children first, so shallower matches win over deeper ones.
+	if (GameObject* direct = FindChildByTag(tag))
+	{
+		return direct;
+	}
+
+	GameWorld& world = GetWorld();
+	for (const GameObjectHandle& handle : mChildGameObjectHandles)
+	{
+		if (GameObject* childObj = world.GetGameObject(handle))
+		{
+			if (GameObject* found = childObj->FindDeepChildByTag(tag))
 			{
 				return found;
 			}

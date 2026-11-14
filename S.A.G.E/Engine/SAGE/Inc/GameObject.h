@@ -95,11 +95,11 @@ namespace SAGE
 
 		GameObjectHandle GetHandle() const { return mHandle; }
 
-		void SetName(const char* name) { mName = name; }
 		const std::string& GetName() const { return mName; }
+		void SetName(const char* name) { mName = name; }
 
-		void SetTag(TagId tag) { mTag = tag; }
 		TagId GetTag() const { return mTag; }
+		void SetTag(TagId tag) { mTag = tag; }
 
 		// New Hierarchy Flow
 		GameObjectHandle GetParentHandle() { return mParentGameObjectHandle; }
@@ -114,6 +114,8 @@ namespace SAGE
 		GameObject* GetChildByIndex(int index);
 		GameObject* FindChildByName(const std::string& name);
 		GameObject* FindDeepChildByName(const std::string& name);
+		GameObject* FindChildByTag(TagId tag);
+		GameObject* FindDeepChildByTag(TagId tag);
 
 		template <class ComponentType>
 		ComponentType* GetComponentInChildren(bool includeInactive = true)

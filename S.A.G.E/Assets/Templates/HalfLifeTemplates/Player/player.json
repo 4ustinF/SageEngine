@@ -1,5 +1,6 @@
 {
   "Name": "Player",
+  "Tag ID": 5,
   "Components": {
     "Transform Component": {
       "Position": [

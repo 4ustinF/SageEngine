@@ -223,6 +223,14 @@ GameObject* GameWorld::FindGameObject(const std::string& name)
 	return iter == mUpdateList.end() ? nullptr : *iter;
 }
 
+GameObject* GameWorld::FindGameObject(TagId tag)
+{
+	auto iter = std::find_if(mUpdateList.begin(), mUpdateList.end(), [&](auto gameObject) {
+			return gameObject->GetTag() == tag;
+		});
+	return iter == mUpdateList.end() ? nullptr : *iter;
+}
+
 GameObject* GameWorld::GetGameObject(GameObjectHandle handle)
 {
 	if (IsValid(handle)) {
@@ -304,6 +312,12 @@ GameObject* GameWorld::InstantiateRecursive(const std::filesystem::path& templat
 	}
 	const bool isActiveInHierarchy = isSelfActive && (parentGO ? parentGO->IsActiveInHierarchy() : true);
 	newObject->PreSeedSetActive(isSelfActive, isActiveInHierarchy);
+
+	if (document.HasMember("Tag ID") && document["Tag ID"].IsInt())
+	{
+		const int tagID = document["Tag ID"].GetInt();
+		newObject->SetTag(static_cast<TagId>(tagID));
+	}
 
 	// Parent is recorded before its children => pre-order, so parents init first.
 	mUpdateList.push_back(newObject.get());

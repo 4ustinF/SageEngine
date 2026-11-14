@@ -40,6 +40,7 @@ namespace SAGE
 		void LoadLevel(std::filesystem::path levelFile);
 		GameObject* CreateGameObject(const std::filesystem::path& templateFile, GameObject* parentGO = nullptr, const char* overrideName = nullptr);
 		GameObject* FindGameObject(const std::string& name);
+		GameObject* FindGameObject(TagId tag);
 		GameObject* GetGameObject(GameObjectHandle handle);
 		const GameObject* GetGameObject(GameObjectHandle handle) const;
 		void DestroyGameObject(GameObjectHandle handle);

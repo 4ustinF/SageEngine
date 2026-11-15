@@ -97,4 +97,6 @@ private:
 	std::vector<SAGE::Graphics::SoundId> mShootSoundIDs;
 	float mShootSoundPitchVolume = 0.05f;
 
+	SAGE::Graphics::SoundId mTempReloadSoundID1 = 0;
+	SAGE::Graphics::SoundId mTempReloadSoundID2 = 0;
 };

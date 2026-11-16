@@ -125,11 +125,13 @@ void PlayerControllerComponent::CheckForPlayerCrouchingInput()
 		}
 
 		mIsCrouching = true;
+		mCapsuleColliderComponent->SetHeight(0.91f); // TODO: Manual number.
 		// TODO: Adjust the capsule collider height and camera position for crouching
 	}
 	else if (mInputSystem->IsKeyReleased(KeyCode::LCONTROL))
 	{
 		mIsCrouching = false;
+		mCapsuleColliderComponent->SetHeight(1.626f); // TODO: Manual number and we should do a raycast above us first before allowing to uncrouch.
 		// TODO: Adjust the capsule collider height and camera position for crouching
 	}
 }

@@ -21,6 +21,10 @@ namespace SAGE::RBPhysics
 		void Transform(const Math::Vector3& translation) override;
 		float GetRadius() const { return mRadius; }
 		float GetRadiusSquared() const { return mRadius * mRadius; }
+		float GetHeight() const { return mHeight; }
+
+		void SetRadius(float radius) { mRadius = radius; }
+		void SetHeight(float height) { mHeight = height; }
 
 		Math::Vector3 GetTopCenter() const { return mCenter + Math::Vector3(0.0f, mHeight * 0.5f, 0.0f); }
 		Math::Vector3 GetBottomCenter() const { return mCenter - Math::Vector3(0.0f, mHeight * 0.5f, 0.0f); }

@@ -73,11 +73,27 @@ void CapsuleColliderComponent::DebugUI()
 void CapsuleColliderComponent::SetRadius(float radius) 
 { 
 	mRadius = Max(0.1f, radius);
+
+	if (mPhysicsObject)
+	{
+		if (BoundingCapsule* boundingCapsule = dynamic_cast<BoundingCapsule*>(mPhysicsObject->GetCollider()))
+		{
+			boundingCapsule->SetRadius(mRadius);
+		}
+	}
 }
 
 void CapsuleColliderComponent::SetHeight(float height) 
 { 
 	mHeight = Max(0.1f, height);
+
+	if (mPhysicsObject)
+	{
+		if (BoundingCapsule* boundingCapsule = dynamic_cast<BoundingCapsule*>(mPhysicsObject->GetCollider()))
+		{
+			boundingCapsule->SetHeight(mHeight);
+		}
+	}
 }
 
 std::unique_ptr<Collider> CapsuleColliderComponent::CreateCollider()

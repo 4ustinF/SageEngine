@@ -62,6 +62,21 @@ void PlayerControllerComponent::Update(float deltaTime)
 	CheckForPlayerGameplayInput();
 	UpdateCameraPosition(camera);
 	UpdateArmsPosition(camera);
+
+	if (mInputSystem->IsKeyDown(KeyCode::LCONTROL))
+	{
+		if (mIsCrouching)
+		{
+			return;
+		}
+
+		mIsCrouching = true;
+	}
+
+	if (mInputSystem->IsKeyReleased(KeyCode::LCONTROL))
+	{
+		mIsCrouching = false;
+	}
 }
 
 void PlayerControllerComponent::DebugUI()
@@ -71,6 +86,7 @@ void PlayerControllerComponent::DebugUI()
 		ImGui::Checkbox("Can Move##PlayerControllerComponent", &mCanMove);
 		ImGui::Checkbox("Is FPS##PlayerControllerComponent", &mIsInFPSMode);
 		ImGui::Checkbox("Is Grounded##PlayerControllerComponent", &mIsGrounded);
+		ImGui::Checkbox("Is Crouching##PlayerControllerComponent", &mIsCrouching);
 		ImGui::DragFloat2("Ground Speed##PlayerControllerComponent", &mGroundSpeed.x, 0.1f);
 		ImGui::DragFloat2("Air Speed##PlayerControllerComponent", &mAirSpeed.x, 0.1f);
 		ImGui::DragFloat("Jump Force##PlayerControllerComponent", &mJumpForce, 0.1f);

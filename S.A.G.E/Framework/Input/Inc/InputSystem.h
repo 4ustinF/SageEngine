@@ -26,6 +26,7 @@ namespace SAGE::Input
 
 		bool IsKeyDown(KeyCode key) const;
 		bool IsKeyPressed(KeyCode key) const;
+		bool IsKeyReleased(KeyCode key) const;
 
 		bool IsMouseDown(MouseButton button) const;
 		bool IsMousePressed(MouseButton button) const;

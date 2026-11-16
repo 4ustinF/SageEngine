@@ -50,6 +50,10 @@ private:
 	bool mIsGrounded = true;
 	SAGE::Math::Vector3 mGroundNormal = SAGE::Math::Vector3::YAxis;
 
+	// Crouch
+	// height = 0.91f
+	bool mIsCrouching = false;
+
 	// Weapons
 	void SwapWeapons(int mNewIndex);
 	PlayerWeaponComponent* mActiveWeapon = nullptr;

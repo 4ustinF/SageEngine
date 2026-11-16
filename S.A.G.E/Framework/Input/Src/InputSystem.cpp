@@ -247,6 +247,12 @@ bool InputSystem::IsKeyPressed(KeyCode key) const
 	return mPressedKeys[(int)key];
 }
 
+bool InputSystem::IsKeyReleased(KeyCode key) const
+{
+	const int keyIndex = static_cast<int>(key);
+	return mPrevKeys[keyIndex] && !mCurrKeys[keyIndex];
+}
+
 bool InputSystem::IsMouseDown(MouseButton button) const
 {
 	return mCurrMouseButtons[(int)button];

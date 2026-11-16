@@ -19,6 +19,7 @@ namespace SAGE
 		void OnEnable() override;
 
 		void AddAnimation(std::string animationFileName);
+		void AddEvent(const std::string& clipName, float tick, std::string eventName);
 
 		Graphics::Animator& GetAnimator() { return mAnimator; }
 		const Graphics::Animator& GetAnimator() const { return mAnimator; }

@@ -3,7 +3,9 @@
 namespace SAGE::Graphics
 {
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnAnimationFinished, size_t); // Clip Index
+	DECLARE_MULTICAST_DELEGATE_TwoParams(FOnAnimationEvent, size_t, const std::string&); // clipIndex, eventName
 
+	class AnimationClip;
 	struct Bone;
 	struct Model;
 
@@ -27,7 +29,6 @@ namespace SAGE::Graphics
 		Math::Vector3 GetPosition(const Bone* bone) const;
 		Math::Quaternion GetRotation(const Bone* bone) const;
 		Math::Vector3 GetScale(const Bone* bone) const;
-
 		Math::Matrix4 GetTransform(const Bone* bone) const override;
 
 		const Model* GetModel() const { return mModel; }
@@ -36,9 +37,14 @@ namespace SAGE::Graphics
 		bool GetIsLooping() const { return mLooping; }
 		bool GetIsReverse() const { return mReverse; }
 
+		float GetNormalizedTime() const;   // 0..1
+		float GetElapsedSeconds() const;   // seconds into the clip
+		float GetDurationSeconds() const;
+
 		const std::string GetClipNameByIndex(size_t index) const;
 		size_t GetClipIndexByName(const std::string& name) const;
 
+		FOnAnimationEvent& GetOnAnimationEventDelegate() { return mOnAnimationEvent; }
 		FOnAnimationFinished& GetOnAnimationFinishedDelegate() { return mOnAnimationFinished; }
 
 	private:
@@ -50,6 +56,10 @@ namespace SAGE::Graphics
 
 		bool mIsAnimating = false;
 		FOnAnimationFinished mOnAnimationFinished;
+
+		// Events
+		void FireEvents(const AnimationClip& clip, float fromTick, float toTick, bool inclusiveEnd);
+		FOnAnimationEvent mOnAnimationEvent;
 
 		std::unordered_map<std::string, size_t> mClipNameToIndexMap;
 	};

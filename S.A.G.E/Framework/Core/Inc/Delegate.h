@@ -190,4 +190,7 @@ namespace SAGE::Core::Delegate // TODO: Maybe move to their own framework?
 
 #define DECLARE_MULTICAST_DELEGATE_OneParam(DelegateName, ParamType1) \
     using DelegateName = SAGE::Core::Delegate::TMulticastDelegate<ParamType1>;
+
+#define DECLARE_MULTICAST_DELEGATE_TwoParams(DelegateName, ParamType1, ParamType2) \
+    using DelegateName = SAGE::Core::Delegate::TMulticastDelegate<ParamType1, ParamType2>;
 }

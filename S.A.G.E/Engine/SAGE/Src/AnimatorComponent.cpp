@@ -68,6 +68,26 @@ void AnimatorComponent::AddAnimation(std::string animationFileName)
 	mAnimationFileNames.emplace_back(std::move(animationFileName));
 }
 
+void AnimatorComponent::AddEvent(const std::string& clipName, float tick, std::string eventName)
+{
+	const size_t index = mAnimator.GetClipIndexByName(clipName);
+	if (index == static_cast<size_t>(-1))
+	{
+		return;
+	}
+
+	auto& events = mModelComponent->GetModel().animationSet[index].events;
+	for (const AnimationEvent& e : events)
+	{
+		if (e.tick == tick && e.name == eventName)
+		{
+			return; // already registered
+		}
+	}
+
+	events.push_back({ tick, std::move(eventName) });
+}
+
 std::string AnimatorComponent::GetAnimationName(size_t index)
 {
 	std::string name = mAnimator.GetClipNameByIndex(index);

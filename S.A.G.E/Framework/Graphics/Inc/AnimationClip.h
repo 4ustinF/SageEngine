@@ -5,6 +5,12 @@
 
 namespace SAGE::Graphics
 {
+	struct AnimationEvent
+	{
+		float tick = 0.0f;   // same units as tickDuration
+		std::string name;    
+	};
+
 	class AnimationClip
 	{
 	public:
@@ -21,5 +27,7 @@ namespace SAGE::Graphics
 		// This will have the same size as bones in skeleton, so we can use bone->index to index this vector.
 		// Though not all bones will animate so we will need to have some null slots to keep this format
 		std::vector<std::unique_ptr<Animation>> boneAnimations;
+
+		std::vector<AnimationEvent> events;
 	};
 }

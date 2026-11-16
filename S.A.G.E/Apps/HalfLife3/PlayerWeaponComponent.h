@@ -58,6 +58,8 @@ private:
 
 	void OnAnimationFinishedCallback(size_t clipIndex);
 	SAGE::Core::Delegate::FDelegateHandle mOnAnimationFinishedHandle;
+	void OnAnimationEventCallback(size_t clipIndex, const std::string& eventName);
+	SAGE::Core::Delegate::FDelegateHandle mOnAnimationEventHandle;
 
 	BulletHolesPoolComponent* GetOrCreateBulletPool();
 

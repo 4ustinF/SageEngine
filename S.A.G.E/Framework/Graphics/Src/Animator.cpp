@@ -90,20 +90,26 @@ void Animator::Update(float deltaTime)
 	}
 
 	const AnimationClip& clip = mModel->animationSet[mClipIndex];
+	const float prevTick = mAnimationTick;
 	mAnimationTick += clip.ticksPerSecond * deltaTime;
+
 	if (mAnimationTick > clip.tickDuration)
 	{
 		if (mLooping) {
-			while (mAnimationTick > clip.tickDuration)
-			{
-				mAnimationTick -= clip.tickDuration;
-			}
+			FireEvents(clip, prevTick, clip.tickDuration, false);
+			mAnimationTick = std::fmod(mAnimationTick, clip.tickDuration);
+			FireEvents(clip, 0.0f, mAnimationTick, false);
 		}
 		else {
 			mAnimationTick = clip.tickDuration;
+			FireEvents(clip, prevTick, clip.tickDuration, true); // include events on the last tick
 			mIsAnimating = false;
 			mOnAnimationFinished.Broadcast(mClipIndex);
 		}
+	}
+	else
+	{
+		FireEvents(clip, prevTick, mAnimationTick, false);
 	}
 }
 
@@ -168,6 +174,24 @@ float Animator::GetAnimationTick() const
 	return mAnimationTick;
 }
 
+float Animator::GetNormalizedTime() const
+{
+	const AnimationClip& clip = mModel->animationSet[mClipIndex];
+	return clip.tickDuration > 0.0f ? mAnimationTick / clip.tickDuration : 0.0f;
+}
+
+float Animator::GetElapsedSeconds() const
+{
+	const AnimationClip& clip = mModel->animationSet[mClipIndex];
+	return clip.ticksPerSecond > 0.0f ? mAnimationTick / clip.ticksPerSecond : 0.0f;
+}
+
+float Animator::GetDurationSeconds() const
+{
+	const AnimationClip& clip = mModel->animationSet[mClipIndex];
+	return clip.ticksPerSecond > 0.0f ? clip.tickDuration / clip.ticksPerSecond : 0.0f;
+}
+
 const std::string Animator::GetClipNameByIndex(size_t index) const
 {
 	if (index < 0 || !mModel || index >= mModel->animationSet.size())
@@ -202,6 +226,21 @@ size_t Animator::GetClipIndexByName(const std::string& name) const
 
 	// Failed to find.
 	return static_cast<size_t>(-1);
+}
+
+void Animator::FireEvents(const AnimationClip& clip, float fromTick, float toTick, bool inclusiveEnd)
+{
+	for (const AnimationEvent& event : clip.events)
+	{
+		// In reverse playback the event sits at the mirrored position.
+		const float t = mReverse ? clip.tickDuration - event.tick : event.tick;
+
+		const bool inRange = (t >= fromTick) && (inclusiveEnd ? t <= toTick : t < toTick);
+		if (inRange)
+		{
+			mOnAnimationEvent.Broadcast(mClipIndex, event.name);
+		}
+	}
 }
 
 // -------------------- AnimationBlender --------------------

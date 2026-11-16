@@ -103,6 +103,11 @@ void PlayerWeaponComponent::Initialize()
 	mTempReloadSoundID1 = mSoundEffectManager->Load("items/cliprelease1.wav");
 	mTempReloadSoundID2 = mSoundEffectManager->Load("items/clipinsert1.wav");
 
+	FOnAnimationEvent& onAnimationEvent= mAnimator->GetOnAnimationEventDelegate();
+	mOnAnimationEventHandle = onAnimationEvent.AddRaw(this, &PlayerWeaponComponent::OnAnimationEventCallback);
+	mAnimatorComponent->AddEvent("reload", 5.0f, "MagOut");
+	mAnimatorComponent->AddEvent("reload", 24.0f, "MagIn");
+
 	mCurrentAmmo = mMaxAmmo;
 	mCurrentAmmoReserve = mMaxAmmoReserve;
 }
@@ -114,7 +119,12 @@ void PlayerWeaponComponent::Terminate()
 	mShootSoundFilePaths.clear();
 	mShootSoundIDs.clear();
 
-	mAnimator = nullptr;
+	if (mAnimator != nullptr)
+	{
+		mAnimator->GetOnAnimationEventDelegate().Remove(mOnAnimationEventHandle);
+		mAnimator = nullptr;
+	}
+
 	mAnimatorComponent = nullptr;
 	mTransformComponent = nullptr;
 	
@@ -128,22 +138,22 @@ void PlayerWeaponComponent::Terminate()
 void PlayerWeaponComponent::Update(float deltaTime)
 {
 	// TODO: Temp logic to get reload aduio working
-	if (mWeaponState == WeaponState::Reloading)
-	{
-		//const AnimationClip& clip = mAnimator->GetCurrentAnimationClip();
-		const float percent = mAnimator->GetAnimationTick() / 65.0f; // Number of ticks in the reload anim. TODO: Get this from the clip itself.
-		const int wholePercent = static_cast<int>(percent * 100.0f);
+	//if (mWeaponState == WeaponState::Reloading)
+	//{
+	//	//const AnimationClip& clip = mAnimator->GetCurrentAnimationClip();
+	//	const float percent = mAnimator->GetAnimationTick() / 65.0f; // Number of ticks in the reload anim. TODO: Get this from the clip itself.
+	//	const int wholePercent = static_cast<int>(percent * 100.0f);
 
-		// 61
-		if (wholePercent == 6) // 4=6 // 5=7
-		{
-			mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID1, mShootSoundPitchVolume);
-		}
-		else if (wholePercent == 38) // 23=35 // 24=38
-		{
-			mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID2, mShootSoundPitchVolume);
-		}
-	}
+	//	// 61
+	//	if (wholePercent == 6) // 4=6 // 5=7
+	//	{
+	//		mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID1, mShootSoundPitchVolume);
+	//	}
+	//	else if (wholePercent == 38) // 23=35 // 24=38
+	//	{
+	//		mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID2, mShootSoundPitchVolume);
+	//	}
+	//}
 }
 
 void PlayerWeaponComponent::OnQueueUpdate(float deltaTime)
@@ -396,6 +406,19 @@ void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 	case PlayerWeaponComponent::Holstering:
 		FinishHolstering();
 		break;
+	}
+}
+
+void PlayerWeaponComponent::OnAnimationEventCallback(size_t clipIndex, const std::string& eventName)
+{
+	// TODO: Maybe do a clipIndex check before we need an eventName check specific to reloading?
+	if (eventName == "MagOut")
+	{
+		mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID1, mShootSoundPitchVolume);
+	}
+	else if (eventName == "MagIn")
+	{
+		mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID2, mShootSoundPitchVolume);
 	}
 }
 

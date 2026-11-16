@@ -28,8 +28,10 @@ namespace SAGE::Input
 		bool IsKeyPressed(KeyCode key) const;
 		bool IsKeyReleased(KeyCode key) const;
 
+		void CenterMouse();
 		bool IsMouseDown(MouseButton button) const;
 		bool IsMousePressed(MouseButton button) const;
+		bool IsMouseReleased(MouseButton button) const;
 		bool IsScrollWheelUp() const;
 		bool IsScrollWheelDown() const;
 		float GetScrollWheelValue() const;
@@ -99,6 +101,7 @@ namespace SAGE::Input
 		bool mCurrKeys[512]{};
 		bool mPrevKeys[512]{};
 		bool mPressedKeys[512]{};
+		bool mReleasedKeys[512]{};
 
 		bool mClipMouseToWindow = false;
 
@@ -115,6 +118,7 @@ namespace SAGE::Input
 		bool mCurrMouseButtons[3]{};
 		bool mPrevMouseButtons[3]{};
 		bool mPressedMouseButtons[3]{};
+		bool mReleasedMouseButtons[3]{};
 
 		bool mMouseLeftEdge = false;
 		bool mMouseRightEdge = false;

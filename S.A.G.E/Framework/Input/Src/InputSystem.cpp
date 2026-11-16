@@ -175,6 +175,7 @@ void InputSystem::Initialize(HWND window)
 	
 	// Hook application to window's procedure
 	sWindowMessageHandler.Hook(window, InputSystemMessageHandler);
+	mWindow = window;
 
 	mGamePad = std::make_unique<DirectX::GamePad>();
 	mInitialized = true;
@@ -194,6 +195,7 @@ void InputSystem::Terminate()
 	LOG("InputSystem -- Terminating...");
 
 	mGamePad.reset();
+	mWindow = nullptr;
 	mInitialized = false;
 
 	// Restore original window's procedure
@@ -210,6 +212,7 @@ void InputSystem::Update()
 	for (int i = 0; i < 512; ++i)
 	{
 		mPressedKeys[i] = !mPrevKeys[i] && mCurrKeys[i];
+		mReleasedKeys[i] = mPrevKeys[i] && !mCurrKeys[i];
 	}
 	memcpy(mPrevKeys, mCurrKeys, sizeof(mCurrKeys));
 
@@ -223,6 +226,7 @@ void InputSystem::Update()
 	for (int i = 0; i < 3; ++i)
 	{
 		mPressedMouseButtons[i] = !mPrevMouseButtons[i] && mCurrMouseButtons[i];
+		mReleasedMouseButtons[i] = mPrevMouseButtons[i] && !mCurrMouseButtons[i];
 	}
 	memcpy(mPrevMouseButtons, mCurrMouseButtons, sizeof(mCurrMouseButtons));
 
@@ -249,8 +253,22 @@ bool InputSystem::IsKeyPressed(KeyCode key) const
 
 bool InputSystem::IsKeyReleased(KeyCode key) const
 {
-	const int keyIndex = static_cast<int>(key);
-	return mPrevKeys[keyIndex] && !mCurrKeys[keyIndex];
+	return mReleasedKeys[(int)key];
+}
+
+void InputSystem::CenterMouse()
+{
+	RECT rect;
+	GetClientRect(mWindow, &rect);
+
+	POINT center{ (rect.right - rect.left) / 2, (rect.bottom - rect.top) / 2 };
+
+	// Keep our tracked position in client space so next frame's delta is relative to the center
+	mCurrMouseX = mPrevMouseX = center.x;
+	mCurrMouseY = mPrevMouseY = center.y;
+
+	ClientToScreen(mWindow, &center);
+	SetCursorPos(center.x, center.y);
 }
 
 bool InputSystem::IsMouseDown(MouseButton button) const
@@ -261,6 +279,11 @@ bool InputSystem::IsMouseDown(MouseButton button) const
 bool InputSystem::IsMousePressed(MouseButton button) const
 {
 	return mPressedMouseButtons[(int)button];
+}
+
+bool InputSystem::IsMouseReleased(MouseButton button) const
+{
+	return mReleasedMouseButtons[(int)button];
 }
 
 bool InputSystem::IsScrollWheelUp() const

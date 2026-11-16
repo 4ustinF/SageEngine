@@ -55,6 +55,8 @@ void App::Run(AppConfig appConfig)
 		}
 
 		auto inputSystem = InputSystem::Get();
+		inputSystem->Update();
+
 		if (inputSystem->IsKeyPressed(KeyCode::ESCAPE)) {
 			Quit();
 			continue;
@@ -72,8 +74,6 @@ void App::Run(AppConfig appConfig)
 		// Update current state
 		auto deltaTime = TimeUtil::GetDeltaTime();
 		mCurrentState->Update(deltaTime);
-
-		inputSystem->Update(); // Moved to after the current state update to ensure input is processed after game logic.
 
 		// Coroutine
 		//CoroutineSystem::Get()->Update();

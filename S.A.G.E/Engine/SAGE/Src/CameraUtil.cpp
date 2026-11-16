@@ -33,13 +33,14 @@ void SAGE::CameraUtil::UpdateFPSCamera(SAGE::Graphics::Camera& camera, float nor
 		camera.Yaw(inputSystem->GetMouseMoveX()	* turnSpeed * deltaTime);
 		camera.Pitch(inputSystem->GetMouseMoveY() * turnSpeed * 0.7f * deltaTime);
 
-		const int screenCenterX = GetSystemMetrics(SM_CXSCREEN) / 2; // 960
-		const int screenCenterY = GetSystemMetrics(SM_CYSCREEN) / 2; // 540
-		SetCursorPos(screenCenterX, screenCenterY);
+		inputSystem->CenterMouse();
+		//const int screenCenterX = GetSystemMetrics(SM_CXSCREEN) / 2; // 960
+		//const int screenCenterY = GetSystemMetrics(SM_CYSCREEN) / 2; // 540
+		//SetCursorPos(screenCenterX, screenCenterY);
 
-		inputSystem->GetMouseScreenX() = 640; // Half of 1280		// TODO: Fix these magic numbers.
-		inputSystem->GetMouseScreenY() = 349; // Kinda half of 720	// TODO: Fix these magic numbers.
-		inputSystem->GetPrevMouseScreenX() = inputSystem->GetMouseScreenX();
-		inputSystem->GetPrevMouseScreenY() = inputSystem->GetMouseScreenY();
+		//inputSystem->GetMouseScreenX() = 640; // Half of 1280		// TODO: Fix these magic numbers.
+		//inputSystem->GetMouseScreenY() = 349; // Kinda half of 720	// TODO: Fix these magic numbers.
+		//inputSystem->GetPrevMouseScreenX() = inputSystem->GetMouseScreenX();
+		//inputSystem->GetPrevMouseScreenY() = inputSystem->GetMouseScreenY();
 	}
 }

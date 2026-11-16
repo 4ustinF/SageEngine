@@ -9,6 +9,16 @@ class SAGE::TransformComponent;
 class BulletHolesPoolComponent;
 class PlayerControllerComponent;
 
+struct PlayerWeaponAudioEvent
+{
+	std::string clipName;
+	float tick = 0.0f;
+	std::string eventName;
+
+	std::string soundFilePath;
+	SAGE::Graphics::SoundId soundID = 0;
+};
+
 class PlayerWeaponComponent final : public SAGE::Component
 {
 public:
@@ -97,8 +107,7 @@ private:
 	// Audio
 	std::vector<std::string> mShootSoundFilePaths;
 	std::vector<SAGE::Graphics::SoundId> mShootSoundIDs;
+	std::vector<PlayerWeaponAudioEvent> mAudioEvents;
 	float mShootSoundPitchVolume = 0.05f;
 
-	SAGE::Graphics::SoundId mTempReloadSoundID1 = 0;
-	SAGE::Graphics::SoundId mTempReloadSoundID2 = 0;
 };

@@ -44,7 +44,6 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 		mIsSemiAutomatic = value["Is Semi Automatic"].GetBool();
 	}
 
-	// "Contains Holstering Animset"
 	if (value.HasMember("Holstering Animset Index"))
 	{
 		mHolsteringAnimIndex = value["Holstering Animset Index"].GetInt();
@@ -57,6 +56,21 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 		for (const auto& shootingAnimset : shootingAnimsets)
 		{
 			mShootingAnimIndexs.push_back(static_cast<size_t>(shootingAnimset.GetInt()));
+		}
+	}
+
+	if (value.HasMember("Audio Events"))
+	{
+		const auto& audioEvents = value["Audio Events"].GetArray();
+		mAudioEvents.reserve(audioEvents.Size());
+		for (const auto& audioEvent : audioEvents)
+		{
+			PlayerWeaponAudioEvent playerWeaponAudioEvent;
+			playerWeaponAudioEvent.clipName = audioEvent["Clip Name"].GetString();
+			playerWeaponAudioEvent.tick = audioEvent["Tick"].GetFloat();
+			playerWeaponAudioEvent.eventName = audioEvent["Event Name"].GetString();
+			playerWeaponAudioEvent.soundFilePath = audioEvent["Sound File Path"].GetString();
+			mAudioEvents.push_back(std::move(playerWeaponAudioEvent));
 		}
 	}
 
@@ -79,6 +93,7 @@ void PlayerWeaponComponent::SaveComponentToTemplate(rj::Value& compObj, rj::Memo
 	if (mIsSemiAutomatic) { SaveBoolToTemplate(compObj, allocator, "Is Semi Automatic", mIsSemiAutomatic); }
 	SaveNumberToTemplate(compObj, allocator, "Holstering Animset Index", mHolsteringAnimIndex, static_cast<size_t>(-1));
 	SaveNumbersToTemplate(compObj, allocator, "Shooting Animsets", mShootingAnimIndexs);
+	// TODO: Save Audio Events
 	SaveStringsToTemplate(compObj, allocator, "Shoot Sound IDs", mShootSoundFilePaths);
 }
 
@@ -100,13 +115,14 @@ void PlayerWeaponComponent::Initialize()
 		mShootSoundIDs.push_back(mSoundEffectManager->Load(soundFilePath.c_str()));
 	}
 
-	mTempReloadSoundID1 = mSoundEffectManager->Load("items/cliprelease1.wav");
-	mTempReloadSoundID2 = mSoundEffectManager->Load("items/clipinsert1.wav");
-
 	FOnAnimationEvent& onAnimationEvent= mAnimator->GetOnAnimationEventDelegate();
 	mOnAnimationEventHandle = onAnimationEvent.AddRaw(this, &PlayerWeaponComponent::OnAnimationEventCallback);
-	mAnimatorComponent->AddEvent("reload", 5.0f, "MagOut");
-	mAnimatorComponent->AddEvent("reload", 24.0f, "MagIn");
+
+	for (PlayerWeaponAudioEvent& audioEvent : mAudioEvents)
+	{
+		audioEvent.soundID = mSoundEffectManager->Load(audioEvent.soundFilePath.c_str());
+		mAnimatorComponent->AddEvent(audioEvent.clipName, audioEvent.tick, audioEvent.eventName);
+	}
 
 	mCurrentAmmo = mMaxAmmo;
 	mCurrentAmmoReserve = mMaxAmmoReserve;
@@ -118,6 +134,7 @@ void PlayerWeaponComponent::Terminate()
 
 	mShootSoundFilePaths.clear();
 	mShootSoundIDs.clear();
+	mAudioEvents.clear();
 
 	if (mAnimator != nullptr)
 	{
@@ -411,14 +428,14 @@ void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 
 void PlayerWeaponComponent::OnAnimationEventCallback(size_t clipIndex, const std::string& eventName)
 {
-	// TODO: Maybe do a clipIndex check before we need an eventName check specific to reloading?
-	if (eventName == "MagOut")
+	const std::string clipName = mAnimator->GetClipNameByIndex(clipIndex);
+	for (const PlayerWeaponAudioEvent& audioEvent : mAudioEvents)
 	{
-		mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID1, mShootSoundPitchVolume);
-	}
-	else if (eventName == "MagIn")
-	{
-		mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID2, mShootSoundPitchVolume);
+		if (audioEvent.clipName ==clipName && audioEvent.eventName == eventName)
+		{
+			mSoundEffectManager->PlayOneShotWithPitchOffset(audioEvent.soundID, mShootSoundPitchVolume);
+			return;
+		}
 	}
 }
 

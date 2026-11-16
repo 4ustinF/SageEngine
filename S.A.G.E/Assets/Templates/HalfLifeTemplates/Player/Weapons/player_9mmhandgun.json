@@ -29,6 +29,20 @@
       "Shooting Animsets": [
         4
       ],
+      "Audio Events": [
+        {
+          "Clip Name": "reload",
+          "Tick": 4.0,
+          "Event Name": "Mag Out",
+          "Sound File Path": "items/9mmclip2.wav"
+        },
+        {
+          "Clip Name": "reload",
+          "Tick": 23.0,
+          "Event Name": "Mag In",
+          "Sound File Path": "items/9mmclip1.wav"
+        }
+      ],
       "Shoot Sound IDs": [
         "weapons/pl_gun3.wav"
       ]

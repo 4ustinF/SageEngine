@@ -31,6 +31,20 @@
         4,
         5
       ],
+      "Audio Events": [
+        {
+          "Clip Name": "reload",
+          "Tick": 5.0,
+          "Event Name": "Mag Out",
+          "Sound File Path": "items/cliprelease1.wav"
+        },
+        {
+          "Clip Name": "reload",
+          "Tick": 24.0,
+          "Event Name": "Mag In",
+          "Sound File Path": "items/clipinsert1.wav"
+        }
+      ],
       "Shoot Sound IDs": [
         "weapons/hks1.wav",
         "weapons/hks2.wav",

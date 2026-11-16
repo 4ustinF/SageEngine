@@ -58,25 +58,11 @@ void PlayerControllerComponent::Update(float deltaTime)
 	Camera& camera = mCameraService->GetCamera();
 	IsGroundedCheck();
 	CheckForFlashlightInput();
+	CheckForPlayerCrouchingInput();
 	CheckForPlayerMovementInput(camera, deltaTime);
 	CheckForPlayerGameplayInput();
 	UpdateCameraPosition(camera);
 	UpdateArmsPosition(camera);
-
-	if (mInputSystem->IsKeyDown(KeyCode::LCONTROL))
-	{
-		if (mIsCrouching)
-		{
-			return;
-		}
-
-		mIsCrouching = true;
-	}
-
-	if (mInputSystem->IsKeyReleased(KeyCode::LCONTROL))
-	{
-		mIsCrouching = false;
-	}
 }
 
 void PlayerControllerComponent::DebugUI()
@@ -126,6 +112,25 @@ void PlayerControllerComponent::CheckForFlashlightInput()
 		{
 			mFlashlightComponent->ToggleFlashlight();
 		}
+	}
+}
+
+void PlayerControllerComponent::CheckForPlayerCrouchingInput()
+{
+	if (mInputSystem->IsKeyDown(KeyCode::LCONTROL))
+	{
+		if (mIsCrouching)
+		{
+			return;
+		}
+
+		mIsCrouching = true;
+		// TODO: Adjust the capsule collider height and camera position for crouching
+	}
+	else if (mInputSystem->IsKeyReleased(KeyCode::LCONTROL))
+	{
+		mIsCrouching = false;
+		// TODO: Adjust the capsule collider height and camera position for crouching
 	}
 }
 

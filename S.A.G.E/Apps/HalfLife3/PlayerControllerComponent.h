@@ -37,6 +37,7 @@ private:
 
 	void IsGroundedCheck();
 	void CheckForFlashlightInput();
+	void CheckForPlayerCrouchingInput();
 	void CheckForPlayerMovementInput(SAGE::Graphics::Camera& camera, float deltaTime);
 	void CheckForPlayerGameplayInput();
 	void UpdateCameraPosition(SAGE::Graphics::Camera& camera);

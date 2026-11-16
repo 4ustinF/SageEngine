@@ -83,6 +83,8 @@ void GameState::Initialize()
 	GameObjectFactory::SetMakeOverride(OnMake);
 	mGameWorld.LoadLevel("../../Assets/Level/HalfLife/c1a0_level.json");
 
+	mInputSystem = InputSystem::Get();
+
 	GameObject* barneyGO = mGameWorld.CreateGameObject("../../Assets/Templates/HalfLifeTemplates/Characters/barney.json");
 	barneyGO->SetName("Barney");
 	AnimatorComponent* barneyGOAnimatorComp = barneyGO->GetComponent<AnimatorComponent>();
@@ -145,6 +147,7 @@ void GameState::Terminate()
 
 	mGlassEffect.Terminate();
 	mCameraService = nullptr;
+	mInputSystem = nullptr;
 	mGameWorld.Terminate();
 }
 
@@ -152,6 +155,18 @@ void GameState::Update(float deltaTime)
 {
 	mPhysicsWorld.Update(deltaTime);
 	mGameWorld.Update(deltaTime);
+
+	if (mInputSystem->IsKeyPressed(KeyCode::P)) // TODO: Remove this. This is for easy debugging. 
+	{
+		mGameWorld.ToggleEditMode();
+		if (GameObject* playerGO = mGameWorld.FindGameObject(TagId::Player))
+		{
+			if (PlayerControllerComponent* playerControllerComponent = playerGO->GetComponent<PlayerControllerComponent>())
+			{
+				playerControllerComponent->SetFPSMode(!playerControllerComponent->GetFPSMode());
+			}
+		}
+	}
 }
 
 void GameState::Render()

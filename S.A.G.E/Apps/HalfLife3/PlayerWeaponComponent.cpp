@@ -154,23 +154,7 @@ void PlayerWeaponComponent::Terminate()
 
 void PlayerWeaponComponent::Update(float deltaTime)
 {
-	// TODO: Temp logic to get reload aduio working
-	//if (mWeaponState == WeaponState::Reloading)
-	//{
-	//	//const AnimationClip& clip = mAnimator->GetCurrentAnimationClip();
-	//	const float percent = mAnimator->GetAnimationTick() / 65.0f; // Number of ticks in the reload anim. TODO: Get this from the clip itself.
-	//	const int wholePercent = static_cast<int>(percent * 100.0f);
 
-	//	// 61
-	//	if (wholePercent == 6) // 4=6 // 5=7
-	//	{
-	//		mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID1, mShootSoundPitchVolume);
-	//	}
-	//	else if (wholePercent == 38) // 23=35 // 24=38
-	//	{
-	//		mSoundEffectManager->PlayOneShotWithPitchOffset(mTempReloadSoundID2, mShootSoundPitchVolume);
-	//	}
-	//}
 }
 
 void PlayerWeaponComponent::OnQueueUpdate(float deltaTime)

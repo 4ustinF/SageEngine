@@ -25,6 +25,9 @@ public:
 	void Update(float deltaTime) override;
 	void DebugUI() override;
 
+	bool GetFPSMode() const { return mIsInFPSMode; }
+	void SetFPSMode(bool fpsMode) { mIsInFPSMode = fpsMode; }
+
 private:
 	SAGE::CameraService* mCameraService = nullptr;
 	SAGE::RBPhysicsService* mRBPhysicsService = nullptr;

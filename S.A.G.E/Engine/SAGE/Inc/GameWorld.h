@@ -45,7 +45,9 @@ namespace SAGE
 		const GameObject* GetGameObject(GameObjectHandle handle) const;
 		void DestroyGameObject(GameObjectHandle handle);
 
+		bool GetEditMode() const { return mEditMode; }
 		void SetEditMode(bool editMode) { mEditMode = editMode; }
+		void ToggleEditMode() { mEditMode = !mEditMode; }
 
 	private:
 		GameObject* InstantiateRecursive(const std::filesystem::path& templateFile, GameObject* parentGO, const char* overrideName, std::vector<GameObjectHandle>& outCreated);

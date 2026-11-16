@@ -62,15 +62,13 @@ void PlayerWeaponComponent::LoadComponentFromTemplate(const rj::Value& value)
 	if (value.HasMember("Audio Events"))
 	{
 		const auto& audioEvents = value["Audio Events"].GetArray();
-		mAudioEvents.reserve(audioEvents.Size());
 		for (const auto& audioEvent : audioEvents)
 		{
 			PlayerWeaponAudioEvent playerWeaponAudioEvent;
-			playerWeaponAudioEvent.clipName = audioEvent["Clip Name"].GetString();
 			playerWeaponAudioEvent.tick = audioEvent["Tick"].GetFloat();
 			playerWeaponAudioEvent.eventName = audioEvent["Event Name"].GetString();
 			playerWeaponAudioEvent.soundFilePath = audioEvent["Sound File Path"].GetString();
-			mAudioEvents.push_back(std::move(playerWeaponAudioEvent));
+			mAudioEventsMap[audioEvent["Clip Name"].GetString()].push_back(std::move(playerWeaponAudioEvent));
 		}
 	}
 
@@ -118,10 +116,13 @@ void PlayerWeaponComponent::Initialize()
 	FOnAnimationEvent& onAnimationEvent= mAnimator->GetOnAnimationEventDelegate();
 	mOnAnimationEventHandle = onAnimationEvent.AddRaw(this, &PlayerWeaponComponent::OnAnimationEventCallback);
 
-	for (PlayerWeaponAudioEvent& audioEvent : mAudioEvents)
+	for (auto& pair : mAudioEventsMap)
 	{
-		audioEvent.soundID = mSoundEffectManager->Load(audioEvent.soundFilePath.c_str());
-		mAnimatorComponent->AddEvent(audioEvent.clipName, audioEvent.tick, audioEvent.eventName);
+		for (PlayerWeaponAudioEvent& audioEvent : pair.second)
+		{
+			audioEvent.soundID = mSoundEffectManager->Load(audioEvent.soundFilePath.c_str());
+			mAnimatorComponent->AddEvent(pair.first, audioEvent.tick, audioEvent.eventName);
+		}
 	}
 
 	mCurrentAmmo = mMaxAmmo;
@@ -134,7 +135,7 @@ void PlayerWeaponComponent::Terminate()
 
 	mShootSoundFilePaths.clear();
 	mShootSoundIDs.clear();
-	mAudioEvents.clear();
+	mAudioEventsMap.clear();
 
 	if (mAnimator != nullptr)
 	{
@@ -413,12 +414,15 @@ void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 void PlayerWeaponComponent::OnAnimationEventCallback(size_t clipIndex, const std::string& eventName)
 {
 	const std::string clipName = mAnimator->GetClipNameByIndex(clipIndex);
-	for (const PlayerWeaponAudioEvent& audioEvent : mAudioEvents)
+	if (const auto it = mAudioEventsMap.find(clipName); it != mAudioEventsMap.end())
 	{
-		if (audioEvent.clipName ==clipName && audioEvent.eventName == eventName)
+		for (const PlayerWeaponAudioEvent& audioEvent : it->second)
 		{
-			mSoundEffectManager->PlayOneShotWithPitchOffset(audioEvent.soundID, mShootSoundPitchVolume);
-			return;
+			if (audioEvent.eventName == eventName)
+			{
+				mSoundEffectManager->PlayOneShotWithPitchOffset(audioEvent.soundID, mShootSoundPitchVolume);
+				break;
+			}
 		}
 	}
 }

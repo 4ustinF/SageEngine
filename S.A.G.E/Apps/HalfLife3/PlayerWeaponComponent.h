@@ -11,7 +11,7 @@ class PlayerControllerComponent;
 
 struct PlayerWeaponAudioEvent
 {
-	std::string clipName;
+	// std::string clipName;
 	float tick = 0.0f;
 	std::string eventName;
 
@@ -107,7 +107,7 @@ private:
 	// Audio
 	std::vector<std::string> mShootSoundFilePaths;
 	std::vector<SAGE::Graphics::SoundId> mShootSoundIDs;
-	std::vector<PlayerWeaponAudioEvent> mAudioEvents;
+	std::unordered_map<std::string, std::vector<PlayerWeaponAudioEvent>> mAudioEventsMap; // Key: clipName
 	float mShootSoundPitchVolume = 0.05f;
 
 };

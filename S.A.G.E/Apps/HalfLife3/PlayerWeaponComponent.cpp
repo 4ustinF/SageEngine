@@ -255,9 +255,10 @@ void PlayerWeaponComponent::CheckForPlayerGameplayInput()
 	}
 }
 
-void PlayerWeaponComponent::UpdateWeaponRotation(const Quaternion& rotation)
+void PlayerWeaponComponent::UpdateWeaponRotationAndPosition(const Camera& camera)
 {
-	mTransformComponent->SetLocalRotation(rotation);
+	mTransformComponent->SetLocalRotation(camera.GetOrientation());
+	mTransformComponent->SetPosition(camera.GetPosition());
 }
 
 void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)

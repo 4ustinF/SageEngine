@@ -23,6 +23,7 @@ public:
 	void Terminate() override;
 
 	void Update(float deltaTime) override;
+	void OnQueueUpdate(float deltaTime) override;
 	void DebugUI() override;
 
 	bool GetFPSMode() const { return mIsInFPSMode; }
@@ -37,7 +38,7 @@ private:
 
 	void IsGroundedCheck();
 	void CheckForFlashlightInput();
-	void CheckForPlayerCrouchingInput();
+	void CheckForPlayerCrouchingInput(float deltaTime);
 	void CheckForPlayerMovementInput(SAGE::Graphics::Camera& camera, float deltaTime);
 	void CheckForPlayerGameplayInput();
 	void UpdateCameraPosition(SAGE::Graphics::Camera& camera);
@@ -52,8 +53,12 @@ private:
 	SAGE::Math::Vector3 mGroundNormal = SAGE::Math::Vector3::YAxis;
 
 	// Crouch
-	// height = 0.91f
 	bool mIsCrouching = false;
+	float mCrouchElapsedTime = 0.0f;
+	float mTimeToCrouch = 0.05f;
+	float mCrouchAmount = 0.0f;
+	float mCrouchHeight = 0.91f;
+	float mStandHeight = 1.626f;
 
 	// Weapons
 	void SwapWeapons(int mNewIndex);

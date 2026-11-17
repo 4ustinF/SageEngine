@@ -15,8 +15,6 @@ namespace SAGE
 		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
 		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
-		void Initialize() override;
-		void Terminate() override;
 		void DebugUI() override;
 
 		// Getters

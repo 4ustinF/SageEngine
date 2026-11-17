@@ -49,7 +49,7 @@ public:
 	void OnDisable() override;
 
 	void CheckForPlayerGameplayInput();
-	void UpdateWeaponRotation(const SAGE::Math::Quaternion& rotation);
+	void UpdateWeaponRotationAndPosition(const SAGE::Graphics::Camera& camera);
 	void OnAmmoPickedUp(int ammoAmount);
 
 	bool IsBusy() const { return mWeaponState != WeaponState::Idling; }

@@ -22,6 +22,8 @@
       "Mass": 5.0
     },
     "Player Controller Component": {
+      "Time To Crouch": 0.05,
+      "Crouch Height": 0.91
     }
   },
   "GameObjects": [

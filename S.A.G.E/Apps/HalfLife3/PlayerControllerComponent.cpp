@@ -21,12 +21,21 @@ MEMORY_POOL_DEFINE(PlayerControllerComponent, 1);
 
 void PlayerControllerComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
-	
+	if (value.HasMember("Time To Crouch"))
+	{
+		mTimeToCrouch = value["Time To Crouch"].GetFloat();
+	}
+
+	if (value.HasMember("Crouch Height"))
+	{
+		mCrouchHeight = value["Crouch Height"].GetFloat();
+	}
 }
 
 void PlayerControllerComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
 {
-
+	SaveNumberToTemplate(compObj, allocator, "Time To Crouch", mTimeToCrouch);
+	SaveNumberToTemplate(compObj, allocator, "Crouch Height", mCrouchHeight);
 }
 
 void PlayerControllerComponent::Initialize()
@@ -42,6 +51,8 @@ void PlayerControllerComponent::Initialize()
 	mFlashlightComponent = owner.GetComponentInChildren<FlashlightComponent>();
 	mWeapons = owner.GetComponentsInChildren<PlayerWeaponComponent>(); 
 	mActiveWeapon = mWeapons.empty() ? nullptr : mWeapons[mActiveWeaponIndex];
+
+	mStandHeight = mCapsuleColliderComponent->GetHeight();
 }
 
 void PlayerControllerComponent::Terminate()
@@ -58,27 +69,60 @@ void PlayerControllerComponent::Update(float deltaTime)
 	Camera& camera = mCameraService->GetCamera();
 	IsGroundedCheck();
 	CheckForFlashlightInput();
-	CheckForPlayerCrouchingInput();
+	CheckForPlayerCrouchingInput(deltaTime);
 	CheckForPlayerMovementInput(camera, deltaTime);
 	CheckForPlayerGameplayInput();
 	UpdateCameraPosition(camera);
 	UpdateArmsPosition(camera);
 }
 
+void PlayerControllerComponent::OnQueueUpdate(float deltaTime)
+{
+	if (!mIsCrouching) // Attempt to stand
+	{
+		const float currentCapsuleHeight = mCapsuleColliderComponent->GetHeight();
+		if (currentCapsuleHeight < mStandHeight)
+		{
+			if (const RBPhysicsObject* physicsObject = mCapsuleColliderComponent->GetPhysicsObject())
+			{
+				if (const BoundingCapsule* boundingCapsule = dynamic_cast<const BoundingCapsule*>(physicsObject->GetCollider()))
+				{
+					const Vector3 rayOrigin = boundingCapsule->GetTopCenter() + (Vector3::YAxis * Constants::Epsilon);
+					if (!mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, Vector3::YAxis, 0.2f))
+					{
+						mCrouchElapsedTime = Max(mCrouchElapsedTime - deltaTime, 0.0f);
+						mCrouchAmount = mCrouchElapsedTime / mTimeToCrouch;
+						const float newCapsuleHeight = Lerp(mStandHeight, mCrouchHeight, mCrouchAmount);
+						mCapsuleColliderComponent->SetHeight(newCapsuleHeight);
+					}
+				}
+			}
+
+			EnqueueUpdate();
+		}
+	}
+}
+
 void PlayerControllerComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Player Controller Component##PlayerControllerComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
+		ImGui::Text("General Data");
 		ImGui::Checkbox("Can Move##PlayerControllerComponent", &mCanMove);
 		ImGui::Checkbox("Is FPS##PlayerControllerComponent", &mIsInFPSMode);
 		ImGui::Checkbox("Is Grounded##PlayerControllerComponent", &mIsGrounded);
-		ImGui::Checkbox("Is Crouching##PlayerControllerComponent", &mIsCrouching);
-		ImGui::DragFloat2("Ground Speed##PlayerControllerComponent", &mGroundSpeed.x, 0.1f);
-		ImGui::DragFloat2("Air Speed##PlayerControllerComponent", &mAirSpeed.x, 0.1f);
 		ImGui::DragFloat("Jump Force##PlayerControllerComponent", &mJumpForce, 0.1f);
 		ImGui::DragFloat3("Camera Offset##PlayerControllerComponent", &mCameraOffset.x, 0.01f);
 
-		// Debug
+		ImGui::Text("Movement Data");
+		ImGui::DragFloat2("Ground Speed##PlayerControllerComponent", &mGroundSpeed.x, 0.1f);
+		ImGui::DragFloat2("Air Speed##PlayerControllerComponent", &mAirSpeed.x, 0.1f);
+
+		ImGui::Text("Crouch Data");
+		ImGui::Checkbox("Is Crouching##PlayerControllerComponent", &mIsCrouching);
+		ImGui::DragFloat("Time To Crouch##PlayerControllerComponent", &mTimeToCrouch, 0.1f, 0.01f);
+
+		ImGui::Text("Weapon Data");
 		ImGui::DragInt("Active Weapon Index##PlayerControllerComponent", &mActiveWeaponIndex, 1, 0, (int)mWeapons.size() - 1);
 	}
 }
@@ -89,8 +133,8 @@ void PlayerControllerComponent::IsGroundedCheck()
 	{
 		if (const BoundingCapsule* boundingCapsule = dynamic_cast<const BoundingCapsule*>(physicsObject->GetCollider()))
 		{
-			const Vector3 rayOrigin = boundingCapsule->GetBottomCenter() - (Vector3::YAxis * Constants::Epsilon);
 			PhysicsRayHit hit;
+			const Vector3 rayOrigin = boundingCapsule->GetBottomCenter() - (Vector3::YAxis * Constants::Epsilon);
 			mIsGrounded = mRBPhysicsService->GetPhysicsWorld().Raycast(rayOrigin, -Vector3::YAxis, 0.01f, hit);
 
 			if (mIsGrounded)
@@ -115,24 +159,30 @@ void PlayerControllerComponent::CheckForFlashlightInput()
 	}
 }
 
-void PlayerControllerComponent::CheckForPlayerCrouchingInput()
+void PlayerControllerComponent::CheckForPlayerCrouchingInput(float deltaTime)
 {
 	if (mInputSystem->IsKeyDown(KeyCode::LCONTROL))
 	{
 		if (mIsCrouching)
 		{
+			const float currentCapsuleHeight = mCapsuleColliderComponent->GetHeight();
+			if (mCrouchAmount < 1.0f)
+			{
+				mCrouchElapsedTime = Min(mCrouchElapsedTime + deltaTime, mTimeToCrouch);
+				mCrouchAmount = mCrouchElapsedTime / mTimeToCrouch;
+				const float newCapsuleHeight = Lerp(mStandHeight, mCrouchHeight, mCrouchAmount);
+				mCapsuleColliderComponent->SetHeight(newCapsuleHeight);
+			}
+
 			return;
 		}
 
 		mIsCrouching = true;
-		mCapsuleColliderComponent->SetHeight(0.91f); // TODO: Manual number.
-		// TODO: Adjust the capsule collider height and camera position for crouching
 	}
 	else if (mInputSystem->IsKeyReleased(KeyCode::LCONTROL))
 	{
 		mIsCrouching = false;
-		mCapsuleColliderComponent->SetHeight(1.626f); // TODO: Manual number and we should do a raycast above us first before allowing to uncrouch.
-		// TODO: Adjust the capsule collider height and camera position for crouching
+		EnqueueUpdate();
 	}
 }
 
@@ -218,7 +268,7 @@ void PlayerControllerComponent::CheckForPlayerGameplayInput()
 
 void PlayerControllerComponent::UpdateCameraPosition(Camera& camera)
 {
-	if (!mIsInFPSMode) // TODO: Also check if we are in edit mode
+	if (!mIsInFPSMode)
 	{
 		return;
 	}
@@ -245,7 +295,7 @@ void PlayerControllerComponent::UpdateArmsPosition(const Camera& camera)
 
 	if (mActiveWeapon != nullptr)
 	{
-		mActiveWeapon->UpdateWeaponRotation(camera.GetOrientation());
+		mActiveWeapon->UpdateWeaponRotationAndPosition(camera);
 	}
 }
 

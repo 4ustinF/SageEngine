@@ -37,16 +37,6 @@ void CapsuleColliderComponent::SaveComponentToTemplate(rj::Value& compObj, rj::M
 	SaveNumberToTemplate(compObj, allocator, "Height", mHeight, 2.0f);
 }
 
-void CapsuleColliderComponent ::Initialize()
-{
-	BaseColliderComponent::Initialize();
-}
-
-void CapsuleColliderComponent ::Terminate()
-{
-	BaseColliderComponent::Terminate();
-}
-
 void CapsuleColliderComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Capsule Collider Component##CapsuleColliderComponent ", ImGuiTreeNodeFlags_CollapsingHeader))

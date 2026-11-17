@@ -80,8 +80,7 @@ void PlayerControllerComponent::OnQueueUpdate(float deltaTime)
 {
 	if (!mIsCrouching) // Attempt to stand
 	{
-		const float currentCapsuleHeight = mCapsuleColliderComponent->GetHeight();
-		if (currentCapsuleHeight < mStandHeight)
+		if (mCrouchAmount > 0.0f)
 		{
 			if (const RBPhysicsObject* physicsObject = mCapsuleColliderComponent->GetPhysicsObject())
 			{

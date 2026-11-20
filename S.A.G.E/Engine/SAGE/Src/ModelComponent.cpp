@@ -91,10 +91,17 @@ void ModelComponent::SaveComponentToTemplate(rapidjson::Value& compObj, rapidjso
 
 void ModelComponent::Initialize()
 {
+	mRenderService = GetOwner().GetWorld().GetService<RenderService>();
+
 	if (mPreloadModel)
 	{
 		LoadModel();
 	}
+}
+
+void ModelComponent::Terminate()
+{
+	mRenderService = nullptr;
 }
 
 void ModelComponent::DebugUI()
@@ -131,16 +138,13 @@ void ModelComponent::DebugUI()
 void ModelComponent::OnEnable() 
 {
 	LoadModel();
-
-	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
-	mRenderGroup = renderService->Register(this, mIsBasicModel);
+	mRenderGroup = mRenderService->Register(this, mIsBasicModel);
 	UpdateRenderGroupShadowSettings();
 }
 
 void ModelComponent::OnDisable()
 {
-	auto renderService = GetOwner().GetWorld().GetService<RenderService>();
-	renderService->Unregister(this, mIsBasicModel);
+	mRenderService->Unregister(this, mIsBasicModel);
 	mRenderGroup = nullptr;
 }
 

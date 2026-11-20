@@ -4,6 +4,8 @@
 
 namespace SAGE
 {
+	class RenderService;
+
 	class ModelComponent final : public Component
 	{
 	public:
@@ -15,6 +17,7 @@ namespace SAGE
 		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
 		void Initialize() override;
+		void Terminate() override;
 
 		void DebugUI() override;
 		void OnEnable() override;
@@ -34,6 +37,8 @@ namespace SAGE
 	private:
 		void LoadModel();
 		void UpdateRenderGroupShadowSettings();
+
+		RenderService* mRenderService = nullptr;
 
 		std::string mFileName;
 		Graphics::ModelId mModelId;

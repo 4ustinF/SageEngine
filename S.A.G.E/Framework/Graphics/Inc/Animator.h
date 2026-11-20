@@ -47,6 +47,8 @@ namespace SAGE::Graphics
 		FOnAnimationEvent& GetOnAnimationEventDelegate() { return mOnAnimationEvent; }
 		FOnAnimationFinished& GetOnAnimationFinishedDelegate() { return mOnAnimationFinished; }
 
+		void SetIsLooping(bool isLooping) { mLooping = isLooping; }
+
 	private:
 		const Model* mModel = nullptr;
 		size_t mClipIndex = 0;

@@ -29,7 +29,7 @@ void GameState::Initialize()
 	mStandardEffect.SetShadowMap(&mShadowEffect.GetDepthMap());
 	mStandardEffect.SetDepthBias(0.000068f);
 	mStandardEffect.SetBumpWeight(0.25f);
-	mStandardEffect.SetSampleSize(5);
+	//mStandardEffect.SetSampleSize(5);
 
 	mShadowEffect.Initialize();
 	mShadowEffect.SetDirectionalLight(mDirectionalLight);
@@ -60,7 +60,7 @@ void GameState::Initialize()
 		auto anim = mCharacterAnimator.AddAnimator();
 		anim->Initialize(&mCharacterModel);
 		anim->PlayAnimation(i);
-		anim->mLooping = true;
+		anim->SetIsLooping(true);
 	}
 
 	mCharacter = CreateRenderGroup(mCharacterModel, &mCharacterAnimator);

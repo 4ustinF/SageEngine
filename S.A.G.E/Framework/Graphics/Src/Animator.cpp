@@ -62,7 +62,7 @@ bool Animator::PlayAnimation(const std::string& clipName, bool looping)
 {
 	// TODO: Should we check if (mClipIndex != clipIndex || IsFinished()) to prevent a unnecessary lookup?
 	const size_t clipIndex = GetClipIndexByName(clipName);
-	if (clipIndex >= static_cast<size_t>(0))
+	if (clipIndex < static_cast<size_t>(0))
 	{
 		return false;
 	}
@@ -74,7 +74,7 @@ bool Animator::PlayAnimationInReverse(const std::string& clipName, bool looping)
 {
 	// TODO: Should we check if (mClipIndex != clipIndex || IsFinished()) to prevent a unnecessary lookup?
 	const size_t clipIndex = GetClipIndexByName(clipName);
-	if (clipIndex >= static_cast<size_t>(0))
+	if (clipIndex < static_cast<size_t>(0))
 	{
 		return false;
 	}

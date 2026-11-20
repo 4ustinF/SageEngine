@@ -84,4 +84,40 @@ namespace SAGE::Graphics
 		};
 		std::vector<std::unique_ptr<Entry>> mEntries;
 	};
+
+	//class AnimationBlender final : public IAnimator
+	//{
+	//public:
+	//	void SetBase(const Animator* base) { mBase = base; }
+	//	Animator* AddLayer();
+	//	Animator* GetLayer(size_t index) { return &mLayers[index]->animator; }
+	//	size_t GetLayerCount() const { return mLayers.size(); }
+	//	void SetLayerWeight(size_t index, float weight);
+
+	//	void Update(float deltaTime); // ticks layers only; the component ticks the base
+	//	Math::Matrix4 GetTransform(const Bone* bone) const override;
+
+	//private:
+	//	struct Layer { Animator animator; float weight = 0.0f; };
+	//	const Animator* mBase = nullptr;
+	//	std::vector<std::unique_ptr<Layer>> mLayers;
+	//};
+
+	//Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
+	//{
+	//	Vector3 position = mBase->GetPosition(bone);
+	//	Quaternion rotation = mBase->GetRotation(bone);
+	//	Vector3 scale = mBase->GetScale(bone);
+
+	//	for (const auto& layer : mLayers)
+	//	{
+	//		const float w = layer->weight;
+	//		if (w <= 0.0f) continue; // idle layer costs nothing
+
+	//		position = Lerp(position, layer->animator.GetPosition(bone), w);
+	//		rotation = Slerp(rotation, layer->animator.GetRotation(bone), w);
+	//		scale = Lerp(scale, layer->animator.GetScale(bone), w);
+	//	}
+	//	return Transform{ position, rotation, scale }.GetMatrix4();
+	//}
 }

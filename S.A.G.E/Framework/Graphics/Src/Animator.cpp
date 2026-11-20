@@ -314,4 +314,23 @@ Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
 	}
 
 	return parentTransform1;
+
+	//const Animator& base = mEntries[0]->animator;
+	//Vector3 position = base.GetPosition(bone);
+	//Quaternion rotation = base.GetRotation(bone);
+	//Vector3 scale = base.GetScale(bone);
+
+	// const size_t entriesSize = mEntries.size();
+	//for (size_t i = 1; i < entriesSize; ++i)
+	//{
+	//	const float w = mEntries[i]->weight;
+	//	if (w <= 0.0f) continue;
+
+	//	const Animator& a = mEntries[i]->animator;
+	//	position = Lerp(position, a.GetPosition(bone), w);
+	//	rotation = Slerp(rotation, a.GetRotation(bone), w); // make sure your Slerp takes the shortest path
+	//	scale = Lerp(scale, a.GetScale(bone), w);
+	//}
+
+	//return Transform{ position, rotation, scale }.GetMatrix4();
 }

@@ -149,6 +149,16 @@ void RenderService::Render()
 
 void RenderService::UpdateRenderObjectsTransform()
 {
+	//for (auto& entry : mRenderEntries)
+	//{
+	//	const IAnimator* animator = entry.animatorComponent ? entry.animatorComponent->GetActiveAnimator() : nullptr;
+	//	for (auto& renderObject : entry.renderGroup)
+	//	{
+	//		renderObject.transform = entry.transformComponent->GetTransform();
+	//		if (animator) renderObject.animator = animator;
+	//	}
+	//}
+
 	for (auto& entry : mRenderEntries)
 	{
 		for (auto& renderObject : entry.renderGroup)

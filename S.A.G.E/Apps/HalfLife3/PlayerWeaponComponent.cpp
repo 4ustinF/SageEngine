@@ -453,3 +453,19 @@ void PlayerWeaponComponent::ResetCanShootTimer()
 	mCanShootTimer = mRateOfFireInSeconds;
 	mCanShoot = true;
 }
+
+/*
+
+// setup (after model is enabled)
+// mShootLayer = animatorComp->AddBlendLayer();
+// animatorComp->GetAnimator().PlayAnimation("Idle", true);
+
+// on fire
+//mShootLayer->PlayAnimation("Shoot", false, true);
+
+// every frame
+// const float target = mShootLayer->IsFinished() ? 0.0f : 1.0f;
+// mShootWeight = MoveToward(mShootWeight, target, 15.0f * dt); // ~0.07s ramp
+// animatorComp->GetBlender().SetLayerWeight(0, mShootWeight);
+
+*/

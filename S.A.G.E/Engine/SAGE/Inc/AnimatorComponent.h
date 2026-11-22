@@ -27,6 +27,16 @@ namespace SAGE
 
 		std::string GetAnimationName(size_t index);
 
+		// ------------------------------------------------------------
+		Graphics::AnimationBlender& GetBlender() { return mBlender; }
+		Graphics::Animator* AddBlendLayer();
+		const Graphics::IAnimator& GetActiveAnimator() const
+		{
+			return mBlender.GetLayerCount() > 0 ? 
+				static_cast<const Graphics::IAnimator&>(mBlender) : 
+				static_cast<const Graphics::IAnimator&>(mAnimator);
+		}
+
 	private:
 		std::string GetAnimationNameFromFilePath(const std::string& path);
 		void LoadAnimatorComponent();
@@ -34,46 +44,8 @@ namespace SAGE
 
 		ModelComponent* mModelComponent = nullptr;
 		std::vector<std::string> mAnimationFileNames;
+		Graphics::AnimationBlender mBlender;
 		Graphics::Animator mAnimator;
 		bool mHasLoadedAnimationSet = false;
 	};
 }
-
-/*
-
-// .h
-Graphics::AnimationBlender& GetBlender() { return mBlender; }
-Graphics::Animator* AddBlendLayer();
-const Graphics::IAnimator* GetActiveAnimator() const
-{
-	return mBlender.GetLayerCount() > 0 ? static_cast<const Graphics::IAnimator*>(&mBlender)
-										: static_cast<const Graphics::IAnimator*>(&mAnimator);
-}
-private:
-Graphics::AnimationBlender mBlender;
-
-// .cpp
-Animator* AnimatorComponent::AddBlendLayer()
-{
-	mBlender.SetBase(&mAnimator);
-	Animator* layer = mBlender.AddLayer();
-	layer->Initialize(&mModelComponent->GetModel()); // call this after the model is loaded/enabled
-	return layer;
-}
-
-void AnimatorComponent::Update(float deltaTime)
-{
-	mAnimator.Update(deltaTime);
-	mBlender.Update(deltaTime);
-}
-
-void AnimatorComponent::LoadAnimatorComponent()
-{
-	Model& model = mModelComponent->GetModel();
-	LoadAnimationSet(model);
-	mAnimator.Initialize(&model);
-	for (size_t i = 0; i < mBlender.GetLayerCount(); ++i)
-		mBlender.GetLayer(i)->Initialize(&model);
-}
-
-*/

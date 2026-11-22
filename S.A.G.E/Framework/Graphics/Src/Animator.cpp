@@ -48,7 +48,7 @@ bool Animator::StopAnimation()
 bool Animator::PlayAnimation(size_t clipIndex, bool looping, bool force)
 {
 	ASSERT(clipIndex < mModel->animationSet.size(), "Animator -- Invalid animation clip index.");
-	if (mClipIndex != clipIndex || IsFinished() || force)
+	if (mClipIndex != clipIndex || IsFinished() || force) // mIsAnimating
 	{
 		mClipIndex = clipIndex;
 		mAnimationTick = 0.0f;

@@ -21,6 +21,7 @@ void AnimatorComponent::Initialize()
 void AnimatorComponent::Update(float deltaTime)
 {
 	mAnimator.Update(deltaTime);
+	mBlender.Update(deltaTime);
 }
 
 void AnimatorComponent::DebugUI()
@@ -127,6 +128,11 @@ void AnimatorComponent::LoadAnimatorComponent()
 
 	LoadAnimationSet(model);
 	mAnimator.Initialize(&model);
+
+	for (size_t i = 0; i < mBlender.GetLayerCount(); ++i)
+	{
+		mBlender.GetAnimator(i)->Initialize(&model);
+	}
 }
 
 void AnimatorComponent::LoadAnimationSet(Model& model)
@@ -144,4 +150,14 @@ void AnimatorComponent::LoadAnimationSet(Model& model)
 	}
 
 	mHasLoadedAnimationSet = true;
+}
+
+
+
+Animator* AnimatorComponent::AddBlendLayer()
+{
+	mBlender.SetBase(&mAnimator);
+	Animator* animator = mBlender.AddAnimator();
+	animator->Initialize(&mModelComponent->GetModel()); // call this after the model is loaded/enabled
+	return animator;
 }

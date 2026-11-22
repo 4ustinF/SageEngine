@@ -55,21 +55,32 @@ void GameState::Initialize()
 	//mCharacterAnimator.Initialize(&mCharacterModel);
 	//mCharacterAnimator.PlayAnimation(0);
 
-	for (int i = 0; i < mCharacterModel.animationSet.size(); ++i)
-	{
-		auto anim = mCharacterAnimator.AddAnimator();
-		if (i == 0)
-		{
-			mCharacterAnimator.SetBase(anim);
-		}
+	auto anim0 = mCharacterAnimator.AddAnimator();
+	anim0->Initialize(&mCharacterModel);
+	mCharacterAnimator.SetBase(anim0);
+	anim0->PlayAnimation(0, true, true);
 
-		anim->Initialize(&mCharacterModel);
+	auto anim1 = mCharacterAnimator.AddAnimator();
+	anim1->Initialize(&mCharacterModel);
 
-		if (i == 0)
-		{
-			anim->PlayAnimation(i, true, true);
-		}
-	}
+	auto anim2 = mCharacterAnimator.AddAnimator();
+	anim2->Initialize(&mCharacterModel);
+
+	//for (int i = 0; i < mCharacterModel.animationSet.size(); ++i)
+	//{
+	//	auto anim = mCharacterAnimator.AddAnimator();
+	//	if (i == 0)
+	//	{
+	//		mCharacterAnimator.SetBase(anim);
+	//	}
+
+	//	anim->Initialize(&mCharacterModel);
+
+	//	if (i == 0)
+	//	{
+	//		anim->PlayAnimation(i, true, true);
+	//	}
+	//}
 
 	mCharacter = CreateRenderGroup(mCharacterModel, &mCharacterAnimator);
 
@@ -184,7 +195,7 @@ void GameState::Update(float deltaTime)
 	if (inputSystem->IsKeyPressed(KeyCode::LEFT)) 
 	{
 		mIsLeft = true;
-		if (Animator* animator = mCharacterAnimator.GetAnimator(4))
+		if (Animator* animator = mCharacterAnimator.GetAnimator(1)) // 4
 		{
 			if (!animator->GetIsAnimating())
 			{
@@ -195,7 +206,7 @@ void GameState::Update(float deltaTime)
 	else if (inputSystem->IsKeyPressed(KeyCode::RIGHT))
 	{
 		mIsLeft = false;
-		if (Animator* animator = mCharacterAnimator.GetAnimator(2))
+		if (Animator* animator = mCharacterAnimator.GetAnimator(2)) // 2
 		{
 			if (!animator->GetIsAnimating())
 			{
@@ -208,25 +219,37 @@ void GameState::Update(float deltaTime)
 	{
 		mLeftAmount += mLeftSpeed * deltaTime;
 		mLeftAmount = Min(mLeftAmount, 1.0f);
-		mCharacterAnimator.SetBlendWeight(4, mLeftAmount);			// Left
+		mCharacterAnimator.SetBlendWeight(1, mLeftAmount);			// Left
 		mCharacterAnimator.SetBlendWeight(2, 1.0f - mLeftAmount);	// Right
 
 		if (mLeftAmount >= 1.0f)
 		{
+			mLeftAmount = 1.0f;
 			mCharacterAnimator.GetAnimator(2)->StopAnimation();
 		}
+
+		mMovementSpeed = Lerp(-mMaxMovementSpeed, mMaxMovementSpeed, mLeftAmount);
 	}
 	else if (!mIsLeft && mLeftAmount > 0.0f)
 	{
 		mLeftAmount -= mLeftSpeed * deltaTime;
 		mLeftAmount = Max(mLeftAmount, 0.0f);
-		mCharacterAnimator.SetBlendWeight(4, mLeftAmount);			// Left
+		mCharacterAnimator.SetBlendWeight(1, mLeftAmount);			// Left
 		mCharacterAnimator.SetBlendWeight(2, 1.0f - mLeftAmount);	// Right
 
 		if (mLeftAmount <= 0.0f)
 		{
-			mCharacterAnimator.GetAnimator(4)->StopAnimation();
+			mLeftAmount = 0.0f;
+			mCharacterAnimator.GetAnimator(1)->StopAnimation();
 		}
+
+		mMovementSpeed = Lerp(-mMaxMovementSpeed, mMaxMovementSpeed, mLeftAmount);
+	}
+
+	//Movement
+	for (auto& renderObject : mCharacter)
+	{
+		renderObject.transform.position.x += mMovementSpeed * deltaTime;
 	}
 
 	mCharacterAnimator.Update(deltaTime);
@@ -301,5 +324,7 @@ void GameState::DebugUI()
 	ImGui::Checkbox("Is Left Facing", &isLeft);
 	ImGui::DragFloat("Left Amount", &mLeftAmount, 0.01f, 0.0f, 1.0f);
 	ImGui::DragFloat("Left Speed", &mLeftSpeed, 0.01f, 0.0f);
+	ImGui::DragFloat("Movement Speed", &mMovementSpeed, 0.01f, 0.0f);
+	ImGui::DragFloat("Max Movement Speed", &mMaxMovementSpeed, 0.01f, 0.0f);
 	ImGui::End();
 }

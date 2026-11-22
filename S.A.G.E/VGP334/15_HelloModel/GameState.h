@@ -51,4 +51,6 @@ private:
 	bool mIsLeft = false;
 	float mLeftAmount = 0.0f;
 	float mLeftSpeed = 1.0f;
+	float mMovementSpeed = 0.0f;
+	float mMaxMovementSpeed = 1.0f;
 };

@@ -45,6 +45,7 @@ void GameState::Initialize()
 	mStandardEffect.SetBumpWeight(0.25f);
 
 	mShadowEffect.Initialize();
+	mShadowEffect.SetSize(16.0f);
 	mShadowEffect.SetDirectionalLight(mDirectionalLight);
 
 	auto gs = GraphicsSystem::Get();

@@ -59,8 +59,7 @@ void GameState::Initialize()
 	{
 		auto anim = mCharacterAnimator.AddAnimator();
 		anim->Initialize(&mCharacterModel);
-		anim->PlayAnimation(i);
-		anim->SetIsLooping(true);
+		anim->PlayAnimation(i, true, true);
 	}
 
 	mCharacter = CreateRenderGroup(mCharacterModel, &mCharacterAnimator);
@@ -90,98 +89,96 @@ void GameState::Update(float deltaTime)
 
 	auto inputSystem = InputSystem::Get();
 
-	// Animation
-	//if (inputSystem->IsMousePressed(MouseButton::LBUTTON)) {
+	//// Animation
+	////if (inputSystem->IsMousePressed(MouseButton::LBUTTON)) {
 
-	//	for (int i = 1; i < mCharacterModel.animationSet.size() -1; ++i)
-	//	{
-	//		mCharacterAnimator.SetBlendWeight(i, 0.0f);
+	////	for (int i = 1; i < mCharacterModel.animationSet.size() -1; ++i)
+	////	{
+	////		mCharacterAnimator.SetBlendWeight(i, 0.0f);
+	////	}
+
+	////	mCharacterAnimator.SetBlendWeight(mCharacterModel.animationSet.size() - 1, 1.0f);
+	////}
+
+	////if (inputSystem->IsMouseUp(MouseButton::LBUTTON)) {
+	////	mCharacterAnimator.SetBlendWeight(mCharacterModel.animationSet.size() - 1, 0.0f);
+	////}
+
+	//if (inputSystem->IsKeyDown(KeyCode::UP)) {
+	//	mSpeedUp += deltaTime;
+	//}
+	//else {
+	//	mSpeedUp -= deltaTime;
+	//}
+	//mSpeedUp = Clamp(mSpeedUp, 0.0f, 1.0f);
+	//mCharacterAnimator.SetBlendWeight(1, mSpeedUp);
+
+	//if (inputSystem->IsKeyDown(KeyCode::DOWN)) {
+	//	mSpeedDown += deltaTime;
+	//}
+	//else {
+	//	mSpeedDown -= deltaTime;
+	//}
+	//mSpeedDown = Clamp(mSpeedDown, 0.0f, 1.0f);
+	//mCharacterAnimator.SetBlendWeight(3, mSpeedDown);
+
+	//if (inputSystem->IsKeyDown(KeyCode::RIGHT)) {
+	//	mSpeedRight += deltaTime;
+	//}
+	//else {
+	//	mSpeedRight -= deltaTime;
+	//}
+	//mSpeedRight = Clamp(mSpeedRight, 0.0f, 1.0f);
+	//mCharacterAnimator.SetBlendWeight(2, mSpeedRight);
+
+	//if (inputSystem->IsKeyDown(KeyCode::LEFT)) {
+	//	mSpeedLeft += deltaTime;
+	//}
+	//else {
+	//	mSpeedLeft -= deltaTime;
+	//}
+	//mSpeedLeft = Clamp(mSpeedLeft, 0.0f, 1.0f);
+	//mCharacterAnimator.SetBlendWeight(4, mSpeedLeft);
+
+	////if (mSpeedUp <= 0.0f && mSpeedDown <= 0.0f && mSpeedRight <= 0.0f && mSpeedLeft <= 0.0f)
+	////{
+	////	idleSpeed += deltaTime;
+
+	////	idleSpeed = Clamp(idleSpeed, 0.0f, 1.0f);
+	////	mCharacterAnimator.SetBlendWeight(0, idleSpeed);
+	////}
+	////else
+	////{
+	////	idleSpeed -= deltaTime;
+
+	////	idleSpeed = Clamp(idleSpeed, 0.0f, 1.0f);
+	////	mCharacterAnimator.SetBlendWeight(0, idleSpeed);
+	////}
+
+	////Movement
+	//for (auto& renderObject : mCharacter)
+	//{
+	//	if (inputSystem->IsKeyDown(KeyCode::UP)) {
+	//		renderObject.transform.position.z -= mSpeedUp * deltaTime;
 	//	}
-
-	//	mCharacterAnimator.SetBlendWeight(mCharacterModel.animationSet.size() - 1, 1.0f);
+	//	if (inputSystem->IsKeyDown(KeyCode::RIGHT)) {
+	//		renderObject.transform.position.x -= mSpeedRight * deltaTime;
+	//	}
+	//	if (inputSystem->IsKeyDown(KeyCode::DOWN)) {
+	//		renderObject.transform.position.z += mSpeedDown * deltaTime;
+	//	}
+	//	if (inputSystem->IsKeyDown(KeyCode::LEFT)) {
+	//		renderObject.transform.position.x += mSpeedLeft * deltaTime;
+	//	}
 	//}
 
-	//if (inputSystem->IsMouseUp(MouseButton::LBUTTON)) {
-	//	mCharacterAnimator.SetBlendWeight(mCharacterModel.animationSet.size() - 1, 0.0f);
-	//}
-
-	if (inputSystem->IsKeyDown(KeyCode::UP)) {
-		mSpeedUp += deltaTime;
-	}
-	else {
-		mSpeedUp -= deltaTime;
-	}
-	mSpeedUp = Clamp(mSpeedUp, 0.0f, 1.0f);
-	mCharacterAnimator.SetBlendWeight(1, mSpeedUp);
-
-	if (inputSystem->IsKeyDown(KeyCode::DOWN)) {
-		mSpeedDown += deltaTime;
-	}
-	else {
-		mSpeedDown -= deltaTime;
-	}
-	mSpeedDown = Clamp(mSpeedDown, 0.0f, 1.0f);
-	mCharacterAnimator.SetBlendWeight(3, mSpeedDown);
-
-	if (inputSystem->IsKeyDown(KeyCode::RIGHT)) {
-		mSpeedRight += deltaTime;
-	}
-	else {
-		mSpeedRight -= deltaTime;
-	}
-	mSpeedRight = Clamp(mSpeedRight, 0.0f, 1.0f);
-	mCharacterAnimator.SetBlendWeight(2, mSpeedRight);
-
-	if (inputSystem->IsKeyDown(KeyCode::LEFT)) {
-		mSpeedLeft += deltaTime;
-	}
-	else {
-		mSpeedLeft -= deltaTime;
-	}
-	mSpeedLeft = Clamp(mSpeedLeft, 0.0f, 1.0f);
-	mCharacterAnimator.SetBlendWeight(4, mSpeedLeft);
-
-	//if (mSpeedUp <= 0.0f && mSpeedDown <= 0.0f && mSpeedRight <= 0.0f && mSpeedLeft <= 0.0f)
-	//{
-	//	idleSpeed += deltaTime;
-
-	//	idleSpeed = Clamp(idleSpeed, 0.0f, 1.0f);
-	//	mCharacterAnimator.SetBlendWeight(0, idleSpeed);
-	//}
-	//else
-	//{
-	//	idleSpeed -= deltaTime;
-
-	//	idleSpeed = Clamp(idleSpeed, 0.0f, 1.0f);
-	//	mCharacterAnimator.SetBlendWeight(0, idleSpeed);
-	//}
-
-	//Movement
-	for (auto& renderObject : mCharacter)
-	{
-		if (inputSystem->IsKeyDown(KeyCode::UP)) {
-			renderObject.transform.position.z -= mSpeedUp * deltaTime;
-		}
-		if (inputSystem->IsKeyDown(KeyCode::RIGHT)) {
-			renderObject.transform.position.x -= mSpeedRight * deltaTime;
-		}
-		if (inputSystem->IsKeyDown(KeyCode::DOWN)) {
-			renderObject.transform.position.z += mSpeedDown * deltaTime;
-		}
-		if (inputSystem->IsKeyDown(KeyCode::LEFT)) {
-			renderObject.transform.position.x += mSpeedLeft * deltaTime;
-		}
-	}
-
+	mCharacterAnimator.SetBlendWeight(4, mLeftAmount);  // Left
+	mCharacterAnimator.SetBlendWeight(2, 1.0f - mLeftAmount); // Right
 	mCharacterAnimator.Update(deltaTime);
 }
 
 void GameState::Render()
 {
-	mShadowEffect.Begin();
-	mShadowEffect.Render(mCharacter);
-	mShadowEffect.End();
-
 	mStandardEffect.Begin();
 	mStandardEffect.Render(mGroundRenderObject);
 	if (mDrawSkeleton) {
@@ -193,6 +190,10 @@ void GameState::Render()
 		mStandardEffect.Render(mCharacter);
 	}
 	mStandardEffect.End();
+
+	mShadowEffect.Begin();
+	mShadowEffect.Render(mCharacter);
+	mShadowEffect.End();
 
 	//SimpleDraw::AddTransform(Math::Matrix4::Identity);
 	SimpleDraw::Render(mCamera);
@@ -240,5 +241,7 @@ void GameState::DebugUI()
 	mShadowEffect.DebugUI();
 	ImGui::Separator();
 	ImGui::Checkbox("Draw Skeleton", &mDrawSkeleton);
+	ImGui::Separator();
+	ImGui::DragFloat("Left Amount", &mLeftAmount, 0.01f, 0.0f, 1.0f);
 	ImGui::End();
 }

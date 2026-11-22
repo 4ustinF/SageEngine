@@ -170,22 +170,22 @@ void StandardEffect::Render(const RenderObject& renderObject, const CachedBoneTr
 		mBoneTransformBuffer.Update(boneTransformData);
 		settingsData.useSkinning = 1;
 	}
-	//else if (renderObject.animator) // Fallback
-	//{
-	//	BoneTransformData boneTransformData;
+	else if (renderObject.animator) // Fallback
+	{
+		BoneTransformData boneTransformData;
 
-	//	std::vector<Matrix4> boneTransforms;
-	//	AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [animator = renderObject.animator](const Bone* bone) {return animator->GetTransform(bone); });
-	//	AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
+		std::vector<Matrix4> boneTransforms;
+		AnimationUtil::ComputeBoneTransforms(*renderObject.skeleton, boneTransforms, [animator = renderObject.animator](const Bone* bone) {return animator->GetTransform(bone); });
+		AnimationUtil::ApplyBoneOffset(*renderObject.skeleton, boneTransforms);
 
-	//	const size_t boneCount = renderObject.skeleton->bones.size();
-	//	for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
-	//		boneTransformData.boneTransforms[i] = Transpose(boneTransforms[i]);
-	//	}
+		const size_t boneCount = renderObject.skeleton->bones.size();
+		for (size_t i = 0; i < boneCount && i < BoneTransformData::MaxBoneCount; ++i) {
+			boneTransformData.boneTransforms[i] = Transpose(boneTransforms[i]);
+		}
 
-	//	mBoneTransformBuffer.Update(boneTransformData);
-	//	settingsData.useSkinning = 1;
-	//}
+		mBoneTransformBuffer.Update(boneTransformData);
+		settingsData.useSkinning = 1;
+	}
 	//else if (renderObject.skeleton) // Fallback
 	//{
 	//	BoneTransformData boneTransformData;

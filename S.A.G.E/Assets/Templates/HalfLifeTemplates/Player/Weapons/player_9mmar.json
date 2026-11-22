@@ -10,6 +10,7 @@
       "Can Cast Shadows": false
     },
     "Animator Component": {
+      "Supports Blended Animations": true,
       "AnimSets": [
         "../../Assets/Models/HalfLife/Player/9mmar/Animsets/9mmar_deploy.animset",
         "../../Assets/Models/HalfLife/Player/9mmar/Animsets/9mmar_reload.animset",

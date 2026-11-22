@@ -72,6 +72,7 @@ namespace SAGE::Graphics
 	{
 	public:
 		void Update(float deltaTime);
+		void DeInitialize();
 
 		void SetBase(const Animator* base);
 		void SetBlendWeight(size_t index, float weight);
@@ -86,10 +87,16 @@ namespace SAGE::Graphics
 		size_t GetEntryCount() const { return mEntries.size(); }
 		Math::Matrix4 GetTransform(const Bone* bone) const override;
 
+		FOnAnimationEvent& GetOnAnimationEventDelegate() { return mOnAnimationEvent; }
+
 	private:
 		struct Entry { Animator animator; float weight = 0.0f; };
 
 		const Animator* mBase = nullptr;
 		std::vector<std::unique_ptr<Entry>> mEntries;
+
+		void OnAnimationEventCallback(size_t clipIndex, const std::string& eventName);
+		FOnAnimationEvent mOnAnimationEvent;
+		std::vector<Core::Delegate::FDelegateHandle> mOnAnimationEventHandles;
 	};
 }

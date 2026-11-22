@@ -105,7 +105,7 @@ void PlayerWeaponComponent::Initialize()
 	mCameraService = world.GetService<CameraService>();
 	mTransformComponent = owner.GetComponent<TransformComponent>();
 	mAnimatorComponent = owner.GetComponent<AnimatorComponent>();
-	mAnimator = &mAnimatorComponent->GetAnimator();
+	mAnimationBlender = &mAnimatorComponent->GetBlender();
 
 	mSoundEffectManager = SoundEffectManager::Get();
 	for (const std::string& soundFilePath : mShootSoundFilePaths)
@@ -113,7 +113,7 @@ void PlayerWeaponComponent::Initialize()
 		mShootSoundIDs.push_back(mSoundEffectManager->Load(soundFilePath.c_str()));
 	}
 
-	FOnAnimationEvent& onAnimationEvent= mAnimator->GetOnAnimationEventDelegate();
+	FOnAnimationEvent& onAnimationEvent = mAnimationBlender->GetOnAnimationEventDelegate();
 	mOnAnimationEventHandle = onAnimationEvent.AddRaw(this, &PlayerWeaponComponent::OnAnimationEventCallback);
 
 	for (auto& pair : mAudioEventsMap)
@@ -137,10 +137,10 @@ void PlayerWeaponComponent::Terminate()
 	mShootSoundIDs.clear();
 	mAudioEventsMap.clear();
 
-	if (mAnimator != nullptr)
+	if (mAnimationBlender != nullptr)
 	{
-		mAnimator->GetOnAnimationEventDelegate().Remove(mOnAnimationEventHandle);
-		mAnimator = nullptr;
+		mAnimationBlender->GetOnAnimationEventDelegate().Remove(mOnAnimationEventHandle);
+		mAnimationBlender = nullptr;
 	}
 
 	mAnimatorComponent = nullptr;
@@ -269,7 +269,7 @@ void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
 void PlayerWeaponComponent::StartDraw()
 {
 	mWeaponState = WeaponState::Drawing;
-	mAnimator->PlayAnimation(mDrawAnimIndex, false);
+	mAnimationBlender->PlayAnimation(mDrawAnimIndex, false);
 }
 
 void PlayerWeaponComponent::FinishDraw()
@@ -280,7 +280,9 @@ void PlayerWeaponComponent::FinishDraw()
 void PlayerWeaponComponent::Idle()
 {
 	mWeaponState = WeaponState::Idling;
-	mAnimator->PlayAnimation(mIdlingAnimIndex, true);
+	mAnimationBlender->PlayAnimation(mIdlingAnimIndex, true, true);
+	mAnimationBlender->SetBlendWeight(mIdlingAnimIndex, 1.0f);
+	// TODO: We should probably stop this anim now?
 }
 
 void PlayerWeaponComponent::StartShooting()
@@ -306,7 +308,10 @@ void PlayerWeaponComponent::StartShooting()
 	// Anim
 	const int shootingAnimIndexsSize = static_cast<int>(mShootingAnimIndexs.size());
 	const size_t shootingIndex = shootingAnimIndexsSize == 1 ? 0 : Random::UniformInt(0, shootingAnimIndexsSize - 1);
-	mAnimator->PlayAnimation(mShootingAnimIndexs[shootingIndex], false, true);
+	mAnimationBlender->PlayAnimation(mShootingAnimIndexs[shootingIndex], false, true);
+
+	for (size_t index : mShootingAnimIndexs) { mAnimationBlender->SetBlendWeight(index, 0.0f); } // TODO: This is a hack to reset shooting anim weights.
+	mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[shootingIndex], 1.0f);
 
 	// Audio
 	const int shootingSoundIndexsSize = static_cast<int>(mShootSoundIDs.size());
@@ -342,6 +347,12 @@ void PlayerWeaponComponent::StartShooting()
 
 void PlayerWeaponComponent::FinishShooting()
 {
+	// TODO: This is a hack to reset shooting anim weights.
+	for (size_t index : mShootingAnimIndexs)
+	{
+		mAnimationBlender->SetBlendWeight(index, 0.0f);
+	}
+
 	Idle();
 }
 
@@ -353,7 +364,8 @@ void PlayerWeaponComponent::StartReloading()
 	}
 
 	mWeaponState = WeaponState::Reloading;
-	mAnimator->PlayAnimation(mReloadAnimIndex, false);
+	mAnimationBlender->PlayAnimation(mReloadAnimIndex, false);
+	mAnimationBlender->SetBlendWeight(mReloadAnimIndex, 1.0f);
 }
 
 void PlayerWeaponComponent::FinishReloading()
@@ -370,6 +382,7 @@ void PlayerWeaponComponent::FinishReloading()
 		mCurrentAmmoReserve = 0;
 	}
 
+	mAnimationBlender->SetBlendWeight(mReloadAnimIndex, 0.0f);
 	Idle();
 }
 
@@ -379,17 +392,21 @@ void PlayerWeaponComponent::StartHolstering()
 
 	if (mHolsteringAnimIndex >= 0) 
 	{
-		mAnimator->PlayAnimation(mHolsteringAnimIndex, false);
+		mAnimationBlender->PlayAnimation(mHolsteringAnimIndex, false);
+		mAnimationBlender->SetBlendWeight(mHolsteringAnimIndex, 1.0f);
 	}
 	else // Does not have a holstering anim.
 	{
-		mAnimator->PlayAnimationInReverse(mDrawAnimIndex, false);
+		mAnimationBlender->PlayAnimationInReverse(mDrawAnimIndex, false);
+		mAnimationBlender->SetBlendWeight(mDrawAnimIndex, 1.0f);
 	}
 }
 
 void PlayerWeaponComponent::FinishHolstering()
 {
 	mWeaponState = WeaponState::Holstered;
+	mAnimationBlender->SetBlendWeight(mHolsteringAnimIndex, 0.0f);
+	mAnimationBlender->SetBlendWeight(mDrawAnimIndex, 0.0f);
 	GetOwner().SetActive(false);
 }
 
@@ -414,7 +431,7 @@ void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 
 void PlayerWeaponComponent::OnAnimationEventCallback(size_t clipIndex, const std::string& eventName)
 {
-	const std::string clipName = mAnimator->GetClipNameByIndex(clipIndex);
+	const std::string clipName = mAnimationBlender->GetAnimator(0)->GetClipNameByIndex(clipIndex); // Weird but works. Figure a better way?
 	if (const auto it = mAudioEventsMap.find(clipName); it != mAudioEventsMap.end())
 	{
 		for (const PlayerWeaponAudioEvent& audioEvent : it->second)

@@ -12,6 +12,15 @@ MEMORY_POOL_DEFINE(AnimatorComponent, 500);
 
 void AnimatorComponent::LoadComponentFromTemplate(const rj::Value& value)
 {
+	if (value.HasMember("AnimSets"))
+	{
+		const auto& animSets = value["AnimSets"].GetArray();
+		for (auto& animset : animSets) 
+		{
+			AddAnimation(animset.GetString());
+		}
+	}
+
 	if (value.HasMember("Supports Blended Animations"))
 	{
 		mSupportsBlendedAnimations = value["Supports Blended Animations"].GetBool();
@@ -61,14 +70,14 @@ void AnimatorComponent::DebugUI()
 
 			if (ImGui::Button("Play", playButtonSize))
 			{
-				mAnimator.PlayAnimation(i, true);
+				mAnimator.PlayAnimation(i, true); // TODO:
 			}
 
 			ImGui::SameLine();
 
 			if (ImGui::Button("One Shot", oneShotButtonSize))
 			{
-				mAnimator.PlayAnimation(i, false);
+				mAnimator.PlayAnimation(i, false); // TODO:
 			}
 
 			ImGui::PopID();
@@ -79,8 +88,6 @@ void AnimatorComponent::DebugUI()
 void AnimatorComponent::OnEnable()
 {
 	LoadAnimatorComponent();
-	mAnimator.PlayAnimation(mAnimator.GetClipIndex(), mAnimator.GetIsLooping());
-
 	if (mSupportsBlendedAnimations)
 	{
 		const size_t entryCount = mBlender.GetEntryCount();
@@ -94,7 +101,15 @@ void AnimatorComponent::OnEnable()
 				mOnAnimationFinishedHandles.push_back(std::move(onAnimationFinishedHandle));
 			}
 		}
+
+		Animator* animator = mBlender.GetAnimator(0);
+		animator->PlayAnimation(animator->GetClipIndex(), animator->GetIsLooping());
 	}
+	else
+	{
+		mAnimator.PlayAnimation(mAnimator.GetClipIndex(), mAnimator.GetIsLooping());
+	}
+
 }
 
 void AnimatorComponent::OnDisable()
@@ -111,6 +126,7 @@ void AnimatorComponent::OnDisable()
 		}
 
 		mOnAnimationFinishedHandles.clear();
+		mBlender.DeInitialize();
 	}
 }
 
@@ -139,11 +155,11 @@ void AnimatorComponent::AddEvent(const std::string& clipName, float tick, std::s
 	events.push_back({ tick, std::move(eventName) });
 }
 
-const IAnimator& AnimatorComponent::GetActiveAnimator() const
+const IAnimator* AnimatorComponent::GetActiveAnimator() const
 {
 	return mSupportsBlendedAnimations ?
-		static_cast<const IAnimator&>(mBlender) :
-		static_cast<const IAnimator&>(mAnimator);
+		static_cast<const IAnimator*>(&mBlender) :
+		static_cast<const IAnimator*>(&mAnimator);
 }
 
 FOnAnimationFinished& AnimatorComponent::GetOnAnimationFinishedDelegate() 
@@ -192,7 +208,6 @@ std::string AnimatorComponent::GetAnimationNameFromFilePath(const std::string& p
 void AnimatorComponent::LoadAnimatorComponent()
 {
 	Model& model = mModelComponent->GetModel();
-
 	LoadAnimationSet(model);
 	mAnimator.Initialize(&model);
 
@@ -200,14 +215,13 @@ void AnimatorComponent::LoadAnimatorComponent()
 	{
 		if (mBlender.GetEntryCount() == 0) // No need to reinit and create entrys.
 		{
-			mBlender.SetBase(&mAnimator);
-
 			const size_t animationCount = model.animationSet.size();
 			for (size_t i = 0; i < animationCount; ++i)
 			{
 				Animator* animator = mBlender.AddAnimator();
-				animator->Initialize(&mModelComponent->GetModel()); // call this after the model is loaded/enabled
+				animator->Initialize(&model); // call this after the model is loaded/enabled
 			}
+			mBlender.SetBase(mBlender.GetAnimator(0));
 		}
 	}
 }

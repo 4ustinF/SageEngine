@@ -79,7 +79,8 @@ private:
 	SAGE::CameraService* mCameraService = nullptr;
 	SAGE::TransformComponent* mTransformComponent = nullptr;
 	SAGE::AnimatorComponent* mAnimatorComponent = nullptr;
-	SAGE::Graphics::Animator* mAnimator = nullptr;
+	//SAGE::Graphics::Animator* mAnimator = nullptr;
+	SAGE::Graphics::AnimationBlender* mAnimationBlender = nullptr;
 	BulletHolesPoolComponent* mBulletPool = nullptr;
 
 	WeaponState mWeaponState = WeaponState::Holstered;

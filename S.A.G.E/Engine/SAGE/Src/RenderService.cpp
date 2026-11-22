@@ -151,14 +151,9 @@ void RenderService::UpdateRenderObjectsTransform()
 {
 	for (auto& entry : mRenderEntries)
 	{
-		// const IAnimator* animator = entry.animatorComponent ? entry.animatorComponent->GetActiveAnimator() : nullptr;
 		for (auto& renderObject : entry.renderGroup)
 		{
 			renderObject.transform = entry.transformComponent->GetTransform();
-			//if (animator)
-			//{
-			//	renderObject.animator = animator;
-			//}
 		}
 	}
 
@@ -609,10 +604,8 @@ RenderGroup* RenderService::Register(const ModelComponent* modelComponent, bool 
 	const IAnimator* animator = nullptr;
 	if (entry.animatorComponent) {
 		//animator = &entry.animatorComponent->GetAnimator();
-		animator = &entry.animatorComponent->GetActiveAnimator();
+		animator = entry.animatorComponent->GetActiveAnimator();
 	}
-
-	// TODO: Blend animator instead?
 
 	entry.renderGroup = CreateRenderGroup(modelComponent->GetModel(), animator);
 	return &entry.renderGroup;

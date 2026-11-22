@@ -97,16 +97,8 @@ void GameObjectFactory::TryMakeComponent(const char* componentName, const rapidj
 
 	if (strcmp(componentName, "Animator Component") == 0)
 	{
-		auto animator = gameObject.AddComponent<AnimatorComponent>();
-
-		if (value.HasMember("AnimSets"))
-		{
-			const auto& animSets = value["AnimSets"].GetArray();
-
-			for (auto& animset : animSets) {
-				animator->AddAnimation(animset.GetString());
-			}
-		}
+		AnimatorComponent* animatorComponent = gameObject.AddComponent<AnimatorComponent>();
+		animatorComponent->LoadComponentFromTemplate(value);
 	}
 	else if (strcmp(componentName, "Box Collider Component") == 0)
 	{

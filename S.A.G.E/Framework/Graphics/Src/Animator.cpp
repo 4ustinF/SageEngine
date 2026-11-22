@@ -98,7 +98,7 @@ bool Animator::PlayAnimationInReverse(const std::string& clipName, bool looping)
 
 void Animator::Update(float deltaTime)
 {
-	if (!mIsAnimating)
+	if (!mIsAnimating) // Also an init check?
 	{
 		return;
 	}
@@ -283,7 +283,27 @@ float AnimationBlender::GetBlendWeight(size_t index)
 
 Animator* AnimationBlender::AddAnimator()
 {
-	return &mEntries.emplace_back(std::make_unique<Entry>())->animator;
+	Animator* animator = &mEntries.emplace_back(std::make_unique<Entry>())->animator;
+
+	FOnAnimationEvent& onAnimationEvent = animator->GetOnAnimationEventDelegate();
+	Core::Delegate::FDelegateHandle onAnimationEventHandle = onAnimationEvent.AddRaw(this, &AnimationBlender::OnAnimationEventCallback);
+	mOnAnimationEventHandles.push_back(std::move(onAnimationEventHandle));
+
+	return animator;
+}
+
+void AnimationBlender::DeInitialize()
+{
+	const size_t entryCount = mEntries.size();
+	for (size_t i = 0; i < entryCount; ++i)
+	{
+		if (Animator* animator = GetAnimator(i))
+		{
+			animator->GetOnAnimationEventDelegate().Remove(mOnAnimationEventHandles[i]);
+		}
+	}
+
+	mOnAnimationEventHandles.clear();
 }
 
 bool AnimationBlender::PlayAnimation(size_t clipIndex, bool looping, bool force)
@@ -298,22 +318,27 @@ bool AnimationBlender::PlayAnimationInReverse(size_t clipIndex, bool looping)
 
 Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
 {
-	Matrix4 transform = mBase->GetTransform(bone);
-	for (const auto& layer : mEntries)
+	Matrix4 transform = mBase->GetTransform(bone); // TODO: Is this assuming that base is just weighted 1 always?
+	for (const auto& entry : mEntries)
 	{
-		if (!layer->animator.GetIsAnimating())
+		if (!entry->animator.GetIsAnimating())
 		{
 			continue;
 		}
 
-		const float w = layer->weight;
+		const float w = entry->weight;
 		if (w <= 0.0f)
 		{
 			continue;
 		}
 
-		transform = Lerp(transform, layer->animator.GetTransform(bone), w);
+		transform = Lerp(transform, entry->animator.GetTransform(bone), w);
 	}
 
 	return transform;
+}
+
+void AnimationBlender::OnAnimationEventCallback(size_t clipIndex, const std::string& eventName)
+{
+	mOnAnimationEvent.Broadcast(clipIndex, eventName);
 }

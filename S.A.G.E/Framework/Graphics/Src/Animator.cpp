@@ -295,15 +295,19 @@ Animator* AnimationBlender::AddAnimator()
 void AnimationBlender::DeInitialize()
 {
 	const size_t entryCount = mEntries.size();
-	for (size_t i = 0; i < entryCount; ++i)
+	if (mOnAnimationEventHandles.size() == entryCount)
 	{
-		if (Animator* animator = GetAnimator(i))
+		for (size_t i = 0; i < entryCount; ++i)
 		{
-			animator->GetOnAnimationEventDelegate().Remove(mOnAnimationEventHandles[i]);
+			if (Animator* animator = GetAnimator(i))
+			{
+				animator->GetOnAnimationEventDelegate().Remove(mOnAnimationEventHandles[i]);
+			}
 		}
 	}
 
 	mOnAnimationEventHandles.clear();
+	mEntries.clear();
 }
 
 bool AnimationBlender::PlayAnimation(size_t clipIndex, bool looping, bool force)

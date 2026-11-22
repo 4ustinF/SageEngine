@@ -280,8 +280,8 @@ void PlayerWeaponComponent::FinishDraw()
 void PlayerWeaponComponent::Idle()
 {
 	mWeaponState = WeaponState::Idling;
-	mAnimationBlender->PlayAnimation(mIdlingAnimIndex, true, true);
 	mAnimationBlender->SetBlendWeight(mIdlingAnimIndex, 1.0f);
+	mAnimationBlender->PlayAnimation(mIdlingAnimIndex, true, true);
 	// TODO: We should probably stop this anim now?
 }
 

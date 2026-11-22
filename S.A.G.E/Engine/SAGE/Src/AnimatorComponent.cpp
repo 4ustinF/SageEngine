@@ -216,16 +216,13 @@ void AnimatorComponent::LoadAnimatorComponent()
 
 	if (mSupportsBlendedAnimations)
 	{
-		if (mBlender.GetEntryCount() == 0) // No need to reinit and create entrys.
+		const size_t animationCount = model.animationSet.size();
+		for (size_t i = 0; i < animationCount; ++i)
 		{
-			const size_t animationCount = model.animationSet.size();
-			for (size_t i = 0; i < animationCount; ++i)
-			{
-				Animator* animator = mBlender.AddAnimator();
-				animator->Initialize(&model); // call this after the model is loaded/enabled
-			}
-			mBlender.SetBase(mBlender.GetAnimator(0));
+			Animator* animator = mBlender.AddAnimator();
+			animator->Initialize(&model); // call this after the model is loaded/enabled
 		}
+		mBlender.SetBase(mBlender.GetAnimator(0));
 	}
 }
 

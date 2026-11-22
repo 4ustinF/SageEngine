@@ -259,9 +259,16 @@ void Animator::FireEvents(const AnimationClip& clip, float fromTick, float toTic
 
 // -------------------- AnimationBlender --------------------
 
-Animator* AnimationBlender::AddAnimator()
+void AnimationBlender::Update(float deltaTime)
 {
-	return &mEntries.emplace_back(std::make_unique<Entry>())->animator;
+	for (auto& entry : mEntries) {
+		entry->animator.Update(deltaTime);
+	}
+}
+
+void AnimationBlender::SetBase(const Animator* base) 
+{ 
+	mBase = base; 
 }
 
 void AnimationBlender::SetBlendWeight(size_t index, float weight)
@@ -269,11 +276,9 @@ void AnimationBlender::SetBlendWeight(size_t index, float weight)
 	mEntries[index]->weight = weight;
 }
 
-void AnimationBlender::Update(float deltaTime)
+Animator* AnimationBlender::AddAnimator()
 {
-	for (auto& entry : mEntries) {
-		entry->animator.Update(deltaTime);
-	}
+	return &mEntries.emplace_back(std::make_unique<Entry>())->animator;
 }
 
 Matrix4 AnimationBlender::GetTransform(const Bone* bone) const

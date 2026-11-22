@@ -71,13 +71,15 @@ namespace SAGE::Graphics
 	class AnimationBlender final : public IAnimator
 	{
 	public:
-		void SetBase(const Animator* base) { mBase = base; }
-		Animator* AddAnimator();
-		Animator* GetAnimator(size_t index) { return &mEntries[index]->animator; }
-		size_t GetLayerCount() const { return mEntries.size(); }
+		void Update(float deltaTime);
+
+		void SetBase(const Animator* base);
 		void SetBlendWeight(size_t index, float weight);
 
-		void Update(float deltaTime);
+		Animator* AddAnimator();
+		Animator* GetAnimator(size_t index) { return &mEntries[index]->animator; }
+		
+		size_t GetEntryCount() const { return mEntries.size(); }
 		Math::Matrix4 GetTransform(const Bone* bone) const override;
 
 	private:

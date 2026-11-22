@@ -6,8 +6,26 @@
 
 using namespace SAGE;
 using namespace SAGE::Graphics;
+namespace rj = rapidjson;
 
 MEMORY_POOL_DEFINE(AnimatorComponent, 500);
+
+void AnimatorComponent::LoadComponentFromTemplate(const rj::Value& value)
+{
+	if (value.HasMember("Supports Blended Animations"))
+	{
+		mSupportsBlendedAnimations = value["Supports Blended Animations"].GetBool();
+	}
+}
+
+void AnimatorComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
+{
+	// --- Supports Blended Animation ---
+	if (mSupportsBlendedAnimations)
+	{
+		SaveBoolToTemplate(compObj, allocator, "Supports Blended Animations", mSupportsBlendedAnimations);
+	}
+}
 
 void AnimatorComponent::Initialize()
 {
@@ -62,6 +80,38 @@ void AnimatorComponent::OnEnable()
 {
 	LoadAnimatorComponent();
 	mAnimator.PlayAnimation(mAnimator.GetClipIndex(), mAnimator.GetIsLooping());
+
+	if (mSupportsBlendedAnimations)
+	{
+		const size_t entryCount = mBlender.GetEntryCount();
+		mOnAnimationFinishedHandles.reserve(entryCount);
+
+		for (size_t i = 0; i < entryCount; ++i)
+		{
+			if (Animator* animator = mBlender.GetAnimator(i))
+			{
+				Core::Delegate::FDelegateHandle onAnimationFinishedHandle = animator->GetOnAnimationFinishedDelegate().AddRaw(this, &AnimatorComponent::OnBlendedAnimationFinishedCallback);
+				mOnAnimationFinishedHandles.push_back(std::move(onAnimationFinishedHandle));
+			}
+		}
+	}
+}
+
+void AnimatorComponent::OnDisable()
+{
+	if (mSupportsBlendedAnimations)
+	{
+		const size_t entryCount = mBlender.GetEntryCount();
+		for (size_t i = 0; i < entryCount; ++i)
+		{
+			if (Animator* animator = mBlender.GetAnimator(i))
+			{
+				animator->GetOnAnimationFinishedDelegate().Remove(mOnAnimationFinishedHandles[i]);
+			}
+		}
+
+		mOnAnimationFinishedHandles.clear();
+	}
 }
 
 void AnimatorComponent::AddAnimation(std::string animationFileName)
@@ -87,6 +137,23 @@ void AnimatorComponent::AddEvent(const std::string& clipName, float tick, std::s
 	}
 
 	events.push_back({ tick, std::move(eventName) });
+}
+
+const IAnimator& AnimatorComponent::GetActiveAnimator() const
+{
+	return mSupportsBlendedAnimations ?
+		static_cast<const IAnimator&>(mBlender) :
+		static_cast<const IAnimator&>(mAnimator);
+}
+
+FOnAnimationFinished& AnimatorComponent::GetOnAnimationFinishedDelegate() 
+{ 
+	if (mSupportsBlendedAnimations)
+	{
+		return mOnBlendedAnimationFinished;
+	}
+
+	return mAnimator.GetOnAnimationFinishedDelegate();
 }
 
 std::string AnimatorComponent::GetAnimationName(size_t index)
@@ -129,9 +196,19 @@ void AnimatorComponent::LoadAnimatorComponent()
 	LoadAnimationSet(model);
 	mAnimator.Initialize(&model);
 
-	for (size_t i = 0; i < mBlender.GetLayerCount(); ++i)
+	if (mSupportsBlendedAnimations)
 	{
-		mBlender.GetAnimator(i)->Initialize(&model);
+		if (mBlender.GetEntryCount() == 0) // No need to reinit and create entrys.
+		{
+			mBlender.SetBase(&mAnimator);
+
+			const size_t animationCount = model.animationSet.size();
+			for (size_t i = 0; i < animationCount; ++i)
+			{
+				Animator* animator = mBlender.AddAnimator();
+				animator->Initialize(&mModelComponent->GetModel()); // call this after the model is loaded/enabled
+			}
+		}
 	}
 }
 
@@ -152,12 +229,7 @@ void AnimatorComponent::LoadAnimationSet(Model& model)
 	mHasLoadedAnimationSet = true;
 }
 
-
-
-Animator* AnimatorComponent::AddBlendLayer()
+void AnimatorComponent::OnBlendedAnimationFinishedCallback(size_t clipIndex)
 {
-	mBlender.SetBase(&mAnimator);
-	Animator* animator = mBlender.AddAnimator();
-	animator->Initialize(&mModelComponent->GetModel()); // call this after the model is loaded/enabled
-	return animator;
+	mOnBlendedAnimationFinished.Broadcast(clipIndex);
 }

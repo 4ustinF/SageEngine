@@ -92,13 +92,20 @@ private:
 	bool mIsSemiAutomatic = false;
 
 	// Fire rate
-	void ResetCanShootTimer();
+	void ResetCanShootTimer(); // TODO: We could make this an event on the animation? Call reset shot when we reach a threshold on the animation instead?
 	bool mCanShoot = true;
 	int mRateOfFire = 60; // In RPM
 	float mCanShootTimer = 1.0f;
 	float mRateOfFireInSeconds = 1.0f;
 
-	// Animations
+	//bool mIsCrossFadingShooting = false;
+	size_t mCurrentShootIndex = -1;
+	//size_t mNextShootIndex = -1;
+	//float mIsCrossFadingElapsedTime = 0.0f;
+	//float mIsCrossFadingMinCrossFadeTime = 0.0f; // Min between remaining anim time and mIsCrossFadingMaxCrossFadeTime.
+	//float mIsCrossFadingMaxCrossFadeTime = 0.25f;
+
+	// Animations // TODO: Why is there a delay at the start of idle anim?
 	const size_t mIdlingAnimIndex = 0; // TODO: maybe turn this into a non looping anim and swap between idle anims?
 	const size_t mDrawAnimIndex = 1;
 	const size_t mReloadAnimIndex = 2;

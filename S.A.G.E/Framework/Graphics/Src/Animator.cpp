@@ -206,6 +206,12 @@ float Animator::GetDurationSeconds() const
 	return clip.ticksPerSecond > 0.0f ? clip.tickDuration / clip.ticksPerSecond : 0.0f;
 }
 
+float Animator::GetRemainingClipTime() const
+{
+	const AnimationClip& clip = mModel->animationSet[mClipIndex];
+	return Max(GetDurationSeconds() - GetElapsedSeconds(), 0.0f);
+}
+
 const std::string Animator::GetClipNameByIndex(size_t index) const
 {
 	if (index < 0 || !mModel || index >= mModel->animationSet.size())
@@ -278,6 +284,11 @@ void AnimationBlender::SetBlendWeight(size_t index, float weight)
 
 float AnimationBlender::GetBlendWeight(size_t index)
 {
+	if (index >= mEntries.size())
+	{
+		return 0.0f;
+	}
+
 	return mEntries[index]->weight;
 }
 

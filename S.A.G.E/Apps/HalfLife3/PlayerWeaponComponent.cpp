@@ -172,6 +172,27 @@ void PlayerWeaponComponent::OnQueueUpdate(float deltaTime)
 			EnqueueUpdate();
 		}
 	}
+
+	//if (mIsCrossFadingShooting)
+	//{
+	//	mIsCrossFadingElapsedTime += deltaTime;
+	//	mIsCrossFadingElapsedTime = Min(mIsCrossFadingElapsedTime, mIsCrossFadingMinCrossFadeTime);
+
+	//	const float amount = mIsCrossFadingElapsedTime / mIsCrossFadingMinCrossFadeTime;
+	//	mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[mCurrentShootIndex], 1.0f - amount);
+	//	mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[mNextShootIndex], amount);
+
+	//	if (amount >= 1.0f)
+	//	{
+	//		mCurrentShootIndex = mNextShootIndex;
+	//		mIsCrossFadingElapsedTime = 0.0f;
+	//		mIsCrossFadingShooting = false;
+	//	}
+	//	else
+	//	{
+	//		EnqueueUpdate();
+	//	}
+	//}
 }
 
 void PlayerWeaponComponent::DebugUI()
@@ -269,11 +290,13 @@ void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
 void PlayerWeaponComponent::StartDraw()
 {
 	mWeaponState = WeaponState::Drawing;
+	mAnimationBlender->SetBlendWeight(mDrawAnimIndex, 1.0f);
 	mAnimationBlender->PlayAnimation(mDrawAnimIndex, false);
 }
 
 void PlayerWeaponComponent::FinishDraw()
 {
+	mAnimationBlender->SetBlendWeight(mDrawAnimIndex, 0.0f);
 	Idle();
 }
 
@@ -299,6 +322,7 @@ void PlayerWeaponComponent::StartShooting()
 	}
 
 	// State
+	//const bool IsInterruptedShooting = mWeaponState == WeaponState::Shooting;
 	mWeaponState = WeaponState::Shooting;
 
 	// Start Cooldown
@@ -306,12 +330,30 @@ void PlayerWeaponComponent::StartShooting()
 	EnqueueUpdate();
 
 	// Anim
-	const int shootingAnimIndexsSize = static_cast<int>(mShootingAnimIndexs.size());
-	const size_t shootingIndex = shootingAnimIndexsSize == 1 ? 0 : Random::UniformInt(0, shootingAnimIndexsSize - 1);
-	mAnimationBlender->PlayAnimation(mShootingAnimIndexs[shootingIndex], false, true);
+	//if (IsInterruptedShooting)
+	//{
+	//	const int shootingAnimIndexsSize = static_cast<int>(mShootingAnimIndexs.size());
+	//	do {
+	//		mNextShootIndex = shootingAnimIndexsSize == 1 ? 0 : Random::UniformInt(0, shootingAnimIndexsSize - 1);
+	//	} while (mCurrentShootIndex == mNextShootIndex);
 
-	for (size_t index : mShootingAnimIndexs) { mAnimationBlender->SetBlendWeight(index, 0.0f); } // TODO: This is a hack to reset shooting anim weights.
-	mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[shootingIndex], 1.0f);
+	//	const float remainingAnimTime = mAnimationBlender->GetAnimator(mShootingAnimIndexs[mCurrentShootIndex])->GetRemainingClipTime();
+	//	mIsCrossFadingMinCrossFadeTime = Min(mIsCrossFadingMaxCrossFadeTime, remainingAnimTime);
+
+	//	for (size_t index : mShootingAnimIndexs) { mAnimationBlender->SetBlendWeight(index, 0.0f); } // TODO: This is a hack to reset shooting anim weights.
+	//	mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[mNextShootIndex], 0.0f);
+	//	mAnimationBlender->PlayAnimation(mShootingAnimIndexs[mNextShootIndex], false, true);
+	//	mIsCrossFadingShooting = true;
+	//}
+	//else
+	//{
+		const int shootingAnimIndexsSize = static_cast<int>(mShootingAnimIndexs.size());
+		mCurrentShootIndex = shootingAnimIndexsSize == 1 ? 0 : Random::UniformInt(0, shootingAnimIndexsSize - 1);
+
+		for (size_t index : mShootingAnimIndexs) { mAnimationBlender->SetBlendWeight(index, 0.0f); } // TODO: This is a hack to reset shooting anim weights.
+		mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[mCurrentShootIndex], 1.0f);
+		mAnimationBlender->PlayAnimation(mShootingAnimIndexs[mCurrentShootIndex], false, true);
+	//}
 
 	// Audio
 	const int shootingSoundIndexsSize = static_cast<int>(mShootSoundIDs.size());
@@ -348,11 +390,7 @@ void PlayerWeaponComponent::StartShooting()
 void PlayerWeaponComponent::FinishShooting()
 {
 	// TODO: This is a hack to reset shooting anim weights.
-	for (size_t index : mShootingAnimIndexs)
-	{
-		mAnimationBlender->SetBlendWeight(index, 0.0f);
-	}
-
+	for (size_t index : mShootingAnimIndexs) { mAnimationBlender->SetBlendWeight(index, 0.0f); }
 	Idle();
 }
 
@@ -364,8 +402,8 @@ void PlayerWeaponComponent::StartReloading()
 	}
 
 	mWeaponState = WeaponState::Reloading;
-	mAnimationBlender->PlayAnimation(mReloadAnimIndex, false);
 	mAnimationBlender->SetBlendWeight(mReloadAnimIndex, 1.0f);
+	mAnimationBlender->PlayAnimation(mReloadAnimIndex, false);
 }
 
 void PlayerWeaponComponent::FinishReloading()
@@ -392,13 +430,13 @@ void PlayerWeaponComponent::StartHolstering()
 
 	if (mHolsteringAnimIndex >= 0) 
 	{
-		mAnimationBlender->PlayAnimation(mHolsteringAnimIndex, false);
 		mAnimationBlender->SetBlendWeight(mHolsteringAnimIndex, 1.0f);
+		mAnimationBlender->PlayAnimation(mHolsteringAnimIndex, false);
 	}
 	else // Does not have a holstering anim.
 	{
-		mAnimationBlender->PlayAnimationInReverse(mDrawAnimIndex, false);
 		mAnimationBlender->SetBlendWeight(mDrawAnimIndex, 1.0f);
+		mAnimationBlender->PlayAnimationInReverse(mDrawAnimIndex, false);
 	}
 }
 

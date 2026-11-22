@@ -30,7 +30,6 @@ namespace SAGE
 		const Graphics::Animator& GetAnimator() const { return mAnimator; }
 		Graphics::AnimationBlender& GetBlender() { return mBlender; }
 		const Graphics::AnimationBlender& GetBlender() const { return mBlender; }
-		//const Graphics::IAnimator& GetActiveAnimator() const;
 		const Graphics::IAnimator* GetActiveAnimator() const;
 
 		Graphics::FOnAnimationFinished& GetOnAnimationFinishedDelegate();

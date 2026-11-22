@@ -42,6 +42,7 @@ namespace SAGE::Graphics
 		float GetNormalizedTime() const;   // 0..1
 		float GetElapsedSeconds() const;   // seconds into the clip
 		float GetDurationSeconds() const;
+		float GetRemainingClipTime() const;
 
 		const std::string GetClipNameByIndex(size_t index) const;
 		size_t GetClipIndexByName(const std::string& name) const;

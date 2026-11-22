@@ -65,19 +65,44 @@ void AnimatorComponent::DebugUI()
 			ImGui::PushID(animationName.c_str());
 			ImGui::Text("%s", animationName.c_str());
 
+			if (mSupportsBlendedAnimations)
+			{
+				ImGui::SameLine();
+
+				// TODO: We should check if animating and if not change the color.
+				const std::string weightStr = std::to_string(mBlender.GetBlendWeight(i));
+				ImGui::Text("%s", weightStr.c_str());
+			}
+
 			const float x = ImGui::GetContentRegionAvail().x - playButtonSize.x - oneShotButtonSize.x - spacing;
 			ImGui::SameLine(ImGui::GetCursorPosX() + x);
 
 			if (ImGui::Button("Play", playButtonSize))
 			{
-				mAnimator.PlayAnimation(i, true); // TODO:
+				if (mSupportsBlendedAnimations)
+				{
+					mBlender.PlayAnimation(i, true, true);
+					mBlender.SetBlendWeight(i, 1.0f);
+				}
+				else
+				{
+					mAnimator.PlayAnimation(i, true);
+				}
 			}
 
 			ImGui::SameLine();
 
 			if (ImGui::Button("One Shot", oneShotButtonSize))
 			{
-				mAnimator.PlayAnimation(i, false); // TODO:
+				if (mSupportsBlendedAnimations)
+				{
+					mBlender.PlayAnimation(i, false, true);
+					mBlender.SetBlendWeight(i, 1.0f);
+				}
+				else
+				{
+					mAnimator.PlayAnimation(i, false);
+				}
 			}
 
 			ImGui::PopID();

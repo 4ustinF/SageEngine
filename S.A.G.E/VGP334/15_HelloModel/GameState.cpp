@@ -58,8 +58,17 @@ void GameState::Initialize()
 	for (int i = 0; i < mCharacterModel.animationSet.size(); ++i)
 	{
 		auto anim = mCharacterAnimator.AddAnimator();
+		if (i == 0)
+		{
+			mCharacterAnimator.SetBase(anim);
+		}
+
 		anim->Initialize(&mCharacterModel);
-		anim->PlayAnimation(i, true, true);
+
+		if (i == 0)
+		{
+			anim->PlayAnimation(i, true, true);
+		}
 	}
 
 	mCharacter = CreateRenderGroup(mCharacterModel, &mCharacterAnimator);
@@ -172,8 +181,54 @@ void GameState::Update(float deltaTime)
 	//	}
 	//}
 
-	mCharacterAnimator.SetBlendWeight(4, mLeftAmount);  // Left
-	mCharacterAnimator.SetBlendWeight(2, 1.0f - mLeftAmount); // Right
+	if (inputSystem->IsKeyPressed(KeyCode::LEFT)) 
+	{
+		mIsLeft = true;
+		if (Animator* animator = mCharacterAnimator.GetAnimator(4))
+		{
+			if (!animator->GetIsAnimating())
+			{
+				animator->PlayAnimation(4, true, true);
+			}
+		}
+	}
+	else if (inputSystem->IsKeyPressed(KeyCode::RIGHT))
+	{
+		mIsLeft = false;
+		if (Animator* animator = mCharacterAnimator.GetAnimator(2))
+		{
+			if (!animator->GetIsAnimating())
+			{
+				animator->PlayAnimation(2, true, true);
+			}
+		}
+	}
+
+	if (mIsLeft && mLeftAmount < 1.0f)
+	{
+		mLeftAmount += mLeftSpeed * deltaTime;
+		mLeftAmount = Min(mLeftAmount, 1.0f);
+		mCharacterAnimator.SetBlendWeight(4, mLeftAmount);			// Left
+		mCharacterAnimator.SetBlendWeight(2, 1.0f - mLeftAmount);	// Right
+
+		if (mLeftAmount >= 1.0f)
+		{
+			mCharacterAnimator.GetAnimator(2)->StopAnimation();
+		}
+	}
+	else if (!mIsLeft && mLeftAmount > 0.0f)
+	{
+		mLeftAmount -= mLeftSpeed * deltaTime;
+		mLeftAmount = Max(mLeftAmount, 0.0f);
+		mCharacterAnimator.SetBlendWeight(4, mLeftAmount);			// Left
+		mCharacterAnimator.SetBlendWeight(2, 1.0f - mLeftAmount);	// Right
+
+		if (mLeftAmount <= 0.0f)
+		{
+			mCharacterAnimator.GetAnimator(4)->StopAnimation();
+		}
+	}
+
 	mCharacterAnimator.Update(deltaTime);
 }
 
@@ -242,6 +297,9 @@ void GameState::DebugUI()
 	ImGui::Separator();
 	ImGui::Checkbox("Draw Skeleton", &mDrawSkeleton);
 	ImGui::Separator();
+	bool isLeft = mIsLeft;
+	ImGui::Checkbox("Is Left Facing", &isLeft);
 	ImGui::DragFloat("Left Amount", &mLeftAmount, 0.01f, 0.0f, 1.0f);
+	ImGui::DragFloat("Left Speed", &mLeftSpeed, 0.01f, 0.0f);
 	ImGui::End();
 }

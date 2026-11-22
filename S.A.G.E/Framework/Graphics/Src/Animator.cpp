@@ -31,6 +31,20 @@ void Animator::Initialize(const Model* model)
 	}
 }
 
+bool Animator::StopAnimation()
+{
+	if (!mIsAnimating)
+	{
+		return false;
+	}
+
+	mIsAnimating = false;
+	const AnimationClip& clip = mModel->animationSet[mClipIndex];
+	mAnimationTick = clip.tickDuration;
+	// TODO: Do we broadcast any events here?
+	return true;
+}
+
 bool Animator::PlayAnimation(size_t clipIndex, bool looping, bool force)
 {
 	ASSERT(clipIndex < mModel->animationSet.size(), "Animator -- Invalid animation clip index.");
@@ -84,7 +98,7 @@ bool Animator::PlayAnimationInReverse(const std::string& clipName, bool looping)
 
 void Animator::Update(float deltaTime)
 {
-	if (!mIsAnimating) // Queue tick instead?
+	if (!mIsAnimating)
 	{
 		return;
 	}
@@ -264,73 +278,22 @@ void AnimationBlender::Update(float deltaTime)
 
 Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
 {
-	//Vector3 position = Vector3::Zero;
-	//Quaternion rotation = Quaternion::Identity;
-	//Vector3 scale = Vector3::One;
-
-	//for (auto& entry : mEntries) 
-	//{
-	//	position = Lerp(position, entry->animator.GetPosition(bone), entry->weight);
-	//	rotation = Slerp(rotation, entry->animator.GetRotation(bone), entry->weight);
-	//	scale = Lerp(scale, entry->animator.GetScale(bone), entry->weight);
-	//}
-
-	//position = Lerp(
-	//	mEntries[0]->animator.GetPosition(bone),
-	//	mEntries[1]->animator.GetPosition(bone),
-	//	mEntries[1]->weight );
-
-	//rotation = Slerp(
-	//	mEntries[0]->animator.GetRotation(bone),
-	//	mEntries[1]->animator.GetRotation(bone),
-	//	mEntries[1]->weight);
-
-	//scale = Lerp(
-	//	mEntries[0]->animator.GetScale(bone),
-	//	mEntries[1]->animator.GetScale(bone),
-	//	mEntries[1]->weight);
-
-	//return Transform{ position, rotation, scale }.GetMatrix4();
-
-	Matrix4 parentTransform1 = bone->toParentTransform;
-	const AnimationClip& clip1 = mEntries[0]->animator.GetModel()->animationSet[mEntries[0]->animator.GetClipIndex()];
-	if (clip1.HasTransform(bone->index)) {
-		parentTransform1 = clip1.boneAnimations[bone->index]->GetTransform(mEntries[0]->animator.GetAnimationTick());
-	}
-
-	for (int i = 1; i < mEntries.size(); ++i)
+	Matrix4 transform = mBase->GetTransform(bone);
+	for (const auto& layer : mEntries)
 	{
-		if (mEntries[i]->weight <= 0.0f) {
+		if (!layer->animator.GetIsAnimating())
+		{
 			continue;
 		}
 
-		Matrix4 parentTransform2 = bone->toParentTransform;
-		const AnimationClip& clip1 = mEntries[i]->animator.GetModel()->animationSet[mEntries[i]->animator.GetClipIndex()];
-		if (clip1.HasTransform(bone->index)) {
-			parentTransform2 = clip1.boneAnimations[bone->index]->GetTransform(mEntries[i]->animator.GetAnimationTick());
+		const float w = layer->weight;
+		if (w <= 0.0f)
+		{
+			continue;
 		}
 
-		parentTransform1 = Lerp(parentTransform1, parentTransform2, mEntries[i]->weight);
+		transform = Lerp(transform, layer->animator.GetTransform(bone), w);
 	}
 
-	return parentTransform1;
-
-	//const Animator& base = mEntries[0]->animator;
-	//Vector3 position = base.GetPosition(bone);
-	//Quaternion rotation = base.GetRotation(bone);
-	//Vector3 scale = base.GetScale(bone);
-
-	// const size_t entriesSize = mEntries.size();
-	//for (size_t i = 1; i < entriesSize; ++i)
-	//{
-	//	const float w = mEntries[i]->weight;
-	//	if (w <= 0.0f) continue;
-
-	//	const Animator& a = mEntries[i]->animator;
-	//	position = Lerp(position, a.GetPosition(bone), w);
-	//	rotation = Slerp(rotation, a.GetRotation(bone), w); // make sure your Slerp takes the shortest path
-	//	scale = Lerp(scale, a.GetScale(bone), w);
-	//}
-
-	//return Transform{ position, rotation, scale }.GetMatrix4();
+	return transform;
 }

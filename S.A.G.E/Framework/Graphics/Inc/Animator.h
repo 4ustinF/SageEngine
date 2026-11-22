@@ -19,6 +19,7 @@ namespace SAGE::Graphics
 	public:
 		void Initialize(const Model* model);
 
+		bool StopAnimation();
 		bool PlayAnimation(size_t clipIndex, bool looping = true, bool force = false);
 		bool PlayAnimationInReverse(size_t clipIndex, bool looping = true);
 		bool PlayAnimation(const std::string& clipName, bool looping = true);
@@ -34,6 +35,7 @@ namespace SAGE::Graphics
 		const Model* GetModel() const { return mModel; }
 		size_t GetClipIndex() const { return mClipIndex; }
 		float GetAnimationTick() const;
+		bool GetIsAnimating() const { return mIsAnimating; }
 		bool GetIsLooping() const { return mLooping; }
 		bool GetIsReverse() const { return mReverse; }
 
@@ -69,55 +71,19 @@ namespace SAGE::Graphics
 	class AnimationBlender final : public IAnimator
 	{
 	public:
+		void SetBase(const Animator* base) { mBase = base; }
 		Animator* AddAnimator();
-
+		Animator* GetAnimator(size_t index) { return &mEntries[index]->animator; }
+		size_t GetLayerCount() const { return mEntries.size(); }
 		void SetBlendWeight(size_t index, float weight);
 
 		void Update(float deltaTime);
 		Math::Matrix4 GetTransform(const Bone* bone) const override;
 
 	private:
-		struct Entry
-		{
-			Animator animator;
-			float weight = 0.0f;
-		};
+		struct Entry { Animator animator; float weight = 0.0f; };
+
+		const Animator* mBase = nullptr;
 		std::vector<std::unique_ptr<Entry>> mEntries;
 	};
-
-	//class AnimationBlender final : public IAnimator
-	//{
-	//public:
-	//	void SetBase(const Animator* base) { mBase = base; }
-	//	Animator* AddLayer();
-	//	Animator* GetLayer(size_t index) { return &mLayers[index]->animator; }
-	//	size_t GetLayerCount() const { return mLayers.size(); }
-	//	void SetLayerWeight(size_t index, float weight);
-
-	//	void Update(float deltaTime); // ticks layers only; the component ticks the base
-	//	Math::Matrix4 GetTransform(const Bone* bone) const override;
-
-	//private:
-	//	struct Layer { Animator animator; float weight = 0.0f; };
-	//	const Animator* mBase = nullptr;
-	//	std::vector<std::unique_ptr<Layer>> mLayers;
-	//};
-
-	//Matrix4 AnimationBlender::GetTransform(const Bone* bone) const
-	//{
-	//	Vector3 position = mBase->GetPosition(bone);
-	//	Quaternion rotation = mBase->GetRotation(bone);
-	//	Vector3 scale = mBase->GetScale(bone);
-
-	//	for (const auto& layer : mLayers)
-	//	{
-	//		const float w = layer->weight;
-	//		if (w <= 0.0f) continue; // idle layer costs nothing
-
-	//		position = Lerp(position, layer->animator.GetPosition(bone), w);
-	//		rotation = Slerp(rotation, layer->animator.GetRotation(bone), w);
-	//		scale = Lerp(scale, layer->animator.GetScale(bone), w);
-	//	}
-	//	return Transform{ position, rotation, scale }.GetMatrix4();
-	//}
 }

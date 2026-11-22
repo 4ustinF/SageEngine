@@ -48,5 +48,7 @@ private:
 	float idleSpeed = 0.0f;
 
 	// Debug
+	bool mIsLeft = false;
 	float mLeftAmount = 0.0f;
+	float mLeftSpeed = 1.0f;
 };

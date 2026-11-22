@@ -286,14 +286,14 @@ Animator* AnimationBlender::AddAnimator()
 	return &mEntries.emplace_back(std::make_unique<Entry>())->animator;
 }
 
-bool AnimationBlender::PlayAnimation(size_t clipIndex, bool looping = true, bool force = false)
+bool AnimationBlender::PlayAnimation(size_t clipIndex, bool looping, bool force)
 {
-	mEntries[clipIndex]->animator.PlayAnimation(clipIndex, looping, force);
+	return mEntries[clipIndex]->animator.PlayAnimation(clipIndex, looping, force);
 }
 
-bool AnimationBlender::PlayAnimationInReverse(size_t clipIndex, bool looping = true)
+bool AnimationBlender::PlayAnimationInReverse(size_t clipIndex, bool looping)
 {
-	mEntries[clipIndex]->animator.PlayAnimationInReverse(clipIndex, looping);
+	return mEntries[clipIndex]->animator.PlayAnimationInReverse(clipIndex, looping);
 }
 
 Matrix4 AnimationBlender::GetTransform(const Bone* bone) const

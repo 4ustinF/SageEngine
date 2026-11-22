@@ -117,11 +117,14 @@ void AnimatorComponent::OnDisable()
 	if (mSupportsBlendedAnimations)
 	{
 		const size_t entryCount = mBlender.GetEntryCount();
-		for (size_t i = 0; i < entryCount; ++i)
+		if (mOnAnimationFinishedHandles.size() == entryCount) // There is no handles if the object wasn't active.
 		{
-			if (Animator* animator = mBlender.GetAnimator(i))
+			for (size_t i = 0; i < entryCount; ++i)
 			{
-				animator->GetOnAnimationFinishedDelegate().Remove(mOnAnimationFinishedHandles[i]);
+				if (Animator* animator = mBlender.GetAnimator(i))
+				{
+					animator->GetOnAnimationFinishedDelegate().Remove(mOnAnimationFinishedHandles[i]);
+				}
 			}
 		}
 

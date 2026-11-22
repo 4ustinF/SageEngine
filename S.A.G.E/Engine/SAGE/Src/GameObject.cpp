@@ -31,12 +31,17 @@ void GameObject::Initialize()
 
 void GameObject::Terminate()
 {
-	mChildGameObjectHandles.clear(); // TODO: More clean up like removing itself from parent and children.
-
-	for (auto& component : mComponents) {
+	for (auto& component : mComponents) 
+	{
 		component->OnDisable();
+	}
+
+	for (auto& component : mComponents) 
+	{
 		component->Terminate();
 	}
+
+	mChildGameObjectHandles.clear(); // TODO: More clean up like removing itself from parent and children.
 }
 
 void GameObject::Update(float deltaTime)

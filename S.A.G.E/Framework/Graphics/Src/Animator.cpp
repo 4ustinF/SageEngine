@@ -276,9 +276,24 @@ void AnimationBlender::SetBlendWeight(size_t index, float weight)
 	mEntries[index]->weight = weight;
 }
 
+float AnimationBlender::GetBlendWeight(size_t index)
+{
+	return mEntries[index]->weight;
+}
+
 Animator* AnimationBlender::AddAnimator()
 {
 	return &mEntries.emplace_back(std::make_unique<Entry>())->animator;
+}
+
+bool AnimationBlender::PlayAnimation(size_t clipIndex, bool looping = true, bool force = false)
+{
+	mEntries[clipIndex]->animator.PlayAnimation(clipIndex, looping, force);
+}
+
+bool AnimationBlender::PlayAnimationInReverse(size_t clipIndex, bool looping = true)
+{
+	mEntries[clipIndex]->animator.PlayAnimationInReverse(clipIndex, looping);
 }
 
 Matrix4 AnimationBlender::GetTransform(const Bone* bone) const

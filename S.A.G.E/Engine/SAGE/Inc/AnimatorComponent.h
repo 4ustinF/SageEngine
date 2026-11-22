@@ -33,7 +33,6 @@ namespace SAGE
 		const Graphics::IAnimator& GetActiveAnimator() const;
 
 		Graphics::FOnAnimationFinished& GetOnAnimationFinishedDelegate();
-
 		std::string GetAnimationName(size_t index);
 
 	private:

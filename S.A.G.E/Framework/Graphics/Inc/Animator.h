@@ -75,9 +75,13 @@ namespace SAGE::Graphics
 
 		void SetBase(const Animator* base);
 		void SetBlendWeight(size_t index, float weight);
+		float GetBlendWeight(size_t index);
 
 		Animator* AddAnimator();
 		Animator* GetAnimator(size_t index) { return &mEntries[index]->animator; }
+
+		bool PlayAnimation(size_t clipIndex, bool looping = true, bool force = false);
+		bool PlayAnimationInReverse(size_t clipIndex, bool looping = true);
 		
 		size_t GetEntryCount() const { return mEntries.size(); }
 		Math::Matrix4 GetTransform(const Bone* bone) const override;

@@ -105,7 +105,7 @@ void PlayerWeaponComponent::Initialize()
 	mCameraService = world.GetService<CameraService>();
 	mTransformComponent = owner.GetComponent<TransformComponent>();
 	mAnimatorComponent = owner.GetComponent<AnimatorComponent>();
-	mAnimationBlender = &mAnimatorComponent->GetBlender();
+	mCrossFader = &mAnimatorComponent->EnableCrossFading();
 
 	mSoundEffectManager = SoundEffectManager::Get();
 	for (const std::string& soundFilePath : mShootSoundFilePaths)
@@ -113,7 +113,7 @@ void PlayerWeaponComponent::Initialize()
 		mShootSoundIDs.push_back(mSoundEffectManager->Load(soundFilePath.c_str()));
 	}
 
-	FOnAnimationEvent& onAnimationEvent = mAnimationBlender->GetOnAnimationEventDelegate();
+	FOnAnimationEvent& onAnimationEvent = mCrossFader->GetOnAnimationEventDelegate();
 	mOnAnimationEventHandle = onAnimationEvent.AddRaw(this, &PlayerWeaponComponent::OnAnimationEventCallback);
 
 	for (auto& pair : mAudioEventsMap)
@@ -137,15 +137,15 @@ void PlayerWeaponComponent::Terminate()
 	mShootSoundIDs.clear();
 	mAudioEventsMap.clear();
 
-	if (mAnimationBlender != nullptr)
+	if (mCrossFader != nullptr)
 	{
-		mAnimationBlender->GetOnAnimationEventDelegate().Remove(mOnAnimationEventHandle);
-		mAnimationBlender = nullptr;
+		mCrossFader->GetOnAnimationEventDelegate().Remove(mOnAnimationEventHandle);
+		mCrossFader = nullptr;
 	}
 
 	mAnimatorComponent = nullptr;
 	mTransformComponent = nullptr;
-	
+
 	mPhysicsService = nullptr;
 	mCameraService = nullptr;
 
@@ -173,26 +173,6 @@ void PlayerWeaponComponent::OnQueueUpdate(float deltaTime)
 		}
 	}
 
-	//if (mIsCrossFadingShooting)
-	//{
-	//	mIsCrossFadingElapsedTime += deltaTime;
-	//	mIsCrossFadingElapsedTime = Min(mIsCrossFadingElapsedTime, mIsCrossFadingMinCrossFadeTime);
-
-	//	const float amount = mIsCrossFadingElapsedTime / mIsCrossFadingMinCrossFadeTime;
-	//	mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[mCurrentShootIndex], 1.0f - amount);
-	//	mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[mNextShootIndex], amount);
-
-	//	if (amount >= 1.0f)
-	//	{
-	//		mCurrentShootIndex = mNextShootIndex;
-	//		mIsCrossFadingElapsedTime = 0.0f;
-	//		mIsCrossFadingShooting = false;
-	//	}
-	//	else
-	//	{
-	//		EnqueueUpdate();
-	//	}
-	//}
 }
 
 void PlayerWeaponComponent::DebugUI()
@@ -200,16 +180,19 @@ void PlayerWeaponComponent::DebugUI()
 	if (ImGui::CollapsingHeader("Player Weapon Component##PlayerWeaponComponent", ImGuiTreeNodeFlags_CollapsingHeader))
 	{
 		ImGui::DragFloat("Shoot Sound Pitch Volume##PlayerWeaponComponent", &mShootSoundPitchVolume, 0.01f, 0.0f, 1.0f);
-		
+
 		ImGui::DragInt("Current Ammo##PlayerWeaponComponent", &mCurrentAmmo, 1, 0, mMaxAmmo);
 		ImGui::DragInt("Max Ammo##PlayerWeaponComponent", &mMaxAmmo, 1, 0, 100);
-		
+
 		ImGui::DragInt("Current Ammo Reserve##PlayerWeaponComponent", &mCurrentAmmoReserve, 1, 0, mMaxAmmoReserve);
 		ImGui::DragInt("Max Ammo Reserve##PlayerWeaponComponent", &mMaxAmmoReserve, 1, 0, 500);
 
 		ImGui::Checkbox("Is Semi-Automatic##PlayerWeaponComponent", &mIsSemiAutomatic);
 
 		ImGui::Checkbox("Can Shoot##PlayerWeaponComponent", &mCanShoot);
+
+		ImGui::DragFloat("Blend Seconds##PlayerWeaponComponent", &mBlendSeconds, 0.005f, 0.0f, 0.5f);
+		ImGui::DragFloat("Shoot Blend Seconds##PlayerWeaponComponent", &mShootBlendSeconds, 0.005f, 0.0f, 0.5f);
 
 		if (ImGui::DragFloat("Rate of Fire (seconds)##PlayerWeaponComponent", &mRateOfFireInSeconds, 0.01f, 0.0f, 3.0f))
 		{
@@ -220,9 +203,9 @@ void PlayerWeaponComponent::DebugUI()
 
 void PlayerWeaponComponent::OnEnable()
 {
-	if (mAnimatorComponent)
+	if (mCrossFader)
 	{
-		mOnAnimationFinishedHandle = mAnimatorComponent->GetOnAnimationFinishedDelegate().AddRaw(this, &PlayerWeaponComponent::OnAnimationFinishedCallback);
+		mOnAnimationFinishedHandle = mCrossFader->GetOnCurrentFinishedDelegate().AddRaw(this, &PlayerWeaponComponent::OnAnimationFinishedCallback);
 	}
 
 	ResetCanShootTimer();
@@ -231,9 +214,9 @@ void PlayerWeaponComponent::OnEnable()
 
 void PlayerWeaponComponent::OnDisable()
 {
-	if (mAnimatorComponent)
+	if (mCrossFader)
 	{
-		mAnimatorComponent->GetOnAnimationFinishedDelegate().Remove(mOnAnimationFinishedHandle);
+		mCrossFader->GetOnCurrentFinishedDelegate().Remove(mOnAnimationFinishedHandle);
 	}
 }
 
@@ -252,7 +235,7 @@ void PlayerWeaponComponent::CheckForPlayerGameplayInput()
 	{
 		if (mWeaponState == WeaponState::Shooting) // Shooting can interrupt shooting now.
 		{
-			if (mIsSemiAutomatic ? 
+			if (mIsSemiAutomatic ?
 				mInputSystem->IsMouseDown(MouseButton::LBUTTON) : mInputSystem->IsMousePressed(MouseButton::LBUTTON))
 			{
 				StartShooting();
@@ -290,22 +273,18 @@ void PlayerWeaponComponent::OnAmmoPickedUp(int ammoAmount)
 void PlayerWeaponComponent::StartDraw()
 {
 	mWeaponState = WeaponState::Drawing;
-	mAnimationBlender->SetBlendWeight(mDrawAnimIndex, 1.0f);
-	mAnimationBlender->PlayAnimation(mDrawAnimIndex, false);
+	mCrossFader->Play(mDrawAnimIndex, false, mBlendSeconds);
 }
 
 void PlayerWeaponComponent::FinishDraw()
 {
-	mAnimationBlender->SetBlendWeight(mDrawAnimIndex, 0.0f);
 	Idle();
 }
 
 void PlayerWeaponComponent::Idle()
 {
 	mWeaponState = WeaponState::Idling;
-	mAnimationBlender->SetBlendWeight(mIdlingAnimIndex, 1.0f);
-	mAnimationBlender->PlayAnimation(mIdlingAnimIndex, true, true);
-	// TODO: We should probably stop this anim now?
+	mCrossFader->Play(mIdlingAnimIndex, true, mBlendSeconds);
 }
 
 void PlayerWeaponComponent::StartShooting()
@@ -322,38 +301,28 @@ void PlayerWeaponComponent::StartShooting()
 	}
 
 	// State
-	//const bool IsInterruptedShooting = mWeaponState == WeaponState::Shooting;
 	mWeaponState = WeaponState::Shooting;
 
 	// Start Cooldown
 	mCanShoot = false;
 	EnqueueUpdate();
 
-	// Anim
-	//if (IsInterruptedShooting)
-	//{
-	//	const int shootingAnimIndexsSize = static_cast<int>(mShootingAnimIndexs.size());
-	//	do {
-	//		mNextShootIndex = shootingAnimIndexsSize == 1 ? 0 : Random::UniformInt(0, shootingAnimIndexsSize - 1);
-	//	} while (mCurrentShootIndex == mNextShootIndex);
+	// Anim: interrupting a shot is just another crossfade, so there is no previous/next bookkeeping.
+	// Pick a variation that differs from the last one when there is more than one.
+	if (!mShootingAnimIndexs.empty())
+	{
+		const int shootingAnimCount = static_cast<int>(mShootingAnimIndexs.size());
+		size_t nextShootIndex = 0;
+		if (shootingAnimCount > 1)
+		{
+			do {
+				nextShootIndex = static_cast<size_t>(Random::UniformInt(0, shootingAnimCount - 1));
+			} while (nextShootIndex == mCurrentShootIndex);
+		}
 
-	//	const float remainingAnimTime = mAnimationBlender->GetAnimator(mShootingAnimIndexs[mCurrentShootIndex])->GetRemainingClipTime();
-	//	mIsCrossFadingMinCrossFadeTime = Min(mIsCrossFadingMaxCrossFadeTime, remainingAnimTime);
-
-	//	for (size_t index : mShootingAnimIndexs) { mAnimationBlender->SetBlendWeight(index, 0.0f); } // TODO: This is a hack to reset shooting anim weights.
-	//	mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[mNextShootIndex], 0.0f);
-	//	mAnimationBlender->PlayAnimation(mShootingAnimIndexs[mNextShootIndex], false, true);
-	//	mIsCrossFadingShooting = true;
-	//}
-	//else
-	//{
-		const int shootingAnimIndexsSize = static_cast<int>(mShootingAnimIndexs.size());
-		mCurrentShootIndex = shootingAnimIndexsSize == 1 ? 0 : Random::UniformInt(0, shootingAnimIndexsSize - 1);
-
-		for (size_t index : mShootingAnimIndexs) { mAnimationBlender->SetBlendWeight(index, 0.0f); } // TODO: This is a hack to reset shooting anim weights.
-		mAnimationBlender->SetBlendWeight(mShootingAnimIndexs[mCurrentShootIndex], 1.0f);
-		mAnimationBlender->PlayAnimation(mShootingAnimIndexs[mCurrentShootIndex], false, true);
-	//}
+		mCurrentShootIndex = nextShootIndex;
+		mCrossFader->Play(mShootingAnimIndexs[mCurrentShootIndex], false, mShootBlendSeconds);
+	}
 
 	// Audio
 	const int shootingSoundIndexsSize = static_cast<int>(mShootSoundIDs.size());
@@ -367,7 +336,7 @@ void PlayerWeaponComponent::StartShooting()
 
 	PhysicsRayHit physicsRayHit;
 	PhysicsRay physicsRay = PhysicsRay(camera.GetPosition(), camera.GetDirection());
-	
+
 	if (physicsWorld.Raycast(physicsRay, physicsRayHit))
 	{
 		if (BulletHolesPoolComponent* bulletHolesPool = GetOrCreateBulletPool())
@@ -389,8 +358,6 @@ void PlayerWeaponComponent::StartShooting()
 
 void PlayerWeaponComponent::FinishShooting()
 {
-	// TODO: This is a hack to reset shooting anim weights.
-	for (size_t index : mShootingAnimIndexs) { mAnimationBlender->SetBlendWeight(index, 0.0f); }
 	Idle();
 }
 
@@ -402,8 +369,7 @@ void PlayerWeaponComponent::StartReloading()
 	}
 
 	mWeaponState = WeaponState::Reloading;
-	mAnimationBlender->SetBlendWeight(mReloadAnimIndex, 1.0f);
-	mAnimationBlender->PlayAnimation(mReloadAnimIndex, false);
+	mCrossFader->Play(mReloadAnimIndex, false, mBlendSeconds);
 }
 
 void PlayerWeaponComponent::FinishReloading()
@@ -420,7 +386,6 @@ void PlayerWeaponComponent::FinishReloading()
 		mCurrentAmmoReserve = 0;
 	}
 
-	mAnimationBlender->SetBlendWeight(mReloadAnimIndex, 0.0f);
 	Idle();
 }
 
@@ -428,28 +393,25 @@ void PlayerWeaponComponent::StartHolstering()
 {
 	mWeaponState = WeaponState::Holstering;
 
-	if (mHolsteringAnimIndex >= 0) 
+	if (mHolsteringAnimIndex != mNoAnim) // was `>= 0` on an unsigned type, which is always true
 	{
-		mAnimationBlender->SetBlendWeight(mHolsteringAnimIndex, 1.0f);
-		mAnimationBlender->PlayAnimation(mHolsteringAnimIndex, false);
+		mCrossFader->Play(mHolsteringAnimIndex, false, mBlendSeconds);
 	}
-	else // Does not have a holstering anim.
+	else // Does not have a holstering anim: play the draw anim backwards.
 	{
-		mAnimationBlender->SetBlendWeight(mDrawAnimIndex, 1.0f);
-		mAnimationBlender->PlayAnimationInReverse(mDrawAnimIndex, false);
+		mCrossFader->Play(mDrawAnimIndex, false, mBlendSeconds, /*reverse*/ true);
 	}
 }
 
 void PlayerWeaponComponent::FinishHolstering()
 {
 	mWeaponState = WeaponState::Holstered;
-	mAnimationBlender->SetBlendWeight(mHolsteringAnimIndex, 0.0f);
-	mAnimationBlender->SetBlendWeight(mDrawAnimIndex, 0.0f);
 	GetOwner().SetActive(false);
 }
 
 void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 {
+	// The cross-fader only reports the NEWEST clip finishing.
 	switch (mWeaponState)
 	{
 	case PlayerWeaponComponent::Drawing:
@@ -469,7 +431,7 @@ void PlayerWeaponComponent::OnAnimationFinishedCallback(size_t clipIndex)
 
 void PlayerWeaponComponent::OnAnimationEventCallback(size_t clipIndex, const std::string& eventName)
 {
-	const std::string clipName = mAnimationBlender->GetAnimator(0)->GetClipNameByIndex(clipIndex); // Weird but works. Figure a better way?
+	const std::string clipName = mCrossFader->GetClipNameByIndex(clipIndex);
 	if (const auto it = mAudioEventsMap.find(clipName); it != mAudioEventsMap.end())
 	{
 		for (const PlayerWeaponAudioEvent& audioEvent : it->second)
@@ -508,19 +470,3 @@ void PlayerWeaponComponent::ResetCanShootTimer()
 	mCanShootTimer = mRateOfFireInSeconds;
 	mCanShoot = true;
 }
-
-/*
-
-// setup (after model is enabled)
-// mShootLayer = animatorComp->AddBlendLayer();
-// animatorComp->GetAnimator().PlayAnimation("Idle", true);
-
-// on fire
-//mShootLayer->PlayAnimation("Shoot", false, true);
-
-// every frame
-// const float target = mShootLayer->IsFinished() ? 0.0f : 1.0f;
-// mShootWeight = MoveToward(mShootWeight, target, 15.0f * dt); // ~0.07s ramp
-// animatorComp->GetBlender().SetLayerWeight(0, mShootWeight);
-
-*/

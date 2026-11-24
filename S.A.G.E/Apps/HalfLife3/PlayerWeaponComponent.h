@@ -79,8 +79,7 @@ private:
 	SAGE::CameraService* mCameraService = nullptr;
 	SAGE::TransformComponent* mTransformComponent = nullptr;
 	SAGE::AnimatorComponent* mAnimatorComponent = nullptr;
-	//SAGE::Graphics::Animator* mAnimator = nullptr;
-	SAGE::Graphics::AnimationBlender* mAnimationBlender = nullptr;
+	SAGE::Graphics::AnimationCrossFader* mCrossFader = nullptr;
 	BulletHolesPoolComponent* mBulletPool = nullptr;
 
 	WeaponState mWeaponState = WeaponState::Holstered;
@@ -98,18 +97,18 @@ private:
 	float mCanShootTimer = 1.0f;
 	float mRateOfFireInSeconds = 1.0f;
 
-	//bool mIsCrossFadingShooting = false;
-	size_t mCurrentShootIndex = -1;
-	//size_t mNextShootIndex = -1;
-	//float mIsCrossFadingElapsedTime = 0.0f;
-	//float mIsCrossFadingMinCrossFadeTime = 0.0f; // Min between remaining anim time and mIsCrossFadingMaxCrossFadeTime.
-	//float mIsCrossFadingMaxCrossFadeTime = 0.25f;
+	size_t mCurrentShootIndex = static_cast<size_t>(-1); // Index into mShootingAnimIndexs of the last shoot anim played.
 
-	// Animations // TODO: Why is there a delay at the start of idle anim?
-	const size_t mIdlingAnimIndex = 0; // TODO: maybe turn this into a non looping anim and swap between idle anims?
-	const size_t mDrawAnimIndex = 1;
-	const size_t mReloadAnimIndex = 2;
-	size_t mHolsteringAnimIndex = -1; // 3
+	// Crossfade durations in seconds.
+	float mBlendSeconds = 0.15f;      // Idle / Draw / Reload / Holster
+	float mShootBlendSeconds = 0.10f; // Short so rapid fire stays snappy.
+
+	// Animations
+	const size_t mNoAnim = static_cast<size_t>(-1);
+	const size_t mIdlingAnimIndex = static_cast<size_t>(0); // TODO: maybe turn this into a non looping anim and swap between idle anims?
+	const size_t mDrawAnimIndex = static_cast<size_t>(1);
+	const size_t mReloadAnimIndex = static_cast<size_t>(2);
+	size_t mHolsteringAnimIndex = mNoAnim; // 3
 	std::vector<size_t> mShootingAnimIndexs;
 
 	// Audio

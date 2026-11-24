@@ -105,7 +105,7 @@ void PlayerWeaponComponent::Initialize()
 	mCameraService = world.GetService<CameraService>();
 	mTransformComponent = owner.GetComponent<TransformComponent>();
 	mAnimatorComponent = owner.GetComponent<AnimatorComponent>();
-	mCrossFader = &mAnimatorComponent->EnableCrossFading();
+	mCrossFader = &mAnimatorComponent->GetCrossFader();
 
 	mSoundEffectManager = SoundEffectManager::Get();
 	for (const std::string& soundFilePath : mShootSoundFilePaths)

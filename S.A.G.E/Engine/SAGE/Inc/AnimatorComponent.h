@@ -16,7 +16,6 @@ namespace SAGE
 		void LoadComponentFromTemplate(const rapidjson::Value& value) override;
 		void SaveComponentToTemplate(rapidjson::Value& compObj, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>& allocator) override;
 
-
 		void Initialize() override;
 
 		void Update(float deltaTime) override;
@@ -31,27 +30,20 @@ namespace SAGE
 		const Graphics::Animator& GetAnimator() const { return mAnimator; }
 		Graphics::FOnAnimationFinished& GetOnAnimationFinishedDelegate() { return mAnimator.GetOnAnimationFinishedDelegate(); }
 
-		// Overlay layers (shoot, reload, flinch...). Layer indices are the order of AddBlendLayer calls.
-		Graphics::Animator* AddBlendLayer();
-		Graphics::AnimationBlender& GetBlender() { return mBlender; }
+		//// Overlay layers (shoot, reload, flinch...). Layer indices are the order of AddBlendLayer calls.
+		//Graphics::Animator* AddBlendLayer();
+		//Graphics::AnimationBlender& GetBlender() { return mBlender; }
 
 		// State-style crossfading (draw -> idle -> shoot -> reload...). Once enabled it replaces the base
 		// animator and layers: drive everything through the returned cross-fader instead.
-		Graphics::AnimationCrossFader& EnableCrossFading();
 		Graphics::AnimationCrossFader& GetCrossFader() { return mCrossFader; }
 
 		// What the renderer should sample: cross-fader if enabled, else the blender once any layer exists,
 		// else the base animator.
 		const Graphics::IAnimator* GetActiveAnimator() const
 		{
-			if (mUseCrossFader)
-			{
-				return &mCrossFader;
-			}
-			if (mBlender.GetLayerCount() > 0)
-			{
-				return &mBlender;
-			}
+			if (mUseCrossFader) { return &mCrossFader; }
+			//if (mBlender.GetLayerCount() > 0) { return &mBlender; }
 			return &mAnimator;
 		}
 
@@ -66,7 +58,7 @@ namespace SAGE
 		ModelComponent* mModelComponent = nullptr;
 		std::vector<std::string> mAnimationFileNames;
 		Graphics::Animator mAnimator;
-		Graphics::AnimationBlender mBlender;
+		//Graphics::AnimationBlender mBlender;
 		Graphics::AnimationCrossFader mCrossFader;
 		bool mUseCrossFader = false;
 		size_t mLoadedFileCount = 0;        // how many entries of mAnimationFileNames were already handled

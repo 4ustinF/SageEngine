@@ -603,7 +603,6 @@ RenderGroup* RenderService::Register(const ModelComponent* modelComponent, bool 
 
 	const IAnimator* animator = nullptr;
 	if (entry.animatorComponent) {
-		//animator = &entry.animatorComponent->GetAnimator();
 		animator = entry.animatorComponent->GetActiveAnimator();
 	}
 

@@ -55,6 +55,11 @@ void AnimatorComponent::LoadComponentFromTemplate(const rj::Value& value)
 			AddAnimation(animset.GetString());
 		}
 	}
+
+	if (value.HasMember("Supports Cross Faded Animations"))
+	{
+		mUseCrossFader = value["Supports Cross Faded Animations"].GetBool();
+	}
 }
 
 void AnimatorComponent::SaveComponentToTemplate(rj::Value& compObj, rj::MemoryPoolAllocator<rj::CrtAllocator>& allocator)
@@ -75,12 +80,14 @@ void AnimatorComponent::Update(float deltaTime)
 {
 	if (mUseCrossFader)
 	{
-		mCrossFader.Update(deltaTime); // replaces the base animator and layers
-		return;
+		mCrossFader.Update(deltaTime);
+	}
+	else
+	{
+		mAnimator.Update(deltaTime);
 	}
 
-	mAnimator.Update(deltaTime);
-	mBlender.Update(deltaTime); // ticks overlay layers only; the base is ticked above
+	//mBlender.Update(deltaTime); // ticks overlay layers only; the base is ticked above
 }
 
 void AnimatorComponent::DebugUI()
@@ -179,21 +186,21 @@ void AnimatorComponent::DrawPlaybackDebug()
 			ImGui::PopID();
 		}
 	}
-	else if (mBlender.GetLayerCount() > 0)
-	{
-		ImGui::Text("Mode: Base + Layers");
-		ImGui::Text("Base:");
-		DrawAnimatorLine(mAnimator);
+	//else if (mBlender.GetLayerCount() > 0)
+	//{
+	//	ImGui::Text("Mode: Base + Layers");
+	//	ImGui::Text("Base:");
+	//	DrawAnimatorLine(mAnimator);
 
-		for (size_t i = 0; i < mBlender.GetLayerCount(); ++i)
-		{
-			ImGui::PushID(static_cast<int>(i));
-			ImGui::Text("Layer %d:", static_cast<int>(i));
-			DrawAnimatorLine(*mBlender.GetLayer(i));
-			DrawWeightBar(mBlender.GetLayerWeight(i));
-			ImGui::PopID();
-		}
-	}
+	//	for (size_t i = 0; i < mBlender.GetLayerCount(); ++i)
+	//	{
+	//		ImGui::PushID(static_cast<int>(i));
+	//		ImGui::Text("Layer %d:", static_cast<int>(i));
+	//		DrawAnimatorLine(*mBlender.GetLayer(i));
+	//		DrawWeightBar(mBlender.GetLayerWeight(i));
+	//		ImGui::PopID();
+	//	}
+	//}
 	else
 	{
 		ImGui::Text("Mode: Single Animator");
@@ -206,7 +213,18 @@ void AnimatorComponent::DrawPlaybackDebug()
 void AnimatorComponent::OnEnable()
 {
 	LoadAnimatorComponent();
-	mAnimator.PlayAnimation(mAnimator.GetClipIndex(), mAnimator.GetIsLooping());
+
+	if (mUseCrossFader)
+	{
+		if (const Animator* currentAnimator = mCrossFader.GetCurrentAnimator())
+		{
+			mCrossFader.Play(currentAnimator->GetClipIndex(), currentAnimator->GetIsLooping(), currentAnimator->GetIsReverse());
+		}
+	}
+	else
+	{
+		mAnimator.PlayAnimation(mAnimator.GetClipIndex(), mAnimator.GetIsLooping());
+	}
 }
 
 void AnimatorComponent::AddAnimation(std::string animationFileName)
@@ -221,30 +239,18 @@ void AnimatorComponent::AddAnimation(std::string animationFileName)
 	}
 }
 
-Animator* AnimatorComponent::AddBlendLayer()
-{
-	mBlender.SetBase(&mAnimator);
-	Animator* layer = mBlender.AddLayer();
-
-	// If the model isn't loaded yet, LoadAnimatorComponent will initialize this layer later.
-	if (mIsModelReady)
-	{
-		layer->Initialize(&mModelComponent->GetModel());
-	}
-	return layer;
-}
-
-AnimationCrossFader& AnimatorComponent::EnableCrossFading()
-{
-	mUseCrossFader = true;
-
-	// If the model isn't loaded yet, LoadAnimatorComponent will initialize it later.
-	if (mIsModelReady)
-	{
-		mCrossFader.Initialize(&mModelComponent->GetModel());
-	}
-	return mCrossFader;
-}
+//Animator* AnimatorComponent::AddBlendLayer()
+//{
+//	mBlender.SetBase(&mAnimator);
+//	Animator* layer = mBlender.AddLayer();
+//
+//	// If the model isn't loaded yet, LoadAnimatorComponent will initialize this layer later.
+//	if (mIsModelReady)
+//	{
+//		layer->Initialize(&mModelComponent->GetModel());
+//	}
+//	return layer;
+//}
 
 void AnimatorComponent::AddEvent(const std::string& clipName, float tick, std::string eventName)
 {
@@ -302,18 +308,22 @@ std::string AnimatorComponent::GetAnimationNameFromFilePath(const std::string& p
 void AnimatorComponent::LoadAnimatorComponent()
 {
 	Model& model = mModelComponent->GetModel();
-
 	LoadAnimationSet(model);
-	mAnimator.Initialize(&model);
 
-	for (size_t i = 0; i < mBlender.GetLayerCount(); ++i)
-	{
-		mBlender.GetLayer(i)->Initialize(&model); // no-op if already initialized with this model
-	}
+	//for (size_t i = 0; i < mBlender.GetLayerCount(); ++i)
+	//{
+	//	mBlender.GetLayer(i)->Initialize(&model); // no-op if already initialized with this model
+	//}
+
 	if (mUseCrossFader)
 	{
 		mCrossFader.Initialize(&model); // no-op for slots already initialized with this model
 	}
+	else
+	{
+		mAnimator.Initialize(&model);
+	}
+
 	mIsModelReady = true;
 }
 
